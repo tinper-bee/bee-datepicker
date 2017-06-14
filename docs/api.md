@@ -1,7 +1,8 @@
 # DatePicker
 ## 代码演示
 ## API
-###DatePicker
+### DatePicker
+
 |参数|说明|类型|默认值|
 |:---|:-----|:----|:------|
 |prefixCls|组件的前缀|String||
@@ -24,10 +25,11 @@
 | onChange|日期改变的回调函数|Function(date: moment)||
 | dateInputPlaceholder|日期的placeholder| String ||
 
-###MonthPicker
+### MonthPicker
+
 |参数|说明|类型|默认值|
 |:---|:-----|:----|:------|
-|prefixCls|组件的前缀|String||
+|prefixCls|组件的前缀|String|-|
 |className|添加节点的样式|String||
 |style|添加内联样式| Object||
 | value |当前值，如输入框的值|moment||
@@ -40,7 +42,8 @@
 | dateCellRender|日期的渲染方法|function||
 | monthCellContentRender|自定义月份的渲染方法，将被添加渲染内容中| function||
 
-###RangePicker
+### RangePicker
+
 |参数|说明|类型|默认值|
 |:---|:-----|:----|:------|
 |prefixCls|组件的前缀|String||
@@ -65,7 +68,8 @@
 | dateInputPlaceholder|日期的placeholder| String ||
 | type|是否固定开始或结束选定的值|enum('both','start', 'end')||
 
-###WeekPicker
+### WeekPicker
+
 |参数|说明|类型|默认值|
 |:---|:-----|:----|:------|
 |placeholder|输入框placeholder|String||
