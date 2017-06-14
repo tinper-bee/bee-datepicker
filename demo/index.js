@@ -1,0 +1,265 @@
+
+import { Con, Row, Col } from 'bee-layout';
+import { Panel } from 'bee-panel';
+import Button from 'bee-button';
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
+import DatePicker from '../src';
+const {MonthPicker,RangePicker,WeekPicker} = DatePicker;
+
+
+const CARET = <i className="uf uf-arrow-down"></i>;
+
+const CARETUP = <i className="uf uf-arrow-up"></i>;
+
+
+/**
+ *
+ * @title 选择日期
+ * @description 以「日期」为基本单位，基础的日期选择控件
+ */
+
+
+import zhCN from 'rc-calendar/lib/locale/zh_CN';
+import enUS from 'rc-calendar/lib/locale/en_US';
+
+
+
+const format = 'YYYY-MM-DD';
+
+const dateInputPlaceholder = '选择日期';
+
+
+function onSelect(d) {
+    console.log(d)
+}
+
+
+function onChange(d) {
+    console.log(d)
+}
+
+
+class Demo1 extends Component {
+    render() {
+
+        return (
+            <div>
+                <Row>
+                    <Col md={12}>
+                        <DatePicker
+
+                            format={format}
+
+                            onSelect={onSelect}
+
+                            onChange={onChange}
+
+                            locale={zhCN}
+
+                            placeholder = {dateInputPlaceholder}
+
+                        />
+                    </Col>
+                </Row>
+            </div>
+        )
+    }
+}/**
+ *
+ * @title 选择年月
+ * @description 以「年月」为基本单位，基础的年月选择控件
+ */
+
+const format2 = 'YYYY-MM';
+
+class Demo2 extends Component {
+
+    render() {
+
+        return (
+            <div>
+                <Row>
+                    <Col md={12}>
+                        <MonthPicker
+
+                            format={format2}
+
+                            onSelect={onSelect}
+
+                            onChange={onChange}
+
+                            locale={zhCN}
+
+                            placeholder={'选择年月'}
+
+                        />
+                    </Col>
+                </Row>
+            </div>
+        )
+    }
+}/**
+ *
+ * @title 日期范围
+ * @description 以「日期范围」为基本单位，基础的日期范围选择控件
+ */
+
+const format3 = 'YYYY-MM-DD';
+
+class Demo3 extends Component {
+
+    render() {
+
+        return (
+            <div>
+                <Row>
+                    <Col md={12}>
+                        <RangePicker
+
+                            format={format3}
+
+                            onSelect={onSelect}
+
+                            onChange={onChange}
+
+                            locale={zhCN}
+
+                            placeholder={'选择年月'}
+
+                        />
+                    </Col>
+                </Row>
+            </div>
+        )
+    }
+}/**
+ *
+ * @title 选择日期时间
+ * @description 以「日期时间」为基本单位，基础的日期时间选择控件
+ */
+
+
+function onSelect(d) {
+    console.log(d)
+}
+
+
+function onChange(d) {
+    console.log(d)
+}
+
+
+class Demo4 extends Component {
+    render() {
+
+        return (
+            <div>
+                <Row>
+                    <Col md={12}>
+                        <DatePicker
+
+                            format={"YYYY-MM-DD HH:mm:ss"}
+
+                            onSelect={onSelect}
+
+                            onChange={onChange}
+
+                            locale={zhCN}
+
+                            placeholder = {'选择日期时间'}
+
+                        />
+                    </Col>
+                </Row>
+            </div>
+        )
+    }
+}/**
+ *
+ * @title 选择周
+ * @description 以「周」为基本单位，基础的周选择控件
+ */
+
+
+function onSelect(d) {
+    console.log(d)
+}
+
+
+function onChange(d) {
+    console.log(d)
+}
+
+
+class Demo5 extends Component {
+    render() {
+
+        return (
+            <div>
+                <Row>
+                    <Col md={12}>
+                        <WeekPicker placeholder="选择周"/>
+                    </Col>
+                </Row>
+            </div>
+        )
+    }
+}var DemoArray = [{"example":<Demo1 />,"title":" 选择日期","code":"/**\n *\n * @title 选择日期\n * @description 以「日期」为基本单位，基础的日期选择控件\n */\n\n\nimport zhCN from 'rc-calendar/lib/locale/zh_CN';\nimport enUS from 'rc-calendar/lib/locale/en_US';\n\n\n\nconst format = 'YYYY-MM-DD';\n\nconst dateInputPlaceholder = '选择日期';\n\n\nfunction onSelect(d) {\n    console.log(d)\n}\n\n\nfunction onChange(d) {\n    console.log(d)\n}\n\n\nclass Demo1 extends Component {\n    render() {\n\n        return (\n            <div>\n                <Row>\n                    <Col md={12}>\n                        <DatePicker\n\n                            format={format}\n\n                            onSelect={onSelect}\n\n                            onChange={onChange}\n\n                            locale={zhCN}\n\n                            placeholder = {dateInputPlaceholder}\n\n                        />\n                    </Col>\n                </Row>\n            </div>\n        )\n    }\n}","desc":" 以「日期」为基本单位，基础的日期选择控件"},{"example":<Demo2 />,"title":" 选择年月","code":"/**\n *\n * @title 选择年月\n * @description 以「年月」为基本单位，基础的年月选择控件\n */\n\nconst format2 = 'YYYY-MM';\n\nclass Demo2 extends Component {\n\n    render() {\n\n        return (\n            <div>\n                <Row>\n                    <Col md={12}>\n                        <MonthPicker\n\n                            format={format2}\n\n                            onSelect={onSelect}\n\n                            onChange={onChange}\n\n                            locale={zhCN}\n\n                            placeholder={'选择年月'}\n\n                        />\n                    </Col>\n                </Row>\n            </div>\n        )\n    }\n}","desc":" 以「年月」为基本单位，基础的年月选择控件"},{"example":<Demo3 />,"title":" 日期范围","code":"/**\n *\n * @title 日期范围\n * @description 以「日期范围」为基本单位，基础的日期范围选择控件\n */\n\nconst format3 = 'YYYY-MM-DD';\n\nclass Demo3 extends Component {\n\n    render() {\n\n        return (\n            <div>\n                <Row>\n                    <Col md={12}>\n                        <RangePicker\n\n                            format={format3}\n\n                            onSelect={onSelect}\n\n                            onChange={onChange}\n\n                            locale={zhCN}\n\n                            placeholder={'选择年月'}\n\n                        />\n                    </Col>\n                </Row>\n            </div>\n        )\n    }\n}","desc":" 以「日期范围」为基本单位，基础的日期范围选择控件"},{"example":<Demo4 />,"title":" 选择日期时间","code":"/**\n *\n * @title 选择日期时间\n * @description 以「日期时间」为基本单位，基础的日期时间选择控件\n */\n\n\nfunction onSelect(d) {\n    console.log(d)\n}\n\n\nfunction onChange(d) {\n    console.log(d)\n}\n\n\nclass Demo4 extends Component {\n    render() {\n\n        return (\n            <div>\n                <Row>\n                    <Col md={12}>\n                        <DatePicker\n\n                            format={\"YYYY-MM-DD HH:mm:ss\"}\n\n                            onSelect={onSelect}\n\n                            onChange={onChange}\n\n                            locale={zhCN}\n\n                            placeholder = {'选择日期时间'}\n\n                        />\n                    </Col>\n                </Row>\n            </div>\n        )\n    }\n}","desc":" 以「日期时间」为基本单位，基础的日期时间选择控件"},{"example":<Demo5 />,"title":" 选择周","code":"/**\n *\n * @title 选择周\n * @description 以「周」为基本单位，基础的周选择控件\n */\n\n\nfunction onSelect(d) {\n    console.log(d)\n}\n\n\nfunction onChange(d) {\n    console.log(d)\n}\n\n\nclass Demo5 extends Component {\n    render() {\n\n        return (\n            <div>\n                <Row>\n                    <Col md={12}>\n                        <WeekPicker placeholder=\"选择周\"/>\n                    </Col>\n                </Row>\n            </div>\n        )\n    }\n}","desc":" 以「周」为基本单位，基础的周选择控件"}]
+
+
+class Demo extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            open: false
+        }
+        this.handleClick = this.handleClick.bind(this);
+    }
+    handleClick() {
+        this.setState({ open: !this.state.open })
+    }
+
+    render () {
+        const { title, example, code, desc  } = this.props;
+        let caret = this.state.open ? CARETUP : CARET;
+        let text = this.state.open ? "隐藏代码" : "查看代码";
+
+        const footer = (
+            <Button shape="block" onClick={ this.handleClick }>
+                { caret }
+                { text }
+            </Button>
+        );
+        return (
+            <Col md={12} >
+                <h3>{ title }</h3>
+                <p>{ desc }</p>
+                <Panel collapsible expanded={ this.state.open } colors='bordered' header={ example } footer={footer} footerStyle = {{padding: 0}}>
+                    <pre><code className="hljs javascript">{ code }</code></pre>
+                </Panel>
+            </Col>
+        )
+    }
+}
+
+class DemoGroup extends Component {
+    constructor(props){
+        super(props)
+    }
+    render () {
+        return (
+                <Row>
+                    {DemoArray.map((child,index) => {
+
+                        return (
+                            <Demo example= {child.example} title= {child.title} code= {child.code} desc= {child.desc} key= {index}/>
+                        )
+
+                    })}
+                </Row>
+        )
+    }
+}
+
+ReactDOM.render(<DemoGroup/>, document.getElementById('tinperBeeDemo'));
