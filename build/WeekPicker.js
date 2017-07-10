@@ -132,7 +132,7 @@ var WeekPicker = function (_Component) {
             { className: 'week-calendar-sidebar', key: 'sidebar' },
             _react2["default"].createElement(
                 _beeButton2["default"],
-                { onClick: this.lastWeek, style: { margin: 20 } },
+                { onClick: this.lastWeek.bind(this), size: 'sm', colors: 'primary', style: { margin: 8 } },
                 '\u4E0A\u4E00\u5468'
             )
         );
@@ -155,7 +155,7 @@ var WeekPicker = function (_Component) {
             dateRender: this.dateRender.bind(this),
             locale: cn ? _zh_CN2["default"] : _en_US2["default"],
             format: format,
-            dateInputPlaceholder: 'please input',
+            dateInputPlaceholder: this.props.placeholder,
             defaultValue: now,
             showDateInput: true
         });
