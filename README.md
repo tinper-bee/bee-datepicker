@@ -28,9 +28,9 @@ ReactDOM.render(
 ```
 - 可以在js中import样式
 ```js
-import "./node_modules/bee-button/src/DatePicker.scss"
+import "./node_modules/bee-datepicker/src/DatePicker.scss"
 //或是
-import "./node_modules/bee-button/build/DatePicker.css"
+import "./node_modules/bee-datepicker/build/DatePicker.css"
 ```
 
 
