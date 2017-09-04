@@ -5,6 +5,15 @@
  */
 
 
+import React, { Component } from 'react';
+import {Con, Row, Col } from 'bee-layout';
+import DatePicker from '../../src';
+
+
+import zhCN from 'rc-calendar/lib/locale/zh_CN';
+import enUS from 'rc-calendar/lib/locale/en_US';
+
+
 function onSelect(d) {
     console.log(d)
 }
@@ -41,3 +50,5 @@ class Demo4 extends Component {
         )
     }
 }
+
+export default  Demo4;

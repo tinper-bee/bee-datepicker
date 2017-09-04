@@ -4,8 +4,7 @@ import { Panel } from 'bee-panel';
 import Button from 'bee-button';
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import DatePicker from '../src';
-const {MonthPicker,RangePicker,WeekPicker} = DatePicker;
+
 
 
 const CARET = <i className="uf uf-arrow-down"></i>;
@@ -14,6 +13,7 @@ const CARETUP = <i className="uf uf-arrow-up"></i>;
 
 
 {demolist}
+
 
 class Demo extends Component {
     constructor(props){

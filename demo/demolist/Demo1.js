@@ -4,6 +4,9 @@
  * @description 以「日期」为基本单位，基础的日期选择控件
  */
 
+import React, { Component } from 'react';
+import {Con, Row, Col } from 'bee-layout';
+import DatePicker from '../../src';
 
 import zhCN from 'rc-calendar/lib/locale/zh_CN';
 import enUS from 'rc-calendar/lib/locale/en_US';
@@ -51,3 +54,5 @@ class Demo1 extends Component {
         )
     }
 }
+
+export default  Demo1;

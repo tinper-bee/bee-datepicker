@@ -4,7 +4,28 @@
  * @description 以「年月」为基本单位，基础的年月选择控件
  */
 
+
+import React, { Component } from 'react';
+import {Con, Row, Col } from 'bee-layout';
+import DatePicker from '../../src';
+const {MonthPicker} = DatePicker;
+
+import zhCN from 'rc-calendar/lib/locale/zh_CN';
+import enUS from 'rc-calendar/lib/locale/en_US';
+
+
 const format2 = 'YYYY-MM';
+
+
+function onSelect(d) {
+    console.log(d)
+}
+
+
+function onChange(d) {
+    console.log(d)
+}
+
 
 class Demo2 extends Component {
 
@@ -33,3 +54,5 @@ class Demo2 extends Component {
         )
     }
 }
+
+export default  Demo2;

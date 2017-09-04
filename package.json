@@ -40,7 +40,8 @@
      "rc-calendar": "^8.4.1",
     "rc-select": "^6.8.6",
     "moment": "^2.17.1",
-    "bee-form-control": "^0.1.7"
+    "bee-form-control": "^0.1.7",
+    "tinper-bee":"0.5.9"
   },
   "devDependencies": {
     "bee-button": "latest",
