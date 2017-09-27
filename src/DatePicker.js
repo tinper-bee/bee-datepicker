@@ -47,6 +47,7 @@ class DatePicker extends Component {
             />
         );
 
+
         return (
             <div>
                 <Picker
@@ -59,7 +60,7 @@ class DatePicker extends Component {
 
                     open={this.state.open}
 
-                    value={state.value}
+                    value={props.value}
 
                     onChange={this.onChange.bind(this)}
 

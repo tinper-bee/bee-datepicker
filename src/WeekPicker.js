@@ -15,7 +15,7 @@ import moment from 'moment';
 import 'moment/locale/zh-cn';
 import 'moment/locale/en-gb';
 
-const cn = location.search.indexOf('cn') !== -1;
+const cn = navigator.browserLanguage?navigator.browserLanguage:navigator.language.indexOf('zh') > -1
 
 const now = moment();
 if (cn) {

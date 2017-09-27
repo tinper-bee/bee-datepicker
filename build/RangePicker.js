@@ -50,7 +50,7 @@ var format = 'YYYY-MM-DD';
 
 var fullFormat = 'YYYY-MM-DD';
 
-var cn = location.search.indexOf('cn') !== -1;
+var cn = navigator.browserLanguage ? navigator.browserLanguage : navigator.language.indexOf('zh') > -1;
 
 var now = (0, _moment2["default"])();
 if (cn) {

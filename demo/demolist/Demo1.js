@@ -10,7 +10,7 @@ import DatePicker from '../../src';
 
 import zhCN from 'rc-calendar/lib/locale/zh_CN';
 import enUS from 'rc-calendar/lib/locale/en_US';
-
+import moment from 'moment';
 
 
 const format = 'YYYY-MM-DD';

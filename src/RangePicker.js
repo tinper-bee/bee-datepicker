@@ -20,7 +20,7 @@ const format = 'YYYY-MM-DD';
 
 const fullFormat = 'YYYY-MM-DD';
 
-const cn = location.search.indexOf('cn') !== -1;
+const cn = navigator.browserLanguage?navigator.browserLanguage:navigator.language.indexOf('zh') > -1
 
 const now = moment();
 if (cn) {
