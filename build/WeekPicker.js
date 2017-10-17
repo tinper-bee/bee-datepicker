@@ -56,7 +56,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 * Created by chief on 17/4/6.
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 */
 
-var cn = navigator.browserLanguage ? navigator.browserLanguage : navigator.language.indexOf('zh') > -1;
+var cn = location.search.indexOf('cn') !== -1;
 
 var now = (0, _moment2["default"])();
 if (cn) {
@@ -85,7 +85,7 @@ var WeekPicker = function (_Component) {
     }
 
     WeekPicker.prototype.onChange = function onChange(value) {
-        console.log('DatePicker change: ', value && value.format(format));
+        //console.log('DatePicker change: ', (value && value.format(format)));
         this.setState({
             value: value
         });

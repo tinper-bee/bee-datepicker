@@ -12,7 +12,7 @@ import DatePicker from '../../src';
 
 import zhCN from 'rc-calendar/lib/locale/zh_CN';
 import enUS from 'rc-calendar/lib/locale/en_US';
-
+import moment from 'moment';
 
 function onSelect(d) {
     console.log(d)
@@ -40,6 +40,9 @@ class Demo4 extends Component {
                             onChange={onChange}
 
                             locale={zhCN}
+
+
+                            value={moment('2017/12/11')}
 
                             placeholder = {'选择日期时间'}
 

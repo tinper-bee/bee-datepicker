@@ -15,9 +15,10 @@ class DatePicker extends Component {
     constructor(props, context) {
         super(props, context);
 
+
         this.state =  {
             type:'month',
-            value:undefined,
+            value:props.value,
             open:false,
         }
     }
@@ -60,7 +61,7 @@ class DatePicker extends Component {
 
                     open={this.state.open}
 
-                    value={props.value}
+                    value={state.value}
 
                     onChange={this.onChange.bind(this)}
 

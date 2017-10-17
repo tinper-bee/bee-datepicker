@@ -20,7 +20,7 @@ const format = 'YYYY-MM-DD';
 
 const fullFormat = 'YYYY-MM-DD';
 
-const cn = navigator.browserLanguage?navigator.browserLanguage:navigator.language.indexOf('zh') > -1
+const cn = location.search.indexOf('cn') !== -1;
 
 const now = moment();
 if (cn) {
@@ -36,7 +36,7 @@ const Picker = React.createClass({
         };
     },
     onHoverChange(hoverValue) {
-        console.log(hoverValue);
+        //console.log(hoverValue);
         this.setState({ hoverValue });
     },
     render() {

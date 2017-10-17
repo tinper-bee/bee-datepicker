@@ -10,6 +10,8 @@ import {Con, Row, Col } from 'bee-layout';
 import DatePicker from '../../src';
 const {MonthPicker} = DatePicker;
 
+import moment from 'moment';
+
 import zhCN from 'rc-calendar/lib/locale/zh_CN';
 import enUS from 'rc-calendar/lib/locale/en_US';
 
@@ -44,6 +46,8 @@ class Demo2 extends Component {
                             onChange={onChange}
 
                             locale={zhCN}
+
+                            value={moment()}
 
                             placeholder={'选择年月'}
 

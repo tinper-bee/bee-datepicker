@@ -46,7 +46,7 @@ var DatePicker = function (_Component) {
 
         _this.state = {
             type: 'month',
-            value: undefined,
+            value: props.value,
             open: false
         };
         return _this;
@@ -88,7 +88,7 @@ var DatePicker = function (_Component) {
 
                     open: this.state.open,
 
-                    value: props.value,
+                    value: state.value,
 
                     onChange: this.onChange.bind(this)
 

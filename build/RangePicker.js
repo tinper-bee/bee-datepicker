@@ -50,7 +50,7 @@ var format = 'YYYY-MM-DD';
 
 var fullFormat = 'YYYY-MM-DD';
 
-var cn = navigator.browserLanguage ? navigator.browserLanguage : navigator.language.indexOf('zh') > -1;
+var cn = location.search.indexOf('cn') !== -1;
 
 var now = (0, _moment2["default"])();
 if (cn) {
@@ -67,7 +67,7 @@ var Picker = _react2["default"].createClass({
         };
     },
     onHoverChange: function onHoverChange(hoverValue) {
-        console.log(hoverValue);
+        //console.log(hoverValue);
         this.setState({ hoverValue: hoverValue });
     },
     render: function render() {
