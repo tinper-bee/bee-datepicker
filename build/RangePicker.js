@@ -42,9 +42,16 @@ require('moment/locale/en-gb');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-/**
- * Created by chief on 17/4/6.
- */
+function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); } /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Created by chief on 17/4/6.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
+
 
 var format = 'YYYY-MM-DD';
 
@@ -59,19 +66,33 @@ if (cn) {
     now.locale('en-gb').utcOffset(0);
 }
 
-var Picker = _react2["default"].createClass({
-    displayName: 'Picker',
-    getInitialState: function getInitialState() {
-        return {
+var Picker = function (_Component) {
+    _inherits(Picker, _Component);
+
+    function Picker(props, context) {
+        _classCallCheck(this, Picker);
+
+        var _this = _possibleConstructorReturn(this, _Component.call(this, props, context));
+
+        _this.state = {
             hoverValue: []
         };
-    },
-    onHoverChange: function onHoverChange(hoverValue) {
+        return _this;
+    }
+
+    // getInitialState() {
+    //     return {
+    //         hoverValue: [],
+    //     };
+    // }
+
+    Picker.prototype.onHoverChange = function onHoverChange(hoverValue) {
         //console.log(hoverValue);
         this.setState({ hoverValue: hoverValue });
-    },
-    render: function render() {
-        var _this = this;
+    };
+
+    Picker.prototype.render = function render() {
+        var _this2 = this;
 
         var props = this.props;
         var showValue = props.showValue;
@@ -86,6 +107,7 @@ var Picker = _react2["default"].createClass({
             onChange: props.onChange,
             disabledDate: props.disabledDate
         });
+
         return _react2["default"].createElement(
             _Picker2["default"],
             {
@@ -99,49 +121,62 @@ var Picker = _react2["default"].createClass({
                     'span',
                     null,
                     _react2["default"].createElement(_beeFormControl2["default"], {
-                        placeholder: _this.props.placeholder,
+                        placeholder: _this2.props.placeholder,
 
                         value: showValue && showValue.format(fullFormat) || ''
                     })
                 );
             }
         );
-    }
-});
+    };
 
-var RangePicker = _react2["default"].createClass({
-    displayName: 'RangePicker',
-    getInitialState: function getInitialState() {
-        return {
+    return Picker;
+}(_react.Component);
+
+var RangePicker = function (_Component2) {
+    _inherits(RangePicker, _Component2);
+
+    function RangePicker(props, context) {
+        _classCallCheck(this, RangePicker);
+
+        var _this3 = _possibleConstructorReturn(this, _Component2.call(this, props, context));
+
+        _this3.state = {
             startValue: null,
             endValue: null,
             startOpen: false,
             endOpen: false
         };
-    },
-    onStartOpenChange: function onStartOpenChange(startOpen) {
+        return _this3;
+    }
+
+    RangePicker.prototype.onStartOpenChange = function onStartOpenChange(startOpen) {
         this.setState({
             startOpen: startOpen
         });
-    },
-    onEndOpenChange: function onEndOpenChange(endOpen) {
+    };
+
+    RangePicker.prototype.onEndOpenChange = function onEndOpenChange(endOpen) {
         this.setState({
             endOpen: endOpen
         });
-    },
-    onStartChange: function onStartChange(value) {
+    };
+
+    RangePicker.prototype.onStartChange = function onStartChange(value) {
         this.setState({
             startValue: value[0],
             startOpen: false,
             endOpen: true
         });
-    },
-    onEndChange: function onEndChange(value) {
+    };
+
+    RangePicker.prototype.onEndChange = function onEndChange(value) {
         this.setState({
             endValue: value[1]
         });
-    },
-    disabledStartDate: function disabledStartDate(endValue) {
+    };
+
+    RangePicker.prototype.disabledStartDate = function disabledStartDate(endValue) {
         if (!endValue) {
             return false;
         }
@@ -150,8 +185,9 @@ var RangePicker = _react2["default"].createClass({
             return false;
         }
         return endValue.diff(startValue, 'days') < 0;
-    },
-    render: function render() {
+    };
+
+    RangePicker.prototype.render = function render() {
         var state = this.state;
         return _react2["default"].createElement(
             'div',
@@ -178,8 +214,10 @@ var RangePicker = _react2["default"].createClass({
                 placeholder: this.props.placeholder
             })
         );
-    }
-});
+    };
+
+    return RangePicker;
+}(_react.Component);
 
 exports["default"] = RangePicker;
 module.exports = exports['default'];

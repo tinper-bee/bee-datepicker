@@ -6,8 +6,6 @@ import MonthCalendar from 'rc-calendar/lib/MonthCalendar';
 import React,{Component} from 'react';
 import Picker from 'rc-calendar/lib/Picker';
 import FormControl from 'bee-form-control';
-import ReactDOM from 'react-dom';
-
 
 class MonthPicker extends Component {
 
@@ -92,10 +90,4 @@ class MonthPicker extends Component {
     }
 
 }
-
-
-
-
 export default  MonthPicker;
-
-

@@ -1,9 +1,7 @@
 /**
  * Created by chief on 17/4/6.
  */
-
-
-import React from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import RangeCalendar from 'rc-calendar/lib/RangeCalendar';
 import FormControl from 'bee-form-control';
@@ -29,16 +27,26 @@ if (cn) {
     now.locale('en-gb').utcOffset(0);
 }
 
-const Picker = React.createClass({
-    getInitialState() {
-        return {
-            hoverValue: [],
-        };
-    },
+class Picker extends Component{
+
+    constructor(props, context) {
+        super(props, context);
+        this.state =  {
+            hoverValue: []
+        }
+    }
+
+    // getInitialState() {
+    //     return {
+    //         hoverValue: [],
+    //     };
+    // }
+
     onHoverChange(hoverValue) {
         //console.log(hoverValue);
         this.setState({ hoverValue });
-    },
+    }
+
     render() {
         const props = this.props;
         const { showValue } = props;
@@ -53,6 +61,7 @@ const Picker = React.createClass({
                 onChange={props.onChange}
                 disabledDate={props.disabledDate}
             />);
+
         return (
             <DatePicker
                 open={this.props.open}
@@ -74,30 +83,32 @@ const Picker = React.createClass({
                     }
                 }
             </DatePicker>);
-    },
-});
+    }
+}
 
-const RangePicker = React.createClass({
-    getInitialState() {
-        return {
-            startValue: null,
+class RangePicker extends Component{
+ 
+     constructor(props, context) {
+        super(props, context);
+        this.state =  {
+           startValue: null,
             endValue: null,
             startOpen: false,
             endOpen: false,
-        };
-    },
+        }
+    }
 
     onStartOpenChange(startOpen) {
         this.setState({
             startOpen,
         });
-    },
+    }
 
     onEndOpenChange(endOpen) {
         this.setState({
             endOpen,
         });
-    },
+    }
 
     onStartChange(value) {
         this.setState({
@@ -105,13 +116,13 @@ const RangePicker = React.createClass({
             startOpen: false,
             endOpen: true,
         });
-    },
+    }
 
     onEndChange(value) {
         this.setState({
             endValue: value[1],
         });
-    },
+    }
 
     disabledStartDate(endValue) {
         if (!endValue) {
@@ -122,7 +133,7 @@ const RangePicker = React.createClass({
             return false;
         }
         return endValue.diff(startValue, 'days') < 0;
-    },
+    }
 
     render() {
         const state = this.state;
@@ -150,12 +161,7 @@ const RangePicker = React.createClass({
                         placeholder={this.props.placeholder}
                     />
             </div>);
-    },
-});
-
-
-
+    }
+}
 
 export default  RangePicker;
-
-
