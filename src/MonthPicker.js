@@ -19,20 +19,20 @@ class MonthPicker extends Component {
         }
     }
 
-    onChange(value) {
-        //console.log('DatePicker change: ', (value && value.format(this.props.format)));
+    onChange = (value) => {
+
         this.setState({
             value,
         });
     }
 
-    onOpenChange(open) {
+    onOpenChange = (open) => {
         this.setState({
             open,
         });
     }
 
-    onTypeChange(type) {
+    onTypeChange = (type) => {
         this.setState({
             type,
         });
@@ -40,9 +40,9 @@ class MonthPicker extends Component {
 
     render() {
 
-        var state = this.state;
+        let state = this.state;
 
-        var props = this.props;
+        let props = this.props;
 
 
         const monthCalendar = (
@@ -55,7 +55,7 @@ class MonthPicker extends Component {
             <div>
                 <Picker
 
-                    onOpenChange={this.onOpenChange.bind(this)}
+                    onOpenChange={this.onOpenChange}
 
                     animation="slide-up"
 
@@ -65,7 +65,7 @@ class MonthPicker extends Component {
 
                     value={state.value}
 
-                    onChange={this.onChange.bind(this)}
+                    onChange={this.onChange}
 
                 >
                     {

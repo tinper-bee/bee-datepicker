@@ -8,14 +8,6 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = require('react-dom');
-
-var _reactDom2 = _interopRequireDefault(_reactDom);
-
-var _FullCalendar = require('rc-calendar/lib/FullCalendar');
-
-var _FullCalendar2 = _interopRequireDefault(_FullCalendar);
-
 var _DatePicker = require('./DatePicker');
 
 var _DatePicker2 = _interopRequireDefault(_DatePicker);

@@ -20,10 +20,6 @@ var _beeFormControl = require('bee-form-control');
 
 var _beeFormControl2 = _interopRequireDefault(_beeFormControl);
 
-var _reactDom = require('react-dom');
-
-var _reactDom2 = _interopRequireDefault(_reactDom);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
@@ -44,6 +40,18 @@ var DatePicker = function (_Component) {
 
         var _this = _possibleConstructorReturn(this, _Component.call(this, props, context));
 
+        _this.onChange = function (value) {
+            _this.setState({
+                value: value
+            });
+        };
+
+        _this.onOpenChange = function (open) {
+            _this.setState({
+                open: open
+            });
+        };
+
         _this.state = {
             type: 'month',
             value: props.value,
@@ -51,18 +59,6 @@ var DatePicker = function (_Component) {
         };
         return _this;
     }
-
-    DatePicker.prototype.onChange = function onChange(value) {
-        this.setState({
-            value: value
-        });
-    };
-
-    DatePicker.prototype.onOpenChange = function onOpenChange(open) {
-        this.setState({
-            open: open
-        });
-    };
 
     DatePicker.prototype.render = function render() {
         var _this2 = this;
@@ -80,7 +76,7 @@ var DatePicker = function (_Component) {
                 _Picker2["default"],
                 {
 
-                    onOpenChange: this.onOpenChange.bind(this),
+                    onOpenChange: this.onOpenChange,
 
                     animation: 'slide-up',
 
@@ -90,7 +86,7 @@ var DatePicker = function (_Component) {
 
                     value: state.value,
 
-                    onChange: this.onChange.bind(this)
+                    onChange: this.onChange
 
                 },
                 function (_ref) {

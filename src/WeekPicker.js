@@ -7,7 +7,6 @@ import React,{Component} from 'react';
 import Picker from 'rc-calendar/lib/Picker';
 import FormControl from 'bee-form-control';
 import Button from 'bee-button';
-import ReactDOM from 'react-dom';
 import zhCN from 'rc-calendar/lib/locale/zh_CN';
 import enUS from 'rc-calendar/lib/locale/en_US';
 
@@ -64,20 +63,20 @@ class WeekPicker extends Component {
         }
     }
 
-    onChange(value) {
-        //console.log('DatePicker change: ', (value && value.format(format)));
+    onChange = (value) => {
+
         this.setState({
             value,
         });
     }
 
-    onOpenChange(open) {
+    onOpenChange = (open) => {
         this.setState({
             open,
         });
     }
 
-    dateRender(current) {
+    dateRender = (current) => {
         const selectedValue = this.state.value;
         if (selectedValue && current.year() === selectedValue.year() &&
             current.week() === selectedValue.week()) {
@@ -93,7 +92,7 @@ class WeekPicker extends Component {
             </div>);
     }
 
-    lastWeek() {
+    lastWeek = () => {
         const value = this.state.value || now;
         value.add(-1, 'weeks');
         this.setState({
@@ -102,16 +101,16 @@ class WeekPicker extends Component {
         });
     }
 
-    renderSidebar() {
+    renderSidebar = () => {
         return (
             <div className="week-calendar-sidebar" key="sidebar">
-                <Button onClick={this.lastWeek.bind(this)} size="sm" colors="primary" style={{ margin: 8 }}>上一周</Button>
+                <Button onClick={this.lastWeek} size="sm" colors="primary" style={{ margin: 8 }}>上一周</Button>
             </div>);
     }
 
 
 
-    onTypeChange(type) {
+    onTypeChange = (type) => {
         this.setState({
             type,
         });
@@ -124,8 +123,8 @@ class WeekPicker extends Component {
             <Calendar
                 className="week-calendar"
                 showWeekNumber
-                renderSidebar={this.renderSidebar.bind(this)}
-                dateRender={this.dateRender.bind(this)}
+                renderSidebar={this.renderSidebar}
+                dateRender={this.dateRender}
                 locale={cn ? zhCN : enUS}
                 format={format}
                 dateInputPlaceholder={this.props.placeholder}
@@ -136,12 +135,12 @@ class WeekPicker extends Component {
             <div>
                 <style dangerouslySetInnerHTML={{ __html: style }} />
                 <Picker
-                    onOpenChange={this.onOpenChange.bind(this)}
+                    onOpenChange={this.onOpenChange}
                     open={this.state.open}
                     animation="slide-up"
                     calendar={calendar}
                     value={state.value}
-                    onChange={this.onChange.bind(this)}
+                    onChange={this.onChange}
                 >
                     {
                         ({ value }) => {

@@ -8,10 +8,6 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = require('react-dom');
-
-var _reactDom2 = _interopRequireDefault(_reactDom);
-
 var _RangeCalendar = require('rc-calendar/lib/RangeCalendar');
 
 var _RangeCalendar2 = _interopRequireDefault(_RangeCalendar);
@@ -74,22 +70,16 @@ var Picker = function (_Component) {
 
         var _this = _possibleConstructorReturn(this, _Component.call(this, props, context));
 
+        _this.onHoverChange = function (hoverValue) {
+
+            _this.setState({ hoverValue: hoverValue });
+        };
+
         _this.state = {
             hoverValue: []
         };
         return _this;
     }
-
-    // getInitialState() {
-    //     return {
-    //         hoverValue: [],
-    //     };
-    // }
-
-    Picker.prototype.onHoverChange = function onHoverChange(hoverValue) {
-        //console.log(hoverValue);
-        this.setState({ hoverValue: hoverValue });
-    };
 
     Picker.prototype.render = function render() {
         var _this2 = this;
@@ -141,6 +131,43 @@ var RangePicker = function (_Component2) {
 
         var _this3 = _possibleConstructorReturn(this, _Component2.call(this, props, context));
 
+        _this3.onStartOpenChange = function (startOpen) {
+            _this3.setState({
+                startOpen: startOpen
+            });
+        };
+
+        _this3.onEndOpenChange = function (endOpen) {
+            _this3.setState({
+                endOpen: endOpen
+            });
+        };
+
+        _this3.onStartChange = function (value) {
+            _this3.setState({
+                startValue: value[0],
+                startOpen: false,
+                endOpen: true
+            });
+        };
+
+        _this3.onEndChange = function (value) {
+            _this3.setState({
+                endValue: value[1]
+            });
+        };
+
+        _this3.disabledStartDate = function (endValue) {
+            if (!endValue) {
+                return false;
+            }
+            var startValue = _this3.state.startValue;
+            if (!startValue) {
+                return false;
+            }
+            return endValue.diff(startValue, 'days') < 0;
+        };
+
         _this3.state = {
             startValue: null,
             endValue: null,
@@ -149,43 +176,6 @@ var RangePicker = function (_Component2) {
         };
         return _this3;
     }
-
-    RangePicker.prototype.onStartOpenChange = function onStartOpenChange(startOpen) {
-        this.setState({
-            startOpen: startOpen
-        });
-    };
-
-    RangePicker.prototype.onEndOpenChange = function onEndOpenChange(endOpen) {
-        this.setState({
-            endOpen: endOpen
-        });
-    };
-
-    RangePicker.prototype.onStartChange = function onStartChange(value) {
-        this.setState({
-            startValue: value[0],
-            startOpen: false,
-            endOpen: true
-        });
-    };
-
-    RangePicker.prototype.onEndChange = function onEndChange(value) {
-        this.setState({
-            endValue: value[1]
-        });
-    };
-
-    RangePicker.prototype.disabledStartDate = function disabledStartDate(endValue) {
-        if (!endValue) {
-            return false;
-        }
-        var startValue = this.state.startValue;
-        if (!startValue) {
-            return false;
-        }
-        return endValue.diff(startValue, 'days') < 0;
-    };
 
     RangePicker.prototype.render = function render() {
         var state = this.state;

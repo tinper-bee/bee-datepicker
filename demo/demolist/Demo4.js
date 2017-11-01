@@ -6,7 +6,7 @@
 
 
 import React, { Component } from 'react';
-import {Con, Row, Col } from 'bee-layout';
+import {Row, Col } from 'bee-layout';
 import DatePicker from '../../src';
 
 
