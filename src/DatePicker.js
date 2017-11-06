@@ -6,7 +6,11 @@ import Calendar from 'rc-calendar';
 import React,{Component} from 'react';
 import Picker from 'rc-calendar/lib/Picker';
 import FormControl from 'bee-form-control';
+import TimePickerPanel from 'rc-time-picker/lib/Panel';
+import moment from 'moment';
 
+
+const timePickerElement = <TimePickerPanel defaultValue={moment('00:00:00', 'HH:mm:ss')} />;
 
 
 class DatePicker extends Component {
@@ -43,6 +47,7 @@ class DatePicker extends Component {
 
         const calendar = (
             <Calendar
+                timePicker={props.showTime ? timePickerElement : null}
                 {...props}
             />
         );

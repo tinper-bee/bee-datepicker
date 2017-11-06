@@ -3,6 +3,7 @@
 /*  Navlayout  */
 /* FormGroup */
 /*  Navlayout  */
+@import url(../node_modules/rc-time-picker/assets/index.css);
 .red {
   color: rgb(244,67,54) !important; }
 
