@@ -5298,37 +5298,8 @@ a, .mdl-accordion, .mdl-button, .mdl-card, .mdl-checkbox, .mdl-dropdown-menu,
   .u-panel-group .u-panel-heading + .u-panel-collapse > .list-group, .u-panel-group .u-panel-group .u-panel-heading + .u-panel-collapse > .u-panel-body {
     border-top: 1px solid #ddd; }
 
-/*  IMAGES  */
-/* 默认颜色 */
-/* 客户化 */
-/* 波纹效果 */
-/*贝塞尔曲线动画 */
-/* 阴影 */
-/* ==========  文本字体  ========== */
-/* 控件 */
-/* 不同背景下对应的文字颜色 */
-/* UButton */
-/* UText */
+/* FormGroup */
 /*  Navlayout  */
-/* gridlayout */
-/* menu */
-/* Alert */
-/* Checkbox */
-/*  Radio  */
-/* Switch  */
-/* loading */
-/* datetimepicker */
-/* message */
-/* DATA TABLE */
-/* tooltip*/
-/* 进度条 */
-/* ==========  Content Tabs  ========== */
-/* CARD */
-/* Card dimensions */
-/* Cover image */
-/* ==========  Card  ========== */
-/* ============ Forms ============*/
-/* BADGE */
 .u-container {
   margin-right: auto;
   margin-left: auto;
@@ -7330,5 +7301,26 @@ input.u-button[type="submit"] {
 .rc-calendar-fullscreen .rc-calendar-month-panel-selected-cell .rc-calendar-month-panel-month {
   border-top-color: #3FC7FA;
   color: #3FC7FA; }
+
+.week-calendar-sidebar-button {
+  padding: 3px 5px;
+  font-size: 1.2rem;
+  color: white;
+  background-color: #1e88e5;
+  border: 1px #1e88e5 solid;
+  border-radius: 0.4rem;
+  position: relative;
+  min-width: 7.2rem;
+  display: inline-block;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0;
+  overflow: hidden;
+  will-change: box-shadow, transform;
+  outline: none;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+  vertical-align: middle; }
 
 /*# sourceMappingURL=demo.css.map */

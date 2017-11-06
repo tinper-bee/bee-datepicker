@@ -1179,3 +1179,24 @@
   border-top-color: #3FC7FA;
   color: #3FC7FA;
 }
+.week-calendar-sidebar-button{
+  padding: 3px 5px;
+  font-size: 1.2rem;
+  color: rgb(255,255,255);
+  background-color: rgb(30,136,229);
+  border: 1px rgb(30,136,229) solid;
+  border-radius: 0.4rem;
+  position: relative;
+  min-width: 7.2rem;
+  display: inline-block;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0;
+  overflow: hidden;
+  will-change: box-shadow, transform;
+  outline: none;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+  vertical-align: middle;
+}

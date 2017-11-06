@@ -105,7 +105,7 @@ class WeekPicker extends Component {
     renderSidebar() {
         return (
             <div className="week-calendar-sidebar" key="sidebar">
-                <Button onClick={this.lastWeek.bind(this)} size="sm" colors="primary" style={{ margin: 8 }}>上一周</Button>
+                <button className="week-calendar-sidebar-button" onClick={this.lastWeek.bind(this)} style={{ margin: 8 }}>上一周</button>
             </div>);
     }
 
