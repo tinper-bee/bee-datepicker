@@ -1,5 +1,7 @@
 @import "../node_modules/tinper-bee-core/scss/minxin-variables";
 @import "../node_modules/tinper-bee-core/scss/minxin-mixins";
+@import "../node_modules/bee-form-control/src/FormControl.scss";
+@import "../node_modules/rc-time-picker/assets/index.css";
 
 .rc-calendar {
   box-sizing: border-box;

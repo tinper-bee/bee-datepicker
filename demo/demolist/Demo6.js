@@ -1,7 +1,7 @@
 /**
  *
- * @title 日期范围
- * @description 以「日期范围」为基本单位，基础的日期范围选择控件
+ * @title 选择日期时间
+ * @description 以「日期时间」为基本单位，可以选择日期和时间
  */
 
 import React, { Component } from 'react';
@@ -10,10 +10,13 @@ import DatePicker from '../../src';
 
 import zhCN from 'rc-calendar/lib/locale/zh_CN';
 import enUS from 'rc-calendar/lib/locale/en_US';
+import moment from 'moment';
 
-const {RangePicker} = DatePicker;
 
-const format3 = 'YYYY-MM-DD';
+const format = 'YYYY-MM-DD HH:mm:ss';
+
+const dateInputPlaceholder = '选择日期';
+
 
 function onSelect(d) {
     console.log(d)
@@ -24,17 +27,19 @@ function onChange(d) {
     console.log(d)
 }
 
-class Demo3 extends Component {
 
+class Demo6 extends Component {
     render() {
 
         return (
             <div>
                 <Row>
                     <Col md={12}>
-                        <RangePicker
+                        <DatePicker
 
-                            format={format3}
+                            format={format}
+
+                            showTime={true}
 
                             onSelect={onSelect}
 
@@ -42,7 +47,9 @@ class Demo3 extends Component {
 
                             locale={zhCN}
 
-                            placeholder={'选择年月'}
+                            value={moment()}
+
+                            placeholder = {dateInputPlaceholder}
 
                         />
                     </Col>
@@ -52,4 +59,4 @@ class Demo3 extends Component {
     }
 }
 
-export default  Demo3;
+export default  Demo6;

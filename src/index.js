@@ -1,6 +1,4 @@
-import React,{ Component } from 'react';
-import ReactDOM from 'react-dom';
-import FullCalendar from 'rc-calendar/lib/FullCalendar';
+import React from 'react';
 import DatePicker from  './DatePicker';
 import MonthPicker from  './MonthPicker';
 import RangePicker from './RangePicker';

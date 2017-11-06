@@ -20,14 +20,6 @@ var _beeFormControl = require('bee-form-control');
 
 var _beeFormControl2 = _interopRequireDefault(_beeFormControl);
 
-var _beeButton = require('bee-button');
-
-var _beeButton2 = _interopRequireDefault(_beeButton);
-
-var _reactDom = require('react-dom');
-
-var _reactDom2 = _interopRequireDefault(_reactDom);
-
 var _zh_CN = require('rc-calendar/lib/locale/zh_CN');
 
 var _zh_CN2 = _interopRequireDefault(_zh_CN);
@@ -77,72 +69,72 @@ var WeekPicker = function (_Component) {
 
         var _this = _possibleConstructorReturn(this, _Component.call(this, props, context));
 
+        _this.onChange = function (value) {
+
+            _this.setState({
+                value: value
+            });
+        };
+
+        _this.onOpenChange = function (open) {
+            _this.setState({
+                open: open
+            });
+        };
+
+        _this.dateRender = function (current) {
+            var selectedValue = _this.state.value;
+            if (selectedValue && current.year() === selectedValue.year() && current.week() === selectedValue.week()) {
+                return _react2["default"].createElement(
+                    'div',
+                    { className: 'rc-calendar-selected-day' },
+                    _react2["default"].createElement(
+                        'div',
+                        { className: 'rc-calendar-date' },
+                        current.date()
+                    )
+                );
+            }
+            return _react2["default"].createElement(
+                'div',
+                { className: 'rc-calendar-date' },
+                current.date()
+            );
+        };
+
+        _this.lastWeek = function () {
+            var value = _this.state.value || now;
+            value.add(-1, 'weeks');
+            _this.setState({
+                value: value,
+                open: false
+            });
+        };
+
+        _this.renderSidebar = function () {
+            return _react2["default"].createElement(
+                'div',
+                { className: 'week-calendar-sidebar', key: 'sidebar' },
+                _react2["default"].createElement(
+                    'button',
+                    { className: 'week-calendar-sidebar-button', onClick: _this.lastWeek.bind(_this), style: { margin: 8 } },
+                    '\u4E0A\u4E00\u5468'
+                )
+            );
+        };
+
+        _this.onTypeChange = function (type) {
+            _this.setState({
+                type: type
+            });
+        };
+
         _this.state = {
             value: undefined,
             open: false
         };
         return _this;
     }
-
-    WeekPicker.prototype.onChange = function onChange(value) {
-        //console.log('DatePicker change: ', (value && value.format(format)));
-        this.setState({
-            value: value
-        });
-    };
-
-    WeekPicker.prototype.onOpenChange = function onOpenChange(open) {
-        this.setState({
-            open: open
-        });
-    };
-
-    WeekPicker.prototype.dateRender = function dateRender(current) {
-        var selectedValue = this.state.value;
-        if (selectedValue && current.year() === selectedValue.year() && current.week() === selectedValue.week()) {
-            return _react2["default"].createElement(
-                'div',
-                { className: 'rc-calendar-selected-day' },
-                _react2["default"].createElement(
-                    'div',
-                    { className: 'rc-calendar-date' },
-                    current.date()
-                )
-            );
-        }
-        return _react2["default"].createElement(
-            'div',
-            { className: 'rc-calendar-date' },
-            current.date()
-        );
-    };
-
-    WeekPicker.prototype.lastWeek = function lastWeek() {
-        var value = this.state.value || now;
-        value.add(-1, 'weeks');
-        this.setState({
-            value: value,
-            open: false
-        });
-    };
-
-    WeekPicker.prototype.renderSidebar = function renderSidebar() {
-        return _react2["default"].createElement(
-            'div',
-            { className: 'week-calendar-sidebar', key: 'sidebar' },
-            _react2["default"].createElement(
-                _beeButton2["default"],
-                { onClick: this.lastWeek.bind(this), size: 'sm', colors: 'primary', style: { margin: 8 } },
-                '\u4E0A\u4E00\u5468'
-            )
-        );
-    };
-
-    WeekPicker.prototype.onTypeChange = function onTypeChange(type) {
-        this.setState({
-            type: type
-        });
-    };
 
     WeekPicker.prototype.render = function render() {
         var _this2 = this;
@@ -151,8 +143,8 @@ var WeekPicker = function (_Component) {
         var calendar = _react2["default"].createElement(_rcCalendar2["default"], {
             className: 'week-calendar',
             showWeekNumber: true,
-            renderSidebar: this.renderSidebar.bind(this),
-            dateRender: this.dateRender.bind(this),
+            renderSidebar: this.renderSidebar,
+            dateRender: this.dateRender,
             locale: cn ? _zh_CN2["default"] : _en_US2["default"],
             format: format,
             dateInputPlaceholder: this.props.placeholder,
@@ -166,12 +158,12 @@ var WeekPicker = function (_Component) {
             _react2["default"].createElement(
                 _Picker2["default"],
                 {
-                    onOpenChange: this.onOpenChange.bind(this),
+                    onOpenChange: this.onOpenChange,
                     open: this.state.open,
                     animation: 'slide-up',
                     calendar: calendar,
                     value: state.value,
-                    onChange: this.onChange.bind(this)
+                    onChange: this.onChange
                 },
                 function (_ref) {
                     var value = _ref.value;

@@ -6,8 +6,11 @@ import Calendar from 'rc-calendar';
 import React,{Component} from 'react';
 import Picker from 'rc-calendar/lib/Picker';
 import FormControl from 'bee-form-control';
-import ReactDOM from 'react-dom';
+import TimePickerPanel from 'rc-time-picker/lib/Panel';
+import moment from 'moment';
 
+
+const timePickerElement = <TimePickerPanel defaultValue={moment('00:00:00', 'HH:mm:ss')} />;
 
 
 class DatePicker extends Component {
@@ -23,13 +26,13 @@ class DatePicker extends Component {
         }
     }
 
-    onChange(value) {
+    onChange = (value) => {
         this.setState({
             value,
         });
     }
 
-    onOpenChange(open) {
+    onOpenChange = (open) => {
         this.setState({
             open,
         });
@@ -37,13 +40,14 @@ class DatePicker extends Component {
 
     render() {
 
-        var state = this.state;
+        let state = this.state;
 
-        var props = this.props;
+        let props = this.props;
 
 
         const calendar = (
             <Calendar
+                timePicker={props.showTime ? timePickerElement : null}
                 {...props}
             />
         );
@@ -53,7 +57,7 @@ class DatePicker extends Component {
             <div>
                 <Picker
 
-                    onOpenChange={this.onOpenChange.bind(this)}
+                    onOpenChange={this.onOpenChange}
 
                     animation="slide-up"
 
@@ -63,7 +67,7 @@ class DatePicker extends Component {
 
                     value={state.value}
 
-                    onChange={this.onChange.bind(this)}
+                    onChange={this.onChange}
 
                 >
                     {

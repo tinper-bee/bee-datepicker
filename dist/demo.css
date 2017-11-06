@@ -3,6 +3,7 @@
 /*  Navlayout  */
 /* FormGroup */
 /*  Navlayout  */
+@import url(../node_modules/rc-time-picker/assets/index.css);
 .red {
   color: rgb(244,67,54) !important; }
 
@@ -5909,6 +5910,8 @@ a, .mdl-accordion, .mdl-button, .mdl-card, .mdl-checkbox, .mdl-dropdown-menu,
 
 /* FormGroup */
 /*  Navlayout  */
+/* FormGroup */
+/*  Navlayout  */
 .u-button {
   background: rgb(224,224,224);
   border: none;
@@ -6234,8 +6237,6 @@ input.u-button[type="submit"] {
   right: 7px;
   color: rgba(0, 0, 0, 0.65); }
 
-/* FormGroup */
-/*  Navlayout  */
 .rc-calendar {
   box-sizing: border-box; }
 

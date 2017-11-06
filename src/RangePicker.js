@@ -2,7 +2,6 @@
  * Created by chief on 17/4/6.
  */
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import RangeCalendar from 'rc-calendar/lib/RangeCalendar';
 import FormControl from 'bee-form-control';
 import DatePicker from 'rc-calendar/lib/Picker';
@@ -36,14 +35,8 @@ class Picker extends Component{
         }
     }
 
-    // getInitialState() {
-    //     return {
-    //         hoverValue: [],
-    //     };
-    // }
+    onHoverChange = (hoverValue) => {
 
-    onHoverChange(hoverValue) {
-        //console.log(hoverValue);
         this.setState({ hoverValue });
     }
 
@@ -98,19 +91,19 @@ class RangePicker extends Component{
         }
     }
 
-    onStartOpenChange(startOpen) {
+    onStartOpenChange = (startOpen) => {
         this.setState({
             startOpen,
         });
     }
 
-    onEndOpenChange(endOpen) {
+    onEndOpenChange = (endOpen) => {
         this.setState({
             endOpen,
         });
     }
 
-    onStartChange(value) {
+    onStartChange = (value) => {
         this.setState({
             startValue: value[0],
             startOpen: false,
@@ -118,13 +111,13 @@ class RangePicker extends Component{
         });
     }
 
-    onEndChange(value) {
+    onEndChange = (value) => {
         this.setState({
             endValue: value[1],
         });
     }
 
-    disabledStartDate(endValue) {
+    disabledStartDate = (endValue) => {
         if (!endValue) {
             return false;
         }

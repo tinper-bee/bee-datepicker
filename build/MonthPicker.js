@@ -40,6 +40,25 @@ var MonthPicker = function (_Component) {
 
         var _this = _possibleConstructorReturn(this, _Component.call(this, props, context));
 
+        _this.onChange = function (value) {
+
+            _this.setState({
+                value: value
+            });
+        };
+
+        _this.onOpenChange = function (open) {
+            _this.setState({
+                open: open
+            });
+        };
+
+        _this.onTypeChange = function (type) {
+            _this.setState({
+                type: type
+            });
+        };
+
         _this.state = {
             type: 'month',
             value: props.value,
@@ -47,25 +66,6 @@ var MonthPicker = function (_Component) {
         };
         return _this;
     }
-
-    MonthPicker.prototype.onChange = function onChange(value) {
-        //console.log('DatePicker change: ', (value && value.format(this.props.format)));
-        this.setState({
-            value: value
-        });
-    };
-
-    MonthPicker.prototype.onOpenChange = function onOpenChange(open) {
-        this.setState({
-            open: open
-        });
-    };
-
-    MonthPicker.prototype.onTypeChange = function onTypeChange(type) {
-        this.setState({
-            type: type
-        });
-    };
 
     MonthPicker.prototype.render = function render() {
         var _this2 = this;
@@ -83,7 +83,7 @@ var MonthPicker = function (_Component) {
                 _Picker2["default"],
                 {
 
-                    onOpenChange: this.onOpenChange.bind(this),
+                    onOpenChange: this.onOpenChange,
 
                     animation: 'slide-up',
 
@@ -93,7 +93,7 @@ var MonthPicker = function (_Component) {
 
                     value: state.value,
 
-                    onChange: this.onChange.bind(this)
+                    onChange: this.onChange
 
                 },
                 function (_ref) {

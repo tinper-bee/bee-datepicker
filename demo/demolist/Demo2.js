@@ -6,14 +6,14 @@
 
 
 import React, { Component } from 'react';
-import {Con, Row, Col } from 'bee-layout';
+import {Row, Col } from 'bee-layout';
 import DatePicker from '../../src';
-const {MonthPicker} = DatePicker;
-
 import moment from 'moment';
 
 import zhCN from 'rc-calendar/lib/locale/zh_CN';
 import enUS from 'rc-calendar/lib/locale/en_US';
+
+const {MonthPicker} = DatePicker;
 
 
 const format2 = 'YYYY-MM';
