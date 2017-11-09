@@ -47,7 +47,7 @@ class Demo2 extends Component {
 
                             locale={zhCN}
 
-                            value={moment()}
+                            defaultValue={moment()}
 
                             placeholder={'选择年月'}
 

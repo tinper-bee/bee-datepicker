@@ -57,7 +57,7 @@ class WeekPicker extends Component {
         super(props, context);
 
         this.state =  {
-            value:undefined,
+            value:props.defaultValue,
             open:false
         }
     }

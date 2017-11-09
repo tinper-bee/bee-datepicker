@@ -74,6 +74,6 @@
 |参数|说明|类型|默认值|
 |:---|:-----|:----|:------|
 |placeholder|输入框placeholder|String||
-
+|defaultValue|默认值|moment||
 
 

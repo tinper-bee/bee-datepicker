@@ -61,7 +61,7 @@ var MonthPicker = function (_Component) {
 
         _this.state = {
             type: 'month',
-            value: props.value,
+            value: props.defaultValue,
             open: false
         };
         return _this;

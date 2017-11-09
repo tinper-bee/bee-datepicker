@@ -41,9 +41,6 @@ class Demo4 extends Component {
 
                             locale={zhCN}
 
-
-                            value={moment('2017/12/11')}
-
                             placeholder = {'选择日期时间'}
 
                         />

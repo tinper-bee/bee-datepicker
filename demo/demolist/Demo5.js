@@ -8,6 +8,7 @@ import React, { Component } from 'react';
 import {Row, Col } from 'bee-layout';
 import DatePicker from '../../src';
 const {WeekPicker} = DatePicker;
+import moment from 'moment';
 
 function onSelect(d) {
     console.log(d)
@@ -26,7 +27,7 @@ class Demo5 extends Component {
             <div>
                 <Row>
                     <Col md={12}>
-                        <WeekPicker placeholder="选择周"/>
+                        <WeekPicker defaultValue={moment()} placeholder="选择周"/>
                     </Col>
                 </Row>
             </div>

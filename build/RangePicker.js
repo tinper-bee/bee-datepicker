@@ -103,8 +103,7 @@ var Picker = function (_Component) {
             {
                 open: this.props.open,
                 onOpenChange: this.props.onOpenChange,
-                calendar: calendar,
-                value: props.value
+                calendar: calendar
             },
             function () {
                 return _react2["default"].createElement(

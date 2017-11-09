@@ -130,7 +130,7 @@ var WeekPicker = function (_Component) {
         };
 
         _this.state = {
-            value: undefined,
+            value: props.defaultValue,
             open: false
         };
         return _this;

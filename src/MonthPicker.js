@@ -14,7 +14,7 @@ class MonthPicker extends Component {
 
         this.state =  {
             type:'month',
-            value:props.value,
+            value:props.defaultValue,
             open:false
         }
     }
