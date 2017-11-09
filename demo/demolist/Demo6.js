@@ -47,7 +47,7 @@ class Demo6 extends Component {
 
                             locale={zhCN}
 
-                            value={moment()}
+                            defaultValue={moment()}
 
                             placeholder = {dateInputPlaceholder}
 
