@@ -11,7 +11,6 @@
 |dateRender|日期表格|(current, value) => React.Node||
 |renderSidebar|侧边栏|() => React.Node||
 |renderFooter|扩展底边栏|() => React.Node||
-| value |当前值，如输入框的值|moment||
 | defaultValue|默认值，输入框的默认值| moment||
 | locale|日历的语言 | Object |en_US |
 | format|日期格式化| String ||
