@@ -1,7 +1,7 @@
 /**
  *
- * @title 选择日期时间
- * @description 以「日期时间」为基本单位，可以选择日期和时间
+ * @title 禁用日期
+ * @description 禁用日期
  */
 
 import React, { Component } from "react";
@@ -12,7 +12,7 @@ import zhCN from "rc-calendar/lib/locale/zh_CN";
 import enUS from "rc-calendar/lib/locale/en_US";
 import moment from "moment";
 
-const format = "YYYY-MM-DD HH:mm:ss";
+const format = "YYYY-MM-DD";
 
 const dateInputPlaceholder = "选择日期";
 
@@ -24,7 +24,7 @@ function onChange(d) {
   console.log(d);
 }
 
-class Demo6 extends Component {
+class Demo7 extends Component {
   render() {
     return (
       <div>
@@ -32,12 +32,12 @@ class Demo6 extends Component {
           <Col md={12}>
             <DatePicker
               format={format}
-              showTime={true}
               onSelect={onSelect}
               onChange={onChange}
               locale={zhCN}
               value={moment()}
               placeholder={dateInputPlaceholder}
+              disabled
             />
           </Col>
         </Row>
@@ -46,4 +46,4 @@ class Demo6 extends Component {
   }
 }
 
-export default Demo6;
+export default Demo7;

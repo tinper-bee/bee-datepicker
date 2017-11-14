@@ -19,7 +19,7 @@ class DatePicker extends Component {
 
     this.state = {
       type: "month",
-      value: props.defaultValue,
+      value: props.value,
       open: false
     };
   }
@@ -35,22 +35,37 @@ class DatePicker extends Component {
       open
     });
   };
+  // componentWillReceiveProps(nextProps) {
+  //     if ('value' in nextProps) {
+  //       this.setState({
+  //         value: nextProps.value,
+  //       });
+  //     }
+  //   }
 
   render() {
     let state = this.state;
-
     let props = this.props;
-
     const calendar = (
       <Calendar
         timePicker={props.showTime ? timePickerElement : null}
-        {...props}
+        disabledDate={props.disabledDate}
+        timePicker={props.timePicker}
+        defaultValue={props.defaultPickerValue || moment()}
+        dateInputPlaceholder={props.placeholder}
+        prefixCls={props.prefixCls}
+        className={props.calendarClassName}
+        onOk={props.onOk}
+        format={props.format}
+        showToday={props.showToday}
+        monthCellContentRender={props.monthCellContentRender}
       />
     );
 
     return (
       <div>
         <Picker
+          {...props}
           onOpenChange={this.onOpenChange}
           animation="slide-up"
           calendar={calendar}
@@ -58,12 +73,14 @@ class DatePicker extends Component {
           defaultValue={state.value}
           onChange={this.onChange}
         >
-          {({ value }) => {
+          {() => {
             return (
               <FormControl
+                disabled={props.disabled}
+                readOnly
                 placeholder={this.props.placeholder}
                 className={this.props.className}
-                value={(value && value.format(props.format)) || ""}
+                value={(state.value && state.value.format(props.format)) || ""}
               />
             );
           }}
