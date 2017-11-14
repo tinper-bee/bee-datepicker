@@ -17,20 +17,29 @@ const format = "YYYY-MM-DD";
 const dateInputPlaceholder = "选择日期";
 
 function onSelect(d) {
-  console.log(d);
+  // console.log(d);
 }
 
 function onChange(d) {
-  console.log(d);
+  this.setState({
+    value: d
+  });
 }
 
 class Demo1 extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
-    this.state={
-      value:moment()
-    }
+    this.state = {
+      value: moment()
+    };
   }
+  onChange = d => {
+    console.log(d)
+    
+    this.setState({
+      value: d
+    });
+  };
   render() {
     return (
       <div>
@@ -39,9 +48,9 @@ class Demo1 extends Component {
             <DatePicker
               format={format}
               onSelect={onSelect}
-              onChange={onChange}
+              onChange={this.onChange}
               locale={zhCN}
-              value={this.state.value}
+              defaultValue={moment()}
               placeholder={dateInputPlaceholder}
             />
           </Col>

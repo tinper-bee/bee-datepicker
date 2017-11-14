@@ -19,15 +19,21 @@ class DatePicker extends Component {
 
     this.state = {
       type: "month",
-      value: props.value,
+      value: props.value||props.defaultValue,
       open: false
     };
   }
 
   onChange = value => {
+    const props = this.props;
+    // // if (!('value' in props)) {
+    // //   this.setState({ value });
+    // // }
     this.setState({
       value
     });
+    props.value = value;
+    props.onChange(value, (value && value.format(props.format)) || "");
   };
 
   onOpenChange = open => {
@@ -35,17 +41,21 @@ class DatePicker extends Component {
       open
     });
   };
-  // componentWillReceiveProps(nextProps) {
-  //     if ('value' in nextProps) {
-  //       this.setState({
-  //         value: nextProps.value,
-  //       });
-  //     }
-  //   }
+  componentWillReceiveProps(nextProps) {
+    if ("value" in nextProps) {
+      this.setState({
+        value: nextProps.value
+      });
+    }
+  }
+  // shouldComponentUpdate(){
+  //   return true;
+  // }
 
   render() {
     let state = this.state;
     let props = this.props;
+    let value = state.value;
     const calendar = (
       <Calendar
         timePicker={props.showTime ? timePickerElement : null}
@@ -80,7 +90,7 @@ class DatePicker extends Component {
                 readOnly
                 placeholder={this.props.placeholder}
                 className={this.props.className}
-                value={(state.value && state.value.format(props.format)) || ""}
+                value={(value && value.format(props.format)) || ""}
               />
             );
           }}
