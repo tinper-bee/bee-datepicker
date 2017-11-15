@@ -1,22 +1,22 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
 
-var _MonthCalendar = require('rc-calendar/lib/MonthCalendar');
+var _MonthCalendar = require("rc-calendar/lib/MonthCalendar");
 
 var _MonthCalendar2 = _interopRequireDefault(_MonthCalendar);
 
-var _react = require('react');
+var _react = require("react");
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Picker = require('rc-calendar/lib/Picker');
+var _Picker = require("rc-calendar/lib/Picker");
 
 var _Picker2 = _interopRequireDefault(_Picker);
 
-var _beeFormControl = require('bee-form-control');
+var _beeFormControl = require("bee-form-control");
 
 var _beeFormControl2 = _interopRequireDefault(_beeFormControl);
 
@@ -33,86 +33,76 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 */
 
 var MonthPicker = function (_Component) {
-    _inherits(MonthPicker, _Component);
+  _inherits(MonthPicker, _Component);
 
-    function MonthPicker(props, context) {
-        _classCallCheck(this, MonthPicker);
+  function MonthPicker(props, context) {
+    _classCallCheck(this, MonthPicker);
 
-        var _this = _possibleConstructorReturn(this, _Component.call(this, props, context));
+    var _this = _possibleConstructorReturn(this, _Component.call(this, props, context));
 
-        _this.onChange = function (value) {
-
-            _this.setState({
-                value: value
-            });
-        };
-
-        _this.onOpenChange = function (open) {
-            _this.setState({
-                open: open
-            });
-        };
-
-        _this.onTypeChange = function (type) {
-            _this.setState({
-                type: type
-            });
-        };
-
-        _this.state = {
-            type: 'month',
-            value: props.defaultValue,
-            open: false
-        };
-        return _this;
-    }
-
-    MonthPicker.prototype.render = function render() {
-        var _this2 = this;
-
-        var state = this.state;
-
-        var props = this.props;
-
-        var monthCalendar = _react2["default"].createElement(_MonthCalendar2["default"], props);
-
-        return _react2["default"].createElement(
-            'div',
-            null,
-            _react2["default"].createElement(
-                _Picker2["default"],
-                {
-
-                    onOpenChange: this.onOpenChange,
-
-                    animation: 'slide-up',
-
-                    calendar: monthCalendar,
-
-                    open: this.state.open,
-
-                    value: state.value,
-
-                    onChange: this.onChange
-
-                },
-                function (_ref) {
-                    var value = _ref.value;
-
-                    return _react2["default"].createElement(_beeFormControl2["default"], {
-                        placeholder: _this2.props.placeholder,
-
-                        className: _this2.props.className,
-
-                        value: value && value.format(props.format) || ''
-                    });
-                }
-            )
-        );
+    _this.onChange = function (value) {
+      _this.setState({
+        value: value
+      });
     };
 
-    return MonthPicker;
+    _this.onOpenChange = function (open) {
+      _this.setState({
+        open: open
+      });
+    };
+
+    _this.onTypeChange = function (type) {
+      _this.setState({
+        type: type
+      });
+    };
+
+    _this.state = {
+      type: "month",
+      value: props.value || props.defaultValue,
+      open: false
+    };
+    return _this;
+  }
+
+  MonthPicker.prototype.render = function render() {
+    var _this2 = this;
+
+    var state = this.state;
+
+    var props = this.props;
+
+    var monthCalendar = _react2["default"].createElement(_MonthCalendar2["default"], props);
+
+    return _react2["default"].createElement(
+      "div",
+      null,
+      _react2["default"].createElement(
+        _Picker2["default"],
+        {
+          onOpenChange: this.onOpenChange,
+          animation: "slide-up",
+          calendar: monthCalendar,
+          open: this.state.open,
+          value: state.value,
+          onChange: this.onChange
+        },
+        function (_ref) {
+          var value = _ref.value;
+
+          return _react2["default"].createElement(_beeFormControl2["default"], {
+            placeholder: _this2.props.placeholder,
+            className: _this2.props.className,
+            value: value && value.format(props.format) || ""
+          });
+        }
+      )
+    );
+  };
+
+  return MonthPicker;
 }(_react.Component);
 
 exports["default"] = MonthPicker;
-module.exports = exports['default'];
+module.exports = exports["default"];
