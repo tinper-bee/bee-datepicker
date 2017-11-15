@@ -24,7 +24,7 @@ class Demo5 extends Component {
       <div>
         <Row>
           <Col md={12}>
-            <WeekPicker value={moment()} placeholder="选择周" />
+            <WeekPicker defaultValue={moment()} placeholder="选择周" />
           </Col>
         </Row>
       </div>

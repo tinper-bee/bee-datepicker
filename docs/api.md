@@ -3,6 +3,8 @@
 ## API
 ### DatePicker
 
+*注:moment是JavaScript日期处理类库。相关的文档地址[链接](http://momentjs.cn/docs/)*
+
 |参数|说明|类型|默认值|
 |:---|:-----|:----|:------|
 |prefixCls|组件的前缀|String||
@@ -15,6 +17,7 @@
 | value|日期| moment||
 | locale|日历的语言 | Object |en_US |
 | format|日期格式化| String ||
+| disabled|是否禁用功能|Boolean| false |
 | disabledDate |禁用的日期|Function(current:moment):Boolean||
 | disabledTime |禁用的时间|Function(current:moment):Object||
 | showDateInput|显示日期输入康|Boolean| true |
@@ -25,6 +28,7 @@
 | onChange|日期改变的回调函数|Function(date: moment)||
 | dateInputPlaceholder|日期的placeholder| String ||
 | showTime | 是否显示时间选择面板 | Boolean ||
+
 
 ### MonthPicker
 
