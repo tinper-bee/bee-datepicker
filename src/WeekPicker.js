@@ -2,27 +2,27 @@
  * Created by chief on 17/4/6.
  */
 
-import Calendar from 'rc-calendar';
-import React,{Component} from 'react';
-import Picker from 'rc-calendar/lib/Picker';
-import FormControl from 'bee-form-control';
-import zhCN from 'rc-calendar/lib/locale/zh_CN';
-import enUS from 'rc-calendar/lib/locale/en_US';
+import Calendar from "rc-calendar";
+import React, { Component } from "react";
+import Picker from "rc-calendar/lib/Picker";
+import FormControl from "bee-form-control";
+import zhCN from "rc-calendar/lib/locale/zh_CN";
+import enUS from "rc-calendar/lib/locale/en_US";
 
-import moment from 'moment';
-import 'moment/locale/zh-cn';
-import 'moment/locale/en-gb';
+import moment from "moment";
+import "moment/locale/zh-cn";
+import "moment/locale/en-gb";
 
-const cn = location.search.indexOf('cn') !== -1;
+const cn = location.search.indexOf("cn") !== -1;
 
 const now = moment();
 if (cn) {
-    now.locale('zh-cn').utcOffset(8);
+  now.locale("zh-cn").utcOffset(8);
 } else {
-    now.locale('en-gb').utcOffset(0);
+  now.locale("en-gb").utcOffset(0);
 }
 
-const format = 'YYYY-Wo';
+const format = "YYYY-Wo";
 
 const style = `
 .week-calendar {
@@ -52,122 +52,114 @@ const style = `
 `;
 
 class WeekPicker extends Component {
+  constructor(props, context) {
+    super(props, context);
 
-    constructor(props, context) {
-        super(props, context);
+    this.state = {
+      value: props.value || props.defaultValue,
+      open: false
+    };
+  }
 
-        this.state =  {
-            value:props.defaultValue,
-            open:false
-        }
+  onChange = value => {
+    this.setState({
+      value
+    });
+  };
+
+  onOpenChange = open => {
+    this.setState({
+      open
+    });
+  };
+
+  dateRender = current => {
+    const selectedValue = this.state.value;
+    if (
+      selectedValue &&
+      current.year() === selectedValue.year() &&
+      current.week() === selectedValue.week()
+    ) {
+      return (
+        <div className="rc-calendar-selected-day">
+          <div className="rc-calendar-date">{current.date()}</div>
+        </div>
+      );
     }
+    return <div className="rc-calendar-date">{current.date()}</div>;
+  };
 
-    onChange = (value) => {
+  lastWeek = () => {
+    const value = this.state.value || now;
+    value.add(-1, "weeks");
+    this.setState({
+      value,
+      open: false
+    });
+  };
 
-        this.setState({
-            value,
-        });
-    }
+  renderSidebar = () => {
+    return (
+      <div className="week-calendar-sidebar" key="sidebar">
+        <button
+          className="week-calendar-sidebar-button"
+          onClick={this.lastWeek.bind(this)}
+          style={{ margin: 8 }}
+        >
+          上一周
+        </button>
+      </div>
+    );
+  };
 
-    onOpenChange = (open) => {
-        this.setState({
-            open,
-        });
-    }
+  onTypeChange = type => {
+    this.setState({
+      type
+    });
+  };
 
-    dateRender = (current) => {
-        const selectedValue = this.state.value;
-        if (selectedValue && current.year() === selectedValue.year() &&
-            current.week() === selectedValue.week()) {
-            return (<div className="rc-calendar-selected-day">
-                <div className="rc-calendar-date">
-                    {current.date()}
-                </div>
-            </div>);
-        }
-        return (
-            <div className="rc-calendar-date">
-                {current.date()}
-            </div>);
-    }
-
-    lastWeek = () => {
-        const value = this.state.value || now;
-        value.add(-1, 'weeks');
-        this.setState({
-            value,
-            open: false,
-        });
-    }
-
-    renderSidebar = () => {
-        return (
-            <div className="week-calendar-sidebar" key="sidebar">
-                <button className="week-calendar-sidebar-button" onClick={this.lastWeek.bind(this)} style={{ margin: 8 }}>上一周</button>
-            </div>);
-    }
-
-
-
-    onTypeChange = (type) => {
-        this.setState({
-            type,
-        });
-    }
-
-    render() {
-
-        const state = this.state;
-        const calendar = (
-            <Calendar
-                className="week-calendar"
-                showWeekNumber
-                renderSidebar={this.renderSidebar}
-                dateRender={this.dateRender}
-                locale={cn ? zhCN : enUS}
-                format={format}
-                dateInputPlaceholder={this.props.placeholder}
-                defaultValue={now}
-                showDateInput
-            />);
-        return (
-            <div>
-                <style dangerouslySetInnerHTML={{ __html: style }} />
-                <Picker
-                    onOpenChange={this.onOpenChange}
-                    open={this.state.open}
-                    animation="slide-up"
-                    calendar={calendar}
-                    value={state.value}
-                    onChange={this.onChange}
-                >
-                    {
-                        ({ value }) => {
-                            return (
-
-                                <FormControl
-                                    placeholder={this.props.placeholder}
-                                    disabled={state.disabled}
-                                    readOnly
-                                    tabIndex="-1"
-                                    className={this.props.className}
-                                    value={value && value.format(format) || ''}
-                                />
-
-                            );
-                        }
-                    }
-                </Picker>
-
-            </div>
-        );
-    }
-
+  render() {
+    const state = this.state;
+    const calendar = (
+      <Calendar
+        className="week-calendar"
+        showWeekNumber
+        renderSidebar={this.renderSidebar}
+        dateRender={this.dateRender}
+        locale={cn ? zhCN : enUS}
+        format={format}
+        dateInputPlaceholder={this.props.placeholder}
+        defaultValue={now}
+        showDateInput
+      />
+    );
+    return (
+      <div>
+        <style dangerouslySetInnerHTML={{ __html: style }} />
+        <Picker
+          onOpenChange={this.onOpenChange}
+          open={this.state.open}
+          animation="slide-up"
+          calendar={calendar}
+          value={state.value}
+          onChange={this.onChange}
+        >
+          {({ value }) => {
+            return (
+              <FormControl
+                placeholder={this.props.placeholder}
+                disabled={state.disabled}
+                readOnly
+                tabIndex="-1"
+                className={this.props.className}
+                value={(value && value.format(format)) || ""}
+              />
+            );
+          }}
+        </Picker>
+      </div>
+    );
+  }
 }
 
-
-
-
-export default  WeekPicker;
-
-
+export default WeekPicker;

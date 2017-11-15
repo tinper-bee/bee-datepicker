@@ -36,7 +36,7 @@ class Demo6 extends Component {
               onSelect={onSelect}
               onChange={onChange}
               locale={zhCN}
-              value={moment()}
+              defaultValue={moment()}
               placeholder={dateInputPlaceholder}
             />
           </Col>

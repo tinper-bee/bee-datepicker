@@ -19,7 +19,7 @@ class DatePicker extends Component {
 
     this.state = {
       type: "month",
-      value: props.value||props.defaultValue,
+      value: props.value || props.defaultValue,
       open: false
     };
   }
@@ -32,7 +32,6 @@ class DatePicker extends Component {
     this.setState({
       value
     });
-    props.value = value;
     props.onChange(value, (value && value.format(props.format)) || "");
   };
 
@@ -48,16 +47,35 @@ class DatePicker extends Component {
       });
     }
   }
-  // shouldComponentUpdate(){
-  //   return true;
-  // }
+  handleChange = value => {
+    const props = this.props;
+    if (!("value" in props)) {
+      this.setState({ value });
+    }
+    props.onChange(value, (value && value.format(props.format)) || "");
+  };
 
   render() {
     let state = this.state;
     let props = this.props;
     let value = state.value;
+
+    let pickerChangeHandler = {};
+    let calendarHandler = {};
+    if (props.showTime) {
+      calendarHandler = {
+        // fix https://github.com/ant-design/ant-design/issues/1902
+        onSelect: this.handleChange
+      };
+    } else {
+      pickerChangeHandler = {
+        onChange: this.handleChange
+      };
+    }
+
     const calendar = (
       <Calendar
+        {...calendarHandler}
         timePicker={props.showTime ? timePickerElement : null}
         disabledDate={props.disabledDate}
         timePicker={props.timePicker}
@@ -76,6 +94,7 @@ class DatePicker extends Component {
       <div>
         <Picker
           {...props}
+          {...pickerChangeHandler}
           onOpenChange={this.onOpenChange}
           animation="slide-up"
           calendar={calendar}

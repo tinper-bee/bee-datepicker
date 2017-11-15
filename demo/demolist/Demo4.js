@@ -12,13 +12,6 @@ import zhCN from "rc-calendar/lib/locale/zh_CN";
 const format = "YYYY-MM-DD HH:mm:ss";
 const dateInputPlaceholder = "选择日期";
 
-function onSelect(d) {
-  console.log(d);
-}
-
-function onChange(d) {
-  console.log(d);
-}
 class Demo4 extends Component {
   constructor(props) {
     super(props);
@@ -28,12 +21,17 @@ class Demo4 extends Component {
   }
 
   handleChange = value => {
-    console.log(value);
+    this.setState({
+      value: value
+    });
+  };
+  onSelect = d => {
+    console.log(d);
   };
 
   handlerChangeDate = () => {
     this.setState({
-      value: moment('2011-11-11 11:11:11')
+      value: moment("2011-11-11 11:11:11")
     });
     console.log("click");
   };
@@ -44,8 +42,8 @@ class Demo4 extends Component {
         <DatePicker
           format={format}
           locale={zhCN}
-          onSelect={onSelect}
-          onChange={onChange}
+          onSelect={this.onSelect}
+          onChange={this.handleChange}
           value={this.state.value}
           placeholder={dateInputPlaceholder}
         />

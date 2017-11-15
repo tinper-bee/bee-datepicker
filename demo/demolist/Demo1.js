@@ -50,7 +50,7 @@ class Demo1 extends Component {
               onSelect={onSelect}
               onChange={this.onChange}
               locale={zhCN}
-              defaultValue={moment()}
+              defaultValue={this.state.value}
               placeholder={dateInputPlaceholder}
             />
           </Col>
