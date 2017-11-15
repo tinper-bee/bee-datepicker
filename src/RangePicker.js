@@ -59,6 +59,7 @@ class Picker extends Component {
         open={this.props.open}
         onOpenChange={this.props.onOpenChange}
         calendar={calendar}
+        value={props.value}
       >
         {() => {
           return (

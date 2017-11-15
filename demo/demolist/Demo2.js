@@ -35,7 +35,7 @@ class Demo2 extends Component {
               onSelect={onSelect}
               onChange={onChange}
               locale={zhCN}
-              value={moment()}
+              defaultValue={moment()}
               placeholder={"选择年月"}
             />
           </Col>

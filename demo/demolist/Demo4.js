@@ -8,7 +8,8 @@ import React, { Component } from "react";
 import DatePicker from "../../src";
 import moment from "moment";
 import zhCN from "rc-calendar/lib/locale/zh_CN";
-
+import { Row, Col } from "bee-layout";
+import Button from "bee-button";
 const format = "YYYY-MM-DD HH:mm:ss";
 const dateInputPlaceholder = "选择日期";
 
@@ -38,15 +39,21 @@ class Demo4 extends Component {
   render() {
     return (
       <div>
-        <button onClick={this.handlerChangeDate}>变</button>
-        <DatePicker
-          format={format}
-          locale={zhCN}
-          onSelect={this.onSelect}
-          onChange={this.handleChange}
-          value={this.state.value}
-          placeholder={dateInputPlaceholder}
-        />
+        <Row>
+          <Col md={8}>
+            <DatePicker
+              format={format}
+              locale={zhCN}
+              onSelect={this.onSelect}
+              onChange={this.handleChange}
+              value={this.state.value}
+              placeholder={dateInputPlaceholder}
+            />
+          </Col>
+          <Col md={3}>
+            <Button onClick={this.handlerChangeDate}>变</Button>
+          </Col>
+        </Row>
       </div>
     );
   }

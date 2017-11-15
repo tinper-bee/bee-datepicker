@@ -12,6 +12,7 @@
 |renderSidebar|侧边栏|() => React.Node||
 |renderFooter|扩展底边栏|() => React.Node||
 | defaultValue|默认值，输入框的默认值| moment||
+| value|日期| moment||
 | locale|日历的语言 | Object |en_US |
 | format|日期格式化| String ||
 | disabledDate |禁用的日期|Function(current:moment):Boolean||

@@ -75,18 +75,8 @@ class DatePicker extends Component {
 
     const calendar = (
       <Calendar
-        {...calendarHandler}
         timePicker={props.showTime ? timePickerElement : null}
-        disabledDate={props.disabledDate}
-        timePicker={props.timePicker}
-        defaultValue={props.defaultPickerValue || moment()}
-        dateInputPlaceholder={props.placeholder}
-        prefixCls={props.prefixCls}
-        className={props.calendarClassName}
-        onOk={props.onOk}
-        format={props.format}
-        showToday={props.showToday}
-        monthCellContentRender={props.monthCellContentRender}
+        {...props}
       />
     );
 
