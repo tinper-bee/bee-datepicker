@@ -1,6 +1,14 @@
 # datepicker
 
 
+[![npm version](https://img.shields.io/npm/v/bee-datepicker.svg)](https://www.npmjs.com/package/bee-datepicker)
+[![Build Status](https://img.shields.io/travis/tinper-bee/bee-datepicker/master.svg)](https://travis-ci.org/tinper-bee/bee-datepicker)
+[![Coverage Status](https://coveralls.io/repos/github/tinper-bee/bee-datepicker/badge.svg?branch=master)](https://coveralls.io/github/tinper-bee/bee-datepicker?branch=master)
+[![devDependency Status](https://img.shields.io/david/dev/tinper-bee/bee-datepicker.svg)](https://david-dm.org/tinper-bee/bee-datepicker#info=devDependencies)
+[![NPM downloads](http://img.shields.io/npm/dm/bee-datepicker.svg?style=flat)](https://npmjs.org/package/bee-datepicker)
+[![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/tinper-bee/bee-datepicker.svg)](http://isitmaintained.com/project/tinper-bee/bee-datepicker "Average time to resolve an issue")
+[![Percentage of issues still open](http://isitmaintained.com/badge/open/tinper-bee/bee-datepicker.svg)](http://isitmaintained.com/project/tinper-bee/bee-datepicker "Percentage of issues still open")
+
 
 react datepicker component for tinper-bee
 
