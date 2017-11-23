@@ -76,7 +76,7 @@
 	
 	var CARETUP = _react2['default'].createElement('i', { className: 'uf uf-arrow-up' });
 	
-	var Demo1 = __webpack_require__(105);var Demo2 = __webpack_require__(360);var Demo3 = __webpack_require__(361);var Demo4 = __webpack_require__(362);var Demo5 = __webpack_require__(363);var Demo6 = __webpack_require__(364);var Demo7 = __webpack_require__(365);var DemoArray = [{ "example": _react2['default'].createElement(Demo1, null), "title": " 选择日期", "code": "/**\n *\n * @title 选择日期\n * @description 以「日期」为基本单位，基础的日期选择控件\n */\n\nimport React, { Component } from \"react\";\nimport { Row, Col } from \"bee-layout\";\nimport DatePicker from \"../../src\";\n\nimport zhCN from \"rc-calendar/lib/locale/zh_CN\";\nimport enUS from \"rc-calendar/lib/locale/en_US\";\nimport moment from \"moment\";\n\nconst format = \"YYYY-MM-DD\";\n\nconst dateInputPlaceholder = \"选择日期\";\n\nfunction onSelect(d) {\n  // console.log(d);\n}\n\nfunction onChange(d) {\n  this.setState({\n    value: d\n  });\n}\n\nclass Demo1 extends Component {\n  constructor(props) {\n    super(props);\n    this.state = {\n      value: moment()\n    };\n  }\n  onChange = d => {\n    console.log(d)\n    \n    this.setState({\n      value: d\n    });\n  };\n  render() {\n    return (\n      <div>\n        <Row>\n          <Col md={12}>\n            <DatePicker\n              format={format}\n              onSelect={onSelect}\n              onChange={this.onChange}\n              locale={zhCN}\n              defaultValue={this.state.value}\n              placeholder={dateInputPlaceholder}\n            />\n          </Col>\n        </Row>\n      </div>\n    );\n  }\n}\n\n\n", "desc": " 以「日期」为基本单位，基础的日期选择控件" }, { "example": _react2['default'].createElement(Demo2, null), "title": " 选择年月", "code": "/**\n *\n * @title 选择年月\n * @description 以「年月」为基本单位，基础的年月选择控件\n */\n\nimport React, { Component } from \"react\";\nimport { Row, Col } from \"bee-layout\";\nimport DatePicker from \"../../src\";\nimport moment from \"moment\";\n\nimport zhCN from \"rc-calendar/lib/locale/zh_CN\";\nimport enUS from \"rc-calendar/lib/locale/en_US\";\n\nconst { MonthPicker } = DatePicker;\n\nconst format2 = \"YYYY-MM\";\n\nfunction onSelect(d) {\n  console.log(d);\n}\n\nfunction onChange(d) {\n  console.log(d);\n}\n\nclass Demo2 extends Component {\n  render() {\n    return (\n      <div>\n        <Row>\n          <Col md={12}>\n            <MonthPicker\n              format={format2}\n              onSelect={onSelect}\n              onChange={onChange}\n              locale={zhCN}\n              defaultValue={moment()}\n              placeholder={\"选择年月\"}\n            />\n          </Col>\n        </Row>\n      </div>\n    );\n  }\n}\n\n\n", "desc": " 以「年月」为基本单位，基础的年月选择控件" }, { "example": _react2['default'].createElement(Demo3, null), "title": " 日期范围", "code": "/**\n *\n * @title 日期范围\n * @description 以「日期范围」为基本单位，基础的日期范围选择控件\n */\n\nimport React, { Component } from \"react\";\nimport { Row, Col } from \"bee-layout\";\nimport DatePicker from \"../../src\";\n\nimport zhCN from \"rc-calendar/lib/locale/zh_CN\";\nimport enUS from \"rc-calendar/lib/locale/en_US\";\n\nconst { RangePicker } = DatePicker;\n\nconst format3 = \"YYYY-MM-DD\";\n\nfunction onSelect(d) {\n  console.log(d);\n}\n\nfunction onChange(d) {\n  console.log(d);\n}\n\nclass Demo3 extends Component {\n  render() {\n    return (\n      <div>\n        <Row>\n          <Col md={12}>\n            <RangePicker\n              format={format3}\n              onSelect={onSelect}\n              onChange={onChange}\n              locale={zhCN}\n              placeholder={\"选择年月\"}\n            />\n          </Col>\n        </Row>\n      </div>\n    );\n  }\n}\n\n\n", "desc": " 以「日期范围」为基本单位，基础的日期范围选择控件" }, { "example": _react2['default'].createElement(Demo4, null), "title": " 动态的改变时间", "code": "/**\n *\n * @title 动态的改变时间\n * @description 以「日期时间」为基本单位，基础的日期时间选择控件\n */\n\nimport React, { Component } from \"react\";\nimport DatePicker from \"../../src\";\nimport moment from \"moment\";\nimport zhCN from \"rc-calendar/lib/locale/zh_CN\";\nimport { Row, Col } from \"bee-layout\";\nimport Button from \"bee-button\";\nconst format = \"YYYY-MM-DD HH:mm:ss\";\nconst dateInputPlaceholder = \"选择日期\";\n\nclass Demo4 extends Component {\n  constructor(props) {\n    super(props);\n    this.state = {\n      value: moment()\n    };\n  }\n\n  handleChange = value => {\n    this.setState({\n      value: value\n    });\n  };\n  onSelect = d => {\n    console.log(d);\n  };\n\n  handlerChangeDate = () => {\n    this.setState({\n      value: moment(\"2011-11-11 11:11:11\")\n    });\n    console.log(\"click\");\n  };\n  render() {\n    return (\n      <div>\n        <Row>\n          <Col md={8}>\n            <DatePicker\n              format={format}\n              locale={zhCN}\n              onSelect={this.onSelect}\n              onChange={this.handleChange}\n              value={this.state.value}\n              placeholder={dateInputPlaceholder}\n            />\n          </Col>\n          <Col md={3}>\n            <Button onClick={this.handlerChangeDate}>变</Button>\n          </Col>\n        </Row>\n      </div>\n    );\n  }\n}\n\n\n", "desc": " 以「日期时间」为基本单位，基础的日期时间选择控件" }, { "example": _react2['default'].createElement(Demo5, null), "title": " 选择周", "code": "/**\n *\n * @title 选择周\n * @description 以「周」为基本单位，基础的周选择控件\n */\n\nimport React, { Component } from \"react\";\nimport { Row, Col } from \"bee-layout\";\nimport DatePicker from \"../../src\";\nconst { WeekPicker } = DatePicker;\nimport moment from \"moment\";\n\nfunction onSelect(d) {\n  console.log(d);\n}\n\nfunction onChange(d) {\n  console.log(d);\n}\n\nclass Demo5 extends Component {\n  render() {\n    return (\n      <div>\n        <Row>\n          <Col md={12}>\n            <WeekPicker defaultValue={moment()} placeholder=\"选择周\" />\n          </Col>\n        </Row>\n      </div>\n    );\n  }\n}\n\n\n", "desc": " 以「周」为基本单位，基础的周选择控件" }, { "example": _react2['default'].createElement(Demo6, null), "title": " 选择日期时间", "code": "/**\n *\n * @title 选择日期时间\n * @description 以「日期时间」为基本单位，可以选择日期和时间\n */\n\nimport React, { Component } from \"react\";\nimport { Row, Col } from \"bee-layout\";\nimport DatePicker from \"../../src\";\n\nimport zhCN from \"rc-calendar/lib/locale/zh_CN\";\nimport enUS from \"rc-calendar/lib/locale/en_US\";\nimport moment from \"moment\";\n\nconst format = \"YYYY-MM-DD HH:mm:ss\";\n\nconst dateInputPlaceholder = \"选择日期\";\n\nfunction onSelect(d) {\n  console.log(d);\n}\n\nfunction onChange(d) {\n  console.log(d);\n}\n\nclass Demo6 extends Component {\n  render() {\n    return (\n      <div>\n        <Row>\n          <Col md={12}>\n            <DatePicker\n              format={format}\n              showTime={true}\n              onSelect={onSelect}\n              onChange={onChange}\n              locale={zhCN}\n              defaultValue={moment()}\n              placeholder={dateInputPlaceholder}\n            />\n          </Col>\n        </Row>\n      </div>\n    );\n  }\n}\n\n\n", "desc": " 以「日期时间」为基本单位，可以选择日期和时间" }, { "example": _react2['default'].createElement(Demo7, null), "title": " 禁用日期", "code": "/**\n *\n * @title 禁用日期\n * @description 禁用日期\n */\n\nimport React, { Component } from \"react\";\nimport { Row, Col } from \"bee-layout\";\nimport DatePicker from \"../../src\";\n\nimport zhCN from \"rc-calendar/lib/locale/zh_CN\";\nimport enUS from \"rc-calendar/lib/locale/en_US\";\nimport moment from \"moment\";\n\nconst format = \"YYYY-MM-DD\";\n\nconst dateInputPlaceholder = \"选择日期\";\n\nfunction onSelect(d) {\n  console.log(d);\n}\n\nfunction onChange(d) {\n  console.log(d);\n}\n\nclass Demo7 extends Component {\n  render() {\n    return (\n      <div>\n        <Row>\n          <Col md={12}>\n            <DatePicker\n              format={format}\n              onSelect={onSelect}\n              onChange={onChange}\n              locale={zhCN}\n              defaultValue={moment()}\n              placeholder={dateInputPlaceholder}\n              disabled={true}\n            />\n          </Col>\n        </Row>\n      </div>\n    );\n  }\n}\n\n\n", "desc": " 禁用日期" }];
+	var Demo1 = __webpack_require__(105);var Demo2 = __webpack_require__(360);var Demo3 = __webpack_require__(361);var Demo4 = __webpack_require__(362);var Demo5 = __webpack_require__(363);var Demo6 = __webpack_require__(364);var Demo7 = __webpack_require__(365);var DemoArray = [{ "example": _react2['default'].createElement(Demo1, null), "title": " 选择日期", "code": "/**\n *\n * @title 选择日期\n * @description 以「日期」为基本单位，基础的日期选择控件\n */\n\nimport React, { Component } from \"react\";\nimport { Row, Col } from \"bee-layout\";\nimport DatePicker from \"../../src\";\n\nimport zhCN from \"rc-calendar/lib/locale/zh_CN\";\nimport enUS from \"rc-calendar/lib/locale/en_US\";\nimport moment from \"moment\";\n\nconst format = \"YYYY-MM-DD\";\n\nconst dateInputPlaceholder = \"选择日期\";\n\nfunction onSelect(d) {\n  // console.log(d);\n}\n\nfunction onChange(d) {\n  this.setState({\n    value: d\n  });\n}\n\nclass Demo1 extends Component {\n  constructor(props) {\n    super(props);\n    this.state = {\n      value: moment()\n    };\n  }\n  onChange = d => {\n    console.log(d)\n    \n    this.setState({\n      value: d\n    });\n  };\n  render() {\n    return (\n      <div>\n        <Row>\n          <Col md={12}>\n            <DatePicker\n              format={format}\n              onSelect={onSelect}\n              onChange={this.onChange}\n              locale={zhCN}\n              defaultValue={this.state.value}\n              placeholder={dateInputPlaceholder}\n            />\n          </Col>\n        </Row>\n      </div>\n    );\n  }\n}\n\n\n", "desc": " 以「日期」为基本单位，基础的日期选择控件" }, { "example": _react2['default'].createElement(Demo2, null), "title": " 选择年月", "code": "/**\n *\n * @title 选择年月\n * @description 以「年月」为基本单位，基础的年月选择控件\n */\n\nimport React, { Component } from \"react\";\nimport { Row, Col } from \"bee-layout\";\nimport DatePicker from \"../../src\";\nimport moment from \"moment\";\n\nimport zhCN from \"rc-calendar/lib/locale/zh_CN\";\nimport enUS from \"rc-calendar/lib/locale/en_US\";\n\nconst { MonthPicker } = DatePicker;\n\nconst format2 = \"YYYY-MM\";\n\nfunction onSelect(d) {\n  console.log(d);\n}\n\nfunction onChange(d) {\n  console.log(d);\n}\n\nclass Demo2 extends Component {\n  render() {\n    return (\n      <div>\n        <Row>\n          <Col md={12}>\n            <MonthPicker\n              format={format2}\n              onSelect={onSelect}\n              onChange={onChange}\n              locale={zhCN}\n              defaultValue={moment()}\n              placeholder={\"选择年月\"}\n            />\n          </Col>\n        </Row>\n      </div>\n    );\n  }\n}\n\n\n", "desc": " 以「年月」为基本单位，基础的年月选择控件" }, { "example": _react2['default'].createElement(Demo3, null), "title": " 日期范围", "code": "/**\n *\n * @title 日期范围\n * @description 以「日期范围」为基本单位，基础的日期范围选择控件\n */\n\nimport React, { Component } from \"react\";\nimport { Row, Col } from \"bee-layout\";\nimport DatePicker from \"../../src\";\n\nimport zhCN from \"rc-calendar/lib/locale/zh_CN\";\nimport enUS from \"rc-calendar/lib/locale/en_US\";\n\nconst { RangePicker } = DatePicker;\n\nconst format3 = \"YYYY-MM-DD\";\n\nfunction onSelect(d) {\n  console.log(d);\n}\n\nfunction onChange(d) {\n  console.log(d);\n}\n\nclass Demo3 extends Component {\n  render() {\n    return (\n      <div>\n        <Row>\n          <Col md={12}>\n            <RangePicker\n              format={format3}\n              onSelect={onSelect}\n              onChange={onChange}\n              locale={zhCN}\n              placeholder={\"选择开始年月\"}\n            />\n          </Col>\n        </Row>\n      </div>\n    );\n  }\n}\n\n\n", "desc": " 以「日期范围」为基本单位，基础的日期范围选择控件" }, { "example": _react2['default'].createElement(Demo4, null), "title": " 动态的改变时间", "code": "/**\n *\n * @title 动态的改变时间\n * @description 以「日期时间」为基本单位，基础的日期时间选择控件\n */\n\nimport React, { Component } from \"react\";\nimport DatePicker from \"../../src\";\nimport moment from \"moment\";\nimport zhCN from \"rc-calendar/lib/locale/zh_CN\";\nimport { Row, Col } from \"bee-layout\";\nimport Button from \"bee-button\";\nconst format = \"YYYY-MM-DD HH:mm:ss\";\nconst dateInputPlaceholder = \"选择日期\";\n\nclass Demo4 extends Component {\n  constructor(props) {\n    super(props);\n    this.state = {\n      value: moment()\n    };\n  }\n\n  handleChange = value => {\n    this.setState({\n      value: value\n    });\n  };\n  onSelect = d => {\n    console.log(d);\n  };\n\n  handlerChangeDate = () => {\n    this.setState({\n      value: moment(\"2011-11-11 11:11:11\")\n    });\n    console.log(\"click\");\n  };\n  render() {\n    return (\n      <div>\n        <Row>\n          <Col md={8}>\n            <DatePicker\n              format={format}\n              locale={zhCN}\n              onSelect={this.onSelect}\n              onChange={this.handleChange}\n              value={this.state.value}\n              placeholder={dateInputPlaceholder}\n            />\n          </Col>\n          <Col md={3}>\n            <Button onClick={this.handlerChangeDate}>变</Button>\n          </Col>\n        </Row>\n      </div>\n    );\n  }\n}\n\n\n", "desc": " 以「日期时间」为基本单位，基础的日期时间选择控件" }, { "example": _react2['default'].createElement(Demo5, null), "title": " 选择周", "code": "/**\n *\n * @title 选择周\n * @description 以「周」为基本单位，基础的周选择控件\n */\n\nimport React, { Component } from \"react\";\nimport { Row, Col } from \"bee-layout\";\nimport DatePicker from \"../../src\";\nconst { WeekPicker } = DatePicker;\nimport moment from \"moment\";\n\nfunction onSelect(d) {\n  console.log(d);\n}\n\nfunction onChange(d) {\n  console.log(d);\n}\n\nclass Demo5 extends Component {\n  render() {\n    return (\n      <div>\n        <Row>\n          <Col md={12}>\n            <WeekPicker defaultValue={moment()} placeholder=\"选择周\" />\n          </Col>\n        </Row>\n      </div>\n    );\n  }\n}\n\n\n", "desc": " 以「周」为基本单位，基础的周选择控件" }, { "example": _react2['default'].createElement(Demo6, null), "title": " 选择日期时间", "code": "/**\n *\n * @title 选择日期时间\n * @description 以「日期时间」为基本单位，可以选择日期和时间\n */\n\nimport React, { Component } from \"react\";\nimport { Row, Col } from \"bee-layout\";\nimport DatePicker from \"../../src\";\n\nimport zhCN from \"rc-calendar/lib/locale/zh_CN\";\nimport enUS from \"rc-calendar/lib/locale/en_US\";\nimport moment from \"moment\";\n\nconst format = \"YYYY-MM-DD HH:mm:ss\";\n\nconst dateInputPlaceholder = \"选择日期\";\n\nfunction onSelect(d) {\n  console.log(d);\n}\n\nfunction onChange(d) {\n  console.log(d);\n}\n\nclass Demo6 extends Component {\n  render() {\n    return (\n      <div>\n        <Row>\n          <Col md={12}>\n            <DatePicker\n              format={format}\n              showTime={true}\n              onSelect={onSelect}\n              onChange={onChange}\n              locale={zhCN}\n              defaultValue={moment()}\n              placeholder={dateInputPlaceholder}\n            />\n          </Col>\n        </Row>\n      </div>\n    );\n  }\n}\n\n\n", "desc": " 以「日期时间」为基本单位，可以选择日期和时间" }, { "example": _react2['default'].createElement(Demo7, null), "title": " 禁用日期", "code": "/**\n *\n * @title 禁用日期\n * @description 禁用日期\n */\n\nimport React, { Component } from \"react\";\nimport { Row, Col } from \"bee-layout\";\nimport DatePicker from \"../../src\";\n\nimport zhCN from \"rc-calendar/lib/locale/zh_CN\";\nimport enUS from \"rc-calendar/lib/locale/en_US\";\nimport moment from \"moment\";\n\nconst format = \"YYYY-MM-DD\";\n\nconst dateInputPlaceholder = \"选择日期\";\n\nfunction onSelect(d) {\n  console.log(d);\n}\n\nfunction onChange(d) {\n  console.log(d);\n}\n\nclass Demo7 extends Component {\n  render() {\n    return (\n      <div>\n        <Row>\n          <Col md={12}>\n            <DatePicker\n              format={format}\n              onSelect={onSelect}\n              onChange={onChange}\n              locale={zhCN}\n              defaultValue={moment()}\n              placeholder={dateInputPlaceholder}\n              disabled={true}\n            />\n          </Col>\n        </Row>\n      </div>\n    );\n  }\n}\n\n\n", "desc": " 禁用日期" }];
 	
 	var Demo = function (_Component) {
 	    _inherits(Demo, _Component);
@@ -10390,7 +10390,7 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 	var require;/* WEBPACK VAR INJECTION */(function(module) {//! moment.js
-	//! version : 2.19.2
+	//! version : 2.19.1
 	//! authors : Tim Wood, Iskren Chernev, Moment.js contributors
 	//! license : MIT
 	//! momentjs.com
@@ -11205,7 +11205,7 @@
 	
 	function set$1 (mom, unit, value) {
 	    if (mom.isValid() && !isNaN(value)) {
-	        if (unit === 'FullYear' && isLeapYear(mom.year()) && mom.month() === 1 && mom.date() === 29) {
+	        if (unit === 'FullYear' && isLeapYear(mom.year())) {
 	            mom._d['set' + (mom._isUTC ? 'UTC' : '') + unit](value, mom.month(), daysInMonth(value, mom.month()));
 	        }
 	        else {
@@ -12311,11 +12311,10 @@
 	
 	function updateLocale(name, config) {
 	    if (config != null) {
-	        var locale, tmpLocale, parentConfig = baseConfig;
+	        var locale, parentConfig = baseConfig;
 	        // MERGE
-	        tmpLocale = loadLocale(name);
-	        if (tmpLocale != null) {
-	            parentConfig = tmpLocale._config;
+	        if (locales[name] != null) {
+	            parentConfig = locales[name]._config;
 	        }
 	        config = mergeConfigs(parentConfig, config);
 	        locale = new Locale(config);
@@ -14869,7 +14868,7 @@
 	// Side effect imports
 	
 	
-	hooks.version = '2.19.2';
+	hooks.version = '2.19.1';
 	
 	setHookCallback(createLocal);
 	
@@ -31597,6 +31596,10 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _reactDom = __webpack_require__(12);
+	
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+	
 	var _classnames = __webpack_require__(3);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
@@ -31614,6 +31617,8 @@
 	function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
 	
 	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+	
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
@@ -31647,10 +31652,7 @@
 	      var value = e.target.value;
 	      var onChange = _this.props.onChange;
 	
-	      _this.setState({
-	        value: value,
-	        showSearch: value == null || value === ""
-	      });
+	      _this.setState(_defineProperty({ value: value, showSearch: false }, 'showSearch', value == ""));
 	      if (onChange) {
 	        onChange(value);
 	      }
@@ -31662,7 +31664,7 @@
 	
 	    _this.state = {
 	      showSearch: true,
-	      value: props.value == null ? "" : props.value
+	      value: props.value || ""
 	    };
 	    _this.input = {};
 	    return _this;
@@ -31692,7 +31694,7 @@
 	    if (size) {
 	      classes['' + size] = true;
 	    }
-	    if (type === "search") {
+	    if (type == "search") {
 	      classes['u-input-search'] = true;
 	    }
 	
@@ -31701,7 +31703,7 @@
 	      classNames = (0, _classnames2["default"])(clsPrefix, classes);
 	    }
 	
-	    if (type === "search") {
+	    if (type == "search") {
 	
 	      return _react2["default"].createElement(
 	        'span',
@@ -33070,8 +33072,10 @@
 	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+	    value: true
 	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
 	var _react = __webpack_require__(4);
 	
@@ -33118,165 +33122,105 @@
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
 	
 	
-	var format = "YYYY-MM-DD";
+	function format(v) {
+	    return v ? v.format(formatStr) : '';
+	}
+	var formatStr = 'YYYY-MM-DD';
 	
 	var fullFormat = "YYYY-MM-DD";
 	
 	var cn = location.search.indexOf("cn") !== -1;
 	
 	var now = (0, _moment2["default"])();
+	
+	function onStandaloneChange(value) {
+	    console.log('onChange');
+	    console.log(value[0] && format(value[0]), value[1] && format(value[1]));
+	}
+	
+	function onStandaloneSelect(value) {
+	    console.log('onSelect');
+	    console.log(format(value[0]), format(value[1]));
+	}
+	function isValidRange(v) {
+	    return v && v[0] && v[1];
+	}
+	
 	if (cn) {
-	  now.locale("zh-cn").utcOffset(8);
+	    now.locale("zh-cn").utcOffset(8);
 	} else {
-	  now.locale("en-gb").utcOffset(0);
+	    now.locale("en-gb").utcOffset(0);
 	}
 	
 	var Picker = function (_Component) {
-	  _inherits(Picker, _Component);
+	    _inherits(Picker, _Component);
 	
-	  function Picker(props, context) {
-	    _classCallCheck(this, Picker);
+	    function Picker(props, context) {
+	        _classCallCheck(this, Picker);
 	
-	    var _this = _possibleConstructorReturn(this, _Component.call(this, props, context));
+	        var _this = _possibleConstructorReturn(this, _Component.call(this, props, context));
 	
-	    _this.onHoverChange = function (hoverValue) {
-	      _this.setState({ hoverValue: hoverValue });
-	    };
+	        _this.onChange = function (value) {
+	            console.log('onChange', value);
+	            _this.setState({ value: value });
+	        };
 	
-	    _this.state = {
-	      hoverValue: []
-	    };
-	    return _this;
-	  }
+	        _this.onHoverChange = function (hoverValue) {
+	            _this.setState({ hoverValue: hoverValue });
+	        };
 	
-	  Picker.prototype.render = function render() {
-	    var _this2 = this;
+	        _this.state = {
+	            hoverValue: [],
+	            value: []
+	        };
+	        return _this;
+	    }
 	
-	    var props = this.props;
-	    var showValue = props.showValue;
+	    Picker.prototype.render = function render() {
+	        var _this2 = this;
 	
-	    var calendar = _react2["default"].createElement(_RangeCalendar2["default"], {
-	      hoverValue: this.state.hoverValue,
-	      onHoverChange: this.onHoverChange,
-	      type: this.props.type,
-	      locale: cn ? _zh_CN2["default"] : _en_US2["default"],
-	      defaultValue: now,
-	      format: format,
-	      onChange: props.onChange,
-	      disabledDate: props.disabledDate
-	    });
+	        var props = this.props;
+	        var showValue = props.showValue;
 	
-	    return _react2["default"].createElement(
-	      _Picker2["default"],
-	      {
-	        open: this.props.open,
-	        onOpenChange: this.props.onOpenChange,
-	        calendar: calendar,
-	        value: props.value
-	      },
-	      function () {
+	        var calendar = _react2["default"].createElement(_RangeCalendar2["default"], _extends({}, props, {
+	            hoverValue: this.state.hoverValue,
+	            onHoverChange: this.onHoverChange,
+	            showWeekNumber: false,
+	            format: formatStr,
+	            dateInputPlaceholder: ['start', 'end'],
+	            defaultValue: [now, now.clone().add(1, 'months')],
+	            locale: cn ? _zh_CN2["default"] : _en_US2["default"],
+	            onChange: props.onChange,
+	            disabledDate: props.disabledDate
+	        }));
+	
 	        return _react2["default"].createElement(
-	          "span",
-	          null,
-	          _react2["default"].createElement(_beeFormControl2["default"], {
-	            placeholder: _this2.props.placeholder,
-	            value: showValue && showValue.format(fullFormat) || ""
-	          })
+	            _Picker2["default"],
+	            {
+	                value: this.state.value,
+	                onChange: this.onChange,
+	                animation: "slide-up",
+	                calendar: calendar
+	            },
+	            function (_ref) {
+	                var value = _ref.value;
+	
+	                return _react2["default"].createElement(
+	                    "div",
+	                    { className: 'calendar-picker' },
+	                    _react2["default"].createElement(_beeFormControl2["default"], {
+	                        placeholder: _this2.props.placeholder,
+	                        value: isValidRange(value) && format(value[0]) + " ~ " + format(value[1]) || ''
+	                    })
+	                );
+	            }
 	        );
-	      }
-	    );
-	  };
+	    };
 	
-	  return Picker;
+	    return Picker;
 	}(_react.Component);
 	
-	var RangePicker = function (_Component2) {
-	  _inherits(RangePicker, _Component2);
-	
-	  function RangePicker(props, context) {
-	    _classCallCheck(this, RangePicker);
-	
-	    var _this3 = _possibleConstructorReturn(this, _Component2.call(this, props, context));
-	
-	    _this3.onStartOpenChange = function (startOpen) {
-	      _this3.setState({
-	        startOpen: startOpen
-	      });
-	    };
-	
-	    _this3.onEndOpenChange = function (endOpen) {
-	      _this3.setState({
-	        endOpen: endOpen
-	      });
-	    };
-	
-	    _this3.onStartChange = function (value) {
-	      _this3.setState({
-	        startValue: value[0],
-	        startOpen: false,
-	        endOpen: true
-	      });
-	    };
-	
-	    _this3.onEndChange = function (value) {
-	      _this3.setState({
-	        endValue: value[1]
-	      });
-	    };
-	
-	    _this3.disabledStartDate = function (endValue) {
-	      if (!endValue) {
-	        return false;
-	      }
-	      var startValue = _this3.state.startValue;
-	      if (!startValue) {
-	        return false;
-	      }
-	      return endValue.diff(startValue, "days") < 0;
-	    };
-	
-	    _this3.state = {
-	      startValue: null,
-	      endValue: null,
-	      startOpen: false,
-	      endOpen: false
-	    };
-	    return _this3;
-	  }
-	
-	  RangePicker.prototype.render = function render() {
-	    var state = this.state;
-	    return _react2["default"].createElement(
-	      "div",
-	      null,
-	      "\u5F00\u59CB\u65F6\u95F4\uFF1A",
-	      _react2["default"].createElement(Picker, {
-	        onOpenChange: this.onStartOpenChange,
-	        type: "start",
-	        showValue: state.startValue,
-	        open: this.state.startOpen,
-	        value: [state.startValue, state.endValue],
-	        onChange: this.onStartChange,
-	        placeholder: this.props.placeholder
-	      }),
-	      "\u7ED3\u675F\u65F6\u95F4\uFF1A",
-	      _react2["default"].createElement(Picker, {
-	        onOpenChange: this.onEndOpenChange,
-	        open: this.state.endOpen,
-	        type: "end",
-	        showValue: state.endValue,
-	        disabledDate: this.disabledStartDate,
-	        value: [state.startValue, state.endValue],
-	        onChange: this.onEndChange,
-	        placeholder: this.props.placeholder
-	      })
-	    );
-	  };
-	
-	  return RangePicker;
-	}(_react.Component);
-	
-	exports["default"] = RangePicker;
+	exports["default"] = Picker;
 	module.exports = exports["default"];
 
 /***/ }),
@@ -34786,7 +34730,7 @@
 	            onSelect: onSelect,
 	            onChange: onChange,
 	            locale: _zh_CN2["default"],
-	            placeholder: "选择年月"
+	            placeholder: "选择开始年月"
 	          })
 	        )
 	      )

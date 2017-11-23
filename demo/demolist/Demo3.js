@@ -34,7 +34,7 @@ class Demo3 extends Component {
               onSelect={onSelect}
               onChange={onChange}
               locale={zhCN}
-              placeholder={"选择年月"}
+              placeholder={"选择开始年月"}
             />
           </Col>
         </Row>

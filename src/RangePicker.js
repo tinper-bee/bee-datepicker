@@ -13,13 +13,31 @@ import moment from "moment";
 import "moment/locale/zh-cn";
 import "moment/locale/en-gb";
 
-const format = "YYYY-MM-DD";
+function format(v) {
+    return v ? v.format(formatStr) : '';
+}
+const formatStr = 'YYYY-MM-DD';
 
 const fullFormat = "YYYY-MM-DD";
 
 const cn = location.search.indexOf("cn") !== -1;
 
 const now = moment();
+
+
+function onStandaloneChange(value) {
+    console.log('onChange');
+    console.log(value[0] && format(value[0]), value[1] && format(value[1]));
+}
+
+function onStandaloneSelect(value) {
+    console.log('onSelect');
+    console.log(format(value[0]), format(value[1]));
+}
+function isValidRange(v) {
+    return v && v[0] && v[1];
+}
+
 if (cn) {
   now.locale("zh-cn").utcOffset(8);
 } else {
@@ -30,128 +48,59 @@ class Picker extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      hoverValue: []
+        hoverValue: [],
+        value: [],
     };
   }
 
-  onHoverChange = hoverValue => {
-    this.setState({ hoverValue });
-  };
+    onChange = (value) => {
+        console.log('onChange', value);
+        this.setState({ value });
+    }
+
+    onHoverChange = (hoverValue) => {
+        this.setState({ hoverValue });
+    }
 
   render() {
     const props = this.props;
     const { showValue } = props;
     const calendar = (
-      <RangeCalendar
-        hoverValue={this.state.hoverValue}
-        onHoverChange={this.onHoverChange}
-        type={this.props.type}
-        locale={cn ? zhCN : enUS}
-        defaultValue={now}
-        format={format}
-        onChange={props.onChange}
-        disabledDate={props.disabledDate}
-      />
+        <RangeCalendar
+            {...props}
+            hoverValue={this.state.hoverValue}
+            onHoverChange={this.onHoverChange}
+            showWeekNumber={false}
+            format={formatStr}
+            dateInputPlaceholder={['start', 'end']}
+            defaultValue={[now, now.clone().add(1, 'months')]}
+            locale={cn ? zhCN : enUS}
+            onChange={props.onChange}
+            disabledDate={props.disabledDate}
+        />
     );
 
-    return (
-      <DatePicker
-        open={this.props.open}
-        onOpenChange={this.props.onOpenChange}
-        calendar={calendar}
-        value={props.value}
-      >
-        {() => {
-          return (
-            <span>
-              <FormControl
-                placeholder={this.props.placeholder}
-                value={(showValue && showValue.format(fullFormat)) || ""}
-              />
-            </span>
-          );
-        }}
-      </DatePicker>
-    );
+      return (
+          <DatePicker
+              value={this.state.value}
+              onChange={this.onChange}
+              animation="slide-up"
+              calendar={calendar}
+          >
+              {
+                  ({ value }) => {
+                      return (
+                    <div className={'calendar-picker'}>
+                        <FormControl
+                            placeholder={this.props.placeholder}
+                            value={isValidRange(value) && `${format(value[0])} ~ ${format(value[1])}` || ''}
+                        />
+                    </div>
+                );
+                  }
+              }
+          </DatePicker>);
   }
 }
 
-class RangePicker extends Component {
-  constructor(props, context) {
-    super(props, context);
-    this.state = {
-      startValue: null,
-      endValue: null,
-      startOpen: false,
-      endOpen: false
-    };
-  }
-
-  onStartOpenChange = startOpen => {
-    this.setState({
-      startOpen
-    });
-  };
-
-  onEndOpenChange = endOpen => {
-    this.setState({
-      endOpen
-    });
-  };
-
-  onStartChange = value => {
-    this.setState({
-      startValue: value[0],
-      startOpen: false,
-      endOpen: true
-    });
-  };
-
-  onEndChange = value => {
-    this.setState({
-      endValue: value[1]
-    });
-  };
-
-  disabledStartDate = endValue => {
-    if (!endValue) {
-      return false;
-    }
-    const startValue = this.state.startValue;
-    if (!startValue) {
-      return false;
-    }
-    return endValue.diff(startValue, "days") < 0;
-  };
-
-  render() {
-    const state = this.state;
-    return (
-      <div>
-        开始时间：
-        <Picker
-          onOpenChange={this.onStartOpenChange}
-          type="start"
-          showValue={state.startValue}
-          open={this.state.startOpen}
-          value={[state.startValue, state.endValue]}
-          onChange={this.onStartChange}
-          placeholder={this.props.placeholder}
-        />
-        结束时间：
-        <Picker
-          onOpenChange={this.onEndOpenChange}
-          open={this.state.endOpen}
-          type="end"
-          showValue={state.endValue}
-          disabledDate={this.disabledStartDate}
-          value={[state.startValue, state.endValue]}
-          onChange={this.onEndChange}
-          placeholder={this.props.placeholder}
-        />
-      </div>
-    );
-  }
-}
-
-export default RangePicker;
+export default Picker;

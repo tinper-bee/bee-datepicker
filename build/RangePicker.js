@@ -1,8 +1,10 @@
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _react = require("react");
 
@@ -49,163 +51,103 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 */
 
 
-var format = "YYYY-MM-DD";
+function format(v) {
+    return v ? v.format(formatStr) : '';
+}
+var formatStr = 'YYYY-MM-DD';
 
 var fullFormat = "YYYY-MM-DD";
 
 var cn = location.search.indexOf("cn") !== -1;
 
 var now = (0, _moment2["default"])();
+
+function onStandaloneChange(value) {
+    console.log('onChange');
+    console.log(value[0] && format(value[0]), value[1] && format(value[1]));
+}
+
+function onStandaloneSelect(value) {
+    console.log('onSelect');
+    console.log(format(value[0]), format(value[1]));
+}
+function isValidRange(v) {
+    return v && v[0] && v[1];
+}
+
 if (cn) {
-  now.locale("zh-cn").utcOffset(8);
+    now.locale("zh-cn").utcOffset(8);
 } else {
-  now.locale("en-gb").utcOffset(0);
+    now.locale("en-gb").utcOffset(0);
 }
 
 var Picker = function (_Component) {
-  _inherits(Picker, _Component);
+    _inherits(Picker, _Component);
 
-  function Picker(props, context) {
-    _classCallCheck(this, Picker);
+    function Picker(props, context) {
+        _classCallCheck(this, Picker);
 
-    var _this = _possibleConstructorReturn(this, _Component.call(this, props, context));
+        var _this = _possibleConstructorReturn(this, _Component.call(this, props, context));
 
-    _this.onHoverChange = function (hoverValue) {
-      _this.setState({ hoverValue: hoverValue });
-    };
+        _this.onChange = function (value) {
+            console.log('onChange', value);
+            _this.setState({ value: value });
+        };
 
-    _this.state = {
-      hoverValue: []
-    };
-    return _this;
-  }
+        _this.onHoverChange = function (hoverValue) {
+            _this.setState({ hoverValue: hoverValue });
+        };
 
-  Picker.prototype.render = function render() {
-    var _this2 = this;
+        _this.state = {
+            hoverValue: [],
+            value: []
+        };
+        return _this;
+    }
 
-    var props = this.props;
-    var showValue = props.showValue;
+    Picker.prototype.render = function render() {
+        var _this2 = this;
 
-    var calendar = _react2["default"].createElement(_RangeCalendar2["default"], {
-      hoverValue: this.state.hoverValue,
-      onHoverChange: this.onHoverChange,
-      type: this.props.type,
-      locale: cn ? _zh_CN2["default"] : _en_US2["default"],
-      defaultValue: now,
-      format: format,
-      onChange: props.onChange,
-      disabledDate: props.disabledDate
-    });
+        var props = this.props;
+        var showValue = props.showValue;
 
-    return _react2["default"].createElement(
-      _Picker2["default"],
-      {
-        open: this.props.open,
-        onOpenChange: this.props.onOpenChange,
-        calendar: calendar,
-        value: props.value
-      },
-      function () {
+        var calendar = _react2["default"].createElement(_RangeCalendar2["default"], _extends({}, props, {
+            hoverValue: this.state.hoverValue,
+            onHoverChange: this.onHoverChange,
+            showWeekNumber: false,
+            format: formatStr,
+            dateInputPlaceholder: ['start', 'end'],
+            defaultValue: [now, now.clone().add(1, 'months')],
+            locale: cn ? _zh_CN2["default"] : _en_US2["default"],
+            onChange: props.onChange,
+            disabledDate: props.disabledDate
+        }));
+
         return _react2["default"].createElement(
-          "span",
-          null,
-          _react2["default"].createElement(_beeFormControl2["default"], {
-            placeholder: _this2.props.placeholder,
-            value: showValue && showValue.format(fullFormat) || ""
-          })
+            _Picker2["default"],
+            {
+                value: this.state.value,
+                onChange: this.onChange,
+                animation: "slide-up",
+                calendar: calendar
+            },
+            function (_ref) {
+                var value = _ref.value;
+
+                return _react2["default"].createElement(
+                    "div",
+                    { className: 'calendar-picker' },
+                    _react2["default"].createElement(_beeFormControl2["default"], {
+                        placeholder: _this2.props.placeholder,
+                        value: isValidRange(value) && format(value[0]) + " ~ " + format(value[1]) || ''
+                    })
+                );
+            }
         );
-      }
-    );
-  };
+    };
 
-  return Picker;
+    return Picker;
 }(_react.Component);
 
-var RangePicker = function (_Component2) {
-  _inherits(RangePicker, _Component2);
-
-  function RangePicker(props, context) {
-    _classCallCheck(this, RangePicker);
-
-    var _this3 = _possibleConstructorReturn(this, _Component2.call(this, props, context));
-
-    _this3.onStartOpenChange = function (startOpen) {
-      _this3.setState({
-        startOpen: startOpen
-      });
-    };
-
-    _this3.onEndOpenChange = function (endOpen) {
-      _this3.setState({
-        endOpen: endOpen
-      });
-    };
-
-    _this3.onStartChange = function (value) {
-      _this3.setState({
-        startValue: value[0],
-        startOpen: false,
-        endOpen: true
-      });
-    };
-
-    _this3.onEndChange = function (value) {
-      _this3.setState({
-        endValue: value[1]
-      });
-    };
-
-    _this3.disabledStartDate = function (endValue) {
-      if (!endValue) {
-        return false;
-      }
-      var startValue = _this3.state.startValue;
-      if (!startValue) {
-        return false;
-      }
-      return endValue.diff(startValue, "days") < 0;
-    };
-
-    _this3.state = {
-      startValue: null,
-      endValue: null,
-      startOpen: false,
-      endOpen: false
-    };
-    return _this3;
-  }
-
-  RangePicker.prototype.render = function render() {
-    var state = this.state;
-    return _react2["default"].createElement(
-      "div",
-      null,
-      "\u5F00\u59CB\u65F6\u95F4\uFF1A",
-      _react2["default"].createElement(Picker, {
-        onOpenChange: this.onStartOpenChange,
-        type: "start",
-        showValue: state.startValue,
-        open: this.state.startOpen,
-        value: [state.startValue, state.endValue],
-        onChange: this.onStartChange,
-        placeholder: this.props.placeholder
-      }),
-      "\u7ED3\u675F\u65F6\u95F4\uFF1A",
-      _react2["default"].createElement(Picker, {
-        onOpenChange: this.onEndOpenChange,
-        open: this.state.endOpen,
-        type: "end",
-        showValue: state.endValue,
-        disabledDate: this.disabledStartDate,
-        value: [state.startValue, state.endValue],
-        onChange: this.onEndChange,
-        placeholder: this.props.placeholder
-      })
-    );
-  };
-
-  return RangePicker;
-}(_react.Component);
-
-exports["default"] = RangePicker;
+exports["default"] = Picker;
 module.exports = exports["default"];
