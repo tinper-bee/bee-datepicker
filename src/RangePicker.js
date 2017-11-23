@@ -92,7 +92,7 @@ class Picker extends Component {
                       return (
                     <div className={'calendar-picker'}>
                         <FormControl
-                            placeholder={this.props.placeholder}
+                            placeholder={this.props.placeholder?this.props.placeholder:'start ~ end'}
                             value={isValidRange(value) && `${format(value[0])} ~ ${format(value[1])}` || ''}
                         />
                     </div>

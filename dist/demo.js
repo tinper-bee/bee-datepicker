@@ -76,7 +76,7 @@
 	
 	var CARETUP = _react2['default'].createElement('i', { className: 'uf uf-arrow-up' });
 	
-	var Demo1 = __webpack_require__(105);var Demo2 = __webpack_require__(360);var Demo3 = __webpack_require__(361);var Demo4 = __webpack_require__(362);var Demo5 = __webpack_require__(363);var Demo6 = __webpack_require__(364);var Demo7 = __webpack_require__(365);var DemoArray = [{ "example": _react2['default'].createElement(Demo1, null), "title": " 选择日期", "code": "/**\n *\n * @title 选择日期\n * @description 以「日期」为基本单位，基础的日期选择控件\n */\n\nimport React, { Component } from \"react\";\nimport { Row, Col } from \"bee-layout\";\nimport DatePicker from \"../../src\";\n\nimport zhCN from \"rc-calendar/lib/locale/zh_CN\";\nimport enUS from \"rc-calendar/lib/locale/en_US\";\nimport moment from \"moment\";\n\nconst format = \"YYYY-MM-DD\";\n\nconst dateInputPlaceholder = \"选择日期\";\n\nfunction onSelect(d) {\n  // console.log(d);\n}\n\nfunction onChange(d) {\n  this.setState({\n    value: d\n  });\n}\n\nclass Demo1 extends Component {\n  constructor(props) {\n    super(props);\n    this.state = {\n      value: moment()\n    };\n  }\n  onChange = d => {\n    console.log(d)\n    \n    this.setState({\n      value: d\n    });\n  };\n  render() {\n    return (\n      <div>\n        <Row>\n          <Col md={12}>\n            <DatePicker\n              format={format}\n              onSelect={onSelect}\n              onChange={this.onChange}\n              locale={zhCN}\n              defaultValue={this.state.value}\n              placeholder={dateInputPlaceholder}\n            />\n          </Col>\n        </Row>\n      </div>\n    );\n  }\n}\n\n\n", "desc": " 以「日期」为基本单位，基础的日期选择控件" }, { "example": _react2['default'].createElement(Demo2, null), "title": " 选择年月", "code": "/**\n *\n * @title 选择年月\n * @description 以「年月」为基本单位，基础的年月选择控件\n */\n\nimport React, { Component } from \"react\";\nimport { Row, Col } from \"bee-layout\";\nimport DatePicker from \"../../src\";\nimport moment from \"moment\";\n\nimport zhCN from \"rc-calendar/lib/locale/zh_CN\";\nimport enUS from \"rc-calendar/lib/locale/en_US\";\n\nconst { MonthPicker } = DatePicker;\n\nconst format2 = \"YYYY-MM\";\n\nfunction onSelect(d) {\n  console.log(d);\n}\n\nfunction onChange(d) {\n  console.log(d);\n}\n\nclass Demo2 extends Component {\n  render() {\n    return (\n      <div>\n        <Row>\n          <Col md={12}>\n            <MonthPicker\n              format={format2}\n              onSelect={onSelect}\n              onChange={onChange}\n              locale={zhCN}\n              defaultValue={moment()}\n              placeholder={\"选择年月\"}\n            />\n          </Col>\n        </Row>\n      </div>\n    );\n  }\n}\n\n\n", "desc": " 以「年月」为基本单位，基础的年月选择控件" }, { "example": _react2['default'].createElement(Demo3, null), "title": " 日期范围", "code": "/**\n *\n * @title 日期范围\n * @description 以「日期范围」为基本单位，基础的日期范围选择控件\n */\n\nimport React, { Component } from \"react\";\nimport { Row, Col } from \"bee-layout\";\nimport DatePicker from \"../../src\";\n\nimport zhCN from \"rc-calendar/lib/locale/zh_CN\";\nimport enUS from \"rc-calendar/lib/locale/en_US\";\n\nconst { RangePicker } = DatePicker;\n\nconst format3 = \"YYYY-MM-DD\";\n\nfunction onSelect(d) {\n  console.log(d);\n}\n\nfunction onChange(d) {\n  console.log(d);\n}\n\nclass Demo3 extends Component {\n  render() {\n    return (\n      <div>\n        <Row>\n          <Col md={12}>\n            <RangePicker\n              format={format3}\n              onSelect={onSelect}\n              onChange={onChange}\n              locale={zhCN}\n              placeholder={\"选择开始年月\"}\n            />\n          </Col>\n        </Row>\n      </div>\n    );\n  }\n}\n\n\n", "desc": " 以「日期范围」为基本单位，基础的日期范围选择控件" }, { "example": _react2['default'].createElement(Demo4, null), "title": " 动态的改变时间", "code": "/**\n *\n * @title 动态的改变时间\n * @description 以「日期时间」为基本单位，基础的日期时间选择控件\n */\n\nimport React, { Component } from \"react\";\nimport DatePicker from \"../../src\";\nimport moment from \"moment\";\nimport zhCN from \"rc-calendar/lib/locale/zh_CN\";\nimport { Row, Col } from \"bee-layout\";\nimport Button from \"bee-button\";\nconst format = \"YYYY-MM-DD HH:mm:ss\";\nconst dateInputPlaceholder = \"选择日期\";\n\nclass Demo4 extends Component {\n  constructor(props) {\n    super(props);\n    this.state = {\n      value: moment()\n    };\n  }\n\n  handleChange = value => {\n    this.setState({\n      value: value\n    });\n  };\n  onSelect = d => {\n    console.log(d);\n  };\n\n  handlerChangeDate = () => {\n    this.setState({\n      value: moment(\"2011-11-11 11:11:11\")\n    });\n    console.log(\"click\");\n  };\n  render() {\n    return (\n      <div>\n        <Row>\n          <Col md={8}>\n            <DatePicker\n              format={format}\n              locale={zhCN}\n              onSelect={this.onSelect}\n              onChange={this.handleChange}\n              value={this.state.value}\n              placeholder={dateInputPlaceholder}\n            />\n          </Col>\n          <Col md={3}>\n            <Button onClick={this.handlerChangeDate}>变</Button>\n          </Col>\n        </Row>\n      </div>\n    );\n  }\n}\n\n\n", "desc": " 以「日期时间」为基本单位，基础的日期时间选择控件" }, { "example": _react2['default'].createElement(Demo5, null), "title": " 选择周", "code": "/**\n *\n * @title 选择周\n * @description 以「周」为基本单位，基础的周选择控件\n */\n\nimport React, { Component } from \"react\";\nimport { Row, Col } from \"bee-layout\";\nimport DatePicker from \"../../src\";\nconst { WeekPicker } = DatePicker;\nimport moment from \"moment\";\n\nfunction onSelect(d) {\n  console.log(d);\n}\n\nfunction onChange(d) {\n  console.log(d);\n}\n\nclass Demo5 extends Component {\n  render() {\n    return (\n      <div>\n        <Row>\n          <Col md={12}>\n            <WeekPicker defaultValue={moment()} placeholder=\"选择周\" />\n          </Col>\n        </Row>\n      </div>\n    );\n  }\n}\n\n\n", "desc": " 以「周」为基本单位，基础的周选择控件" }, { "example": _react2['default'].createElement(Demo6, null), "title": " 选择日期时间", "code": "/**\n *\n * @title 选择日期时间\n * @description 以「日期时间」为基本单位，可以选择日期和时间\n */\n\nimport React, { Component } from \"react\";\nimport { Row, Col } from \"bee-layout\";\nimport DatePicker from \"../../src\";\n\nimport zhCN from \"rc-calendar/lib/locale/zh_CN\";\nimport enUS from \"rc-calendar/lib/locale/en_US\";\nimport moment from \"moment\";\n\nconst format = \"YYYY-MM-DD HH:mm:ss\";\n\nconst dateInputPlaceholder = \"选择日期\";\n\nfunction onSelect(d) {\n  console.log(d);\n}\n\nfunction onChange(d) {\n  console.log(d);\n}\n\nclass Demo6 extends Component {\n  render() {\n    return (\n      <div>\n        <Row>\n          <Col md={12}>\n            <DatePicker\n              format={format}\n              showTime={true}\n              onSelect={onSelect}\n              onChange={onChange}\n              locale={zhCN}\n              defaultValue={moment()}\n              placeholder={dateInputPlaceholder}\n            />\n          </Col>\n        </Row>\n      </div>\n    );\n  }\n}\n\n\n", "desc": " 以「日期时间」为基本单位，可以选择日期和时间" }, { "example": _react2['default'].createElement(Demo7, null), "title": " 禁用日期", "code": "/**\n *\n * @title 禁用日期\n * @description 禁用日期\n */\n\nimport React, { Component } from \"react\";\nimport { Row, Col } from \"bee-layout\";\nimport DatePicker from \"../../src\";\n\nimport zhCN from \"rc-calendar/lib/locale/zh_CN\";\nimport enUS from \"rc-calendar/lib/locale/en_US\";\nimport moment from \"moment\";\n\nconst format = \"YYYY-MM-DD\";\n\nconst dateInputPlaceholder = \"选择日期\";\n\nfunction onSelect(d) {\n  console.log(d);\n}\n\nfunction onChange(d) {\n  console.log(d);\n}\n\nclass Demo7 extends Component {\n  render() {\n    return (\n      <div>\n        <Row>\n          <Col md={12}>\n            <DatePicker\n              format={format}\n              onSelect={onSelect}\n              onChange={onChange}\n              locale={zhCN}\n              defaultValue={moment()}\n              placeholder={dateInputPlaceholder}\n              disabled={true}\n            />\n          </Col>\n        </Row>\n      </div>\n    );\n  }\n}\n\n\n", "desc": " 禁用日期" }];
+	var Demo1 = __webpack_require__(105);var Demo2 = __webpack_require__(361);var Demo3 = __webpack_require__(362);var Demo4 = __webpack_require__(363);var Demo5 = __webpack_require__(364);var Demo6 = __webpack_require__(365);var Demo7 = __webpack_require__(366);var DemoArray = [{ "example": _react2['default'].createElement(Demo1, null), "title": " 选择日期", "code": "/**\n *\n * @title 选择日期\n * @description 以「日期」为基本单位，基础的日期选择控件\n */\n\nimport React, { Component } from \"react\";\nimport { Row, Col } from \"bee-layout\";\nimport DatePicker from \"../../src\";\n\nimport zhCN from \"rc-calendar/lib/locale/zh_CN\";\nimport enUS from \"rc-calendar/lib/locale/en_US\";\nimport moment from \"moment\";\n\nconst format = \"YYYY-MM-DD\";\n\nconst dateInputPlaceholder = \"选择日期\";\n\nfunction onSelect(d) {\n  // console.log(d);\n}\n\nfunction onChange(d) {\n  this.setState({\n    value: d\n  });\n}\n\nclass Demo1 extends Component {\n  constructor(props) {\n    super(props);\n    this.state = {\n      value: moment()\n    };\n  }\n  onChange = d => {\n    console.log(d)\n    \n    this.setState({\n      value: d\n    });\n  };\n  render() {\n    return (\n      <div>\n        <Row>\n          <Col md={12}>\n            <DatePicker\n              format={format}\n              onSelect={onSelect}\n              onChange={this.onChange}\n              locale={zhCN}\n              defaultValue={this.state.value}\n              placeholder={dateInputPlaceholder}\n            />\n          </Col>\n        </Row>\n      </div>\n    );\n  }\n}\n\n\n", "desc": " 以「日期」为基本单位，基础的日期选择控件" }, { "example": _react2['default'].createElement(Demo2, null), "title": " 选择年月", "code": "/**\n *\n * @title 选择年月\n * @description 以「年月」为基本单位，基础的年月选择控件\n */\n\nimport React, { Component } from \"react\";\nimport { Row, Col } from \"bee-layout\";\nimport DatePicker from \"../../src\";\nimport moment from \"moment\";\n\nimport zhCN from \"rc-calendar/lib/locale/zh_CN\";\nimport enUS from \"rc-calendar/lib/locale/en_US\";\n\nconst { MonthPicker } = DatePicker;\n\nconst format2 = \"YYYY-MM\";\n\nfunction onSelect(d) {\n  console.log(d);\n}\n\nfunction onChange(d) {\n  console.log(d);\n}\n\nclass Demo2 extends Component {\n  render() {\n    return (\n      <div>\n        <Row>\n          <Col md={12}>\n            <MonthPicker\n              format={format2}\n              onSelect={onSelect}\n              onChange={onChange}\n              locale={zhCN}\n              defaultValue={moment()}\n              placeholder={\"选择年月\"}\n            />\n          </Col>\n        </Row>\n      </div>\n    );\n  }\n}\n\n\n", "desc": " 以「年月」为基本单位，基础的年月选择控件" }, { "example": _react2['default'].createElement(Demo3, null), "title": " 日期范围", "code": "/**\n *\n * @title 日期范围\n * @description 以「日期范围」为基本单位，基础的日期范围选择控件\n */\n\nimport React, { Component } from \"react\";\nimport { Row, Col } from \"bee-layout\";\nimport DatePicker from \"../../src\";\n\nimport zhCN from \"rc-calendar/lib/locale/zh_CN\";\nimport enUS from \"rc-calendar/lib/locale/en_US\";\n\nconst { RangePicker } = DatePicker;\n\nconst format3 = \"YYYY-MM-DD\";\n\nfunction onSelect(d) {\n  console.log(d);\n}\n\nfunction onChange(d) {\n  console.log(d);\n}\n\nclass Demo3 extends Component {\n  render() {\n    return (\n      <div>\n        <Row>\n          <Col md={12}>\n            <RangePicker\n              format={format3}\n              onSelect={onSelect}\n              onChange={onChange}\n              locale={zhCN}\n            />\n          </Col>\n        </Row>\n      </div>\n    );\n  }\n}\n\n\n", "desc": " 以「日期范围」为基本单位，基础的日期范围选择控件" }, { "example": _react2['default'].createElement(Demo4, null), "title": " 动态的改变时间", "code": "/**\n *\n * @title 动态的改变时间\n * @description 以「日期时间」为基本单位，基础的日期时间选择控件\n */\n\nimport React, { Component } from \"react\";\nimport DatePicker from \"../../src\";\nimport moment from \"moment\";\nimport zhCN from \"rc-calendar/lib/locale/zh_CN\";\nimport { Row, Col } from \"bee-layout\";\nimport Button from \"bee-button\";\nconst format = \"YYYY-MM-DD HH:mm:ss\";\nconst dateInputPlaceholder = \"选择日期\";\n\nclass Demo4 extends Component {\n  constructor(props) {\n    super(props);\n    this.state = {\n      value: moment()\n    };\n  }\n\n  handleChange = value => {\n    this.setState({\n      value: value\n    });\n  };\n  onSelect = d => {\n    console.log(d);\n  };\n\n  handlerChangeDate = () => {\n    this.setState({\n      value: moment(\"2011-11-11 11:11:11\")\n    });\n    console.log(\"click\");\n  };\n  render() {\n    return (\n      <div>\n        <Row>\n          <Col md={8}>\n            <DatePicker\n              format={format}\n              locale={zhCN}\n              onSelect={this.onSelect}\n              onChange={this.handleChange}\n              value={this.state.value}\n              placeholder={dateInputPlaceholder}\n            />\n          </Col>\n          <Col md={3}>\n            <Button onClick={this.handlerChangeDate}>变</Button>\n          </Col>\n        </Row>\n      </div>\n    );\n  }\n}\n\n\n", "desc": " 以「日期时间」为基本单位，基础的日期时间选择控件" }, { "example": _react2['default'].createElement(Demo5, null), "title": " 选择周", "code": "/**\n *\n * @title 选择周\n * @description 以「周」为基本单位，基础的周选择控件\n */\n\nimport React, { Component } from \"react\";\nimport { Row, Col } from \"bee-layout\";\nimport DatePicker from \"../../src\";\nconst { WeekPicker } = DatePicker;\nimport moment from \"moment\";\n\nfunction onSelect(d) {\n  console.log(d);\n}\n\nfunction onChange(d) {\n  console.log(d);\n}\n\nclass Demo5 extends Component {\n  render() {\n    return (\n      <div>\n        <Row>\n          <Col md={12}>\n            <WeekPicker defaultValue={moment()} placeholder=\"选择周\" />\n          </Col>\n        </Row>\n      </div>\n    );\n  }\n}\n\n\n", "desc": " 以「周」为基本单位，基础的周选择控件" }, { "example": _react2['default'].createElement(Demo6, null), "title": " 选择日期时间", "code": "/**\n *\n * @title 选择日期时间\n * @description 以「日期时间」为基本单位，可以选择日期和时间\n */\n\nimport React, { Component } from \"react\";\nimport { Row, Col } from \"bee-layout\";\nimport DatePicker from \"../../src\";\n\nimport zhCN from \"rc-calendar/lib/locale/zh_CN\";\nimport enUS from \"rc-calendar/lib/locale/en_US\";\nimport moment from \"moment\";\n\nconst format = \"YYYY-MM-DD HH:mm:ss\";\n\nconst dateInputPlaceholder = \"选择日期\";\n\nfunction onSelect(d) {\n  console.log(d);\n}\n\nfunction onChange(d) {\n  console.log(d);\n}\n\nclass Demo6 extends Component {\n  render() {\n    return (\n      <div>\n        <Row>\n          <Col md={12}>\n            <DatePicker\n              format={format}\n              showTime={true}\n              onSelect={onSelect}\n              onChange={onChange}\n              locale={zhCN}\n              defaultValue={moment()}\n              placeholder={dateInputPlaceholder}\n            />\n          </Col>\n        </Row>\n      </div>\n    );\n  }\n}\n\n\n", "desc": " 以「日期时间」为基本单位，可以选择日期和时间" }, { "example": _react2['default'].createElement(Demo7, null), "title": " 禁用日期", "code": "/**\n *\n * @title 禁用日期\n * @description 禁用日期\n */\n\nimport React, { Component } from \"react\";\nimport { Row, Col } from \"bee-layout\";\nimport DatePicker from \"../../src\";\n\nimport zhCN from \"rc-calendar/lib/locale/zh_CN\";\nimport enUS from \"rc-calendar/lib/locale/en_US\";\nimport moment from \"moment\";\n\nconst format = \"YYYY-MM-DD\";\n\nconst dateInputPlaceholder = \"选择日期\";\n\nfunction onSelect(d) {\n  console.log(d);\n}\n\nfunction onChange(d) {\n  console.log(d);\n}\n\nclass Demo7 extends Component {\n  render() {\n    return (\n      <div>\n        <Row>\n          <Col md={12}>\n            <DatePicker\n              format={format}\n              onSelect={onSelect}\n              onChange={onChange}\n              locale={zhCN}\n              defaultValue={moment()}\n              placeholder={dateInputPlaceholder}\n              disabled={true}\n            />\n          </Col>\n        </Row>\n      </div>\n    );\n  }\n}\n\n\n", "desc": " 禁用日期" }];
 	
 	var Demo = function (_Component) {
 	    _inherits(Demo, _Component);
@@ -7804,7 +7804,7 @@
 	
 	var _src2 = _interopRequireDefault(_src);
 	
-	var _zh_CN = __webpack_require__(358);
+	var _zh_CN = __webpack_require__(359);
 	
 	var _zh_CN2 = _interopRequireDefault(_zh_CN);
 	
@@ -7913,15 +7913,15 @@
 	
 	var _DatePicker2 = _interopRequireDefault(_DatePicker);
 	
-	var _MonthPicker = __webpack_require__(336);
+	var _MonthPicker = __webpack_require__(337);
 	
 	var _MonthPicker2 = _interopRequireDefault(_MonthPicker);
 	
-	var _RangePicker = __webpack_require__(338);
+	var _RangePicker = __webpack_require__(339);
 	
 	var _RangePicker2 = _interopRequireDefault(_RangePicker);
 	
-	var _WeekPicker = __webpack_require__(359);
+	var _WeekPicker = __webpack_require__(360);
 	
 	var _WeekPicker2 = _interopRequireDefault(_WeekPicker);
 	
@@ -7958,11 +7958,11 @@
 	
 	var _Picker2 = _interopRequireDefault(_Picker);
 	
-	var _beeFormControl = __webpack_require__(328);
+	var _beeFormControl = __webpack_require__(329);
 	
 	var _beeFormControl2 = _interopRequireDefault(_beeFormControl);
 	
-	var _Panel = __webpack_require__(332);
+	var _Panel = __webpack_require__(333);
 	
 	var _Panel2 = _interopRequireDefault(_Panel);
 	
@@ -10390,7 +10390,7 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 	var require;/* WEBPACK VAR INJECTION */(function(module) {//! moment.js
-	//! version : 2.19.1
+	//! version : 2.19.2
 	//! authors : Tim Wood, Iskren Chernev, Moment.js contributors
 	//! license : MIT
 	//! momentjs.com
@@ -11205,7 +11205,7 @@
 	
 	function set$1 (mom, unit, value) {
 	    if (mom.isValid() && !isNaN(value)) {
-	        if (unit === 'FullYear' && isLeapYear(mom.year())) {
+	        if (unit === 'FullYear' && isLeapYear(mom.year()) && mom.month() === 1 && mom.date() === 29) {
 	            mom._d['set' + (mom._isUTC ? 'UTC' : '') + unit](value, mom.month(), daysInMonth(value, mom.month()));
 	        }
 	        else {
@@ -12311,10 +12311,11 @@
 	
 	function updateLocale(name, config) {
 	    if (config != null) {
-	        var locale, parentConfig = baseConfig;
+	        var locale, tmpLocale, parentConfig = baseConfig;
 	        // MERGE
-	        if (locales[name] != null) {
-	            parentConfig = locales[name]._config;
+	        tmpLocale = loadLocale(name);
+	        if (tmpLocale != null) {
+	            parentConfig = tmpLocale._config;
 	        }
 	        config = mergeConfigs(parentConfig, config);
 	        locale = new Locale(config);
@@ -14868,7 +14869,7 @@
 	// Side effect imports
 	
 	
-	hooks.version = '2.19.1';
+	hooks.version = '2.19.2';
 	
 	setHookCallback(createLocal);
 	
@@ -29196,6 +29197,10 @@
 	
 	var _getContainerRenderMixin2 = _interopRequireDefault(_getContainerRenderMixin);
 	
+	var _Portal = __webpack_require__(328);
+	
+	var _Portal2 = _interopRequireDefault(_Portal);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
 	function noop() {}
@@ -29208,9 +29213,26 @@
 	  return window.document;
 	}
 	
+	var ALL_HANDLERS = ['onClick', 'onMouseDown', 'onTouchStart', 'onMouseEnter', 'onMouseLeave', 'onFocus', 'onBlur', 'onContextMenu'];
+	
+	var IS_REACT_16 = !!_reactDom.createPortal;
+	
 	var isMobile = typeof navigator !== 'undefined' && !!navigator.userAgent.match(/(Android|iPhone|iPad|iPod|iOS|UCWEB)/i);
 	
-	var ALL_HANDLERS = ['onClick', 'onMouseDown', 'onTouchStart', 'onMouseEnter', 'onMouseLeave', 'onFocus', 'onBlur'];
+	var mixins = [];
+	
+	if (!IS_REACT_16) {
+	  mixins.push((0, _getContainerRenderMixin2['default'])({
+	    autoMount: false,
+	
+	    isVisible: function isVisible(instance) {
+	      return instance.state.popupVisible;
+	    },
+	    getContainer: function getContainer(instance) {
+	      return instance.getContainer();
+	    }
+	  }));
+	}
 	
 	var Trigger = (0, _createReactClass2['default'])({
 	  displayName: 'Trigger',
@@ -29247,27 +29269,7 @@
 	    maskAnimation: _propTypes2['default'].string
 	  },
 	
-	  mixins: [(0, _getContainerRenderMixin2['default'])({
-	    autoMount: false,
-	
-	    isVisible: function isVisible(instance) {
-	      return instance.state.popupVisible;
-	    },
-	    getContainer: function getContainer(instance) {
-	      var props = instance.props;
-	
-	      var popupContainer = document.createElement('div');
-	      // Make sure default popup container will never cause scrollbar appearing
-	      // https://github.com/react-component/trigger/issues/41
-	      popupContainer.style.position = 'absolute';
-	      popupContainer.style.top = '0';
-	      popupContainer.style.left = '0';
-	      popupContainer.style.width = '100%';
-	      var mountNode = props.getPopupContainer ? props.getPopupContainer((0, _reactDom.findDOMNode)(instance)) : props.getDocument().body;
-	      mountNode.appendChild(popupContainer);
-	      return popupContainer;
-	    }
-	  })],
+	  mixins: mixins,
 	
 	  getDefaultProps: function getDefaultProps() {
 	    return {
@@ -29301,6 +29303,9 @@
 	    } else {
 	      popupVisible = !!props.defaultPopupVisible;
 	    }
+	
+	    this.prevPopupVisible = popupVisible;
+	
 	    return {
 	      popupVisible: popupVisible
 	    };
@@ -29331,11 +29336,16 @@
 	  componentDidUpdate: function componentDidUpdate(_, prevState) {
 	    var props = this.props;
 	    var state = this.state;
-	    this.renderComponent(null, function () {
+	    var triggerAfterPopupVisibleChange = function triggerAfterPopupVisibleChange() {
 	      if (prevState.popupVisible !== state.popupVisible) {
 	        props.afterPopupVisibleChange(state.popupVisible);
 	      }
-	    });
+	    };
+	    if (!IS_REACT_16) {
+	      this.renderComponent(null, triggerAfterPopupVisibleChange);
+	    }
+	
+	    this.prevPopupVisible = prevState.popupVisible;
 	
 	    // We must listen to `mousedown`, edge case:
 	    // https://github.com/ant-design/ant-design/issues/5804
@@ -29343,7 +29353,7 @@
 	    // https://github.com/react-component/trigger/issues/50
 	    if (state.popupVisible) {
 	      var currentDocument = void 0;
-	      if (!this.clickOutsideHandler && this.isClickToHide()) {
+	      if (!this.clickOutsideHandler && (this.isClickToHide() || this.isContextMenuToShow())) {
 	        currentDocument = props.getDocument();
 	        this.clickOutsideHandler = (0, _addEventListener2['default'])(currentDocument, 'mousedown', this.onDocumentClick);
 	      }
@@ -29354,6 +29364,15 @@
 	      if (!this.touchOutsideHandler && isMobile) {
 	        currentDocument = currentDocument || props.getDocument();
 	        this.touchOutsideHandler = (0, _addEventListener2['default'])(currentDocument, 'click', this.onDocumentClick);
+	      }
+	      // close popup when trigger type contains 'onContextMenu' and document is scrolling.
+	      if (!this.contextMenuOutsideHandler1 && this.isContextMenuToShow()) {
+	        currentDocument = currentDocument || props.getDocument();
+	        this.contextMenuOutsideHandler1 = (0, _addEventListener2['default'])(currentDocument, 'scroll', this.onContextMenuClose);
+	      }
+	      // close popup when trigger type contains 'onContextMenu' and window is blur.
+	      if (!this.contextMenuOutsideHandler2 && this.isContextMenuToShow()) {
+	        this.contextMenuOutsideHandler2 = (0, _addEventListener2['default'])(window, 'blur', this.onContextMenuClose);
 	      }
 	      return;
 	    }
@@ -29407,6 +29426,16 @@
 	      this.delaySetPopupVisible(false, this.props.blurDelay);
 	    }
 	  },
+	  onContextMenu: function onContextMenu(e) {
+	    e.preventDefault();
+	    this.fireEvents('onContextMenu', e);
+	    this.setPopupVisible(true);
+	  },
+	  onContextMenuClose: function onContextMenuClose() {
+	    if (this.isContextMenuToShow()) {
+	      this.close();
+	    }
+	  },
 	  onClick: function onClick(event) {
 	    this.fireEvents('onClick', event);
 	    // focus will trigger click
@@ -29441,6 +29470,11 @@
 	    var popupNode = this.getPopupDomNode();
 	    if (!(0, _contains2['default'])(root, target) && !(0, _contains2['default'])(popupNode, target)) {
 	      this.close();
+	    }
+	  },
+	  handlePortalUpdate: function handlePortalUpdate() {
+	    if (this.prevPopupVisible !== this.state.popupVisible) {
+	      this.props.afterPopupVisibleChange(this.state.popupVisible);
 	    }
 	  },
 	  getPopupDomNode: function getPopupDomNode() {
@@ -29509,10 +29543,25 @@
 	        zIndex: props.zIndex,
 	        transitionName: props.popupTransitionName,
 	        maskAnimation: props.maskAnimation,
-	        maskTransitionName: props.maskTransitionName
+	        maskTransitionName: props.maskTransitionName,
+	        ref: this.savePopup
 	      }),
 	      typeof props.popup === 'function' ? props.popup() : props.popup
 	    );
+	  },
+	  getContainer: function getContainer() {
+	    var props = this.props;
+	
+	    var popupContainer = document.createElement('div');
+	    // Make sure default popup container will never cause scrollbar appearing
+	    // https://github.com/react-component/trigger/issues/41
+	    popupContainer.style.position = 'absolute';
+	    popupContainer.style.top = '0';
+	    popupContainer.style.left = '0';
+	    popupContainer.style.width = '100%';
+	    var mountNode = props.getPopupContainer ? props.getPopupContainer((0, _reactDom.findDOMNode)(this)) : props.getDocument().body;
+	    mountNode.appendChild(popupContainer);
+	    return popupContainer;
 	  },
 	  setPopupVisible: function setPopupVisible(popupVisible) {
 	    this.clearDelayTimer();
@@ -29551,6 +29600,16 @@
 	      this.clickOutsideHandler = null;
 	    }
 	
+	    if (this.contextMenuOutsideHandler1) {
+	      this.contextMenuOutsideHandler1.remove();
+	      this.contextMenuOutsideHandler1 = null;
+	    }
+	
+	    if (this.contextMenuOutsideHandler2) {
+	      this.contextMenuOutsideHandler2.remove();
+	      this.contextMenuOutsideHandler2 = null;
+	    }
+	
 	    if (this.touchOutsideHandler) {
 	      this.touchOutsideHandler.remove();
 	      this.touchOutsideHandler = null;
@@ -29571,38 +29630,45 @@
 	
 	    return action.indexOf('click') !== -1 || showAction.indexOf('click') !== -1;
 	  },
-	  isClickToHide: function isClickToHide() {
+	  isContextMenuToShow: function isContextMenuToShow() {
 	    var _props2 = this.props,
 	        action = _props2.action,
-	        hideAction = _props2.hideAction;
+	        showAction = _props2.showAction;
+	
+	    return action.indexOf('contextMenu') !== -1 || showAction.indexOf('contextMenu') !== -1;
+	  },
+	  isClickToHide: function isClickToHide() {
+	    var _props3 = this.props,
+	        action = _props3.action,
+	        hideAction = _props3.hideAction;
 	
 	    return action.indexOf('click') !== -1 || hideAction.indexOf('click') !== -1;
 	  },
 	  isMouseEnterToShow: function isMouseEnterToShow() {
-	    var _props3 = this.props,
-	        action = _props3.action,
-	        showAction = _props3.showAction;
+	    var _props4 = this.props,
+	        action = _props4.action,
+	        showAction = _props4.showAction;
 	
 	    return action.indexOf('hover') !== -1 || showAction.indexOf('mouseEnter') !== -1;
 	  },
 	  isMouseLeaveToHide: function isMouseLeaveToHide() {
-	    var _props4 = this.props,
-	        action = _props4.action,
-	        hideAction = _props4.hideAction;
+	    var _props5 = this.props,
+	        action = _props5.action,
+	        hideAction = _props5.hideAction;
 	
 	    return action.indexOf('hover') !== -1 || hideAction.indexOf('mouseLeave') !== -1;
 	  },
 	  isFocusToShow: function isFocusToShow() {
-	    var _props5 = this.props,
-	        action = _props5.action,
-	        showAction = _props5.showAction;
+	    var _props6 = this.props,
+	        action = _props6.action,
+	        showAction = _props6.showAction;
 	
 	    return action.indexOf('focus') !== -1 || showAction.indexOf('focus') !== -1;
 	  },
 	  isBlurToHide: function isBlurToHide() {
-	    var _props6 = this.props,
-	        action = _props6.action,
-	        hideAction = _props6.hideAction;
+	    var _props7 = this.props,
+	        action = _props7.action,
+	        hideAction = _props7.hideAction;
 	
 	    return action.indexOf('focus') !== -1 || hideAction.indexOf('blur') !== -1;
 	  },
@@ -29624,11 +29690,25 @@
 	  close: function close() {
 	    this.setPopupVisible(false);
 	  },
+	  savePopup: function savePopup(node) {
+	    if (IS_REACT_16) {
+	      this._component = node;
+	    }
+	  },
 	  render: function render() {
+	    var popupVisible = this.state.popupVisible;
+	
 	    var props = this.props;
 	    var children = props.children;
 	    var child = _react2['default'].Children.only(children);
-	    var newChildProps = {};
+	    var newChildProps = { key: 'trigger' };
+	
+	    if (this.isContextMenuToShow()) {
+	      newChildProps.onContextMenu = this.onContextMenu;
+	    } else {
+	      newChildProps.onContextMenu = this.createTwoChains('onContextMenu');
+	    }
+	
 	    if (this.isClickToHide() || this.isClickToShow()) {
 	      newChildProps.onClick = this.onClick;
 	      newChildProps.onMouseDown = this.onMouseDown;
@@ -29656,7 +29736,27 @@
 	      newChildProps.onBlur = this.createTwoChains('onBlur');
 	    }
 	
-	    return _react2['default'].cloneElement(child, newChildProps);
+	    var trigger = _react2['default'].cloneElement(child, newChildProps);
+	
+	    if (!IS_REACT_16) {
+	      return trigger;
+	    }
+	
+	    var portal = void 0;
+	    // prevent unmounting after it's rendered
+	    if (popupVisible || this._component) {
+	      portal = _react2['default'].createElement(
+	        _Portal2['default'],
+	        {
+	          key: 'portal',
+	          getContainer: this.getContainer,
+	          didUpdate: this.handlePortalUpdate
+	        },
+	        this.getComponent()
+	      );
+	    }
+	
+	    return [trigger, portal];
 	  }
 	});
 	
@@ -31571,7 +31671,105 @@
 	  value: true
 	});
 	
-	var _FormControl = __webpack_require__(329);
+	var _classCallCheck2 = __webpack_require__(119);
+	
+	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+	
+	var _createClass2 = __webpack_require__(120);
+	
+	var _createClass3 = _interopRequireDefault(_createClass2);
+	
+	var _possibleConstructorReturn2 = __webpack_require__(124);
+	
+	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+	
+	var _inherits2 = __webpack_require__(159);
+	
+	var _inherits3 = _interopRequireDefault(_inherits2);
+	
+	var _react = __webpack_require__(4);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _propTypes = __webpack_require__(5);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
+	
+	var _reactDom = __webpack_require__(12);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
+	var Portal = function (_React$Component) {
+	  (0, _inherits3['default'])(Portal, _React$Component);
+	
+	  function Portal() {
+	    (0, _classCallCheck3['default'])(this, Portal);
+	    return (0, _possibleConstructorReturn3['default'])(this, (Portal.__proto__ || Object.getPrototypeOf(Portal)).apply(this, arguments));
+	  }
+	
+	  (0, _createClass3['default'])(Portal, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      this.createContainer();
+	    }
+	  }, {
+	    key: 'componentDidUpdate',
+	    value: function componentDidUpdate(prevProps) {
+	      var didUpdate = this.props.didUpdate;
+	
+	      if (didUpdate) {
+	        didUpdate(prevProps);
+	      }
+	    }
+	  }, {
+	    key: 'componentWillUnmount',
+	    value: function componentWillUnmount() {
+	      this.removeContainer();
+	    }
+	  }, {
+	    key: 'createContainer',
+	    value: function createContainer() {
+	      this._container = this.props.getContainer();
+	      this.forceUpdate();
+	    }
+	  }, {
+	    key: 'removeContainer',
+	    value: function removeContainer() {
+	      if (this._container) {
+	        this._container.parentNode.removeChild(this._container);
+	      }
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      if (this._container) {
+	        return (0, _reactDom.createPortal)(this.props.children, this._container);
+	      }
+	      return null;
+	    }
+	  }]);
+	  return Portal;
+	}(_react2['default'].Component);
+	
+	Portal.propTypes = {
+	  getContainer: _propTypes2['default'].func.isRequired,
+	  children: _propTypes2['default'].node.isRequired,
+	  didUpdate: _propTypes2['default'].func
+	};
+	exports['default'] = Portal;
+	module.exports = exports['default'];
+
+/***/ }),
+/* 329 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _FormControl = __webpack_require__(330);
 	
 	var _FormControl2 = _interopRequireDefault(_FormControl);
 	
@@ -31581,7 +31779,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 329 */
+/* 330 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31596,15 +31794,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactDom = __webpack_require__(12);
-	
-	var _reactDom2 = _interopRequireDefault(_reactDom);
-	
 	var _classnames = __webpack_require__(3);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _beeIcon = __webpack_require__(330);
+	var _beeIcon = __webpack_require__(331);
 	
 	var _beeIcon2 = _interopRequireDefault(_beeIcon);
 	
@@ -31617,8 +31811,6 @@
 	function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
 	
 	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
-	
-	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
@@ -31652,7 +31844,10 @@
 	      var value = e.target.value;
 	      var onChange = _this.props.onChange;
 	
-	      _this.setState(_defineProperty({ value: value, showSearch: false }, 'showSearch', value == ""));
+	      _this.setState({
+	        value: value,
+	        showSearch: value == null || value === ""
+	      });
 	      if (onChange) {
 	        onChange(value);
 	      }
@@ -31664,7 +31859,7 @@
 	
 	    _this.state = {
 	      showSearch: true,
-	      value: props.value || ""
+	      value: props.value == null ? "" : props.value
 	    };
 	    _this.input = {};
 	    return _this;
@@ -31694,7 +31889,7 @@
 	    if (size) {
 	      classes['' + size] = true;
 	    }
-	    if (type == "search") {
+	    if (type === "search") {
 	      classes['u-input-search'] = true;
 	    }
 	
@@ -31703,7 +31898,7 @@
 	      classNames = (0, _classnames2["default"])(clsPrefix, classes);
 	    }
 	
-	    if (type == "search") {
+	    if (type === "search") {
 	
 	      return _react2["default"].createElement(
 	        'span',
@@ -31746,7 +31941,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 330 */
+/* 331 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31755,7 +31950,7 @@
 	  value: true
 	});
 	
-	var _Icon = __webpack_require__(331);
+	var _Icon = __webpack_require__(332);
 	
 	var _Icon2 = _interopRequireDefault(_Icon);
 	
@@ -31765,7 +31960,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 331 */
+/* 332 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31844,7 +32039,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 332 */
+/* 333 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31881,11 +32076,11 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _Header = __webpack_require__(333);
+	var _Header = __webpack_require__(334);
 	
 	var _Header2 = _interopRequireDefault(_Header);
 	
-	var _Combobox = __webpack_require__(334);
+	var _Combobox = __webpack_require__(335);
 	
 	var _Combobox2 = _interopRequireDefault(_Combobox);
 	
@@ -32087,7 +32282,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 333 */
+/* 334 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32351,7 +32546,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 334 */
+/* 335 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32384,7 +32579,7 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _Select = __webpack_require__(335);
+	var _Select = __webpack_require__(336);
 	
 	var _Select2 = _interopRequireDefault(_Select);
 	
@@ -32633,7 +32828,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 335 */
+/* 336 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32835,7 +33030,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 336 */
+/* 337 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -32844,7 +33039,7 @@
 	  value: true
 	});
 	
-	var _MonthCalendar = __webpack_require__(337);
+	var _MonthCalendar = __webpack_require__(338);
 	
 	var _MonthCalendar2 = _interopRequireDefault(_MonthCalendar);
 	
@@ -32856,7 +33051,7 @@
 	
 	var _Picker2 = _interopRequireDefault(_Picker);
 	
-	var _beeFormControl = __webpack_require__(328);
+	var _beeFormControl = __webpack_require__(329);
 	
 	var _beeFormControl2 = _interopRequireDefault(_beeFormControl);
 	
@@ -32948,7 +33143,7 @@
 	module.exports = exports["default"];
 
 /***/ }),
-/* 337 */
+/* 338 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -33066,7 +33261,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 338 */
+/* 339 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -33081,11 +33276,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _RangeCalendar = __webpack_require__(339);
+	var _RangeCalendar = __webpack_require__(340);
 	
 	var _RangeCalendar2 = _interopRequireDefault(_RangeCalendar);
 	
-	var _beeFormControl = __webpack_require__(328);
+	var _beeFormControl = __webpack_require__(329);
 	
 	var _beeFormControl2 = _interopRequireDefault(_beeFormControl);
 	
@@ -33093,7 +33288,7 @@
 	
 	var _Picker2 = _interopRequireDefault(_Picker);
 	
-	var _zh_CN = __webpack_require__(358);
+	var _zh_CN = __webpack_require__(359);
 	
 	var _zh_CN2 = _interopRequireDefault(_zh_CN);
 	
@@ -33209,7 +33404,7 @@
 	                    "div",
 	                    { className: 'calendar-picker' },
 	                    _react2["default"].createElement(_beeFormControl2["default"], {
-	                        placeholder: _this2.props.placeholder,
+	                        placeholder: _this2.props.placeholder ? _this2.props.placeholder : 'start ~ end',
 	                        value: isValidRange(value) && format(value[0]) + " ~ " + format(value[1]) || ''
 	                    })
 	                );
@@ -33224,7 +33419,7 @@
 	module.exports = exports["default"];
 
 /***/ }),
-/* 339 */
+/* 340 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -33241,11 +33436,11 @@
 	
 	var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 	
-	var _toConsumableArray2 = __webpack_require__(340);
+	var _toConsumableArray2 = __webpack_require__(341);
 	
 	var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
 	
-	var _slicedToArray2 = __webpack_require__(350);
+	var _slicedToArray2 = __webpack_require__(351);
 	
 	var _slicedToArray3 = _interopRequireDefault(_slicedToArray2);
 	
@@ -33269,7 +33464,7 @@
 	
 	var _classnames3 = _interopRequireDefault(_classnames2);
 	
-	var _CalendarPart = __webpack_require__(357);
+	var _CalendarPart = __webpack_require__(358);
 	
 	var _CalendarPart2 = _interopRequireDefault(_CalendarPart);
 	
@@ -33849,14 +34044,14 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 340 */
+/* 341 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
 	
 	exports.__esModule = true;
 	
-	var _from = __webpack_require__(341);
+	var _from = __webpack_require__(342);
 	
 	var _from2 = _interopRequireDefault(_from);
 	
@@ -33875,35 +34070,35 @@
 	};
 
 /***/ }),
-/* 341 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	module.exports = { "default": __webpack_require__(342), __esModule: true };
-
-/***/ }),
 /* 342 */
 /***/ (function(module, exports, __webpack_require__) {
 
+	module.exports = { "default": __webpack_require__(343), __esModule: true };
+
+/***/ }),
+/* 343 */
+/***/ (function(module, exports, __webpack_require__) {
+
 	__webpack_require__(128);
-	__webpack_require__(343);
+	__webpack_require__(344);
 	module.exports = __webpack_require__(41).Array.from;
 
 
 /***/ }),
-/* 343 */
+/* 344 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	var ctx = __webpack_require__(42);
 	var $export = __webpack_require__(39);
 	var toObject = __webpack_require__(116);
-	var call = __webpack_require__(344);
-	var isArrayIter = __webpack_require__(345);
+	var call = __webpack_require__(345);
+	var isArrayIter = __webpack_require__(346);
 	var toLength = __webpack_require__(63);
-	var createProperty = __webpack_require__(346);
-	var getIterFn = __webpack_require__(347);
+	var createProperty = __webpack_require__(347);
+	var getIterFn = __webpack_require__(348);
 	
-	$export($export.S + $export.F * !__webpack_require__(349)(function (iter) { Array.from(iter); }), 'Array', {
+	$export($export.S + $export.F * !__webpack_require__(350)(function (iter) { Array.from(iter); }), 'Array', {
 	  // 22.1.2.1 Array.from(arrayLike, mapfn = undefined, thisArg = undefined)
 	  from: function from(arrayLike /* , mapfn = undefined, thisArg = undefined */) {
 	    var O = toObject(arrayLike);
@@ -33933,7 +34128,7 @@
 
 
 /***/ }),
-/* 344 */
+/* 345 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	// call something on iterator step with safe closing on error
@@ -33951,7 +34146,7 @@
 
 
 /***/ }),
-/* 345 */
+/* 346 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	// check on default Array iterator
@@ -33965,7 +34160,7 @@
 
 
 /***/ }),
-/* 346 */
+/* 347 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -33979,10 +34174,10 @@
 
 
 /***/ }),
-/* 347 */
+/* 348 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var classof = __webpack_require__(348);
+	var classof = __webpack_require__(349);
 	var ITERATOR = __webpack_require__(139)('iterator');
 	var Iterators = __webpack_require__(133);
 	module.exports = __webpack_require__(41).getIteratorMethod = function (it) {
@@ -33993,7 +34188,7 @@
 
 
 /***/ }),
-/* 348 */
+/* 349 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	// getting tag from 19.1.3.6 Object.prototype.toString()
@@ -34022,7 +34217,7 @@
 
 
 /***/ }),
-/* 349 */
+/* 350 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var ITERATOR = __webpack_require__(139)('iterator');
@@ -34050,18 +34245,18 @@
 
 
 /***/ }),
-/* 350 */
+/* 351 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
 	
 	exports.__esModule = true;
 	
-	var _isIterable2 = __webpack_require__(351);
+	var _isIterable2 = __webpack_require__(352);
 	
 	var _isIterable3 = _interopRequireDefault(_isIterable2);
 	
-	var _getIterator2 = __webpack_require__(354);
+	var _getIterator2 = __webpack_require__(355);
 	
 	var _getIterator3 = _interopRequireDefault(_getIterator2);
 	
@@ -34106,25 +34301,25 @@
 	}();
 
 /***/ }),
-/* 351 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	module.exports = { "default": __webpack_require__(352), __esModule: true };
-
-/***/ }),
 /* 352 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	__webpack_require__(141);
-	__webpack_require__(128);
-	module.exports = __webpack_require__(353);
-
+	module.exports = { "default": __webpack_require__(353), __esModule: true };
 
 /***/ }),
 /* 353 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var classof = __webpack_require__(348);
+	__webpack_require__(141);
+	__webpack_require__(128);
+	module.exports = __webpack_require__(354);
+
+
+/***/ }),
+/* 354 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var classof = __webpack_require__(349);
 	var ITERATOR = __webpack_require__(139)('iterator');
 	var Iterators = __webpack_require__(133);
 	module.exports = __webpack_require__(41).isIterable = function (it) {
@@ -34137,26 +34332,26 @@
 
 
 /***/ }),
-/* 354 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	module.exports = { "default": __webpack_require__(355), __esModule: true };
-
-/***/ }),
 /* 355 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	__webpack_require__(141);
-	__webpack_require__(128);
-	module.exports = __webpack_require__(356);
-
+	module.exports = { "default": __webpack_require__(356), __esModule: true };
 
 /***/ }),
 /* 356 */
 /***/ (function(module, exports, __webpack_require__) {
 
+	__webpack_require__(141);
+	__webpack_require__(128);
+	module.exports = __webpack_require__(357);
+
+
+/***/ }),
+/* 357 */
+/***/ (function(module, exports, __webpack_require__) {
+
 	var anObject = __webpack_require__(46);
-	var get = __webpack_require__(347);
+	var get = __webpack_require__(348);
 	module.exports = __webpack_require__(41).getIterator = function (it) {
 	  var iterFn = get(it);
 	  if (typeof iterFn != 'function') throw TypeError(it + ' is not iterable!');
@@ -34165,7 +34360,7 @@
 
 
 /***/ }),
-/* 357 */
+/* 358 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -34322,7 +34517,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 358 */
+/* 359 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -34359,7 +34554,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 359 */
+/* 360 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -34380,11 +34575,11 @@
 	
 	var _Picker2 = _interopRequireDefault(_Picker);
 	
-	var _beeFormControl = __webpack_require__(328);
+	var _beeFormControl = __webpack_require__(329);
 	
 	var _beeFormControl2 = _interopRequireDefault(_beeFormControl);
 	
-	var _zh_CN = __webpack_require__(358);
+	var _zh_CN = __webpack_require__(359);
 	
 	var _zh_CN2 = _interopRequireDefault(_zh_CN);
 	
@@ -34555,7 +34750,7 @@
 	module.exports = exports["default"];
 
 /***/ }),
-/* 360 */
+/* 361 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -34578,7 +34773,7 @@
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
-	var _zh_CN = __webpack_require__(358);
+	var _zh_CN = __webpack_require__(359);
 	
 	var _zh_CN2 = _interopRequireDefault(_zh_CN);
 	
@@ -34652,7 +34847,7 @@
 	module.exports = exports["default"];
 
 /***/ }),
-/* 361 */
+/* 362 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -34671,7 +34866,7 @@
 	
 	var _src2 = _interopRequireDefault(_src);
 	
-	var _zh_CN = __webpack_require__(358);
+	var _zh_CN = __webpack_require__(359);
 	
 	var _zh_CN2 = _interopRequireDefault(_zh_CN);
 	
@@ -34729,8 +34924,7 @@
 	            format: format3,
 	            onSelect: onSelect,
 	            onChange: onChange,
-	            locale: _zh_CN2["default"],
-	            placeholder: "选择开始年月"
+	            locale: _zh_CN2["default"]
 	          })
 	        )
 	      )
@@ -34744,7 +34938,7 @@
 	module.exports = exports["default"];
 
 /***/ }),
-/* 362 */
+/* 363 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -34765,7 +34959,7 @@
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
-	var _zh_CN = __webpack_require__(358);
+	var _zh_CN = __webpack_require__(359);
 	
 	var _zh_CN2 = _interopRequireDefault(_zh_CN);
 	
@@ -34862,7 +35056,7 @@
 	module.exports = exports["default"];
 
 /***/ }),
-/* 363 */
+/* 364 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -34942,7 +35136,7 @@
 	module.exports = exports["default"];
 
 /***/ }),
-/* 364 */
+/* 365 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -34961,7 +35155,7 @@
 	
 	var _src2 = _interopRequireDefault(_src);
 	
-	var _zh_CN = __webpack_require__(358);
+	var _zh_CN = __webpack_require__(359);
 	
 	var _zh_CN2 = _interopRequireDefault(_zh_CN);
 	
@@ -35039,7 +35233,7 @@
 	module.exports = exports["default"];
 
 /***/ }),
-/* 365 */
+/* 366 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -35058,7 +35252,7 @@
 	
 	var _src2 = _interopRequireDefault(_src);
 	
-	var _zh_CN = __webpack_require__(358);
+	var _zh_CN = __webpack_require__(359);
 	
 	var _zh_CN2 = _interopRequireDefault(_zh_CN);
 	
