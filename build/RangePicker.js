@@ -138,7 +138,7 @@ var Picker = function (_Component) {
                     "div",
                     { className: 'calendar-picker' },
                     _react2["default"].createElement(_beeFormControl2["default"], {
-                        placeholder: _this2.props.placeholder,
+                        placeholder: _this2.props.placeholder ? _this2.props.placeholder : 'start ~ end',
                         value: isValidRange(value) && format(value[0]) + " ~ " + format(value[1]) || ''
                     })
                 );
