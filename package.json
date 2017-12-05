@@ -1,6 +1,6 @@
 {
  "name": "bee-datepicker",
- "version": "1.0.8",
+ "version": "1.0.9",
  "description": "DatePicker ui component for react",
  "keywords": [
   "react",
@@ -20,7 +20,10 @@
  "license": "MIT",
  "main": "./build/index.js",
  "config": {
-  "port": 3000
+  "port": 3000,
+  "commitizen": {
+   "path": "./node_modules/cz-conventional-changelog"
+  }
  },
  "scripts": {
   "dev": "bee-tools run start",
@@ -35,6 +38,7 @@
  },
  "dependencies": {
   "bee-form-control": "latest",
+  "bee-input-group": "^1.0.3",
   "classnames": "^2.2.5",
   "moment": "^2.17.1",
   "rc-calendar": "^8.4.1",
@@ -52,6 +56,7 @@
   "bee-panel": "latest",
   "chai": "^3.5.0",
   "console-polyfill": "~0.2.1",
+  "cz-conventional-changelog": "^2.1.0",
   "enzyme": "^2.4.1",
   "es5-shim": "~4.1.10",
   "object-assign": "^4.1.0",

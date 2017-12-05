@@ -8,6 +8,8 @@ import Picker from "rc-calendar/lib/Picker";
 import FormControl from "bee-form-control";
 import TimePickerPanel from "rc-time-picker/lib/Panel";
 import moment from "moment";
+import Icon from "bee-icon";
+import InputGroup from 'bee-input-group';
 
 const timePickerElement = (
   <TimePickerPanel defaultValue={moment("00:00:00", "HH:mm:ss")} />
@@ -94,6 +96,7 @@ class DatePicker extends Component {
         >
           {() => {
             return (
+              <InputGroup simple className="datepicker-input-group">
               <FormControl
                 disabled={props.disabled}
                 readOnly
@@ -101,12 +104,21 @@ class DatePicker extends Component {
                 className={this.props.className}
                 value={(value && value.format(props.format)) || ""}
               />
+              <InputGroup.Button shape="border">
+            { props.renderIcon() }
+           </InputGroup.Button>
+          </InputGroup>
+              
             );
           }}
         </Picker>
       </div>
     );
   }
+}
+
+DatePicker.defaultProps = {
+  renderIcon: () => <Icon type="uf-calendar" />  
 }
 
 export default DatePicker;

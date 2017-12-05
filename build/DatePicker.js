@@ -30,6 +30,14 @@ var _moment = require("moment");
 
 var _moment2 = _interopRequireDefault(_moment);
 
+var _beeIcon = require("bee-icon");
+
+var _beeIcon2 = _interopRequireDefault(_beeIcon);
+
+var _beeInputGroup = require("bee-input-group");
+
+var _beeInputGroup2 = _interopRequireDefault(_beeInputGroup);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
@@ -108,13 +116,22 @@ var DatePicker = function (_Component) {
           onChange: this.onChange
         }),
         function () {
-          return _react2["default"].createElement(_beeFormControl2["default"], {
-            disabled: props.disabled,
-            readOnly: true,
-            placeholder: _this2.props.placeholder,
-            className: _this2.props.className,
-            value: value && value.format(props.format) || ""
-          });
+          return _react2["default"].createElement(
+            _beeInputGroup2["default"],
+            { simple: true, className: "datepicker-input-group" },
+            _react2["default"].createElement(_beeFormControl2["default"], {
+              disabled: props.disabled,
+              readOnly: true,
+              placeholder: _this2.props.placeholder,
+              className: _this2.props.className,
+              value: value && value.format(props.format) || ""
+            }),
+            _react2["default"].createElement(
+              _beeInputGroup2["default"].Button,
+              { shape: "border" },
+              props.renderIcon()
+            )
+          );
         }
       )
     );
@@ -150,6 +167,12 @@ var _initialiseProps = function _initialiseProps() {
     }
     props.onChange(value, value && value.format(props.format) || "");
   };
+};
+
+DatePicker.defaultProps = {
+  renderIcon: function renderIcon() {
+    return _react2["default"].createElement(_beeIcon2["default"], { type: "uf-calendar" });
+  }
 };
 
 exports["default"] = DatePicker;

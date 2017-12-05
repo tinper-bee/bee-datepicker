@@ -1,6 +1,7 @@
 @import "../node_modules/tinper-bee-core/scss/minxin-variables";
 @import "../node_modules/tinper-bee-core/scss/minxin-mixins";
 @import "../node_modules/bee-form-control/src/FormControl.scss";
+@import "../node_modules/bee-input-group/src/InputGroup.scss";
 
 .rc-calendar {
   box-sizing: border-box;
@@ -1358,4 +1359,12 @@ li.rc-time-picker-panel-select-option-disabled:hover {
 }
 .calendar-picker {
   width:300px;
+}
+.icon-container{
+  position: relative;
+}
+.datepicker-input-group{
+  &.u-input-group{
+    display: block;
+  }
 }

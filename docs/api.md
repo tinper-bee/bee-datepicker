@@ -28,6 +28,7 @@
 | onChange|日期改变的回调函数|Function(date: moment)||
 | dateInputPlaceholder|日期的placeholder| String ||
 | showTime | 是否显示时间选择面板 | Boolean ||
+| renderIcon |更改默认的图标|Function| () => <Icon type="uf-calendar" />|
 
 
 ### MonthPicker
