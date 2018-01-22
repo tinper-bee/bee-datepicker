@@ -5,7 +5,7 @@
  */
 
 import React, { Component } from "react";
-import DatePicker from "../../src";
+import DatePicker from "../../src/index";
 import moment from "moment";
 import zhCN from "rc-calendar/lib/locale/zh_CN";
 import { Row, Col } from "bee-layout";

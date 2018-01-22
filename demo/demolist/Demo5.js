@@ -6,7 +6,7 @@
 
 import React, { Component } from "react";
 import { Row, Col } from "bee-layout";
-import DatePicker from "../../src";
+import DatePicker from "../../src/index";
 const { WeekPicker } = DatePicker;
 import moment from "moment";
 
