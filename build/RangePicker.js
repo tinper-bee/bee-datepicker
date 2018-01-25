@@ -62,15 +62,6 @@ var cn = location.search.indexOf("cn") !== -1;
 
 var now = (0, _moment2["default"])();
 
-function onStandaloneChange(value) {
-    console.log('onChange');
-    console.log(value[0] && format(value[0]), value[1] && format(value[1]));
-}
-
-function onStandaloneSelect(value) {
-    console.log('onSelect');
-    console.log(format(value[0]), format(value[1]));
-}
 function isValidRange(v) {
     return v && v[0] && v[1];
 }
@@ -98,6 +89,11 @@ var Picker = function (_Component) {
             _this.setState({ hoverValue: hoverValue });
         };
 
+        _this.remove = function (e) {
+            console.log(e);
+            _this.setState({ value: '' });
+        };
+
         _this.state = {
             hoverValue: [],
             value: []
@@ -105,11 +101,18 @@ var Picker = function (_Component) {
         return _this;
     }
 
+    Picker.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
+        this.setState({
+            value: []
+        });
+    };
+
     Picker.prototype.render = function render() {
         var _this2 = this;
 
         var props = this.props;
-        var showValue = props.showValue;
+        var showValue = props.showValue,
+            value = props.value;
 
         var calendar = _react2["default"].createElement(_RangeCalendar2["default"], _extends({}, props, {
             hoverValue: this.state.hoverValue,
@@ -125,18 +128,18 @@ var Picker = function (_Component) {
 
         return _react2["default"].createElement(
             _Picker2["default"],
-            {
+            _extends({}, props, {
                 value: this.state.value,
                 onChange: this.onChange,
                 animation: "slide-up",
                 calendar: calendar
-            },
+            }),
             function (_ref) {
                 var value = _ref.value;
 
                 return _react2["default"].createElement(
                     "div",
-                    { className: 'calendar-picker' },
+                    { className: 'calendar-picker  u-input-group simple' },
                     _react2["default"].createElement(_beeFormControl2["default"], {
                         placeholder: _this2.props.placeholder ? _this2.props.placeholder : 'start ~ end',
                         value: isValidRange(value) && format(value[0]) + " ~ " + format(value[1]) || ''
