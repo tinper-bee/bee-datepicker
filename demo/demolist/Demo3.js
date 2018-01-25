@@ -10,6 +10,8 @@ import DatePicker from "../../src/index";
 
 import zhCN from "rc-calendar/lib/locale/zh_CN";
 import enUS from "rc-calendar/lib/locale/en_US";
+import moment from "moment/moment";
+const now = moment();
 
 const { RangePicker } = DatePicker;
 
@@ -24,18 +26,30 @@ function onChange(d) {
 }
 
 class Demo3 extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            value: ''
+        };
+    }
+    remove(){
+        this.setState({value:''})
+    }
   render() {
     return (
       <div>
         <Row>
-          <Col md={12}>
+          <Col md={8}>
             <RangePicker
               format={format3}
               onSelect={onSelect}
               onChange={onChange}
               locale={zhCN}
+              showClear={true}
+              defaultValue={this.state.value}
             />
           </Col>
+          <Col md={3}><button className="u-button" onClick={this.remove.bind(this)}>清空</button></Col>
         </Row>
       </div>
     );

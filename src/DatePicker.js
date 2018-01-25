@@ -108,7 +108,7 @@ class DatePicker extends Component {
             { props.renderIcon() }
            </InputGroup.Button>
           </InputGroup>
-              
+
             );
           }}
         </Picker>
@@ -118,7 +118,7 @@ class DatePicker extends Component {
 }
 
 DatePicker.defaultProps = {
-  renderIcon: () => <Icon type="uf-calendar" />  
+  renderIcon: () => <Icon type="uf-calendar" />
 }
 
 export default DatePicker;

@@ -25,15 +25,7 @@ const cn = location.search.indexOf("cn") !== -1;
 const now = moment();
 
 
-function onStandaloneChange(value) {
-    console.log('onChange');
-    console.log(value[0] && format(value[0]), value[1] && format(value[1]));
-}
 
-function onStandaloneSelect(value) {
-    console.log('onSelect');
-    console.log(format(value[0]), format(value[1]));
-}
 function isValidRange(v) {
     return v && v[0] && v[1];
 }
@@ -49,9 +41,14 @@ class Picker extends Component {
     super(props, context);
     this.state = {
         hoverValue: [],
-        value: [],
+        value: [] ,
     };
   }
+    componentWillReceiveProps(nextProps){
+        this.setState({
+            value:[]
+        })
+    }
 
     onChange = (value) => {
         console.log('onChange', value);
@@ -62,9 +59,15 @@ class Picker extends Component {
         this.setState({ hoverValue });
     }
 
-  render() {
+    remove = (e) => {
+        console.log(e);
+        this.setState({ value:''});
+    }
+
+
+    render() {
     const props = this.props;
-    const { showValue } = props;
+    const { showValue,value } = props;
     const calendar = (
         <RangeCalendar
             {...props}
@@ -82,15 +85,16 @@ class Picker extends Component {
 
       return (
           <DatePicker
+              {...props}
               value={this.state.value}
               onChange={this.onChange}
               animation="slide-up"
               calendar={calendar}
           >
               {
-                  ({ value }) => {
+                  ({value}) => {
                       return (
-                    <div className={'calendar-picker'}>
+                    <div className={'calendar-picker  u-input-group simple'}>
                         <FormControl
                             placeholder={this.props.placeholder?this.props.placeholder:'start ~ end'}
                             value={isValidRange(value) && `${format(value[0])} ~ ${format(value[1])}` || ''}
