@@ -29,7 +29,7 @@ class Demo3 extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            value: ''
+            value: [moment('2017-01-11'),moment('2017-01-19')]
         };
     }
     remove(){

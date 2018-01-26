@@ -41,12 +41,12 @@ class Picker extends Component {
     super(props, context);
     this.state = {
         hoverValue: [],
-        value: [] ,
+        value: props.defaultValue  || [],
     };
   }
     componentWillReceiveProps(nextProps){
         this.setState({
-            value:[]
+            value:nextProps.defaultValue || []
         })
     }
 

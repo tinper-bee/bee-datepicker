@@ -96,14 +96,14 @@ var Picker = function (_Component) {
 
         _this.state = {
             hoverValue: [],
-            value: []
+            value: props.defaultValue || []
         };
         return _this;
     }
 
     Picker.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
         this.setState({
-            value: []
+            value: nextProps.defaultValue || []
         });
     };
 
