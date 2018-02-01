@@ -23,7 +23,7 @@ function onSelect(d) {
 
 function onChange(d) {
   this.setState({
-    value: d
+    value: ''
   });
 }
 
@@ -31,14 +31,14 @@ class Demo1 extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: moment()
+      value: ''
     };
   }
   onChange = d => {
     console.log(d)
-    
+
     this.setState({
-      value: d
+      value: ''
     });
   };
   render() {
