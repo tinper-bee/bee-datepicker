@@ -145,13 +145,12 @@ var _initialiseProps = function _initialiseProps() {
 
   this.onChange = function (value) {
     var props = _this3.props;
-    // // if (!('value' in props)) {
-    // //   this.setState({ value });
-    // // }
-    _this3.setState({
-      value: value
-    });
-    props.onChange(value, value && value.format(props.format) || "");
+
+    if (!('value' in props)) {
+      _this3.setState({ value: value });
+    }
+
+    //props.onChange(value, (value && value.format(props.format)) || "");
   };
 
   this.onOpenChange = function (open) {
@@ -165,7 +164,7 @@ var _initialiseProps = function _initialiseProps() {
     if (!("value" in props)) {
       _this3.setState({ value: value });
     }
-    props.onChange(value, value && value.format(props.format) || "");
+    //props.onChange(value, (value && value.format(props.format)) || "");
   };
 };
 

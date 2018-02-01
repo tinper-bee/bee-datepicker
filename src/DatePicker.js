@@ -28,13 +28,12 @@ class DatePicker extends Component {
 
   onChange = value => {
     const props = this.props;
-    // // if (!('value' in props)) {
-    // //   this.setState({ value });
-    // // }
-    this.setState({
-      value
-    });
-    props.onChange(value, (value && value.format(props.format)) || "");
+
+    if (!('value' in props)) {
+      this.setState({ value });
+    }
+
+    //props.onChange(value, (value && value.format(props.format)) || "");
   };
 
   onOpenChange = open => {
@@ -54,7 +53,7 @@ class DatePicker extends Component {
     if (!("value" in props)) {
       this.setState({ value });
     }
-    props.onChange(value, (value && value.format(props.format)) || "");
+    //props.onChange(value, (value && value.format(props.format)) || "");
   };
 
   render() {

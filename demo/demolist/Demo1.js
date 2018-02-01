@@ -21,11 +21,7 @@ function onSelect(d) {
   // console.log(d);
 }
 
-function onChange(d) {
-  this.setState({
-    value: ''
-  });
-}
+
 
 class Demo1 extends Component {
   constructor(props) {
