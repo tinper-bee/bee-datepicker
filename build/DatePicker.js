@@ -147,14 +147,11 @@ var _initialiseProps = function _initialiseProps() {
   this.onChange = function (value) {
     var props = _this3.props;
 
-    if (props.onChange) {
+    if (!('value' in props)) {
       _this3.setState({ value: value });
-      return false;
-    } else {
-      _this3.setState({ value: value });
-      return false;
     }
-    //props.onChange(value, (value && value.format(props.format)) || "");
+
+    props.onChange(value, value && value.format(props.format) || "");
   };
 
   this.onOpenChange = function (open) {

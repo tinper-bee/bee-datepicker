@@ -27,17 +27,25 @@ class Demo1 extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: ''
+      value: moment('2018-03-28')
     };
   }
-  onChange = d => {
-    console.log(d)
+  onChange  = d => {
+      console.log(d.format(format));
+      this.setState({
+          value:d
+      })
   };
+  clear = d => {
+      this.setState({
+          value:''
+      })
+  }
   render() {
     return (
       <div>
         <Row>
-          <Col md={12}>
+          <Col md={8}>
             <DatePicker
               format={format}
               onSelect={onSelect}
@@ -46,6 +54,9 @@ class Demo1 extends Component {
               value={this.state.value}
               placeholder={dateInputPlaceholder}
             />
+          </Col>
+          <Col md={3}>
+              <button className="u-button" onClick={this.clear}>清空</button>
           </Col>
         </Row>
       </div>
