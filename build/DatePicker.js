@@ -64,7 +64,7 @@ var DatePicker = function (_Component) {
 
     _this.state = {
       type: "month",
-      value: props.value || props.defaultValue,
+      value: props.value || props.defaultValue || '',
       open: false
     };
     return _this;
@@ -114,7 +114,8 @@ var DatePicker = function (_Component) {
           calendar: calendar,
           open: this.state.open,
           defaultValue: state.value,
-          onChange: this.onChange
+          onChange: this.onChange,
+          value: state.value
         }),
         function () {
           return _react2["default"].createElement(
@@ -147,11 +148,7 @@ var _initialiseProps = function _initialiseProps() {
   this.onChange = function (value) {
     var props = _this3.props;
 
-    if (!('value' in props)) {
-      _this3.setState({ value: value });
-    }
-
-    props.onChange(value, value && value.format(props.format) || "");
+    _this3.setState({ value: value });
   };
 
   this.onOpenChange = function (open) {
