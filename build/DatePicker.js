@@ -87,6 +87,7 @@ var DatePicker = function (_Component) {
 
     var pickerChangeHandler = {};
     var calendarHandler = {};
+
     if (props.showTime) {
       calendarHandler = {
         // fix https://github.com/ant-design/ant-design/issues/1902
@@ -146,10 +147,13 @@ var _initialiseProps = function _initialiseProps() {
   this.onChange = function (value) {
     var props = _this3.props;
 
-    if (!('value' in props)) {
+    if (props.onChange) {
       _this3.setState({ value: value });
+      return false;
+    } else {
+      _this3.setState({ value: value });
+      return false;
     }
-
     //props.onChange(value, (value && value.format(props.format)) || "");
   };
 

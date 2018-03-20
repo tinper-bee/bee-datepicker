@@ -29,10 +29,14 @@ class DatePicker extends Component {
   onChange = value => {
     const props = this.props;
 
-    if (!('value' in props)) {
-      this.setState({ value });
-    }
-
+      if(props.onChange){
+          this.setState({ value });
+          return false;
+      }
+      else {
+          this.setState({ value });
+          return false;
+      }
     //props.onChange(value, (value && value.format(props.format)) || "");
   };
 
@@ -63,6 +67,7 @@ class DatePicker extends Component {
 
     let pickerChangeHandler = {};
     let calendarHandler = {};
+
     if (props.showTime) {
       calendarHandler = {
         // fix https://github.com/ant-design/ant-design/issues/1902

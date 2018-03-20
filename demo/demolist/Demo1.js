@@ -32,10 +32,6 @@ class Demo1 extends Component {
   }
   onChange = d => {
     console.log(d)
-
-    this.setState({
-      value: ''
-    });
   };
   render() {
     return (
@@ -47,7 +43,7 @@ class Demo1 extends Component {
               onSelect={onSelect}
               onChange={this.onChange}
               locale={zhCN}
-              defaultValue={this.state.value}
+              value={this.state.value}
               placeholder={dateInputPlaceholder}
             />
           </Col>
