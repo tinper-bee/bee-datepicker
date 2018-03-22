@@ -46,6 +46,7 @@ class Demo3 extends Component {
               onChange={onChange}
               locale={zhCN}
               showClear={true}
+              showOk = {true}
               defaultValue={this.state.value}
             />
           </Col>

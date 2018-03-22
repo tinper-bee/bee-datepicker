@@ -64,8 +64,9 @@ var DatePicker = function (_Component) {
 
     _this.state = {
       type: "month",
-      value: props.value || props.defaultValue || '',
+      value: props.value || props.defaultValue || null,
       open: false
+
     };
     return _this;
   }
@@ -101,7 +102,10 @@ var DatePicker = function (_Component) {
 
     var calendar = _react2["default"].createElement(_rcCalendar2["default"], _extends({
       timePicker: props.showTime ? timePickerElement : null
-    }, props));
+    }, props, {
+      onChange: this.handleCalendarChange,
+      value: this.state.value
+    }));
 
     return _react2["default"].createElement(
       "div",
@@ -113,8 +117,6 @@ var DatePicker = function (_Component) {
           animation: "slide-up",
           calendar: calendar,
           open: this.state.open,
-          defaultValue: state.value,
-          onChange: this.onChange,
           value: state.value
         }),
         function () {
@@ -157,12 +159,16 @@ var _initialiseProps = function _initialiseProps() {
     });
   };
 
+  this.handleCalendarChange = function (value) {
+    _this3.setState({ value: value });
+  };
+
   this.handleChange = function (value) {
     var props = _this3.props;
     if (!("value" in props)) {
       _this3.setState({ value: value });
     }
-    //props.onChange(value, (value && value.format(props.format)) || "");
+    props.onChange(value, value && value.format(props.format) || '');
   };
 };
 

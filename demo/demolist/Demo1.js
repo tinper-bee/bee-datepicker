@@ -27,7 +27,7 @@ class Demo1 extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: moment('2018-03-28')
+      value: ''
     };
   }
   onChange  = d => {
@@ -42,6 +42,7 @@ class Demo1 extends Component {
       })
   }
   render() {
+    var self = this;
     return (
       <div>
         <Row>
@@ -51,6 +52,7 @@ class Demo1 extends Component {
               onSelect={onSelect}
               onChange={this.onChange}
               locale={zhCN}
+              //defaultValue={this.state.value}
               value={this.state.value}
               placeholder={dateInputPlaceholder}
             />

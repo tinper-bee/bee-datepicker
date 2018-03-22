@@ -21,8 +21,9 @@ class DatePicker extends Component {
 
     this.state = {
       type: "month",
-      value: props.value || props.defaultValue || '',
-      open: false
+      value: props.value || props.defaultValue || moment.Moment,
+      open: false,
+
     };
   }
 
@@ -44,12 +45,15 @@ class DatePicker extends Component {
       });
     }
   }
+  handleCalendarChange = (value) => {
+      this.setState({ value: value });
+  }
   handleChange = value => {
     const props = this.props;
     if (!("value" in props)) {
       this.setState({ value });
     }
-    //props.onChange(value, (value && value.format(props.format)) || "");
+    props.onChange(value, (value && value.format(props.format)) || '');
   };
 
   render() {
@@ -75,6 +79,8 @@ class DatePicker extends Component {
       <Calendar
         timePicker={props.showTime ? timePickerElement : null}
         {...props}
+        onChange={this.handleCalendarChange}
+        value={this.state.value}
       />
     );
 
@@ -88,9 +94,7 @@ class DatePicker extends Component {
           animation="slide-up"
           calendar={calendar}
           open={this.state.open}
-          defaultValue={state.value}
-          onChange={this.onChange}
-          value = {state.value}
+          value={state.value}
         >
           {() => {
             return (
