@@ -81,7 +81,7 @@ var Picker = function (_Component) {
         var _this = _possibleConstructorReturn(this, _Component.call(this, props, context));
 
         _this.onChange = function (value) {
-            console.log('onChange', value);
+            //console.log('onChange', value);
             _this.setState({ value: value });
         };
 

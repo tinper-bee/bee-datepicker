@@ -4,57 +4,81 @@
  * @description 以「日期范围」为基本单位，基础的日期范围选择控件
  */
 
-import React, { Component } from "react";
-import { Row, Col } from "bee-layout";
+import React, {Component} from "react";
+import {Row, Col} from "bee-layout";
 import DatePicker from "../../src/index";
 
 import zhCN from "rc-calendar/lib/locale/zh_CN";
 import enUS from "rc-calendar/lib/locale/en_US";
 import moment from "moment/moment";
+
 const now = moment();
 
-const { RangePicker } = DatePicker;
+const {RangePicker} = DatePicker;
 
 const format3 = "YYYY-MM-DD";
 
-function onSelect(d) {
-  console.log(d);
+function formatValue(value, format) {
+    return (value && value.format(format)) || '';
 }
 
-function onChange(d) {
-  console.log(d);
+function onSelect(d) {
+    //console.log(d);
 }
+
+
 
 class Demo3 extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            value: [moment('2017-01-11'),moment('2017-01-19')]
+            value: [moment('2017-01-11'), moment('2017-01-19')],
+            v:''
         };
     }
-    remove(){
-        this.setState({value:''})
+
+    onStartChange = (value) => {
+        this.setState({
+            startValue: value[0],
+            startOpen: false,
+            endOpen: true,
+        });
     }
-  render() {
-    return (
-      <div>
-        <Row>
-          <Col md={8}>
-            <RangePicker
-              format={format3}
-              onSelect={onSelect}
-              onChange={onChange}
-              locale={zhCN}
-              showClear={true}
-              showOk = {true}
-              defaultValue={this.state.value}
-            />
-          </Col>
-          <Col md={3}><button className="u-button" onClick={this.remove.bind(this)}>清空</button></Col>
-        </Row>
-      </div>
-    );
-  }
+
+    remove() {
+        this.setState({value: ''})
+    }
+
+    onChange (d) {
+        this.setState({
+            value:d,
+        })
+    }
+
+    render() {
+        const props = this.props;
+        console.log(this.state.v);
+        return (
+            <div>
+                <Row>
+                    <Col md={8}>
+                        <RangePicker
+                            format={format3}
+                            onSelect={onSelect}
+                            onChange={this.onChange.bind(this)}
+                            locale={zhCN}
+                            showClear={true}
+                            showOk={true}
+                            defaultValue={this.state.value}
+                        />
+                    </Col>
+                    <Col md={3}>
+                        <button className="u-button" onClick={this.remove.bind(this)}>清空</button>
+                    </Col>
+                </Row>
+            </div>
+        );
+    }
 }
 
 export default Demo3;
