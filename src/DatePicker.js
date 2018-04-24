@@ -63,6 +63,7 @@ class DatePicker extends Component {
 
     let pickerChangeHandler = {};
     let calendarHandler = {};
+    const autofocus = this.props.autofocus?{autofocus:'autofocus'}:null;
 
     if (props.showTime) {
       calendarHandler = {
@@ -105,6 +106,7 @@ class DatePicker extends Component {
                 placeholder={this.props.placeholder}
                 className={this.props.className}
                 value={(value && value.format(props.format)) || ""}
+                {...autofocus}
               />
               <InputGroup.Button shape="border">
             { props.renderIcon() }
