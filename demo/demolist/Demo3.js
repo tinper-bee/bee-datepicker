@@ -69,6 +69,7 @@ class Demo3 extends Component {
                             locale={zhCN}
                             showClear={true}
                             showOk={true}
+                            className={'range-fixed'}
                             defaultValue={this.state.value}
                         />
                     </Col>

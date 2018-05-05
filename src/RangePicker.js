@@ -5,6 +5,7 @@ import React, { Component } from "react";
 import RangeCalendar from "rc-calendar/lib/RangeCalendar";
 import FormControl from "bee-form-control";
 import DatePicker from "rc-calendar/lib/Picker";
+var classNames = require('classnames');
 
 import zhCN from "rc-calendar/lib/locale/zh_CN";
 import enUS from "rc-calendar/lib/locale/en_US";
@@ -94,7 +95,7 @@ class Picker extends Component {
               {
                   ({value}) => {
                       return (
-                    <div className={'calendar-picker  u-input-group simple'}>
+                    <div className={classNames('calendar-picker','u-input-group','simple',props.className)}>
                         <FormControl
                             placeholder={this.props.placeholder?this.props.placeholder:'start ~ end'}
                             value={isValidRange(value) && `${format(value[0])} ~ ${format(value[1])}` || ''}
