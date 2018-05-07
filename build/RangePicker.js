@@ -51,6 +51,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 */
 
 
+var classNames = require('classnames');
+
 function format(v) {
     return v ? v.format(formatStr) : '';
 }
@@ -139,7 +141,7 @@ var Picker = function (_Component) {
 
                 return _react2["default"].createElement(
                     "div",
-                    { className: 'calendar-picker  u-input-group simple' },
+                    { className: classNames('calendar-picker', 'u-input-group', 'simple', props.className) },
                     _react2["default"].createElement(_beeFormControl2["default"], {
                         placeholder: _this2.props.placeholder ? _this2.props.placeholder : 'start ~ end',
                         value: isValidRange(value) && format(value[0]) + " ~ " + format(value[1]) || ''
