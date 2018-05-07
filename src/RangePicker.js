@@ -12,7 +12,6 @@ import enUS from "rc-calendar/lib/locale/en_US";
 
 import moment from "moment";
 import "moment/locale/zh-cn";
-import "moment/locale/en-gb";
 
 function format(v) {
     return v ? v.format(formatStr) : '';
@@ -78,7 +77,7 @@ class Picker extends Component {
             format={formatStr}
             dateInputPlaceholder={['start', 'end']}
             defaultValue={[now, now.clone().add(1, 'months')]}
-            locale={cn ? zhCN : enUS}
+            locale={props.locale || zhCN }
             onChange={props.onChange}
             disabledDate={props.disabledDate}
         />

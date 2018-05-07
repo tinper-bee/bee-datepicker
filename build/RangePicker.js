@@ -36,8 +36,6 @@ var _moment2 = _interopRequireDefault(_moment);
 
 require("moment/locale/zh-cn");
 
-require("moment/locale/en-gb");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
@@ -123,7 +121,7 @@ var Picker = function (_Component) {
             format: formatStr,
             dateInputPlaceholder: ['start', 'end'],
             defaultValue: [now, now.clone().add(1, 'months')],
-            locale: cn ? _zh_CN2["default"] : _en_US2["default"],
+            locale: props.locale || _zh_CN2["default"],
             onChange: props.onChange,
             disabledDate: props.disabledDate
         }));

@@ -12,6 +12,8 @@ import zhCN from "rc-calendar/lib/locale/zh_CN";
 import enUS from "rc-calendar/lib/locale/en_US";
 import moment from "moment";
 import Icon from 'bee-icon';
+import 'moment/locale/zh-cn';
+moment.locale('zh-cn');
 
 const format = "YYYY-MM-DD";
 

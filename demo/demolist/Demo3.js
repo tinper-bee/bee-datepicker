@@ -9,7 +9,6 @@ import {Row, Col} from "bee-layout";
 import DatePicker from "../../src/index";
 
 import zhCN from "rc-calendar/lib/locale/zh_CN";
-import enUS from "rc-calendar/lib/locale/en_US";
 import moment from "moment/moment";
 
 const now = moment();
@@ -66,11 +65,11 @@ class Demo3 extends Component {
                             format={format3}
                             onSelect={onSelect}
                             onChange={this.onChange.bind(this)}
-                            locale={zhCN}
                             showClear={true}
                             showOk={true}
                             className={'range-fixed'}
                             defaultValue={this.state.value}
+                            placeholder={'开始 ~ 结束'}
                         />
                     </Col>
                     <Col md={3}>
