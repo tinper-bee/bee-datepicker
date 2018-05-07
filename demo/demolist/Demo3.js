@@ -70,6 +70,7 @@ class Demo3 extends Component {
                             className={'range-fixed'}
                             defaultValue={this.state.value}
                             placeholder={'开始 ~ 结束'}
+                            dateInputPlaceholder={['开始', '结束']}
                         />
                     </Col>
                     <Col md={3}>

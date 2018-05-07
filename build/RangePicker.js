@@ -119,7 +119,7 @@ var Picker = function (_Component) {
             onHoverChange: this.onHoverChange,
             showWeekNumber: false,
             format: formatStr,
-            dateInputPlaceholder: ['start', 'end'],
+            dateInputPlaceholder: props.dateInputPlaceholder || ['start', 'end'],
             defaultValue: [now, now.clone().add(1, 'months')],
             locale: props.locale || _zh_CN2["default"],
             onChange: props.onChange,
