@@ -87,7 +87,7 @@ class DatePicker extends Component {
 
 
     return (
-      <div>
+      <div className={props.className}>
         <Picker
           {...props}
           {...pickerChangeHandler}
@@ -104,7 +104,6 @@ class DatePicker extends Component {
                 disabled={props.disabled}
                 readOnly
                 placeholder={this.props.placeholder}
-                className={this.props.className}
                 value={(value && value.format(props.format)) || ""}
                 {...autofocus}
               />

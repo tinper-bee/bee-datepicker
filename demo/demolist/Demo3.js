@@ -31,7 +31,7 @@ class Demo3 extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            value: [moment('2017-01-11'), moment('2017-01-19')],
+            value: '',
             v:''
         };
     }
@@ -62,15 +62,16 @@ class Demo3 extends Component {
                 <Row>
                     <Col md={8}>
                         <RangePicker
-                            format={format3}
+                            format={"YYYY-MM-DD"}
+                            locale={zhCN}
                             onSelect={onSelect}
                             onChange={this.onChange.bind(this)}
                             showClear={true}
                             showOk={true}
                             className={'range-fixed'}
                             defaultValue={this.state.value}
-                            placeholder={'开始 ~ 结束'}
-                            dateInputPlaceholder={['开始', '结束']}
+                            placeholder={'开始时间 ~ 结束时间'}
+                            dateInputPlaceholder={['开始时间', '结束时间']}
                         />
                     </Col>
                     <Col md={3}>

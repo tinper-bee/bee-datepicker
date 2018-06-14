@@ -57,6 +57,7 @@ class Demo1 extends Component {
               //defaultValue={this.state.value}
               value={this.state.value}
               placeholder={dateInputPlaceholder}
+              className={"uuuu"}
               autofocus={false}
             />
           </Col>
