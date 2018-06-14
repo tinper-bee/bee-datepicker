@@ -110,7 +110,7 @@ var DatePicker = function (_Component) {
 
     return _react2["default"].createElement(
       "div",
-      null,
+      { className: props.className },
       _react2["default"].createElement(
         _Picker2["default"],
         _extends({}, props, pickerChangeHandler, {
@@ -128,7 +128,6 @@ var DatePicker = function (_Component) {
               disabled: props.disabled,
               readOnly: true,
               placeholder: _this2.props.placeholder,
-              className: _this2.props.className,
               value: value && value.format(props.format) || ""
             }, autofocus)),
             _react2["default"].createElement(
