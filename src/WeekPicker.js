@@ -97,6 +97,14 @@ class WeekPicker extends Component {
       open: false
     });
   };
+  nextWeek = () => {
+      const value = this.state.value || now;
+      value.add(+1, "weeks");
+      this.setState({
+          value,
+          open: false
+      });
+  };
 
   renderSidebar = () => {
     return (
@@ -108,6 +116,13 @@ class WeekPicker extends Component {
         >
           上一周
         </button>
+          <button
+              className="week-calendar-sidebar-button"
+              onClick={this.nextWeek.bind(this)}
+              style={{ margin: 8 }}
+          >
+              下一周
+          </button>
       </div>
     );
   };

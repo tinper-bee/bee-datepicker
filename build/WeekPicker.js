@@ -110,6 +110,15 @@ var WeekPicker = function (_Component) {
       });
     };
 
+    _this.nextWeek = function () {
+      var value = _this.state.value || now;
+      value.add(+1, "weeks");
+      _this.setState({
+        value: value,
+        open: false
+      });
+    };
+
     _this.renderSidebar = function () {
       return _react2["default"].createElement(
         "div",
@@ -122,6 +131,15 @@ var WeekPicker = function (_Component) {
             style: { margin: 8 }
           },
           "\u4E0A\u4E00\u5468"
+        ),
+        _react2["default"].createElement(
+          "button",
+          {
+            className: "week-calendar-sidebar-button",
+            onClick: _this.nextWeek.bind(_this),
+            style: { margin: 8 }
+          },
+          "\u4E0B\u4E00\u5468"
         )
       );
     };

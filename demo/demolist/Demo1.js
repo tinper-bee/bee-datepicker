@@ -15,7 +15,7 @@ import Icon from 'bee-icon';
 import 'moment/locale/zh-cn';
 moment.locale('zh-cn');
 
-const format = "YYYY-MM-DD";
+const format = "YYYY-MM-DD dddd";
 
 const dateInputPlaceholder = "选择日期";
 
@@ -23,6 +23,7 @@ function onSelect(d) {
   // console.log(d);
 }
 
+console.log(moment().format(format));
 
 
 class Demo1 extends Component {
