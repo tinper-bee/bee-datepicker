@@ -104,7 +104,7 @@ var WeekPicker = function (_Component) {
     };
 
     _this.lastWeek = function () {
-      var value = _this.state.value || now;
+      var value = _this.props.value || now;
       value.add(-1, "weeks");
       _this.setState({
         value: value,
@@ -113,7 +113,7 @@ var WeekPicker = function (_Component) {
     };
 
     _this.nextWeek = function () {
-      var value = _this.state.value || now;
+      var value = _this.props.value || now;
       value.add(+1, "weeks");
       _this.setState({
         value: value,
@@ -152,6 +152,10 @@ var WeekPicker = function (_Component) {
       });
     };
 
+    _this.handleCalendarChange = function (value) {
+      _this.setState({ value: value });
+    };
+
     _this.state = {
       value: props.value || props.defaultValue,
       open: false
@@ -173,7 +177,8 @@ var WeekPicker = function (_Component) {
       format: format,
       dateInputPlaceholder: this.props.placeholder,
       defaultValue: now,
-      showDateInput: true
+      showDateInput: true,
+      onChange: this.handleCalendarChange
     });
     return _react2["default"].createElement(
       "div",
@@ -186,8 +191,7 @@ var WeekPicker = function (_Component) {
           open: this.state.open,
           animation: "slide-up",
           calendar: calendar,
-          value: state.value,
-          onChange: this.onChange
+          value: state.value
         }, props),
         function (_ref) {
           var value = _ref.value;

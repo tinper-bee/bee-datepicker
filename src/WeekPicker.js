@@ -90,7 +90,7 @@ class WeekPicker extends Component {
   };
 
   lastWeek = () => {
-    const value = this.state.value || now;
+    const value = this.props.value || now;
     value.add(-1, "weeks");
     this.setState({
       value,
@@ -98,7 +98,7 @@ class WeekPicker extends Component {
     });
   };
   nextWeek = () => {
-      const value = this.state.value || now;
+      const value = this.props.value || now;
       value.add(+1, "weeks");
       this.setState({
           value,
@@ -133,6 +133,10 @@ class WeekPicker extends Component {
     });
   };
 
+  handleCalendarChange = (value) => {
+      this.setState({ value: value });
+  }
+
   render() {
     const state = this.state;
     const props = this.props;
@@ -147,6 +151,7 @@ class WeekPicker extends Component {
         dateInputPlaceholder={this.props.placeholder}
         defaultValue={now}
         showDateInput
+        onChange={this.handleCalendarChange}
       />
     );
     return (
@@ -158,7 +163,6 @@ class WeekPicker extends Component {
           animation="slide-up"
           calendar={calendar}
           value={state.value}
-          onChange={this.onChange}
           {...props}
         >
           {({ value }) => {
