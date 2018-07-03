@@ -135,6 +135,7 @@ class WeekPicker extends Component {
 
   render() {
     const state = this.state;
+    const props = this.props;
     const calendar = (
       <Calendar
         className="week-calendar"
@@ -158,6 +159,7 @@ class WeekPicker extends Component {
           calendar={calendar}
           value={state.value}
           onChange={this.onChange}
+          {...props}
         >
           {({ value }) => {
             return (

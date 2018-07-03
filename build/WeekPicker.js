@@ -4,6 +4,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _rcCalendar = require("rc-calendar");
 
 var _rcCalendar2 = _interopRequireDefault(_rcCalendar);
@@ -161,6 +163,7 @@ var WeekPicker = function (_Component) {
     var _this2 = this;
 
     var state = this.state;
+    var props = this.props;
     var calendar = _react2["default"].createElement(_rcCalendar2["default"], {
       className: "week-calendar",
       showWeekNumber: true,
@@ -178,14 +181,14 @@ var WeekPicker = function (_Component) {
       _react2["default"].createElement("style", { dangerouslySetInnerHTML: { __html: style } }),
       _react2["default"].createElement(
         _Picker2["default"],
-        {
+        _extends({
           onOpenChange: this.onOpenChange,
           open: this.state.open,
           animation: "slide-up",
           calendar: calendar,
           value: state.value,
           onChange: this.onChange
-        },
+        }, props),
         function (_ref) {
           var value = _ref.value;
 
