@@ -140,6 +140,7 @@ class WeekPicker extends Component {
   render() {
     const state = this.state;
     const props = this.props;
+    const value = state.value;
     const calendar = (
       <Calendar
         className="week-calendar"
@@ -158,14 +159,14 @@ class WeekPicker extends Component {
       <div>
         <style dangerouslySetInnerHTML={{ __html: style }} />
         <Picker
+          {...props}
           onOpenChange={this.onOpenChange}
           open={this.state.open}
           animation="slide-up"
           calendar={calendar}
           value={state.value}
-          {...props}
         >
-          {({ value }) => {
+          {({ }) => {
             return (
               <FormControl
                 placeholder={this.props.placeholder}
