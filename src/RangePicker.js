@@ -13,8 +13,8 @@ import enUS from "rc-calendar/lib/locale/en_US";
 import moment from "moment";
 import "moment/locale/zh-cn";
 
-function format(v) {
-    return v ? v.format(formatStr) : '';
+function format(v,f) {
+    return v ? v.format(f) : '';
 }
 const formatStr = 'YYYY-MM-DD';
 
@@ -52,11 +52,7 @@ class Picker extends Component {
 
     onChange = (value) => {
         //console.log('onChange', value);
-        const props = this.props;
-        if (!("value" in props)) {
-            this.setState({ value });
-        }
-        props.onChange(value);
+        this.setState({ value });
     }
 
     onHoverChange = (hoverValue) => {
@@ -67,41 +63,46 @@ class Picker extends Component {
         console.log(e);
         this.setState({ value:''});
     }
+    handleCalendarChange = (value) => {
 
+        const props = this.props;
+        if (!("value" in props)) {
+            this.setState({ value });
+        }
+        props.onChange(value);
+    }
 
     render() {
     const props = this.props;
-    const { showValue,value } = props;
+    const { showValue } = props;
+    const {value} = this.state;
+    let formatStr = props.format || formatStr;
     const calendar = (
         <RangeCalendar
-            {...props}
             hoverValue={this.state.hoverValue}
             onHoverChange={this.onHoverChange}
             showWeekNumber={false}
             format={formatStr}
             dateInputPlaceholder={props.dateInputPlaceholder||['start', 'end']}
-            defaultValue={[now, now.clone().add(1, 'months')]}
             locale={props.locale || zhCN }
-            onChange={props.onChange}
+            onChange={this.handleCalendarChange}
             disabledDate={props.disabledDate}
         />
     );
 
       return (
           <DatePicker
-              {...props}
               value={this.state.value}
-              onChange={this.onChange}
               animation="slide-up"
               calendar={calendar}
           >
               {
-                  ({value}) => {
+                  ({}) => {
                       return (
                     <div className={classNames('calendar-picker','u-input-group','simple',props.className)}>
                         <FormControl
                             placeholder={this.props.placeholder?this.props.placeholder:'start ~ end'}
-                            value={isValidRange(value) && `${format(value[0])} ~ ${format(value[1])}` || ''}
+                            value={isValidRange(value) && `${format(value[0],formatStr)} ~ ${format(value[1],formatStr)}` || ''}
                         />
                     </div>
                 );

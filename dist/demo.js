@@ -33803,8 +33803,6 @@
 	    value: true
 	});
 	
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-	
 	var _react = __webpack_require__(4);
 	
 	var _react2 = _interopRequireDefault(_react);
@@ -33839,6 +33837,8 @@
 	
 	function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
 	
+	function _objectDestructuringEmpty(obj) { if (obj == null) throw new TypeError("Cannot destructure undefined"); }
+	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -33850,8 +33850,8 @@
 	
 	var classNames = __webpack_require__(3);
 	
-	function format(v) {
-	    return v ? v.format(formatStr) : '';
+	function format(v, f) {
+	    return v ? v.format(f) : '';
 	}
 	var formatStr = 'YYYY-MM-DD';
 	
@@ -33898,38 +33898,37 @@
 	        var _this2 = this;
 	
 	        var props = this.props;
-	        var showValue = props.showValue,
-	            value = props.value;
+	        var showValue = props.showValue;
+	        var value = this.state.value;
 	
-	        var calendar = _react2["default"].createElement(_RangeCalendar2["default"], _extends({}, props, {
+	        var formatStr = props.format || formatStr;
+	        var calendar = _react2["default"].createElement(_RangeCalendar2["default"], {
 	            hoverValue: this.state.hoverValue,
 	            onHoverChange: this.onHoverChange,
 	            showWeekNumber: false,
 	            format: formatStr,
 	            dateInputPlaceholder: props.dateInputPlaceholder || ['start', 'end'],
-	            defaultValue: [now, now.clone().add(1, 'months')],
 	            locale: props.locale || _zh_CN2["default"],
-	            onChange: props.onChange,
+	            onChange: this.handleCalendarChange,
 	            disabledDate: props.disabledDate
-	        }));
+	        });
 	
 	        return _react2["default"].createElement(
 	            _Picker2["default"],
-	            _extends({}, props, {
+	            {
 	                value: this.state.value,
-	                onChange: this.onChange,
 	                animation: "slide-up",
 	                calendar: calendar
-	            }),
+	            },
 	            function (_ref) {
-	                var value = _ref.value;
+	                _objectDestructuringEmpty(_ref);
 	
 	                return _react2["default"].createElement(
 	                    "div",
 	                    { className: classNames('calendar-picker', 'u-input-group', 'simple', props.className) },
 	                    _react2["default"].createElement(_beeFormControl2["default"], {
 	                        placeholder: _this2.props.placeholder ? _this2.props.placeholder : 'start ~ end',
-	                        value: isValidRange(value) && format(value[0]) + " ~ " + format(value[1]) || ''
+	                        value: isValidRange(value) && format(value[0], formatStr) + " ~ " + format(value[1], formatStr) || ''
 	                    })
 	                );
 	            }
@@ -33944,11 +33943,7 @@
 	
 	    this.onChange = function (value) {
 	        //console.log('onChange', value);
-	        var props = _this3.props;
-	        if (!("value" in props)) {
-	            _this3.setState({ value: value });
-	        }
-	        props.onChange(value);
+	        _this3.setState({ value: value });
 	    };
 	
 	    this.onHoverChange = function (hoverValue) {
@@ -33958,6 +33953,15 @@
 	    this.remove = function (e) {
 	        console.log(e);
 	        _this3.setState({ value: '' });
+	    };
+	
+	    this.handleCalendarChange = function (value) {
+	
+	        var props = _this3.props;
+	        if (!("value" in props)) {
+	            _this3.setState({ value: value });
+	        }
+	        props.onChange(value);
 	    };
 	};
 	

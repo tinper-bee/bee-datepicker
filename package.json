@@ -1,6 +1,6 @@
 {
   "name": "bee-datepicker",
-  "version": "1.0.28",
+  "version": "1.0.29",
   "description": "DatePicker ui component for react",
   "keywords": [
     "react",
@@ -52,6 +52,7 @@
   },
   "devDependencies": {
     "bee-button": "^1.0.2",
+    "bee-form": "^2.0.0",
     "bee-layout": "latest",
     "bee-panel": "latest",
     "chai": "^3.5.0",
