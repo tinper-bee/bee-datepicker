@@ -16,7 +16,6 @@ import "moment/locale/zh-cn";
 function format(v,f) {
     return v ? v.format(f) : '';
 }
-const formatStr = 'YYYY-MM-DD';
 
 const fullFormat = "YYYY-MM-DD";
 
@@ -76,7 +75,7 @@ class Picker extends Component {
     const props = this.props;
     const { showValue } = props;
     const {value} = this.state;
-    let formatStr = props.format || formatStr;
+    let formatStr = props.format || 'YYYY-MM-DD';
     const calendar = (
         <RangeCalendar
             hoverValue={this.state.hoverValue}

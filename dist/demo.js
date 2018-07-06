@@ -33853,7 +33853,6 @@
 	function format(v, f) {
 	    return v ? v.format(f) : '';
 	}
-	var formatStr = 'YYYY-MM-DD';
 	
 	var fullFormat = "YYYY-MM-DD";
 	
@@ -33901,7 +33900,7 @@
 	        var showValue = props.showValue;
 	        var value = this.state.value;
 	
-	        var formatStr = props.format || formatStr;
+	        var formatStr = props.format || 'YYYY-MM-DD';
 	        var calendar = _react2["default"].createElement(_RangeCalendar2["default"], {
 	            hoverValue: this.state.hoverValue,
 	            onHoverChange: this.onHoverChange,
