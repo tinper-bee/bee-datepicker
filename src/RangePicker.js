@@ -41,7 +41,7 @@ class Picker extends Component {
     super(props, context);
     this.state = {
         hoverValue: [],
-        value: props.defaultValue  || [],
+        value: props.value || props.defaultValue || [],
     };
   }
     componentWillReceiveProps(nextProps){
@@ -52,7 +52,11 @@ class Picker extends Component {
 
     onChange = (value) => {
         //console.log('onChange', value);
-        this.setState({ value });
+        const props = this.props;
+        if (!("value" in props)) {
+            this.setState({ value });
+        }
+        props.onChange(value);
     }
 
     onHoverChange = (hoverValue) => {

@@ -80,23 +80,11 @@ var Picker = function (_Component) {
 
         var _this = _possibleConstructorReturn(this, _Component.call(this, props, context));
 
-        _this.onChange = function (value) {
-            //console.log('onChange', value);
-            _this.setState({ value: value });
-        };
-
-        _this.onHoverChange = function (hoverValue) {
-            _this.setState({ hoverValue: hoverValue });
-        };
-
-        _this.remove = function (e) {
-            console.log(e);
-            _this.setState({ value: '' });
-        };
+        _initialiseProps.call(_this);
 
         _this.state = {
             hoverValue: [],
-            value: props.defaultValue || []
+            value: props.value || props.defaultValue || []
         };
         return _this;
     }
@@ -151,6 +139,28 @@ var Picker = function (_Component) {
 
     return Picker;
 }(_react.Component);
+
+var _initialiseProps = function _initialiseProps() {
+    var _this3 = this;
+
+    this.onChange = function (value) {
+        //console.log('onChange', value);
+        var props = _this3.props;
+        if (!("value" in props)) {
+            _this3.setState({ value: value });
+        }
+        props.onChange(value);
+    };
+
+    this.onHoverChange = function (hoverValue) {
+        _this3.setState({ hoverValue: hoverValue });
+    };
+
+    this.remove = function (e) {
+        console.log(e);
+        _this3.setState({ value: '' });
+    };
+};
 
 exports["default"] = Picker;
 module.exports = exports["default"];
