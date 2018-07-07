@@ -86,6 +86,8 @@ class Picker extends Component {
             locale={props.locale || zhCN }
             onChange={this.handleCalendarChange}
             disabledDate={props.disabledDate}
+            showClear={ props.showClear||false}
+            showOk={props.showOk||true}
         />
     );
 

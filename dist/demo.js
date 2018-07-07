@@ -33909,7 +33909,9 @@
 	            dateInputPlaceholder: props.dateInputPlaceholder || ['start', 'end'],
 	            locale: props.locale || _zh_CN2["default"],
 	            onChange: this.handleCalendarChange,
-	            disabledDate: props.disabledDate
+	            disabledDate: props.disabledDate,
+	            showClear: props.showClear || false,
+	            showOk: props.showOk || true
 	        });
 	
 	        return _react2["default"].createElement(
