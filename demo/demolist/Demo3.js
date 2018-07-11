@@ -72,11 +72,11 @@ class Demo3 extends Component {
                                 ...getFieldProps('shipDate', {
                                     initialValue:'',
                                     onChange:  (v,dateString)=> {
-                                        self.setState({
-                                            shipDate: dateString,
-                                            value:v
+                                        self.setState({ shipDate: v });
+                                        self.props.form.setFieldsValue({
+                                            'shipDate':dateString
                                         })
-                                    }
+                                    },
                                 })
                             }
                         />
