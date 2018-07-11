@@ -10,6 +10,9 @@ import DatePicker from "../../src/index";
 
 import zhCN from "rc-calendar/lib/locale/zh_CN";
 import moment from "moment/moment";
+import Form from 'bee-form';
+const FormItem = Form.FormItem;
+
 
 const now = moment();
 
@@ -49,29 +52,23 @@ class Demo3 extends Component {
     }
 
     onChange (d) {
-        this.setState({
-            value:d,
-        })
+        console.log(d);
     }
 
     render() {
         const props = this.props;
-        console.log(this.state.v);
+        const self = this;
+        const { getFieldProps, getFieldError } = this.props.form;
+        console.log(this.state.value)
         return (
             <div>
                 <Row>
                     <Col md={8}>
                         <RangePicker
-                            format={"YYYY-MM-DD"}
-                            locale={zhCN}
-                            onSelect={onSelect}
-                            onChange={this.onChange.bind(this)}
+                            placeholder={'开始 ~ 结束'}
+                            dateInputPlaceholder={['开始', '结束']}
                             showClear={true}
-                            showOk={true}
-                            className={'range-fixed'}
-                            defaultValue={this.state.value}
-                            placeholder={'开始时间 ~ 结束时间'}
-                            dateInputPlaceholder={['开始时间', '结束时间']}
+                            value={this.state.value}
                         />
                     </Col>
                     <Col md={3}>
@@ -83,4 +80,4 @@ class Demo3 extends Component {
     }
 }
 
-export default Demo3;
+export default Form.createForm()(Demo3)

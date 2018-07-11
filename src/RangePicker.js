@@ -14,7 +14,7 @@ import moment from "moment";
 import "moment/locale/zh-cn";
 
 function format(v,f) {
-    return v ? v.format(f) : '';
+    return v ? v.format&&v.format(f) : '';
 }
 
 const fullFormat = "YYYY-MM-DD";
@@ -44,14 +44,24 @@ class Picker extends Component {
     };
   }
     componentWillReceiveProps(nextProps){
-        this.setState({
-            value:nextProps.defaultValue || []
-        })
+        if ("value" in nextProps) {
+            this.setState({
+                value: nextProps.value
+            });
+        }
     }
 
     onChange = (value) => {
         //console.log('onChange', value);
-        this.setState({ value });
+        const props = this.props;
+        let formatStr = props.format || 'YYYY-MM-DD';
+        this.setState({
+            value:value
+        });
+        //传入value和dateString
+        if(props.onChange&&isValidRange(value)){
+            props.onChange(value,`["${format(value[0],formatStr)}" , "${format(value[1],formatStr)}"]`);
+        }
     }
 
     onHoverChange = (hoverValue) => {
@@ -64,11 +74,6 @@ class Picker extends Component {
     }
     handleCalendarChange = (value) => {
 
-        const props = this.props;
-        if (!("value" in props)) {
-            this.setState({ value });
-        }
-        props.onChange(value);
     }
 
     render() {
@@ -76,6 +81,7 @@ class Picker extends Component {
     const { showValue } = props;
     const {value} = this.state;
     let formatStr = props.format || 'YYYY-MM-DD';
+
     const calendar = (
         <RangeCalendar
             hoverValue={this.state.hoverValue}
@@ -84,7 +90,7 @@ class Picker extends Component {
             format={formatStr}
             dateInputPlaceholder={props.dateInputPlaceholder||['start', 'end']}
             locale={props.locale || zhCN }
-            onChange={this.handleCalendarChange}
+            onChange={this.onChange}
             disabledDate={props.disabledDate}
             showClear={ props.showClear||false}
             showOk={props.showOk||true}
@@ -93,7 +99,7 @@ class Picker extends Component {
 
       return (
           <DatePicker
-              value={this.state.value}
+              value = {this.state.value}
               animation="slide-up"
               calendar={calendar}
           >

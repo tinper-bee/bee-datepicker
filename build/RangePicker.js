@@ -52,7 +52,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var classNames = require('classnames');
 
 function format(v, f) {
-    return v ? v.format(f) : '';
+    return v ? v.format && v.format(f) : '';
 }
 
 var fullFormat = "YYYY-MM-DD";
@@ -89,9 +89,11 @@ var Picker = function (_Component) {
     }
 
     Picker.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
-        this.setState({
-            value: nextProps.defaultValue || []
-        });
+        if ("value" in nextProps) {
+            this.setState({
+                value: nextProps.value
+            });
+        }
     };
 
     Picker.prototype.render = function render() {
@@ -102,6 +104,7 @@ var Picker = function (_Component) {
         var value = this.state.value;
 
         var formatStr = props.format || 'YYYY-MM-DD';
+
         var calendar = _react2["default"].createElement(_RangeCalendar2["default"], {
             hoverValue: this.state.hoverValue,
             onHoverChange: this.onHoverChange,
@@ -109,7 +112,7 @@ var Picker = function (_Component) {
             format: formatStr,
             dateInputPlaceholder: props.dateInputPlaceholder || ['start', 'end'],
             locale: props.locale || _zh_CN2["default"],
-            onChange: this.handleCalendarChange,
+            onChange: this.onChange,
             disabledDate: props.disabledDate,
             showClear: props.showClear || false,
             showOk: props.showOk || true
@@ -145,7 +148,15 @@ var _initialiseProps = function _initialiseProps() {
 
     this.onChange = function (value) {
         //console.log('onChange', value);
-        _this3.setState({ value: value });
+        var props = _this3.props;
+        var formatStr = props.format || 'YYYY-MM-DD';
+        _this3.setState({
+            value: value
+        });
+        //传入value和dateString
+        if (props.onChange && isValidRange(value)) {
+            props.onChange(value, "[\"" + format(value[0], formatStr) + "\" , \"" + format(value[1], formatStr) + "\"]");
+        }
     };
 
     this.onHoverChange = function (hoverValue) {
@@ -157,14 +168,7 @@ var _initialiseProps = function _initialiseProps() {
         _this3.setState({ value: '' });
     };
 
-    this.handleCalendarChange = function (value) {
-
-        var props = _this3.props;
-        if (!("value" in props)) {
-            _this3.setState({ value: value });
-        }
-        props.onChange(value);
-    };
+    this.handleCalendarChange = function (value) {};
 };
 
 exports["default"] = Picker;

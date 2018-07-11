@@ -33,8 +33,8 @@ class Demo1 extends Component {
       value: ''
     };
   }
-  onChange  = d => {
-      console.log(d.format(format));
+  onChange  = (d,dataString) => {
+      console.log(dataString);
       this.setState({
           value:d
       })
