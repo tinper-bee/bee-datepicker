@@ -155,7 +155,7 @@ var _initialiseProps = function _initialiseProps() {
         });
         //传入value和dateString
         if (props.onChange && isValidRange(value)) {
-            props.onChange(value, "[\"" + format(value[0], formatStr) + "\" , \"" + format(value[1], formatStr) + "\"]");
+            props.onChange("[\"" + format(value[0], formatStr) + "\" , \"" + format(value[1], formatStr) + "\"]", value);
         }
     };
 

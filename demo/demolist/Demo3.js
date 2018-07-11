@@ -68,7 +68,17 @@ class Demo3 extends Component {
                             placeholder={'开始 ~ 结束'}
                             dateInputPlaceholder={['开始', '结束']}
                             showClear={true}
-                            value={this.state.value}
+                            {
+                                ...getFieldProps('shipDate', {
+                                    initialValue:'',
+                                    onChange:  (v,dateString)=> {
+                                        self.setState({
+                                            shipDate: dateString,
+                                            value:v
+                                        })
+                                    }
+                                })
+                            }
                         />
                     </Col>
                     <Col md={3}>
