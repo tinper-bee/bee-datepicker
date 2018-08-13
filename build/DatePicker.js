@@ -65,7 +65,7 @@ var DatePicker = function (_Component) {
     _this.state = {
       type: "month",
       value: props.value || props.defaultValue || _moment2["default"].Moment,
-      open: false
+      open: props.open || false
 
     };
     return _this;

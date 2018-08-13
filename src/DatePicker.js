@@ -22,7 +22,7 @@ class DatePicker extends Component {
     this.state = {
       type: "month",
       value: props.value || props.defaultValue || moment.Moment,
-      open: false,
+      open: props.open||false,
 
     };
   }
