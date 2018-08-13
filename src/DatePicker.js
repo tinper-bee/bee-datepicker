@@ -41,7 +41,8 @@ class DatePicker extends Component {
   componentWillReceiveProps(nextProps) {
     if ("value" in nextProps) {
       this.setState({
-        value: nextProps.value
+        value: nextProps.value,
+        open: nextProps.open
       });
     }
   }

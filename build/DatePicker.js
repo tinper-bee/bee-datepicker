@@ -74,7 +74,8 @@ var DatePicker = function (_Component) {
   DatePicker.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
     if ("value" in nextProps) {
       this.setState({
-        value: nextProps.value
+        value: nextProps.value,
+        open: nextProps.open
       });
     }
   };
