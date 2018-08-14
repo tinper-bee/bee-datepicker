@@ -41,10 +41,14 @@ class DatePicker extends Component {
   componentWillReceiveProps(nextProps) {
     if ("value" in nextProps) {
       this.setState({
-        value: nextProps.value,
-        open: nextProps.open
+        value: nextProps.value
       });
     }
+    this.setState({
+        renderIcon: nextProps.renderIcon,
+        open: nextProps.open
+    });
+
   }
   handleCalendarChange = (value) => {
       this.setState({ value: value });

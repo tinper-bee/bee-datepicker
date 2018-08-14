@@ -44,6 +44,9 @@ class Demo1 extends Component {
           value:''
       })
   }
+    renderIcon= d => {
+        return (<Icon type="uf-search"></Icon>)
+    }
   render() {
     var self = this;
     return (
@@ -57,9 +60,11 @@ class Demo1 extends Component {
               locale={zhCN}
               //defaultValue={this.state.value}
               value={this.state.value}
+
               placeholder={dateInputPlaceholder}
               className={"uuuu"}
               autofocus={false}
+      
             />
           </Col>
           <Col md={3}>

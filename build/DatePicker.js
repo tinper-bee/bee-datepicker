@@ -74,10 +74,13 @@ var DatePicker = function (_Component) {
   DatePicker.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
     if ("value" in nextProps) {
       this.setState({
-        value: nextProps.value,
-        open: nextProps.open
+        value: nextProps.value
       });
     }
+    this.setState({
+      renderIcon: nextProps.renderIcon,
+      open: nextProps.open
+    });
   };
 
   DatePicker.prototype.render = function render() {
