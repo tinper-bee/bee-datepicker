@@ -34,7 +34,6 @@ class Demo1 extends Component {
     };
   }
   onChange  = (d,dataString) => {
-      console.log(dataString);
       this.setState({
           value:d
       })
@@ -63,8 +62,8 @@ class Demo1 extends Component {
 
               placeholder={dateInputPlaceholder}
               className={"uuuu"}
-              autofocus={false}
-      
+
+
             />
           </Col>
           <Col md={3}>
