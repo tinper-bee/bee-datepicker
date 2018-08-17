@@ -18,7 +18,7 @@ const now = moment();
 
 const {RangePicker} = DatePicker;
 
-const format3 = "YYYY-MM-DD";
+const format3 = "YYYY-MM-DD HH:mm:ss";
 
 function formatValue(value, format) {
     return (value && value.format(format)) || '';
@@ -67,7 +67,9 @@ class Demo3 extends Component {
                         <RangePicker
                             placeholder={'开始 ~ 结束'}
                             dateInputPlaceholder={['开始', '结束']}
+
                             showClear={true}
+
                             {
                                 ...getFieldProps('shipDate', {
                                     initialValue:'',

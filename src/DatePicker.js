@@ -57,9 +57,7 @@ class DatePicker extends Component {
   }
   handleChange = value => {
     const props = this.props;
-    if (!("value" in props)) {
-      this.setState({ value });
-    }
+    this.setState({ value });
     //props.onChange(value, (value && value.format(props.format)) || '');
   };
 

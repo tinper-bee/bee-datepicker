@@ -34,9 +34,8 @@ class Demo1 extends Component {
     };
   }
   onChange  = (d,dataString) => {
-      this.setState({
-          value:d
-      })
+ 
+      console.log(dataString);
   };
   clear = d => {
       this.setState({
@@ -62,7 +61,9 @@ class Demo1 extends Component {
 
               placeholder={dateInputPlaceholder}
               className={"uuuu"}
-
+              renderIcon={()=>{
+                  return (<Icon type="uf-search"></Icon>)
+              }}
 
             />
           </Col>
