@@ -1,9 +1,46 @@
 # DatePicker
+
+## Moment.js
+
+### 格式化
+
+```javascript
+var moment = require('moment');
+moment().format();                                // "2014-09-08T08:02:17-05:00" (ISO 8601)
+moment().format("YYYY-MM-DD");                    // "2018-08-08"
+moment().format("dddd, MMMM Do YYYY, h:mm:ss a"); // "Sunday, February 14th 2010, 3:25:50 pm"
+moment().format("ddd, hA");                       // "Sun, 3PM"
+moment('gibberish').format('YYYY MM DD');         // "Invalid date"
+```
+
+### 当前时间
+
+```javascript
+var now = moment();
+```
+
+### 设置语言 (全局)
+
+```javascript
+moment.locale('en');     //英文
+moment.locale('zh-cn');  //中文
+```
+
+###  设置语言 (局部) 1.7.0+
+
+```javascript
+moment().locale('en'); //英文
+```
+
+
+##### 相关的文档地址[链接](http://momentjs.cn/docs/)*
+
+
 ## 代码演示
 ## API
 ### DatePicker
 
-*注:moment是JavaScript日期处理类库。相关的文档地址[链接](http://momentjs.cn/docs/)*
+
 
 |参数|说明|类型|默认值|
 |:---|:-----|:----|:------|
