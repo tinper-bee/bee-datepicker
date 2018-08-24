@@ -166,7 +166,7 @@ var _initialiseProps = function _initialiseProps() {
     if (props.onOpenChange) {
       setTimeout(function () {
         var value = self.state.value;
-        props.onOpenChange(value, value && value.format(props.format) || '');
+        props.onOpenChange(open, value, value && value.format(props.format) || '');
       }, 200);
     }
   };
