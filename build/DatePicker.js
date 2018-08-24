@@ -118,7 +118,7 @@ var DatePicker = function (_Component) {
       _react2["default"].createElement(
         _Picker2["default"],
         _extends({}, props, pickerChangeHandler, {
-          onOpenChange: this.onOpenChange,
+          onOpenChange: this.onOpenChange.bind(this),
           animation: "slide-up",
           calendar: calendar,
           open: this.state.open,
@@ -158,9 +158,17 @@ var _initialiseProps = function _initialiseProps() {
   };
 
   this.onOpenChange = function (open) {
+    var props = _this3.props;
+    var self = _this3;
     _this3.setState({
       open: open
     });
+    if (props.onOpenChange) {
+      setTimeout(function () {
+        var value = self.state.value;
+        props.onOpenChange(value, value && value.format(props.format) || '');
+      }, 200);
+    }
   };
 
   this.handleCalendarChange = function (value) {

@@ -34,9 +34,17 @@ class DatePicker extends Component {
   };
 
   onOpenChange = open => {
-    this.setState({
-      open
-    });
+      const props = this.props;
+      const self = this;
+      this.setState({
+          open
+      });
+      if(props.onOpenChange){
+          setTimeout(function () {
+              const value = self.state.value;
+              props.onOpenChange(value, (value && value.format(props.format)) || '');
+          },200)
+      }
   };
   componentWillReceiveProps(nextProps) {
     if ("value" in nextProps) {
@@ -96,7 +104,7 @@ class DatePicker extends Component {
         <Picker
           {...props}
           {...pickerChangeHandler}
-          onOpenChange={this.onOpenChange}
+          onOpenChange={this.onOpenChange.bind(this)}
           animation="slide-up"
           calendar={calendar}
           open={this.state.open}
