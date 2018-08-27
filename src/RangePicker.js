@@ -5,6 +5,8 @@ import React, { Component } from "react";
 import RangeCalendar from "rc-calendar/lib/RangeCalendar";
 import FormControl from "bee-form-control";
 import DatePicker from "rc-calendar/lib/Picker";
+import InputGroup from 'bee-input-group';
+import Icon from "bee-icon";
 var classNames = require('classnames');
 
 import zhCN from "rc-calendar/lib/locale/zh_CN";
@@ -49,6 +51,9 @@ class Picker extends Component {
                 value: nextProps.value
             });
         }
+        this.setState({
+            renderIcon: nextProps.renderIcon
+        });
     }
 
     onChange = (value) => {
@@ -111,12 +116,19 @@ class Picker extends Component {
                             placeholder={this.props.placeholder?this.props.placeholder:'start ~ end'}
                             value={isValidRange(value) && `${format(value[0],formatStr)} ~ ${format(value[1],formatStr)}` || ''}
                         />
+                        <InputGroup.Button shape="border">
+                            { props.renderIcon() }
+                        </InputGroup.Button>
                     </div>
                 );
                   }
               }
           </DatePicker>);
   }
+}
+
+Picker.defaultProps = {
+    renderIcon: () => <Icon type="uf-calendar" />
 }
 
 export default Picker;

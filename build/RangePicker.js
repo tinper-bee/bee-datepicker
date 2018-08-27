@@ -20,6 +20,14 @@ var _Picker = require("rc-calendar/lib/Picker");
 
 var _Picker2 = _interopRequireDefault(_Picker);
 
+var _beeInputGroup = require("bee-input-group");
+
+var _beeInputGroup2 = _interopRequireDefault(_beeInputGroup);
+
+var _beeIcon = require("bee-icon");
+
+var _beeIcon2 = _interopRequireDefault(_beeIcon);
+
 var _zh_CN = require("rc-calendar/lib/locale/zh_CN");
 
 var _zh_CN2 = _interopRequireDefault(_zh_CN);
@@ -94,6 +102,9 @@ var Picker = function (_Component) {
                 value: nextProps.value
             });
         }
+        this.setState({
+            renderIcon: nextProps.renderIcon
+        });
     };
 
     Picker.prototype.render = function render() {
@@ -134,7 +145,12 @@ var Picker = function (_Component) {
                     _react2["default"].createElement(_beeFormControl2["default"], {
                         placeholder: _this2.props.placeholder ? _this2.props.placeholder : 'start ~ end',
                         value: isValidRange(value) && format(value[0], formatStr) + " ~ " + format(value[1], formatStr) || ''
-                    })
+                    }),
+                    _react2["default"].createElement(
+                        _beeInputGroup2["default"].Button,
+                        { shape: "border" },
+                        props.renderIcon()
+                    )
                 );
             }
         );
@@ -169,6 +185,12 @@ var _initialiseProps = function _initialiseProps() {
     };
 
     this.handleCalendarChange = function (value) {};
+};
+
+Picker.defaultProps = {
+    renderIcon: function renderIcon() {
+        return _react2["default"].createElement(_beeIcon2["default"], { type: "uf-calendar" });
+    }
 };
 
 exports["default"] = Picker;

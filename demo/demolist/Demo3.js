@@ -7,6 +7,7 @@
 import React, {Component} from "react";
 import {Row, Col} from "bee-layout";
 import DatePicker from "../../src/index";
+import Icon from "bee-icon";
 
 import zhCN from "rc-calendar/lib/locale/zh_CN";
 import moment from "moment/moment";
@@ -67,9 +68,7 @@ class Demo3 extends Component {
                         <RangePicker
                             placeholder={'开始 ~ 结束'}
                             dateInputPlaceholder={['开始', '结束']}
-
                             showClear={true}
-
                             {
                                 ...getFieldProps('shipDate', {
                                     initialValue:'',
