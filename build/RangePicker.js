@@ -4,6 +4,8 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _react = require("react");
 
 var _react2 = _interopRequireDefault(_react);
@@ -116,7 +118,7 @@ var Picker = function (_Component) {
 
         var formatStr = props.format || 'YYYY-MM-DD';
 
-        var calendar = _react2["default"].createElement(_RangeCalendar2["default"], {
+        var calendar = _react2["default"].createElement(_RangeCalendar2["default"], _extends({
             hoverValue: this.state.hoverValue,
             onHoverChange: this.onHoverChange,
             showWeekNumber: false,
@@ -127,7 +129,7 @@ var Picker = function (_Component) {
             disabledDate: props.disabledDate,
             showClear: props.showClear || false,
             showOk: props.showOk || true
-        });
+        }, props));
 
         return _react2["default"].createElement(
             _Picker2["default"],

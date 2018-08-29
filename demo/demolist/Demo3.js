@@ -60,7 +60,7 @@ class Demo3 extends Component {
         const props = this.props;
         const self = this;
         const { getFieldProps, getFieldError } = this.props.form;
-        console.log(this.state.value)
+
         return (
             <div>
                 <Row>
@@ -69,17 +69,7 @@ class Demo3 extends Component {
                             placeholder={'开始 ~ 结束'}
                             dateInputPlaceholder={['开始', '结束']}
                             showClear={true}
-                            {
-                                ...getFieldProps('shipDate', {
-                                    initialValue:'',
-                                    onChange:  (v,dateString)=> {
-                                        self.setState({ shipDate: v });
-                                        self.props.form.setFieldsValue({
-                                            'shipDate':dateString
-                                        })
-                                    },
-                                })
-                            }
+                            value={this.state.value}
                         />
                     </Col>
                     <Col md={3}>

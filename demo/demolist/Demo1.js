@@ -34,7 +34,7 @@ class Demo1 extends Component {
     };
   }
   onChange  = (d,dataString) => {
- 
+
       console.log(dataString);
   };
   clear = d => {
