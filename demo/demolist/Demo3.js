@@ -70,6 +70,11 @@ class Demo3 extends Component {
                             dateInputPlaceholder={['开始', '结束']}
                             showClear={true}
                             value={this.state.value}
+                            renderFooter={()=>{
+                                return (
+                                    <div>322</div>
+                                )
+                            }}
                         />
                     </Col>
                     <Col md={3}>

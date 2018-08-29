@@ -99,7 +99,7 @@ class Picker extends Component {
             disabledDate={props.disabledDate}
             showClear={ props.showClear||false}
             showOk={props.showOk||true}
-            {...props}
+            renderFooter={props.renderFooter}
         />
     );
 
