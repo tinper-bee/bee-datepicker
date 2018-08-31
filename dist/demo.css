@@ -5504,6 +5504,18 @@ input.u-button[type="submit"] {
   .u-panel .u-panel-body {
     padding: 15px 15px;
     position: relative; }
+    .u-panel .u-panel-body .uf {
+      position: absolute;
+      right: 25px;
+      top: 30px;
+      color: #fff;
+      font-size: 20px;
+      padding: 2px 8px;
+      margin: 8px;
+      border-radius: 4px;
+      cursor: pointer; }
+      .u-panel .u-panel-body .uf:hover {
+        color: #a8a7a7; }
 
 .u-panel-default {
   border-color: #ddd; }
@@ -6175,6 +6187,8 @@ input.u-button[type="submit"] {
   .u-form-control:focus {
     border-color: #66afe9;
     outline: 0; }
+  .u-form-control::-ms-clear, .u-form-control ::-ms-reveal {
+    display: none; }
 
 .u-form-control[disabled] {
   background: #eee;
@@ -6420,7 +6434,7 @@ input.u-button[type="submit"] {
   position: absolute;
   left: -9999px;
   top: -9999px;
-  z-index: 1000; }
+  z-index: 1800; }
 
 .rc-calendar-picker-hidden {
   display: none; }

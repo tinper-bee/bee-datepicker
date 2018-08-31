@@ -21,6 +21,8 @@
   .u-form-control:focus {
     border-color: #66afe9;
     outline: 0; }
+  .u-form-control::-ms-clear, .u-form-control ::-ms-reveal {
+    display: none; }
 
 .u-form-control[disabled] {
   background: #eee;
@@ -268,7 +270,7 @@
   position: absolute;
   left: -9999px;
   top: -9999px;
-  z-index: 1000; }
+  z-index: 1800; }
 
 .rc-calendar-picker-hidden {
   display: none; }
