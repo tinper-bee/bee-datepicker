@@ -52,7 +52,7 @@ class Demo3 extends Component {
         this.setState({value: ''})
     }
 
-    onChange (d) {
+    onChange (d,str) {
         console.log(d);
     }
 
@@ -70,6 +70,7 @@ class Demo3 extends Component {
                             dateInputPlaceholder={['开始', '结束']}
                             showClear={true}
                             value={this.state.value}
+                            onChange={this.onChange.bind(this)}
                             renderFooter={()=>{
                                 return (
                                     <div>322</div>

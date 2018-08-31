@@ -61,12 +61,12 @@ class DatePicker extends Component {
   handleCalendarChange = (value) => {
       const props = this.props;
       this.setState({ value: value });
-      props.onChange(value, (value && value.format(props.format)) || '');
+      //props.onChange(value, (value && value.format(props.format)) || '');
   }
   handleChange = value => {
     const props = this.props;
     this.setState({ value });
-    //props.onChange(value, (value && value.format(props.format)) || '');
+    props.onChange(value, (value && value.format(props.format)) || '');
   };
 
   render() {

@@ -23,8 +23,6 @@ function onSelect(d) {
   // console.log(d);
 }
 
-console.log(moment().format(format));
-
 
 class Demo1 extends Component {
   constructor(props) {
@@ -34,8 +32,7 @@ class Demo1 extends Component {
     };
   }
   onChange  = (d,dataString) => {
-
-      console.log(dataString);
+      console.log(d && d.format(format)+1111);
   };
   clear = d => {
       this.setState({
