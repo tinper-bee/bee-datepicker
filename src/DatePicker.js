@@ -104,7 +104,7 @@ class DatePicker extends Component {
         <Picker
           {...props}
           {...pickerChangeHandler}
-          onOpenChange={this.onOpenChange.bind(this)}
+          onOpenChange={this.onOpenChange}
           animation="slide-up"
           calendar={calendar}
           open={this.state.open}

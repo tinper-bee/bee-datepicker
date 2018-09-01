@@ -63,9 +63,16 @@ class Picker extends Component {
         this.setState({
             value:value
         });
+
         //传入value和dateString
-        if(props.onChange&&isValidRange(value)){
-            props.onChange(value,`["${format(value[0],formatStr)}" , "${format(value[1],formatStr)}"]`);
+        if(props.onChange&&isValidRange(value)||value.length==0){
+            if(value.length>0){
+                props.onChange(value,`["${format(value[0],formatStr)}" , "${format(value[1],formatStr)}"]`);
+            }
+            else {
+                props.onChange(null)
+            }
+
         }
     }
 

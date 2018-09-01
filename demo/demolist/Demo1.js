@@ -32,7 +32,7 @@ class Demo1 extends Component {
     };
   }
   onChange  = (d,dataString) => {
-      console.log(d && d.format(format)+1111);
+      console.log(d);
   };
   clear = d => {
       this.setState({
@@ -41,6 +41,9 @@ class Demo1 extends Component {
   }
     renderIcon= d => {
         return (<Icon type="uf-search"></Icon>)
+    }
+    onOpenChange= d => {
+        console.log(d);
     }
   render() {
     var self = this;
@@ -55,7 +58,7 @@ class Demo1 extends Component {
               locale={zhCN}
               //defaultValue={this.state.value}
               value={this.state.value}
-
+              onOpenChange={this.onOpenChange.bind(this)}
               placeholder={dateInputPlaceholder}
               className={"uuuu"}
               renderIcon={()=>{
