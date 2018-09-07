@@ -67,7 +67,12 @@ class DatePicker extends Component {
     const props = this.props;
     this.setState({ value });
     props.onChange(value, (value && value.format(props.format)) || '');
-  };
+  }
+  onClick = () =>{
+    const props = this.props;
+    let value = this.state.value;
+    props.onClick(value||null,(value && value.format(props.format)) || '')
+  }
 
   render() {
     let state = this.state;
@@ -118,6 +123,7 @@ class DatePicker extends Component {
                 readOnly
                 placeholder={this.props.placeholder}
                 value={(value && value.format(props.format)) || ""}
+                onClick={this.onClick}
                 {...autofocus}
               />
               <InputGroup.Button shape="border">

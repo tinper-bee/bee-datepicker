@@ -76,7 +76,7 @@
 	
 	var CARETUP = _react2['default'].createElement('i', { className: 'uf uf-arrow-up' });
 	
-	var Demo1 = __webpack_require__(64);var Demo2 = __webpack_require__(366);var Demo3 = __webpack_require__(367);var Demo4 = __webpack_require__(462);var Demo5 = __webpack_require__(463);var Demo6 = __webpack_require__(464);var Demo7 = __webpack_require__(465);var Demo8 = __webpack_require__(466);var Demo9 = __webpack_require__(467);var DemoArray = [{ "example": _react2['default'].createElement(Demo1, null), "title": " 选择日期", "code": "/**\n *\n * @title 选择日期\n * @description 以「日期」为基本单位，基础的日期选择控件\n */\n\nimport React, { Component } from \"react\";\nimport { Row, Col } from \"bee-layout\";\nimport DatePicker from \"../../src/index\";\n\nimport zhCN from \"rc-calendar/lib/locale/zh_CN\";\nimport enUS from \"rc-calendar/lib/locale/en_US\";\nimport moment from \"moment\";\nimport Icon from 'bee-icon';\nimport 'moment/locale/zh-cn';\nmoment.locale('zh-cn');\n\nconst format = \"YYYY-MM-DD dddd\";\n\nconst dateInputPlaceholder = \"选择日期\";\n\nfunction onSelect(d) {\n  // console.log(d);\n}\n\n\nclass Demo1 extends Component {\n  constructor(props) {\n    super(props);\n    this.state = {\n      value: ''\n    };\n  }\n  onChange  = (d,dataString) => {\n      console.log(d);\n  };\n  clear = d => {\n      this.setState({\n          value:''\n      })\n  }\n    renderIcon= d => {\n        return (<Icon type=\"uf-search\"></Icon>)\n    }\n    onOpenChange= d => {\n        console.log(d);\n    }\n  render() {\n    var self = this;\n    return (\n      <div>\n        <Row>\n          <Col md={8}>\n            <DatePicker\n              format={format}\n              onSelect={onSelect}\n              onChange={this.onChange}\n              locale={zhCN}\n              //defaultValue={this.state.value}\n              value={this.state.value}\n              onOpenChange={this.onOpenChange.bind(this)}\n              placeholder={dateInputPlaceholder}\n              className={\"uuuu\"}\n              renderIcon={()=>{\n                  return (<Icon type=\"uf-search\"></Icon>)\n              }}\n\n            />\n          </Col>\n          <Col md={3}>\n              <button className=\"u-button\" onClick={this.clear}>清空</button>\n          </Col>\n        </Row>\n      </div>\n    );\n  }\n}\n\nexport default Demo1;\n", "desc": " 以「日期」为基本单位，基础的日期选择控件" }, { "example": _react2['default'].createElement(Demo2, null), "title": " 选择年月", "code": "/**\n *\n * @title 选择年月\n * @description 以「年月」为基本单位，基础的年月选择控件\n */\n\nimport React, { Component } from \"react\";\nimport { Row, Col } from \"bee-layout\";\nimport DatePicker from \"../../src/index\";\nimport moment from \"moment\";\n\nimport zhCN from \"rc-calendar/lib/locale/zh_CN\";\nimport enUS from \"rc-calendar/lib/locale/en_US\";\n\nconst { MonthPicker } = DatePicker;\n\nconst format2 = \"YYYY-MM\";\n\nfunction onSelect(d) {\n  console.log(d);\n}\n\nfunction onChange(d) {\n  console.log(d);\n}\n\nclass Demo2 extends Component {\n  render() {\n    return (\n      <div>\n        <Row>\n          <Col md={12}>\n            <MonthPicker\n              format={format2}\n              onSelect={onSelect}\n              onChange={onChange}\n              locale={zhCN}\n              defaultValue={moment()}\n              placeholder={\"选择年月\"}\n            />\n          </Col>\n        </Row>\n      </div>\n    );\n  }\n}\n\nexport default Demo2;\n", "desc": " 以「年月」为基本单位，基础的年月选择控件" }, { "example": _react2['default'].createElement(Demo3, null), "title": " 日期范围", "code": "/**\n *\n * @title 日期范围\n * @description 以「日期范围」为基本单位，基础的日期范围选择控件\n */\n\nimport React, {Component} from \"react\";\nimport {Row, Col} from \"bee-layout\";\nimport DatePicker from \"../../src/index\";\nimport Icon from \"bee-icon\";\n\nimport zhCN from \"rc-calendar/lib/locale/zh_CN\";\nimport moment from \"moment/moment\";\nimport Form from 'bee-form';\nconst FormItem = Form.FormItem;\n\n\nconst now = moment();\n\nconst {RangePicker} = DatePicker;\n\nconst format3 = \"YYYY-MM-DD HH:mm:ss\";\n\nfunction formatValue(value, format) {\n    return (value && value.format(format)) || '';\n}\n\nfunction onSelect(d) {\n    //console.log(d);\n}\n\n\n\nclass Demo3 extends Component {\n    constructor(props) {\n        super(props);\n        this.state = {\n            value: '',\n            v:''\n        };\n    }\n\n    onStartChange = (value) => {\n        this.setState({\n            startValue: value[0],\n            startOpen: false,\n            endOpen: true,\n        });\n    }\n\n    remove() {\n        this.setState({value: ''})\n    }\n\n    onChange (d,str) {\n        console.log(d);\n    }\n\n    render() {\n        const props = this.props;\n        const self = this;\n        const { getFieldProps, getFieldError } = this.props.form;\n\n        return (\n            <div>\n                <Row>\n                    <Col md={8}>\n                        <RangePicker\n                            placeholder={'开始 ~ 结束'}\n                            dateInputPlaceholder={['开始', '结束']}\n                            showClear={true}\n                            value={this.state.value}\n                            onChange={this.onChange.bind(this)}\n                            renderFooter={()=>{\n                                return (\n                                    <div>322</div>\n                                )\n                            }}\n                        />\n                    </Col>\n                    <Col md={3}>\n                        <button className=\"u-button\" onClick={this.remove.bind(this)}>清空</button>\n                    </Col>\n                </Row>\n            </div>\n        );\n    }\n}\n\nexport default Form.createForm()(Demo3)\n", "desc": " 以「日期范围」为基本单位，基础的日期范围选择控件" }, { "example": _react2['default'].createElement(Demo4, null), "title": " 动态的改变时间", "code": "/**\n *\n * @title 动态的改变时间\n * @description 以「日期时间」为基本单位，基础的日期时间选择控件\n */\n\nimport React, { Component } from \"react\";\nimport DatePicker from \"../../src/index\";\nimport moment from \"moment\";\nimport zhCN from \"rc-calendar/lib/locale/zh_CN\";\nimport { Row, Col } from \"bee-layout\";\nimport Button from \"bee-button\";\nconst format = \"YYYY-MM-DD HH:mm:ss\";\nconst dateInputPlaceholder = \"选择日期\";\n\nclass Demo4 extends Component {\n  constructor(props) {\n    super(props);\n    this.state = {\n      value: moment()\n    };\n  }\n\n  handleChange = value => {\n    this.setState({\n      value: value\n    });\n  };\n  onSelect = d => {\n    console.log(d);\n  };\n\n  handlerChangeDate = () => {\n    this.setState({\n      value: moment(\"2011-11-11 11:11:11\")\n    });\n    console.log(\"click\");\n  };\n  render() {\n    return (\n      <div>\n        <Row>\n          <Col md={8}>\n            <DatePicker\n              format={format}\n              locale={zhCN}\n              onSelect={this.onSelect}\n              onChange={this.handleChange}\n              value={this.state.value}\n              placeholder={dateInputPlaceholder}\n            />\n          </Col>\n          <Col md={3}>\n            <Button onClick={this.handlerChangeDate}>变</Button>\n          </Col>\n        </Row>\n      </div>\n    );\n  }\n}\n\nexport default Demo4;\n", "desc": " 以「日期时间」为基本单位，基础的日期时间选择控件" }, { "example": _react2['default'].createElement(Demo5, null), "title": " 选择周", "code": "/**\n *\n * @title 选择周\n * @description 以「周」为基本单位，基础的周选择控件\n */\n\nimport React, { Component } from \"react\";\nimport { Row, Col } from \"bee-layout\";\nimport DatePicker from \"../../src/index\";\nconst { WeekPicker } = DatePicker;\nimport moment from \"moment\";\n\nfunction onSelect(d) {\n  console.log(d);\n}\n\nfunction onChange(d) {\n  console.log(d);\n}\n\nclass Demo5 extends Component {\n  render() {\n    return (\n      <div>\n        <Row>\n          <Col md={12}>\n            <WeekPicker defaultValue={''} onChange={onChange} placeholder=\"选择周\" />\n          </Col>\n        </Row>\n      </div>\n    );\n  }\n}\n\nexport default Demo5;\n", "desc": " 以「周」为基本单位，基础的周选择控件" }, { "example": _react2['default'].createElement(Demo6, null), "title": " 选择日期时间", "code": "/**\n *\n * @title 选择日期时间\n * @description 以「日期时间」为基本单位，可以选择日期和时间\n */\n\nimport React, { Component } from \"react\";\nimport { Row, Col } from \"bee-layout\";\nimport DatePicker from \"../../src/index\";\n\nimport zhCN from \"rc-calendar/lib/locale/zh_CN\";\nimport enUS from \"rc-calendar/lib/locale/en_US\";\nimport moment from \"moment\";\n\nconst format = \"YYYY-MM-DD HH:mm:ss\";\n\nconst dateInputPlaceholder = \"选择日期\";\n\nfunction onSelect(d) {\n  console.log(d);\n}\n\nfunction onChange(d) {\n  console.log(d);\n}\n\nclass Demo6 extends Component {\n  render() {\n    return (\n      <div>\n        <Row>\n          <Col md={12}>\n            <DatePicker\n              format={format}\n              showTime={true}\n              onSelect={onSelect}\n              onChange={onChange}\n              locale={zhCN}\n              defaultValue={moment()}\n              placeholder={dateInputPlaceholder}\n            />\n          </Col>\n        </Row>\n      </div>\n    );\n  }\n}\n\nexport default Demo6;\n", "desc": " 以「日期时间」为基本单位，可以选择日期和时间" }, { "example": _react2['default'].createElement(Demo7, null), "title": " 禁用日期", "code": "/**\n *\n * @title 禁用日期\n * @description 禁用日期\n */\n\nimport React, { Component } from \"react\";\nimport { Row, Col } from \"bee-layout\";\nimport DatePicker from \"../../src/index\";\n\nimport zhCN from \"rc-calendar/lib/locale/zh_CN\";\nimport enUS from \"rc-calendar/lib/locale/en_US\";\nimport moment from \"moment\";\n\nconst format = \"YYYY-MM-DD\";\n\nconst dateInputPlaceholder = \"选择日期\";\n\nfunction onSelect(d) {\n  console.log(d);\n}\n\nfunction onChange(d) {\n  console.log(d);\n}\n\nclass Demo7 extends Component {\n  render() {\n    return (\n      <div>\n        <Row>\n          <Col md={12}>\n            <DatePicker\n              format={format}\n              onSelect={onSelect}\n              onChange={onChange}\n              locale={zhCN}\n              defaultValue={moment()}\n              placeholder={dateInputPlaceholder}\n              disabled={true}\n            />\n          </Col>\n        </Row>\n      </div>\n    );\n  }\n}\n\nexport default Demo7;\n", "desc": " 禁用日期" }, { "example": _react2['default'].createElement(Demo8, null), "title": " 不可选择日期和时间", "code": "/**\n *\n * @title 不可选择日期和时间\n * @description 可用 disabledDate 和 disabledTime 分别禁止选择部分日期和时间，其中 disabledTime 需要和 showTime 一起使用。\n */\n\nimport React, { Component } from \"react\";\nimport { Row, Col } from \"bee-layout\";\nimport DatePicker from \"../../src/index\";\n\nimport zhCN from \"rc-calendar/lib/locale/zh_CN\";\nimport moment from \"moment\";\n\nconst format = \"YYYY-MM-DD\";\n\nconst dateInputPlaceholder = \"选择日期\";\n\nfunction onSelect(d) {\n  console.log(d);\n}\n\nfunction onChange(d) {\n  console.log(d);\n}\n\nfunction disabledDate(current) {\n  return current && current.valueOf() < Date.now();\n}\n\nclass Demo7 extends Component {\n  render() {\n    return (\n      <div>\n        <Row>\n          <Col md={12}>\n            <DatePicker\n              format={format}\n              onSelect={onSelect}\n              onChange={onChange}\n              locale={zhCN}\n              disabledDate={disabledDate}\n              defaultValue={moment()}\n              placeholder={dateInputPlaceholder}\n            />\n          </Col>\n        </Row>\n      </div>\n    );\n  }\n}\n\nexport default Demo7;\n", "desc": " 可用 disabledDate 和 disabledTime 分别禁止选择部分日期和时间，其中 disabledTime 需要和 showTime 一起使用。" }, { "example": _react2['default'].createElement(Demo9, null), "title": " 自定义日期渲染父级容器", "code": "/**\n *\n * @title 自定义日期渲染父级容器\n * @description 以「日期」为基本单位，基础的日期选择控件\n */\n\nimport React, { Component } from \"react\";\nimport { Row, Col } from \"bee-layout\";\nimport DatePicker from \"../../src/index\";\n\nimport zhCN from \"rc-calendar/lib/locale/zh_CN\";\nimport enUS from \"rc-calendar/lib/locale/en_US\";\nimport moment from \"moment\";\nimport Icon from 'bee-icon';\n\nconst format = \"YYYY-MM-DD\";\n\nconst dateInputPlaceholder = \"选择日期\";\n\nfunction onSelect(d) {\n    // console.log(d);\n}\n\nfunction onChange(d) {\n    this.setState({\n        value: ''\n    });\n}\n\nclass Demo1 extends Component {\n    constructor(props) {\n        super(props);\n        this.state = {\n            value: ''\n        };\n    }\n    getCalendarContainer() {\n        return this.d || document.getElementById('d');\n    }\n    onChange = d => {\n        console.log(d)\n\n        this.setState({\n            value: ''\n        });\n    };\n    render() {\n        return (\n            <div id=\"d\" ref=\"d\">\n                <Row>\n                    <Col md={12}>\n                        <DatePicker\n                            format={format}\n                            onSelect={onSelect}\n                            onChange={this.onChange}\n                            locale={zhCN}\n                            defaultValue={this.state.value}\n                            placeholder={dateInputPlaceholder}\n                            getCalendarContainer={this.getCalendarContainer}\n                        />\n                    </Col>\n                </Row>\n            </div>\n        );\n    }\n}\n\nexport default Demo1;\n", "desc": " 以「日期」为基本单位，基础的日期选择控件" }];
+	var Demo1 = __webpack_require__(64);var Demo2 = __webpack_require__(366);var Demo3 = __webpack_require__(367);var Demo4 = __webpack_require__(462);var Demo5 = __webpack_require__(463);var Demo6 = __webpack_require__(464);var Demo7 = __webpack_require__(465);var Demo8 = __webpack_require__(466);var Demo9 = __webpack_require__(467);var DemoArray = [{ "example": _react2['default'].createElement(Demo1, null), "title": " 选择日期", "code": "/**\n *\n * @title 选择日期\n * @description 以「日期」为基本单位，基础的日期选择控件\n */\n\nimport React, {Component} from \"react\";\nimport {Row, Col} from \"bee-layout\";\nimport DatePicker from \"../../src/index\";\n\nimport zhCN from \"rc-calendar/lib/locale/zh_CN\";\nimport enUS from \"rc-calendar/lib/locale/en_US\";\nimport moment from \"moment\";\nimport Icon from 'bee-icon';\nimport 'moment/locale/zh-cn';\n\nmoment.locale('zh-cn');\n\nconst format = \"YYYY-MM-DD dddd\";\n\nconst dateInputPlaceholder = \"选择日期\";\n\nfunction onSelect(d) {\n    // console.log(d);\n}\n\n\nclass Demo1 extends Component {\n    constructor(props) {\n        super(props);\n        this.state = {\n            value: '',\n            open: false\n        };\n    }\n\n    onChange = (d, dataString) => {\n        console.log(d);\n    };\n    clear = d => {\n        this.setState({\n            value: ''\n        })\n    }\n    renderIcon = d => {\n        return (<Icon type=\"uf-search\"></Icon>)\n    }\n    onOpenChange = d => {\n        console.log(d);\n    }\n    open = d => {\n        this.setState({\n            open: true\n        })\n    }\n    onClick = (d,str) => {\n        console.log(d)\n    }\n\n    render() {\n        var self = this;\n        return (\n            <div>\n                <Row>\n                    <Col md={8}>\n                        <DatePicker\n                            format={format}\n                            onSelect={onSelect}\n                            onChange={this.onChange}\n                            locale={zhCN}\n                            open={this.state.open}\n                            //defaultValue={this.state.value}\n                            value={this.state.value}\n                            onOpenChange={this.onOpenChange.bind(this)}\n                            placeholder={dateInputPlaceholder}\n                            className={\"uuuu\"}\n                            onClick={this.onClick}\n                        />\n                    </Col>\n                    <Col md={3}>\n                        <button className=\"u-button\" onClick={this.clear}>清空</button>\n                        <button className=\"u-button\" onClick={this.open}>设置为true</button>\n                    </Col>\n                </Row>\n            </div>\n        );\n    }\n}\n\nexport default Demo1;\n", "desc": " 以「日期」为基本单位，基础的日期选择控件" }, { "example": _react2['default'].createElement(Demo2, null), "title": " 选择年月", "code": "/**\n *\n * @title 选择年月\n * @description 以「年月」为基本单位，基础的年月选择控件\n */\n\nimport React, { Component } from \"react\";\nimport { Row, Col } from \"bee-layout\";\nimport DatePicker from \"../../src/index\";\nimport moment from \"moment\";\n\nimport zhCN from \"rc-calendar/lib/locale/zh_CN\";\nimport enUS from \"rc-calendar/lib/locale/en_US\";\n\nconst { MonthPicker } = DatePicker;\n\nconst format2 = \"YYYY-MM\";\n\nfunction onSelect(d) {\n  console.log(d);\n}\n\nfunction onChange(d) {\n  console.log(d);\n}\n\nclass Demo2 extends Component {\n  render() {\n    return (\n      <div>\n        <Row>\n          <Col md={12}>\n            <MonthPicker\n              format={format2}\n              onSelect={onSelect}\n              onChange={onChange}\n              locale={zhCN}\n              defaultValue={moment()}\n              placeholder={\"选择年月\"}\n            />\n          </Col>\n        </Row>\n      </div>\n    );\n  }\n}\n\nexport default Demo2;\n", "desc": " 以「年月」为基本单位，基础的年月选择控件" }, { "example": _react2['default'].createElement(Demo3, null), "title": " 日期范围", "code": "/**\n *\n * @title 日期范围\n * @description 以「日期范围」为基本单位，基础的日期范围选择控件\n */\n\nimport React, {Component} from \"react\";\nimport {Row, Col} from \"bee-layout\";\nimport DatePicker from \"../../src/index\";\nimport Icon from \"bee-icon\";\n\nimport zhCN from \"rc-calendar/lib/locale/zh_CN\";\nimport moment from \"moment/moment\";\nimport Form from 'bee-form';\nconst FormItem = Form.FormItem;\n\n\nconst now = moment();\n\nconst {RangePicker} = DatePicker;\n\nconst format3 = \"YYYY-MM-DD HH:mm:ss\";\n\nfunction formatValue(value, format) {\n    return (value && value.format(format)) || '';\n}\n\nfunction onSelect(d) {\n    //console.log(d);\n}\n\n\n\nclass Demo3 extends Component {\n    constructor(props) {\n        super(props);\n        this.state = {\n            value: '',\n            v:''\n        };\n    }\n\n    onStartChange = (value) => {\n        this.setState({\n            startValue: value[0],\n            startOpen: false,\n            endOpen: true,\n        });\n    }\n\n    remove() {\n        this.setState({value: ''})\n    }\n\n    onChange (d,str) {\n        console.log(d);\n    }\n\n    render() {\n        const props = this.props;\n        const self = this;\n        const { getFieldProps, getFieldError } = this.props.form;\n\n        return (\n            <div>\n                <Row>\n                    <Col md={8}>\n                        <RangePicker\n                            placeholder={'开始 ~ 结束'}\n                            dateInputPlaceholder={['开始', '结束']}\n                            showClear={true}\n                            value={this.state.value}\n                            onChange={this.onChange.bind(this)}\n                            renderFooter={()=>{\n                                return (\n                                    <div>322</div>\n                                )\n                            }}\n                        />\n                    </Col>\n                    <Col md={3}>\n                        <button className=\"u-button\" onClick={this.remove.bind(this)}>清空</button>\n                    </Col>\n                </Row>\n            </div>\n        );\n    }\n}\n\nexport default Form.createForm()(Demo3)\n", "desc": " 以「日期范围」为基本单位，基础的日期范围选择控件" }, { "example": _react2['default'].createElement(Demo4, null), "title": " 动态的改变时间", "code": "/**\n *\n * @title 动态的改变时间\n * @description 以「日期时间」为基本单位，基础的日期时间选择控件\n */\n\nimport React, { Component } from \"react\";\nimport DatePicker from \"../../src/index\";\nimport moment from \"moment\";\nimport zhCN from \"rc-calendar/lib/locale/zh_CN\";\nimport { Row, Col } from \"bee-layout\";\nimport Button from \"bee-button\";\nconst format = \"YYYY-MM-DD HH:mm:ss\";\nconst dateInputPlaceholder = \"选择日期\";\n\nclass Demo4 extends Component {\n  constructor(props) {\n    super(props);\n    this.state = {\n      value: moment()\n    };\n  }\n\n  handleChange = value => {\n    this.setState({\n      value: value\n    });\n  };\n  onSelect = d => {\n    console.log(d);\n  };\n\n  handlerChangeDate = () => {\n    this.setState({\n      value: moment(\"2011-11-11 11:11:11\")\n    });\n    console.log(\"click\");\n  };\n  render() {\n    return (\n      <div>\n        <Row>\n          <Col md={8}>\n            <DatePicker\n              format={format}\n              locale={zhCN}\n              onSelect={this.onSelect}\n              onChange={this.handleChange}\n              value={this.state.value}\n              placeholder={dateInputPlaceholder}\n            />\n          </Col>\n          <Col md={3}>\n            <Button onClick={this.handlerChangeDate}>变</Button>\n          </Col>\n        </Row>\n      </div>\n    );\n  }\n}\n\nexport default Demo4;\n", "desc": " 以「日期时间」为基本单位，基础的日期时间选择控件" }, { "example": _react2['default'].createElement(Demo5, null), "title": " 选择周", "code": "/**\n *\n * @title 选择周\n * @description 以「周」为基本单位，基础的周选择控件\n */\n\nimport React, { Component } from \"react\";\nimport { Row, Col } from \"bee-layout\";\nimport DatePicker from \"../../src/index\";\nconst { WeekPicker } = DatePicker;\nimport moment from \"moment\";\n\nfunction onSelect(d) {\n  console.log(d);\n}\n\nfunction onChange(d) {\n  console.log(d);\n}\n\nclass Demo5 extends Component {\n  render() {\n    return (\n      <div>\n        <Row>\n          <Col md={12}>\n            <WeekPicker defaultValue={''} onChange={onChange} placeholder=\"选择周\" />\n          </Col>\n        </Row>\n      </div>\n    );\n  }\n}\n\nexport default Demo5;\n", "desc": " 以「周」为基本单位，基础的周选择控件" }, { "example": _react2['default'].createElement(Demo6, null), "title": " 选择日期时间", "code": "/**\n *\n * @title 选择日期时间\n * @description 以「日期时间」为基本单位，可以选择日期和时间\n */\n\nimport React, { Component } from \"react\";\nimport { Row, Col } from \"bee-layout\";\nimport DatePicker from \"../../src/index\";\n\nimport zhCN from \"rc-calendar/lib/locale/zh_CN\";\nimport enUS from \"rc-calendar/lib/locale/en_US\";\nimport moment from \"moment\";\n\nconst format = \"YYYY-MM-DD HH:mm:ss\";\n\nconst dateInputPlaceholder = \"选择日期\";\n\nfunction onSelect(d) {\n  console.log(d);\n}\n\nfunction onChange(d) {\n  console.log(d);\n}\n\nclass Demo6 extends Component {\n  render() {\n    return (\n      <div>\n        <Row>\n          <Col md={12}>\n            <DatePicker\n              format={format}\n              showTime={true}\n              onSelect={onSelect}\n              onChange={onChange}\n              locale={zhCN}\n              defaultValue={moment()}\n              placeholder={dateInputPlaceholder}\n            />\n          </Col>\n        </Row>\n      </div>\n    );\n  }\n}\n\nexport default Demo6;\n", "desc": " 以「日期时间」为基本单位，可以选择日期和时间" }, { "example": _react2['default'].createElement(Demo7, null), "title": " 禁用日期", "code": "/**\n *\n * @title 禁用日期\n * @description 禁用日期\n */\n\nimport React, { Component } from \"react\";\nimport { Row, Col } from \"bee-layout\";\nimport DatePicker from \"../../src/index\";\n\nimport zhCN from \"rc-calendar/lib/locale/zh_CN\";\nimport enUS from \"rc-calendar/lib/locale/en_US\";\nimport moment from \"moment\";\n\nconst format = \"YYYY-MM-DD\";\n\nconst dateInputPlaceholder = \"选择日期\";\n\nfunction onSelect(d) {\n  console.log(d);\n}\n\nfunction onChange(d) {\n  console.log(d);\n}\n\nclass Demo7 extends Component {\n  render() {\n    return (\n      <div>\n        <Row>\n          <Col md={12}>\n            <DatePicker\n              format={format}\n              onSelect={onSelect}\n              onChange={onChange}\n              locale={zhCN}\n              defaultValue={moment()}\n              placeholder={dateInputPlaceholder}\n              disabled={true}\n            />\n          </Col>\n        </Row>\n      </div>\n    );\n  }\n}\n\nexport default Demo7;\n", "desc": " 禁用日期" }, { "example": _react2['default'].createElement(Demo8, null), "title": " 不可选择日期和时间", "code": "/**\n *\n * @title 不可选择日期和时间\n * @description 可用 disabledDate 和 disabledTime 分别禁止选择部分日期和时间，其中 disabledTime 需要和 showTime 一起使用。\n */\n\nimport React, { Component } from \"react\";\nimport { Row, Col } from \"bee-layout\";\nimport DatePicker from \"../../src/index\";\n\nimport zhCN from \"rc-calendar/lib/locale/zh_CN\";\nimport moment from \"moment\";\n\nconst format = \"YYYY-MM-DD\";\n\nconst dateInputPlaceholder = \"选择日期\";\n\nfunction onSelect(d) {\n  console.log(d);\n}\n\nfunction onChange(d) {\n  console.log(d);\n}\n\nfunction disabledDate(current) {\n  return current && current.valueOf() < Date.now();\n}\n\nclass Demo7 extends Component {\n  render() {\n    return (\n      <div>\n        <Row>\n          <Col md={12}>\n            <DatePicker\n              format={format}\n              onSelect={onSelect}\n              onChange={onChange}\n              locale={zhCN}\n              disabledDate={disabledDate}\n              defaultValue={moment()}\n              placeholder={dateInputPlaceholder}\n            />\n          </Col>\n        </Row>\n      </div>\n    );\n  }\n}\n\nexport default Demo7;\n", "desc": " 可用 disabledDate 和 disabledTime 分别禁止选择部分日期和时间，其中 disabledTime 需要和 showTime 一起使用。" }, { "example": _react2['default'].createElement(Demo9, null), "title": " 自定义日期渲染父级容器", "code": "/**\n *\n * @title 自定义日期渲染父级容器\n * @description 以「日期」为基本单位，基础的日期选择控件\n */\n\nimport React, { Component } from \"react\";\nimport { Row, Col } from \"bee-layout\";\nimport DatePicker from \"../../src/index\";\n\nimport zhCN from \"rc-calendar/lib/locale/zh_CN\";\nimport enUS from \"rc-calendar/lib/locale/en_US\";\nimport moment from \"moment\";\nimport Icon from 'bee-icon';\n\nconst format = \"YYYY-MM-DD\";\n\nconst dateInputPlaceholder = \"选择日期\";\n\nfunction onSelect(d) {\n    // console.log(d);\n}\n\nfunction onChange(d) {\n    this.setState({\n        value: ''\n    });\n}\n\nclass Demo1 extends Component {\n    constructor(props) {\n        super(props);\n        this.state = {\n            value: ''\n        };\n    }\n    getCalendarContainer() {\n        return this.d || document.getElementById('d');\n    }\n    onChange = d => {\n        console.log(d)\n\n        this.setState({\n            value: ''\n        });\n    };\n    render() {\n        return (\n            <div id=\"d\" ref=\"d\">\n                <Row>\n                    <Col md={12}>\n                        <DatePicker\n                            format={format}\n                            onSelect={onSelect}\n                            onChange={this.onChange}\n                            locale={zhCN}\n                            defaultValue={this.state.value}\n                            placeholder={dateInputPlaceholder}\n                            getCalendarContainer={this.getCalendarContainer}\n                        />\n                    </Col>\n                </Row>\n            </div>\n        );\n    }\n}\n\nexport default Demo1;\n", "desc": " 以「日期」为基本单位，基础的日期选择控件" }];
 	
 	var Demo = function (_Component) {
 	    _inherits(Demo, _Component);
@@ -6203,7 +6203,7 @@
 	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+	    value: true
 	});
 	
 	var _react = __webpack_require__(4);
@@ -6255,82 +6255,96 @@
 	var dateInputPlaceholder = "选择日期";
 	
 	function onSelect(d) {
-	  // console.log(d);
+	    // console.log(d);
 	}
 	
 	var Demo1 = function (_Component) {
-	  _inherits(Demo1, _Component);
+	    _inherits(Demo1, _Component);
 	
-	  function Demo1(props) {
-	    _classCallCheck(this, Demo1);
+	    function Demo1(props) {
+	        _classCallCheck(this, Demo1);
 	
-	    var _this = _possibleConstructorReturn(this, _Component.call(this, props));
+	        var _this = _possibleConstructorReturn(this, _Component.call(this, props));
 	
-	    _this.onChange = function (d, dataString) {
-	      console.log(d);
+	        _this.onChange = function (d, dataString) {
+	            console.log(d);
+	        };
+	
+	        _this.clear = function (d) {
+	            _this.setState({
+	                value: ''
+	            });
+	        };
+	
+	        _this.renderIcon = function (d) {
+	            return _react2["default"].createElement(_beeIcon2["default"], { type: "uf-search" });
+	        };
+	
+	        _this.onOpenChange = function (d) {
+	            console.log(d);
+	        };
+	
+	        _this.open = function (d) {
+	            _this.setState({
+	                open: true
+	            });
+	        };
+	
+	        _this.onClick = function (d, str) {
+	            console.log(d);
+	        };
+	
+	        _this.state = {
+	            value: '',
+	            open: false
+	        };
+	        return _this;
+	    }
+	
+	    Demo1.prototype.render = function render() {
+	        var self = this;
+	        return _react2["default"].createElement(
+	            "div",
+	            null,
+	            _react2["default"].createElement(
+	                _beeLayout.Row,
+	                null,
+	                _react2["default"].createElement(
+	                    _beeLayout.Col,
+	                    { md: 8 },
+	                    _react2["default"].createElement(_index2["default"], {
+	                        format: format,
+	                        onSelect: onSelect,
+	                        onChange: this.onChange,
+	                        locale: _zh_CN2["default"],
+	                        open: this.state.open
+	                        //defaultValue={this.state.value}
+	                        , value: this.state.value,
+	                        onOpenChange: this.onOpenChange.bind(this),
+	                        placeholder: dateInputPlaceholder,
+	                        className: "uuuu",
+	                        onClick: this.onClick
+	                    })
+	                ),
+	                _react2["default"].createElement(
+	                    _beeLayout.Col,
+	                    { md: 3 },
+	                    _react2["default"].createElement(
+	                        "button",
+	                        { className: "u-button", onClick: this.clear },
+	                        "\u6E05\u7A7A"
+	                    ),
+	                    _react2["default"].createElement(
+	                        "button",
+	                        { className: "u-button", onClick: this.open },
+	                        "\u8BBE\u7F6E\u4E3Atrue"
+	                    )
+	                )
+	            )
+	        );
 	    };
 	
-	    _this.clear = function (d) {
-	      _this.setState({
-	        value: ''
-	      });
-	    };
-	
-	    _this.renderIcon = function (d) {
-	      return _react2["default"].createElement(_beeIcon2["default"], { type: "uf-search" });
-	    };
-	
-	    _this.onOpenChange = function (d) {
-	      console.log(d);
-	    };
-	
-	    _this.state = {
-	      value: ''
-	    };
-	    return _this;
-	  }
-	
-	  Demo1.prototype.render = function render() {
-	    var self = this;
-	    return _react2["default"].createElement(
-	      "div",
-	      null,
-	      _react2["default"].createElement(
-	        _beeLayout.Row,
-	        null,
-	        _react2["default"].createElement(
-	          _beeLayout.Col,
-	          { md: 8 },
-	          _react2["default"].createElement(_index2["default"], {
-	            format: format,
-	            onSelect: onSelect,
-	            onChange: this.onChange,
-	            locale: _zh_CN2["default"]
-	            //defaultValue={this.state.value}
-	            , value: this.state.value,
-	            onOpenChange: this.onOpenChange.bind(this),
-	            placeholder: dateInputPlaceholder,
-	            className: "uuuu",
-	            renderIcon: function renderIcon() {
-	              return _react2["default"].createElement(_beeIcon2["default"], { type: "uf-search" });
-	            }
-	
-	          })
-	        ),
-	        _react2["default"].createElement(
-	          _beeLayout.Col,
-	          { md: 3 },
-	          _react2["default"].createElement(
-	            "button",
-	            { className: "u-button", onClick: this.clear },
-	            "\u6E05\u7A7A"
-	          )
-	        )
-	      )
-	    );
-	  };
-	
-	  return Demo1;
+	    return Demo1;
 	}(_react.Component);
 	
 	exports["default"] = Demo1;
@@ -6513,7 +6527,8 @@
 	              disabled: props.disabled,
 	              readOnly: true,
 	              placeholder: _this2.props.placeholder,
-	              value: value && value.format(props.format) || ""
+	              value: value && value.format(props.format) || "",
+	              onClick: _this2.onClick
 	            }, autofocus)),
 	            _react2["default"].createElement(
 	              _beeInputGroup2["default"].Button,
@@ -6562,6 +6577,12 @@
 	    var props = _this3.props;
 	    _this3.setState({ value: value });
 	    props.onChange(value, value && value.format(props.format) || '');
+	  };
+	
+	  this.onClick = function () {
+	    var props = _this3.props;
+	    var value = _this3.state.value;
+	    props.onClick(value || null, value && value.format(props.format) || '');
 	  };
 	};
 	
