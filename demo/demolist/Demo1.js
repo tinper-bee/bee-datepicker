@@ -53,8 +53,8 @@ class Demo1 extends Component {
             open: true
         })
     }
-    onClick = (d,str) => {
-        console.log(d)
+    onClick = (e,d,str) => {
+        console.log(e)
     }
 
     render() {
@@ -74,7 +74,7 @@ class Demo1 extends Component {
                             onOpenChange={this.onOpenChange.bind(this)}
                             placeholder={dateInputPlaceholder}
                             className={"uuuu"}
-                            onClick={this.onClick}
+                            onClick={(e) => this.onClick(e)}
                         />
                     </Col>
                     <Col md={3}>
