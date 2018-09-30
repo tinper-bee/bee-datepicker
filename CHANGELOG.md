@@ -1,5 +1,11 @@
-<a name="1.0.9"></a>
-## [1.0.9](https://github.com/tinper-bee/bee-datepicker/compare/1.0.6...1.0.9) (2017-12-05)
+<a name="1.2.3"></a>
+## [1.2.3](https://github.com/tinper-bee/bee-datepicker/compare/1.0.6...1.2.3) (2018-09-30)
+
+
+### Bug Fixes
+
+* update import DatePicker to Datepicker ([8472e7b](https://github.com/tinper-bee/bee-datepicker/commit/8472e7b))
+* 修改示例 ([1d932f1](https://github.com/tinper-bee/bee-datepicker/commit/1d932f1))
 
 
 ### Features
