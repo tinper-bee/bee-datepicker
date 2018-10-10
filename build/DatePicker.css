@@ -877,7 +877,7 @@
   user-select: none;
   right: 0; }
 
-.rc-calendar-month-panel-body, .rc-calendar-year-panel-body {
+.rc-calendar-month-panel-body, .rc-calendar-year-panel-body, .rc-calendar-decade-panel-body {
   padding: 9px 10px 10px;
   height: calc(100% - 30px); }
 
