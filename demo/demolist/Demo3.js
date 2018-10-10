@@ -72,10 +72,10 @@ class Demo3 extends Component {
                             value={this.state.value}
                             onChange={this.onChange.bind(this)}
                             renderFooter={()=>{
-                                return (
-                                    <div>322</div>
-                                )
-                            }}
+                            return (
+                                <div></div>
+                            )
+                        }}
                         />
                     </Col>
                     <Col md={3}>

@@ -133,7 +133,9 @@ var DatePicker = function (_Component) {
               readOnly: true,
               placeholder: _this2.props.placeholder,
               value: value && value.format(props.format) || "",
-              onClick: _this2.onClick
+              onClick: function onClick(event) {
+                _this2.onClick(event);
+              }
             }, autofocus)),
             _react2["default"].createElement(
               _beeInputGroup2["default"].Button,
@@ -184,10 +186,10 @@ var _initialiseProps = function _initialiseProps() {
     props.onChange(value, value && value.format(props.format) || '');
   };
 
-  this.onClick = function () {
+  this.onClick = function (e) {
     var props = _this3.props;
     var value = _this3.state.value;
-    props.onClick(value || null, value && value.format(props.format) || '');
+    props.onClick && props.onClick(e.nativeEvent, value || null, value && value.format(props.format) || '');
   };
 };
 

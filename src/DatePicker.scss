@@ -436,6 +436,7 @@
   max-width: 100%;
   background-color: transparent;
   width: 100%;
+  height:100%;
 }
 .rc-calendar table,
 .rc-calendar td,
@@ -639,7 +640,7 @@
 .rc-calendar-time-panel-table {
   table-layout: fixed;
   width: 100%;
-  height: 255px;
+  height: 100%;
   border-collapse: separate;
 }
 .rc-calendar-time-panel-cell {
@@ -733,13 +734,16 @@
           user-select: none;
   right: 0;
 }
-.rc-calendar-month-panel-body {
+.rc-calendar-month-panel-body,.rc-calendar-year-panel-body {
   padding: 9px 10px 10px;
+  height: calc(100% - 30px);
+}
+.rc-calendar-month-panel > div,.rc-calendar-year-panel > div {
+  height:100%;
 }
 .rc-calendar-month-panel-table {
   table-layout: fixed;
   width: 100%;
-  height: 255px;
   border-collapse: separate;
 }
 .rc-calendar-month-panel-cell {

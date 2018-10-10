@@ -35,7 +35,7 @@ class Demo1 extends Component {
     }
 
     onChange = (d, dataString) => {
-        console.log(d);
+        console.log(dataString);
     };
     clear = d => {
         this.setState({
@@ -54,7 +54,13 @@ class Demo1 extends Component {
         })
     }
     onClick = (d,str) => {
-        console.log(d)
+        console.log(d);
+        this.state = {
+            open: false
+        };
+    }
+    renderFooter = () => {
+        return null
     }
 
     render() {
@@ -64,6 +70,7 @@ class Demo1 extends Component {
                 <Row>
                     <Col md={8}>
                         <DatePicker
+
                             format={format}
                             onSelect={onSelect}
                             onChange={this.onChange}
