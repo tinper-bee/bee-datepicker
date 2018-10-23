@@ -14,7 +14,7 @@ import enUS from "rc-calendar/lib/locale/en_US";
 
 const { MonthPicker } = DatePicker;
 
-const format2 = "YYYY-MM";
+const format2 = "YYYY";
 
 function onSelect(d) {
   console.log(d);
@@ -35,6 +35,8 @@ class Demo2 extends Component {
               onSelect={onSelect}
               onChange={onChange}
               locale={zhCN}
+
+
               defaultValue={moment()}
               placeholder={"选择年月"}
             />

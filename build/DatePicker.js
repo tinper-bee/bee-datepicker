@@ -121,6 +121,7 @@ var DatePicker = function (_Component) {
           onOpenChange: this.onOpenChange,
           animation: "slide-up",
           calendar: calendar,
+          mode: 'year',
           open: this.state.open,
           value: state.value
         }),

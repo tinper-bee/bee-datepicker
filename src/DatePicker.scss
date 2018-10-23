@@ -780,6 +780,9 @@
   background: #3fc7fa;
   color: #fff;
 }
+.rc-calendar > .rc-calendar-year-panel {
+  position: relative;
+}
 .rc-calendar-year-panel {
   left: 0;
   top: 0;
@@ -1068,7 +1071,8 @@
   left: 36px;
 }
 .rc-calendar-range .rc-calendar-year-panel,
-.rc-calendar-range .rc-calendar-month-panel {
+.rc-calendar-range .rc-calendar-month-panel,
+.rc-calendar-range .rc-calendar-decade-panel {
   top: 35px;
 }
 .rc-calendar-range .rc-calendar-month-panel .rc-calendar-year-panel {

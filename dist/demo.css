@@ -3478,6 +3478,33 @@ a, .mdl-accordion, .mdl-button, .mdl-card, .mdl-checkbox, .mdl-dropdown-menu,
 .uf-treeline-copy:before {
   content: "\e994"; }
 
+.uf-listwithdots:before {
+  content: "\e9cd"; }
+
+.uf-gridlogo:before {
+  content: "\e900"; }
+
+.uf-magnifyingglass:before {
+  content: "\e9ce"; }
+
+.uf-anglearrowdown:before {
+  content: "\e9cf"; }
+
+.uf-yongyouyunchnen:before {
+  content: "\e98d"; }
+
+.uf-yycloud:before {
+  content: "\e68f"; }
+
+.uf-funnel-o:before {
+  content: "\e63c"; }
+
+.uf-filter:before {
+  content: "\e9d0"; }
+
+.uf-filterno:before {
+  content: "\e9d1"; }
+
 /* FormGroup */
 /*  Navlayout  */
 .vertical-align {
@@ -5504,6 +5531,18 @@ input.u-button[type="submit"] {
   .u-panel .u-panel-body {
     padding: 15px 15px;
     position: relative; }
+    .u-panel .u-panel-body .uf {
+      position: absolute;
+      right: 25px;
+      top: 30px;
+      color: #fff;
+      font-size: 20px;
+      padding: 2px 8px;
+      margin: 8px;
+      border-radius: 4px;
+      cursor: pointer; }
+      .u-panel .u-panel-body .uf:hover {
+        color: #a8a7a7; }
 
 .u-panel-default {
   border-color: #ddd; }
@@ -6175,6 +6214,8 @@ input.u-button[type="submit"] {
   .u-form-control:focus {
     border-color: #66afe9;
     outline: 0; }
+  .u-form-control::-ms-clear, .u-form-control ::-ms-reveal {
+    display: none; }
 
 .u-form-control[disabled] {
   background: #eee;
@@ -6979,6 +7020,9 @@ input.u-button[type="submit"] {
   background: #3fc7fa;
   color: #fff; }
 
+.rc-calendar > .rc-calendar-year-panel {
+  position: relative; }
+
 .rc-calendar-year-panel {
   left: 0;
   top: 0;
@@ -7267,7 +7311,8 @@ input.u-button[type="submit"] {
   left: 36px; }
 
 .rc-calendar-range .rc-calendar-year-panel,
-.rc-calendar-range .rc-calendar-month-panel {
+.rc-calendar-range .rc-calendar-month-panel,
+.rc-calendar-range .rc-calendar-decade-panel {
   top: 35px; }
 
 .rc-calendar-range .rc-calendar-month-panel .rc-calendar-year-panel {

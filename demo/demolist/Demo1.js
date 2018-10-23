@@ -70,7 +70,6 @@ class Demo1 extends Component {
                 <Row>
                     <Col md={8}>
                         <DatePicker
-
                             format={format}
                             onSelect={onSelect}
                             onChange={this.onChange}
