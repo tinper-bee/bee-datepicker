@@ -30,6 +30,14 @@ var _en_US = require("rc-calendar/lib/locale/en_US");
 
 var _en_US2 = _interopRequireDefault(_en_US);
 
+var _beeIcon = require("bee-icon");
+
+var _beeIcon2 = _interopRequireDefault(_beeIcon);
+
+var _beeInputGroup = require("bee-input-group");
+
+var _beeInputGroup2 = _interopRequireDefault(_beeInputGroup);
+
 var _moment = require("moment");
 
 var _moment2 = _interopRequireDefault(_moment);
@@ -37,6 +45,10 @@ var _moment2 = _interopRequireDefault(_moment);
 require("moment/locale/zh-cn");
 
 require("moment/locale/en-gb");
+
+var _YearPicker = require("./YearPicker");
+
+var _YearPicker2 = _interopRequireDefault(_YearPicker);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -199,14 +211,23 @@ var WeekPicker = function (_Component) {
         function (_ref) {
           _objectDestructuringEmpty(_ref);
 
-          return _react2["default"].createElement(_beeFormControl2["default"], {
-            placeholder: _this2.props.placeholder,
-            disabled: state.disabled,
-            readOnly: true,
-            tabIndex: "-1",
-            className: _this2.props.className,
-            value: value && value.format(format) || ""
-          });
+          return _react2["default"].createElement(
+            _beeInputGroup2["default"],
+            { simple: true, className: "datepicker-input-group" },
+            _react2["default"].createElement(_beeFormControl2["default"], {
+              placeholder: _this2.props.placeholder,
+              disabled: state.disabled,
+              readOnly: true,
+              tabIndex: "-1",
+              className: _this2.props.className,
+              value: value && value.format(format) || ""
+            }),
+            _react2["default"].createElement(
+              _beeInputGroup2["default"].Button,
+              { shape: "border" },
+              props.renderIcon()
+            )
+          );
         }
       )
     );
@@ -214,6 +235,12 @@ var WeekPicker = function (_Component) {
 
   return WeekPicker;
 }(_react.Component);
+
+WeekPicker.defaultProps = {
+  renderIcon: function renderIcon() {
+    return _react2["default"].createElement(_beeIcon2["default"], { type: "uf-calendar" });
+  }
+};
 
 exports["default"] = WeekPicker;
 module.exports = exports["default"];

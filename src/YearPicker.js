@@ -6,6 +6,8 @@ import YearPanel from "rc-calendar/lib/year/YearPanel";
 import React, { Component } from "react";
 import Picker from "rc-calendar/lib/Picker";
 import FormControl from "bee-form-control";
+import InputGroup from 'bee-input-group';
+import Icon from "bee-icon";
 
 class YearPicker extends Component {
     constructor(props, context) {
@@ -18,11 +20,14 @@ class YearPicker extends Component {
         };
     }
 
+
+
     onChange = value => {
         this.setState({
             value
         });
     };
+
 
     onOpenChange = open => {
         this.setState({
@@ -54,11 +59,16 @@ class YearPicker extends Component {
                 >
                     {({ value }) => {
                         return (
-                            <FormControl
-                                placeholder={this.props.placeholder}
-                                className={this.props.className}
-                                value={(value && value.format(props.format)) || ""}
-                            />
+                            <InputGroup simple className="datepicker-input-group">
+                                <FormControl
+                                    placeholder={this.props.placeholder}
+                                    className={this.props.className}
+                                    value={(value && value.format(props.format)) || ""}
+                                />
+                                <InputGroup.Button shape="border">
+                                { props.renderIcon() }
+                                </InputGroup.Button>
+                            </InputGroup>
                         );
                     }}
                 </Picker>
@@ -66,4 +76,10 @@ class YearPicker extends Component {
         );
     }
 }
+
+
+YearPicker.defaultProps = {
+    renderIcon: () => <Icon type="uf-calendar" />
+}
+
 export default YearPicker;

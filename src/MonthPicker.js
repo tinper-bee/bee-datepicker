@@ -6,6 +6,8 @@ import MonthCalendar from "rc-calendar/lib/MonthCalendar";
 import React, { Component } from "react";
 import Picker from "rc-calendar/lib/Picker";
 import FormControl from "bee-form-control";
+import Icon from "bee-icon";
+import InputGroup from 'bee-input-group';
 
 class MonthPicker extends Component {
   constructor(props, context) {
@@ -55,11 +57,16 @@ class MonthPicker extends Component {
         >
           {({ value }) => {
             return (
-              <FormControl
-                placeholder={this.props.placeholder}
-                className={this.props.className}
-                value={(value && value.format(props.format)) || ""}
-              />
+                <InputGroup simple className="datepicker-input-group">
+                  <FormControl
+                    placeholder={this.props.placeholder}
+                    className={this.props.className}
+                    value={(value && value.format(props.format)) || ""}
+                  />
+                  <InputGroup.Button shape="border">
+                      { props.renderIcon() }
+                  </InputGroup.Button>
+                </InputGroup>
             );
           }}
         </Picker>
@@ -67,4 +74,10 @@ class MonthPicker extends Component {
     );
   }
 }
+
+
+MonthPicker.defaultProps = {
+    renderIcon: () => <Icon type="uf-calendar" />
+}
+
 export default MonthPicker;

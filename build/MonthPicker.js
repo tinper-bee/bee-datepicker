@@ -20,6 +20,14 @@ var _beeFormControl = require("bee-form-control");
 
 var _beeFormControl2 = _interopRequireDefault(_beeFormControl);
 
+var _beeIcon = require("bee-icon");
+
+var _beeIcon2 = _interopRequireDefault(_beeIcon);
+
+var _beeInputGroup = require("bee-input-group");
+
+var _beeInputGroup2 = _interopRequireDefault(_beeInputGroup);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
@@ -91,11 +99,20 @@ var MonthPicker = function (_Component) {
         function (_ref) {
           var value = _ref.value;
 
-          return _react2["default"].createElement(_beeFormControl2["default"], {
-            placeholder: _this2.props.placeholder,
-            className: _this2.props.className,
-            value: value && value.format(props.format) || ""
-          });
+          return _react2["default"].createElement(
+            _beeInputGroup2["default"],
+            { simple: true, className: "datepicker-input-group" },
+            _react2["default"].createElement(_beeFormControl2["default"], {
+              placeholder: _this2.props.placeholder,
+              className: _this2.props.className,
+              value: value && value.format(props.format) || ""
+            }),
+            _react2["default"].createElement(
+              _beeInputGroup2["default"].Button,
+              { shape: "border" },
+              props.renderIcon()
+            )
+          );
         }
       )
     );
@@ -103,6 +120,12 @@ var MonthPicker = function (_Component) {
 
   return MonthPicker;
 }(_react.Component);
+
+MonthPicker.defaultProps = {
+  renderIcon: function renderIcon() {
+    return _react2["default"].createElement(_beeIcon2["default"], { type: "uf-calendar" });
+  }
+};
 
 exports["default"] = MonthPicker;
 module.exports = exports["default"];

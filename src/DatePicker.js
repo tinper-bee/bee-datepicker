@@ -119,18 +119,18 @@ class DatePicker extends Component {
           {() => {
             return (
               <InputGroup simple className="datepicker-input-group">
-              <FormControl
-                disabled={props.disabled}
-                readOnly
-                placeholder={this.props.placeholder}
-                value={(value && value.format(props.format)) || ""}
-                onClick={ (event) => {this.onClick(event)}}
-                {...autofocus}
-              />
-              <InputGroup.Button shape="border">
-            { props.renderIcon() }
-           </InputGroup.Button>
-          </InputGroup>
+                  <FormControl
+                    disabled={props.disabled}
+                    readOnly
+                    placeholder={this.props.placeholder}
+                    value={(value && value.format(props.format)) || ""}
+                    onClick={ (event) => {this.onClick(event)}}
+                    {...autofocus}
+                  />
+                  <InputGroup.Button shape="border">
+                  { props.renderIcon() }
+                  </InputGroup.Button>
+                </InputGroup>
 
             );
           }}

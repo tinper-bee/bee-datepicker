@@ -8,10 +8,13 @@ import Picker from "rc-calendar/lib/Picker";
 import FormControl from "bee-form-control";
 import zhCN from "rc-calendar/lib/locale/zh_CN";
 import enUS from "rc-calendar/lib/locale/en_US";
+import Icon from "bee-icon";
+import InputGroup from 'bee-input-group';
 
 import moment from "moment";
 import "moment/locale/zh-cn";
 import "moment/locale/en-gb";
+import YearPicker from "./YearPicker";
 
 const cn = location.search.indexOf("cn") !== -1;
 
@@ -168,20 +171,29 @@ class WeekPicker extends Component {
         >
           {({ }) => {
             return (
-              <FormControl
-                placeholder={this.props.placeholder}
-                disabled={state.disabled}
-                readOnly
-                tabIndex="-1"
-                className={this.props.className}
-                value={(value && value.format(format)) || ""}
-              />
+                <InputGroup simple className="datepicker-input-group">
+                  <FormControl
+                    placeholder={this.props.placeholder}
+                    disabled={state.disabled}
+                    readOnly
+                    tabIndex="-1"
+                    className={this.props.className}
+                    value={(value && value.format(format)) || ""}
+                  />
+                    <InputGroup.Button shape="border">
+                        { props.renderIcon() }
+                    </InputGroup.Button>
+                </InputGroup>
             );
           }}
         </Picker>
       </div>
     );
   }
+}
+
+WeekPicker.defaultProps = {
+    renderIcon: () => <Icon type="uf-calendar" />
 }
 
 export default WeekPicker;

@@ -8,6 +8,7 @@ import React, { Component } from "react";
 import { Row, Col } from "bee-layout";
 import DatePicker from "../../src/index";
 import moment from "moment";
+import Icon from "bee-icon";
 
 import zhCN from "rc-calendar/lib/locale/zh_CN";
 import enUS from "rc-calendar/lib/locale/en_US";
@@ -25,6 +26,7 @@ function onChange(d) {
 }
 
 class Demo10 extends Component {
+
     render() {
         return (
             <div>
