@@ -8,6 +8,7 @@ import Picker from "rc-calendar/lib/Picker";
 import FormControl from "bee-form-control";
 import InputGroup from 'bee-input-group';
 import Icon from "bee-icon";
+import moment from "moment";
 
 class YearPicker extends Component {
     constructor(props, context) {
@@ -15,12 +16,23 @@ class YearPicker extends Component {
 
         this.state = {
             type: "year",
-            value: props.value || props.defaultValue,
-            open: false
+            value: props.value || props.defaultValue || '' ,
+            open: props.open||false
         };
     }
 
+    componentWillReceiveProps(nextProps) {
+        if ("value" in nextProps) {
+            this.setState({
+                value: nextProps.value
+            });
+        }
+        this.setState({
+            renderIcon: nextProps.renderIcon,
+            open: nextProps.open
+        });
 
+    }
 
     onChange = value => {
         this.setState({
@@ -40,24 +52,32 @@ class YearPicker extends Component {
             type
         });
     };
+    handleChange = value => {
+        const props = this.props;
+        this.setState({ value });
+        props.onChange(value, (value && value.format(props.format)) || '');
+    }
 
     render() {
         let state = this.state;
 
         let props = this.props;
+        let value = state.value;
 
-        const Calendar = <YearPanel prefixCls={'rc-calendar-picker'} rootPrefixCls={'rc-calendar'}  {...props} />;
+        const Calendar = <YearPanel prefixCls={'rc-calendar-picker'} rootPrefixCls={'rc-calendar'}  {...props}  />;
 
         return (
             <div>
                 <Picker
+                    {...props}
                     onOpenChange={this.onOpenChange}
+                    onChange={this.handleChange}
                     animation="slide-up"
                     calendar={Calendar}
                     prefixCls={'rc-calendar'}
-                    className={'rc-calendar-year'}
+                    value={state.value||moment()}
                 >
-                    {({ value }) => {
+                    {({  }) => {
                         return (
                             <InputGroup simple className="datepicker-input-group">
                                 <FormControl

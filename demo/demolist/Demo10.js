@@ -26,20 +26,27 @@ function onChange(d) {
 }
 
 class Demo10 extends Component {
-
+    getCalendarContainer() {
+        return this.d || document.getElementById('d');
+    }
     render() {
         return (
             <div>
                 <Row>
                     <Col md={12}>
-                        <YearPicker
-                            format={format2}
-                            onSelect={onSelect}
-                            onChange={onChange}
-                            locale={zhCN}
-                            value={moment()}
-                            placeholder={"选择年"}
-                        />
+                        <div id={"d"}>
+                            <YearPicker
+                                format={format2}
+
+                                onChange={onChange}
+
+                                locale={zhCN}
+                                
+                                className = {'rc-calendar-year'}
+
+                                placeholder={"选择年"}
+                            />
+                        </div>
                     </Col>
                 </Row>
             </div>

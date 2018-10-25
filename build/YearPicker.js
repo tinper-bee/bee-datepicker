@@ -30,9 +30,15 @@ var _beeIcon = require("bee-icon");
 
 var _beeIcon2 = _interopRequireDefault(_beeIcon);
 
+var _moment = require("moment");
+
+var _moment2 = _interopRequireDefault(_moment);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
+
+function _objectDestructuringEmpty(obj) { if (obj == null) throw new TypeError("Cannot destructure undefined"); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -50,31 +56,27 @@ var YearPicker = function (_Component) {
 
         var _this = _possibleConstructorReturn(this, _Component.call(this, props, context));
 
-        _this.onChange = function (value) {
-            _this.setState({
-                value: value
-            });
-        };
-
-        _this.onOpenChange = function (open) {
-            _this.setState({
-                open: open
-            });
-        };
-
-        _this.onTypeChange = function (type) {
-            _this.setState({
-                type: type
-            });
-        };
+        _initialiseProps.call(_this);
 
         _this.state = {
             type: "year",
-            value: props.value || props.defaultValue,
-            open: false
+            value: props.value || props.defaultValue || '',
+            open: props.open || false
         };
         return _this;
     }
+
+    YearPicker.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
+        if ("value" in nextProps) {
+            this.setState({
+                value: nextProps.value
+            });
+        }
+        this.setState({
+            renderIcon: nextProps.renderIcon,
+            open: nextProps.open
+        });
+    };
 
     YearPicker.prototype.render = function render() {
         var _this2 = this;
@@ -82,6 +84,7 @@ var YearPicker = function (_Component) {
         var state = this.state;
 
         var props = this.props;
+        var value = state.value;
 
         var Calendar = _react2["default"].createElement(_YearPanel2["default"], _extends({ prefixCls: 'rc-calendar-picker', rootPrefixCls: 'rc-calendar' }, props));
 
@@ -90,15 +93,16 @@ var YearPicker = function (_Component) {
             null,
             _react2["default"].createElement(
                 _Picker2["default"],
-                {
+                _extends({}, props, {
                     onOpenChange: this.onOpenChange,
+                    onChange: this.handleChange,
                     animation: "slide-up",
                     calendar: Calendar,
                     prefixCls: 'rc-calendar',
-                    className: 'rc-calendar-year'
-                },
+                    value: state.value || (0, _moment2["default"])()
+                }),
                 function (_ref) {
-                    var value = _ref.value;
+                    _objectDestructuringEmpty(_ref);
 
                     return _react2["default"].createElement(
                         _beeInputGroup2["default"],
@@ -121,6 +125,34 @@ var YearPicker = function (_Component) {
 
     return YearPicker;
 }(_react.Component);
+
+var _initialiseProps = function _initialiseProps() {
+    var _this3 = this;
+
+    this.onChange = function (value) {
+        _this3.setState({
+            value: value
+        });
+    };
+
+    this.onOpenChange = function (open) {
+        _this3.setState({
+            open: open
+        });
+    };
+
+    this.onTypeChange = function (type) {
+        _this3.setState({
+            type: type
+        });
+    };
+
+    this.handleChange = function (value) {
+        var props = _this3.props;
+        _this3.setState({ value: value });
+        props.onChange(value, value && value.format(props.format) || '');
+    };
+};
 
 YearPicker.defaultProps = {
     renderIcon: function renderIcon() {
