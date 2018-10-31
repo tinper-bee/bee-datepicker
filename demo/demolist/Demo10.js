@@ -26,14 +26,26 @@ function onChange(d) {
 }
 
 class Demo10 extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            value: moment(),
+            open: false
+        };
+    }
     getCalendarContainer() {
         return this.d || document.getElementById('d');
+    }
+    clear = d => {
+        this.setState({
+            value: ''
+        })
     }
     render() {
         return (
             <div>
                 <Row>
-                    <Col md={12}>
+                    <Col md={8}>
                         <div id={"d"}>
                             <YearPicker
                                 format={format2}
@@ -41,12 +53,17 @@ class Demo10 extends Component {
                                 onChange={onChange}
 
                                 locale={zhCN}
-                                
+
+                                value={this.state.value}
+
                                 className = {'rc-calendar-year'}
 
                                 placeholder={"选择年"}
                             />
                         </div>
+                    </Col>
+                    <Col md={3}>
+                        <button className="u-button" onClick={this.clear}>清空</button>
                     </Col>
                 </Row>
             </div>
