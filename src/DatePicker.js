@@ -19,11 +19,11 @@ class DatePicker extends Component {
   constructor(props, context) {
     super(props, context);
 
+    console.log(props.open)
     this.state = {
       type: "month",
       value: props.value || props.defaultValue || moment.Moment,
       open: props.open||false,
-
     };
   }
 
@@ -36,6 +36,7 @@ class DatePicker extends Component {
   onOpenChange = open => {
       const props = this.props;
       const self = this;
+      console.log(open)
       this.setState({
           open
       });
@@ -54,7 +55,7 @@ class DatePicker extends Component {
     }
     this.setState({
         renderIcon: nextProps.renderIcon,
-        open: nextProps.open
+        open: nextProps.open || false
     });
 
   }
@@ -115,6 +116,7 @@ class DatePicker extends Component {
           mode = {'year'}
           open={this.state.open}
           value={state.value}
+
         >
           {() => {
             return (
@@ -126,6 +128,7 @@ class DatePicker extends Component {
                     value={(value && value.format(props.format)) || ""}
                     onClick={ (event) => {this.onClick(event)}}
                     {...autofocus}
+                    defultSelect={props.defaultSelected}
                   />
                   <InputGroup.Button shape="border">
                   { props.renderIcon() }
@@ -141,7 +144,9 @@ class DatePicker extends Component {
 }
 
 DatePicker.defaultProps = {
-  renderIcon: () => <Icon type="uf-calendar" />
+  renderIcon: () => <Icon type="uf-calendar" />,
+  focusOnOpen:true,
+  defultSelect:false
 }
 
 export default DatePicker;

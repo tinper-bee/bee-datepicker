@@ -62,11 +62,11 @@ var DatePicker = function (_Component) {
 
     _initialiseProps.call(_this);
 
+    console.log(props.open);
     _this.state = {
       type: "month",
       value: props.value || props.defaultValue || _moment2["default"].Moment,
       open: props.open || false
-
     };
     return _this;
   }
@@ -79,7 +79,7 @@ var DatePicker = function (_Component) {
     }
     this.setState({
       renderIcon: nextProps.renderIcon,
-      open: nextProps.open
+      open: nextProps.open || false
     });
   };
 
@@ -124,6 +124,7 @@ var DatePicker = function (_Component) {
           mode: 'year',
           open: this.state.open,
           value: state.value
+
         }),
         function () {
           return _react2["default"].createElement(
@@ -137,7 +138,9 @@ var DatePicker = function (_Component) {
               onClick: function onClick(event) {
                 _this2.onClick(event);
               }
-            }, autofocus)),
+            }, autofocus, {
+              defultSelect: props.defaultSelected
+            })),
             _react2["default"].createElement(
               _beeInputGroup2["default"].Button,
               { shape: "border" },
@@ -164,6 +167,7 @@ var _initialiseProps = function _initialiseProps() {
   this.onOpenChange = function (open) {
     var props = _this3.props;
     var self = _this3;
+    console.log(open);
     _this3.setState({
       open: open
     });
@@ -197,7 +201,9 @@ var _initialiseProps = function _initialiseProps() {
 DatePicker.defaultProps = {
   renderIcon: function renderIcon() {
     return _react2["default"].createElement(_beeIcon2["default"], { type: "uf-calendar" });
-  }
+  },
+  focusOnOpen: true,
+  defultSelect: false
 };
 
 exports["default"] = DatePicker;
