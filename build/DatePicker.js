@@ -181,7 +181,7 @@ var _initialiseProps = function _initialiseProps() {
             open: false
           });
           var v = _this3.state.value;
-          _this3.props.onOpenChange(false, v, v && v.format(props.format) || '');
+          _this3.props.onOpenChange(false, v, v && v.format(_this3.props.format) || '');
         }
       };
     }

@@ -49,7 +49,7 @@ class DatePicker extends Component {
             open:false
           });
           let v = this.state.value;
-          this.props.onOpenChange(false,v, (v && v.format(props.format)) || '');
+          this.props.onOpenChange(false,v, (v && v.format(this.props.format)) || '');
         }
       }
     }
