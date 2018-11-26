@@ -5531,7 +5531,7 @@ input.u-button[type="submit"] {
   .u-panel .u-panel-body {
     padding: 15px 15px;
     position: relative; }
-    .u-panel .u-panel-body .uf {
+    .u-panel .u-panel-body .u-panel-copy {
       position: absolute;
       right: 25px;
       top: 30px;
@@ -5541,7 +5541,7 @@ input.u-button[type="submit"] {
       margin: 8px;
       border-radius: 4px;
       cursor: pointer; }
-      .u-panel .u-panel-body .uf:hover {
+      .u-panel .u-panel-body .u-panel-copy:hover {
         color: #a8a7a7; }
 
 .u-panel-default {

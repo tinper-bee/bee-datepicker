@@ -14,6 +14,8 @@ var _react = require("react");
 
 var _react2 = _interopRequireDefault(_react);
 
+var _tinperBeeCore = require("tinper-bee-core");
+
 var _Picker = require("rc-calendar/lib/Picker");
 
 var _Picker2 = _interopRequireDefault(_Picker);
@@ -62,7 +64,6 @@ var DatePicker = function (_Component) {
 
     _initialiseProps.call(_this);
 
-    console.log(props.open);
     _this.state = {
       type: "month",
       value: props.value || props.defaultValue || _moment2["default"].Moment,
@@ -124,7 +125,6 @@ var DatePicker = function (_Component) {
           mode: 'year',
           open: this.state.open,
           value: state.value
-
         }),
         function () {
           return _react2["default"].createElement(
@@ -139,7 +139,7 @@ var DatePicker = function (_Component) {
                 _this2.onClick(event);
               }
             }, autofocus, {
-              defultSelect: props.defaultSelected
+              focusSelect: props.defaultSelected
             })),
             _react2["default"].createElement(
               _beeInputGroup2["default"].Button,
@@ -164,10 +164,29 @@ var _initialiseProps = function _initialiseProps() {
     _this3.setState({ value: value });
   };
 
+  this.inputFocus = function () {
+    var input = document.querySelector('.rc-calendar-input');
+    if (input) {
+      if (input.value) {
+        input.select();
+      } else {
+        input.focus();
+      }
+      input.onkeydown = function (e) {
+        if (e.keyCode == _tinperBeeCore.KeyCode.DELETE) {
+          input.value = '';
+        } else if (e.keyCode == _tinperBeeCore.KeyCode.ESC) {
+          _this3.setState({
+            open: false
+          });
+        }
+      };
+    }
+  };
+
   this.onOpenChange = function (open) {
     var props = _this3.props;
     var self = _this3;
-    console.log(open);
     _this3.setState({
       open: open
     });
@@ -175,6 +194,11 @@ var _initialiseProps = function _initialiseProps() {
       setTimeout(function () {
         var value = self.state.value;
         props.onOpenChange(open, value, value && value.format(props.format) || '');
+        self.inputFocus();
+      }, 200);
+    } else {
+      setTimeout(function () {
+        self.inputFocus();
       }, 200);
     }
   };

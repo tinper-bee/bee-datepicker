@@ -4,6 +4,7 @@
 
 import Calendar from "rc-calendar";
 import React, { Component } from "react";
+import { KeyCode } from 'tinper-bee-core';
 import Picker from "rc-calendar/lib/Picker";
 import FormControl from "bee-form-control";
 import TimePickerPanel from "rc-time-picker/lib/Panel";
@@ -18,8 +19,6 @@ const timePickerElement = (
 class DatePicker extends Component {
   constructor(props, context) {
     super(props, context);
-
-    console.log(props.open)
     this.state = {
       type: "month",
       value: props.value || props.defaultValue || moment.Moment,
@@ -33,10 +32,29 @@ class DatePicker extends Component {
     this.setState({ value:value });
   };
 
+  inputFocus=()=>{
+    let input = document.querySelector('.rc-calendar-input');
+    if(input){
+      if(input.value){
+        input.select()
+      }else{
+        input.focus()
+      }
+      input.onkeydown=(e)=>{
+        if(e.keyCode == KeyCode.DELETE){
+          input.value = '';
+        }else if(e.keyCode == KeyCode.ESC){
+          this.setState({
+            open:false
+          })
+        }
+      }
+    }
+  }
+
   onOpenChange = open => {
       const props = this.props;
       const self = this;
-      console.log(open)
       this.setState({
           open
       });
@@ -44,7 +62,12 @@ class DatePicker extends Component {
           setTimeout(function () {
               const value = self.state.value;
               props.onOpenChange(open,value, (value && value.format(props.format)) || '');
+              self.inputFocus()
           },200)
+      }else{
+        setTimeout(function(){
+          self.inputFocus()
+        },200)
       }
   };
   componentWillReceiveProps(nextProps) {
@@ -116,7 +139,6 @@ class DatePicker extends Component {
           mode = {'year'}
           open={this.state.open}
           value={state.value}
-
         >
           {() => {
             return (
@@ -128,7 +150,7 @@ class DatePicker extends Component {
                     value={(value && value.format(props.format)) || ""}
                     onClick={ (event) => {this.onClick(event)}}
                     {...autofocus}
-                    defultSelect={props.defaultSelected}
+                    focusSelect={props.defaultSelected}
                   />
                   <InputGroup.Button shape="border">
                   { props.renderIcon() }
