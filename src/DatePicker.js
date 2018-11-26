@@ -47,7 +47,9 @@ class DatePicker extends Component {
         }else if(e.keyCode == KeyCode.ESC){
           this.setState({
             open:false
-          })
+          });
+          let v = this.state.value;
+          this.props.onOpenChange(false,v, (v && v.format(props.format)) || '');
         }
       }
     }
@@ -59,17 +61,11 @@ class DatePicker extends Component {
       this.setState({
           open
       });
-      if(props.onOpenChange){
-          setTimeout(function () {
-              const value = self.state.value;
-              props.onOpenChange(open,value, (value && value.format(props.format)) || '');
-              self.inputFocus()
-          },200)
-      }else{
-        setTimeout(function(){
+      setTimeout(function () {
+          const value = self.state.value;
+          props.onOpenChange(open,value, (value && value.format(props.format)) || '');
           self.inputFocus()
-        },200)
-      }
+      },200)
   };
   componentWillReceiveProps(nextProps) {
     if ("value" in nextProps) {
@@ -169,7 +165,8 @@ class DatePicker extends Component {
 DatePicker.defaultProps = {
   renderIcon: () => <Icon type="uf-calendar" />,
   focusOnOpen:true,
-  defultSelect:false
+  defultSelect:false,
+  onOpenChange:()=>{}
 }
 
 export default DatePicker;

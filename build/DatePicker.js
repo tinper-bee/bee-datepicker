@@ -180,6 +180,8 @@ var _initialiseProps = function _initialiseProps() {
           _this3.setState({
             open: false
           });
+          var v = _this3.state.value;
+          _this3.props.onOpenChange(false, v, v && v.format(props.format) || '');
         }
       };
     }
@@ -191,17 +193,11 @@ var _initialiseProps = function _initialiseProps() {
     _this3.setState({
       open: open
     });
-    if (props.onOpenChange) {
-      setTimeout(function () {
-        var value = self.state.value;
-        props.onOpenChange(open, value, value && value.format(props.format) || '');
-        self.inputFocus();
-      }, 200);
-    } else {
-      setTimeout(function () {
-        self.inputFocus();
-      }, 200);
-    }
+    setTimeout(function () {
+      var value = self.state.value;
+      props.onOpenChange(open, value, value && value.format(props.format) || '');
+      self.inputFocus();
+    }, 200);
   };
 
   this.handleCalendarChange = function (value) {
@@ -228,7 +224,8 @@ DatePicker.defaultProps = {
     return _react2["default"].createElement(_beeIcon2["default"], { type: "uf-calendar" });
   },
   focusOnOpen: true,
-  defultSelect: false
+  defultSelect: false,
+  onOpenChange: function onOpenChange() {}
 };
 
 exports["default"] = DatePicker;
