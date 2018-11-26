@@ -83,6 +83,8 @@ class YearPicker extends Component {
                                 <FormControl
                                     placeholder={this.props.placeholder}
                                     className={this.props.className}
+                                    disabled={props.disabled}
+                                    readOnly
                                     value={(value && value.format(props.format)) || ""}
                                 />
                                 <InputGroup.Button shape="border">
@@ -99,7 +101,8 @@ class YearPicker extends Component {
 
 
 YearPicker.defaultProps = {
-    renderIcon: () => <Icon type="uf-calendar" />
+    renderIcon: () => <Icon type="uf-calendar" />,
+    disabled:false
 }
 
 export default YearPicker;

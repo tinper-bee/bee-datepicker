@@ -110,6 +110,8 @@ var YearPicker = function (_Component) {
                         _react2["default"].createElement(_beeFormControl2["default"], {
                             placeholder: _this2.props.placeholder,
                             className: _this2.props.className,
+                            disabled: props.disabled,
+                            readOnly: true,
                             value: value && value.format(props.format) || ""
                         }),
                         _react2["default"].createElement(
@@ -157,7 +159,8 @@ var _initialiseProps = function _initialiseProps() {
 YearPicker.defaultProps = {
     renderIcon: function renderIcon() {
         return _react2["default"].createElement(_beeIcon2["default"], { type: "uf-calendar" });
-    }
+    },
+    disabled: false
 };
 
 exports["default"] = YearPicker;
