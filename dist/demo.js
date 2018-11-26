@@ -8296,6 +8296,7 @@
 	      input.onkeydown = function (e) {
 	        if (e.keyCode == _tinperBeeCore.KeyCode.DELETE) {
 	          input.value = '';
+	          _this3.props.onChange('', '');
 	        } else if (e.keyCode == _tinperBeeCore.KeyCode.ESC) {
 	          _this3.setState({
 	            open: false

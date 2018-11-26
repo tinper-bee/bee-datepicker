@@ -43,6 +43,7 @@ class DatePicker extends Component {
       input.onkeydown=(e)=>{
         if(e.keyCode == KeyCode.DELETE){
           input.value = '';
+          this.props.onChange('','');
         }else if(e.keyCode == KeyCode.ESC){
           this.setState({
             open:false
