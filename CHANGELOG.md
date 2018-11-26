@@ -1,3 +1,13 @@
+<a name=""></a>
+# [](https://github.com/tinper-bee/bee-datepicker/compare/v1.3.7...v) (2018-11-26)
+
+
+### Bug Fixes
+
+* **bee-datepicker:** esc触发 onOpenChange事件 ([f12a292](https://github.com/tinper-bee/bee-datepicker/commit/f12a292))
+
+
+
 <a name="1.3.7"></a>
 ## [1.3.7](https://github.com/tinper-bee/bee-datepicker/compare/v1.3.5...v1.3.7) (2018-11-26)
 
