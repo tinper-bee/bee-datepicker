@@ -125,3 +125,10 @@ moment().locale('en'); //英文
 | getCalendarContainer |更改默认渲染位置|Function||
 
 
+## 已支持的键盘操作
+
+|按键|功能|
+|:---|:----|
+|↓(下箭) |打开面板|
+|esc |关闭面板|
+|delete |清除内容|

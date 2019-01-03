@@ -125,6 +125,13 @@ import "./node_modules/bee-datepicker/build/DatePicker.css"
 |:---|:-----|:----|:------|
 |placeholder|输入框placeholder|String||
 
+## 已支持的键盘操作
+
+|按键|功能|
+|:---|:----|
+|↓(下箭) |打开面板|
+|esc |关闭面板|
+|delete |清除内容|
 
 #### setup develop environment
 
