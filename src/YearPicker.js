@@ -10,6 +10,9 @@ import InputGroup from 'bee-input-group';
 import Icon from "bee-icon";
 import moment from "moment";
 
+//去掉focus报错
+Picker.prototype.componentDidUpdate = ()=>{}
+
 class YearPicker extends Component {
     constructor(props, context) {
         super(props, context);
@@ -64,7 +67,7 @@ class YearPicker extends Component {
         let props = this.props;
         let value = state.value;
 
-        const Calendar = <YearPanel prefixCls={'rc-calendar-picker'} rootPrefixCls={'rc-calendar'}  {...props}  />;
+        const Calendar = <YearPanel prefixCls={'rc-calendar-picker'} rootPrefixCls={'rc-calendar'}  {...props} focus={()=>{}}  />;
 
         return (
             <div>

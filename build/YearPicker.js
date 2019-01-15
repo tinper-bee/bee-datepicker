@@ -48,6 +48,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 * Created by chief on 17/4/6.
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 */
 
+//去掉focus报错
+_Picker2["default"].prototype.componentDidUpdate = function () {};
+
 var YearPicker = function (_Component) {
     _inherits(YearPicker, _Component);
 
@@ -86,7 +89,7 @@ var YearPicker = function (_Component) {
         var props = this.props;
         var value = state.value;
 
-        var Calendar = _react2["default"].createElement(_YearPanel2["default"], _extends({ prefixCls: 'rc-calendar-picker', rootPrefixCls: 'rc-calendar' }, props));
+        var Calendar = _react2["default"].createElement(_YearPanel2["default"], _extends({ prefixCls: 'rc-calendar-picker', rootPrefixCls: 'rc-calendar' }, props, { focus: function focus() {} }));
 
         return _react2["default"].createElement(
             "div",
