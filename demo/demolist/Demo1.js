@@ -30,7 +30,7 @@ class Demo1 extends Component {
         super(props);
         this.state = {
             value: '',
-            open: false
+            open: true
         };
     }
 
