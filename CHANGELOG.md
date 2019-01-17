@@ -1,3 +1,13 @@
+<a name="1.3.10-beta"></a>
+## [1.3.10-beta](https://github.com/tinper-bee/bee-datepicker/compare/v1.3.8...v1.3.10-beta) (2019-01-17)
+
+
+### Features
+
+* **bee-datepicker:** 外层输入框可手动输入值 ([7bac90d](https://github.com/tinper-bee/bee-datepicker/commit/7bac90d))
+
+
+
 <a name="1.3.8"></a>
 ## [1.3.8](https://github.com/tinper-bee/bee-datepicker/compare/v1.3.7...v1.3.8) (2018-11-26)
 
