@@ -67,7 +67,8 @@ var DatePicker = function (_Component) {
     _this.state = {
       type: "month",
       value: props.value || props.defaultValue || _moment2["default"].Moment,
-      open: props.open || false
+      open: props.open || false,
+      inputValue: props.value && props.value.format(props.format) || props.defaultValue && props.defaultValue.format(props.format) || ''
     };
     return _this;
   }
@@ -90,7 +91,7 @@ var DatePicker = function (_Component) {
     var state = this.state;
     var props = this.props;
     var value = state.value;
-
+    console.log('render——————————', value);
     var pickerChangeHandler = {};
     var calendarHandler = {};
     var autofocus = this.props.autofocus ? { autofocus: 'autofocus' } : null;
@@ -113,6 +114,16 @@ var DatePicker = function (_Component) {
       value: this.state.value
     }));
 
+    var keyboardInputProps = {};
+    if (props.keyboardInput) {
+      keyboardInputProps.readOnly = false;
+      keyboardInputProps.onChange = this.inputChange;
+      keyboardInputProps.value = state.inputValue;
+    } else {
+      keyboardInputProps.readOnly = true;
+      keyboardInputProps.value = value && value.format(props.format) || "";
+    }
+
     return _react2["default"].createElement(
       "div",
       { className: props.className },
@@ -132,13 +143,11 @@ var DatePicker = function (_Component) {
             { simple: true, className: "datepicker-input-group" },
             _react2["default"].createElement(_beeFormControl2["default"], _extends({
               disabled: props.disabled,
-              readOnly: true,
               placeholder: _this2.props.placeholder,
-              value: value && value.format(props.format) || "",
               onClick: function onClick(event) {
                 _this2.onClick(event);
               }
-            }, autofocus, {
+            }, keyboardInputProps, autofocus, {
               focusSelect: props.defaultSelected
             })),
             _react2["default"].createElement(
@@ -202,20 +211,39 @@ var _initialiseProps = function _initialiseProps() {
 
   this.handleCalendarChange = function (value) {
     var props = _this3.props;
-    _this3.setState({ value: value });
+    _this3.setState({ value: value, inputValue: value && value.format(props.format) || '' });
     //props.onChange(value, (value && value.format(props.format)) || '');
   };
 
   this.handleChange = function (value) {
     var props = _this3.props;
-    _this3.setState({ value: value });
+    _this3.setState({ value: value, inputValue: value && value.format(props.format) || '' });
     props.onChange(value, value && value.format(props.format) || '');
   };
 
   this.onClick = function (e) {
     var props = _this3.props;
     var value = _this3.state.value;
-    props.onClick && props.onClick(e.nativeEvent, value || null, value && value.format(props.format) || '');
+    if (props.keyboardInput) {
+      props.onClick && props.onClick(e.nativeEvent, value || null, _this3.state.inputValue);
+    } else {
+      props.onClick && props.onClick(e.nativeEvent, value || null, value && value.format(props.format) || '');
+    }
+  };
+
+  this.inputChange = function (value) {
+    _this3.setState({
+      inputValue: value
+    });
+    if ((0, _moment2["default"])(value, _this3.props.format).isValid()) {
+      _this3.setState({
+        value: (0, _moment2["default"])(value, _this3.props.format)
+      });
+      value = (0, _moment2["default"])(value, _this3.props.format);
+      _this3.props.onChange(value, value && value.format(_this3.props.format) || '');
+    } else {
+      _this3.props.onChange(null, value);
+    }
   };
 };
 

@@ -40,8 +40,6 @@ moment().locale('en'); //英文
 ## API
 ### DatePicker
 
-
-
 |参数|说明|类型|默认值|
 |:---|:-----|:----|:------|
 |prefixCls|组件的前缀|String||
@@ -58,7 +56,7 @@ moment().locale('en'); //英文
 | disabled|是否禁用功能|Boolean| false |
 | disabledDate |禁用的日期|Function(current:moment):Boolean||
 | disabledTime |禁用的时间|Function(current:moment):Object||
-| showDateInput|显示日期输入康|Boolean| true |
+| showDateInput|显示日期输入框|Boolean| true |
 | showWeekNumber|是否显示周数| Boolean| false|
 | showToday|是否显示今天| Boolean| true|
 | showOk|底边栏是否显示ok按钮| Boolean | auto |
@@ -68,7 +66,12 @@ moment().locale('en'); //英文
 | showTime | 是否显示时间选择面板 | Boolean ||
 | renderIcon |更改默认的图标|Function| () => <Icon type="uf-calendar" />|
 | getCalendarContainer |更改默认渲染位置|Function||
+| keyboardInput |外层输入框是否支持键盘输入|Boolean|false|
 
+注：使用keyboardInput时，以下api变化
+
+- 输入内容的格式需要个format格式相同，也可以有部分变化，变化范围参考 [moment.js](http://momentjs.cn/)。例如：format='YYYY-MM-DD' 输入 '19-1-1'也可识别
+- 当输入日期格式无法转换为 moment 对象时，onChange,onClick回调内对应的moment参数值为 null
 
 
 ### MonthPicker
@@ -130,5 +133,5 @@ moment().locale('en'); //英文
 |按键|功能|
 |:---|:----|
 |↓(下箭) |打开面板|
-|esc |关闭面板|
+|esc |关闭面板，自定义是否展开面板即设置open时，此属性不可用|
 |delete |清除内容|

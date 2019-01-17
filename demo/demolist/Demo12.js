@@ -1,22 +1,22 @@
 /**
  *
- * @title 选择日期
- * @description 以「日期」为基本单位，基础的日期选择控件
+ * @title 自定义展示日期面板，外层输入框可输入，配合form使用
+ * @description open设置面板展开收起，keyboardInput外层input是否可输入，showDateInput是否显示内层input
  */
 
 import React, {Component} from "react";
 import {Row, Col} from "bee-layout";
 import DatePicker from "../../src/index";
-
 import zhCN from "rc-calendar/lib/locale/zh_CN";
 import enUS from "rc-calendar/lib/locale/en_US";
 import moment from "moment";
 import Icon from 'bee-icon';
 import 'moment/locale/zh-cn';
+import Form from 'bee-form';
 
 moment.locale('zh-cn');
 
-const format = "YYYY-MM-DD dddd";
+const format = "YYYY-MM-DD";
 
 const dateInputPlaceholder = "选择日期";
 
@@ -25,7 +25,7 @@ function onSelect(d) {
 }
 
 
-class Demo1 extends Component {
+class Demo12 extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -33,13 +33,9 @@ class Demo1 extends Component {
             open: false
         };
     }
-
-    onChange = (d, dataString) => {
-        console.log(dataString);
-    };
     clear = d => {
-        this.setState({
-            value: ''
+        this.props.form.setFieldsValue({
+            date:''
         })
     }
     renderIcon = d => {
@@ -54,17 +50,25 @@ class Demo1 extends Component {
         })
     }
     onClick = (e,d,str) => {
-        console.log(d);
         this.setState({
-            open: true
+            open: false
         })
     }
     renderFooter = () => {
         return null
     }
-
+    submit = (e) => {
+        this.props.form.validateFields((err, values) => {
+            if (err) {
+                console.log('校验失败', values);
+            } else {
+                console.log('提交成功', values, moment(values.date).format('YYYY-MM-DD'));
+            }
+        });
+    }
     render() {
-        var self = this;
+        const { getFieldProps, getFieldError } = this.props.form;
+        var self = this; 
         return (
             <div>
                 <Row>
@@ -72,20 +76,27 @@ class Demo1 extends Component {
                         <DatePicker
                             format={format}
                             onSelect={onSelect}
-                            onChange={this.onChange}
                             locale={zhCN}
                             open={this.state.open}
-                            //defaultValue={this.state.value}
-                            value={this.state.value}
                             onOpenChange={this.onOpenChange.bind(this)}
                             placeholder={dateInputPlaceholder}
                             className={"uuuu"}
                             onClick={this.onClick}
+                            keyboardInput={true}
+                            showDateInput={false}
+                            {...getFieldProps('date', {
+                                validateTrigger: 'onBlur',
+                                initialValue:moment('2018-01-01'),
+                                rules: [{
+                                    required: true, message: '请输入日期',
+                                }],
+                            }) }
                         />
                     </Col>
                     <Col md={3}>
                         <button className="u-button" onClick={this.clear}>清空</button>
                         <button className="u-button" onClick={this.open}>设置为true</button>
+                        <button className="u-button" onClick={this.submit}>获得值</button>
                     </Col>
                 </Row>
             </div>
@@ -93,4 +104,4 @@ class Demo1 extends Component {
     }
 }
 
-export default Demo1;
+export default Form.createForm()(Demo12);

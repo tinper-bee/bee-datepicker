@@ -48,8 +48,6 @@ import "./node_modules/bee-datepicker/build/DatePicker.css"
 
 ### DatePicker
 
-*注:moment是JavaScript日期处理类库。相关的文档地址[链接](http://momentjs.cn/docs/)*
-
 |参数|说明|类型|默认值|
 |:---|:-----|:----|:------|
 |prefixCls|组件的前缀|String||
@@ -66,7 +64,7 @@ import "./node_modules/bee-datepicker/build/DatePicker.css"
 | disabled|是否禁用功能|Boolean| false |
 | disabledDate |禁用的日期|Function(current:moment):Boolean||
 | disabledTime |禁用的时间|Function(current:moment):Object||
-| showDateInput|显示日期输入康|Boolean| true |
+| showDateInput|显示日期输入框|Boolean| true |
 | showWeekNumber|是否显示周数| Boolean| false|
 | showToday|是否显示今天| Boolean| true|
 | showOk|底边栏是否显示ok按钮| Boolean | auto |
@@ -74,12 +72,21 @@ import "./node_modules/bee-datepicker/build/DatePicker.css"
 | onChange|日期改变的回调函数|Function(date: moment)||
 | dateInputPlaceholder|日期的placeholder| String ||
 | showTime | 是否显示时间选择面板 | Boolean ||
+| renderIcon |更改默认的图标|Function| () => <Icon type="uf-calendar" />|
+| getCalendarContainer |更改默认渲染位置|Function||
+| keyboardInput |外层输入框是否支持键盘输入|Boolean|false|
+
+注：使用keyboardInput时，以下api变化
+
+- 输入内容的格式需要个format格式相同，也可以有部分变化，变化范围参考 [moment.js](http://momentjs.cn/)。例如：format='YYYY-MM-DD' 输入 '19-1-1'也可识别
+- 当输入日期格式无法转换为 moment 对象时，onChange,onClick回调内对应的moment参数值为 null
+
 
 ### MonthPicker
 
 |参数|说明|类型|默认值|
 |:---|:-----|:----|:------|
-|prefixCls|组件的前缀|String||
+|prefixCls|组件的前缀|String|-|
 |className|添加节点的样式|String||
 |style|添加内联样式| Object||
 | value |当前值，如输入框的值|moment||
@@ -91,6 +98,7 @@ import "./node_modules/bee-datepicker/build/DatePicker.css"
 | monthCellRender |月份的渲染方法| function ||
 | dateCellRender|日期的渲染方法|function||
 | monthCellContentRender|自定义月份的渲染方法，将被添加渲染内容中| function||
+| getCalendarContainer |更改默认渲染位置|Function||
 
 ### RangePicker
 
@@ -117,20 +125,23 @@ import "./node_modules/bee-datepicker/build/DatePicker.css"
 | onChange|日期改变的回调函数|Function(date: moment)||
 | dateInputPlaceholder|日期的placeholder| String ||
 | type|是否固定开始或结束选定的值|enum('both','start', 'end')||
-| renderIcon |更改默认的图标|Function| () => <Icon type="uf-calendar" />|
+| getCalendarContainer |更改默认渲染位置|Function||
 
 ### WeekPicker
 
 |参数|说明|类型|默认值|
 |:---|:-----|:----|:------|
 |placeholder|输入框placeholder|String||
+|defaultValue|默认值|moment||
+| getCalendarContainer |更改默认渲染位置|Function||
+
 
 ## 已支持的键盘操作
 
 |按键|功能|
 |:---|:----|
 |↓(下箭) |打开面板|
-|esc |关闭面板|
+|esc |关闭面板，自定义是否展开面板即设置open时，此属性不可用|
 |delete |清除内容|
 
 #### setup develop environment

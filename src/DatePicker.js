@@ -23,6 +23,7 @@ class DatePicker extends Component {
       type: "month",
       value: props.value || props.defaultValue || moment.Moment,
       open: props.open||false,
+      inputValue:(props.value&&props.value.format(props.format)) || (props.defaultValue&&props.defaultValue.format(props.format)) || '',
     };
   }
 
@@ -81,25 +82,44 @@ class DatePicker extends Component {
   }
   handleCalendarChange = (value) => {
       const props = this.props;
-      this.setState({ value: value });
+      this.setState({ value: value,inputValue:(value && value.format(props.format)) || '' });
       //props.onChange(value, (value && value.format(props.format)) || '');
   }
   handleChange = value => {
     const props = this.props;
-    this.setState({ value });
+    this.setState({ value,inputValue:(value && value.format(props.format)) || '' });
     props.onChange(value, (value && value.format(props.format)) || '');
   }
   onClick = (e) =>{
     const props = this.props;
     let value = this.state.value;
-    props.onClick&&props.onClick(e.nativeEvent,value||null,(value && value.format(props.format)) || '')
+    if(props.keyboardInput){
+      props.onClick&&props.onClick(e.nativeEvent,value||null,this.state.inputValue);
+    }else{
+      props.onClick&&props.onClick(e.nativeEvent,value||null,(value && value.format(props.format)) || '');
+    }
   }
+  inputChange = value => {
+    this.setState({
+      inputValue:value
+    });
+    if(moment(value,this.props.format).isValid()){
+      this.setState({
+        value:moment(value,this.props.format)
+      });
+      value = moment(value,this.props.format);
+      this.props.onChange(value, (value && value.format(this.props.format)) || '');
+    }else{
+      this.props.onChange(null,value);
+    }
+  }
+
 
   render() {
     let state = this.state;
     let props = this.props;
     let value = state.value;
-
+    console.log('render——————————',value)
     let pickerChangeHandler = {};
     let calendarHandler = {};
     const autofocus = this.props.autofocus?{autofocus:'autofocus'}:null;
@@ -124,6 +144,16 @@ class DatePicker extends Component {
       />
     );
 
+    let keyboardInputProps = {};
+    if(props.keyboardInput){
+      keyboardInputProps.readOnly=false;
+      keyboardInputProps.onChange=this.inputChange;
+      keyboardInputProps.value=state.inputValue;
+    }else{
+      keyboardInputProps.readOnly=true;
+      keyboardInputProps.value=(value && value.format(props.format)) || ""
+    }
+
 
     return (
       <div className={props.className}>
@@ -142,10 +172,9 @@ class DatePicker extends Component {
               <InputGroup simple className="datepicker-input-group">
                   <FormControl
                     disabled={props.disabled}
-                    readOnly
                     placeholder={this.props.placeholder}
-                    value={(value && value.format(props.format)) || ""}
                     onClick={ (event) => {this.onClick(event)}}
+                    {...keyboardInputProps}
                     {...autofocus}
                     focusSelect={props.defaultSelected}
                   />
