@@ -1,5 +1,15 @@
+<a name="1.3.11"></a>
+## [1.3.11](https://github.com/tinper-bee/bee-datepicker/compare/v1.3.10-beta...v1.3.11) (2019-01-22)
+
+
+### Features
+
+* **bee-datepicker:** 自定义展开手机open属性机制修改 ([d865efc](https://github.com/tinper-bee/bee-datepicker/commit/d865efc))
+
+
+
 <a name="1.3.10-beta"></a>
-## [1.3.10-beta](https://github.com/tinper-bee/bee-datepicker/compare/v1.3.8...v1.3.10-beta) (2019-01-17)
+## [1.3.10-beta](https://github.com/tinper-bee/bee-datepicker/compare/v1.3.10...v1.3.10-beta) (2019-01-17)
 
 
 ### Features
