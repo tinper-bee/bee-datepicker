@@ -60,13 +60,14 @@ class DatePicker extends Component {
       const props = this.props;
       const self = this;
       this.setState({
-          open
-      });
+        open
+      }); 
       setTimeout(function () {
-          const value = self.state.value;
-          props.onOpenChange(open,value, (value && value.format(props.format)) || '');
-          self.inputFocus()
+        const value = self.state.value;
+        props.onOpenChange(open,value, (value && value.format(props.format)) || '');
+        if(props.showDateInput)self.inputFocus()
       },200)
+      
   };
   componentWillReceiveProps(nextProps) {
     if ("value" in nextProps) {
@@ -74,11 +75,13 @@ class DatePicker extends Component {
         value: nextProps.value
       });
     }
-    this.setState({
-        renderIcon: nextProps.renderIcon,
-        open: nextProps.open || false
-    });
-
+    if('open' in nextProps ){
+      if(this.state.open!=nextProps.open){
+        this.setState({
+          open:nextProps.open
+        })
+      }
+    }
   }
   handleCalendarChange = (value) => {
       const props = this.props;
@@ -91,6 +94,7 @@ class DatePicker extends Component {
     props.onChange(value, (value && value.format(props.format)) || '');
   }
   onClick = (e) =>{
+    if(this.props.hasOwnProperty('open'))e.stopPropagation();
     const props = this.props;
     let value = this.state.value;
     if(props.keyboardInput){
@@ -99,7 +103,8 @@ class DatePicker extends Component {
       props.onClick&&props.onClick(e.nativeEvent,value||null,(value && value.format(props.format)) || '');
     }
   }
-  inputChange = value => {
+  inputChange = (value,e) => {
+    if(this.props.hasOwnProperty('open'))e.stopPropagation();
     this.setState({
       inputValue:value
     });
@@ -113,13 +118,22 @@ class DatePicker extends Component {
       this.props.onChange(null,value);
     }
   }
-
-
+  outInputFocus = (e)=>{
+    if(this.props.hasOwnProperty('open'))e.stopPropagation();
+    this.props.outInputFocus&&this.props.outInputFocus(e);
+  }
+  iconClick=(e)=>{
+    if(this.props.hasOwnProperty('open'))e.stopPropagation();
+    this.props.iconClick&&this.props.iconClick(e);
+  }
+  outInputKeydown=(e)=>{
+    if(this.props.hasOwnProperty('open'))e.stopPropagation();
+    this.props.outInputKeydown&&this.props.outInputKeydown(e);
+  }
   render() {
     let state = this.state;
     let props = this.props;
     let value = state.value;
-    console.log('render——————————',value)
     let pickerChangeHandler = {};
     let calendarHandler = {};
     const autofocus = this.props.autofocus?{autofocus:'autofocus'}:null;
@@ -154,7 +168,6 @@ class DatePicker extends Component {
       keyboardInputProps.value=(value && value.format(props.format)) || ""
     }
 
-
     return (
       <div className={props.className}>
         <Picker
@@ -174,11 +187,13 @@ class DatePicker extends Component {
                     disabled={props.disabled}
                     placeholder={this.props.placeholder}
                     onClick={ (event) => {this.onClick(event)}}
+                    focusSelect={props.defaultSelected}
+                    onFocus={(v,e)=>{this.outInputFocus(e)}}
+                    onKeyDown={this.outInputKeydown}
                     {...keyboardInputProps}
                     {...autofocus}
-                    focusSelect={props.defaultSelected}
                   />
-                  <InputGroup.Button shape="border">
+                  <InputGroup.Button shape="border" onClick={(e)=>{props.keyboardInput?this.iconClick(e):''}}>
                   { props.renderIcon() }
                   </InputGroup.Button>
                 </InputGroup>

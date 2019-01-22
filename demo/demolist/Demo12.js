@@ -20,10 +20,6 @@ const format = "YYYY-MM-DD";
 
 const dateInputPlaceholder = "选择日期";
 
-function onSelect(d) {
-    // console.log(d);
-}
-
 
 class Demo12 extends Component {
     constructor(props) {
@@ -33,29 +29,27 @@ class Demo12 extends Component {
             open: false
         };
     }
-    clear = d => {
-        this.props.form.setFieldsValue({
-            date:''
-        })
-    }
     renderIcon = d => {
         return (<Icon type="uf-search"></Icon>)
     }
-    onOpenChange = d => {
-        console.log(d);
+    onOpenChange = open => {
+        this.setState({
+            open
+        })
     }
     open = d => {
         this.setState({
-            open: true
+            open: !this.state.open
         })
     }
     onClick = (e,d,str) => {
-        this.setState({
-            open: false
-        })
+        console.log(d);
     }
-    renderFooter = () => {
-        return null
+    onSelect(d) {
+        console.log("select:"+d);
+    }
+    outInputKeydown = ()=>{
+        console.log('keydown')
     }
     submit = (e) => {
         this.props.form.validateFields((err, values) => {
@@ -67,23 +61,26 @@ class Demo12 extends Component {
         });
     }
     render() {
-        const { getFieldProps, getFieldError } = this.props.form;
         var self = this; 
+        const { getFieldProps, getFieldError } = this.props.form;
         return (
             <div>
                 <Row>
                     <Col md={8}>
                         <DatePicker
                             format={format}
-                            onSelect={onSelect}
+                            onSelect={this.onSelect}
+                            onChange={this.onChange}
                             locale={zhCN}
                             open={this.state.open}
                             onOpenChange={this.onOpenChange.bind(this)}
                             placeholder={dateInputPlaceholder}
-                            className={"uuuu"}
+                            className={"demo11"}
                             onClick={this.onClick}
                             keyboardInput={true}
                             showDateInput={false}
+                            iconClick={this.open}
+                            outInputKeydown={this.outInputKeydown}
                             {...getFieldProps('date', {
                                 validateTrigger: 'onBlur',
                                 initialValue:moment('2018-01-01'),
@@ -94,8 +91,7 @@ class Demo12 extends Component {
                         />
                     </Col>
                     <Col md={3}>
-                        <button className="u-button" onClick={this.clear}>清空</button>
-                        <button className="u-button" onClick={this.open}>设置为true</button>
+                        <button className="u-button" onClick={this.open}>展开/收起面板</button>
                         <button className="u-button" onClick={this.submit}>获得值</button>
                     </Col>
                 </Row>

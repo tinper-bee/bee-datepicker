@@ -75,6 +75,9 @@ import "./node_modules/bee-datepicker/build/DatePicker.css"
 | renderIcon |更改默认的图标|Function| () => <Icon type="uf-calendar" />|
 | getCalendarContainer |更改默认渲染位置|Function||
 | keyboardInput |外层输入框是否支持键盘输入|Boolean|false|
+| iconClick |日期按钮点击的回调|Function|-|
+| outInputFocus |外层输入框获得焦点的回调|Function|-|
+| outInputKeydown |外层输入框keydown回调|Function|-|
 
 注：使用keyboardInput时，以下api变化
 

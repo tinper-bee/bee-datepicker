@@ -79,10 +79,13 @@ var DatePicker = function (_Component) {
         value: nextProps.value
       });
     }
-    this.setState({
-      renderIcon: nextProps.renderIcon,
-      open: nextProps.open || false
-    });
+    if ('open' in nextProps) {
+      if (this.state.open != nextProps.open) {
+        this.setState({
+          open: nextProps.open
+        });
+      }
+    }
   };
 
   DatePicker.prototype.render = function render() {
@@ -91,7 +94,6 @@ var DatePicker = function (_Component) {
     var state = this.state;
     var props = this.props;
     var value = state.value;
-    console.log('render——————————', value);
     var pickerChangeHandler = {};
     var calendarHandler = {};
     var autofocus = this.props.autofocus ? { autofocus: 'autofocus' } : null;
@@ -146,13 +148,18 @@ var DatePicker = function (_Component) {
               placeholder: _this2.props.placeholder,
               onClick: function onClick(event) {
                 _this2.onClick(event);
-              }
-            }, keyboardInputProps, autofocus, {
-              focusSelect: props.defaultSelected
-            })),
+              },
+              focusSelect: props.defaultSelected,
+              onFocus: function onFocus(v, e) {
+                _this2.outInputFocus(e);
+              },
+              onKeyDown: _this2.outInputKeydown
+            }, keyboardInputProps, autofocus)),
             _react2["default"].createElement(
               _beeInputGroup2["default"].Button,
-              { shape: "border" },
+              { shape: "border", onClick: function onClick(e) {
+                  props.keyboardInput ? _this2.iconClick(e) : '';
+                } },
               props.renderIcon()
             )
           );
@@ -205,7 +212,7 @@ var _initialiseProps = function _initialiseProps() {
     setTimeout(function () {
       var value = self.state.value;
       props.onOpenChange(open, value, value && value.format(props.format) || '');
-      self.inputFocus();
+      if (props.showDateInput) self.inputFocus();
     }, 200);
   };
 
@@ -222,6 +229,7 @@ var _initialiseProps = function _initialiseProps() {
   };
 
   this.onClick = function (e) {
+    if (_this3.props.hasOwnProperty('open')) e.stopPropagation();
     var props = _this3.props;
     var value = _this3.state.value;
     if (props.keyboardInput) {
@@ -231,7 +239,8 @@ var _initialiseProps = function _initialiseProps() {
     }
   };
 
-  this.inputChange = function (value) {
+  this.inputChange = function (value, e) {
+    if (_this3.props.hasOwnProperty('open')) e.stopPropagation();
     _this3.setState({
       inputValue: value
     });
@@ -244,6 +253,21 @@ var _initialiseProps = function _initialiseProps() {
     } else {
       _this3.props.onChange(null, value);
     }
+  };
+
+  this.outInputFocus = function (e) {
+    if (_this3.props.hasOwnProperty('open')) e.stopPropagation();
+    _this3.props.outInputFocus && _this3.props.outInputFocus(e);
+  };
+
+  this.iconClick = function (e) {
+    if (_this3.props.hasOwnProperty('open')) e.stopPropagation();
+    _this3.props.iconClick && _this3.props.iconClick(e);
+  };
+
+  this.outInputKeydown = function (e) {
+    if (_this3.props.hasOwnProperty('open')) e.stopPropagation();
+    _this3.props.outInputKeydown && _this3.props.outInputKeydown(e);
   };
 };
 

@@ -74,8 +74,6 @@ class Demo1 extends Component {
                             onSelect={onSelect}
                             onChange={this.onChange}
                             locale={zhCN}
-                            open={this.state.open}
-                            //defaultValue={this.state.value}
                             value={this.state.value}
                             onOpenChange={this.onOpenChange.bind(this)}
                             placeholder={dateInputPlaceholder}
@@ -85,7 +83,6 @@ class Demo1 extends Component {
                     </Col>
                     <Col md={3}>
                         <button className="u-button" onClick={this.clear}>清空</button>
-                        <button className="u-button" onClick={this.open}>设置为true</button>
                     </Col>
                 </Row>
             </div>

@@ -42,25 +42,25 @@ class Demo11 extends Component {
     renderIcon = d => {
         return (<Icon type="uf-search"></Icon>)
     }
-    onOpenChange = d => {
-        console.log(d);
+    onOpenChange = open => {
+        this.setState({
+            open
+        })
     }
     open = d => {
         this.setState({
-            open: true
+            open: !this.state.open
         })
     }
     onClick = (e,d,str) => {
         console.log(d);
-        this.setState({
-            open: false
-        })
+        
     }
-    renderFooter = () => {
-        return null
+    outInputKeydown = ()=>{
+        console.log('keydown')
     }
     render() {
-        var self = this; console.log('open:'+this.state.open)
+        var self = this; 
         return (
             <div>
                 <Row>
@@ -75,10 +75,12 @@ class Demo11 extends Component {
                             value={this.state.value}
                             onOpenChange={this.onOpenChange.bind(this)}
                             placeholder={dateInputPlaceholder}
-                            className={"uuuu"}
+                            className={"demo11"}
                             onClick={this.onClick}
                             keyboardInput={true}
                             showDateInput={false}
+                            iconClick={this.open}
+                            outInputKeydown={this.outInputKeydown}
                         />
                     </Col>
                     <Col md={3}>
