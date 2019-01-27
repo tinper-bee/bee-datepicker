@@ -212,7 +212,7 @@ var _initialiseProps = function _initialiseProps() {
     setTimeout(function () {
       var value = self.state.value;
       props.onOpenChange(open, value, value && value.format(props.format) || '');
-      if (props.showDateInput) self.inputFocus();
+      self.inputFocus();
     }, 200);
   };
 
@@ -229,8 +229,8 @@ var _initialiseProps = function _initialiseProps() {
   };
 
   this.onClick = function (e) {
-    if (_this3.props.hasOwnProperty('open')) e.stopPropagation();
     var props = _this3.props;
+    if (props.keyboardInput) e.stopPropagation();
     var value = _this3.state.value;
     if (props.keyboardInput) {
       props.onClick && props.onClick(e.nativeEvent, value || null, _this3.state.inputValue);
@@ -240,7 +240,7 @@ var _initialiseProps = function _initialiseProps() {
   };
 
   this.inputChange = function (value, e) {
-    if (_this3.props.hasOwnProperty('open')) e.stopPropagation();
+    if (_this3.props.keyboardInput) e.stopPropagation();
     _this3.setState({
       inputValue: value
     });
@@ -261,12 +261,30 @@ var _initialiseProps = function _initialiseProps() {
   };
 
   this.iconClick = function (e) {
-    if (_this3.props.hasOwnProperty('open')) e.stopPropagation();
     _this3.props.iconClick && _this3.props.iconClick(e);
   };
 
   this.outInputKeydown = function (e) {
-    if (_this3.props.hasOwnProperty('open')) e.stopPropagation();
+    if (e.keyCode == _tinperBeeCore.KeyCode.DELETE) {
+      _this3.setState({
+        inputValue: ''
+      });
+      _this3.props.onChange('', '');
+    } else if (e.keyCode == _tinperBeeCore.KeyCode.ESC) {
+      _this3.setState({
+        open: false
+      });
+      var value = _this3.state.inputValue;
+      if ((0, _moment2["default"])(value, _this3.props.format).isValid()) {
+        _this3.setState({
+          value: (0, _moment2["default"])(value, _this3.props.format)
+        });
+        value = (0, _moment2["default"])(value, _this3.props.format);
+        _this3.props.onChange(value, value && value.format(_this3.props.format) || '');
+      } else {
+        _this3.props.onChange(null, value);
+      }
+    }
     _this3.props.outInputKeydown && _this3.props.outInputKeydown(e);
   };
 };

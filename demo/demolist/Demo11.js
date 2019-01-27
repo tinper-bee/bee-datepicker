@@ -43,9 +43,7 @@ class Demo11 extends Component {
         return (<Icon type="uf-search"></Icon>)
     }
     onOpenChange = open => {
-        this.setState({
-            open
-        })
+        console.log(open)
     }
     open = d => {
         this.setState({
@@ -79,8 +77,8 @@ class Demo11 extends Component {
                             onClick={this.onClick}
                             keyboardInput={true}
                             showDateInput={false}
-                            iconClick={this.open}
-                            outInputKeydown={this.outInputKeydown}
+                            // iconClick={this.open}
+                            // outInputKeydown={this.outInputKeydown}
                         />
                     </Col>
                     <Col md={3}>

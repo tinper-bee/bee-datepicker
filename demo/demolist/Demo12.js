@@ -33,9 +33,7 @@ class Demo12 extends Component {
         return (<Icon type="uf-search"></Icon>)
     }
     onOpenChange = open => {
-        this.setState({
-            open
-        })
+        console.log(open)
     }
     open = d => {
         this.setState({

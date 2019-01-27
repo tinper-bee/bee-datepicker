@@ -144,7 +144,7 @@ import "./node_modules/bee-datepicker/build/DatePicker.css"
 |按键|功能|
 |:---|:----|
 |↓(下箭) |打开面板|
-|esc |关闭面板，自定义是否展开面板即设置open时，此属性不可用|
+|esc |关闭面板|
 |delete |清除内容|
 
 #### setup develop environment

@@ -65,7 +65,7 @@ class DatePicker extends Component {
       setTimeout(function () {
         const value = self.state.value;
         props.onOpenChange(open,value, (value && value.format(props.format)) || '');
-        if(props.showDateInput)self.inputFocus()
+        self.inputFocus()
       },200)
       
   };
@@ -94,8 +94,8 @@ class DatePicker extends Component {
     props.onChange(value, (value && value.format(props.format)) || '');
   }
   onClick = (e) =>{
-    if(this.props.hasOwnProperty('open'))e.stopPropagation();
     const props = this.props;
+    if(props.keyboardInput)e.stopPropagation();
     let value = this.state.value;
     if(props.keyboardInput){
       props.onClick&&props.onClick(e.nativeEvent,value||null,this.state.inputValue);
@@ -104,7 +104,7 @@ class DatePicker extends Component {
     }
   }
   inputChange = (value,e) => {
-    if(this.props.hasOwnProperty('open'))e.stopPropagation();
+    if(this.props.keyboardInput)e.stopPropagation();
     this.setState({
       inputValue:value
     });
@@ -123,11 +123,29 @@ class DatePicker extends Component {
     this.props.outInputFocus&&this.props.outInputFocus(e);
   }
   iconClick=(e)=>{
-    if(this.props.hasOwnProperty('open'))e.stopPropagation();
     this.props.iconClick&&this.props.iconClick(e);
   }
   outInputKeydown=(e)=>{
-    if(this.props.hasOwnProperty('open'))e.stopPropagation();
+    if(e.keyCode == KeyCode.DELETE){
+      this.setState({
+        inputValue:''
+      });
+      this.props.onChange('','');
+    }else if(e.keyCode == KeyCode.ESC){
+      this.setState({
+        open:false
+      });
+      let value = this.state.inputValue;
+      if(moment(value,this.props.format).isValid()){
+        this.setState({
+          value:moment(value,this.props.format)
+        });
+        value = moment(value,this.props.format);
+        this.props.onChange(value, (value && value.format(this.props.format)) || '');
+      }else{
+        this.props.onChange(null,value);
+      }
+    }
     this.props.outInputKeydown&&this.props.outInputKeydown(e);
   }
   render() {
