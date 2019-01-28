@@ -1,3 +1,13 @@
+<a name="1.3.13"></a>
+## [1.3.13](https://github.com/tinper-bee/bee-datepicker/compare/v1.3.12...v1.3.13) (2019-01-28)
+
+
+### Features
+
+* **bee-datepicker:** open属性更新还原 ([5474ccd](https://github.com/tinper-bee/bee-datepicker/commit/5474ccd))
+
+
+
 <a name="1.3.12"></a>
 ## [1.3.12](https://github.com/tinper-bee/bee-datepicker/compare/v1.3.11...v1.3.12) (2019-01-27)
 
