@@ -79,13 +79,10 @@ var DatePicker = function (_Component) {
         value: nextProps.value
       });
     }
-    if ('open' in nextProps) {
-      if (this.state.open != nextProps.open) {
-        this.setState({
-          open: nextProps.open
-        });
-      }
-    }
+    this.setState({
+      renderIcon: nextProps.renderIcon,
+      open: nextProps.open || false
+    });
   };
 
   DatePicker.prototype.render = function render() {

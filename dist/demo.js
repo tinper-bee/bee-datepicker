@@ -76,7 +76,7 @@
 	
 	var CARETUP = _react2['default'].createElement('i', { className: 'uf uf-arrow-up' });
 	
-	var Demo1 = __webpack_require__(84);var Demo10 = __webpack_require__(387);var Demo11 = __webpack_require__(388);var Demo12 = __webpack_require__(389);var Demo2 = __webpack_require__(484);var Demo3 = __webpack_require__(485);var Demo4 = __webpack_require__(486);var Demo5 = __webpack_require__(487);var Demo6 = __webpack_require__(488);var Demo7 = __webpack_require__(489);var Demo8 = __webpack_require__(490);var Demo9 = __webpack_require__(491);var DemoArray = [{ "example": _react2['default'].createElement(Demo1, null), "title": " 选择日期", "code": "/**\n *\n * @title 选择日期\n * @description 以「日期」为基本单位，基础的日期选择控件\n */\n\nimport React, {Component} from \"react\";\nimport DatePicker from \"tinper-bee/lib/Datepicker\";\nimport { Icon, Row, Col } from 'tinper-bee';\n\nimport zhCN from \"rc-calendar/lib/locale/zh_CN\";\nimport enUS from \"rc-calendar/lib/locale/en_US\";\nimport moment from \"moment\";\nimport 'moment/locale/zh-cn';\n\nmoment.locale('zh-cn');\n\nconst format = \"YYYY-MM-DD dddd\";\n\nconst dateInputPlaceholder = \"选择日期\";\n\nfunction onSelect(d) {\n    // console.log(d);\n}\n\n\nclass Demo1 extends Component {\n    constructor(props) {\n        super(props);\n        this.state = {\n            value: '',\n            open: false\n        };\n    }\n\n    onChange = (d, dataString) => {\n        console.log(dataString);\n    };\n    clear = d => {\n        this.setState({\n            value: ''\n        })\n    }\n    renderIcon = d => {\n        return (<Icon type=\"uf-search\"></Icon>)\n    }\n    onOpenChange = d => {\n        console.log(d);\n    }\n    open = d => {\n        this.setState({\n            open: true\n        })\n    }\n    onClick = (e,d,str) => {\n        console.log(d);\n        this.setState({\n            open: true\n        })\n    }\n    renderFooter = () => {\n        return null\n    }\n\n    render() {\n        var self = this;\n        return (\n            <div>\n                <Row>\n                    <Col md={8}>\n                        <DatePicker\n                            format={format}\n                            onSelect={onSelect}\n                            onChange={this.onChange}\n                            locale={zhCN}\n                            value={this.state.value}\n                            onOpenChange={this.onOpenChange.bind(this)}\n                            placeholder={dateInputPlaceholder}\n                            className={\"uuuu\"}\n                            onClick={this.onClick}\n                        />\n                    </Col>\n                    <Col md={3}>\n                        <button className=\"u-button\" onClick={this.clear}>清空</button>\n                    </Col>\n                </Row>\n            </div>\n        );\n    }\n}\n\n\n", "desc": " 以「日期」为基本单位，基础的日期选择控件" }, { "example": _react2['default'].createElement(Demo10, null), "title": " 选择年", "code": "/**\n *\n * @title 选择年\n * @description 以「年」为基本单位，基础的年选择控件\n */\n\nimport React, { Component } from \"react\";\nimport DatePicker from \"tinper-bee/lib/Datepicker\";\nimport { Icon,  Row, Col  } from 'tinper-bee';\nimport moment from \"moment\";\n\nimport zhCN from \"rc-calendar/lib/locale/zh_CN\";\nimport enUS from \"rc-calendar/lib/locale/en_US\";\n\nconst { YearPicker } = DatePicker;\n\nconst format2 = \"YYYY\";\n\nfunction onSelect(d) {\n    console.log(d);\n}\n\nfunction onChange(d) {\n    console.log(d);\n}\n\nclass Demo10 extends Component {\n    constructor(props) {\n        super(props);\n        this.state = {\n            value: moment(),\n            open: false\n        };\n    }\n    getCalendarContainer() {\n        return this.d || document.getElementById('d');\n    }\n    clear = d => {\n        this.setState({\n            value: ''\n        })\n    }\n    render() {\n        return (\n            <div>\n                <Row>\n                    <Col md={8}>\n                        <div id={\"d\"}>\n                            <YearPicker\n                                format={format2}\n\n                                onChange={onChange}\n\n                                locale={zhCN}\n\n                                value={this.state.value}\n\n                                className = {'rc-calendar-year'}\n\n                                placeholder={\"选择年\"}\n                            />\n                        </div>\n                    </Col>\n                    <Col md={3}>\n                        <button className=\"u-button\" onClick={this.clear}>清空</button>\n                    </Col>\n                </Row>\n            </div>\n        );\n    }\n}\n\n\n", "desc": " 以「年」为基本单位，基础的年选择控件" }, { "example": _react2['default'].createElement(Demo11, null), "title": " 自定义展示日期面板，外层输入框可输入", "code": "/**\n *\n * @title 自定义展示日期面板，外层输入框可输入\n * @description open设置面板展开收起，keyboardInput外层input是否可输入，showDateInput是否显示内层input\n */\n\nimport React, {Component} from \"react\";\nimport DatePicker from \"tinper-bee/lib/Datepicker\";\nimport { Icon, Row, Col } from 'tinper-bee';\nimport zhCN from \"rc-calendar/lib/locale/zh_CN\";\nimport enUS from \"rc-calendar/lib/locale/en_US\";\nimport moment from \"moment\";\nimport 'moment/locale/zh-cn';\n\nmoment.locale('zh-cn');\n\nconst format = \"YYYY-MM-DD\";\n\nconst dateInputPlaceholder = \"选择日期\";\n\nfunction onSelect(d) {\n    // console.log(d);\n}\n\n\nclass Demo11 extends Component {\n    constructor(props) {\n        super(props);\n        this.state = {\n            value: '',\n            open: false\n        };\n    }\n\n    onChange = (d, dataString) => {\n        this.setState({\n            value:d\n        })\n        console.log('onChange',dataString)\n    };\n    renderIcon = d => {\n        return (<Icon type=\"uf-search\"></Icon>)\n    }\n    onOpenChange = open => {\n        console.log(open)\n    }\n    open = d => {\n        this.setState({\n            open: !this.state.open\n        })\n    }\n    onClick = (e,d,str) => {\n        console.log(d);\n        \n    }\n    outInputKeydown = ()=>{\n        console.log('keydown')\n    }\n    render() {\n        var self = this; \n        return (\n            <div>\n                <Row>\n                    <Col md={8}>\n                        <DatePicker\n                            format={format}\n                            onSelect={onSelect}\n                            onChange={this.onChange}\n                            locale={zhCN}\n                            open={this.state.open}\n                            defaultValue={moment('2018-01-01')}\n                            value={this.state.value}\n                            onOpenChange={this.onOpenChange.bind(this)}\n                            placeholder={dateInputPlaceholder}\n                            className={\"demo11\"}\n                            onClick={this.onClick}\n                            keyboardInput={true}\n                            showDateInput={false}\n                            // iconClick={this.open}\n                            // outInputKeydown={this.outInputKeydown}\n                        />\n                    </Col>\n                    <Col md={3}>\n                        <button className=\"u-button\" onClick={this.open}>展开面板</button>\n                    </Col>\n                </Row>\n            </div>\n        );\n    }\n}\n\n\n", "desc": " open设置面板展开收起，keyboardInput外层input是否可输入，showDateInput是否显示内层input" }, { "example": _react2['default'].createElement(Demo12, null), "title": " 自定义展示日期面板，外层输入框可输入，配合form使用", "code": "/**\n *\n * @title 自定义展示日期面板，外层输入框可输入，配合form使用\n * @description open设置面板展开收起，keyboardInput外层input是否可输入，showDateInput是否显示内层input\n */\n\nimport React, {Component} from \"react\";\nimport DatePicker from \"tinper-bee/lib/Datepicker\";\nimport { Form, Icon, Row, Col } from 'tinper-bee';\nimport zhCN from \"rc-calendar/lib/locale/zh_CN\";\nimport enUS from \"rc-calendar/lib/locale/en_US\";\nimport moment from \"moment\";\nimport 'moment/locale/zh-cn';\n\nmoment.locale('zh-cn');\n\nconst format = \"YYYY-MM-DD\";\n\nconst dateInputPlaceholder = \"选择日期\";\n\n\nclass Demo12 extends Component {\n    constructor(props) {\n        super(props);\n        this.state = {\n            value: '',\n            open: false\n        };\n    }\n    renderIcon = d => {\n        return (<Icon type=\"uf-search\"></Icon>)\n    }\n    onOpenChange = open => {\n        console.log(open)\n    }\n    open = d => {\n        this.setState({\n            open: !this.state.open\n        })\n    }\n    onClick = (e,d,str) => {\n        console.log(d);\n    }\n    onSelect(d) {\n        console.log(\"select:\"+d);\n    }\n    outInputKeydown = ()=>{\n        console.log('keydown')\n    }\n    submit = (e) => {\n        this.props.form.validateFields((err, values) => {\n            if (err) {\n                console.log('校验失败', values);\n            } else {\n                console.log('提交成功', values, moment(values.date).format('YYYY-MM-DD'));\n            }\n        });\n    }\n    render() {\n        var self = this; \n        const { getFieldProps, getFieldError } = this.props.form;\n        return (\n            <div>\n                <Row>\n                    <Col md={8}>\n                        <DatePicker\n                            format={format}\n                            onSelect={this.onSelect}\n                            onChange={this.onChange}\n                            locale={zhCN}\n                            open={this.state.open}\n                            onOpenChange={this.onOpenChange.bind(this)}\n                            placeholder={dateInputPlaceholder}\n                            className={\"demo11\"}\n                            onClick={this.onClick}\n                            keyboardInput={true}\n                            showDateInput={false}\n                            iconClick={this.open}\n                            outInputKeydown={this.outInputKeydown}\n                            {...getFieldProps('date', {\n                                validateTrigger: 'onBlur',\n                                initialValue:moment('2018-01-01'),\n                                rules: [{\n                                    required: true, message: '请输入日期',\n                                }],\n                            }) }\n                        />\n                    </Col>\n                    <Col md={3}>\n                        <button className=\"u-button\" onClick={this.open}>展开/收起面板</button>\n                        <button className=\"u-button\" onClick={this.submit}>获得值</button>\n                    </Col>\n                </Row>\n            </div>\n        );\n    }\n}\n\n\n", "desc": " open设置面板展开收起，keyboardInput外层input是否可输入，showDateInput是否显示内层input" }, { "example": _react2['default'].createElement(Demo2, null), "title": " 选择年月", "code": "/**\n *\n * @title 选择年月\n * @description 以「年月」为基本单位，基础的年月选择控件\n */\n\nimport React, { Component } from \"react\";\nimport DatePicker from \"tinper-bee/lib/Datepicker\";\nimport {  Row, Col  } from 'tinper-bee';\nimport moment from \"moment\";\n\n\nimport zhCN from \"rc-calendar/lib/locale/zh_CN\";\nimport enUS from \"rc-calendar/lib/locale/en_US\";\n\nconst { MonthPicker } = DatePicker;\n\nconst format2 = \"YYYY\";\n\nfunction onSelect(d) {\n  console.log(d);\n}\n\nfunction onChange(d) {\n  console.log(d);\n}\n\nclass Demo2 extends Component {\n  render() {\n    return (\n      <div>\n        <Row>\n          <Col md={12}>\n            <MonthPicker\n              format={format2}\n              onSelect={onSelect}\n              onChange={onChange}\n              locale={zhCN}\n\n\n              defaultValue={moment()}\n              placeholder={\"选择年月\"}\n            />\n          </Col>\n        </Row>\n      </div>\n    );\n  }\n}\n\n\n", "desc": " 以「年月」为基本单位，基础的年月选择控件" }, { "example": _react2['default'].createElement(Demo3, null), "title": " 日期范围", "code": "/**\n *\n * @title 日期范围\n * @description 以「日期范围」为基本单位，基础的日期范围选择控件\n */\n\nimport React, {Component} from \"react\";\nimport DatePicker from \"tinper-bee/lib/Datepicker\";\nimport { Form, Icon, Row, Col } from 'tinper-bee';\n\nimport zhCN from \"rc-calendar/lib/locale/zh_CN\";\nimport moment from \"moment/moment\";\nconst FormItem = Form.FormItem;\n\n\nconst now = moment();\n\nconst {RangePicker} = DatePicker;\n\nconst format3 = \"YYYY-MM-DD HH:mm:ss\";\n\nfunction formatValue(value, format) {\n    return (value && value.format(format)) || '';\n}\n\nfunction onSelect(d) {\n    //console.log(d);\n}\n\n\n\nclass Demo3 extends Component {\n    constructor(props) {\n        super(props);\n        this.state = {\n            value: '',\n            v:''\n        };\n    }\n\n    onStartChange = (value) => {\n        this.setState({\n            startValue: value[0],\n            startOpen: false,\n            endOpen: true,\n        });\n    }\n\n    remove() {\n        this.setState({value: ''})\n    }\n\n    onChange (d,str) {\n        console.log(d);\n    }\n\n    render() {\n        const props = this.props;\n        const self = this;\n        const { getFieldProps, getFieldError } = this.props.form;\n\n        return (\n            <div>\n                <Row>\n                    <Col md={8}>\n                        <RangePicker\n                            placeholder={'开始 ~ 结束'}\n                            dateInputPlaceholder={['开始', '结束']}\n                            showClear={true}\n                            value={this.state.value}\n                            onChange={this.onChange.bind(this)}\n                            renderFooter={()=>{\n                            return (\n                                <div></div>\n                            )\n                        }}\n                        />\n                    </Col>\n                    <Col md={3}>\n                        <button className=\"u-button\" onClick={this.remove.bind(this)}>清空</button>\n                    </Col>\n                </Row>\n            </div>\n        );\n    }\n}\n\n\n", "desc": " 以「日期范围」为基本单位，基础的日期范围选择控件" }, { "example": _react2['default'].createElement(Demo4, null), "title": " 动态的改变时间", "code": "/**\n *\n * @title 动态的改变时间\n * @description 以「日期时间」为基本单位，基础的日期时间选择控件\n */\n\nimport React, { Component } from \"react\";\nimport DatePicker from \"tinper-bee/lib/Datepicker\";\nimport { Button,  Row, Col  } from 'tinper-bee';\nimport moment from \"moment\";\nimport zhCN from \"rc-calendar/lib/locale/zh_CN\";\nconst format = \"YYYY-MM-DD HH:mm:ss\";\nconst dateInputPlaceholder = \"选择日期\";\n\nclass Demo4 extends Component {\n  constructor(props) {\n    super(props);\n    this.state = {\n      value: moment()\n    };\n  }\n\n  handleChange = value => {\n    this.setState({\n      value: value\n    });\n  };\n  onSelect = d => {\n    console.log(d);\n  };\n\n  handlerChangeDate = () => {\n    this.setState({\n      value: moment(\"2011-11-11 11:11:11\")\n    });\n    console.log(\"click\");\n  };\n  render() {\n    return (\n      <div>\n        <Row>\n          <Col md={8}>\n            <DatePicker\n              format={format}\n              locale={zhCN}\n              onSelect={this.onSelect}\n              onChange={this.handleChange}\n              value={this.state.value}\n              placeholder={dateInputPlaceholder}\n            />\n          </Col>\n          <Col md={3}>\n            <Button onClick={this.handlerChangeDate}>变</Button>\n          </Col>\n        </Row>\n      </div>\n    );\n  }\n}\n\n\n", "desc": " 以「日期时间」为基本单位，基础的日期时间选择控件" }, { "example": _react2['default'].createElement(Demo5, null), "title": " 选择周", "code": "/**\n *\n * @title 选择周\n * @description 以「周」为基本单位，基础的周选择控件\n */\n\nimport React, { Component } from \"react\";\nimport DatePicker from \"tinper-bee/lib/Datepicker\";\nimport {  Row, Col  } from 'tinper-bee';\nconst { WeekPicker } = DatePicker;\nimport moment from \"moment\";\n\nfunction onSelect(d) {\n  console.log(d);\n}\n\nfunction onChange(d) {\n  console.log(d);\n}\n\nclass Demo5 extends Component {\n  render() {\n    return (\n      <div>\n        <Row>\n          <Col md={12}>\n            <WeekPicker defaultValue={''} onChange={onChange} placeholder=\"选择周\" />\n          </Col>\n        </Row>\n      </div>\n    );\n  }\n}\n\n\n", "desc": " 以「周」为基本单位，基础的周选择控件" }, { "example": _react2['default'].createElement(Demo6, null), "title": " 选择日期时间", "code": "/**\n *\n * @title 选择日期时间\n * @description 以「日期时间」为基本单位，可以选择日期和时间\n */\n\nimport React, { Component } from \"react\";\nimport DatePicker from \"tinper-bee/lib/Datepicker\";\nimport {  Row, Col  } from 'tinper-bee';\n\nimport zhCN from \"rc-calendar/lib/locale/zh_CN\";\nimport enUS from \"rc-calendar/lib/locale/en_US\";\nimport moment from \"moment\";\n\nconst format = \"YYYY-MM-DD HH:mm:ss\";\n\nconst dateInputPlaceholder = \"选择日期\";\n\nfunction onSelect(d) {\n  console.log(d);\n}\n\nfunction onChange(d) {\n  console.log(d);\n}\n\nclass Demo6 extends Component {\n  render() {\n    return (\n      <div>\n        <Row>\n          <Col md={12}>\n            <DatePicker\n              format={format}\n              showTime={true}\n              onSelect={onSelect}\n              onChange={onChange}\n              locale={zhCN}\n              defaultValue={moment()}\n              placeholder={dateInputPlaceholder}\n            />\n          </Col>\n        </Row>\n      </div>\n    );\n  }\n}\n\n\n", "desc": " 以「日期时间」为基本单位，可以选择日期和时间" }, { "example": _react2['default'].createElement(Demo7, null), "title": " 禁用日期", "code": "/**\n *\n * @title 禁用日期\n * @description 禁用日期\n */\n\nimport React, { Component } from \"react\";\nimport DatePicker from \"tinper-bee/lib/Datepicker\";\nimport {  Row, Col  } from 'tinper-bee';\n\nimport zhCN from \"rc-calendar/lib/locale/zh_CN\";\nimport enUS from \"rc-calendar/lib/locale/en_US\";\nimport moment from \"moment\";\n\nconst format = \"YYYY-MM-DD\";\n\nconst dateInputPlaceholder = \"选择日期\";\n\nfunction onSelect(d) {\n  console.log(d);\n}\n\nfunction onChange(d) {\n  console.log(d);\n}\n\nclass Demo7 extends Component {\n  render() {\n    return (\n      <div>\n        <Row>\n          <Col md={12}>\n            <DatePicker\n              format={format}\n              onSelect={onSelect}\n              onChange={onChange}\n              locale={zhCN}\n              defaultValue={moment()}\n              placeholder={dateInputPlaceholder}\n              disabled={true}\n            />\n          </Col>\n        </Row>\n      </div>\n    );\n  }\n}\n\n\n", "desc": " 禁用日期" }, { "example": _react2['default'].createElement(Demo8, null), "title": " 不可选择日期和时间", "code": "/**\n *\n * @title 不可选择日期和时间\n * @description 可用 disabledDate 和 disabledTime 分别禁止选择部分日期和时间，其中 disabledTime 需要和 showTime 一起使用。\n */\n\nimport React, { Component } from \"react\";\nimport DatePicker from \"tinper-bee/lib/Datepicker\";\nimport {  Row, Col  } from 'tinper-bee';\n\nimport zhCN from \"rc-calendar/lib/locale/zh_CN\";\nimport moment from \"moment\";\n\nconst format = \"YYYY-MM-DD\";\n\nconst dateInputPlaceholder = \"选择日期\";\n\nfunction onSelect(d) {\n  console.log(d);\n}\n\nfunction onChange(d) {\n  console.log(d);\n}\n\nfunction disabledDate(current) {\n  return current && current.valueOf() < Date.now();\n}\n\nclass Demo7 extends Component {\n  render() {\n    return (\n      <div>\n        <Row>\n          <Col md={12}>\n            <DatePicker\n              format={format}\n              onSelect={onSelect}\n              onChange={onChange}\n              locale={zhCN}\n              disabledDate={disabledDate}\n              defaultValue={moment()}\n              placeholder={dateInputPlaceholder}\n            />\n          </Col>\n        </Row>\n      </div>\n    );\n  }\n}\n\n\n", "desc": " 可用 disabledDate 和 disabledTime 分别禁止选择部分日期和时间，其中 disabledTime 需要和 showTime 一起使用。" }, { "example": _react2['default'].createElement(Demo9, null), "title": " 自定义日期渲染父级容器", "code": "/**\n *\n * @title 自定义日期渲染父级容器\n * @description 以「日期」为基本单位，基础的日期选择控件\n */\n\nimport React, { Component } from \"react\";\nimport DatePicker from \"tinper-bee/lib/Datepicker\";\nimport { Icon,  Row, Col  } from 'tinper-bee';\n\nimport zhCN from \"rc-calendar/lib/locale/zh_CN\";\nimport enUS from \"rc-calendar/lib/locale/en_US\";\nimport moment from \"moment\";\n\nconst format = \"YYYY-MM-DD\";\n\nconst dateInputPlaceholder = \"选择日期\";\n\nfunction onSelect(d) {\n    // console.log(d);\n}\n\nfunction onChange(d) {\n    this.setState({\n        value: ''\n    });\n}\n\nclass Demo1 extends Component {\n    constructor(props) {\n        super(props);\n        this.state = {\n            value: ''\n        };\n    }\n    getCalendarContainer() {\n        return this.d || document.getElementById('d');\n    }\n    onChange = d => {\n        console.log(d)\n\n        this.setState({\n            value: ''\n        });\n    };\n    render() {\n        return (\n            <div id=\"d\" ref=\"d\">\n                <Row>\n                    <Col md={12}>\n                        <DatePicker\n                            format={format}\n                            onSelect={onSelect}\n                            onChange={this.onChange}\n                            locale={zhCN}\n                            defaultValue={this.state.value}\n                            placeholder={dateInputPlaceholder}\n                            getCalendarContainer={this.getCalendarContainer}\n                        />\n                    </Col>\n                </Row>\n            </div>\n        );\n    }\n}\n\n\n", "desc": " 以「日期」为基本单位，基础的日期选择控件" }];
+	var Demo1 = __webpack_require__(84);var Demo2 = __webpack_require__(387);var Demo3 = __webpack_require__(388);var Demo4 = __webpack_require__(483);var Demo5 = __webpack_require__(484);var Demo6 = __webpack_require__(485);var Demo7 = __webpack_require__(486);var Demo8 = __webpack_require__(487);var Demo9 = __webpack_require__(488);var Demo10 = __webpack_require__(489);var Demo11 = __webpack_require__(490);var Demo12 = __webpack_require__(491);var DemoArray = [{ "example": _react2['default'].createElement(Demo1, null), "title": " 选择日期", "code": "/**\n *\n * @title 选择日期\n * @description 以「日期」为基本单位，基础的日期选择控件\n */\n\nimport React, {Component} from \"react\";\nimport DatePicker from \"tinper-bee/lib/Datepicker\";\nimport { Icon, Row, Col } from 'tinper-bee';\n\nimport zhCN from \"rc-calendar/lib/locale/zh_CN\";\nimport enUS from \"rc-calendar/lib/locale/en_US\";\nimport moment from \"moment\";\nimport 'moment/locale/zh-cn';\n\nmoment.locale('zh-cn');\n\nconst format = \"YYYY-MM-DD dddd\";\n\nconst dateInputPlaceholder = \"选择日期\";\n\nfunction onSelect(d) {\n    // console.log(d);\n}\n\n\nclass Demo1 extends Component {\n    constructor(props) {\n        super(props);\n        this.state = {\n            value: '',\n            open: false\n        };\n    }\n\n    onChange = (d, dataString) => {\n        console.log(dataString);\n    };\n    clear = d => {\n        this.setState({\n            value: ''\n        })\n    }\n    renderIcon = d => {\n        return (<Icon type=\"uf-search\"></Icon>)\n    }\n    onOpenChange = d => {\n        console.log(d);\n    }\n    open = d => {\n        this.setState({\n            open: true\n        })\n    }\n    onClick = (e,d,str) => {\n        console.log(d);\n        this.setState({\n            open: true\n        })\n    }\n    renderFooter = () => {\n        return null\n    }\n\n    render() {\n        var self = this;\n        return (\n            <div>\n                <Row>\n                    <Col md={8}>\n                        <DatePicker\n                            format={format}\n                            onSelect={onSelect}\n                            onChange={this.onChange}\n                            locale={zhCN}\n                            value={this.state.value}\n                            onOpenChange={this.onOpenChange.bind(this)}\n                            placeholder={dateInputPlaceholder}\n                            className={\"uuuu\"}\n                            onClick={this.onClick}\n                        />\n                    </Col>\n                    <Col md={3}>\n                        <button className=\"u-button\" onClick={this.clear}>清空</button>\n                    </Col>\n                </Row>\n            </div>\n        );\n    }\n}\n\n\n", "desc": " 以「日期」为基本单位，基础的日期选择控件" }, { "example": _react2['default'].createElement(Demo2, null), "title": " 选择年月", "code": "/**\n *\n * @title 选择年月\n * @description 以「年月」为基本单位，基础的年月选择控件\n */\n\nimport React, { Component } from \"react\";\nimport DatePicker from \"tinper-bee/lib/Datepicker\";\nimport {  Row, Col  } from 'tinper-bee';\nimport moment from \"moment\";\n\n\nimport zhCN from \"rc-calendar/lib/locale/zh_CN\";\nimport enUS from \"rc-calendar/lib/locale/en_US\";\n\nconst { MonthPicker } = DatePicker;\n\nconst format2 = \"YYYY\";\n\nfunction onSelect(d) {\n  console.log(d);\n}\n\nfunction onChange(d) {\n  console.log(d);\n}\n\nclass Demo2 extends Component {\n  render() {\n    return (\n      <div>\n        <Row>\n          <Col md={12}>\n            <MonthPicker\n              format={format2}\n              onSelect={onSelect}\n              onChange={onChange}\n              locale={zhCN}\n\n\n              defaultValue={moment()}\n              placeholder={\"选择年月\"}\n            />\n          </Col>\n        </Row>\n      </div>\n    );\n  }\n}\n\n\n", "desc": " 以「年月」为基本单位，基础的年月选择控件" }, { "example": _react2['default'].createElement(Demo3, null), "title": " 日期范围", "code": "/**\n *\n * @title 日期范围\n * @description 以「日期范围」为基本单位，基础的日期范围选择控件\n */\n\nimport React, {Component} from \"react\";\nimport DatePicker from \"tinper-bee/lib/Datepicker\";\nimport { Form, Icon, Row, Col } from 'tinper-bee';\n\nimport zhCN from \"rc-calendar/lib/locale/zh_CN\";\nimport moment from \"moment/moment\";\nconst FormItem = Form.FormItem;\n\n\nconst now = moment();\n\nconst {RangePicker} = DatePicker;\n\nconst format3 = \"YYYY-MM-DD HH:mm:ss\";\n\nfunction formatValue(value, format) {\n    return (value && value.format(format)) || '';\n}\n\nfunction onSelect(d) {\n    //console.log(d);\n}\n\n\n\nclass Demo3 extends Component {\n    constructor(props) {\n        super(props);\n        this.state = {\n            value: '',\n            v:''\n        };\n    }\n\n    onStartChange = (value) => {\n        this.setState({\n            startValue: value[0],\n            startOpen: false,\n            endOpen: true,\n        });\n    }\n\n    remove() {\n        this.setState({value: ''})\n    }\n\n    onChange (d,str) {\n        console.log(d);\n    }\n\n    render() {\n        const props = this.props;\n        const self = this;\n        const { getFieldProps, getFieldError } = this.props.form;\n\n        return (\n            <div>\n                <Row>\n                    <Col md={8}>\n                        <RangePicker\n                            placeholder={'开始 ~ 结束'}\n                            dateInputPlaceholder={['开始', '结束']}\n                            showClear={true}\n                            value={this.state.value}\n                            onChange={this.onChange.bind(this)}\n                            renderFooter={()=>{\n                            return (\n                                <div></div>\n                            )\n                        }}\n                        />\n                    </Col>\n                    <Col md={3}>\n                        <button className=\"u-button\" onClick={this.remove.bind(this)}>清空</button>\n                    </Col>\n                </Row>\n            </div>\n        );\n    }\n}\n\n\n", "desc": " 以「日期范围」为基本单位，基础的日期范围选择控件" }, { "example": _react2['default'].createElement(Demo4, null), "title": " 动态的改变时间", "code": "/**\n *\n * @title 动态的改变时间\n * @description 以「日期时间」为基本单位，基础的日期时间选择控件\n */\n\nimport React, { Component } from \"react\";\nimport DatePicker from \"tinper-bee/lib/Datepicker\";\nimport { Button,  Row, Col  } from 'tinper-bee';\nimport moment from \"moment\";\nimport zhCN from \"rc-calendar/lib/locale/zh_CN\";\nconst format = \"YYYY-MM-DD HH:mm:ss\";\nconst dateInputPlaceholder = \"选择日期\";\n\nclass Demo4 extends Component {\n  constructor(props) {\n    super(props);\n    this.state = {\n      value: moment()\n    };\n  }\n\n  handleChange = value => {\n    this.setState({\n      value: value\n    });\n  };\n  onSelect = d => {\n    console.log(d);\n  };\n\n  handlerChangeDate = () => {\n    this.setState({\n      value: moment(\"2011-11-11 11:11:11\")\n    });\n    console.log(\"click\");\n  };\n  render() {\n    return (\n      <div>\n        <Row>\n          <Col md={8}>\n            <DatePicker\n              format={format}\n              locale={zhCN}\n              onSelect={this.onSelect}\n              onChange={this.handleChange}\n              value={this.state.value}\n              placeholder={dateInputPlaceholder}\n            />\n          </Col>\n          <Col md={3}>\n            <Button onClick={this.handlerChangeDate}>变</Button>\n          </Col>\n        </Row>\n      </div>\n    );\n  }\n}\n\n\n", "desc": " 以「日期时间」为基本单位，基础的日期时间选择控件" }, { "example": _react2['default'].createElement(Demo5, null), "title": " 选择周", "code": "/**\n *\n * @title 选择周\n * @description 以「周」为基本单位，基础的周选择控件\n */\n\nimport React, { Component } from \"react\";\nimport DatePicker from \"tinper-bee/lib/Datepicker\";\nimport {  Row, Col  } from 'tinper-bee';\nconst { WeekPicker } = DatePicker;\nimport moment from \"moment\";\n\nfunction onSelect(d) {\n  console.log(d);\n}\n\nfunction onChange(d) {\n  console.log(d);\n}\n\nclass Demo5 extends Component {\n  render() {\n    return (\n      <div>\n        <Row>\n          <Col md={12}>\n            <WeekPicker defaultValue={''} onChange={onChange} placeholder=\"选择周\" />\n          </Col>\n        </Row>\n      </div>\n    );\n  }\n}\n\n\n", "desc": " 以「周」为基本单位，基础的周选择控件" }, { "example": _react2['default'].createElement(Demo6, null), "title": " 选择日期时间", "code": "/**\n *\n * @title 选择日期时间\n * @description 以「日期时间」为基本单位，可以选择日期和时间\n */\n\nimport React, { Component } from \"react\";\nimport DatePicker from \"tinper-bee/lib/Datepicker\";\nimport {  Row, Col  } from 'tinper-bee';\n\nimport zhCN from \"rc-calendar/lib/locale/zh_CN\";\nimport enUS from \"rc-calendar/lib/locale/en_US\";\nimport moment from \"moment\";\n\nconst format = \"YYYY-MM-DD HH:mm:ss\";\n\nconst dateInputPlaceholder = \"选择日期\";\n\nfunction onSelect(d) {\n  console.log(d);\n}\n\nfunction onChange(d) {\n  console.log(d);\n}\n\nclass Demo6 extends Component {\n  render() {\n    return (\n      <div>\n        <Row>\n          <Col md={12}>\n            <DatePicker\n              format={format}\n              showTime={true}\n              onSelect={onSelect}\n              onChange={onChange}\n              locale={zhCN}\n              defaultValue={moment()}\n              placeholder={dateInputPlaceholder}\n            />\n          </Col>\n        </Row>\n      </div>\n    );\n  }\n}\n\n\n", "desc": " 以「日期时间」为基本单位，可以选择日期和时间" }, { "example": _react2['default'].createElement(Demo7, null), "title": " 禁用日期", "code": "/**\n *\n * @title 禁用日期\n * @description 禁用日期\n */\n\nimport React, { Component } from \"react\";\nimport DatePicker from \"tinper-bee/lib/Datepicker\";\nimport {  Row, Col  } from 'tinper-bee';\n\nimport zhCN from \"rc-calendar/lib/locale/zh_CN\";\nimport enUS from \"rc-calendar/lib/locale/en_US\";\nimport moment from \"moment\";\n\nconst format = \"YYYY-MM-DD\";\n\nconst dateInputPlaceholder = \"选择日期\";\n\nfunction onSelect(d) {\n  console.log(d);\n}\n\nfunction onChange(d) {\n  console.log(d);\n}\n\nclass Demo7 extends Component {\n  render() {\n    return (\n      <div>\n        <Row>\n          <Col md={12}>\n            <DatePicker\n              format={format}\n              onSelect={onSelect}\n              onChange={onChange}\n              locale={zhCN}\n              defaultValue={moment()}\n              placeholder={dateInputPlaceholder}\n              disabled={true}\n            />\n          </Col>\n        </Row>\n      </div>\n    );\n  }\n}\n\n\n", "desc": " 禁用日期" }, { "example": _react2['default'].createElement(Demo8, null), "title": " 不可选择日期和时间", "code": "/**\n *\n * @title 不可选择日期和时间\n * @description 可用 disabledDate 和 disabledTime 分别禁止选择部分日期和时间，其中 disabledTime 需要和 showTime 一起使用。\n */\n\nimport React, { Component } from \"react\";\nimport DatePicker from \"tinper-bee/lib/Datepicker\";\nimport {  Row, Col  } from 'tinper-bee';\n\nimport zhCN from \"rc-calendar/lib/locale/zh_CN\";\nimport moment from \"moment\";\n\nconst format = \"YYYY-MM-DD\";\n\nconst dateInputPlaceholder = \"选择日期\";\n\nfunction onSelect(d) {\n  console.log(d);\n}\n\nfunction onChange(d) {\n  console.log(d);\n}\n\nfunction disabledDate(current) {\n  return current && current.valueOf() < Date.now();\n}\n\nclass Demo7 extends Component {\n  render() {\n    return (\n      <div>\n        <Row>\n          <Col md={12}>\n            <DatePicker\n              format={format}\n              onSelect={onSelect}\n              onChange={onChange}\n              locale={zhCN}\n              disabledDate={disabledDate}\n              defaultValue={moment()}\n              placeholder={dateInputPlaceholder}\n            />\n          </Col>\n        </Row>\n      </div>\n    );\n  }\n}\n\n\n", "desc": " 可用 disabledDate 和 disabledTime 分别禁止选择部分日期和时间，其中 disabledTime 需要和 showTime 一起使用。" }, { "example": _react2['default'].createElement(Demo9, null), "title": " 自定义日期渲染父级容器", "code": "/**\n *\n * @title 自定义日期渲染父级容器\n * @description 以「日期」为基本单位，基础的日期选择控件\n */\n\nimport React, { Component } from \"react\";\nimport DatePicker from \"tinper-bee/lib/Datepicker\";\nimport { Icon,  Row, Col  } from 'tinper-bee';\n\nimport zhCN from \"rc-calendar/lib/locale/zh_CN\";\nimport enUS from \"rc-calendar/lib/locale/en_US\";\nimport moment from \"moment\";\n\nconst format = \"YYYY-MM-DD\";\n\nconst dateInputPlaceholder = \"选择日期\";\n\nfunction onSelect(d) {\n    // console.log(d);\n}\n\nfunction onChange(d) {\n    this.setState({\n        value: ''\n    });\n}\n\nclass Demo1 extends Component {\n    constructor(props) {\n        super(props);\n        this.state = {\n            value: ''\n        };\n    }\n    getCalendarContainer() {\n        return this.d || document.getElementById('d');\n    }\n    onChange = d => {\n        console.log(d)\n\n        this.setState({\n            value: ''\n        });\n    };\n    render() {\n        return (\n            <div id=\"d\" ref=\"d\">\n                <Row>\n                    <Col md={12}>\n                        <DatePicker\n                            format={format}\n                            onSelect={onSelect}\n                            onChange={this.onChange}\n                            locale={zhCN}\n                            defaultValue={this.state.value}\n                            placeholder={dateInputPlaceholder}\n                            getCalendarContainer={this.getCalendarContainer}\n                        />\n                    </Col>\n                </Row>\n            </div>\n        );\n    }\n}\n\n\n", "desc": " 以「日期」为基本单位，基础的日期选择控件" }, { "example": _react2['default'].createElement(Demo10, null), "title": " 选择年", "code": "/**\n *\n * @title 选择年\n * @description 以「年」为基本单位，基础的年选择控件\n */\n\nimport React, { Component } from \"react\";\nimport DatePicker from \"tinper-bee/lib/Datepicker\";\nimport { Icon,  Row, Col  } from 'tinper-bee';\nimport moment from \"moment\";\n\nimport zhCN from \"rc-calendar/lib/locale/zh_CN\";\nimport enUS from \"rc-calendar/lib/locale/en_US\";\n\nconst { YearPicker } = DatePicker;\n\nconst format2 = \"YYYY\";\n\nfunction onSelect(d) {\n    console.log(d);\n}\n\nfunction onChange(d) {\n    console.log(d);\n}\n\nclass Demo10 extends Component {\n    constructor(props) {\n        super(props);\n        this.state = {\n            value: moment(),\n            open: false\n        };\n    }\n    getCalendarContainer() {\n        return this.d || document.getElementById('d');\n    }\n    clear = d => {\n        this.setState({\n            value: ''\n        })\n    }\n    render() {\n        return (\n            <div>\n                <Row>\n                    <Col md={8}>\n                        <div id={\"d\"}>\n                            <YearPicker\n                                format={format2}\n\n                                onChange={onChange}\n\n                                locale={zhCN}\n\n                                value={this.state.value}\n\n                                className = {'rc-calendar-year'}\n\n                                placeholder={\"选择年\"}\n                            />\n                        </div>\n                    </Col>\n                    <Col md={3}>\n                        <button className=\"u-button\" onClick={this.clear}>清空</button>\n                    </Col>\n                </Row>\n            </div>\n        );\n    }\n}\n\n\n", "desc": " 以「年」为基本单位，基础的年选择控件" }, { "example": _react2['default'].createElement(Demo11, null), "title": " 自定义展示日期面板，外层输入框可输入", "code": "/**\n *\n * @title 自定义展示日期面板，外层输入框可输入\n * @description open设置面板展开收起，keyboardInput外层input是否可输入，showDateInput是否显示内层input\n */\n\nimport React, {Component} from \"react\";\nimport DatePicker from \"tinper-bee/lib/Datepicker\";\nimport { Icon, Row, Col } from 'tinper-bee';\nimport zhCN from \"rc-calendar/lib/locale/zh_CN\";\nimport enUS from \"rc-calendar/lib/locale/en_US\";\nimport moment from \"moment\";\nimport 'moment/locale/zh-cn';\n\nmoment.locale('zh-cn');\n\nconst format = \"YYYY-MM-DD\";\n\nconst dateInputPlaceholder = \"选择日期\";\n\nfunction onSelect(d) {\n    // console.log(d);\n}\n\n\nclass Demo11 extends Component {\n    constructor(props) {\n        super(props);\n        this.state = {\n            value: '',\n            open: false\n        };\n    }\n\n    onChange = (d, dataString) => {\n        this.setState({\n            value:d\n        })\n        console.log('onChange',dataString)\n    };\n    renderIcon = d => {\n        return (<Icon type=\"uf-search\"></Icon>)\n    }\n    onOpenChange = open => {\n        console.log(open)\n    }\n    open = d => {\n        this.setState({\n            open: !this.state.open\n        })\n    }\n    onClick = (e,d,str) => {\n        console.log(d);\n        \n    }\n    outInputKeydown = ()=>{\n        console.log('keydown')\n    }\n    render() {\n        var self = this; \n        return (\n            <div>\n                <Row>\n                    <Col md={8}>\n                        <DatePicker\n                            format={format}\n                            onSelect={onSelect}\n                            onChange={this.onChange}\n                            locale={zhCN}\n                            open={this.state.open}\n                            defaultValue={moment('2018-01-01')}\n                            value={this.state.value}\n                            onOpenChange={this.onOpenChange.bind(this)}\n                            placeholder={dateInputPlaceholder}\n                            className={\"demo11\"}\n                            onClick={this.onClick}\n                            keyboardInput={true}\n                            showDateInput={false}\n                            // iconClick={this.open}\n                            // outInputKeydown={this.outInputKeydown}\n                        />\n                    </Col>\n                    <Col md={3}>\n                        <button className=\"u-button\" onClick={this.open}>展开面板</button>\n                    </Col>\n                </Row>\n            </div>\n        );\n    }\n}\n\n\n", "desc": " open设置面板展开收起，keyboardInput外层input是否可输入，showDateInput是否显示内层input" }, { "example": _react2['default'].createElement(Demo12, null), "title": " 自定义展示日期面板，外层输入框可输入，配合form使用", "code": "/**\n *\n * @title 自定义展示日期面板，外层输入框可输入，配合form使用\n * @description open设置面板展开收起，keyboardInput外层input是否可输入，showDateInput是否显示内层input\n */\n\nimport React, {Component} from \"react\";\nimport DatePicker from \"tinper-bee/lib/Datepicker\";\nimport { Form, Icon, Row, Col } from 'tinper-bee';\nimport zhCN from \"rc-calendar/lib/locale/zh_CN\";\nimport enUS from \"rc-calendar/lib/locale/en_US\";\nimport moment from \"moment\";\nimport 'moment/locale/zh-cn';\n\nmoment.locale('zh-cn');\n\nconst format = \"YYYY-MM-DD\";\n\nconst dateInputPlaceholder = \"选择日期\";\n\n\nclass Demo12 extends Component {\n    constructor(props) {\n        super(props);\n        this.state = {\n            value: '',\n            open: false\n        };\n    }\n    renderIcon = d => {\n        return (<Icon type=\"uf-search\"></Icon>)\n    }\n    onOpenChange = open => {\n        console.log(open)\n    }\n    open = d => {\n        this.setState({\n            open: !this.state.open\n        })\n    }\n    onClick = (e,d,str) => {\n        console.log(d);\n    }\n    onSelect(d) {\n        console.log(\"select:\"+d);\n    }\n    outInputKeydown = ()=>{\n        console.log('keydown')\n    }\n    submit = (e) => {\n        this.props.form.validateFields((err, values) => {\n            if (err) {\n                console.log('校验失败', values);\n            } else {\n                console.log('提交成功', values, moment(values.date).format('YYYY-MM-DD'));\n            }\n        });\n    }\n    render() {\n        var self = this; \n        const { getFieldProps, getFieldError } = this.props.form;\n        return (\n            <div>\n                <Row>\n                    <Col md={8}>\n                        <DatePicker\n                            format={format}\n                            onSelect={this.onSelect}\n                            onChange={this.onChange}\n                            locale={zhCN}\n                            open={this.state.open}\n                            onOpenChange={this.onOpenChange.bind(this)}\n                            placeholder={dateInputPlaceholder}\n                            className={\"demo11\"}\n                            onClick={this.onClick}\n                            keyboardInput={true}\n                            showDateInput={false}\n                            iconClick={this.open}\n                            outInputKeydown={this.outInputKeydown}\n                            {...getFieldProps('date', {\n                                validateTrigger: 'onBlur',\n                                initialValue:moment('2018-01-01'),\n                                rules: [{\n                                    required: true, message: '请输入日期',\n                                }],\n                            }) }\n                        />\n                    </Col>\n                    <Col md={3}>\n                        <button className=\"u-button\" onClick={this.open}>展开/收起面板</button>\n                        <button className=\"u-button\" onClick={this.submit}>获得值</button>\n                    </Col>\n                </Row>\n            </div>\n        );\n    }\n}\n\n\n", "desc": " open设置面板展开收起，keyboardInput外层input是否可输入，showDateInput是否显示内层input" }];
 	
 	var Demo = function (_Component) {
 	    _inherits(Demo, _Component);
@@ -8190,13 +8190,10 @@
 	        value: nextProps.value
 	      });
 	    }
-	    if ('open' in nextProps) {
-	      if (this.state.open != nextProps.open) {
-	        this.setState({
-	          open: nextProps.open
-	        });
-	      }
-	    }
+	    this.setState({
+	      renderIcon: nextProps.renderIcon,
+	      open: nextProps.open || false
+	    });
 	  };
 	
 	  DatePicker.prototype.render = function render() {
@@ -37699,7 +37696,7 @@
 	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
-	    value: true
+	  value: true
 	});
 	
 	var _react = __webpack_require__(4);
@@ -37715,10 +37712,6 @@
 	var _moment = __webpack_require__(185);
 	
 	var _moment2 = _interopRequireDefault(_moment);
-	
-	var _beeIcon = __webpack_require__(351);
-	
-	var _beeIcon2 = _interopRequireDefault(_beeIcon);
 	
 	var _zh_CN = __webpack_require__(384);
 	
@@ -37738,93 +37731,60 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); } /**
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @title 选择年
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @description 以「年」为基本单位，基础的年选择控件
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @title 选择年月
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @description 以「年月」为基本单位，基础的年月选择控件
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
 	
-	var YearPicker = _index2["default"].YearPicker;
+	var MonthPicker = _index2["default"].MonthPicker;
 	
 	
 	var format2 = "YYYY";
 	
 	function onSelect(d) {
-	    console.log(d);
+	  console.log(d);
 	}
 	
 	function onChange(d) {
-	    console.log(d);
+	  console.log(d);
 	}
 	
-	var Demo10 = function (_Component) {
-	    _inherits(Demo10, _Component);
+	var Demo2 = function (_Component) {
+	  _inherits(Demo2, _Component);
 	
-	    function Demo10(props) {
-	        _classCallCheck(this, Demo10);
+	  function Demo2() {
+	    _classCallCheck(this, Demo2);
 	
-	        var _this = _possibleConstructorReturn(this, _Component.call(this, props));
+	    return _possibleConstructorReturn(this, _Component.apply(this, arguments));
+	  }
 	
-	        _this.clear = function (d) {
-	            _this.setState({
-	                value: ''
-	            });
-	        };
+	  Demo2.prototype.render = function render() {
+	    return _react2["default"].createElement(
+	      "div",
+	      null,
+	      _react2["default"].createElement(
+	        _beeLayout.Row,
+	        null,
+	        _react2["default"].createElement(
+	          _beeLayout.Col,
+	          { md: 12 },
+	          _react2["default"].createElement(MonthPicker, {
+	            format: format2,
+	            onSelect: onSelect,
+	            onChange: onChange,
+	            locale: _zh_CN2["default"],
 	
-	        _this.state = {
-	            value: (0, _moment2["default"])(),
-	            open: false
-	        };
-	        return _this;
-	    }
+	            defaultValue: (0, _moment2["default"])(),
+	            placeholder: "选择年月"
+	          })
+	        )
+	      )
+	    );
+	  };
 	
-	    Demo10.prototype.getCalendarContainer = function getCalendarContainer() {
-	        return this.d || document.getElementById('d');
-	    };
-	
-	    Demo10.prototype.render = function render() {
-	        return _react2["default"].createElement(
-	            "div",
-	            null,
-	            _react2["default"].createElement(
-	                _beeLayout.Row,
-	                null,
-	                _react2["default"].createElement(
-	                    _beeLayout.Col,
-	                    { md: 8 },
-	                    _react2["default"].createElement(
-	                        "div",
-	                        { id: "d" },
-	                        _react2["default"].createElement(YearPicker, {
-	                            format: format2,
-	
-	                            onChange: onChange,
-	
-	                            locale: _zh_CN2["default"],
-	
-	                            value: this.state.value,
-	
-	                            className: 'rc-calendar-year',
-	
-	                            placeholder: "选择年"
-	                        })
-	                    )
-	                ),
-	                _react2["default"].createElement(
-	                    _beeLayout.Col,
-	                    { md: 3 },
-	                    _react2["default"].createElement(
-	                        "button",
-	                        { className: "u-button", onClick: this.clear },
-	                        "\u6E05\u7A7A"
-	                    )
-	                )
-	            )
-	        );
-	    };
-	
-	    return Demo10;
+	  return Demo2;
 	}(_react.Component);
 	
-	exports["default"] = Demo10;
+	exports["default"] = Demo2;
 	module.exports = exports["default"];
 
 /***/ }),
@@ -37847,181 +37807,19 @@
 	
 	var _index2 = _interopRequireDefault(_index);
 	
-	var _zh_CN = __webpack_require__(384);
-	
-	var _zh_CN2 = _interopRequireDefault(_zh_CN);
-	
-	var _en_US = __webpack_require__(326);
-	
-	var _en_US2 = _interopRequireDefault(_en_US);
-	
-	var _moment = __webpack_require__(185);
-	
-	var _moment2 = _interopRequireDefault(_moment);
-	
 	var _beeIcon = __webpack_require__(351);
 	
 	var _beeIcon2 = _interopRequireDefault(_beeIcon);
-	
-	__webpack_require__(308);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-	
-	function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); } /**
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @title 自定义展示日期面板，外层输入框可输入
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @description open设置面板展开收起，keyboardInput外层input是否可输入，showDateInput是否显示内层input
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
-	
-	_moment2["default"].locale('zh-cn');
-	
-	var format = "YYYY-MM-DD";
-	
-	var dateInputPlaceholder = "选择日期";
-	
-	function onSelect(d) {
-	    // console.log(d);
-	}
-	
-	var Demo11 = function (_Component) {
-	    _inherits(Demo11, _Component);
-	
-	    function Demo11(props) {
-	        _classCallCheck(this, Demo11);
-	
-	        var _this = _possibleConstructorReturn(this, _Component.call(this, props));
-	
-	        _this.onChange = function (d, dataString) {
-	            _this.setState({
-	                value: d
-	            });
-	            console.log('onChange', dataString);
-	        };
-	
-	        _this.renderIcon = function (d) {
-	            return _react2["default"].createElement(_beeIcon2["default"], { type: "uf-search" });
-	        };
-	
-	        _this.onOpenChange = function (open) {
-	            console.log(open);
-	        };
-	
-	        _this.open = function (d) {
-	            _this.setState({
-	                open: !_this.state.open
-	            });
-	        };
-	
-	        _this.onClick = function (e, d, str) {
-	            console.log(d);
-	        };
-	
-	        _this.outInputKeydown = function () {
-	            console.log('keydown');
-	        };
-	
-	        _this.state = {
-	            value: '',
-	            open: false
-	        };
-	        return _this;
-	    }
-	
-	    Demo11.prototype.render = function render() {
-	        var self = this;
-	        return _react2["default"].createElement(
-	            "div",
-	            null,
-	            _react2["default"].createElement(
-	                _beeLayout.Row,
-	                null,
-	                _react2["default"].createElement(
-	                    _beeLayout.Col,
-	                    { md: 8 },
-	                    _react2["default"].createElement(_index2["default"], {
-	                        format: format,
-	                        onSelect: onSelect,
-	                        onChange: this.onChange,
-	                        locale: _zh_CN2["default"],
-	                        open: this.state.open,
-	                        defaultValue: (0, _moment2["default"])('2018-01-01'),
-	                        value: this.state.value,
-	                        onOpenChange: this.onOpenChange.bind(this),
-	                        placeholder: dateInputPlaceholder,
-	                        className: "demo11",
-	                        onClick: this.onClick,
-	                        keyboardInput: true,
-	                        showDateInput: false
-	                        // iconClick={this.open}
-	                        // outInputKeydown={this.outInputKeydown}
-	                    })
-	                ),
-	                _react2["default"].createElement(
-	                    _beeLayout.Col,
-	                    { md: 3 },
-	                    _react2["default"].createElement(
-	                        "button",
-	                        { className: "u-button", onClick: this.open },
-	                        "\u5C55\u5F00\u9762\u677F"
-	                    )
-	                )
-	            )
-	        );
-	    };
-	
-	    return Demo11;
-	}(_react.Component);
-	
-	exports["default"] = Demo11;
-	module.exports = exports["default"];
-
-/***/ }),
-/* 389 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	"use strict";
-	
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-	
-	var _react = __webpack_require__(4);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _beeLayout = __webpack_require__(1);
-	
-	var _index = __webpack_require__(85);
-	
-	var _index2 = _interopRequireDefault(_index);
 	
 	var _zh_CN = __webpack_require__(384);
 	
 	var _zh_CN2 = _interopRequireDefault(_zh_CN);
 	
-	var _en_US = __webpack_require__(326);
-	
-	var _en_US2 = _interopRequireDefault(_en_US);
-	
 	var _moment = __webpack_require__(185);
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
-	var _beeIcon = __webpack_require__(351);
-	
-	var _beeIcon2 = _interopRequireDefault(_beeIcon);
-	
-	__webpack_require__(308);
-	
-	var _beeForm = __webpack_require__(390);
+	var _beeForm = __webpack_require__(389);
 	
 	var _beeForm2 = _interopRequireDefault(_beeForm);
 	
@@ -38035,72 +37833,65 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); } /**
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @title 自定义展示日期面板，外层输入框可输入，配合form使用
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @description open设置面板展开收起，keyboardInput外层input是否可输入，showDateInput是否显示内层input
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @title 日期范围
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @description 以「日期范围」为基本单位，基础的日期范围选择控件
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
 	
-	_moment2["default"].locale('zh-cn');
+	var FormItem = _beeForm2["default"].FormItem;
 	
-	var format = "YYYY-MM-DD";
+	var now = (0, _moment2["default"])();
 	
-	var dateInputPlaceholder = "选择日期";
+	var RangePicker = _index2["default"].RangePicker;
 	
-	var Demo12 = function (_Component) {
-	    _inherits(Demo12, _Component);
 	
-	    function Demo12(props) {
-	        _classCallCheck(this, Demo12);
+	var format3 = "YYYY-MM-DD HH:mm:ss";
+	
+	function formatValue(value, format) {
+	    return value && value.format(format) || '';
+	}
+	
+	function onSelect(d) {
+	    //console.log(d);
+	}
+	
+	var Demo3 = function (_Component) {
+	    _inherits(Demo3, _Component);
+	
+	    function Demo3(props) {
+	        _classCallCheck(this, Demo3);
 	
 	        var _this = _possibleConstructorReturn(this, _Component.call(this, props));
 	
-	        _this.renderIcon = function (d) {
-	            return _react2["default"].createElement(_beeIcon2["default"], { type: "uf-search" });
-	        };
-	
-	        _this.onOpenChange = function (open) {
-	            console.log(open);
-	        };
-	
-	        _this.open = function (d) {
+	        _this.onStartChange = function (value) {
 	            _this.setState({
-	                open: !_this.state.open
-	            });
-	        };
-	
-	        _this.onClick = function (e, d, str) {
-	            console.log(d);
-	        };
-	
-	        _this.outInputKeydown = function () {
-	            console.log('keydown');
-	        };
-	
-	        _this.submit = function (e) {
-	            _this.props.form.validateFields(function (err, values) {
-	                if (err) {
-	                    console.log('校验失败', values);
-	                } else {
-	                    console.log('提交成功', values, (0, _moment2["default"])(values.date).format('YYYY-MM-DD'));
-	                }
+	                startValue: value[0],
+	                startOpen: false,
+	                endOpen: true
 	            });
 	        };
 	
 	        _this.state = {
 	            value: '',
-	            open: false
+	            v: ''
 	        };
 	        return _this;
 	    }
 	
-	    Demo12.prototype.onSelect = function onSelect(d) {
-	        console.log("select:" + d);
+	    Demo3.prototype.remove = function remove() {
+	        this.setState({ value: '' });
 	    };
 	
-	    Demo12.prototype.render = function render() {
+	    Demo3.prototype.onChange = function onChange(d, str) {
+	        console.log(d);
+	    };
+	
+	    Demo3.prototype.render = function render() {
+	        var props = this.props;
 	        var self = this;
 	        var _props$form = this.props.form,
 	            getFieldProps = _props$form.getFieldProps,
 	            getFieldError = _props$form.getFieldError;
+	
 	
 	        return _react2["default"].createElement(
 	            "div",
@@ -38111,54 +37902,38 @@
 	                _react2["default"].createElement(
 	                    _beeLayout.Col,
 	                    { md: 8 },
-	                    _react2["default"].createElement(_index2["default"], _extends({
-	                        format: format,
-	                        onSelect: this.onSelect,
-	                        onChange: this.onChange,
-	                        locale: _zh_CN2["default"],
-	                        open: this.state.open,
-	                        onOpenChange: this.onOpenChange.bind(this),
-	                        placeholder: dateInputPlaceholder,
-	                        className: "demo11",
-	                        onClick: this.onClick,
-	                        keyboardInput: true,
-	                        showDateInput: false,
-	                        iconClick: this.open,
-	                        outInputKeydown: this.outInputKeydown
-	                    }, getFieldProps('date', {
-	                        validateTrigger: 'onBlur',
-	                        initialValue: (0, _moment2["default"])('2018-01-01'),
-	                        rules: [{
-	                            required: true, message: '请输入日期'
-	                        }]
-	                    })))
+	                    _react2["default"].createElement(RangePicker, {
+	                        placeholder: '开始 ~ 结束',
+	                        dateInputPlaceholder: ['开始', '结束'],
+	                        showClear: true,
+	                        value: this.state.value,
+	                        onChange: this.onChange.bind(this),
+	                        renderFooter: function renderFooter() {
+	                            return _react2["default"].createElement("div", null);
+	                        }
+	                    })
 	                ),
 	                _react2["default"].createElement(
 	                    _beeLayout.Col,
 	                    { md: 3 },
 	                    _react2["default"].createElement(
 	                        "button",
-	                        { className: "u-button", onClick: this.open },
-	                        "\u5C55\u5F00/\u6536\u8D77\u9762\u677F"
-	                    ),
-	                    _react2["default"].createElement(
-	                        "button",
-	                        { className: "u-button", onClick: this.submit },
-	                        "\u83B7\u5F97\u503C"
+	                        { className: "u-button", onClick: this.remove.bind(this) },
+	                        "\u6E05\u7A7A"
 	                    )
 	                )
 	            )
 	        );
 	    };
 	
-	    return Demo12;
+	    return Demo3;
 	}(_react.Component);
 	
-	exports["default"] = _beeForm2["default"].createForm()(Demo12);
+	exports["default"] = _beeForm2["default"].createForm()(Demo3);
 	module.exports = exports["default"];
 
 /***/ }),
-/* 390 */
+/* 389 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38167,11 +37942,11 @@
 	  value: true
 	});
 	
-	var _Form = __webpack_require__(391);
+	var _Form = __webpack_require__(390);
 	
 	var _Form2 = _interopRequireDefault(_Form);
 	
-	var _FormItem = __webpack_require__(483);
+	var _FormItem = __webpack_require__(482);
 	
 	var _FormItem2 = _interopRequireDefault(_FormItem);
 	
@@ -38182,7 +37957,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 391 */
+/* 390 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38199,7 +37974,7 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _rcForm = __webpack_require__(392);
+	var _rcForm = __webpack_require__(391);
 	
 	var _classnames = __webpack_require__(3);
 	
@@ -38262,7 +38037,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 392 */
+/* 391 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38272,15 +38047,15 @@
 	});
 	exports.createForm = exports.formShape = exports.createFormField = undefined;
 	
-	var _createForm = __webpack_require__(393);
+	var _createForm = __webpack_require__(392);
 	
 	var _createForm2 = _interopRequireDefault(_createForm);
 	
-	var _createFormField = __webpack_require__(479);
+	var _createFormField = __webpack_require__(478);
 	
 	var _createFormField2 = _interopRequireDefault(_createFormField);
 	
-	var _propTypes = __webpack_require__(482);
+	var _propTypes = __webpack_require__(481);
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
@@ -38291,7 +38066,7 @@
 	exports.createForm = _createForm2['default']; // export this package's api
 
 /***/ }),
-/* 393 */
+/* 392 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38301,7 +38076,7 @@
 	});
 	exports.mixin = undefined;
 	
-	var _createBaseForm = __webpack_require__(394);
+	var _createBaseForm = __webpack_require__(393);
 	
 	var _createBaseForm2 = _interopRequireDefault(_createBaseForm);
 	
@@ -38339,7 +38114,7 @@
 	exports['default'] = createForm;
 
 /***/ }),
-/* 394 */
+/* 393 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -38372,7 +38147,7 @@
 	
 	var _createReactClass2 = _interopRequireDefault(_createReactClass);
 	
-	var _asyncValidator = __webpack_require__(395);
+	var _asyncValidator = __webpack_require__(394);
 	
 	var _asyncValidator2 = _interopRequireDefault(_asyncValidator);
 	
@@ -38380,19 +38155,19 @@
 	
 	var _warning2 = _interopRequireDefault(_warning);
 	
-	var _get = __webpack_require__(420);
+	var _get = __webpack_require__(419);
 	
 	var _get2 = _interopRequireDefault(_get);
 	
-	var _set = __webpack_require__(472);
+	var _set = __webpack_require__(471);
 	
 	var _set2 = _interopRequireDefault(_set);
 	
-	var _createFieldsStore = __webpack_require__(478);
+	var _createFieldsStore = __webpack_require__(477);
 	
 	var _createFieldsStore2 = _interopRequireDefault(_createFieldsStore);
 	
-	var _utils = __webpack_require__(480);
+	var _utils = __webpack_require__(479);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -38948,7 +38723,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33)))
 
 /***/ }),
-/* 395 */
+/* 394 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -38965,13 +38740,13 @@
 	
 	var _typeof3 = _interopRequireDefault(_typeof2);
 	
-	var _util = __webpack_require__(396);
+	var _util = __webpack_require__(395);
 	
-	var _validator = __webpack_require__(397);
+	var _validator = __webpack_require__(396);
 	
 	var _validator2 = _interopRequireDefault(_validator);
 	
-	var _messages2 = __webpack_require__(419);
+	var _messages2 = __webpack_require__(418);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -39234,7 +39009,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 396 */
+/* 395 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -39450,7 +39225,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33)))
 
 /***/ }),
-/* 397 */
+/* 396 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39459,59 +39234,59 @@
 	  value: true
 	});
 	
-	var _string = __webpack_require__(398);
+	var _string = __webpack_require__(397);
 	
 	var _string2 = _interopRequireDefault(_string);
 	
-	var _method = __webpack_require__(406);
+	var _method = __webpack_require__(405);
 	
 	var _method2 = _interopRequireDefault(_method);
 	
-	var _number = __webpack_require__(407);
+	var _number = __webpack_require__(406);
 	
 	var _number2 = _interopRequireDefault(_number);
 	
-	var _boolean = __webpack_require__(408);
+	var _boolean = __webpack_require__(407);
 	
 	var _boolean2 = _interopRequireDefault(_boolean);
 	
-	var _regexp = __webpack_require__(409);
+	var _regexp = __webpack_require__(408);
 	
 	var _regexp2 = _interopRequireDefault(_regexp);
 	
-	var _integer = __webpack_require__(410);
+	var _integer = __webpack_require__(409);
 	
 	var _integer2 = _interopRequireDefault(_integer);
 	
-	var _float = __webpack_require__(411);
+	var _float = __webpack_require__(410);
 	
 	var _float2 = _interopRequireDefault(_float);
 	
-	var _array = __webpack_require__(412);
+	var _array = __webpack_require__(411);
 	
 	var _array2 = _interopRequireDefault(_array);
 	
-	var _object = __webpack_require__(413);
+	var _object = __webpack_require__(412);
 	
 	var _object2 = _interopRequireDefault(_object);
 	
-	var _enum = __webpack_require__(414);
+	var _enum = __webpack_require__(413);
 	
 	var _enum2 = _interopRequireDefault(_enum);
 	
-	var _pattern = __webpack_require__(415);
+	var _pattern = __webpack_require__(414);
 	
 	var _pattern2 = _interopRequireDefault(_pattern);
 	
-	var _date = __webpack_require__(416);
+	var _date = __webpack_require__(415);
 	
 	var _date2 = _interopRequireDefault(_date);
 	
-	var _required = __webpack_require__(417);
+	var _required = __webpack_require__(416);
 	
 	var _required2 = _interopRequireDefault(_required);
 	
-	var _type = __webpack_require__(418);
+	var _type = __webpack_require__(417);
 	
 	var _type2 = _interopRequireDefault(_type);
 	
@@ -39538,7 +39313,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 398 */
+/* 397 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39547,11 +39322,11 @@
 	  value: true
 	});
 	
-	var _rule = __webpack_require__(399);
+	var _rule = __webpack_require__(398);
 	
 	var _rule2 = _interopRequireDefault(_rule);
 	
-	var _util = __webpack_require__(396);
+	var _util = __webpack_require__(395);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -39589,7 +39364,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 399 */
+/* 398 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39598,27 +39373,27 @@
 	  value: true
 	});
 	
-	var _required = __webpack_require__(400);
+	var _required = __webpack_require__(399);
 	
 	var _required2 = _interopRequireDefault(_required);
 	
-	var _whitespace = __webpack_require__(401);
+	var _whitespace = __webpack_require__(400);
 	
 	var _whitespace2 = _interopRequireDefault(_whitespace);
 	
-	var _type = __webpack_require__(402);
+	var _type = __webpack_require__(401);
 	
 	var _type2 = _interopRequireDefault(_type);
 	
-	var _range = __webpack_require__(403);
+	var _range = __webpack_require__(402);
 	
 	var _range2 = _interopRequireDefault(_range);
 	
-	var _enum = __webpack_require__(404);
+	var _enum = __webpack_require__(403);
 	
 	var _enum2 = _interopRequireDefault(_enum);
 	
-	var _pattern = __webpack_require__(405);
+	var _pattern = __webpack_require__(404);
 	
 	var _pattern2 = _interopRequireDefault(_pattern);
 	
@@ -39635,7 +39410,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 400 */
+/* 399 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39644,7 +39419,7 @@
 	  value: true
 	});
 	
-	var _util = __webpack_require__(396);
+	var _util = __webpack_require__(395);
 	
 	var util = _interopRequireWildcard(_util);
 	
@@ -39671,7 +39446,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 401 */
+/* 400 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39680,7 +39455,7 @@
 	  value: true
 	});
 	
-	var _util = __webpack_require__(396);
+	var _util = __webpack_require__(395);
 	
 	var util = _interopRequireWildcard(_util);
 	
@@ -39707,7 +39482,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 402 */
+/* 401 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39720,11 +39495,11 @@
 	
 	var _typeof3 = _interopRequireDefault(_typeof2);
 	
-	var _util = __webpack_require__(396);
+	var _util = __webpack_require__(395);
 	
 	var util = _interopRequireWildcard(_util);
 	
-	var _required = __webpack_require__(400);
+	var _required = __webpack_require__(399);
 	
 	var _required2 = _interopRequireDefault(_required);
 	
@@ -39819,7 +39594,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 403 */
+/* 402 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39828,7 +39603,7 @@
 	  value: true
 	});
 	
-	var _util = __webpack_require__(396);
+	var _util = __webpack_require__(395);
 	
 	var util = _interopRequireWildcard(_util);
 	
@@ -39893,7 +39668,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 404 */
+/* 403 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39902,7 +39677,7 @@
 	  value: true
 	});
 	
-	var _util = __webpack_require__(396);
+	var _util = __webpack_require__(395);
 	
 	var util = _interopRequireWildcard(_util);
 	
@@ -39932,7 +39707,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 405 */
+/* 404 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39941,7 +39716,7 @@
 	  value: true
 	});
 	
-	var _util = __webpack_require__(396);
+	var _util = __webpack_require__(395);
 	
 	var util = _interopRequireWildcard(_util);
 	
@@ -39981,7 +39756,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 406 */
+/* 405 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39990,11 +39765,11 @@
 	  value: true
 	});
 	
-	var _rule = __webpack_require__(399);
+	var _rule = __webpack_require__(398);
 	
 	var _rule2 = _interopRequireDefault(_rule);
 	
-	var _util = __webpack_require__(396);
+	var _util = __webpack_require__(395);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -40027,7 +39802,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 407 */
+/* 406 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -40036,11 +39811,11 @@
 	  value: true
 	});
 	
-	var _rule = __webpack_require__(399);
+	var _rule = __webpack_require__(398);
 	
 	var _rule2 = _interopRequireDefault(_rule);
 	
-	var _util = __webpack_require__(396);
+	var _util = __webpack_require__(395);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -40074,7 +39849,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 408 */
+/* 407 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -40083,9 +39858,9 @@
 	  value: true
 	});
 	
-	var _util = __webpack_require__(396);
+	var _util = __webpack_require__(395);
 	
-	var _rule = __webpack_require__(399);
+	var _rule = __webpack_require__(398);
 	
 	var _rule2 = _interopRequireDefault(_rule);
 	
@@ -40120,7 +39895,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 409 */
+/* 408 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -40129,11 +39904,11 @@
 	  value: true
 	});
 	
-	var _rule = __webpack_require__(399);
+	var _rule = __webpack_require__(398);
 	
 	var _rule2 = _interopRequireDefault(_rule);
 	
-	var _util = __webpack_require__(396);
+	var _util = __webpack_require__(395);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -40166,7 +39941,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 410 */
+/* 409 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -40175,11 +39950,11 @@
 	  value: true
 	});
 	
-	var _rule = __webpack_require__(399);
+	var _rule = __webpack_require__(398);
 	
 	var _rule2 = _interopRequireDefault(_rule);
 	
-	var _util = __webpack_require__(396);
+	var _util = __webpack_require__(395);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -40213,7 +39988,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 411 */
+/* 410 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -40222,11 +39997,11 @@
 	  value: true
 	});
 	
-	var _rule = __webpack_require__(399);
+	var _rule = __webpack_require__(398);
 	
 	var _rule2 = _interopRequireDefault(_rule);
 	
-	var _util = __webpack_require__(396);
+	var _util = __webpack_require__(395);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -40260,7 +40035,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 412 */
+/* 411 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -40269,11 +40044,11 @@
 	  value: true
 	});
 	
-	var _rule = __webpack_require__(399);
+	var _rule = __webpack_require__(398);
 	
 	var _rule2 = _interopRequireDefault(_rule);
 	
-	var _util = __webpack_require__(396);
+	var _util = __webpack_require__(395);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -40307,7 +40082,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 413 */
+/* 412 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -40316,11 +40091,11 @@
 	  value: true
 	});
 	
-	var _rule = __webpack_require__(399);
+	var _rule = __webpack_require__(398);
 	
 	var _rule2 = _interopRequireDefault(_rule);
 	
-	var _util = __webpack_require__(396);
+	var _util = __webpack_require__(395);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -40353,7 +40128,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 414 */
+/* 413 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -40362,11 +40137,11 @@
 	  value: true
 	});
 	
-	var _rule = __webpack_require__(399);
+	var _rule = __webpack_require__(398);
 	
 	var _rule2 = _interopRequireDefault(_rule);
 	
-	var _util = __webpack_require__(396);
+	var _util = __webpack_require__(395);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -40401,7 +40176,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 415 */
+/* 414 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -40410,11 +40185,11 @@
 	  value: true
 	});
 	
-	var _rule = __webpack_require__(399);
+	var _rule = __webpack_require__(398);
 	
 	var _rule2 = _interopRequireDefault(_rule);
 	
-	var _util = __webpack_require__(396);
+	var _util = __webpack_require__(395);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -40450,7 +40225,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 416 */
+/* 415 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -40459,11 +40234,11 @@
 	  value: true
 	});
 	
-	var _rule = __webpack_require__(399);
+	var _rule = __webpack_require__(398);
 	
 	var _rule2 = _interopRequireDefault(_rule);
 	
-	var _util = __webpack_require__(396);
+	var _util = __webpack_require__(395);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -40499,7 +40274,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 417 */
+/* 416 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -40512,7 +40287,7 @@
 	
 	var _typeof3 = _interopRequireDefault(_typeof2);
 	
-	var _rule = __webpack_require__(399);
+	var _rule = __webpack_require__(398);
 	
 	var _rule2 = _interopRequireDefault(_rule);
 	
@@ -40529,7 +40304,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 418 */
+/* 417 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -40538,11 +40313,11 @@
 	  value: true
 	});
 	
-	var _rule = __webpack_require__(399);
+	var _rule = __webpack_require__(398);
 	
 	var _rule2 = _interopRequireDefault(_rule);
 	
-	var _util = __webpack_require__(396);
+	var _util = __webpack_require__(395);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -40566,7 +40341,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 419 */
+/* 418 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -40633,10 +40408,10 @@
 	var messages = exports.messages = newMessages();
 
 /***/ }),
-/* 420 */
+/* 419 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var baseGet = __webpack_require__(421);
+	var baseGet = __webpack_require__(420);
 	
 	/**
 	 * Gets the value at `path` of `object`. If the resolved value is
@@ -40672,11 +40447,11 @@
 
 
 /***/ }),
-/* 421 */
+/* 420 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var castPath = __webpack_require__(422),
-	    toKey = __webpack_require__(471);
+	var castPath = __webpack_require__(421),
+	    toKey = __webpack_require__(470);
 	
 	/**
 	 * The base implementation of `_.get` without support for default values.
@@ -40702,13 +40477,13 @@
 
 
 /***/ }),
-/* 422 */
+/* 421 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var isArray = __webpack_require__(423),
-	    isKey = __webpack_require__(424),
-	    stringToPath = __webpack_require__(433),
-	    toString = __webpack_require__(468);
+	var isArray = __webpack_require__(422),
+	    isKey = __webpack_require__(423),
+	    stringToPath = __webpack_require__(432),
+	    toString = __webpack_require__(467);
 	
 	/**
 	 * Casts `value` to a path array if it's not one.
@@ -40729,7 +40504,7 @@
 
 
 /***/ }),
-/* 423 */
+/* 422 */
 /***/ (function(module, exports) {
 
 	/**
@@ -40761,11 +40536,11 @@
 
 
 /***/ }),
-/* 424 */
+/* 423 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var isArray = __webpack_require__(423),
-	    isSymbol = __webpack_require__(425);
+	var isArray = __webpack_require__(422),
+	    isSymbol = __webpack_require__(424);
 	
 	/** Used to match property names within property paths. */
 	var reIsDeepProp = /\.|\[(?:[^[\]]*|(["'])(?:(?!\1)[^\\]|\\.)*?\1)\]/,
@@ -40796,11 +40571,11 @@
 
 
 /***/ }),
-/* 425 */
+/* 424 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var baseGetTag = __webpack_require__(426),
-	    isObjectLike = __webpack_require__(432);
+	var baseGetTag = __webpack_require__(425),
+	    isObjectLike = __webpack_require__(431);
 	
 	/** `Object#toString` result references. */
 	var symbolTag = '[object Symbol]';
@@ -40831,12 +40606,12 @@
 
 
 /***/ }),
-/* 426 */
+/* 425 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var Symbol = __webpack_require__(427),
-	    getRawTag = __webpack_require__(430),
-	    objectToString = __webpack_require__(431);
+	var Symbol = __webpack_require__(426),
+	    getRawTag = __webpack_require__(429),
+	    objectToString = __webpack_require__(430);
 	
 	/** `Object#toString` result references. */
 	var nullTag = '[object Null]',
@@ -40865,10 +40640,10 @@
 
 
 /***/ }),
-/* 427 */
+/* 426 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var root = __webpack_require__(428);
+	var root = __webpack_require__(427);
 	
 	/** Built-in value references. */
 	var Symbol = root.Symbol;
@@ -40877,10 +40652,10 @@
 
 
 /***/ }),
-/* 428 */
+/* 427 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var freeGlobal = __webpack_require__(429);
+	var freeGlobal = __webpack_require__(428);
 	
 	/** Detect free variable `self`. */
 	var freeSelf = typeof self == 'object' && self && self.Object === Object && self;
@@ -40892,7 +40667,7 @@
 
 
 /***/ }),
-/* 429 */
+/* 428 */
 /***/ (function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/** Detect free variable `global` from Node.js. */
@@ -40903,10 +40678,10 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ }),
-/* 430 */
+/* 429 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var Symbol = __webpack_require__(427);
+	var Symbol = __webpack_require__(426);
 	
 	/** Used for built-in method references. */
 	var objectProto = Object.prototype;
@@ -40955,7 +40730,7 @@
 
 
 /***/ }),
-/* 431 */
+/* 430 */
 /***/ (function(module, exports) {
 
 	/** Used for built-in method references. */
@@ -40983,7 +40758,7 @@
 
 
 /***/ }),
-/* 432 */
+/* 431 */
 /***/ (function(module, exports) {
 
 	/**
@@ -41018,10 +40793,10 @@
 
 
 /***/ }),
-/* 433 */
+/* 432 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var memoizeCapped = __webpack_require__(434);
+	var memoizeCapped = __webpack_require__(433);
 	
 	/** Used to match property names within property paths. */
 	var rePropName = /[^.[\]]+|\[(?:(-?\d+(?:\.\d+)?)|(["'])((?:(?!\2)[^\\]|\\.)*?)\2)\]|(?=(?:\.|\[\])(?:\.|\[\]|$))/g;
@@ -41051,10 +40826,10 @@
 
 
 /***/ }),
-/* 434 */
+/* 433 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var memoize = __webpack_require__(435);
+	var memoize = __webpack_require__(434);
 	
 	/** Used as the maximum memoize cache size. */
 	var MAX_MEMOIZE_SIZE = 500;
@@ -41083,10 +40858,10 @@
 
 
 /***/ }),
-/* 435 */
+/* 434 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var MapCache = __webpack_require__(436);
+	var MapCache = __webpack_require__(435);
 	
 	/** Error message constants. */
 	var FUNC_ERROR_TEXT = 'Expected a function';
@@ -41162,14 +40937,14 @@
 
 
 /***/ }),
-/* 436 */
+/* 435 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var mapCacheClear = __webpack_require__(437),
-	    mapCacheDelete = __webpack_require__(462),
-	    mapCacheGet = __webpack_require__(465),
-	    mapCacheHas = __webpack_require__(466),
-	    mapCacheSet = __webpack_require__(467);
+	var mapCacheClear = __webpack_require__(436),
+	    mapCacheDelete = __webpack_require__(461),
+	    mapCacheGet = __webpack_require__(464),
+	    mapCacheHas = __webpack_require__(465),
+	    mapCacheSet = __webpack_require__(466);
 	
 	/**
 	 * Creates a map cache object to store key-value pairs.
@@ -41200,12 +40975,12 @@
 
 
 /***/ }),
-/* 437 */
+/* 436 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var Hash = __webpack_require__(438),
-	    ListCache = __webpack_require__(453),
-	    Map = __webpack_require__(461);
+	var Hash = __webpack_require__(437),
+	    ListCache = __webpack_require__(452),
+	    Map = __webpack_require__(460);
 	
 	/**
 	 * Removes all key-value entries from the map.
@@ -41227,14 +41002,14 @@
 
 
 /***/ }),
-/* 438 */
+/* 437 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var hashClear = __webpack_require__(439),
-	    hashDelete = __webpack_require__(449),
-	    hashGet = __webpack_require__(450),
-	    hashHas = __webpack_require__(451),
-	    hashSet = __webpack_require__(452);
+	var hashClear = __webpack_require__(438),
+	    hashDelete = __webpack_require__(448),
+	    hashGet = __webpack_require__(449),
+	    hashHas = __webpack_require__(450),
+	    hashSet = __webpack_require__(451);
 	
 	/**
 	 * Creates a hash object.
@@ -41265,10 +41040,10 @@
 
 
 /***/ }),
-/* 439 */
+/* 438 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var nativeCreate = __webpack_require__(440);
+	var nativeCreate = __webpack_require__(439);
 	
 	/**
 	 * Removes all key-value entries from the hash.
@@ -41286,10 +41061,10 @@
 
 
 /***/ }),
-/* 440 */
+/* 439 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var getNative = __webpack_require__(441);
+	var getNative = __webpack_require__(440);
 	
 	/* Built-in method references that are verified to be native. */
 	var nativeCreate = getNative(Object, 'create');
@@ -41298,11 +41073,11 @@
 
 
 /***/ }),
-/* 441 */
+/* 440 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var baseIsNative = __webpack_require__(442),
-	    getValue = __webpack_require__(448);
+	var baseIsNative = __webpack_require__(441),
+	    getValue = __webpack_require__(447);
 	
 	/**
 	 * Gets the native function at `key` of `object`.
@@ -41321,13 +41096,13 @@
 
 
 /***/ }),
-/* 442 */
+/* 441 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var isFunction = __webpack_require__(443),
-	    isMasked = __webpack_require__(445),
-	    isObject = __webpack_require__(444),
-	    toSource = __webpack_require__(447);
+	var isFunction = __webpack_require__(442),
+	    isMasked = __webpack_require__(444),
+	    isObject = __webpack_require__(443),
+	    toSource = __webpack_require__(446);
 	
 	/**
 	 * Used to match `RegExp`
@@ -41374,11 +41149,11 @@
 
 
 /***/ }),
-/* 443 */
+/* 442 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var baseGetTag = __webpack_require__(426),
-	    isObject = __webpack_require__(444);
+	var baseGetTag = __webpack_require__(425),
+	    isObject = __webpack_require__(443);
 	
 	/** `Object#toString` result references. */
 	var asyncTag = '[object AsyncFunction]',
@@ -41417,7 +41192,7 @@
 
 
 /***/ }),
-/* 444 */
+/* 443 */
 /***/ (function(module, exports) {
 
 	/**
@@ -41454,10 +41229,10 @@
 
 
 /***/ }),
-/* 445 */
+/* 444 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var coreJsData = __webpack_require__(446);
+	var coreJsData = __webpack_require__(445);
 	
 	/** Used to detect methods masquerading as native. */
 	var maskSrcKey = (function() {
@@ -41480,10 +41255,10 @@
 
 
 /***/ }),
-/* 446 */
+/* 445 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var root = __webpack_require__(428);
+	var root = __webpack_require__(427);
 	
 	/** Used to detect overreaching core-js shims. */
 	var coreJsData = root['__core-js_shared__'];
@@ -41492,7 +41267,7 @@
 
 
 /***/ }),
-/* 447 */
+/* 446 */
 /***/ (function(module, exports) {
 
 	/** Used for built-in method references. */
@@ -41524,7 +41299,7 @@
 
 
 /***/ }),
-/* 448 */
+/* 447 */
 /***/ (function(module, exports) {
 
 	/**
@@ -41543,7 +41318,7 @@
 
 
 /***/ }),
-/* 449 */
+/* 448 */
 /***/ (function(module, exports) {
 
 	/**
@@ -41566,10 +41341,10 @@
 
 
 /***/ }),
-/* 450 */
+/* 449 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var nativeCreate = __webpack_require__(440);
+	var nativeCreate = __webpack_require__(439);
 	
 	/** Used to stand-in for `undefined` hash values. */
 	var HASH_UNDEFINED = '__lodash_hash_undefined__';
@@ -41602,10 +41377,10 @@
 
 
 /***/ }),
-/* 451 */
+/* 450 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var nativeCreate = __webpack_require__(440);
+	var nativeCreate = __webpack_require__(439);
 	
 	/** Used for built-in method references. */
 	var objectProto = Object.prototype;
@@ -41631,10 +41406,10 @@
 
 
 /***/ }),
-/* 452 */
+/* 451 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var nativeCreate = __webpack_require__(440);
+	var nativeCreate = __webpack_require__(439);
 	
 	/** Used to stand-in for `undefined` hash values. */
 	var HASH_UNDEFINED = '__lodash_hash_undefined__';
@@ -41660,14 +41435,14 @@
 
 
 /***/ }),
-/* 453 */
+/* 452 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var listCacheClear = __webpack_require__(454),
-	    listCacheDelete = __webpack_require__(455),
-	    listCacheGet = __webpack_require__(458),
-	    listCacheHas = __webpack_require__(459),
-	    listCacheSet = __webpack_require__(460);
+	var listCacheClear = __webpack_require__(453),
+	    listCacheDelete = __webpack_require__(454),
+	    listCacheGet = __webpack_require__(457),
+	    listCacheHas = __webpack_require__(458),
+	    listCacheSet = __webpack_require__(459);
 	
 	/**
 	 * Creates an list cache object.
@@ -41698,7 +41473,7 @@
 
 
 /***/ }),
-/* 454 */
+/* 453 */
 /***/ (function(module, exports) {
 
 	/**
@@ -41717,10 +41492,10 @@
 
 
 /***/ }),
-/* 455 */
+/* 454 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var assocIndexOf = __webpack_require__(456);
+	var assocIndexOf = __webpack_require__(455);
 	
 	/** Used for built-in method references. */
 	var arrayProto = Array.prototype;
@@ -41758,10 +41533,10 @@
 
 
 /***/ }),
-/* 456 */
+/* 455 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var eq = __webpack_require__(457);
+	var eq = __webpack_require__(456);
 	
 	/**
 	 * Gets the index at which the `key` is found in `array` of key-value pairs.
@@ -41785,7 +41560,7 @@
 
 
 /***/ }),
-/* 457 */
+/* 456 */
 /***/ (function(module, exports) {
 
 	/**
@@ -41828,10 +41603,10 @@
 
 
 /***/ }),
-/* 458 */
+/* 457 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var assocIndexOf = __webpack_require__(456);
+	var assocIndexOf = __webpack_require__(455);
 	
 	/**
 	 * Gets the list cache value for `key`.
@@ -41853,10 +41628,10 @@
 
 
 /***/ }),
-/* 459 */
+/* 458 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var assocIndexOf = __webpack_require__(456);
+	var assocIndexOf = __webpack_require__(455);
 	
 	/**
 	 * Checks if a list cache value for `key` exists.
@@ -41875,10 +41650,10 @@
 
 
 /***/ }),
-/* 460 */
+/* 459 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var assocIndexOf = __webpack_require__(456);
+	var assocIndexOf = __webpack_require__(455);
 	
 	/**
 	 * Sets the list cache `key` to `value`.
@@ -41907,11 +41682,11 @@
 
 
 /***/ }),
-/* 461 */
+/* 460 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var getNative = __webpack_require__(441),
-	    root = __webpack_require__(428);
+	var getNative = __webpack_require__(440),
+	    root = __webpack_require__(427);
 	
 	/* Built-in method references that are verified to be native. */
 	var Map = getNative(root, 'Map');
@@ -41920,10 +41695,10 @@
 
 
 /***/ }),
-/* 462 */
+/* 461 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var getMapData = __webpack_require__(463);
+	var getMapData = __webpack_require__(462);
 	
 	/**
 	 * Removes `key` and its value from the map.
@@ -41944,10 +41719,10 @@
 
 
 /***/ }),
-/* 463 */
+/* 462 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var isKeyable = __webpack_require__(464);
+	var isKeyable = __webpack_require__(463);
 	
 	/**
 	 * Gets the data for `map`.
@@ -41968,7 +41743,7 @@
 
 
 /***/ }),
-/* 464 */
+/* 463 */
 /***/ (function(module, exports) {
 
 	/**
@@ -41989,10 +41764,10 @@
 
 
 /***/ }),
-/* 465 */
+/* 464 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var getMapData = __webpack_require__(463);
+	var getMapData = __webpack_require__(462);
 	
 	/**
 	 * Gets the map value for `key`.
@@ -42011,10 +41786,10 @@
 
 
 /***/ }),
-/* 466 */
+/* 465 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var getMapData = __webpack_require__(463);
+	var getMapData = __webpack_require__(462);
 	
 	/**
 	 * Checks if a map value for `key` exists.
@@ -42033,10 +41808,10 @@
 
 
 /***/ }),
-/* 467 */
+/* 466 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var getMapData = __webpack_require__(463);
+	var getMapData = __webpack_require__(462);
 	
 	/**
 	 * Sets the map `key` to `value`.
@@ -42061,10 +41836,10 @@
 
 
 /***/ }),
-/* 468 */
+/* 467 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var baseToString = __webpack_require__(469);
+	var baseToString = __webpack_require__(468);
 	
 	/**
 	 * Converts `value` to a string. An empty string is returned for `null`
@@ -42095,13 +41870,13 @@
 
 
 /***/ }),
-/* 469 */
+/* 468 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var Symbol = __webpack_require__(427),
-	    arrayMap = __webpack_require__(470),
-	    isArray = __webpack_require__(423),
-	    isSymbol = __webpack_require__(425);
+	var Symbol = __webpack_require__(426),
+	    arrayMap = __webpack_require__(469),
+	    isArray = __webpack_require__(422),
+	    isSymbol = __webpack_require__(424);
 	
 	/** Used as references for various `Number` constants. */
 	var INFINITY = 1 / 0;
@@ -42138,7 +41913,7 @@
 
 
 /***/ }),
-/* 470 */
+/* 469 */
 /***/ (function(module, exports) {
 
 	/**
@@ -42165,10 +41940,10 @@
 
 
 /***/ }),
-/* 471 */
+/* 470 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var isSymbol = __webpack_require__(425);
+	var isSymbol = __webpack_require__(424);
 	
 	/** Used as references for various `Number` constants. */
 	var INFINITY = 1 / 0;
@@ -42192,10 +41967,10 @@
 
 
 /***/ }),
-/* 472 */
+/* 471 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var baseSet = __webpack_require__(473);
+	var baseSet = __webpack_require__(472);
 	
 	/**
 	 * Sets the value at `path` of `object`. If a portion of `path` doesn't exist,
@@ -42233,14 +42008,14 @@
 
 
 /***/ }),
-/* 473 */
+/* 472 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var assignValue = __webpack_require__(474),
-	    castPath = __webpack_require__(422),
-	    isIndex = __webpack_require__(477),
-	    isObject = __webpack_require__(444),
-	    toKey = __webpack_require__(471);
+	var assignValue = __webpack_require__(473),
+	    castPath = __webpack_require__(421),
+	    isIndex = __webpack_require__(476),
+	    isObject = __webpack_require__(443),
+	    toKey = __webpack_require__(470);
 	
 	/**
 	 * The base implementation of `_.set`.
@@ -42286,11 +42061,11 @@
 
 
 /***/ }),
-/* 474 */
+/* 473 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var baseAssignValue = __webpack_require__(475),
-	    eq = __webpack_require__(457);
+	var baseAssignValue = __webpack_require__(474),
+	    eq = __webpack_require__(456);
 	
 	/** Used for built-in method references. */
 	var objectProto = Object.prototype;
@@ -42320,10 +42095,10 @@
 
 
 /***/ }),
-/* 475 */
+/* 474 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var defineProperty = __webpack_require__(476);
+	var defineProperty = __webpack_require__(475);
 	
 	/**
 	 * The base implementation of `assignValue` and `assignMergeValue` without
@@ -42351,10 +42126,10 @@
 
 
 /***/ }),
-/* 476 */
+/* 475 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var getNative = __webpack_require__(441);
+	var getNative = __webpack_require__(440);
 	
 	var defineProperty = (function() {
 	  try {
@@ -42368,7 +42143,7 @@
 
 
 /***/ }),
-/* 477 */
+/* 476 */
 /***/ (function(module, exports) {
 
 	/** Used as references for various `Number` constants. */
@@ -42399,7 +42174,7 @@
 
 
 /***/ }),
-/* 478 */
+/* 477 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -42426,15 +42201,15 @@
 	
 	exports['default'] = createFieldsStore;
 	
-	var _set = __webpack_require__(472);
+	var _set = __webpack_require__(471);
 	
 	var _set2 = _interopRequireDefault(_set);
 	
-	var _createFormField = __webpack_require__(479);
+	var _createFormField = __webpack_require__(478);
 	
 	var _createFormField2 = _interopRequireDefault(_createFormField);
 	
-	var _utils = __webpack_require__(480);
+	var _utils = __webpack_require__(479);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -42732,7 +42507,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 479 */
+/* 478 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -42772,7 +42547,7 @@
 	}
 
 /***/ }),
-/* 480 */
+/* 479 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -42799,7 +42574,7 @@
 	exports.hasRules = hasRules;
 	exports.startsWith = startsWith;
 	
-	var _hoistNonReactStatics = __webpack_require__(481);
+	var _hoistNonReactStatics = __webpack_require__(480);
 	
 	var _hoistNonReactStatics2 = _interopRequireDefault(_hoistNonReactStatics);
 	
@@ -42962,7 +42737,7 @@
 	}
 
 /***/ }),
-/* 481 */
+/* 480 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -43036,7 +42811,7 @@
 
 
 /***/ }),
-/* 482 */
+/* 481 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -43076,7 +42851,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 483 */
+/* 482 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -43148,250 +42923,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 484 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	"use strict";
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _react = __webpack_require__(4);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _beeLayout = __webpack_require__(1);
-	
-	var _index = __webpack_require__(85);
-	
-	var _index2 = _interopRequireDefault(_index);
-	
-	var _moment = __webpack_require__(185);
-	
-	var _moment2 = _interopRequireDefault(_moment);
-	
-	var _zh_CN = __webpack_require__(384);
-	
-	var _zh_CN2 = _interopRequireDefault(_zh_CN);
-	
-	var _en_US = __webpack_require__(326);
-	
-	var _en_US2 = _interopRequireDefault(_en_US);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-	
-	function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); } /**
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @title 选择年月
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @description 以「年月」为基本单位，基础的年月选择控件
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
-	
-	var MonthPicker = _index2["default"].MonthPicker;
-	
-	
-	var format2 = "YYYY";
-	
-	function onSelect(d) {
-	  console.log(d);
-	}
-	
-	function onChange(d) {
-	  console.log(d);
-	}
-	
-	var Demo2 = function (_Component) {
-	  _inherits(Demo2, _Component);
-	
-	  function Demo2() {
-	    _classCallCheck(this, Demo2);
-	
-	    return _possibleConstructorReturn(this, _Component.apply(this, arguments));
-	  }
-	
-	  Demo2.prototype.render = function render() {
-	    return _react2["default"].createElement(
-	      "div",
-	      null,
-	      _react2["default"].createElement(
-	        _beeLayout.Row,
-	        null,
-	        _react2["default"].createElement(
-	          _beeLayout.Col,
-	          { md: 12 },
-	          _react2["default"].createElement(MonthPicker, {
-	            format: format2,
-	            onSelect: onSelect,
-	            onChange: onChange,
-	            locale: _zh_CN2["default"],
-	
-	            defaultValue: (0, _moment2["default"])(),
-	            placeholder: "选择年月"
-	          })
-	        )
-	      )
-	    );
-	  };
-	
-	  return Demo2;
-	}(_react.Component);
-	
-	exports["default"] = Demo2;
-	module.exports = exports["default"];
-
-/***/ }),
-/* 485 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	"use strict";
-	
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	
-	var _react = __webpack_require__(4);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _beeLayout = __webpack_require__(1);
-	
-	var _index = __webpack_require__(85);
-	
-	var _index2 = _interopRequireDefault(_index);
-	
-	var _beeIcon = __webpack_require__(351);
-	
-	var _beeIcon2 = _interopRequireDefault(_beeIcon);
-	
-	var _zh_CN = __webpack_require__(384);
-	
-	var _zh_CN2 = _interopRequireDefault(_zh_CN);
-	
-	var _moment = __webpack_require__(185);
-	
-	var _moment2 = _interopRequireDefault(_moment);
-	
-	var _beeForm = __webpack_require__(390);
-	
-	var _beeForm2 = _interopRequireDefault(_beeForm);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-	
-	function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); } /**
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @title 日期范围
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @description 以「日期范围」为基本单位，基础的日期范围选择控件
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
-	
-	var FormItem = _beeForm2["default"].FormItem;
-	
-	var now = (0, _moment2["default"])();
-	
-	var RangePicker = _index2["default"].RangePicker;
-	
-	
-	var format3 = "YYYY-MM-DD HH:mm:ss";
-	
-	function formatValue(value, format) {
-	    return value && value.format(format) || '';
-	}
-	
-	function onSelect(d) {
-	    //console.log(d);
-	}
-	
-	var Demo3 = function (_Component) {
-	    _inherits(Demo3, _Component);
-	
-	    function Demo3(props) {
-	        _classCallCheck(this, Demo3);
-	
-	        var _this = _possibleConstructorReturn(this, _Component.call(this, props));
-	
-	        _this.onStartChange = function (value) {
-	            _this.setState({
-	                startValue: value[0],
-	                startOpen: false,
-	                endOpen: true
-	            });
-	        };
-	
-	        _this.state = {
-	            value: '',
-	            v: ''
-	        };
-	        return _this;
-	    }
-	
-	    Demo3.prototype.remove = function remove() {
-	        this.setState({ value: '' });
-	    };
-	
-	    Demo3.prototype.onChange = function onChange(d, str) {
-	        console.log(d);
-	    };
-	
-	    Demo3.prototype.render = function render() {
-	        var props = this.props;
-	        var self = this;
-	        var _props$form = this.props.form,
-	            getFieldProps = _props$form.getFieldProps,
-	            getFieldError = _props$form.getFieldError;
-	
-	
-	        return _react2["default"].createElement(
-	            "div",
-	            null,
-	            _react2["default"].createElement(
-	                _beeLayout.Row,
-	                null,
-	                _react2["default"].createElement(
-	                    _beeLayout.Col,
-	                    { md: 8 },
-	                    _react2["default"].createElement(RangePicker, {
-	                        placeholder: '开始 ~ 结束',
-	                        dateInputPlaceholder: ['开始', '结束'],
-	                        showClear: true,
-	                        value: this.state.value,
-	                        onChange: this.onChange.bind(this),
-	                        renderFooter: function renderFooter() {
-	                            return _react2["default"].createElement("div", null);
-	                        }
-	                    })
-	                ),
-	                _react2["default"].createElement(
-	                    _beeLayout.Col,
-	                    { md: 3 },
-	                    _react2["default"].createElement(
-	                        "button",
-	                        { className: "u-button", onClick: this.remove.bind(this) },
-	                        "\u6E05\u7A7A"
-	                    )
-	                )
-	            )
-	        );
-	    };
-	
-	    return Demo3;
-	}(_react.Component);
-	
-	exports["default"] = _beeForm2["default"].createForm()(Demo3);
-	module.exports = exports["default"];
-
-/***/ }),
-/* 486 */
+/* 483 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -43509,7 +43041,7 @@
 	module.exports = exports["default"];
 
 /***/ }),
-/* 487 */
+/* 484 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -43589,7 +43121,7 @@
 	module.exports = exports["default"];
 
 /***/ }),
-/* 488 */
+/* 485 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -43686,7 +43218,7 @@
 	module.exports = exports["default"];
 
 /***/ }),
-/* 489 */
+/* 486 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -43783,7 +43315,7 @@
 	module.exports = exports["default"];
 
 /***/ }),
-/* 490 */
+/* 487 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -43880,7 +43412,7 @@
 	module.exports = exports["default"];
 
 /***/ }),
-/* 491 */
+/* 488 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -43997,6 +43529,471 @@
 	}(_react.Component);
 	
 	exports["default"] = Demo1;
+	module.exports = exports["default"];
+
+/***/ }),
+/* 489 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _react = __webpack_require__(4);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _beeLayout = __webpack_require__(1);
+	
+	var _index = __webpack_require__(85);
+	
+	var _index2 = _interopRequireDefault(_index);
+	
+	var _moment = __webpack_require__(185);
+	
+	var _moment2 = _interopRequireDefault(_moment);
+	
+	var _beeIcon = __webpack_require__(351);
+	
+	var _beeIcon2 = _interopRequireDefault(_beeIcon);
+	
+	var _zh_CN = __webpack_require__(384);
+	
+	var _zh_CN2 = _interopRequireDefault(_zh_CN);
+	
+	var _en_US = __webpack_require__(326);
+	
+	var _en_US2 = _interopRequireDefault(_en_US);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	
+	function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); } /**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @title 选择年
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @description 以「年」为基本单位，基础的年选择控件
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
+	
+	var YearPicker = _index2["default"].YearPicker;
+	
+	
+	var format2 = "YYYY";
+	
+	function onSelect(d) {
+	    console.log(d);
+	}
+	
+	function onChange(d) {
+	    console.log(d);
+	}
+	
+	var Demo10 = function (_Component) {
+	    _inherits(Demo10, _Component);
+	
+	    function Demo10(props) {
+	        _classCallCheck(this, Demo10);
+	
+	        var _this = _possibleConstructorReturn(this, _Component.call(this, props));
+	
+	        _this.clear = function (d) {
+	            _this.setState({
+	                value: ''
+	            });
+	        };
+	
+	        _this.state = {
+	            value: (0, _moment2["default"])(),
+	            open: false
+	        };
+	        return _this;
+	    }
+	
+	    Demo10.prototype.getCalendarContainer = function getCalendarContainer() {
+	        return this.d || document.getElementById('d');
+	    };
+	
+	    Demo10.prototype.render = function render() {
+	        return _react2["default"].createElement(
+	            "div",
+	            null,
+	            _react2["default"].createElement(
+	                _beeLayout.Row,
+	                null,
+	                _react2["default"].createElement(
+	                    _beeLayout.Col,
+	                    { md: 8 },
+	                    _react2["default"].createElement(
+	                        "div",
+	                        { id: "d" },
+	                        _react2["default"].createElement(YearPicker, {
+	                            format: format2,
+	
+	                            onChange: onChange,
+	
+	                            locale: _zh_CN2["default"],
+	
+	                            value: this.state.value,
+	
+	                            className: 'rc-calendar-year',
+	
+	                            placeholder: "选择年"
+	                        })
+	                    )
+	                ),
+	                _react2["default"].createElement(
+	                    _beeLayout.Col,
+	                    { md: 3 },
+	                    _react2["default"].createElement(
+	                        "button",
+	                        { className: "u-button", onClick: this.clear },
+	                        "\u6E05\u7A7A"
+	                    )
+	                )
+	            )
+	        );
+	    };
+	
+	    return Demo10;
+	}(_react.Component);
+	
+	exports["default"] = Demo10;
+	module.exports = exports["default"];
+
+/***/ }),
+/* 490 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _react = __webpack_require__(4);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _beeLayout = __webpack_require__(1);
+	
+	var _index = __webpack_require__(85);
+	
+	var _index2 = _interopRequireDefault(_index);
+	
+	var _zh_CN = __webpack_require__(384);
+	
+	var _zh_CN2 = _interopRequireDefault(_zh_CN);
+	
+	var _en_US = __webpack_require__(326);
+	
+	var _en_US2 = _interopRequireDefault(_en_US);
+	
+	var _moment = __webpack_require__(185);
+	
+	var _moment2 = _interopRequireDefault(_moment);
+	
+	var _beeIcon = __webpack_require__(351);
+	
+	var _beeIcon2 = _interopRequireDefault(_beeIcon);
+	
+	__webpack_require__(308);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	
+	function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); } /**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @title 自定义展示日期面板，外层输入框可输入
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @description open设置面板展开收起，keyboardInput外层input是否可输入，showDateInput是否显示内层input
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
+	
+	_moment2["default"].locale('zh-cn');
+	
+	var format = "YYYY-MM-DD";
+	
+	var dateInputPlaceholder = "选择日期";
+	
+	function onSelect(d) {
+	    // console.log(d);
+	}
+	
+	var Demo11 = function (_Component) {
+	    _inherits(Demo11, _Component);
+	
+	    function Demo11(props) {
+	        _classCallCheck(this, Demo11);
+	
+	        var _this = _possibleConstructorReturn(this, _Component.call(this, props));
+	
+	        _this.onChange = function (d, dataString) {
+	            _this.setState({
+	                value: d
+	            });
+	            console.log('onChange', dataString);
+	        };
+	
+	        _this.renderIcon = function (d) {
+	            return _react2["default"].createElement(_beeIcon2["default"], { type: "uf-search" });
+	        };
+	
+	        _this.onOpenChange = function (open) {
+	            console.log(open);
+	        };
+	
+	        _this.open = function (d) {
+	            _this.setState({
+	                open: !_this.state.open
+	            });
+	        };
+	
+	        _this.onClick = function (e, d, str) {
+	            console.log(d);
+	        };
+	
+	        _this.outInputKeydown = function () {
+	            console.log('keydown');
+	        };
+	
+	        _this.state = {
+	            value: '',
+	            open: false
+	        };
+	        return _this;
+	    }
+	
+	    Demo11.prototype.render = function render() {
+	        var self = this;
+	        return _react2["default"].createElement(
+	            "div",
+	            null,
+	            _react2["default"].createElement(
+	                _beeLayout.Row,
+	                null,
+	                _react2["default"].createElement(
+	                    _beeLayout.Col,
+	                    { md: 8 },
+	                    _react2["default"].createElement(_index2["default"], {
+	                        format: format,
+	                        onSelect: onSelect,
+	                        onChange: this.onChange,
+	                        locale: _zh_CN2["default"],
+	                        open: this.state.open,
+	                        defaultValue: (0, _moment2["default"])('2018-01-01'),
+	                        value: this.state.value,
+	                        onOpenChange: this.onOpenChange.bind(this),
+	                        placeholder: dateInputPlaceholder,
+	                        className: "demo11",
+	                        onClick: this.onClick,
+	                        keyboardInput: true,
+	                        showDateInput: false
+	                        // iconClick={this.open}
+	                        // outInputKeydown={this.outInputKeydown}
+	                    })
+	                ),
+	                _react2["default"].createElement(
+	                    _beeLayout.Col,
+	                    { md: 3 },
+	                    _react2["default"].createElement(
+	                        "button",
+	                        { className: "u-button", onClick: this.open },
+	                        "\u5C55\u5F00\u9762\u677F"
+	                    )
+	                )
+	            )
+	        );
+	    };
+	
+	    return Demo11;
+	}(_react.Component);
+	
+	exports["default"] = Demo11;
+	module.exports = exports["default"];
+
+/***/ }),
+/* 491 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _react = __webpack_require__(4);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _beeLayout = __webpack_require__(1);
+	
+	var _index = __webpack_require__(85);
+	
+	var _index2 = _interopRequireDefault(_index);
+	
+	var _zh_CN = __webpack_require__(384);
+	
+	var _zh_CN2 = _interopRequireDefault(_zh_CN);
+	
+	var _en_US = __webpack_require__(326);
+	
+	var _en_US2 = _interopRequireDefault(_en_US);
+	
+	var _moment = __webpack_require__(185);
+	
+	var _moment2 = _interopRequireDefault(_moment);
+	
+	var _beeIcon = __webpack_require__(351);
+	
+	var _beeIcon2 = _interopRequireDefault(_beeIcon);
+	
+	__webpack_require__(308);
+	
+	var _beeForm = __webpack_require__(389);
+	
+	var _beeForm2 = _interopRequireDefault(_beeForm);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	
+	function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); } /**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @title 自定义展示日期面板，外层输入框可输入，配合form使用
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @description open设置面板展开收起，keyboardInput外层input是否可输入，showDateInput是否显示内层input
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
+	
+	_moment2["default"].locale('zh-cn');
+	
+	var format = "YYYY-MM-DD";
+	
+	var dateInputPlaceholder = "选择日期";
+	
+	var Demo12 = function (_Component) {
+	    _inherits(Demo12, _Component);
+	
+	    function Demo12(props) {
+	        _classCallCheck(this, Demo12);
+	
+	        var _this = _possibleConstructorReturn(this, _Component.call(this, props));
+	
+	        _this.renderIcon = function (d) {
+	            return _react2["default"].createElement(_beeIcon2["default"], { type: "uf-search" });
+	        };
+	
+	        _this.onOpenChange = function (open) {
+	            console.log(open);
+	        };
+	
+	        _this.open = function (d) {
+	            _this.setState({
+	                open: !_this.state.open
+	            });
+	        };
+	
+	        _this.onClick = function (e, d, str) {
+	            console.log(d);
+	        };
+	
+	        _this.outInputKeydown = function () {
+	            console.log('keydown');
+	        };
+	
+	        _this.submit = function (e) {
+	            _this.props.form.validateFields(function (err, values) {
+	                if (err) {
+	                    console.log('校验失败', values);
+	                } else {
+	                    console.log('提交成功', values, (0, _moment2["default"])(values.date).format('YYYY-MM-DD'));
+	                }
+	            });
+	        };
+	
+	        _this.state = {
+	            value: '',
+	            open: false
+	        };
+	        return _this;
+	    }
+	
+	    Demo12.prototype.onSelect = function onSelect(d) {
+	        console.log("select:" + d);
+	    };
+	
+	    Demo12.prototype.render = function render() {
+	        var self = this;
+	        var _props$form = this.props.form,
+	            getFieldProps = _props$form.getFieldProps,
+	            getFieldError = _props$form.getFieldError;
+	
+	        return _react2["default"].createElement(
+	            "div",
+	            null,
+	            _react2["default"].createElement(
+	                _beeLayout.Row,
+	                null,
+	                _react2["default"].createElement(
+	                    _beeLayout.Col,
+	                    { md: 8 },
+	                    _react2["default"].createElement(_index2["default"], _extends({
+	                        format: format,
+	                        onSelect: this.onSelect,
+	                        onChange: this.onChange,
+	                        locale: _zh_CN2["default"],
+	                        open: this.state.open,
+	                        onOpenChange: this.onOpenChange.bind(this),
+	                        placeholder: dateInputPlaceholder,
+	                        className: "demo11",
+	                        onClick: this.onClick,
+	                        keyboardInput: true,
+	                        showDateInput: false,
+	                        iconClick: this.open,
+	                        outInputKeydown: this.outInputKeydown
+	                    }, getFieldProps('date', {
+	                        validateTrigger: 'onBlur',
+	                        initialValue: (0, _moment2["default"])('2018-01-01'),
+	                        rules: [{
+	                            required: true, message: '请输入日期'
+	                        }]
+	                    })))
+	                ),
+	                _react2["default"].createElement(
+	                    _beeLayout.Col,
+	                    { md: 3 },
+	                    _react2["default"].createElement(
+	                        "button",
+	                        { className: "u-button", onClick: this.open },
+	                        "\u5C55\u5F00/\u6536\u8D77\u9762\u677F"
+	                    ),
+	                    _react2["default"].createElement(
+	                        "button",
+	                        { className: "u-button", onClick: this.submit },
+	                        "\u83B7\u5F97\u503C"
+	                    )
+	                )
+	            )
+	        );
+	    };
+	
+	    return Demo12;
+	}(_react.Component);
+	
+	exports["default"] = _beeForm2["default"].createForm()(Demo12);
 	module.exports = exports["default"];
 
 /***/ })
