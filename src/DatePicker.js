@@ -13,7 +13,7 @@ import Icon from "bee-icon";
 import InputGroup from 'bee-input-group';
 
 const timePickerElement = (
-  <TimePickerPanel defaultValue={moment("00:00:00", "HH:mm:ss")} />
+  <TimePickerPanel defaultValue={moment(moment().format("HH:mm:ss"), "HH:mm:ss")} />
 );
 
 class DatePicker extends Component {
