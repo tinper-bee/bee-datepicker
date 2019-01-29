@@ -1,3 +1,13 @@
+<a name="1.3.14"></a>
+## [1.3.14](https://github.com/tinper-bee/bee-datepicker/compare/v1.3.13...v1.3.14) (2019-01-29)
+
+
+### Features
+
+* **bee-datepicker:** 选择时间默认defaultValue改为当前时间 ([dffa249](https://github.com/tinper-bee/bee-datepicker/commit/dffa249))
+
+
+
 <a name="1.3.13"></a>
 ## [1.3.13](https://github.com/tinper-bee/bee-datepicker/compare/v1.3.12...v1.3.13) (2019-01-28)
 
