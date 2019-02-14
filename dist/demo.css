@@ -3502,6 +3502,36 @@ a, .mdl-accordion, .mdl-button, .mdl-card, .mdl-checkbox, .mdl-dropdown-menu,
 .uf-filterno:before {
   content: "\e9d1"; }
 
+.uf-clean:before {
+  content: "\e9d2"; }
+
+.uf-save:before {
+  content: "\e9d3"; }
+
+.uf-export:before {
+  content: "\e9d4"; }
+
+.uf-import:before {
+  content: "\e9d5"; }
+
+.uf-stop-c:before {
+  content: "\e9d6"; }
+
+.uf-rubber:before {
+  content: "\e9d7"; }
+
+.uf-bediting:before {
+  content: "\e9d8"; }
+
+.uf-maxmize:before {
+  content: "\e9d9"; }
+
+.uf-minimize:before {
+  content: "\e9da"; }
+
+.uf-globe:before {
+  content: "\e9db"; }
+
 /* FormGroup */
 /*  Navlayout  */
 .vertical-align {
@@ -6632,7 +6662,7 @@ input.u-button[type="submit"] {
 .rc-calendar-month-select:hover,
 .rc-calendar-day-select:hover {
   cursor: pointer;
-  color: #23c0fa; }
+  color: rgb(66,165,245); }
 
 .rc-calendar-prev-month-btn,
 .rc-calendar-next-month-btn,
@@ -6652,7 +6682,7 @@ input.u-button[type="submit"] {
 .rc-calendar-next-month-btn:hover,
 .rc-calendar-prev-year-btn:hover,
 .rc-calendar-next-year-btn:hover {
-  color: #23c0fa; }
+  color: rgb(66,165,245); }
 
 .rc-calendar-next-year-btn {
   right: 0; }
@@ -6716,21 +6746,22 @@ input.u-button[type="submit"] {
   text-align: center; }
 
 .rc-calendar-date:hover {
-  background: #ebfaff;
+  background: rgb(30,136,229, 0.1);
   cursor: pointer; }
 
 .rc-calendar-selected-day .rc-calendar-date {
-  background: #d9f4fe; }
+  background: rgb(30,136,229);
+  color: #fff; }
 
 .rc-calendar-selected-date .rc-calendar-date {
-  background: #3fc7fa;
+  background: rgb(30,136,229);
   color: #fff; }
 
 .rc-calendar-selected-date .rc-calendar-date:hover {
-  background: #3fc7fa; }
+  background: rgb(30,136,229); }
 
 .rc-calendar-today .rc-calendar-date {
-  border: 1px solid #3fc7fa; }
+  border: 1px solid rgb(30,136,229); }
 
 .rc-calendar-disabled-cell .rc-calendar-date {
   cursor: not-allowed;
@@ -6798,13 +6829,16 @@ input.u-button[type="submit"] {
 .rc-calendar-time-picker-btn {
   display: inline-block;
   text-align: center;
-  color: #f46830; }
-
-.rc-calendar-today-btn:hover,
-.rc-calendar-ok-btn:hover,
-.rc-calendar-time-picker-btn:hover {
-  cursor: pointer;
-  color: #23c0fa; }
+  color: rgb(30,136,229); }
+  .rc-calendar-today-btn:hover,
+  .rc-calendar-ok-btn:hover,
+  .rc-calendar-time-picker-btn:hover {
+    cursor: pointer;
+    color: rgb(66,165,245); }
+  .rc-calendar-today-btn:active,
+  .rc-calendar-ok-btn:active,
+  .rc-calendar-time-picker-btn:active {
+    color: rgb(21,101,192); }
 
 .rc-calendar-today-btn-disabled,
 .rc-calendar-ok-btn-disabled,
@@ -6939,7 +6973,7 @@ input.u-button[type="submit"] {
 
 .rc-calendar-month-panel-header > a:hover {
   cursor: pointer;
-  color: #23c0fa; }
+  color: rgb(66,165,245); }
 
 .rc-calendar-month-panel-prev-year-btn,
 .rc-calendar-month-panel-next-year-btn {
@@ -7000,7 +7034,7 @@ input.u-button[type="submit"] {
   text-align: center; }
 
 .rc-calendar-month-panel-cell .rc-calendar-month-panel-month:hover {
-  background: #ebfaff;
+  background: rgb(30,136,229, 0.1);
   cursor: pointer; }
 
 .rc-calendar-month-panel-cell-disabled .rc-calendar-month-panel-month {
@@ -7011,11 +7045,11 @@ input.u-button[type="submit"] {
   cursor: not-allowed; }
 
 .rc-calendar-month-panel-selected-cell .rc-calendar-month-panel-month {
-  background: #3fc7fa;
+  background: rgb(30,136,229);
   color: #fff; }
 
 .rc-calendar-month-panel-selected-cell .rc-calendar-month-panel-month:hover {
-  background: #3fc7fa;
+  background: rgb(30,136,229);
   color: #fff; }
 
 .rc-calendar > .rc-calendar-year-panel {
@@ -7055,7 +7089,7 @@ input.u-button[type="submit"] {
 
 .rc-calendar-year-panel-header > a:hover {
   cursor: pointer;
-  color: #23c0fa; }
+  color: rgb(66,165,245); }
 
 .rc-calendar-year-panel-prev-decade-btn,
 .rc-calendar-year-panel-next-decade-btn {
@@ -7113,15 +7147,15 @@ input.u-button[type="submit"] {
   text-align: center; }
 
 .rc-calendar-year-panel-year:hover {
-  background: #ebfaff;
+  background: rgb(30,136,229, 0.1);
   cursor: pointer; }
 
 .rc-calendar-year-panel-selected-cell .rc-calendar-year-panel-year {
-  background: #3fc7fa;
+  background: rgb(30,136,229);
   color: #fff; }
 
 .rc-calendar-year-panel-selected-cell .rc-calendar-year-panel-year:hover {
-  background: #3fc7fa;
+  background: rgb(30,136,229);
   color: #fff; }
 
 .rc-calendar-year-panel-last-decade-cell .rc-calendar-year-panel-year,
@@ -7166,7 +7200,7 @@ input.u-button[type="submit"] {
 
 .rc-calendar-decade-panel-header > a:hover {
   cursor: pointer;
-  color: #23c0fa; }
+  color: rgb(30,136,229); }
 
 .rc-calendar-decade-panel-prev-century-btn,
 .rc-calendar-decade-panel-next-century-btn {
@@ -7221,11 +7255,11 @@ input.u-button[type="submit"] {
   cursor: pointer; }
 
 .rc-calendar-decade-panel-selected-cell .rc-calendar-decade-panel-decade {
-  background: #3fc7fa;
+  background: rgb(30,136,229);
   color: #fff; }
 
 .rc-calendar-decade-panel-selected-cell .rc-calendar-decade-panel-decade:hover {
-  background: #3fc7fa;
+  background: rgb(30,136,229);
   color: #fff; }
 
 .rc-calendar-decade-panel-last-century-cell .rc-calendar-decade-panel-decade,
