@@ -4,6 +4,7 @@
 
 import Calendar from "rc-calendar";
 import React, { Component } from "react";
+import ReactDOM from 'react-dom';
 import { KeyCode } from 'tinper-bee-core';
 import Picker from "rc-calendar/lib/Picker";
 import FormControl from "bee-form-control";
@@ -51,6 +52,7 @@ class DatePicker extends Component {
           });
           let v = this.state.value;
           this.props.onOpenChange(false,v, (v && v.format(this.props.format)) || '');
+          ReactDOM.findDOMNode(this.outInput).focus();// 按esc时候焦点回到input输入框
         }
       }
     }
@@ -199,6 +201,7 @@ class DatePicker extends Component {
             return (
               <InputGroup simple className="datepicker-input-group">
                   <FormControl
+                    ref = { ref => this.outInput = ref }
                     disabled={props.disabled}
                     placeholder={this.props.placeholder}
                     onClick={ (event) => {this.onClick(event)}}
@@ -225,7 +228,8 @@ DatePicker.defaultProps = {
   renderIcon: () => <Icon type="uf-calendar" />,
   focusOnOpen:true,
   defultSelect:false,
-  onOpenChange:()=>{}
+  onOpenChange:()=>{},
+  onChange:()=>{}
 }
 
 export default DatePicker;

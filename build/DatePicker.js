@@ -14,6 +14,10 @@ var _react = require("react");
 
 var _react2 = _interopRequireDefault(_react);
 
+var _reactDom = require("react-dom");
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
 var _tinperBeeCore = require("tinper-bee-core");
 
 var _Picker = require("rc-calendar/lib/Picker");
@@ -141,6 +145,9 @@ var DatePicker = function (_Component) {
             _beeInputGroup2["default"],
             { simple: true, className: "datepicker-input-group" },
             _react2["default"].createElement(_beeFormControl2["default"], _extends({
+              ref: function ref(_ref) {
+                return _this2.outInput = _ref;
+              },
               disabled: props.disabled,
               placeholder: _this2.props.placeholder,
               onClick: function onClick(event) {
@@ -195,6 +202,7 @@ var _initialiseProps = function _initialiseProps() {
           });
           var v = _this3.state.value;
           _this3.props.onOpenChange(false, v, v && v.format(_this3.props.format) || '');
+          _reactDom2["default"].findDOMNode(_this3.outInput).focus(); // 按esc时候焦点回到input输入框
         }
       };
     }
@@ -292,7 +300,8 @@ DatePicker.defaultProps = {
   },
   focusOnOpen: true,
   defultSelect: false,
-  onOpenChange: function onOpenChange() {}
+  onOpenChange: function onOpenChange() {},
+  onChange: function onChange() {}
 };
 
 exports["default"] = DatePicker;
