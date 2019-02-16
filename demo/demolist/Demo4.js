@@ -1,62 +1,69 @@
 /**
  *
- * @title 动态的改变时间
- * @description 以「日期时间」为基本单位，基础的日期时间选择控件
+ * @title 选择年，年月，周，日期范围
+ * @description 选择年，年月，周，日期范围基本示例
  */
 
 import React, { Component } from "react";
+import { Row, Col } from "bee-layout";
 import DatePicker from "../../src/index";
 import moment from "moment";
 import zhCN from "rc-calendar/lib/locale/zh_CN";
-import { Row, Col } from "bee-layout";
-import Button from "bee-button";
-const format = "YYYY-MM-DD HH:mm:ss";
-const dateInputPlaceholder = "选择日期";
+const { YearPicker,MonthPicker,WeekPicker,RangePicker } = DatePicker;
+
 
 class Demo4 extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      value: moment()
+    onChange = (d, dataString) => {
+        console.log(d);
+        console.log(dataString);
     };
-  }
-
-  handleChange = value => {
-    this.setState({
-      value: value
-    });
-  };
-  onSelect = d => {
-    console.log(d);
-  };
-
-  handlerChangeDate = () => {
-    this.setState({
-      value: moment("2011-11-11 11:11:11")
-    });
-    console.log("click");
-  };
-  render() {
-    return (
-      <div>
-        <Row>
-          <Col md={8}>
-            <DatePicker
-              format={format}
-              locale={zhCN}
-              onSelect={this.onSelect}
-              onChange={this.handleChange}
-              value={this.state.value}
-              placeholder={dateInputPlaceholder}
-            />
-          </Col>
-          <Col md={3}>
-            <Button onClick={this.handlerChangeDate}>变</Button>
-          </Col>
-        </Row>
-      </div>
-    );
-  }
+    onSelect = d => {
+        console.log(d);
+    }
+    render() {
+        return (
+            <div>
+                <Row style={{'marginBottom':'10px'}}>
+                    <Col md={6}>
+                        <YearPicker
+                            format="YYYY"
+                            onChange={this.onChange}
+                            onSelect={this.onSelect}
+                            locale={zhCN}
+                            placeholder="选择年"
+                            defaultValue={moment()}
+                        />
+                    </Col>
+                    <Col md={6} style={{'marginBottom':'10px'}}>
+                        <MonthPicker
+                            format="YYYY-MM"
+                            onSelect={this.onSelect}
+                            onChange={this.onChange}
+                            locale={zhCN}
+                            defaultValue={moment()}
+                            placeholder="选择年月"
+                        />
+                    </Col>
+                    <Col md={6} style={{'marginBottom':'10px'}}>
+                        <WeekPicker 
+                        defaultValue={moment()}
+                        onSelect={this.onSelect}
+                        onChange={this.onChange}
+                        placeholder="选择周" 
+                        />
+                    </Col>
+                    <Col md={6} style={{'marginBottom':'10px'}}>
+                        <RangePicker
+                            placeholder={'开始 ~ 结束'}
+                            dateInputPlaceholder={['开始', '结束']}
+                            showClear={true}
+                            onChange={this.onChange}
+                        />
+                    </Col>
+                </Row>
+            </div>
+        );
+    }
 }
 
 export default Demo4;

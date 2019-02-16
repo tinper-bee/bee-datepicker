@@ -117,7 +117,7 @@ moment().locale('en'); //英文
 | showWeekNumber|是否显示周数| Boolean| false|
 | showToday|是否显示今天| Boolean| true|
 | showOk|底边栏是否显示ok按钮| Boolean | auto |
-|showClear|是否显示清除按钮| Boolean|false|
+| showClear|是否显示清除按钮| Boolean|false|
 | onSelect|选择日期的回调函数|Function(date: moment)||
 | onChange|日期改变的回调函数|Function(date: moment)||
 | dateInputPlaceholder|日期的placeholder| String ||
