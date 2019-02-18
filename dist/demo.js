@@ -38035,7 +38035,6 @@
 	    return _react2["default"].createElement(
 	      "div",
 	      null,
-	      _react2["default"].createElement("style", { dangerouslySetInnerHTML: { __html: style } }),
 	      _react2["default"].createElement(
 	        _Picker2["default"],
 	        _extends({}, props, {

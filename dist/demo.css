@@ -5265,7 +5265,7 @@ a, .mdl-accordion, .mdl-button, .mdl-card, .mdl-checkbox, .mdl-dropdown-menu,
   color: rgb(0,0,0);
   position: relative;
   min-width: 72px;
-  padding: 5px 13px;
+  padding: 4px 13px;
   display: inline-block;
   font-family: "Open Sans", "Helvetica Neue", Arial, "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
   font-size: 14px;
@@ -6746,7 +6746,7 @@ input.u-button[type="submit"] {
   text-align: center; }
 
 .rc-calendar-date:hover {
-  background: rgb(30,136,229, 0.1);
+  background: rgb(227,242,253);
   cursor: pointer; }
 
 .rc-calendar-selected-day .rc-calendar-date {
@@ -7034,7 +7034,7 @@ input.u-button[type="submit"] {
   text-align: center; }
 
 .rc-calendar-month-panel-cell .rc-calendar-month-panel-month:hover {
-  background: rgb(30,136,229, 0.1);
+  background: rgb(227,242,253);
   cursor: pointer; }
 
 .rc-calendar-month-panel-cell-disabled .rc-calendar-month-panel-month {
@@ -7147,7 +7147,7 @@ input.u-button[type="submit"] {
   text-align: center; }
 
 .rc-calendar-year-panel-year:hover {
-  background: rgb(30,136,229, 0.1);
+  background: rgb(227,242,253);
   cursor: pointer; }
 
 .rc-calendar-year-panel-selected-cell .rc-calendar-year-panel-year {
@@ -7251,7 +7251,7 @@ input.u-button[type="submit"] {
   text-align: center; }
 
 .rc-calendar-decade-panel-decade:hover {
-  background: #ebfaff;
+  background: rgb(227,242,253);
   cursor: pointer; }
 
 .rc-calendar-decade-panel-selected-cell .rc-calendar-decade-panel-decade {
@@ -7481,6 +7481,28 @@ input.u-button[type="submit"] {
   text-decoration: none;
   text-align: center;
   vertical-align: middle; }
+
+.week-calendar {
+  width: 386px; }
+
+.week-calendar .rc-calendar-tbody > tr:hover
+.rc-calendar-date {
+  background: rgb(227,242,253); }
+
+.week-calendar .rc-calendar-tbody > tr:hover
+.rc-calendar-selected-day .rc-calendar-date {
+  background: rgb(30,136,229); }
+
+.week-calendar .week-calendar-sidebar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 100px;
+  border-right: 1px solid #ccc; }
+
+.week-calendar .rc-calendar-panel {
+  margin-left: 100px; }
 
 .rc-time-picker {
   display: inline-block;
