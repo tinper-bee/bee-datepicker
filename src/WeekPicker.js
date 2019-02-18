@@ -160,7 +160,7 @@ class WeekPicker extends Component {
     );
     return (
       <div>
-        <style dangerouslySetInnerHTML={{ __html: style }} />
+        {/* <style dangerouslySetInnerHTML={{ __html: style }} /> */}
         <Picker
           {...props}
           onOpenChange={this.onOpenChange}
