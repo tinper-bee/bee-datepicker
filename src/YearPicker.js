@@ -2,9 +2,9 @@
  * Created by chief on 17/4/6.
  */
 
-import YearPanel from "rc-calendar/lib/year/YearPanel";
+import YearPanel from "./rc-calendar/year/YearPanel";
 import React, { Component } from "react";
-import Picker from "rc-calendar/lib/Picker";
+import Picker from "./rc-calendar/Picker";
 import FormControl from "bee-form-control";
 import InputGroup from 'bee-input-group';
 import Icon from "bee-icon";
@@ -67,7 +67,11 @@ class YearPicker extends Component {
         let props = this.props;
         let value = state.value;
 
-        const Calendar = <YearPanel prefixCls={'rc-calendar-picker'} rootPrefixCls={'rc-calendar'}  {...props} focus={()=>{}}  />;
+        const Calendar = <YearPanel 
+        prefixCls={'rc-calendar-picker'} 
+        rootPrefixCls={'rc-calendar'}  {...props} 
+        onChange={this.handleChange}
+        focus={()=>{}}  />;
 
         return (
             <div>

@@ -2,12 +2,12 @@
  * Created by chief on 17/4/6.
  */
 
-import Calendar from "rc-calendar";
+import Calendar from "./rc-calendar";
 import React, { Component } from "react";
-import Picker from "rc-calendar/lib/Picker";
+import Picker from "./rc-calendar/Picker";
 import FormControl from "bee-form-control";
-import zhCN from "rc-calendar/lib/locale/zh_CN";
-import enUS from "rc-calendar/lib/locale/en_US";
+import zhCN from "./rc-calendar/locale/zh_CN";
+import enUS from "./rc-calendar/locale/en_US";
 import Icon from "bee-icon";
 import InputGroup from 'bee-input-group';
 

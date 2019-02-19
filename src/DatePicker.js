@@ -2,11 +2,11 @@
  * Created by chief on 17/4/6.
  */
 
-import Calendar from "rc-calendar";
+import Calendar from "./rc-calendar";
 import React, { Component } from "react";
 import ReactDOM from 'react-dom';
 import { KeyCode } from 'tinper-bee-core';
-import Picker from "rc-calendar/lib/Picker";
+import Picker from "./rc-calendar/Picker";
 import FormControl from "bee-form-control";
 import TimePickerPanel from "rc-time-picker/lib/Panel";
 import moment from "moment";

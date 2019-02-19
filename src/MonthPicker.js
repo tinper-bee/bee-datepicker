@@ -2,9 +2,9 @@
  * Created by chief on 17/4/6.
  */
 
-import MonthCalendar from "rc-calendar/lib/MonthCalendar";
+import MonthCalendar from "./rc-calendar/MonthCalendar";
 import React, { Component } from "react";
-import Picker from "rc-calendar/lib/Picker";
+import Picker from "./rc-calendar/Picker";
 import FormControl from "bee-form-control";
 import Icon from "bee-icon";
 import InputGroup from 'bee-input-group';

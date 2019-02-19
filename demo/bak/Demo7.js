@@ -7,8 +7,8 @@
 import React, {Component} from "react";
 import {Row, Col} from "bee-layout";
 import DatePicker from "../../src/index";
-import zhCN from "rc-calendar/lib/locale/zh_CN";
-import enUS from "rc-calendar/lib/locale/en_US";
+import zhCN from "../../src/locale/zh_CN";
+import enUS from "../../src/locale/en_US";
 import moment from "moment";
 import Icon from 'bee-icon';
 import 'moment/locale/zh-cn';

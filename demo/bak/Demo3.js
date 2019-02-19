@@ -8,7 +8,7 @@ import React, { Component } from "react";
 import { Row, Col } from "bee-layout";
 import DatePicker from "../../src/index";
 
-import zhCN from "rc-calendar/lib/locale/zh_CN";
+import zhCN from "../../src/locale/zh_CN";
 import moment from "moment";
 
 const format = "YYYY-MM-DD";

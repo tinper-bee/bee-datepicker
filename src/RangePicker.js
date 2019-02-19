@@ -2,15 +2,15 @@
  * Created by chief on 17/4/6.
  */
 import React, { Component } from "react";
-import RangeCalendar from "rc-calendar/lib/RangeCalendar";
+import RangeCalendar from "./rc-calendar/RangeCalendar";
 import FormControl from "bee-form-control";
-import DatePicker from "rc-calendar/lib/Picker";
+import DatePicker from "./rc-calendar/Picker";
 import InputGroup from 'bee-input-group';
 import Icon from "bee-icon";
-var classNames = require('classnames');
+import classNames from 'classnames';
 
-import zhCN from "rc-calendar/lib/locale/zh_CN";
-import enUS from "rc-calendar/lib/locale/en_US";
+import zhCN from "./rc-calendar/locale/zh_CN";
+import enUS from "./rc-calendar/locale/en_US";
 
 import moment from "moment";
 import "moment/locale/zh-cn";
@@ -57,7 +57,6 @@ class Picker extends Component {
     }
 
     onChange = (value) => {
-        //console.log('onChange', value);
         const props = this.props;
         let formatStr = props.format || 'YYYY-MM-DD';
         this.setState({
@@ -81,7 +80,6 @@ class Picker extends Component {
     }
 
     remove = (e) => {
-        console.log(e);
         this.setState({ value:''});
     }
     handleCalendarChange = (value) => {
