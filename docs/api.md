@@ -139,6 +139,8 @@ moment().locale('en'); //英文
 | placeholder |输入框placeholder|String| - |
 | defaultValue|默认值|moment| 当前年 |
 | getCalendarContainer |更改默认渲染位置|Function| - |
+| format|日期格式化| String | - |
+| disabled|是否禁用功能|Boolean| false |
 
 
 ## 已支持的键盘操作

@@ -79,6 +79,8 @@ import "./node_modules/bee-datepicker/build/DatePicker.css"
 | outInputFocus |外层输入框获得焦点的回调|Function|-|
 | outInputKeydown |外层输入框keydown回调|Function|-|
 
+
+
 注：使用keyboardInput时，以下api变化
 
 - 输入内容的格式需要个format格式相同，也可以有部分变化，变化范围参考 [moment.js](http://momentjs.cn/)。例如：format='YYYY-MM-DD' 输入 '19-1-1'也可识别
@@ -98,13 +100,10 @@ import "./node_modules/bee-datepicker/build/DatePicker.css"
 | disabledDate |禁用的日期|Function(current:moment):Boolean| - |
 | onSelect|选择日期的回调函数|Function(date: moment)| - |
 | onChange|日期改变的回调函数|Function(date: moment)| - |
-| onClear|清楚的回调函数|function| - |
 | monthCellRender |月份的渲染方法| function | - |
 | dateCellRender|日期的渲染方法|function| - |
 | monthCellContentRender|自定义月份的渲染方法，将被添加渲染内容中| function| - |
 | getCalendarContainer |更改默认渲染位置|Function| - |
-| showDateInput|显示日期输入框|Boolean| false |
-| format|日期格式化| String | YYYY-MM |
 
 ### RangePicker
 
@@ -122,7 +121,7 @@ import "./node_modules/bee-datepicker/build/DatePicker.css"
 | format|日期格式化| String | - |
 | disabledDate |禁用的日期|Function(current:moment):Boolean| - |
 | disabledTime |禁用的时间|Function(current:moment):Object| - |
-| showDateInput|显示日期输入框|Boolean| true |
+| showDateInput|显示日期输入康|Boolean| true |
 | showWeekNumber|是否显示周数| Boolean| false|
 | showToday|是否显示今天| Boolean| true|
 | showOk|底边栏是否显示ok按钮| Boolean | auto |
@@ -137,26 +136,20 @@ import "./node_modules/bee-datepicker/build/DatePicker.css"
 
 |参数|说明|类型|默认值|
 |:---|:-----|:----|:------|
-|placeholder|输入框placeholder|String| - |
-|defaultValue|默认值|moment| - |
+| placeholder|输入框placeholder|String| - |
+| defaultValue|默认值|moment| - |
 | getCalendarContainer |更改默认渲染位置|Function| - |
-| onSelect|选择日期的回调函数|Function(date: moment)| - |
-| onChange|日期改变的回调函数|Function(date: moment)| - |
-
 
 ### YearPicker
 
 |参数|说明|类型|默认值|
 |:---|:-----|:----|:------|
-|prefixCls|组件的前缀|String|-|
-|className|添加节点的样式|String| - |
-|style|添加内联样式| Object| - |
-| placeholder|输入框placeholder|String| - |
-| defaultValue|默认值|moment| - |
+| placeholder |输入框placeholder|String| - |
+| defaultValue|默认值|moment| 当前年 |
 | getCalendarContainer |更改默认渲染位置|Function| - |
-| showDateInput|显示日期输入框|Boolean| true |
-| format|日期格式化| String | YYYY |
-| locale|语言 | Object |en_US |
+| format|日期格式化| String | - |
+| disabled|是否禁用功能|Boolean| false |
+
 
 
 ## 已支持的键盘操作
