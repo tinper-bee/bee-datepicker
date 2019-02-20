@@ -237,7 +237,7 @@ class DatePicker extends Component {
                     this.state.value&&this.state.showClose&&(!props.disabled)?(
                       <InputGroup.Button shape="border" 
                         onClick={this.clear}>
-                        <i className="uf uf-close-c-o"></i>
+                        <i className="uf uf-close-c"></i>
                       </InputGroup.Button>
                     ):<InputGroup.Button shape="border" 
                        onClick={(e)=>{props.keyboardInput?this.iconClick(e):''}}>
