@@ -72,7 +72,8 @@ var DatePicker = function (_Component) {
       type: "month",
       value: props.value || props.defaultValue || _moment2["default"].Moment,
       open: props.open || false,
-      inputValue: props.value && props.value.format(props.format) || props.defaultValue && props.defaultValue.format(props.format) || ''
+      inputValue: props.value && props.value.format(props.format) || props.defaultValue && props.defaultValue.format(props.format) || '',
+      showClose: false
     };
     return _this;
   }
@@ -143,7 +144,10 @@ var DatePicker = function (_Component) {
         function () {
           return _react2["default"].createElement(
             _beeInputGroup2["default"],
-            { simple: true, className: "datepicker-input-group" },
+            { simple: true, className: "datepicker-input-group",
+              onMouseEnter: _this2.onMouseEnter,
+              onMouseLeave: _this2.onMouseLeave
+            },
             _react2["default"].createElement(_beeFormControl2["default"], _extends({
               ref: function ref(_ref) {
                 return _this2.outInput = _ref;
@@ -159,9 +163,15 @@ var DatePicker = function (_Component) {
               },
               onKeyDown: _this2.outInputKeydown
             }, keyboardInputProps, autofocus)),
-            _react2["default"].createElement(
+            _this2.state.value && _this2.state.showClose && !props.disabled ? _react2["default"].createElement(
               _beeInputGroup2["default"].Button,
-              { shape: "border", onClick: function onClick(e) {
+              { shape: "border",
+                onClick: _this2.clear },
+              _react2["default"].createElement("i", { className: "uf uf-close-c" })
+            ) : _react2["default"].createElement(
+              _beeInputGroup2["default"].Button,
+              { shape: "border",
+                onClick: function onClick(e) {
                   props.keyboardInput ? _this2.iconClick(e) : '';
                 } },
               props.renderIcon()
@@ -291,6 +301,27 @@ var _initialiseProps = function _initialiseProps() {
       }
     }
     _this3.props.outInputKeydown && _this3.props.outInputKeydown(e);
+  };
+
+  this.onMouseLeave = function (e) {
+    _this3.setState({
+      showClose: false
+    });
+  };
+
+  this.onMouseEnter = function (e) {
+    _this3.setState({
+      showClose: true
+    });
+  };
+
+  this.clear = function (e) {
+    e.stopPropagation();
+    _this3.setState({
+      inputValue: '',
+      value: ''
+    });
+    _this3.props.onChange && _this3.props.onChange('', '');
   };
 };
 

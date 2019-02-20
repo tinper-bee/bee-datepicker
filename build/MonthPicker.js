@@ -4,6 +4,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _MonthCalendar = require("./rc-calendar/MonthCalendar");
 
 var _MonthCalendar2 = _interopRequireDefault(_MonthCalendar);
@@ -48,10 +50,17 @@ var MonthPicker = function (_Component) {
 
     var _this = _possibleConstructorReturn(this, _Component.call(this, props, context));
 
-    _this.onChange = function (value) {
+    _this.onChange = function (value, valueString) {
       _this.setState({
         value: value
       });
+      var _this$props = _this.props,
+          onChange = _this$props.onChange,
+          onClear = _this$props.onClear,
+          onSelect = _this$props.onSelect,
+          format = _this$props.format;
+
+      onChange && onChange(value, valueString);
     };
 
     _this.onOpenChange = function (open) {
@@ -66,10 +75,31 @@ var MonthPicker = function (_Component) {
       });
     };
 
+    _this.onMouseLeave = function (e) {
+      _this.setState({
+        showClose: false
+      });
+    };
+
+    _this.onMouseEnter = function (e) {
+      _this.setState({
+        showClose: true
+      });
+    };
+
+    _this.clear = function (e) {
+      e.stopPropagation();
+      _this.setState({
+        value: ''
+      });
+      _this.props.onChange && _this.props.onChange('', '');
+    };
+
     _this.state = {
       type: "month",
       value: props.value || props.defaultValue,
-      open: false
+      open: false,
+      showClose: false
     };
     return _this;
   }
@@ -81,8 +111,9 @@ var MonthPicker = function (_Component) {
 
     var props = this.props;
 
-    var monthCalendar = _react2["default"].createElement(_MonthCalendar2["default"], props);
-
+    var monthCalendar = _react2["default"].createElement(_MonthCalendar2["default"], _extends({}, props, {
+      onChange: this.onChange
+    }));
     return _react2["default"].createElement(
       "div",
       null,
@@ -101,13 +132,22 @@ var MonthPicker = function (_Component) {
 
           return _react2["default"].createElement(
             _beeInputGroup2["default"],
-            { simple: true, className: "datepicker-input-group" },
+            { simple: true, className: "datepicker-input-group",
+              onMouseEnter: _this2.onMouseEnter,
+              onMouseLeave: _this2.onMouseLeave
+            },
             _react2["default"].createElement(_beeFormControl2["default"], {
               placeholder: _this2.props.placeholder,
               className: _this2.props.className,
-              value: value && value.format(props.format) || ""
+              value: value && value.format(props.format) || "",
+              disabled: props.disabled
             }),
-            _react2["default"].createElement(
+            _this2.state.value && _this2.state.showClose && !props.disabled ? _react2["default"].createElement(
+              _beeInputGroup2["default"].Button,
+              { shape: "border",
+                onClick: _this2.clear },
+              _react2["default"].createElement("i", { className: "uf uf-close-c" })
+            ) : _react2["default"].createElement(
               _beeInputGroup2["default"].Button,
               { shape: "border" },
               props.renderIcon()
@@ -124,7 +164,9 @@ var MonthPicker = function (_Component) {
 MonthPicker.defaultProps = {
   renderIcon: function renderIcon() {
     return _react2["default"].createElement(_beeIcon2["default"], { type: "uf-calendar" });
-  }
+  },
+  format: 'YYYY-MM',
+  showDateInput: true
 };
 
 exports["default"] = MonthPicker;

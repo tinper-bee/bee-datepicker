@@ -22,11 +22,11 @@ var _beeFormControl = require("bee-form-control");
 
 var _beeFormControl2 = _interopRequireDefault(_beeFormControl);
 
-var _zh_CN = require("./rc-calendar/locale/zh_CN");
+var _zh_CN = require("./locale/zh_CN");
 
 var _zh_CN2 = _interopRequireDefault(_zh_CN);
 
-var _en_US = require("./rc-calendar/locale/en_US");
+var _en_US = require("./locale/en_US");
 
 var _en_US2 = _interopRequireDefault(_en_US);
 
@@ -170,9 +170,30 @@ var WeekPicker = function (_Component) {
       _this.setState({ value: value });
     };
 
+    _this.onMouseLeave = function (e) {
+      _this.setState({
+        showClose: false
+      });
+    };
+
+    _this.onMouseEnter = function (e) {
+      _this.setState({
+        showClose: true
+      });
+    };
+
+    _this.clear = function (e) {
+      e.stopPropagation();
+      _this.setState({
+        value: ''
+      });
+      _this.props.onChange && _this.props.onChange('', '');
+    };
+
     _this.state = {
       value: props.value || props.defaultValue,
-      open: false
+      open: false,
+      showClose: false
     };
     return _this;
   }
@@ -212,16 +233,24 @@ var WeekPicker = function (_Component) {
 
           return _react2["default"].createElement(
             _beeInputGroup2["default"],
-            { simple: true, className: "datepicker-input-group" },
+            { simple: true, className: "datepicker-input-group",
+              onMouseEnter: _this2.onMouseEnter,
+              onMouseLeave: _this2.onMouseLeave
+            },
             _react2["default"].createElement(_beeFormControl2["default"], {
               placeholder: _this2.props.placeholder,
-              disabled: state.disabled,
+              disabled: props.disabled,
               readOnly: true,
               tabIndex: "-1",
               className: _this2.props.className,
               value: value && value.format(format) || ""
             }),
-            _react2["default"].createElement(
+            _this2.state.value && _this2.state.showClose && !props.disabled ? _react2["default"].createElement(
+              _beeInputGroup2["default"].Button,
+              { shape: "border",
+                onClick: _this2.clear },
+              _react2["default"].createElement("i", { className: "uf uf-close-c" })
+            ) : _react2["default"].createElement(
               _beeInputGroup2["default"].Button,
               { shape: "border" },
               props.renderIcon()

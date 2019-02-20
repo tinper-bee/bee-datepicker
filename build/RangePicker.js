@@ -32,11 +32,11 @@ var _classnames = require("classnames");
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
-var _zh_CN = require("./rc-calendar/locale/zh_CN");
+var _zh_CN = require("./locale/zh_CN");
 
 var _zh_CN2 = _interopRequireDefault(_zh_CN);
 
-var _en_US = require("./rc-calendar/locale/en_US");
+var _en_US = require("./locale/en_US");
 
 var _en_US2 = _interopRequireDefault(_en_US);
 
@@ -144,12 +144,21 @@ var Picker = function (_Component) {
 
                 return _react2["default"].createElement(
                     "div",
-                    { className: (0, _classnames2["default"])('calendar-picker', 'u-input-group', 'simple', props.className) },
+                    { className: (0, _classnames2["default"])('calendar-picker', 'u-input-group', 'simple', props.className),
+                        onMouseEnter: _this2.onMouseEnter,
+                        onMouseLeave: _this2.onMouseLeave
+                    },
                     _react2["default"].createElement(_beeFormControl2["default"], {
                         placeholder: _this2.props.placeholder ? _this2.props.placeholder : 'start ~ end',
-                        value: isValidRange(value) && format(value[0], formatStr) + " ~ " + format(value[1], formatStr) || ''
+                        value: isValidRange(value) && format(value[0], formatStr) + " ~ " + format(value[1], formatStr) || '',
+                        disabled: props.disabled
                     }),
-                    _react2["default"].createElement(
+                    _this2.state.value && _this2.state.showClose && !props.disabled ? _react2["default"].createElement(
+                        _beeInputGroup2["default"].Button,
+                        { shape: "border",
+                            onClick: _this2.clear },
+                        _react2["default"].createElement("i", { className: "uf uf-close-c" })
+                    ) : _react2["default"].createElement(
                         _beeInputGroup2["default"].Button,
                         { shape: "border" },
                         props.renderIcon()
@@ -191,6 +200,26 @@ var _initialiseProps = function _initialiseProps() {
     };
 
     this.handleCalendarChange = function (value) {};
+
+    this.onMouseLeave = function (e) {
+        _this3.setState({
+            showClose: false
+        });
+    };
+
+    this.onMouseEnter = function (e) {
+        _this3.setState({
+            showClose: true
+        });
+    };
+
+    this.clear = function (e) {
+        e.stopPropagation();
+        _this3.setState({
+            value: ''
+        });
+        _this3.props.onChange && _this3.props.onChange('', '');
+    };
 };
 
 Picker.defaultProps = {

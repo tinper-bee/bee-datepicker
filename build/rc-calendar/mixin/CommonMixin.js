@@ -9,7 +9,7 @@ var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _en_US = require('../locale/en_US');
+var _en_US = require('../../locale/en_US');
 
 var _en_US2 = _interopRequireDefault(_en_US);
 

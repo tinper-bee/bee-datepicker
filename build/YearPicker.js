@@ -64,7 +64,8 @@ var YearPicker = function (_Component) {
         _this.state = {
             type: "year",
             value: props.value || props.defaultValue || '',
-            open: props.open || false
+            open: props.open || false,
+            showClose: false
         };
         return _this;
     }
@@ -113,7 +114,10 @@ var YearPicker = function (_Component) {
 
                     return _react2["default"].createElement(
                         _beeInputGroup2["default"],
-                        { simple: true, className: "datepicker-input-group" },
+                        { simple: true, className: "datepicker-input-group",
+                            onMouseEnter: _this2.onMouseEnter,
+                            onMouseLeave: _this2.onMouseLeave
+                        },
                         _react2["default"].createElement(_beeFormControl2["default"], {
                             placeholder: _this2.props.placeholder,
                             className: _this2.props.className,
@@ -121,7 +125,12 @@ var YearPicker = function (_Component) {
                             readOnly: true,
                             value: value && value.format(props.format) || ""
                         }),
-                        _react2["default"].createElement(
+                        _this2.state.value && _this2.state.showClose && !props.disabled ? _react2["default"].createElement(
+                            _beeInputGroup2["default"].Button,
+                            { shape: "border",
+                                onClick: _this2.clear },
+                            _react2["default"].createElement("i", { className: "uf uf-close-c" })
+                        ) : _react2["default"].createElement(
                             _beeInputGroup2["default"].Button,
                             { shape: "border" },
                             props.renderIcon()
@@ -160,6 +169,26 @@ var _initialiseProps = function _initialiseProps() {
         var props = _this3.props;
         _this3.setState({ value: value });
         props.onChange(value, value && value.format(props.format) || '');
+    };
+
+    this.onMouseLeave = function (e) {
+        _this3.setState({
+            showClose: false
+        });
+    };
+
+    this.onMouseEnter = function (e) {
+        _this3.setState({
+            showClose: true
+        });
+    };
+
+    this.clear = function (e) {
+        e.stopPropagation();
+        _this3.setState({
+            value: ''
+        });
+        _this3.props.onChange && _this3.props.onChange('', '');
     };
 };
 

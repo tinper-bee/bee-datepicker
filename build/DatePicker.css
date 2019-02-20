@@ -823,14 +823,14 @@
   color: #fff; }
 
 .rc-calendar-month-panel {
-  left: 0;
-  top: 0;
-  bottom: 0;
-  right: 0;
   background: #ffffff;
   z-index: 10;
-  position: absolute;
   outline: none; }
+
+.rc-calendar-month-calendar .rc-calendar-header {
+  padding: 0; }
+  .rc-calendar-month-calendar .rc-calendar-header .rc-calendar-month-panel-header {
+    display: none; }
 
 .rc-calendar-month-panel-hidden {
   display: none; }
@@ -891,10 +891,12 @@
 
 .rc-calendar-month-panel-body, .rc-calendar-year-panel-body, .rc-calendar-decade-panel-body {
   padding: 9px 10px 10px;
+  border-bottom: 1px solid #ccc;
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  margin: 0 -1px;
+  box-shadow: 0 1px 5px #ccc;
   height: calc(100% - 30px); }
-
-.rc-calendar-month-panel > div, .rc-calendar-year-panel > div {
-  height: 100%; }
 
 .rc-calendar-month-panel-table {
   table-layout: fixed;
@@ -952,8 +954,9 @@
   display: none; }
 
 .rc-calendar-year-panel-header {
+  background: #fff;
   padding: 0 10px;
-  height: 34px;
+  height: 30px;
   line-height: 30px;
   position: relative;
   text-align: center;
@@ -1006,7 +1009,8 @@
   right: 0; }
 
 .rc-calendar-year-panel-body {
-  padding: 9px 10px 10px; }
+  padding: 9px 10px 10px;
+  background: #fff; }
 
 .rc-calendar-year-panel-table {
   table-layout: fixed;
@@ -1548,4 +1552,17 @@ li.rc-time-picker-panel-select-option-disabled:hover {
   position: relative; }
 
 .datepicker-input-group.u-input-group {
-  display: block; }
+  display: block;
+  cursor: pointer; }
+
+.datepicker-input-group .u-input-group-btn {
+  right: 3px !important;
+  height: 30px;
+  width: 23px; }
+  .datepicker-input-group .u-input-group-btn .uf-close-c {
+    color: #424242;
+    opacity: .2; }
+
+.calendar-picker.u-input-group .uf-close-c {
+  color: #424242;
+  opacity: .2; }

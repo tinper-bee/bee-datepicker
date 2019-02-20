@@ -65,15 +65,25 @@ var YearPanel = function (_React$Component) {
     _this.onInputChange = function (value) {
       var _this$props = _this.props,
           onChange = _this$props.onChange,
-          onClear = _this$props.onClear,
-          onSelect = _this$props.onSelect;
+          format = _this$props.format;
 
-      if (value) {
-        _this.setState({
-          value: value
-        });
-        onChange && onChange(value, value.format('YYYY'));
-      }
+      _this.setState({
+        value: value ? value : (0, _moment2["default"])()
+      });
+      onChange && onChange(value, value ? value.format(format) : '');
+    };
+
+    _this.onClear = function () {
+      var _this$props2 = _this.props,
+          onChange = _this$props2.onChange,
+          format = _this$props2.format,
+          onClear = _this$props2.onClear;
+
+      _this.setState({
+        value: (0, _moment2["default"])()
+      });
+      onChange && onChange('', '');
+      onClear && onClear('', '');
     };
 
     _this.prefixCls = props.rootPrefixCls + '-year-panel';
@@ -87,7 +97,7 @@ var YearPanel = function (_React$Component) {
 
   YearPanel.prototype.years = function years() {
     var value = this.state.value;
-    var currentYear = value.year();
+    var currentYear = value ? value.year() : (0, _moment2["default"])().year();
     var startYear = parseInt(currentYear / 10, 10) * 10;
     var previousYear = startYear - 1;
     var years = [];
@@ -118,7 +128,7 @@ var YearPanel = function (_React$Component) {
     var locale = props.locale,
         renderFooter = props.renderFooter,
         format = props.format,
-        onClear = props.onClear;
+        showDateInput = props.showDateInput;
 
     var years = this.years();
     var currentYear = value.year();
@@ -169,7 +179,7 @@ var YearPanel = function (_React$Component) {
     return _react2["default"].createElement(
       'div',
       { className: this.prefixCls },
-      _react2["default"].createElement(_DateInput2["default"], {
+      showDateInput ? _react2["default"].createElement(_DateInput2["default"], {
         value: value,
         prefixCls: this.props.rootPrefixCls,
         showClear: true,
@@ -177,8 +187,8 @@ var YearPanel = function (_React$Component) {
         format: format,
         onChange: this.onInputChange,
         selectedValue: value,
-        onClear: onClear
-      }),
+        onClear: this.onClear
+      }) : '',
       _react2["default"].createElement(
         'div',
         null,
@@ -257,6 +267,7 @@ YearPanel.propTypes = {
 YearPanel.defaultProps = {
   onSelect: function onSelect() {},
 
-  format: 'YYYY'
+  format: 'YYYY',
+  showDateInput: true
 };
 module.exports = exports['default'];
