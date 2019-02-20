@@ -6,8 +6,8 @@ import Calendar from "./rc-calendar";
 import React, { Component } from "react";
 import Picker from "./rc-calendar/Picker";
 import FormControl from "bee-form-control";
-import zhCN from "./rc-calendar/locale/zh_CN";
-import enUS from "./rc-calendar/locale/en_US";
+import zhCN from "./locale/zh_CN";
+import enUS from "./locale/en_US";
 import Icon from "bee-icon";
 import InputGroup from 'bee-input-group';
 
@@ -60,7 +60,8 @@ class WeekPicker extends Component {
 
     this.state = {
       value: props.value || props.defaultValue,
-      open: false
+      open: false,
+      showClose: false
     };
   }
 
@@ -139,7 +140,23 @@ class WeekPicker extends Component {
   handleCalendarChange = (value) => {
       this.setState({ value: value });
   }
-
+  onMouseLeave = (e) => {
+    this.setState({
+      showClose: false
+    })
+  }
+  onMouseEnter = (e) => {
+    this.setState({
+      showClose: true
+    })
+  }
+  clear = (e) => {
+    e.stopPropagation();
+    this.setState({
+      value: ''
+    })
+    this.props.onChange && this.props.onChange('', '');
+  }
   render() {
     const state = this.state;
     const props = this.props;
@@ -160,7 +177,7 @@ class WeekPicker extends Component {
     );
     return (
       <div>
-        <style dangerouslySetInnerHTML={{ __html: style }} />
+        {/* <style dangerouslySetInnerHTML={{ __html: style }} /> */}
         <Picker
           {...props}
           onOpenChange={this.onOpenChange}
@@ -171,18 +188,28 @@ class WeekPicker extends Component {
         >
           {({ }) => {
             return (
-                <InputGroup simple className="datepicker-input-group">
+                <InputGroup simple className="datepicker-input-group" 
+                  onMouseEnter={this.onMouseEnter}
+                  onMouseLeave={this.onMouseLeave}
+                >
                   <FormControl
                     placeholder={this.props.placeholder}
-                    disabled={state.disabled}
+                    disabled={props.disabled}
                     readOnly
                     tabIndex="-1"
                     className={this.props.className}
                     value={(value && value.format(format)) || ""}
                   />
-                    <InputGroup.Button shape="border">
-                        { props.renderIcon() }
-                    </InputGroup.Button>
+                    {
+                        this.state.value&&this.state.showClose&&(!props.disabled)?(
+                        <InputGroup.Button shape="border" 
+                            onClick={this.clear}>
+                            <i className="uf uf-close-c"></i>
+                        </InputGroup.Button>
+                        ):<InputGroup.Button shape="border">
+                            { props.renderIcon() }
+                        </InputGroup.Button>
+                    }
                 </InputGroup>
             );
           }}

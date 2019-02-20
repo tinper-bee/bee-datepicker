@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _rcCalendar = require("rc-calendar");
+var _rcCalendar = require("./rc-calendar");
 
 var _rcCalendar2 = _interopRequireDefault(_rcCalendar);
 
@@ -14,7 +14,7 @@ var _react = require("react");
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Picker = require("rc-calendar/lib/Picker");
+var _Picker = require("./rc-calendar/Picker");
 
 var _Picker2 = _interopRequireDefault(_Picker);
 
@@ -22,11 +22,11 @@ var _beeFormControl = require("bee-form-control");
 
 var _beeFormControl2 = _interopRequireDefault(_beeFormControl);
 
-var _zh_CN = require("rc-calendar/lib/locale/zh_CN");
+var _zh_CN = require("./rc-calendar/locale/zh_CN");
 
 var _zh_CN2 = _interopRequireDefault(_zh_CN);
 
-var _en_US = require("rc-calendar/lib/locale/en_US");
+var _en_US = require("./rc-calendar/locale/en_US");
 
 var _en_US2 = _interopRequireDefault(_en_US);
 
@@ -198,7 +198,6 @@ var WeekPicker = function (_Component) {
     return _react2["default"].createElement(
       "div",
       null,
-      _react2["default"].createElement("style", { dangerouslySetInnerHTML: { __html: style } }),
       _react2["default"].createElement(
         _Picker2["default"],
         _extends({}, props, {

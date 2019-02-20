@@ -34,7 +34,7 @@ export default class YearPanel extends React.Component {
 
   years() {
     const value = this.state.value;
-    const currentYear = value.year();
+    const currentYear = value?value.year():moment().year();
     const startYear = parseInt(currentYear / 10, 10) * 10;
     const previousYear = startYear - 1;
     const years = [];
@@ -56,20 +56,26 @@ export default class YearPanel extends React.Component {
   }
 
   onInputChange=value=>{
-    let { onChange,onClear,onSelect } = this.props;
-    if(value){
+    let { onChange,format } = this.props;
       this.setState({
-        value
+        value:value ? value : moment()
       })
-      onChange&&onChange(value,value.format('YYYY'));
-    }
+      onChange&&onChange(value,value?value.format(format):'');
+  }
+  onClear = () =>{
+    let { onChange,format,onClear } = this.props;
+    this.setState({
+      value:moment()
+    })
+    onChange&&onChange('','');
+    onClear&&onClear('','');
   }
   render() {
     const props = this.props;
     const { value,str } = this.state;
-    const { locale, renderFooter,format,onClear } = props;
+    const { locale, renderFooter,format,showDateInput } = props;
     const years = this.years();
-    const currentYear = value.year();
+    const currentYear =value.year();
     const startYear = parseInt(currentYear / 10, 10) * 10;
     const endYear = startYear + 9;
     const prefixCls = this.prefixCls;
@@ -112,7 +118,8 @@ export default class YearPanel extends React.Component {
 
     return (
       <div className={this.prefixCls}>
-        <DateInput 
+      {
+        showDateInput?<DateInput 
           value={value}
           prefixCls={this.props.rootPrefixCls}
           showClear={true}
@@ -120,8 +127,9 @@ export default class YearPanel extends React.Component {
           format={format}
           onChange={this.onInputChange}
           selectedValue={value}
-          onClear={onClear}
-        />
+          onClear={this.onClear}
+        />:''
+      }  
         <div>
           <div className={`${prefixCls}-header`}>
             <a
@@ -176,5 +184,6 @@ YearPanel.propTypes = {
 YearPanel.defaultProps = {
   onSelect() {
   },
-  format:'YYYY'
+  format:'YYYY',
+  showDateInput:true
 };

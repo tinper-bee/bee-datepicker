@@ -394,7 +394,7 @@
 .rc-calendar-month-select:hover,
 .rc-calendar-day-select:hover {
   cursor: pointer;
-  color: #23c0fa;
+  color: $brand-primary-hover;
 }
 .rc-calendar-prev-month-btn,
 .rc-calendar-next-month-btn,
@@ -414,7 +414,7 @@
 .rc-calendar-next-month-btn:hover,
 .rc-calendar-prev-year-btn:hover,
 .rc-calendar-next-year-btn:hover {
-  color: #23c0fa;
+  color: $brand-primary-hover;
 }
 .rc-calendar-next-year-btn {
   right: 0;
@@ -478,21 +478,22 @@
   text-align: center;
 }
 .rc-calendar-date:hover {
-  background: #ebfaff;
+  background: $hover-bg-color-base;
   cursor: pointer;
 }
 .rc-calendar-selected-day .rc-calendar-date {
-  background: #d9f4fe;
+  background: $brand-primary;
+  color: #fff;
 }
 .rc-calendar-selected-date .rc-calendar-date {
-  background: #3fc7fa;
+  background: $brand-primary;
   color: #fff;
 }
 .rc-calendar-selected-date .rc-calendar-date:hover {
-  background: #3fc7fa;
+  background: $brand-primary;
 }
 .rc-calendar-today .rc-calendar-date {
-  border: 1px solid #3fc7fa;
+  border: 1px solid $brand-primary;
 }
 .rc-calendar-disabled-cell .rc-calendar-date {
   cursor: not-allowed;
@@ -560,13 +561,14 @@
 .rc-calendar-time-picker-btn {
   display: inline-block;
   text-align: center;
-  color: #f46830;
-}
-.rc-calendar-today-btn:hover,
-.rc-calendar-ok-btn:hover,
-.rc-calendar-time-picker-btn:hover {
-  cursor: pointer;
-  color: #23c0fa;
+  color: $brand-primary;
+  &:hover{
+    cursor: pointer;
+    color: $brand-primary-hover;
+  }
+  &:active{
+    color: $brand-primary-active;
+  }
 }
 .rc-calendar-today-btn-disabled,
 .rc-calendar-ok-btn-disabled,
@@ -669,14 +671,22 @@
   color: #fff;
 }
 .rc-calendar-month-panel {
-  left: 0;
-  top: 0;
-  bottom: 0;
-  right: 0;
+  // left: 0;
+  // top: 0;
+  // bottom: 0;
+  // right: 0;
   background: #ffffff;
   z-index: 10;
-  position: absolute;
+  // position: absolute;
   outline: none;
+}
+.rc-calendar-month-calendar {
+  .rc-calendar-header {
+    padding:0;
+    .rc-calendar-month-panel-header{
+      display: none;
+    }
+  }
 }
 .rc-calendar-month-panel-hidden {
   display: none;
@@ -702,7 +712,7 @@
 }
 .rc-calendar-month-panel-header > a:hover {
   cursor: pointer;
-  color: #23c0fa;
+  color: $brand-primary-hover;
 }
 .rc-calendar-month-panel-prev-year-btn,
 .rc-calendar-month-panel-next-year-btn {
@@ -737,10 +747,16 @@
 }
 .rc-calendar-month-panel-body,.rc-calendar-year-panel-body,.rc-calendar-decade-panel-body {
   padding: 9px 10px 10px;
+  // background: #fff;
+  border-bottom: 1px solid #ccc;
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  margin: 0 -1px;
+  box-shadow: 0 1px 5px #ccc;
   height: calc(100% - 30px);
 }
 .rc-calendar-month-panel > div,.rc-calendar-year-panel > div {
-  height:100%;
+  // height:100%;
 }
 .rc-calendar-month-panel-table {
   table-layout: fixed;
@@ -763,7 +779,7 @@
   text-align: center;
 }
 .rc-calendar-month-panel-cell .rc-calendar-month-panel-month:hover {
-  background: #ebfaff;
+  background: $hover-bg-color-base;
   cursor: pointer;
 }
 .rc-calendar-month-panel-cell-disabled .rc-calendar-month-panel-month {
@@ -774,11 +790,11 @@
   cursor: not-allowed;
 }
 .rc-calendar-month-panel-selected-cell .rc-calendar-month-panel-month {
-  background: #3fc7fa;
+  background: $brand-primary;
   color: #fff;
 }
 .rc-calendar-month-panel-selected-cell .rc-calendar-month-panel-month:hover {
-  background: #3fc7fa;
+  background: $brand-primary;
   color: #fff;
 }
 .rc-calendar > .rc-calendar-year-panel {
@@ -798,8 +814,9 @@
   display: none;
 }
 .rc-calendar-year-panel-header {
+  background: #fff;
   padding: 0 10px;
-  height: 34px;
+  height: 30px;
   line-height: 30px;
   position: relative;
   text-align: center;
@@ -818,7 +835,7 @@
 }
 .rc-calendar-year-panel-header > a:hover {
   cursor: pointer;
-  color: #23c0fa;
+  color: $brand-primary-hover;
 }
 .rc-calendar-year-panel-prev-decade-btn,
 .rc-calendar-year-panel-next-decade-btn {
@@ -853,6 +870,7 @@
 }
 .rc-calendar-year-panel-body {
   padding: 9px 10px 10px;
+  background: #fff;
 }
 .rc-calendar-year-panel-table {
   table-layout: fixed;
@@ -876,15 +894,15 @@
   text-align: center;
 }
 .rc-calendar-year-panel-year:hover {
-  background: #ebfaff;
+  background: $hover-bg-color-base;
   cursor: pointer;
 }
 .rc-calendar-year-panel-selected-cell .rc-calendar-year-panel-year {
-  background: #3fc7fa;
+  background: $brand-primary;
   color: #fff;
 }
 .rc-calendar-year-panel-selected-cell .rc-calendar-year-panel-year:hover {
-  background: #3fc7fa;
+  background: $brand-primary;
   color: #fff;
 }
 .rc-calendar-year-panel-last-decade-cell .rc-calendar-year-panel-year,
@@ -929,7 +947,7 @@
 }
 .rc-calendar-decade-panel-header > a:hover {
   cursor: pointer;
-  color: #23c0fa;
+  color: $brand-primary;
 }
 .rc-calendar-decade-panel-prev-century-btn,
 .rc-calendar-decade-panel-next-century-btn {
@@ -980,15 +998,15 @@
   text-align: center;
 }
 .rc-calendar-decade-panel-decade:hover {
-  background: #ebfaff;
+  background: $hover-bg-color-base;
   cursor: pointer;
 }
 .rc-calendar-decade-panel-selected-cell .rc-calendar-decade-panel-decade {
-  background: #3fc7fa;
+  background: $brand-primary;
   color: #fff;
 }
 .rc-calendar-decade-panel-selected-cell .rc-calendar-decade-panel-decade:hover {
-  background: #3fc7fa;
+  background: $brand-primary;
   color: #fff;
 }
 .rc-calendar-decade-panel-last-century-cell .rc-calendar-decade-panel-decade,
@@ -1211,6 +1229,30 @@
   text-align: center;
   vertical-align: middle;
 }
+.week-calendar {
+  width: 386px;
+}
+.week-calendar .rc-calendar-tbody > tr:hover
+.rc-calendar-date {
+  background: $hover-bg-color-base;
+}
+
+.week-calendar .rc-calendar-tbody > tr:hover
+.rc-calendar-selected-day .rc-calendar-date {
+    background: $brand-primary;
+}
+
+.week-calendar .week-calendar-sidebar {
+  position:absolute;
+  top:0;
+  left:0;
+  bottom:0;
+  width:100px;
+  border-right: 1px solid #ccc;
+}
+.week-calendar .rc-calendar-panel {
+  margin-left: 100px;
+}
 
 .rc-time-picker {
   display: inline-block;
@@ -1375,5 +1417,11 @@ li.rc-time-picker-panel-select-option-disabled:hover {
 .datepicker-input-group{
   &.u-input-group{
     display: block;
+    cursor: pointer;
+  }
+  .u-input-group-btn{
+    right: 3px!important;
+    height: 30px;
+    width: 23px;
   }
 }

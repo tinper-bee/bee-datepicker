@@ -4,7 +4,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _MonthCalendar = require("rc-calendar/lib/MonthCalendar");
+var _MonthCalendar = require("./rc-calendar/MonthCalendar");
 
 var _MonthCalendar2 = _interopRequireDefault(_MonthCalendar);
 
@@ -12,7 +12,7 @@ var _react = require("react");
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Picker = require("rc-calendar/lib/Picker");
+var _Picker = require("./rc-calendar/Picker");
 
 var _Picker2 = _interopRequireDefault(_Picker);
 

@@ -25,6 +25,7 @@ class DatePicker extends Component {
       value: props.value || props.defaultValue || moment.Moment,
       open: props.open||false,
       inputValue:(props.value&&props.value.format(props.format)) || (props.defaultValue&&props.defaultValue.format(props.format)) || '',
+      showClose:false
     };
   }
 
@@ -147,6 +148,24 @@ class DatePicker extends Component {
     }
     this.props.outInputKeydown&&this.props.outInputKeydown(e);
   }
+  onMouseLeave=(e)=>{
+    this.setState({
+      showClose:false
+    })
+  }
+  onMouseEnter=(e)=>{
+    this.setState({
+      showClose:true
+    })
+  }
+  clear=(e)=>{
+    e.stopPropagation();
+    this.setState({
+      inputValue:'',
+      value:''
+    })
+    this.props.onChange&&this.props.onChange('','');
+  }
   render() {
     let state = this.state;
     let props = this.props;
@@ -199,7 +218,10 @@ class DatePicker extends Component {
         >
           {() => {
             return (
-              <InputGroup simple className="datepicker-input-group">
+              <InputGroup simple className="datepicker-input-group" 
+                onMouseEnter={this.onMouseEnter}
+                onMouseLeave={this.onMouseLeave}
+              >
                   <FormControl
                     ref = { ref => this.outInput = ref }
                     disabled={props.disabled}
@@ -211,9 +233,17 @@ class DatePicker extends Component {
                     {...keyboardInputProps}
                     {...autofocus}
                   />
-                  <InputGroup.Button shape="border" onClick={(e)=>{props.keyboardInput?this.iconClick(e):''}}>
-                  { props.renderIcon() }
-                  </InputGroup.Button>
+                  {
+                    this.state.value&&this.state.showClose&&(!props.disabled)?(
+                      <InputGroup.Button shape="border" 
+                        onClick={this.clear}>
+                        <i className="uf uf-close-c"></i>
+                      </InputGroup.Button>
+                    ):<InputGroup.Button shape="border" 
+                       onClick={(e)=>{props.keyboardInput?this.iconClick(e):''}}>
+                      { props.renderIcon() }
+                      </InputGroup.Button>
+                  }
                 </InputGroup>
 
             );

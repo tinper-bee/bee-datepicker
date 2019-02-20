@@ -16,14 +16,17 @@ class MonthPicker extends Component {
     this.state = {
       type: "month",
       value: props.value || props.defaultValue,
-      open: false
+      open: false,
+      showClose: false
     };
   }
 
-  onChange = value => {
+  onChange = (value,valueString) => {
     this.setState({
       value
     });
+    let { onChange,onClear,onSelect,format } = this.props;
+    onChange&&onChange(value,valueString);
   };
 
   onOpenChange = open => {
@@ -37,14 +40,31 @@ class MonthPicker extends Component {
       type
     });
   };
-
+  onMouseLeave = (e) => {
+    this.setState({
+      showClose: false
+    })
+  }
+  onMouseEnter = (e) => {
+    this.setState({
+      showClose: true
+    })
+  }
+  clear = (e) => {
+    e.stopPropagation();
+    this.setState({
+      value: ''
+    })
+    this.props.onChange && this.props.onChange('', '');
+  }
   render() {
     let state = this.state;
 
     let props = this.props;
 
-    const monthCalendar = <MonthCalendar {...props} />;
-
+    const monthCalendar = <MonthCalendar {...props}
+      onChange={this.onChange}
+    />;
     return (
       <div>
         <Picker
@@ -57,15 +77,26 @@ class MonthPicker extends Component {
         >
           {({ value }) => {
             return (
-                <InputGroup simple className="datepicker-input-group">
+                <InputGroup simple className="datepicker-input-group"
+                  onMouseEnter={this.onMouseEnter}
+                  onMouseLeave={this.onMouseLeave}
+                >
                   <FormControl
                     placeholder={this.props.placeholder}
                     className={this.props.className}
                     value={(value && value.format(props.format)) || ""}
+                    disabled={props.disabled}
                   />
-                  <InputGroup.Button shape="border">
-                      { props.renderIcon() }
-                  </InputGroup.Button>
+                  {
+                      this.state.value&&this.state.showClose&&(!props.disabled)?(
+                      <InputGroup.Button shape="border" 
+                          onClick={this.clear}>
+                          <i className="uf uf-close-c"></i>
+                      </InputGroup.Button>
+                      ):<InputGroup.Button shape="border">
+                          { props.renderIcon() }
+                      </InputGroup.Button>
+                  }
                 </InputGroup>
             );
           }}
@@ -77,7 +108,9 @@ class MonthPicker extends Component {
 
 
 MonthPicker.defaultProps = {
-    renderIcon: () => <Icon type="uf-calendar" />
+    renderIcon: () => <Icon type="uf-calendar" />,
+    format:'YYYY-MM',
+    showDateInput:true
 }
 
 export default MonthPicker;

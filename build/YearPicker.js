@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _YearPanel = require("rc-calendar/lib/year/YearPanel");
+var _YearPanel = require("./rc-calendar/year/YearPanel");
 
 var _YearPanel2 = _interopRequireDefault(_YearPanel);
 
@@ -14,7 +14,7 @@ var _react = require("react");
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Picker = require("rc-calendar/lib/Picker");
+var _Picker = require("./rc-calendar/Picker");
 
 var _Picker2 = _interopRequireDefault(_Picker);
 
@@ -89,7 +89,11 @@ var YearPicker = function (_Component) {
         var props = this.props;
         var value = state.value;
 
-        var Calendar = _react2["default"].createElement(_YearPanel2["default"], _extends({ prefixCls: 'rc-calendar-picker', rootPrefixCls: 'rc-calendar' }, props, { focus: function focus() {} }));
+        var Calendar = _react2["default"].createElement(_YearPanel2["default"], _extends({
+            prefixCls: 'rc-calendar-picker',
+            rootPrefixCls: 'rc-calendar' }, props, {
+            onChange: this.handleChange,
+            focus: function focus() {} }));
 
         return _react2["default"].createElement(
             "div",

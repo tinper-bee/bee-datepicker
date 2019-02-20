@@ -9,8 +9,8 @@ import InputGroup from 'bee-input-group';
 import Icon from "bee-icon";
 import classNames from 'classnames';
 
-import zhCN from "./rc-calendar/locale/zh_CN";
-import enUS from "./rc-calendar/locale/en_US";
+import zhCN from "./locale/zh_CN";
+import enUS from "./locale/en_US";
 
 import moment from "moment";
 import "moment/locale/zh-cn";
@@ -85,7 +85,23 @@ class Picker extends Component {
     handleCalendarChange = (value) => {
 
     }
-
+    onMouseLeave = (e) => {
+        this.setState({
+            showClose: false
+        })
+    }
+    onMouseEnter = (e) => {
+        this.setState({
+            showClose: true
+        })
+    }
+    clear = (e) => {
+        e.stopPropagation();
+        this.setState({
+            value: ''
+        })
+        this.props.onChange && this.props.onChange('', '');
+    }
     render() {
     const props = this.props;
     const { showValue } = props;
@@ -117,14 +133,25 @@ class Picker extends Component {
               {
                   ({}) => {
                       return (
-                    <div className={classNames('calendar-picker','u-input-group','simple',props.className)}>
+                    <div className={classNames('calendar-picker','u-input-group','simple',props.className)}
+                        onMouseEnter={this.onMouseEnter}
+                        onMouseLeave={this.onMouseLeave}
+                    >
                         <FormControl
                             placeholder={this.props.placeholder?this.props.placeholder:'start ~ end'}
                             value={isValidRange(value) && `${format(value[0],formatStr)} ~ ${format(value[1],formatStr)}` || ''}
+                            disabled={props.disabled}
                         />
-                        <InputGroup.Button shape="border">
-                            { props.renderIcon() }
-                        </InputGroup.Button>
+                        {
+                            this.state.value&&this.state.showClose&&(!props.disabled)?(
+                            <InputGroup.Button shape="border" 
+                                onClick={this.clear}>
+                                <i className="uf uf-close-c"></i>
+                            </InputGroup.Button>
+                            ):<InputGroup.Button shape="border">
+                                { props.renderIcon() }
+                            </InputGroup.Button>
+                        }
                     </div>
                 );
                   }

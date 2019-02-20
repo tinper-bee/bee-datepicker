@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import enUs from '../locale/en_US';
+import enUs from '../../locale/en_US';
 
 function noop() {
 }

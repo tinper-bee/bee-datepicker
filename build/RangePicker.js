@@ -8,7 +8,7 @@ var _react = require("react");
 
 var _react2 = _interopRequireDefault(_react);
 
-var _RangeCalendar = require("rc-calendar/lib/RangeCalendar");
+var _RangeCalendar = require("./rc-calendar/RangeCalendar");
 
 var _RangeCalendar2 = _interopRequireDefault(_RangeCalendar);
 
@@ -16,7 +16,7 @@ var _beeFormControl = require("bee-form-control");
 
 var _beeFormControl2 = _interopRequireDefault(_beeFormControl);
 
-var _Picker = require("rc-calendar/lib/Picker");
+var _Picker = require("./rc-calendar/Picker");
 
 var _Picker2 = _interopRequireDefault(_Picker);
 
@@ -28,11 +28,15 @@ var _beeIcon = require("bee-icon");
 
 var _beeIcon2 = _interopRequireDefault(_beeIcon);
 
-var _zh_CN = require("rc-calendar/lib/locale/zh_CN");
+var _classnames = require("classnames");
+
+var _classnames2 = _interopRequireDefault(_classnames);
+
+var _zh_CN = require("./rc-calendar/locale/zh_CN");
 
 var _zh_CN2 = _interopRequireDefault(_zh_CN);
 
-var _en_US = require("rc-calendar/lib/locale/en_US");
+var _en_US = require("./rc-calendar/locale/en_US");
 
 var _en_US2 = _interopRequireDefault(_en_US);
 
@@ -56,8 +60,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 * Created by chief on 17/4/6.
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 */
 
-
-var classNames = require('classnames');
 
 function format(v, f) {
     return v ? v.format && v.format(f) : '';
@@ -142,7 +144,7 @@ var Picker = function (_Component) {
 
                 return _react2["default"].createElement(
                     "div",
-                    { className: classNames('calendar-picker', 'u-input-group', 'simple', props.className) },
+                    { className: (0, _classnames2["default"])('calendar-picker', 'u-input-group', 'simple', props.className) },
                     _react2["default"].createElement(_beeFormControl2["default"], {
                         placeholder: _this2.props.placeholder ? _this2.props.placeholder : 'start ~ end',
                         value: isValidRange(value) && format(value[0], formatStr) + " ~ " + format(value[1], formatStr) || ''
@@ -164,7 +166,6 @@ var _initialiseProps = function _initialiseProps() {
     var _this3 = this;
 
     this.onChange = function (value) {
-        //console.log('onChange', value);
         var props = _this3.props;
         var formatStr = props.format || 'YYYY-MM-DD';
         _this3.setState({
@@ -186,7 +187,6 @@ var _initialiseProps = function _initialiseProps() {
     };
 
     this.remove = function (e) {
-        console.log(e);
         _this3.setState({ value: '' });
     };
 

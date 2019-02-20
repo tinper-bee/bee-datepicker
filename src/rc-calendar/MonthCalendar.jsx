@@ -9,6 +9,7 @@ import {
   calendarMixinDefaultProps,
 } from './mixin/CalendarMixin';
 import { commonMixinWrapper, propType, defaultProp } from './mixin/CommonMixin';
+import DateInput from './date/DateInput';
 import moment from 'moment';
 
 class MonthCalendar extends React.Component {
@@ -31,8 +32,7 @@ class MonthCalendar extends React.Component {
 
     this.state = {
       mode: 'month',
-      value: props.value || props.defaultValue || moment(),
-      selectedValue: props.selectedValue || props.defaultSelectedValue,
+      value: props.value || props.defaultValue || moment()
     };
   }
 
@@ -89,30 +89,67 @@ class MonthCalendar extends React.Component {
     }
   }
 
+  onInputChange = value =>{
+    let { onChange,onClear,onSelect,format } = this.props;
+    if(value){
+      this.setState({
+        value:value 
+      })
+    }else{
+      this.setState({
+        value:moment()
+      })
+    }
+    onChange&&onChange(value,value?value.format(format):'');
+  }
+  onClear = () =>{
+    let { onChange,onClear } = this.props;
+    this.setState({
+      value:moment()
+    });
+    onChange&&onChange('','');
+    onClear&&onClear('','');
+  }
   render() {
     const { props, state } = this;
-    const { mode, value } = state;
+    const { mode, value, valueNull } = state;
+    const { prefixCls,locale,format,showDateInput } = props;
     const children = (
-      <div className={`${props.prefixCls}-month-calendar-content`}>
-        <div className={`${props.prefixCls}-month-header-wrap`}>
-          <CalendarHeader
-            prefixCls={props.prefixCls}
-            mode={mode}
+      <div>
+        {
+          showDateInput?<DateInput 
             value={value}
-            locale={props.locale}
-            disabledMonth={props.disabledDate}
-            monthCellRender={props.monthCellRender}
-            monthCellContentRender={props.monthCellContentRender}
-            onMonthSelect={this.onSelect}
-            onValueChange={this.setValue}
-            onPanelChange={this.handlePanelChange}
-          />
-        </div>
-        <CalendarFooter
-          prefixCls={props.prefixCls}
-          renderFooter={props.renderFooter}
-        />
+            prefixCls={prefixCls}
+            showClear={true}
+            locale={locale}
+            format={format}
+            onChange={this.onInputChange}
+            selectedValue={value}
+            onClear={this.onClear}
+          />:''
+        }
+        <div className={`${props.prefixCls}-month-calendar-content`}>
+          <div className={`${props.prefixCls}-month-header-wrap`}>
+            <CalendarHeader
+              prefixCls={props.prefixCls}
+              mode={mode}
+              value={value}
+              locale={props.locale}
+              disabledMonth={props.disabledDate}
+              monthCellRender={props.monthCellRender}
+              monthCellContentRender={props.monthCellContentRender}
+              onMonthSelect={this.onSelect}
+              onValueChange={this.setValue}
+              onPanelChange={this.handlePanelChange}
+            />
+            </div>
+            <CalendarFooter
+              prefixCls={props.prefixCls}
+              renderFooter={props.renderFooter}
+            />
+          </div>
       </div>
+     
     );
     return this.renderRoot({
       className: `${props.prefixCls}-month-calendar`,

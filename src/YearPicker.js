@@ -20,7 +20,8 @@ class YearPicker extends Component {
         this.state = {
             type: "year",
             value: props.value || props.defaultValue || '' ,
-            open: props.open||false
+            open: props.open||false,
+            showClose:false
         };
     }
 
@@ -61,6 +62,23 @@ class YearPicker extends Component {
         props.onChange(value, (value && value.format(props.format)) || '');
     }
 
+    onMouseLeave=(e)=>{
+        this.setState({
+          showClose:false
+        })
+      }
+    onMouseEnter=(e)=>{
+        this.setState({
+          showClose:true
+        })
+    }
+    clear=(e)=>{
+        e.stopPropagation();
+        this.setState({
+            value:''
+        })
+        this.props.onChange&&this.props.onChange('','');
+    }
     render() {
         let state = this.state;
 
@@ -86,7 +104,10 @@ class YearPicker extends Component {
                 >
                     {({  }) => {
                         return (
-                            <InputGroup simple className="datepicker-input-group">
+                            <InputGroup simple className="datepicker-input-group" 
+                                onMouseEnter={this.onMouseEnter}
+                                onMouseLeave={this.onMouseLeave}
+                            >
                                 <FormControl
                                     placeholder={this.props.placeholder}
                                     className={this.props.className}
@@ -94,9 +115,16 @@ class YearPicker extends Component {
                                     readOnly
                                     value={(value && value.format(props.format)) || ""}
                                 />
-                                <InputGroup.Button shape="border">
-                                { props.renderIcon() }
-                                </InputGroup.Button>
+                                {
+                                    this.state.value&&this.state.showClose&&(!props.disabled)?(
+                                    <InputGroup.Button shape="border" 
+                                        onClick={this.clear}>
+                                        <i className="uf uf-close-c"></i>
+                                    </InputGroup.Button>
+                                    ):<InputGroup.Button shape="border">
+                                        { props.renderIcon() }
+                                    </InputGroup.Button>
+                                }
                             </InputGroup>
                         );
                     }}
