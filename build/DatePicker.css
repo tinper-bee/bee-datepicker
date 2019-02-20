@@ -1555,13 +1555,9 @@ li.rc-time-picker-panel-select-option-disabled:hover {
   display: block;
   cursor: pointer; }
 
-.datepicker-input-group .u-input-group-btn {
-  right: 3px !important;
-  height: 30px;
-  width: 23px; }
-  .datepicker-input-group .u-input-group-btn .uf-close-c {
-    color: #424242;
-    opacity: .2; }
+.datepicker-input-group .u-input-group-btn .uf-close-c {
+  color: #424242;
+  opacity: .2; }
 
 .calendar-picker.u-input-group .uf-close-c {
   color: #424242;
