@@ -1,3 +1,18 @@
+<a name="2.0.0-beta"></a>
+# [2.0.0-beta](https://github.com/tinper-bee/bee-datepicker/compare/v1.3.14...v2.0.0-beta) (2019-02-20)
+
+
+### Features
+
+* **bee-datepicker:** 所有选择新增输入时间框，新增清空功能 ([dae4ebc](https://github.com/tinper-bee/bee-datepicker/commit/dae4ebc))
+
+
+### BREAKING CHANGES
+
+* **bee-datepicker:** 修改rc组件依赖
+
+
+
 <a name="1.3.14"></a>
 ## [1.3.14](https://github.com/tinper-bee/bee-datepicker/compare/v1.3.13...v1.3.14) (2019-01-29)
 
