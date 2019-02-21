@@ -36569,7 +36569,9 @@
 	  defaultSelectedValue: _propTypes2['default'].object,
 	  disabledDate: _propTypes2['default'].func
 	});
-	MonthCalendar.defaultProps = _extends({}, _CommonMixin.defaultProp, _CalendarMixin.calendarMixinDefaultProps);
+	MonthCalendar.defaultProps = _extends({
+	  showDateInput: false
+	}, _CommonMixin.defaultProp, _CalendarMixin.calendarMixinDefaultProps);
 	exports['default'] = (0, _CalendarMixin.calendarMixinWrapper)((0, _CommonMixin.commonMixinWrapper)(MonthCalendar));
 	module.exports = exports['default'];
 

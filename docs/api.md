@@ -147,7 +147,7 @@ moment().locale('en'); //英文
 | locale| 语言包 | Object |zh_CN |
 
 
-## 已支持的键盘操作
+## DatePicker 已支持的键盘操作
 
 |按键|功能|
 |:---|:----|
