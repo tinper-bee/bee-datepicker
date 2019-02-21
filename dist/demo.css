@@ -6388,7 +6388,8 @@ input.u-button[type="submit"] {
     padding-right: 23px; }
 
 .rc-calendar {
-  box-sizing: border-box; }
+  box-sizing: border-box;
+  color: #212121; }
 
 .rc-calendar * {
   box-sizing: border-box; }
@@ -7224,7 +7225,7 @@ input.u-button[type="submit"] {
 .rc-calendar-decade-panel-header > a {
   font-weight: bold;
   display: inline-block;
-  padding: 1px 5px;
+  padding: 0px 5px;
   text-align: center;
   width: 30px; }
 
