@@ -169,6 +169,7 @@ class WeekPicker extends Component {
       <Calendar
         className="week-calendar"
         showWeekNumber
+        showMonthInput={false}
         renderFooter={this.renderFooter}
         dateRender={this.dateRender}
         locale={cn ? zhCN : enUS}

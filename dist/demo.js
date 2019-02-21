@@ -27351,8 +27351,6 @@
 	    var _this2 = this;
 	
 	    var props = this.props;
-	
-	    console.log(props);
 	    var prefixCls = props.prefixCls,
 	        locale = props.locale,
 	        mode = props.mode,
@@ -38141,6 +38139,7 @@
 	    var calendar = _react2["default"].createElement(_rcCalendar2["default"], {
 	      className: "week-calendar",
 	      showWeekNumber: true,
+	      showMonthInput: false,
 	      renderFooter: this.renderFooter,
 	      dateRender: this.dateRender,
 	      locale: cn ? _zh_CN2["default"] : _en_US2["default"],

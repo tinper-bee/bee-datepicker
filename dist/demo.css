@@ -7767,7 +7767,7 @@ li.rc-time-picker-panel-select-option-disabled:hover {
   height: 274px; }
 
 .week-calendar-footer-button {
-  padding: 3px 5px;
+  padding: 3px 20px;
   color: rgb(30,136,229);
   position: relative;
   display: inline-block;
@@ -7792,13 +7792,9 @@ li.rc-time-picker-panel-select-option-disabled:hover {
 .rc-calendar-selected-day .rc-calendar-date {
   background: rgb(30,136,229); }
 
-.week-calendar .week-calendar-footer {
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  border-right: 1px solid #ccc; }
+.week-calendar .rc-calendar-footer {
+  padding: 0;
+  height: 38px; }
 
 .rc-calendar-btn-ok {
   padding: 0;

@@ -1351,13 +1351,19 @@ li.rc-time-picker-panel-select-option-disabled:hover {
 .rc-calendar-selected-day .rc-calendar-date {
     background: $brand-primary;
 }
-.week-calendar .week-calendar-footer {
-  position:absolute;
-  top:0;
-  left:0;
-  bottom:0;
-  width:100%;
-  border-right: 1px solid #ccc;
+// .week-calendar .week-calendar-footer {
+//   position:absolute;
+//   top:0;
+//   left:0;
+//   bottom:0;
+//   width:100%;
+//   border-right: 1px solid #ccc;
+// }
+.week-calendar{
+  .rc-calendar-footer{
+    padding: 0;
+    height: 38px;
+  }
 }
 .rc-calendar-btn-ok{
   padding: 0;
