@@ -76,7 +76,7 @@
 	
 	var CARETUP = _react2['default'].createElement('i', { className: 'uf uf-arrow-up' });
 	
-	var Demo1 = __webpack_require__(84);var Demo2 = __webpack_require__(371);var Demo3 = __webpack_require__(372);var Demo4 = __webpack_require__(373);var Demo5 = __webpack_require__(374);var Demo6 = __webpack_require__(375);var Demo7 = __webpack_require__(376);var Demo8 = __webpack_require__(377);var DemoArray = [{ "example": _react2['default'].createElement(Demo1, null), "title": " 选择日期", "code": "/**\n *\n * @title 选择日期\n * @description 以「日期」为基本单位，基础的日期选择控件\n */\n\nimport React, {Component} from \"react\";\nimport DatePicker from \"tinper-bee/lib/Datepicker\";\nimport { Row, Col } from 'tinper-bee';\n\nconst format = \"YYYY-MM-DD dddd\";\nconst dateInputPlaceholder = \"选择日期\";\n\nclass Demo1 extends Component {\n    onSelect = d => {\n        console.log(d);\n    }\n    onChange = (d, dataString) => {\n        console.log(dataString);\n    };\n    render() {\n        var self = this;\n        return (\n            <div>\n                <Row>\n                    <Col md={12}>\n                        <DatePicker\n                            format={format}\n                            onSelect={this.onSelect}\n                            onChange={this.onChange}\n                        />\n                    </Col>\n                </Row>\n            </div>\n        );\n    }\n}\n\n\n", "desc": " 以「日期」为基本单位，基础的日期选择控件" }, { "example": _react2['default'].createElement(Demo2, null), "title": " 禁用日期", "code": "/**\n *\n * @title 禁用日期\n * @description 设置 disabled\n */\n\nimport React, {Component} from \"react\";\nimport DatePicker from \"tinper-bee/lib/Datepicker\";\nimport { Row, Col } from 'tinper-bee';\nimport moment from \"moment\";\n\nconst format = \"YYYY-MM-DD dddd\";\nconst dateInputPlaceholder = \"选择日期\";\n\nclass Demo2 extends Component {\n    onSelect = d => {\n        console.log(d);\n    }\n    onChange = (d, dataString) => {\n        console.log(dataString);\n    };\n    render() {\n        var self = this;\n        return (\n            <div>\n                <Row>\n                    <Col md={12}>\n                        <DatePicker\n                            format={format}\n                            onSelect={this.onSelect}\n                            onChange={this.onChange}\n                            disabled\n                            defaultValue={moment()}\n                        />\n                    </Col>\n                </Row>\n            </div>\n        );\n    }\n}\n\n\n", "desc": " 设置 disabled" }, { "example": _react2['default'].createElement(Demo3, null), "title": " 不可选择日期和时间", "code": "/**\n *\n * @title 不可选择日期和时间\n * @description 可用 disabledDate 和 disabledTime 分别禁止选择部分日期和时间，其中 disabledTime 需要和 showTime 一起使用。\n */\n\nimport React, { Component } from \"react\";\nimport DatePicker from \"tinper-bee/lib/Datepicker\";\nimport {  Row, Col  } from 'tinper-bee';\n\nimport zhCN from \"tinper-bee/lib/zh_CN\";;\nimport moment from \"moment\";\n\nconst format = \"YYYY-MM-DD\";\n\nconst dateInputPlaceholder = \"选择日期\";\n\n\nfunction disabledDate(current) {\n  return current && current.valueOf() < Date.now();\n}\n\nclass Demo3 extends Component {\n  onSelect = d => {\n    console.log(d);\n  }\n  \n  onChange = d => {\n    console.log(d);\n  }\n  render() {\n    return (\n      <div>\n        <Row>\n          <Col md={12}>\n            <DatePicker\n              format={format}\n              onSelect={this.onSelect}\n              onChange={this.onChange}\n              locale={zhCN}\n              disabledDate={disabledDate}\n              defaultValue={moment()}\n              placeholder={dateInputPlaceholder}\n            />\n          </Col>\n        </Row>\n      </div>\n    );\n  }\n}\n\n\n", "desc": " 可用 disabledDate 和 disabledTime 分别禁止选择部分日期和时间，其中 disabledTime 需要和 showTime 一起使用。" }, { "example": _react2['default'].createElement(Demo4, null), "title": " 选择年，年月，周，日期范围", "code": "/**\n *\n * @title 选择年，年月，周，日期范围\n * @description 选择年，年月，周，日期范围基本示例\n */\n\nimport React, { Component } from \"react\";\nimport DatePicker from \"tinper-bee/lib/Datepicker\";\nimport {  Row, Col  } from 'tinper-bee';\nimport moment from \"moment\";\nimport zhCN from \"tinper-bee/lib/zh_CN\";;\nconst { YearPicker,MonthPicker,WeekPicker,RangePicker } = DatePicker;\n\n\nclass Demo4 extends Component {\n    onChange = (d, dataString) => {\n        console.log('change')\n        console.log(d);\n        console.log(dataString);\n    };\n    onSelect = d => {\n        console.log('select')\n        console.log(d);\n    }\n    onClear = () => {\n        console.log('clear')\n    }\n    render() {\n        return (\n            <div>\n                <Row style={{'marginBottom':'10px'}}>\n                    <Col md={6}>\n                        <YearPicker\n                            format=\"YYYY\"\n                            onChange={this.onChange}\n                            onSelect={this.onSelect}\n                            locale={zhCN}\n                            placeholder=\"选择年\"\n                            defaultValue={moment()}\n                        />\n                    </Col>\n                    <Col md={6} style={{'marginBottom':'10px'}}>\n                        <MonthPicker\n                            format=\"YYYY-MM\"\n                            onSelect={this.onSelect}\n                            onChange={this.onChange}\n                            locale={zhCN}\n                            defaultValue={moment()}\n                            placeholder=\"选择年月\"\n                            onClear={this.onClear}\n                        />\n                    </Col>\n                    <Col md={6} style={{'marginBottom':'10px'}}>\n                        <WeekPicker \n                        defaultValue={moment()}\n                        onSelect={this.onSelect}\n                        onChange={this.onChange}\n                        placeholder=\"选择周\" \n                        />\n                    </Col>\n                    <Col md={6} style={{'marginBottom':'10px'}}>\n                        <RangePicker\n                            placeholder={'开始 ~ 结束'}\n                            dateInputPlaceholder={['开始', '结束']}\n                            showClear={true}\n                            onChange={this.onChange}\n                        />\n                    </Col>\n                </Row>\n            </div>\n        );\n    }\n}\n\n\n", "desc": " 选择年，年月，周，日期范围基本示例" }, { "example": _react2['default'].createElement(Demo5, null), "title": " 动态的改变时间", "code": "/**\n *\n * @title 动态的改变时间\n * @description 以「日期时间」为基本单位，基础的日期时间选择控件\n */\n\nimport React, { Component } from \"react\";\nimport DatePicker from \"tinper-bee/lib/Datepicker\";\nimport { Button,  Row, Col  } from 'tinper-bee';\nimport moment from \"moment\";\nimport zhCN from \"tinper-bee/lib/zh_CN\";;\nconst format = \"YYYY-MM-DD HH:mm:ss\";\nconst dateInputPlaceholder = \"选择日期\";\n\nclass Demo5 extends Component {\n  constructor(props) {\n    super(props);\n    this.state = {\n      value: moment()\n    };\n  }\n\n  handleChange = value => {\n    this.setState({\n      value: value\n    });\n  };\n  onSelect = d => {\n    console.log(d);\n  };\n\n  handlerChangeDate = () => {\n    this.setState({\n      value: moment(\"2011-11-11 11:11:11\")\n    });\n    console.log(\"click\");\n  };\n  render() {\n    return (\n      <div>\n        <Row>\n          <Col md={8}>\n            <DatePicker\n              format={format}\n              locale={zhCN}\n              onSelect={this.onSelect}\n              onChange={this.handleChange}\n              value={this.state.value}\n              placeholder={dateInputPlaceholder}\n            />\n          </Col>\n          <Col md={3}>\n            <Button onClick={this.handlerChangeDate}>变</Button>\n          </Col>\n        </Row>\n      </div>\n    );\n  }\n}\n\n\n", "desc": " 以「日期时间」为基本单位，基础的日期时间选择控件" }, { "example": _react2['default'].createElement(Demo6, null), "title": " 自定义日期渲染父级容器，扩展底边栏\t", "code": "/**\n *\n * @title 自定义日期渲染父级容器，扩展底边栏\t\n * @description getCalendarContainer自定义日期渲染父级容器，renderFooter扩展底边栏\n */\n\nimport React, { Component } from \"react\";\nimport DatePicker from \"tinper-bee/lib/Datepicker\";\nimport {  Row, Col  } from 'tinper-bee';\n\nimport zhCN from \"tinper-bee/lib/zh_CN\";;\nimport enUS from \"tinper-bee/lib/en_US\";;\nimport moment from \"moment\";\n\nconst format = \"YYYY-MM-DD\";\n\nconst dateInputPlaceholder = \"选择日期\";\n\nclass Demo6 extends Component {\n    constructor(props) {\n        super(props);\n    }\n    getCalendarContainer() {\n        return this.d || document.getElementById('d');\n    }\n    onChange = d => {\n        console.log(d);\n    };\n    render() {\n        return (\n            <div id=\"d\" >\n                <Row>\n                    <Col md={12}>\n                        <DatePicker\n                            format={format}\n                            onChange={this.onChange}\n                            locale={zhCN}\n                            defaultValue={moment()}\n                            placeholder={dateInputPlaceholder}\n                            getCalendarContainer={this.getCalendarContainer}\n                            showToday={false}//是否显示今天\n                            renderFooter={()=>{\n                                return (\n                                    <span> 我是底部 </span>\n                                )\n                            }}\n                        />\n                    </Col>\n                </Row>\n            </div>\n        );\n    }\n}\n\n\n", "desc": " getCalendarContainer自定义日期渲染父级容器，renderFooter扩展底边栏" }, { "example": _react2['default'].createElement(Demo7, null), "title": " 自定义展示日期面板，外层输入框可输入", "code": "/**\n *\n * @title 自定义展示日期面板，外层输入框可输入\n * @description open设置面板展开收起，keyboardInput外层input是否可输入，showDateInput是否显示内层input\n */\n\nimport React, {Component} from \"react\";\nimport DatePicker from \"tinper-bee/lib/Datepicker\";\nimport { Icon, Row, Col } from 'tinper-bee';\nimport zhCN from \"tinper-bee/lib/zh_CN\";;\nimport enUS from \"tinper-bee/lib/en_US\";;\nimport moment from \"moment\";\nimport 'moment/locale/zh-cn';\n\nmoment.locale('zh-cn');\n\nconst format = \"YYYY-MM-DD\";\n\nconst dateInputPlaceholder = \"选择日期\";\n\nclass Demo7 extends Component {\n    constructor(props) {\n        super(props);\n        this.state = {\n            value: '',\n            open: false\n        };\n    }\n    onSelect = d=> {\n        console.log(d);\n    }\n    onChange = (d, dataString) => {\n        this.setState({\n            value:d\n        })\n        console.log('onChange',dataString)\n    };\n    onOpenChange = open => {\n        console.log(open)\n    }\n    open = d => {\n        this.setState({\n            open: !this.state.open\n        })\n    }\n    onClick = (e,d,str) => {\n        console.log(d);\n    }\n    outInputKeydown = ()=>{\n        console.log('keydown')\n    }\n    render() {\n        return (\n            <div>\n                <Row>\n                    <Col md={8}>\n                        <DatePicker\n                            format={format}\n                            onSelect={this.onSelect}\n                            onChange={this.onChange}\n                            locale={zhCN}\n                            open={this.state.open}\n                            defaultValue={moment('2018-01-01')}\n                            value={this.state.value}\n                            onOpenChange={this.onOpenChange}\n                            placeholder={dateInputPlaceholder}\n                            className={\"Demo7\"}\n                            onClick={this.onClick}\n                            keyboardInput={true}\n                            showDateInput={false}\n                        />\n                    </Col>\n                    <Col md={3}>\n                        <button className=\"u-button\" onClick={this.open}>展开面板</button>\n                    </Col>\n                </Row>\n            </div>\n        );\n    }\n}\n\n\n", "desc": " open设置面板展开收起，keyboardInput外层input是否可输入，showDateInput是否显示内层input" }, { "example": _react2['default'].createElement(Demo8, null), "title": " 自定义展示日期面板，外层输入框可输入，配合form使用", "code": "/**\n *\n * @title 自定义展示日期面板，外层输入框可输入，配合form使用\n * @description open设置面板展开收起，keyboardInput外层input是否可输入，showDateInput是否显示内层input\n */\n\nimport React, {Component} from \"react\";\nimport DatePicker from \"tinper-bee/lib/Datepicker\";\nimport { Form, Row, Col } from 'tinper-bee';\nimport zhCN from \"tinper-bee/lib/zh_CN\";;\nimport enUS from \"tinper-bee/lib/en_US\";;\nimport moment from \"moment\";\nimport 'moment/locale/zh-cn';\n\nmoment.locale('zh-cn');\n\nconst format = \"YYYY-MM-DD\";\n\nconst dateInputPlaceholder = \"选择日期\";\n\n\nclass Demo8 extends Component {\n    constructor(props) {\n        super(props);\n        this.state = {\n            value: '',\n            open: false\n        };\n    }\n    onOpenChange = open => {\n        console.log(open)\n    }\n    open = d => {\n        this.setState({\n            open: !this.state.open\n        })\n    }\n    onClick = (e,d,str) => {\n        console.log(d);\n    }\n    onSelect(d) {\n        console.log(\"select:\"+d);\n    }\n    outInputKeydown = ()=>{\n        console.log('keydown')\n    }\n    submit = (e) => {\n        this.props.form.validateFields((err, values) => {\n            if (err) {\n                console.log('校验失败', values);\n            } else {\n                console.log('提交成功', values, moment(values.date).format('YYYY-MM-DD'));\n            }\n        });\n    }\n    render() {\n        var self = this; \n        const { getFieldProps, getFieldError } = this.props.form;\n        return (\n            <div>\n                <Row>\n                    <Col md={8}>\n                        <DatePicker\n                            format={format}\n                            onSelect={this.onSelect}\n                            onChange={this.onChange}\n                            locale={zhCN}\n                            open={this.state.open}\n                            onOpenChange={this.onOpenChange.bind(this)}\n                            placeholder={dateInputPlaceholder}\n                            className={\"demo11\"}\n                            onClick={this.onClick}\n                            keyboardInput={true}\n                            showDateInput={false}\n                            iconClick={this.open}\n                            outInputKeydown={this.outInputKeydown}\n                            {...getFieldProps('date', {\n                                validateTrigger: 'onBlur',\n                                initialValue:moment('2018-01-01'),\n                                rules: [{\n                                    required: true, message: '请输入日期',\n                                }],\n                            }) }\n                        />\n                    </Col>\n                    <Col md={3}>\n                        <button className=\"u-button\" onClick={this.open}>展开/收起面板</button>\n                        <button className=\"u-button\" onClick={this.submit}>获得值</button>\n                    </Col>\n                </Row>\n            </div>\n        );\n    }\n}\n\n\n", "desc": " open设置面板展开收起，keyboardInput外层input是否可输入，showDateInput是否显示内层input" }];
+	var Demo1 = __webpack_require__(84);var Demo2 = __webpack_require__(371);var Demo3 = __webpack_require__(372);var Demo4 = __webpack_require__(373);var Demo5 = __webpack_require__(374);var Demo6 = __webpack_require__(375);var Demo7 = __webpack_require__(376);var Demo8 = __webpack_require__(377);var DemoArray = [{ "example": _react2['default'].createElement(Demo1, null), "title": " 选择日期", "code": "/**\n *\n * @title 选择日期\n * @description 以「日期」为基本单位，基础的日期选择控件\n */\n\nimport React, {Component} from \"react\";\nimport DatePicker from \"tinper-bee/lib/Datepicker\";\nimport { Row, Col } from 'tinper-bee';\n\nconst format = \"YYYY-MM-DD dddd\";\nconst dateInputPlaceholder = \"选择日期\";\n\nclass Demo1 extends Component {\n    onSelect = d => {\n        console.log(d);\n    }\n    onChange = (d, dataString) => {\n        console.log(dataString);\n    };\n    render() {\n        var self = this;\n        return (\n            <div>\n                <Row>\n                    <Col md={12}>\n                        <DatePicker\n                            format={format}\n                            onOpenChange={()=>{console.log('open')}}\n                            onSelect={this.onSelect}\n                            onChange={this.onChange}\n                            showTime={true}\n                        />\n                    </Col>\n                </Row>\n            </div>\n        );\n    }\n}\n\n\n", "desc": " 以「日期」为基本单位，基础的日期选择控件" }, { "example": _react2['default'].createElement(Demo2, null), "title": " 禁用日期", "code": "/**\n *\n * @title 禁用日期\n * @description 设置 disabled\n */\n\nimport React, {Component} from \"react\";\nimport DatePicker from \"tinper-bee/lib/Datepicker\";\nimport { Row, Col } from 'tinper-bee';\nimport moment from \"moment\";\n\nconst format = \"YYYY-MM-DD dddd\";\nconst dateInputPlaceholder = \"选择日期\";\n\nclass Demo2 extends Component {\n    onSelect = d => {\n        console.log(d);\n    }\n    onChange = (d, dataString) => {\n        console.log(dataString);\n    };\n    render() {\n        var self = this;\n        return (\n            <div>\n                <Row>\n                    <Col md={12}>\n                        <DatePicker\n                            format={format}\n                            onSelect={this.onSelect}\n                            onChange={this.onChange}\n                            disabled\n                            defaultValue={moment()}\n                        />\n                    </Col>\n                </Row>\n            </div>\n        );\n    }\n}\n\n\n", "desc": " 设置 disabled" }, { "example": _react2['default'].createElement(Demo3, null), "title": " 不可选择日期和时间", "code": "/**\n *\n * @title 不可选择日期和时间\n * @description 可用 disabledDate 和 disabledTime 分别禁止选择部分日期和时间，其中 disabledTime 需要和 showTime 一起使用。\n */\n\nimport React, { Component } from \"react\";\nimport DatePicker from \"tinper-bee/lib/Datepicker\";\nimport {  Row, Col  } from 'tinper-bee';\n\nimport zhCN from \"tinper-bee/lib/zh_CN\";;\nimport moment from \"moment\";\n\nconst format = \"YYYY-MM-DD\";\n\nconst dateInputPlaceholder = \"选择日期\";\n\n\nfunction disabledDate(current) {\n  return current && current.valueOf() < Date.now();\n}\n\nclass Demo3 extends Component {\n  onSelect = d => {\n    console.log(d);\n  }\n  \n  onChange = d => {\n    console.log(d);\n  }\n  render() {\n    return (\n      <div>\n        <Row>\n          <Col md={12}>\n            <DatePicker\n              format={format}\n              onSelect={this.onSelect}\n              onChange={this.onChange}\n              locale={zhCN}\n              disabledDate={disabledDate}\n              defaultValue={moment()}\n              placeholder={dateInputPlaceholder}\n            />\n          </Col>\n        </Row>\n      </div>\n    );\n  }\n}\n\n\n", "desc": " 可用 disabledDate 和 disabledTime 分别禁止选择部分日期和时间，其中 disabledTime 需要和 showTime 一起使用。" }, { "example": _react2['default'].createElement(Demo4, null), "title": " 选择年，年月，周，日期范围", "code": "/**\n *\n * @title 选择年，年月，周，日期范围\n * @description 选择年，年月，周，日期范围基本示例\n */\n\nimport React, { Component } from \"react\";\nimport DatePicker from \"tinper-bee/lib/Datepicker\";\nimport {  Row, Col  } from 'tinper-bee';\nimport moment from \"moment\";\nimport zhCN from \"tinper-bee/lib/zh_CN\";;\nconst { YearPicker,MonthPicker,WeekPicker,RangePicker } = DatePicker;\n\n\nclass Demo4 extends Component {\n    onChange = (d, dataString) => {\n        console.log('change')\n        console.log(d);\n        console.log(dataString);\n    };\n    onSelect = d => {\n        console.log('select')\n        console.log(d);\n    }\n    onClear = () => {\n        console.log('clear')\n    }\n    render() {\n        return (\n            <div>\n                <Row style={{'marginBottom':'10px'}}>\n                    <Col md={6}>\n                        <YearPicker\n                            format=\"YYYY\"\n                            onChange={this.onChange}\n                            onSelect={this.onSelect}\n                            locale={zhCN}\n                            placeholder=\"选择年\"\n                            defaultValue={moment()}\n                        />\n                    </Col>\n                    <Col md={6} style={{'marginBottom':'10px'}}>\n                        <MonthPicker\n                            format=\"YYYY-MM\"\n                            onSelect={this.onSelect}\n                            onChange={this.onChange}\n                            locale={zhCN}\n                            defaultValue={moment()}\n                            placeholder=\"选择年月\"\n                            onClear={this.onClear}\n                        />\n                    </Col>\n                    <Col md={6} style={{'marginBottom':'10px'}}>\n                        <WeekPicker \n                        defaultValue={moment()}\n                        onSelect={this.onSelect}\n                        onChange={this.onChange}\n                        placeholder=\"选择周\" \n                        />\n                    </Col>\n                    <Col md={6} style={{'marginBottom':'10px'}}>\n                        <RangePicker\n                            placeholder={'开始 ~ 结束'}\n                            dateInputPlaceholder={['开始', '结束']}\n                            showClear={true}\n                            onChange={this.onChange}\n                        />\n                    </Col>\n                </Row>\n            </div>\n        );\n    }\n}\n\n\n", "desc": " 选择年，年月，周，日期范围基本示例" }, { "example": _react2['default'].createElement(Demo5, null), "title": " 动态的改变时间", "code": "/**\n *\n * @title 动态的改变时间\n * @description 以「日期时间」为基本单位，基础的日期时间选择控件\n */\n\nimport React, { Component } from \"react\";\nimport DatePicker from \"tinper-bee/lib/Datepicker\";\nimport { Button,  Row, Col  } from 'tinper-bee';\nimport moment from \"moment\";\nimport zhCN from \"tinper-bee/lib/zh_CN\";;\nconst format = \"YYYY-MM-DD HH:mm:ss\";\nconst dateInputPlaceholder = \"选择日期\";\n\nclass Demo5 extends Component {\n  constructor(props) {\n    super(props);\n    this.state = {\n      value: moment()\n    };\n  }\n\n  handleChange = value => {\n    this.setState({\n      value: value\n    });\n  };\n  onSelect = d => {\n    console.log(d);\n  };\n\n  handlerChangeDate = () => {\n    this.setState({\n      value: moment(\"2011-11-11 11:11:11\")\n    });\n    console.log(\"click\");\n  };\n  render() {\n    return (\n      <div>\n        <Row>\n          <Col md={8}>\n            <DatePicker\n              format={format}\n              locale={zhCN}\n              onSelect={this.onSelect}\n              onChange={this.handleChange}\n              value={this.state.value}\n              placeholder={dateInputPlaceholder}\n            />\n          </Col>\n          <Col md={3}>\n            <Button onClick={this.handlerChangeDate}>变</Button>\n          </Col>\n        </Row>\n      </div>\n    );\n  }\n}\n\n\n", "desc": " 以「日期时间」为基本单位，基础的日期时间选择控件" }, { "example": _react2['default'].createElement(Demo6, null), "title": " 自定义日期渲染父级容器，扩展底边栏\t", "code": "/**\n *\n * @title 自定义日期渲染父级容器，扩展底边栏\t\n * @description getCalendarContainer自定义日期渲染父级容器，renderFooter扩展底边栏\n */\n\nimport React, { Component } from \"react\";\nimport DatePicker from \"tinper-bee/lib/Datepicker\";\nimport {  Row, Col  } from 'tinper-bee';\n\nimport zhCN from \"tinper-bee/lib/zh_CN\";;\nimport enUS from \"tinper-bee/lib/en_US\";;\nimport moment from \"moment\";\n\nconst format = \"YYYY-MM-DD\";\n\nconst dateInputPlaceholder = \"选择日期\";\n\nclass Demo6 extends Component {\n    constructor(props) {\n        super(props);\n    }\n    getCalendarContainer() {\n        return this.d || document.getElementById('d');\n    }\n    onChange = d => {\n        console.log(d);\n    };\n    render() {\n        return (\n            <div id=\"d\" >\n                <Row>\n                    <Col md={12}>\n                        <DatePicker\n                            format={format}\n                            onChange={this.onChange}\n                            locale={zhCN}\n                            defaultValue={moment()}\n                            placeholder={dateInputPlaceholder}\n                            getCalendarContainer={this.getCalendarContainer}\n                            showToday={false}//是否显示今天\n                            renderFooter={()=>{\n                                return (\n                                    <span> 我是底部 </span>\n                                )\n                            }}\n                        />\n                    </Col>\n                </Row>\n            </div>\n        );\n    }\n}\n\n\n", "desc": " getCalendarContainer自定义日期渲染父级容器，renderFooter扩展底边栏" }, { "example": _react2['default'].createElement(Demo7, null), "title": " 自定义展示日期面板，外层输入框可输入", "code": "/**\n *\n * @title 自定义展示日期面板，外层输入框可输入\n * @description open设置面板展开收起，keyboardInput外层input是否可输入，showDateInput是否显示内层input\n */\n\nimport React, {Component} from \"react\";\nimport DatePicker from \"tinper-bee/lib/Datepicker\";\nimport { Icon, Row, Col } from 'tinper-bee';\nimport zhCN from \"tinper-bee/lib/zh_CN\";;\nimport enUS from \"tinper-bee/lib/en_US\";;\nimport moment from \"moment\";\nimport 'moment/locale/zh-cn';\n\nmoment.locale('zh-cn');\n\nconst format = \"YYYY-MM-DD\";\n\nconst dateInputPlaceholder = \"选择日期\";\n\nclass Demo7 extends Component {\n    constructor(props) {\n        super(props);\n        this.state = {\n            value: '',\n            open: false\n        };\n    }\n    onSelect = d=> {\n        console.log(d);\n    }\n    onChange = (d, dataString) => {\n        this.setState({\n            value:d\n        })\n        console.log('onChange',dataString)\n    };\n    onOpenChange = open => {\n        console.log(open)\n    }\n    open = d => {\n        this.setState({\n            open: !this.state.open\n        })\n    }\n    onClick = (e,d,str) => {\n        console.log(d);\n    }\n    outInputKeydown = ()=>{\n        console.log('keydown')\n    }\n    render() {\n        return (\n            <div>\n                <Row>\n                    <Col md={8}>\n                        <DatePicker\n                            format={format}\n                            onSelect={this.onSelect}\n                            onChange={this.onChange}\n                            locale={zhCN}\n                            open={this.state.open}\n                            defaultValue={moment('2018-01-01')}\n                            value={this.state.value}\n                            onOpenChange={this.onOpenChange}\n                            placeholder={dateInputPlaceholder}\n                            className={\"Demo7\"}\n                            onClick={this.onClick}\n                            keyboardInput={true}\n                            showDateInput={false}\n                        />\n                    </Col>\n                    <Col md={3}>\n                        <button className=\"u-button\" onClick={this.open}>展开面板</button>\n                    </Col>\n                </Row>\n            </div>\n        );\n    }\n}\n\n\n", "desc": " open设置面板展开收起，keyboardInput外层input是否可输入，showDateInput是否显示内层input" }, { "example": _react2['default'].createElement(Demo8, null), "title": " 自定义展示日期面板，外层输入框可输入，配合form使用", "code": "/**\n *\n * @title 自定义展示日期面板，外层输入框可输入，配合form使用\n * @description open设置面板展开收起，keyboardInput外层input是否可输入，showDateInput是否显示内层input\n */\n\nimport React, {Component} from \"react\";\nimport DatePicker from \"tinper-bee/lib/Datepicker\";\nimport { Form, Row, Col } from 'tinper-bee';\nimport zhCN from \"tinper-bee/lib/zh_CN\";;\nimport enUS from \"tinper-bee/lib/en_US\";;\nimport moment from \"moment\";\nimport 'moment/locale/zh-cn';\n\nmoment.locale('zh-cn');\n\nconst format = \"YYYY-MM-DD\";\n\nconst dateInputPlaceholder = \"选择日期\";\n\n\nclass Demo8 extends Component {\n    constructor(props) {\n        super(props);\n        this.state = {\n            value: '',\n            open: false\n        };\n    }\n    onOpenChange = open => {\n        console.log(open)\n    }\n    open = d => {\n        this.setState({\n            open: !this.state.open\n        })\n    }\n    onClick = (e,d,str) => {\n        console.log(d);\n    }\n    onSelect(d) {\n        console.log(\"select:\"+d);\n    }\n    outInputKeydown = ()=>{\n        console.log('keydown')\n    }\n    submit = (e) => {\n        this.props.form.validateFields((err, values) => {\n            if (err) {\n                console.log('校验失败', values);\n            } else {\n                console.log('提交成功', values, moment(values.date).format('YYYY-MM-DD'));\n            }\n        });\n    }\n    render() {\n        var self = this; \n        const { getFieldProps, getFieldError } = this.props.form;\n        return (\n            <div>\n                <Row>\n                    <Col md={8}>\n                        <DatePicker\n                            format={format}\n                            onSelect={this.onSelect}\n                            onChange={this.onChange}\n                            locale={zhCN}\n                            open={this.state.open}\n                            onOpenChange={this.onOpenChange.bind(this)}\n                            placeholder={dateInputPlaceholder}\n                            className={\"demo11\"}\n                            onClick={this.onClick}\n                            keyboardInput={true}\n                            showDateInput={false}\n                            iconClick={this.open}\n                            outInputKeydown={this.outInputKeydown}\n                            {...getFieldProps('date', {\n                                validateTrigger: 'onBlur',\n                                initialValue:moment('2018-01-01'),\n                                rules: [{\n                                    required: true, message: '请输入日期',\n                                }],\n                            }) }\n                        />\n                    </Col>\n                    <Col md={3}>\n                        <button className=\"u-button\" onClick={this.open}>展开/收起面板</button>\n                        <button className=\"u-button\" onClick={this.submit}>获得值</button>\n                    </Col>\n                </Row>\n            </div>\n        );\n    }\n}\n\n\n", "desc": " open设置面板展开收起，keyboardInput外层input是否可输入，showDateInput是否显示内层input" }];
 	
 	var Demo = function (_Component) {
 	    _inherits(Demo, _Component);
@@ -7995,8 +7995,12 @@
 	                    { md: 12 },
 	                    _react2["default"].createElement(_index2["default"], {
 	                        format: format,
+	                        onOpenChange: function onOpenChange() {
+	                            console.log('open');
+	                        },
 	                        onSelect: this.onSelect,
-	                        onChange: this.onChange
+	                        onChange: this.onChange,
+	                        showTime: true
 	                    })
 	                )
 	            )
@@ -8027,11 +8031,11 @@
 	
 	var _DatePicker2 = _interopRequireDefault(_DatePicker);
 	
-	var _MonthPicker = __webpack_require__(363);
+	var _MonthPicker = __webpack_require__(364);
 	
 	var _MonthPicker2 = _interopRequireDefault(_MonthPicker);
 	
-	var _RangePicker = __webpack_require__(365);
+	var _RangePicker = __webpack_require__(366);
 	
 	var _RangePicker2 = _interopRequireDefault(_RangePicker);
 	
@@ -8102,6 +8106,10 @@
 	var _beeInputGroup = __webpack_require__(358);
 	
 	var _beeInputGroup2 = _interopRequireDefault(_beeInputGroup);
+	
+	var _zh_CN = __webpack_require__(363);
+	
+	var _zh_CN2 = _interopRequireDefault(_zh_CN);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
@@ -8391,7 +8399,8 @@
 	  focusOnOpen: true,
 	  defultSelect: false,
 	  onOpenChange: function onOpenChange() {},
-	  onChange: function onChange() {}
+	  onChange: function onChange() {},
+	  locale: _zh_CN2["default"]
 	};
 	
 	exports["default"] = DatePicker;
@@ -8462,7 +8471,7 @@
 	
 	var _CommonMixin = __webpack_require__(238);
 	
-	var _DateInput = __webpack_require__(231);
+	var _DateInput = __webpack_require__(230);
 	
 	var _DateInput2 = _interopRequireDefault(_DateInput);
 	
@@ -27278,7 +27287,7 @@
 	
 	var _MonthPanel2 = _interopRequireDefault(_MonthPanel);
 	
-	var _YearPanel = __webpack_require__(230);
+	var _YearPanel = __webpack_require__(231);
 	
 	var _YearPanel2 = _interopRequireDefault(_YearPanel);
 	
@@ -27343,12 +27352,15 @@
 	        enableNext = props.enableNext,
 	        enablePrev = props.enablePrev,
 	        disabledMonth = props.disabledMonth,
-	        renderFooter = props.renderFooter;
+	        renderFooter = props.renderFooter,
+	        onChange = props.onChange,
+	        onClear = props.onClear;
 	
 	
 	    var panel = null;
 	    if (mode === 'month') {
 	      panel = _react2['default'].createElement(_MonthPanel2['default'], {
+	        showDateInput: true,
 	        locale: locale,
 	        defaultValue: value,
 	        rootPrefixCls: prefixCls,
@@ -27359,7 +27371,9 @@
 	        disabledDate: disabledMonth,
 	        cellRender: props.monthCellRender,
 	        contentRender: props.monthCellContentRender,
-	        renderFooter: renderFooter
+	        renderFooter: renderFooter,
+	        onChange: onChange,
+	        onClear: onClear
 	      });
 	    }
 	    if (mode === 'year') {
@@ -27587,6 +27601,14 @@
 	
 	var _MonthTable2 = _interopRequireDefault(_MonthTable);
 	
+	var _DateInput = __webpack_require__(230);
+	
+	var _DateInput2 = _interopRequireDefault(_DateInput);
+	
+	var _moment = __webpack_require__(94);
+	
+	var _moment2 = _interopRequireDefault(_moment);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
 	function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
@@ -27631,6 +27653,30 @@
 	      }
 	    };
 	
+	    _this.onInputChange = function (value) {
+	      var _this$props = _this.props,
+	          onChange = _this$props.onChange,
+	          format = _this$props.format;
+	
+	      _this.setState({
+	        value: value ? value : (0, _moment2['default'])()
+	      });
+	      onChange && onChange(value);
+	    };
+	
+	    _this.onClear = function () {
+	      var _this$props2 = _this.props,
+	          onChange = _this$props2.onChange,
+	          format = _this$props2.format,
+	          onClear = _this$props2.onClear;
+	
+	      _this.setState({
+	        value: (0, _moment2['default'])()
+	      });
+	      onChange && onChange('', '');
+	      onClear && onClear('', '');
+	    };
+	
 	    _this.nextYear = goYear.bind(_this, 1);
 	    _this.previousYear = goYear.bind(_this, -1);
 	    _this.prefixCls = props.rootPrefixCls + '-month-panel';
@@ -27659,7 +27705,10 @@
 	    var locale = props.locale,
 	        cellRender = props.cellRender,
 	        contentRender = props.contentRender,
-	        renderFooter = props.renderFooter;
+	        renderFooter = props.renderFooter,
+	        showDateInput = props.showDateInput,
+	        format = props.format,
+	        rootPrefixCls = props.rootPrefixCls;
 	
 	    var year = value.year();
 	    var prefixCls = this.prefixCls;
@@ -27672,6 +27721,16 @@
 	      _react2['default'].createElement(
 	        'div',
 	        null,
+	        showDateInput ? _react2['default'].createElement(_DateInput2['default'], {
+	          value: value,
+	          prefixCls: rootPrefixCls,
+	          showClear: true,
+	          locale: locale,
+	          format: format,
+	          onChange: this.onInputChange,
+	          selectedValue: value,
+	          onClear: this.onClear
+	        }) : '',
 	        _react2['default'].createElement(
 	          'div',
 	          { className: prefixCls + '-header' },
@@ -27743,7 +27802,8 @@
 	};
 	MonthPanel.defaultProps = {
 	  onChange: noop,
-	  onSelect: noop
+	  onSelect: noop,
+	  format: 'YYYY-MM'
 	};
 	
 	
@@ -27952,284 +28012,6 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _propTypes = __webpack_require__(5);
-	
-	var _propTypes2 = _interopRequireDefault(_propTypes);
-	
-	var _classnames = __webpack_require__(3);
-	
-	var _classnames2 = _interopRequireDefault(_classnames);
-	
-	var _DateInput = __webpack_require__(231);
-	
-	var _DateInput2 = _interopRequireDefault(_DateInput);
-	
-	var _moment = __webpack_require__(94);
-	
-	var _moment2 = _interopRequireDefault(_moment);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-	
-	function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
-	
-	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
-	
-	var ROW = 4;
-	var COL = 3;
-	
-	function goYear(direction) {
-	  var value = this.state.value.clone();
-	  value.add(direction, 'year');
-	  this.setState({
-	    value: value
-	  });
-	}
-	
-	function chooseYear(year) {
-	  var value = this.state.value.clone();
-	  value.year(year);
-	  value.month(this.state.value.month());
-	  this.props.onSelect(value);
-	}
-	
-	var YearPanel = function (_React$Component) {
-	  _inherits(YearPanel, _React$Component);
-	
-	  function YearPanel(props) {
-	    _classCallCheck(this, YearPanel);
-	
-	    var _this = _possibleConstructorReturn(this, _React$Component.call(this, props));
-	
-	    _this.onInputChange = function (value) {
-	      var _this$props = _this.props,
-	          onChange = _this$props.onChange,
-	          format = _this$props.format;
-	
-	      _this.setState({
-	        value: value ? value : (0, _moment2['default'])()
-	      });
-	      onChange && onChange(value, value ? value.format(format) : '');
-	    };
-	
-	    _this.onClear = function () {
-	      var _this$props2 = _this.props,
-	          onChange = _this$props2.onChange,
-	          format = _this$props2.format,
-	          onClear = _this$props2.onClear;
-	
-	      _this.setState({
-	        value: (0, _moment2['default'])()
-	      });
-	      onChange && onChange('', '');
-	      onClear && onClear('', '');
-	    };
-	
-	    _this.prefixCls = props.rootPrefixCls + '-year-panel';
-	    _this.state = {
-	      value: props.value || props.defaultValue
-	    };
-	    _this.nextDecade = goYear.bind(_this, 10);
-	    _this.previousDecade = goYear.bind(_this, -10);
-	    return _this;
-	  }
-	
-	  YearPanel.prototype.years = function years() {
-	    var value = this.state.value;
-	    var currentYear = value ? value.year() : (0, _moment2['default'])().year();
-	    var startYear = parseInt(currentYear / 10, 10) * 10;
-	    var previousYear = startYear - 1;
-	    var years = [];
-	    var index = 0;
-	    for (var rowIndex = 0; rowIndex < ROW; rowIndex++) {
-	      years[rowIndex] = [];
-	      for (var colIndex = 0; colIndex < COL; colIndex++) {
-	        var year = previousYear + index;
-	        var content = String(year);
-	        years[rowIndex][colIndex] = {
-	          content: content,
-	          year: year,
-	          title: content
-	        };
-	        index++;
-	      }
-	    }
-	    return years;
-	  };
-	
-	  YearPanel.prototype.render = function render() {
-	    var _this2 = this;
-	
-	    var props = this.props;
-	    var _state = this.state,
-	        value = _state.value,
-	        str = _state.str;
-	    var locale = props.locale,
-	        renderFooter = props.renderFooter,
-	        format = props.format,
-	        showDateInput = props.showDateInput;
-	
-	    var years = this.years();
-	    var currentYear = value.year();
-	    var startYear = parseInt(currentYear / 10, 10) * 10;
-	    var endYear = startYear + 9;
-	    var prefixCls = this.prefixCls;
-	
-	    var yeasEls = years.map(function (row, index) {
-	      var tds = row.map(function (yearData) {
-	        var _classNameMap;
-	
-	        var classNameMap = (_classNameMap = {}, _defineProperty(_classNameMap, prefixCls + '-cell', 1), _defineProperty(_classNameMap, prefixCls + '-selected-cell', yearData.year === currentYear), _defineProperty(_classNameMap, prefixCls + '-last-decade-cell', yearData.year < startYear), _defineProperty(_classNameMap, prefixCls + '-next-decade-cell', yearData.year > endYear), _classNameMap);
-	        var clickHandler = void 0;
-	        if (yearData.year < startYear) {
-	          clickHandler = _this2.previousDecade;
-	        } else if (yearData.year > endYear) {
-	          clickHandler = _this2.nextDecade;
-	        } else {
-	          clickHandler = chooseYear.bind(_this2, yearData.year);
-	        }
-	        return _react2['default'].createElement(
-	          'td',
-	          {
-	            role: 'gridcell',
-	            title: yearData.title,
-	            key: yearData.content,
-	            onClick: clickHandler,
-	            className: (0, _classnames2['default'])(classNameMap)
-	          },
-	          _react2['default'].createElement(
-	            'a',
-	            {
-	              className: prefixCls + '-year'
-	            },
-	            yearData.content
-	          )
-	        );
-	      });
-	      return _react2['default'].createElement(
-	        'tr',
-	        { key: index, role: 'row' },
-	        tds
-	      );
-	    });
-	
-	    var footer = renderFooter && renderFooter('year');
-	
-	    return _react2['default'].createElement(
-	      'div',
-	      { className: this.prefixCls },
-	      showDateInput ? _react2['default'].createElement(_DateInput2['default'], {
-	        value: value,
-	        prefixCls: this.props.rootPrefixCls,
-	        showClear: true,
-	        locale: locale,
-	        format: format,
-	        onChange: this.onInputChange,
-	        selectedValue: value,
-	        onClear: this.onClear
-	      }) : '',
-	      _react2['default'].createElement(
-	        'div',
-	        null,
-	        _react2['default'].createElement(
-	          'div',
-	          { className: prefixCls + '-header' },
-	          _react2['default'].createElement('a', {
-	            className: prefixCls + '-prev-decade-btn',
-	            role: 'button',
-	            onClick: this.previousDecade,
-	            title: locale.previousDecade
-	          }),
-	          _react2['default'].createElement(
-	            'a',
-	            {
-	              className: prefixCls + '-decade-select',
-	              role: 'button',
-	              onClick: props.onDecadePanelShow,
-	              title: locale.decadeSelect
-	            },
-	            _react2['default'].createElement(
-	              'span',
-	              { className: prefixCls + '-decade-select-content' },
-	              startYear,
-	              '-',
-	              endYear
-	            ),
-	            _react2['default'].createElement(
-	              'span',
-	              { className: prefixCls + '-decade-select-arrow' },
-	              'x'
-	            )
-	          ),
-	          _react2['default'].createElement('a', {
-	            className: prefixCls + '-next-decade-btn',
-	            role: 'button',
-	            onClick: this.nextDecade,
-	            title: locale.nextDecade
-	          })
-	        ),
-	        _react2['default'].createElement(
-	          'div',
-	          { className: prefixCls + '-body' },
-	          _react2['default'].createElement(
-	            'table',
-	            { className: prefixCls + '-table', cellSpacing: '0', role: 'grid' },
-	            _react2['default'].createElement(
-	              'tbody',
-	              { className: prefixCls + '-tbody' },
-	              yeasEls
-	            )
-	          )
-	        ),
-	        footer && _react2['default'].createElement(
-	          'div',
-	          { className: prefixCls + '-footer' },
-	          footer
-	        )
-	      )
-	    );
-	  };
-	
-	  return YearPanel;
-	}(_react2['default'].Component);
-	
-	exports['default'] = YearPanel;
-	
-	
-	YearPanel.propTypes = {
-	  rootPrefixCls: _propTypes2['default'].string,
-	  value: _propTypes2['default'].object,
-	  defaultValue: _propTypes2['default'].object,
-	  renderFooter: _propTypes2['default'].func
-	};
-	
-	YearPanel.defaultProps = {
-	  onSelect: function onSelect() {},
-	
-	  format: 'YYYY',
-	  showDateInput: true
-	};
-	module.exports = exports['default'];
-
-/***/ }),
-/* 231 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _react = __webpack_require__(4);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
 	var _reactDom = __webpack_require__(12);
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
@@ -28349,7 +28131,7 @@
 	          title: locale.clear,
 	          onClick: this.onClear
 	        },
-	        clearIcon || _react2['default'].createElement('span', { className: prefixCls + '-clear-btn' })
+	        clearIcon || _react2['default'].createElement('span', { className: prefixCls + '-clear-btn uf uf-close-c' })
 	      ) : null
 	    );
 	  };
@@ -28474,6 +28256,304 @@
 	(0, _reactLifecyclesCompat.polyfill)(DateInput);
 	
 	exports['default'] = DateInput;
+	module.exports = exports['default'];
+
+/***/ }),
+/* 231 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(4);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _propTypes = __webpack_require__(5);
+	
+	var _propTypes2 = _interopRequireDefault(_propTypes);
+	
+	var _classnames = __webpack_require__(3);
+	
+	var _classnames2 = _interopRequireDefault(_classnames);
+	
+	var _DecadePanel = __webpack_require__(232);
+	
+	var _DecadePanel2 = _interopRequireDefault(_DecadePanel);
+	
+	var _DateInput = __webpack_require__(230);
+	
+	var _DateInput2 = _interopRequireDefault(_DateInput);
+	
+	var _moment = __webpack_require__(94);
+	
+	var _moment2 = _interopRequireDefault(_moment);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	
+	function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
+	
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
+	
+	var ROW = 4;
+	var COL = 3;
+	
+	function goYear(direction) {
+	  var value = this.state.value.clone();
+	  value.add(direction, 'year');
+	  this.setState({
+	    value: value
+	  });
+	}
+	
+	function chooseYear(year) {
+	  var value = this.state.value.clone();
+	  value.year(year);
+	  value.month(this.state.value.month());
+	  this.props.onSelect(value);
+	}
+	
+	var YearPanel = function (_React$Component) {
+	  _inherits(YearPanel, _React$Component);
+	
+	  function YearPanel(props) {
+	    _classCallCheck(this, YearPanel);
+	
+	    var _this = _possibleConstructorReturn(this, _React$Component.call(this, props));
+	
+	    _this.onInputChange = function (value) {
+	      var _this$props = _this.props,
+	          onChange = _this$props.onChange,
+	          format = _this$props.format;
+	
+	      _this.setState({
+	        value: value ? value : (0, _moment2['default'])()
+	      });
+	      onChange && onChange(value, value ? value.format(format) : '');
+	    };
+	
+	    _this.onClear = function () {
+	      var _this$props2 = _this.props,
+	          onChange = _this$props2.onChange,
+	          format = _this$props2.format,
+	          onClear = _this$props2.onClear;
+	
+	      _this.setState({
+	        value: (0, _moment2['default'])()
+	      });
+	      onChange && onChange('', '');
+	      onClear && onClear('', '');
+	    };
+	
+	    _this.prefixCls = props.rootPrefixCls + '-year-panel';
+	    _this.state = {
+	      value: props.value || props.defaultValue
+	    };
+	    _this.nextDecade = goYear.bind(_this, 10);
+	    _this.previousDecade = goYear.bind(_this, -10);
+	    ['showDecadePanel', 'onDecadePanelSelect'].forEach(function (method) {
+	      _this[method] = _this[method].bind(_this);
+	    });
+	    return _this;
+	  }
+	
+	  YearPanel.prototype.onDecadePanelSelect = function onDecadePanelSelect(current) {
+	    this.setState({
+	      value: current,
+	      showDecadePanel: 0
+	    });
+	  };
+	
+	  YearPanel.prototype.years = function years() {
+	    var value = this.state.value;
+	    var currentYear = value.year();
+	    var startYear = parseInt(currentYear / 10, 10) * 10;
+	    var previousYear = startYear - 1;
+	    var years = [];
+	    var index = 0;
+	    for (var rowIndex = 0; rowIndex < ROW; rowIndex++) {
+	      years[rowIndex] = [];
+	      for (var colIndex = 0; colIndex < COL; colIndex++) {
+	        var year = previousYear + index;
+	        var content = String(year);
+	        years[rowIndex][colIndex] = {
+	          content: content,
+	          year: year,
+	          title: content
+	        };
+	        index++;
+	      }
+	    }
+	    return years;
+	  };
+	
+	  YearPanel.prototype.showDecadePanel = function showDecadePanel() {
+	    this.setState({
+	      showDecadePanel: 1
+	    });
+	  };
+	
+	  YearPanel.prototype.render = function render() {
+	    var _this2 = this;
+	
+	    var props = this.props;
+	    var value = this.state.value;
+	    var locale = props.locale;
+	    var years = this.years();
+	    var currentYear = value.year();
+	    var startYear = parseInt(currentYear / 10, 10) * 10;
+	    var endYear = startYear + 9;
+	    var prefixCls = this.prefixCls;
+	
+	    var yeasEls = years.map(function (row, index) {
+	      var tds = row.map(function (yearData) {
+	        var _classNameMap;
+	
+	        var classNameMap = (_classNameMap = {}, _defineProperty(_classNameMap, prefixCls + '-cell', 1), _defineProperty(_classNameMap, prefixCls + '-selected-cell', yearData.year === currentYear), _defineProperty(_classNameMap, prefixCls + '-last-decade-cell', yearData.year < startYear), _defineProperty(_classNameMap, prefixCls + '-next-decade-cell', yearData.year > endYear), _classNameMap);
+	        var clickHandler = void 0;
+	        if (yearData.year < startYear) {
+	          clickHandler = _this2.previousDecade;
+	        } else if (yearData.year > endYear) {
+	          clickHandler = _this2.nextDecade;
+	        } else {
+	          clickHandler = chooseYear.bind(_this2, yearData.year);
+	        }
+	        return _react2['default'].createElement(
+	          'td',
+	          {
+	            role: 'gridcell',
+	            title: yearData.title,
+	            key: yearData.content,
+	            onClick: clickHandler,
+	            className: (0, _classnames2['default'])(classNameMap)
+	          },
+	          _react2['default'].createElement(
+	            'a',
+	            {
+	              className: prefixCls + '-year'
+	            },
+	            yearData.content
+	          )
+	        );
+	      });
+	      return _react2['default'].createElement(
+	        'tr',
+	        { key: index, role: 'row' },
+	        tds
+	      );
+	    });
+	
+	    var decadePanel = void 0;
+	    if (this.state.showDecadePanel) {
+	      decadePanel = _react2['default'].createElement(_DecadePanel2['default'], {
+	        locale: locale,
+	        value: value,
+	        rootPrefixCls: props.rootPrefixCls,
+	        onSelect: this.onDecadePanelSelect
+	      });
+	    }
+	    var showDateInput = props.showDateInput,
+	        rootPrefixCls = props.rootPrefixCls,
+	        format = props.format;
+	
+	    return _react2['default'].createElement(
+	      'div',
+	      { className: this.prefixCls },
+	      _react2['default'].createElement(
+	        'div',
+	        null,
+	        showDateInput ? _react2['default'].createElement(_DateInput2['default'], {
+	          value: value,
+	          prefixCls: this.props.rootPrefixCls,
+	          showClear: true,
+	          locale: locale,
+	          format: format,
+	          onChange: this.onInputChange,
+	          selectedValue: value,
+	          onClear: this.onClear
+	        }) : '',
+	        _react2['default'].createElement(
+	          'div',
+	          { className: prefixCls + '-header' },
+	          _react2['default'].createElement('a', {
+	            className: prefixCls + '-prev-decade-btn',
+	            role: 'button',
+	            onClick: this.previousDecade,
+	            title: locale.previousDecade
+	          }),
+	          _react2['default'].createElement(
+	            'a',
+	            {
+	              className: prefixCls + '-decade-select',
+	              role: 'button',
+	              onClick: this.showDecadePanel,
+	              title: locale.decadeSelect
+	            },
+	            _react2['default'].createElement(
+	              'span',
+	              { className: prefixCls + '-decade-select-content' },
+	              startYear,
+	              '-',
+	              endYear
+	            ),
+	            _react2['default'].createElement(
+	              'span',
+	              { className: prefixCls + '-decade-select-arrow' },
+	              'x'
+	            )
+	          ),
+	          _react2['default'].createElement('a', {
+	            className: prefixCls + '-next-decade-btn',
+	            role: 'button',
+	            onClick: this.nextDecade,
+	            title: locale.nextDecade
+	          })
+	        ),
+	        _react2['default'].createElement(
+	          'div',
+	          { className: prefixCls + '-body' },
+	          _react2['default'].createElement(
+	            'table',
+	            { className: prefixCls + '-table', cellSpacing: '0', role: 'grid' },
+	            _react2['default'].createElement(
+	              'tbody',
+	              { className: prefixCls + '-tbody' },
+	              yeasEls
+	            )
+	          )
+	        )
+	      ),
+	      decadePanel
+	    );
+	  };
+	
+	  return YearPanel;
+	}(_react2['default'].Component);
+	
+	exports['default'] = YearPanel;
+	
+	
+	YearPanel.propTypes = {
+	  rootPrefixCls: _propTypes2['default'].string,
+	  value: _propTypes2['default'].object,
+	  defaultValue: _propTypes2['default'].object
+	};
+	
+	YearPanel.defaultProps = {
+	  onSelect: function onSelect() {},
+	
+	  format: 'YYYY',
+	  showDateInput: false
+	};
 	module.exports = exports['default'];
 
 /***/ }),
@@ -29259,7 +29339,10 @@
 	  previousDecade: 'Last decade',
 	  nextDecade: 'Next decade',
 	  previousCentury: 'Last century',
-	  nextCentury: 'Next century'
+	  nextCentury: 'Next century',
+	  lastWeek: 'Last week',
+	  nowWeek: 'Now week',
+	  nextWeek: 'Next week'
 	};
 	module.exports = exports['default'];
 
@@ -36087,6 +36170,47 @@
 
 /***/ }),
 /* 363 */
+/***/ (function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports['default'] = {
+	  today: '今天',
+	  now: '此刻',
+	  backToToday: '返回今天',
+	  ok: '确定',
+	  timeSelect: '选择时间',
+	  dateSelect: '选择日期',
+	  weekSelect: '选择周',
+	  clear: '清除',
+	  month: '月',
+	  year: '年',
+	  previousMonth: '上个月 (翻页上键)',
+	  nextMonth: '下个月 (翻页下键)',
+	  monthSelect: '选择月份',
+	  yearSelect: '选择年份',
+	  decadeSelect: '选择年代',
+	  yearFormat: 'YYYY年',
+	  dayFormat: 'D日',
+	  dateFormat: 'YYYY年M月D日',
+	  dateTimeFormat: 'YYYY年M月D日 HH时mm分ss秒',
+	  previousYear: '上一年 (Control键加左方向键)',
+	  nextYear: '下一年 (Control键加右方向键)',
+	  previousDecade: '上一年代',
+	  nextDecade: '下一年代',
+	  previousCentury: '上一世纪',
+	  nextCentury: '下一世纪',
+	  lastWeek: '上一周',
+	  nowWeek: '本周',
+	  nextWeek: '下一周'
+	};
+	module.exports = exports['default'];
+
+/***/ }),
+/* 364 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -36097,7 +36221,7 @@
 	
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
-	var _MonthCalendar = __webpack_require__(364);
+	var _MonthCalendar = __webpack_require__(365);
 	
 	var _MonthCalendar2 = _interopRequireDefault(_MonthCalendar);
 	
@@ -36121,6 +36245,10 @@
 	
 	var _beeInputGroup2 = _interopRequireDefault(_beeInputGroup);
 	
+	var _zh_CN = __webpack_require__(363);
+	
+	var _zh_CN2 = _interopRequireDefault(_zh_CN);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
 	function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
@@ -36141,7 +36269,7 @@
 	
 	    var _this = _possibleConstructorReturn(this, _Component.call(this, props, context));
 	
-	    _this.onChange = function (value, valueString) {
+	    _this.onChange = function (value) {
 	      _this.setState({
 	        value: value
 	      });
@@ -36151,7 +36279,7 @@
 	          onSelect = _this$props.onSelect,
 	          format = _this$props.format;
 	
-	      onChange && onChange(value, valueString);
+	      onChange && onChange(value, value ? value.format(format) : '');
 	    };
 	
 	    _this.onOpenChange = function (open) {
@@ -36257,14 +36385,15 @@
 	    return _react2["default"].createElement(_beeIcon2["default"], { type: "uf-calendar" });
 	  },
 	  format: 'YYYY-MM',
-	  showDateInput: true
+	  showDateInput: true,
+	  locale: _zh_CN2["default"]
 	};
 	
 	exports["default"] = MonthPicker;
 	module.exports = exports["default"];
 
 /***/ }),
-/* 364 */
+/* 365 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -36298,10 +36427,6 @@
 	var _CalendarMixin = __webpack_require__(237);
 	
 	var _CommonMixin = __webpack_require__(238);
-	
-	var _DateInput = __webpack_require__(231);
-	
-	var _DateInput2 = _interopRequireDefault(_DateInput);
 	
 	var _moment = __webpack_require__(94);
 	
@@ -36379,40 +36504,10 @@
 	      }
 	    };
 	
-	    _this.onInputChange = function (value) {
-	      var _this$props = _this.props,
-	          onChange = _this$props.onChange,
-	          onClear = _this$props.onClear,
-	          onSelect = _this$props.onSelect,
-	          format = _this$props.format;
-	
-	      if (value) {
-	        _this.setState({
-	          value: value
-	        });
-	      } else {
-	        _this.setState({
-	          value: (0, _moment2['default'])()
-	        });
-	      }
-	      onChange && onChange(value, value ? value.format(format) : '');
-	    };
-	
-	    _this.onClear = function () {
-	      var _this$props2 = _this.props,
-	          onChange = _this$props2.onChange,
-	          onClear = _this$props2.onClear;
-	
-	      _this.setState({
-	        value: (0, _moment2['default'])()
-	      });
-	      onChange && onChange('', '');
-	      onClear && onClear('', '');
-	    };
-	
 	    _this.state = {
 	      mode: 'month',
-	      value: props.value || props.defaultValue || (0, _moment2['default'])()
+	      value: props.value || props.defaultValue || (0, _moment2['default'])(),
+	      selectedValue: props.selectedValue || props.defaultSelectedValue
 	    };
 	    return _this;
 	  }
@@ -36421,50 +36516,40 @@
 	    var props = this.props,
 	        state = this.state;
 	    var mode = state.mode,
-	        value = state.value,
-	        valueNull = state.valueNull;
+	        value = state.value;
 	    var prefixCls = props.prefixCls,
 	        locale = props.locale,
 	        format = props.format,
-	        showDateInput = props.showDateInput;
+	        showDateInput = props.showDateInput,
+	        onChange = props.onChange,
+	        onSelect = props.onSelect,
+	        onClear = props.onClear;
 	
 	    var children = _react2['default'].createElement(
 	      'div',
-	      null,
-	      showDateInput ? _react2['default'].createElement(_DateInput2['default'], {
-	        value: value,
-	        prefixCls: prefixCls,
-	        showClear: true,
-	        locale: locale,
-	        format: format,
-	        onChange: this.onInputChange,
-	        selectedValue: value,
-	        onClear: this.onClear
-	      }) : '',
+	      { className: props.prefixCls + '-month-calendar-content' },
 	      _react2['default'].createElement(
 	        'div',
-	        { className: props.prefixCls + '-month-calendar-content' },
-	        _react2['default'].createElement(
-	          'div',
-	          { className: props.prefixCls + '-month-header-wrap' },
-	          _react2['default'].createElement(_CalendarHeader2['default'], {
-	            prefixCls: props.prefixCls,
-	            mode: mode,
-	            value: value,
-	            locale: props.locale,
-	            disabledMonth: props.disabledDate,
-	            monthCellRender: props.monthCellRender,
-	            monthCellContentRender: props.monthCellContentRender,
-	            onMonthSelect: this.onSelect,
-	            onValueChange: this.setValue,
-	            onPanelChange: this.handlePanelChange
-	          })
-	        ),
-	        _react2['default'].createElement(_CalendarFooter2['default'], {
+	        { className: props.prefixCls + '-month-header-wrap' },
+	        _react2['default'].createElement(_CalendarHeader2['default'], {
 	          prefixCls: props.prefixCls,
-	          renderFooter: props.renderFooter
+	          mode: mode,
+	          value: value,
+	          locale: props.locale,
+	          disabledMonth: props.disabledDate,
+	          monthCellRender: props.monthCellRender,
+	          monthCellContentRender: props.monthCellContentRender,
+	          onMonthSelect: this.onSelect,
+	          onValueChange: this.setValue,
+	          onPanelChange: this.handlePanelChange
+	          // onChange={onChange}
+	          , onClear: onClear
 	        })
-	      )
+	      ),
+	      _react2['default'].createElement(_CalendarFooter2['default'], {
+	        prefixCls: props.prefixCls,
+	        renderFooter: props.renderFooter
+	      })
 	    );
 	    return this.renderRoot({
 	      className: props.prefixCls + '-month-calendar',
@@ -36489,7 +36574,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 365 */
+/* 366 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -36502,7 +36587,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _RangeCalendar = __webpack_require__(366);
+	var _RangeCalendar = __webpack_require__(367);
 	
 	var _RangeCalendar2 = _interopRequireDefault(_RangeCalendar);
 	
@@ -36526,13 +36611,9 @@
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _zh_CN = __webpack_require__(368);
+	var _zh_CN = __webpack_require__(363);
 	
 	var _zh_CN2 = _interopRequireDefault(_zh_CN);
-	
-	var _en_US = __webpack_require__(239);
-	
-	var _en_US2 = _interopRequireDefault(_en_US);
 	
 	var _moment = __webpack_require__(94);
 	
@@ -36719,14 +36800,15 @@
 	Picker.defaultProps = {
 	    renderIcon: function renderIcon() {
 	        return _react2["default"].createElement(_beeIcon2["default"], { type: "uf-calendar" });
-	    }
+	    },
+	    locale: _zh_CN2["default"]
 	};
 	
 	exports["default"] = Picker;
 	module.exports = exports["default"];
 
 /***/ }),
-/* 366 */
+/* 367 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -36761,7 +36843,7 @@
 	
 	var _KeyCode2 = _interopRequireDefault(_KeyCode);
 	
-	var _CalendarPart = __webpack_require__(367);
+	var _CalendarPart = __webpack_require__(368);
 	
 	var _CalendarPart2 = _interopRequireDefault(_CalendarPart);
 	
@@ -36956,6 +37038,10 @@
 	    var isTodayInView = startValue.year() === thisYear && startValue.month() === thisMonth || endValue.year() === thisYear && endValue.month() === thisMonth;
 	    var nextMonthOfStart = startValue.clone().add(1, 'months');
 	    var isClosestMonths = nextMonthOfStart.year() === endValue.year() && nextMonthOfStart.month() === endValue.month();
+	
+	    // console.warn('Render:', selectedValue.map(t => t.format('YYYY-MM-DD')).join(', '));
+	    // console.log('start:', startValue.format('YYYY-MM-DD'));
+	    // console.log('end:', endValue.format('YYYY-MM-DD'));
 	
 	    var extraFooter = props.renderFooter();
 	
@@ -37630,7 +37716,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 367 */
+/* 368 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -37657,7 +37743,7 @@
 	
 	var _DateTable2 = _interopRequireDefault(_DateTable);
 	
-	var _DateInput = __webpack_require__(231);
+	var _DateInput = __webpack_require__(230);
 	
 	var _DateInput2 = _interopRequireDefault(_DateInput);
 	
@@ -37811,44 +37897,6 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 368 */
-/***/ (function(module, exports) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	exports['default'] = {
-	  today: '今天',
-	  now: '此刻',
-	  backToToday: '返回今天',
-	  ok: '确定',
-	  timeSelect: '选择时间',
-	  dateSelect: '选择日期',
-	  weekSelect: '选择周',
-	  clear: '清除',
-	  month: '月',
-	  year: '年',
-	  previousMonth: '上个月 (翻页上键)',
-	  nextMonth: '下个月 (翻页下键)',
-	  monthSelect: '选择月份',
-	  yearSelect: '选择年份',
-	  decadeSelect: '选择年代',
-	  yearFormat: 'YYYY年',
-	  dayFormat: 'D日',
-	  dateFormat: 'YYYY年M月D日',
-	  dateTimeFormat: 'YYYY年M月D日 HH时mm分ss秒',
-	  previousYear: '上一年 (Control键加左方向键)',
-	  nextYear: '下一年 (Control键加右方向键)',
-	  previousDecade: '上一年代',
-	  nextDecade: '下一年代',
-	  previousCentury: '上一世纪',
-	  nextCentury: '下一世纪'
-	};
-	module.exports = exports['default'];
-
-/***/ }),
 /* 369 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -37876,7 +37924,7 @@
 	
 	var _beeFormControl2 = _interopRequireDefault(_beeFormControl);
 	
-	var _zh_CN = __webpack_require__(368);
+	var _zh_CN = __webpack_require__(363);
 	
 	var _zh_CN2 = _interopRequireDefault(_zh_CN);
 	
@@ -37899,10 +37947,6 @@
 	__webpack_require__(221);
 	
 	__webpack_require__(126);
-	
-	var _YearPicker = __webpack_require__(370);
-	
-	var _YearPicker2 = _interopRequireDefault(_YearPicker);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
@@ -37929,7 +37973,7 @@
 	
 	var format = "YYYY-Wo";
 	
-	var style = "\n.week-calendar {\n  width: 386px;\n}\n.week-calendar .rc-calendar-tbody > tr:hover\n.rc-calendar-date {\n  background: #ebfaff;\n}\n\n.week-calendar .rc-calendar-tbody > tr:hover\n.rc-calendar-selected-day .rc-calendar-date {\n    background: #3fc7fa;\n}\n\n.week-calendar .week-calendar-sidebar {\n  position:absolute;\n  top:0;\n  left:0;\n  bottom:0;\n  width:100px;\n  border-right: 1px solid #ccc;\n}\n.week-calendar .rc-calendar-panel {\n  margin-left: 100px;\n}\n";
+	var style = "\n.week-calendar .rc-calendar-tbody > tr:hover\n.rc-calendar-date {\n  background: #ebfaff;\n}\n\n.week-calendar .rc-calendar-tbody > tr:hover\n.rc-calendar-selected-day .rc-calendar-date {\n    background: #3fc7fa;\n}\n.week-calendar .week-calendar-footer {\n  position:absolute;\n  top:0;\n  left:0;\n  bottom:0;\n  width:100%;\n  border-right: 1px solid #ccc;\n}\n";
 	
 	var WeekPicker = function (_Component) {
 	  _inherits(WeekPicker, _Component);
@@ -37989,27 +38033,43 @@
 	      });
 	    };
 	
-	    _this.renderSidebar = function () {
+	    _this.nowWeek = function () {
+	      var value = now;
+	      _this.setState({
+	        value: value,
+	        open: false
+	      });
+	    };
+	
+	    _this.renderFooter = function () {
 	      return _react2["default"].createElement(
 	        "div",
-	        { className: "week-calendar-sidebar", key: "sidebar" },
+	        { className: "week-calendar-footer", key: "footer" },
 	        _react2["default"].createElement(
-	          "button",
+	          "span",
 	          {
-	            className: "week-calendar-sidebar-button",
+	            className: "week-calendar-footer-button",
 	            onClick: _this.lastWeek.bind(_this),
-	            style: { margin: 8 }
+	            style: { 'float': 'left' }
 	          },
-	          "\u4E0A\u4E00\u5468"
+	          _this.props.locale.lastWeek
 	        ),
 	        _react2["default"].createElement(
-	          "button",
+	          "span",
 	          {
-	            className: "week-calendar-sidebar-button",
-	            onClick: _this.nextWeek.bind(_this),
-	            style: { margin: 8 }
+	            className: "week-calendar-footer-button",
+	            onClick: _this.nowWeek.bind(_this)
 	          },
-	          "\u4E0B\u4E00\u5468"
+	          _this.props.locale.nowWeek
+	        ),
+	        _react2["default"].createElement(
+	          "span",
+	          {
+	            className: "week-calendar-footer-button",
+	            onClick: _this.nextWeek.bind(_this),
+	            style: { 'float': 'right' }
+	          },
+	          _this.props.locale.nextWeek
 	        )
 	      );
 	    };
@@ -38061,14 +38121,15 @@
 	    var calendar = _react2["default"].createElement(_rcCalendar2["default"], {
 	      className: "week-calendar",
 	      showWeekNumber: true,
-	      renderSidebar: this.renderSidebar,
+	      renderFooter: this.renderFooter,
 	      dateRender: this.dateRender,
 	      locale: cn ? _zh_CN2["default"] : _en_US2["default"],
 	      format: format,
 	      dateInputPlaceholder: this.props.placeholder,
 	      defaultValue: now,
 	      showDateInput: true,
-	      onChange: this.handleCalendarChange
+	      onChange: this.handleCalendarChange,
+	      showToday: false
 	    });
 	    return _react2["default"].createElement(
 	      "div",
@@ -38121,7 +38182,8 @@
 	WeekPicker.defaultProps = {
 	  renderIcon: function renderIcon() {
 	    return _react2["default"].createElement(_beeIcon2["default"], { type: "uf-calendar" });
-	  }
+	  },
+	  locale: _zh_CN2["default"]
 	};
 	
 	exports["default"] = WeekPicker;
@@ -38139,7 +38201,7 @@
 	
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
-	var _YearPanel = __webpack_require__(230);
+	var _YearPanel = __webpack_require__(231);
 	
 	var _YearPanel2 = _interopRequireDefault(_YearPanel);
 	
@@ -38225,9 +38287,10 @@
 	
 	        var Calendar = _react2["default"].createElement(_YearPanel2["default"], _extends({
 	            prefixCls: 'rc-calendar-picker',
-	            rootPrefixCls: 'rc-calendar' }, props, {
-	            onChange: this.handleChange,
-	            focus: function focus() {} }));
+	            rootPrefixCls: 'rc-calendar'
+	        }, props, { focus: function focus() {},
+	            showDateInput: true
+	        }));
 	
 	        return _react2["default"].createElement(
 	            "div",
@@ -38289,12 +38352,6 @@
 	    this.onOpenChange = function (open) {
 	        _this3.setState({
 	            open: open
-	        });
-	    };
-	
-	    this.onTypeChange = function (type) {
-	        _this3.setState({
-	            type: type
 	        });
 	    };
 	
@@ -38444,7 +38501,7 @@
 	
 	var _index2 = _interopRequireDefault(_index);
 	
-	var _zh_CN = __webpack_require__(368);
+	var _zh_CN = __webpack_require__(363);
 	
 	var _zh_CN2 = _interopRequireDefault(_zh_CN);
 	
@@ -38547,7 +38604,7 @@
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
-	var _zh_CN = __webpack_require__(368);
+	var _zh_CN = __webpack_require__(363);
 	
 	var _zh_CN2 = _interopRequireDefault(_zh_CN);
 	
@@ -38678,7 +38735,7 @@
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
-	var _zh_CN = __webpack_require__(368);
+	var _zh_CN = __webpack_require__(363);
 	
 	var _zh_CN2 = _interopRequireDefault(_zh_CN);
 	
@@ -38794,7 +38851,7 @@
 	
 	var _index2 = _interopRequireDefault(_index);
 	
-	var _zh_CN = __webpack_require__(368);
+	var _zh_CN = __webpack_require__(363);
 	
 	var _zh_CN2 = _interopRequireDefault(_zh_CN);
 	
@@ -38900,7 +38957,7 @@
 	
 	var _index2 = _interopRequireDefault(_index);
 	
-	var _zh_CN = __webpack_require__(368);
+	var _zh_CN = __webpack_require__(363);
 	
 	var _zh_CN2 = _interopRequireDefault(_zh_CN);
 	
@@ -39049,7 +39106,7 @@
 	
 	var _index2 = _interopRequireDefault(_index);
 	
-	var _zh_CN = __webpack_require__(368);
+	var _zh_CN = __webpack_require__(363);
 	
 	var _zh_CN2 = _interopRequireDefault(_zh_CN);
 	

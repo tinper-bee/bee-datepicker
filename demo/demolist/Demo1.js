@@ -26,8 +26,10 @@ class Demo1 extends Component {
                     <Col md={12}>
                         <DatePicker
                             format={format}
+                            onOpenChange={()=>{console.log('open')}}
                             onSelect={this.onSelect}
                             onChange={this.onChange}
+                            showTime={true}
                         />
                     </Col>
                 </Row>

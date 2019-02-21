@@ -30,6 +30,10 @@ var _beeInputGroup = require("bee-input-group");
 
 var _beeInputGroup2 = _interopRequireDefault(_beeInputGroup);
 
+var _zh_CN = require("./locale/zh_CN");
+
+var _zh_CN2 = _interopRequireDefault(_zh_CN);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
@@ -50,7 +54,7 @@ var MonthPicker = function (_Component) {
 
     var _this = _possibleConstructorReturn(this, _Component.call(this, props, context));
 
-    _this.onChange = function (value, valueString) {
+    _this.onChange = function (value) {
       _this.setState({
         value: value
       });
@@ -60,7 +64,7 @@ var MonthPicker = function (_Component) {
           onSelect = _this$props.onSelect,
           format = _this$props.format;
 
-      onChange && onChange(value, valueString);
+      onChange && onChange(value, value ? value.format(format) : '');
     };
 
     _this.onOpenChange = function (open) {
@@ -166,7 +170,8 @@ MonthPicker.defaultProps = {
     return _react2["default"].createElement(_beeIcon2["default"], { type: "uf-calendar" });
   },
   format: 'YYYY-MM',
-  showDateInput: true
+  showDateInput: true,
+  locale: _zh_CN2["default"]
 };
 
 exports["default"] = MonthPicker;

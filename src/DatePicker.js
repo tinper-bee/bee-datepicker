@@ -12,6 +12,7 @@ import TimePickerPanel from "rc-time-picker/lib/Panel";
 import moment from "moment";
 import Icon from "bee-icon";
 import InputGroup from 'bee-input-group';
+import zhCN from "./locale/zh_CN";
 
 const timePickerElement = (
   <TimePickerPanel defaultValue={moment(moment().format("HH:mm:ss"), "HH:mm:ss")} />
@@ -259,7 +260,8 @@ DatePicker.defaultProps = {
   focusOnOpen:true,
   defultSelect:false,
   onOpenChange:()=>{},
-  onChange:()=>{}
+  onChange:()=>{},
+  locale:zhCN
 }
 
 export default DatePicker;

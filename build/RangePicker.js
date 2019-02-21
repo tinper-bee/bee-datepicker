@@ -36,10 +36,6 @@ var _zh_CN = require("./locale/zh_CN");
 
 var _zh_CN2 = _interopRequireDefault(_zh_CN);
 
-var _en_US = require("./locale/en_US");
-
-var _en_US2 = _interopRequireDefault(_en_US);
-
 var _moment = require("moment");
 
 var _moment2 = _interopRequireDefault(_moment);
@@ -225,7 +221,8 @@ var _initialiseProps = function _initialiseProps() {
 Picker.defaultProps = {
     renderIcon: function renderIcon() {
         return _react2["default"].createElement(_beeIcon2["default"], { type: "uf-calendar" });
-    }
+    },
+    locale: _zh_CN2["default"]
 };
 
 exports["default"] = Picker;

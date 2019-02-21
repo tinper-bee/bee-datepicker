@@ -46,10 +46,6 @@ require("moment/locale/zh-cn");
 
 require("moment/locale/en-gb");
 
-var _YearPicker = require("./YearPicker");
-
-var _YearPicker2 = _interopRequireDefault(_YearPicker);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
@@ -75,7 +71,7 @@ if (cn) {
 
 var format = "YYYY-Wo";
 
-var style = "\n.week-calendar {\n  width: 386px;\n}\n.week-calendar .rc-calendar-tbody > tr:hover\n.rc-calendar-date {\n  background: #ebfaff;\n}\n\n.week-calendar .rc-calendar-tbody > tr:hover\n.rc-calendar-selected-day .rc-calendar-date {\n    background: #3fc7fa;\n}\n\n.week-calendar .week-calendar-sidebar {\n  position:absolute;\n  top:0;\n  left:0;\n  bottom:0;\n  width:100px;\n  border-right: 1px solid #ccc;\n}\n.week-calendar .rc-calendar-panel {\n  margin-left: 100px;\n}\n";
+var style = "\n.week-calendar .rc-calendar-tbody > tr:hover\n.rc-calendar-date {\n  background: #ebfaff;\n}\n\n.week-calendar .rc-calendar-tbody > tr:hover\n.rc-calendar-selected-day .rc-calendar-date {\n    background: #3fc7fa;\n}\n.week-calendar .week-calendar-footer {\n  position:absolute;\n  top:0;\n  left:0;\n  bottom:0;\n  width:100%;\n  border-right: 1px solid #ccc;\n}\n";
 
 var WeekPicker = function (_Component) {
   _inherits(WeekPicker, _Component);
@@ -135,27 +131,43 @@ var WeekPicker = function (_Component) {
       });
     };
 
-    _this.renderSidebar = function () {
+    _this.nowWeek = function () {
+      var value = now;
+      _this.setState({
+        value: value,
+        open: false
+      });
+    };
+
+    _this.renderFooter = function () {
       return _react2["default"].createElement(
         "div",
-        { className: "week-calendar-sidebar", key: "sidebar" },
+        { className: "week-calendar-footer", key: "footer" },
         _react2["default"].createElement(
-          "button",
+          "span",
           {
-            className: "week-calendar-sidebar-button",
+            className: "week-calendar-footer-button",
             onClick: _this.lastWeek.bind(_this),
-            style: { margin: 8 }
+            style: { 'float': 'left' }
           },
-          "\u4E0A\u4E00\u5468"
+          _this.props.locale.lastWeek
         ),
         _react2["default"].createElement(
-          "button",
+          "span",
           {
-            className: "week-calendar-sidebar-button",
-            onClick: _this.nextWeek.bind(_this),
-            style: { margin: 8 }
+            className: "week-calendar-footer-button",
+            onClick: _this.nowWeek.bind(_this)
           },
-          "\u4E0B\u4E00\u5468"
+          _this.props.locale.nowWeek
+        ),
+        _react2["default"].createElement(
+          "span",
+          {
+            className: "week-calendar-footer-button",
+            onClick: _this.nextWeek.bind(_this),
+            style: { 'float': 'right' }
+          },
+          _this.props.locale.nextWeek
         )
       );
     };
@@ -207,14 +219,15 @@ var WeekPicker = function (_Component) {
     var calendar = _react2["default"].createElement(_rcCalendar2["default"], {
       className: "week-calendar",
       showWeekNumber: true,
-      renderSidebar: this.renderSidebar,
+      renderFooter: this.renderFooter,
       dateRender: this.dateRender,
       locale: cn ? _zh_CN2["default"] : _en_US2["default"],
       format: format,
       dateInputPlaceholder: this.props.placeholder,
       defaultValue: now,
       showDateInput: true,
-      onChange: this.handleCalendarChange
+      onChange: this.handleCalendarChange,
+      showToday: false
     });
     return _react2["default"].createElement(
       "div",
@@ -267,7 +280,8 @@ var WeekPicker = function (_Component) {
 WeekPicker.defaultProps = {
   renderIcon: function renderIcon() {
     return _react2["default"].createElement(_beeIcon2["default"], { type: "uf-calendar" });
-  }
+  },
+  locale: _zh_CN2["default"]
 };
 
 exports["default"] = WeekPicker;

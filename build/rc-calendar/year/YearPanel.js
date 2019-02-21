@@ -16,6 +16,10 @@ var _classnames = require('classnames');
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
+var _DecadePanel = require('../decade/DecadePanel');
+
+var _DecadePanel2 = _interopRequireDefault(_DecadePanel);
+
 var _DateInput = require('../date/DateInput');
 
 var _DateInput2 = _interopRequireDefault(_DateInput);
@@ -92,12 +96,22 @@ var YearPanel = function (_React$Component) {
     };
     _this.nextDecade = goYear.bind(_this, 10);
     _this.previousDecade = goYear.bind(_this, -10);
+    ['showDecadePanel', 'onDecadePanelSelect'].forEach(function (method) {
+      _this[method] = _this[method].bind(_this);
+    });
     return _this;
   }
 
+  YearPanel.prototype.onDecadePanelSelect = function onDecadePanelSelect(current) {
+    this.setState({
+      value: current,
+      showDecadePanel: 0
+    });
+  };
+
   YearPanel.prototype.years = function years() {
     var value = this.state.value;
-    var currentYear = value ? value.year() : (0, _moment2["default"])().year();
+    var currentYear = value.year();
     var startYear = parseInt(currentYear / 10, 10) * 10;
     var previousYear = startYear - 1;
     var years = [];
@@ -118,18 +132,18 @@ var YearPanel = function (_React$Component) {
     return years;
   };
 
+  YearPanel.prototype.showDecadePanel = function showDecadePanel() {
+    this.setState({
+      showDecadePanel: 1
+    });
+  };
+
   YearPanel.prototype.render = function render() {
     var _this2 = this;
 
     var props = this.props;
-    var _state = this.state,
-        value = _state.value,
-        str = _state.str;
-    var locale = props.locale,
-        renderFooter = props.renderFooter,
-        format = props.format,
-        showDateInput = props.showDateInput;
-
+    var value = this.state.value;
+    var locale = props.locale;
     var years = this.years();
     var currentYear = value.year();
     var startYear = parseInt(currentYear / 10, 10) * 10;
@@ -174,24 +188,35 @@ var YearPanel = function (_React$Component) {
       );
     });
 
-    var footer = renderFooter && renderFooter('year');
+    var decadePanel = void 0;
+    if (this.state.showDecadePanel) {
+      decadePanel = _react2["default"].createElement(_DecadePanel2["default"], {
+        locale: locale,
+        value: value,
+        rootPrefixCls: props.rootPrefixCls,
+        onSelect: this.onDecadePanelSelect
+      });
+    }
+    var showDateInput = props.showDateInput,
+        rootPrefixCls = props.rootPrefixCls,
+        format = props.format;
 
     return _react2["default"].createElement(
       'div',
       { className: this.prefixCls },
-      showDateInput ? _react2["default"].createElement(_DateInput2["default"], {
-        value: value,
-        prefixCls: this.props.rootPrefixCls,
-        showClear: true,
-        locale: locale,
-        format: format,
-        onChange: this.onInputChange,
-        selectedValue: value,
-        onClear: this.onClear
-      }) : '',
       _react2["default"].createElement(
         'div',
         null,
+        showDateInput ? _react2["default"].createElement(_DateInput2["default"], {
+          value: value,
+          prefixCls: this.props.rootPrefixCls,
+          showClear: true,
+          locale: locale,
+          format: format,
+          onChange: this.onInputChange,
+          selectedValue: value,
+          onClear: this.onClear
+        }) : '',
         _react2["default"].createElement(
           'div',
           { className: prefixCls + '-header' },
@@ -206,7 +231,7 @@ var YearPanel = function (_React$Component) {
             {
               className: prefixCls + '-decade-select',
               role: 'button',
-              onClick: props.onDecadePanelShow,
+              onClick: this.showDecadePanel,
               title: locale.decadeSelect
             },
             _react2["default"].createElement(
@@ -241,13 +266,9 @@ var YearPanel = function (_React$Component) {
               yeasEls
             )
           )
-        ),
-        footer && _react2["default"].createElement(
-          'div',
-          { className: prefixCls + '-footer' },
-          footer
         )
-      )
+      ),
+      decadePanel
     );
   };
 
@@ -260,14 +281,13 @@ exports["default"] = YearPanel;
 YearPanel.propTypes = {
   rootPrefixCls: _propTypes2["default"].string,
   value: _propTypes2["default"].object,
-  defaultValue: _propTypes2["default"].object,
-  renderFooter: _propTypes2["default"].func
+  defaultValue: _propTypes2["default"].object
 };
 
 YearPanel.defaultProps = {
   onSelect: function onSelect() {},
 
   format: 'YYYY',
-  showDateInput: true
+  showDateInput: false
 };
 module.exports = exports['default'];

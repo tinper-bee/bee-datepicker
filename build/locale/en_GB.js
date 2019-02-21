@@ -28,6 +28,9 @@ exports["default"] = {
   previousDecade: 'Last decade',
   nextDecade: 'Next decade',
   previousCentury: 'Last century',
-  nextCentury: 'Next century'
+  nextCentury: 'Next century',
+  lastWeek: 'Last week',
+  nowWeek: 'Now week',
+  nextWeek: 'Next week'
 };
 module.exports = exports['default'];

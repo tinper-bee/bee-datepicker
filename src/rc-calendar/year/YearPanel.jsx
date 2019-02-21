@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
+import DecadePanel from '../decade/DecadePanel';
 import DateInput from '../date/DateInput';
 import moment from 'moment';
 const ROW = 4;
@@ -21,20 +22,31 @@ function chooseYear(year) {
   this.props.onSelect(value);
 }
 
-export default class YearPanel extends React.Component {
+export default
+class YearPanel extends React.Component {
   constructor(props) {
     super(props);
     this.prefixCls = `${props.rootPrefixCls}-year-panel`;
     this.state = {
-      value: props.value || props.defaultValue
+      value: props.value || props.defaultValue,
     };
     this.nextDecade = goYear.bind(this, 10);
     this.previousDecade = goYear.bind(this, -10);
+    ['showDecadePanel', 'onDecadePanelSelect'].forEach(method => {
+      this[method] = this[method].bind(this);
+    });
+  }
+
+  onDecadePanelSelect(current) {
+    this.setState({
+      value: current,
+      showDecadePanel: 0,
+    });
   }
 
   years() {
     const value = this.state.value;
-    const currentYear = value?value.year():moment().year();
+    const currentYear = value.year();
     const startYear = parseInt(currentYear / 10, 10) * 10;
     const previousYear = startYear - 1;
     const years = [];
@@ -55,6 +67,11 @@ export default class YearPanel extends React.Component {
     return years;
   }
 
+  showDecadePanel() {
+    this.setState({
+      showDecadePanel: 1,
+    });
+  }
   onInputChange=value=>{
     let { onChange,format } = this.props;
       this.setState({
@@ -72,10 +89,10 @@ export default class YearPanel extends React.Component {
   }
   render() {
     const props = this.props;
-    const { value,str } = this.state;
-    const { locale, renderFooter,format,showDateInput } = props;
+    const value = this.state.value;
+    const locale = props.locale;
     const years = this.years();
-    const currentYear =value.year();
+    const currentYear = value.year();
     const startYear = parseInt(currentYear / 10, 10) * 10;
     const endYear = startYear + 9;
     const prefixCls = this.prefixCls;
@@ -114,23 +131,31 @@ export default class YearPanel extends React.Component {
       return (<tr key={index} role="row">{tds}</tr>);
     });
 
-    const footer = renderFooter && renderFooter('year');
-
+    let decadePanel;
+    if (this.state.showDecadePanel) {
+      decadePanel = (<DecadePanel
+        locale={locale}
+        value={value}
+        rootPrefixCls={props.rootPrefixCls}
+        onSelect={this.onDecadePanelSelect}
+      />);
+    }
+    let { showDateInput,rootPrefixCls,format } = props;
     return (
       <div className={this.prefixCls}>
-      {
-        showDateInput?<DateInput 
-          value={value}
-          prefixCls={this.props.rootPrefixCls}
-          showClear={true}
-          locale={locale}
-          format={format}
-          onChange={this.onInputChange}
-          selectedValue={value}
-          onClear={this.onClear}
-        />:''
-      }  
         <div>
+        {
+          showDateInput?<DateInput 
+            value={value}
+            prefixCls={this.props.rootPrefixCls}
+            showClear={true}
+            locale={locale}
+            format={format}
+            onChange={this.onInputChange}
+            selectedValue={value}
+            onClear={this.onClear}
+          />:''
+        }  
           <div className={`${prefixCls}-header`}>
             <a
               className={`${prefixCls}-prev-decade-btn`}
@@ -141,7 +166,7 @@ export default class YearPanel extends React.Component {
             <a
               className={`${prefixCls}-decade-select`}
               role="button"
-              onClick={props.onDecadePanelShow}
+              onClick={this.showDecadePanel}
               title={locale.decadeSelect}
             >
               <span className={`${prefixCls}-decade-select-content`}>
@@ -160,16 +185,12 @@ export default class YearPanel extends React.Component {
           <div className={`${prefixCls}-body`}>
             <table className={`${prefixCls}-table`} cellSpacing="0" role="grid">
               <tbody className={`${prefixCls}-tbody`}>
-                {yeasEls}
+              {yeasEls}
               </tbody>
             </table>
           </div>
-
-          {footer && (
-            <div className={`${prefixCls}-footer`}>
-              {footer}
-            </div>)}
         </div>
+        {decadePanel}
       </div>);
   }
 }
@@ -178,12 +199,11 @@ YearPanel.propTypes = {
   rootPrefixCls: PropTypes.string,
   value: PropTypes.object,
   defaultValue: PropTypes.object,
-  renderFooter: PropTypes.func,
 };
 
 YearPanel.defaultProps = {
   onSelect() {
   },
   format:'YYYY',
-  showDateInput:true
+  showDateInput:false
 };

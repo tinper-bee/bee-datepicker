@@ -92,9 +92,10 @@ var YearPicker = function (_Component) {
 
         var Calendar = _react2["default"].createElement(_YearPanel2["default"], _extends({
             prefixCls: 'rc-calendar-picker',
-            rootPrefixCls: 'rc-calendar' }, props, {
-            onChange: this.handleChange,
-            focus: function focus() {} }));
+            rootPrefixCls: 'rc-calendar'
+        }, props, { focus: function focus() {},
+            showDateInput: true
+        }));
 
         return _react2["default"].createElement(
             "div",
@@ -156,12 +157,6 @@ var _initialiseProps = function _initialiseProps() {
     this.onOpenChange = function (open) {
         _this3.setState({
             open: open
-        });
-    };
-
-    this.onTypeChange = function (type) {
-        _this3.setState({
-            type: type
         });
     };
 

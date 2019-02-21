@@ -10,11 +10,9 @@ import zhCN from "./locale/zh_CN";
 import enUS from "./locale/en_US";
 import Icon from "bee-icon";
 import InputGroup from 'bee-input-group';
-
 import moment from "moment";
 import "moment/locale/zh-cn";
 import "moment/locale/en-gb";
-import YearPicker from "./YearPicker";
 
 const cn = location.search.indexOf("cn") !== -1;
 
@@ -28,9 +26,6 @@ if (cn) {
 const format = "YYYY-Wo";
 
 const style = `
-.week-calendar {
-  width: 386px;
-}
 .week-calendar .rc-calendar-tbody > tr:hover
 .rc-calendar-date {
   background: #ebfaff;
@@ -40,17 +35,13 @@ const style = `
 .rc-calendar-selected-day .rc-calendar-date {
     background: #3fc7fa;
 }
-
-.week-calendar .week-calendar-sidebar {
+.week-calendar .week-calendar-footer {
   position:absolute;
   top:0;
   left:0;
   bottom:0;
-  width:100px;
+  width:100%;
   border-right: 1px solid #ccc;
-}
-.week-calendar .rc-calendar-panel {
-  margin-left: 100px;
 }
 `;
 
@@ -109,24 +100,37 @@ class WeekPicker extends Component {
           open: false
       });
   };
+  nowWeek = () => {
+      const value =  now;
+      this.setState({
+          value,
+          open: false
+      });
+  };
 
-  renderSidebar = () => {
+  renderFooter = () => {
     return (
-      <div className="week-calendar-sidebar" key="sidebar">
-        <button
-          className="week-calendar-sidebar-button"
+      <div className="week-calendar-footer" key="footer">
+        <span
+          className="week-calendar-footer-button"
           onClick={this.lastWeek.bind(this)}
-          style={{ margin: 8 }}
+          style={{'float':'left'}}
         >
-          上一周
-        </button>
-          <button
-              className="week-calendar-sidebar-button"
+          {this.props.locale.lastWeek}
+        </span>
+        <span
+          className="week-calendar-footer-button"
+          onClick={this.nowWeek.bind(this)}
+        >
+          {this.props.locale.nowWeek}
+        </span>
+          <span
+              className="week-calendar-footer-button"
               onClick={this.nextWeek.bind(this)}
-              style={{ margin: 8 }}
+              style={{'float':'right'}}
           >
-              下一周
-          </button>
+              {this.props.locale.nextWeek}
+          </span>
       </div>
     );
   };
@@ -165,7 +169,7 @@ class WeekPicker extends Component {
       <Calendar
         className="week-calendar"
         showWeekNumber
-        renderSidebar={this.renderSidebar}
+        renderFooter={this.renderFooter}
         dateRender={this.dateRender}
         locale={cn ? zhCN : enUS}
         format={format}
@@ -173,6 +177,7 @@ class WeekPicker extends Component {
         defaultValue={now}
         showDateInput
         onChange={this.handleCalendarChange}
+        showToday={false}
       />
     );
     return (
@@ -220,7 +225,8 @@ class WeekPicker extends Component {
 }
 
 WeekPicker.defaultProps = {
-    renderIcon: () => <Icon type="uf-calendar" />
+    renderIcon: () => <Icon type="uf-calendar" />,
+    locale:zhCN
 }
 
 export default WeekPicker;

@@ -24,4 +24,7 @@ export default {
   nextDecade: 'Next decade',
   previousCentury: 'Last century',
   nextCentury: 'Next century',
+  lastWeek: 'Last week',
+  nowWeek: 'Now week',
+  nextWeek: 'Next week',
 };

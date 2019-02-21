@@ -127,7 +127,7 @@ var DateInput = function (_React$Component) {
           title: locale.clear,
           onClick: this.onClear
         },
-        clearIcon || _react2["default"].createElement('span', { className: prefixCls + '-clear-btn' })
+        clearIcon || _react2["default"].createElement('span', { className: prefixCls + '-clear-btn uf uf-close-c' })
       ) : null
     );
   };

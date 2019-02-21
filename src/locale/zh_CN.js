@@ -24,4 +24,7 @@ export default {
   nextDecade: '下一年代',
   previousCentury: '上一世纪',
   nextCentury: '下一世纪',
+  lastWeek: '上一周',
+  nowWeek: '本周',
+  nextWeek: '下一周',
 };

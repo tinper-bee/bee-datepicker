@@ -50,7 +50,7 @@ moment().locale('en'); //英文
 |renderFooter|扩展底边栏|() => React.Node| - |
 | defaultValue|默认值，输入框的默认值| moment| - |
 | value|日期| moment| - |
-| locale|日历的语言 | Object |en_US |
+| locale| 语言包 | Object |zh_CN |
 | format|日期格式化| String | - |
 | open|日期组件隐藏、显示| Boolean | false |
 | disabled|是否禁用功能|Boolean| false |
@@ -96,6 +96,7 @@ moment().locale('en'); //英文
 | dateCellRender|日期的渲染方法|function| - |
 | monthCellContentRender|自定义月份的渲染方法，将被添加渲染内容中| function| - |
 | getCalendarContainer |更改默认渲染位置|Function| - |
+| locale| 语言包 | Object |zh_CN |
 
 ### RangePicker
 
@@ -123,6 +124,7 @@ moment().locale('en'); //英文
 | dateInputPlaceholder|日期的placeholder| String | - |
 | type|是否固定开始或结束选定的值|enum('both','start', 'end')| - |
 | getCalendarContainer |更改默认渲染位置|Function| - |
+| locale| 语言包 | Object |zh_CN |
 
 ### WeekPicker
 
@@ -131,6 +133,7 @@ moment().locale('en'); //英文
 | placeholder|输入框placeholder|String| - |
 | defaultValue|默认值|moment| - |
 | getCalendarContainer |更改默认渲染位置|Function| - |
+| locale| 语言包 | Object |zh_CN |
 
 ### YearPicker
 
@@ -141,6 +144,7 @@ moment().locale('en'); //英文
 | getCalendarContainer |更改默认渲染位置|Function| - |
 | format|日期格式化| String | - |
 | disabled|是否禁用功能|Boolean| false |
+| locale| 语言包 | Object |zh_CN |
 
 
 ## 已支持的键盘操作

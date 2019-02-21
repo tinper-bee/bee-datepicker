@@ -21,7 +21,7 @@ class YearPicker extends Component {
             type: "year",
             value: props.value || props.defaultValue || '' ,
             open: props.open||false,
-            showClose:false
+            showClose: false
         };
     }
 
@@ -51,34 +51,29 @@ class YearPicker extends Component {
         });
     };
 
-    onTypeChange = type => {
-        this.setState({
-            type
-        });
-    };
     handleChange = value => {
         const props = this.props;
         this.setState({ value });
         props.onChange(value, (value && value.format(props.format)) || '');
     }
-
-    onMouseLeave=(e)=>{
+    onMouseLeave = (e) => {
         this.setState({
-          showClose:false
+          showClose: false
         })
       }
-    onMouseEnter=(e)=>{
+      onMouseEnter = (e) => {
         this.setState({
-          showClose:true
+          showClose: true
         })
-    }
-    clear=(e)=>{
+      }
+      clear = (e) => {
         e.stopPropagation();
         this.setState({
-            value:''
+          value: ''
         })
-        this.props.onChange&&this.props.onChange('','');
-    }
+        this.props.onChange && this.props.onChange('', '');
+      }
+
     render() {
         let state = this.state;
 
@@ -87,9 +82,10 @@ class YearPicker extends Component {
 
         const Calendar = <YearPanel 
         prefixCls={'rc-calendar-picker'} 
-        rootPrefixCls={'rc-calendar'}  {...props} 
-        onChange={this.handleChange}
-        focus={()=>{}}  />;
+        rootPrefixCls={'rc-calendar'}  
+        {...props} focus={()=>{}} 
+        showDateInput={true}
+        />;
 
         return (
             <div>
@@ -115,7 +111,7 @@ class YearPicker extends Component {
                                     readOnly
                                     value={(value && value.format(props.format)) || ""}
                                 />
-                                {
+                               {
                                     this.state.value&&this.state.showClose&&(!props.disabled)?(
                                     <InputGroup.Button shape="border" 
                                         onClick={this.clear}>

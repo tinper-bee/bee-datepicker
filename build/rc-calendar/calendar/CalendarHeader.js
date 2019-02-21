@@ -85,12 +85,15 @@ var CalendarHeader = function (_React$Component) {
         enableNext = props.enableNext,
         enablePrev = props.enablePrev,
         disabledMonth = props.disabledMonth,
-        renderFooter = props.renderFooter;
+        renderFooter = props.renderFooter,
+        onChange = props.onChange,
+        onClear = props.onClear;
 
 
     var panel = null;
     if (mode === 'month') {
       panel = _react2["default"].createElement(_MonthPanel2["default"], {
+        showDateInput: true,
         locale: locale,
         defaultValue: value,
         rootPrefixCls: prefixCls,
@@ -101,7 +104,9 @@ var CalendarHeader = function (_React$Component) {
         disabledDate: disabledMonth,
         cellRender: props.monthCellRender,
         contentRender: props.monthCellContentRender,
-        renderFooter: renderFooter
+        renderFooter: renderFooter,
+        onChange: onChange,
+        onClear: onClear
       });
     }
     if (mode === 'year') {

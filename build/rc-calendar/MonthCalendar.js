@@ -30,10 +30,6 @@ var _CalendarMixin = require('./mixin/CalendarMixin');
 
 var _CommonMixin = require('./mixin/CommonMixin');
 
-var _DateInput = require('./date/DateInput');
-
-var _DateInput2 = _interopRequireDefault(_DateInput);
-
 var _moment = require('moment');
 
 var _moment2 = _interopRequireDefault(_moment);
@@ -110,40 +106,10 @@ var MonthCalendar = function (_React$Component) {
       }
     };
 
-    _this.onInputChange = function (value) {
-      var _this$props = _this.props,
-          onChange = _this$props.onChange,
-          onClear = _this$props.onClear,
-          onSelect = _this$props.onSelect,
-          format = _this$props.format;
-
-      if (value) {
-        _this.setState({
-          value: value
-        });
-      } else {
-        _this.setState({
-          value: (0, _moment2["default"])()
-        });
-      }
-      onChange && onChange(value, value ? value.format(format) : '');
-    };
-
-    _this.onClear = function () {
-      var _this$props2 = _this.props,
-          onChange = _this$props2.onChange,
-          onClear = _this$props2.onClear;
-
-      _this.setState({
-        value: (0, _moment2["default"])()
-      });
-      onChange && onChange('', '');
-      onClear && onClear('', '');
-    };
-
     _this.state = {
       mode: 'month',
-      value: props.value || props.defaultValue || (0, _moment2["default"])()
+      value: props.value || props.defaultValue || (0, _moment2["default"])(),
+      selectedValue: props.selectedValue || props.defaultSelectedValue
     };
     return _this;
   }
@@ -152,50 +118,40 @@ var MonthCalendar = function (_React$Component) {
     var props = this.props,
         state = this.state;
     var mode = state.mode,
-        value = state.value,
-        valueNull = state.valueNull;
+        value = state.value;
     var prefixCls = props.prefixCls,
         locale = props.locale,
         format = props.format,
-        showDateInput = props.showDateInput;
+        showDateInput = props.showDateInput,
+        onChange = props.onChange,
+        onSelect = props.onSelect,
+        onClear = props.onClear;
 
     var children = _react2["default"].createElement(
       'div',
-      null,
-      showDateInput ? _react2["default"].createElement(_DateInput2["default"], {
-        value: value,
-        prefixCls: prefixCls,
-        showClear: true,
-        locale: locale,
-        format: format,
-        onChange: this.onInputChange,
-        selectedValue: value,
-        onClear: this.onClear
-      }) : '',
+      { className: props.prefixCls + '-month-calendar-content' },
       _react2["default"].createElement(
         'div',
-        { className: props.prefixCls + '-month-calendar-content' },
-        _react2["default"].createElement(
-          'div',
-          { className: props.prefixCls + '-month-header-wrap' },
-          _react2["default"].createElement(_CalendarHeader2["default"], {
-            prefixCls: props.prefixCls,
-            mode: mode,
-            value: value,
-            locale: props.locale,
-            disabledMonth: props.disabledDate,
-            monthCellRender: props.monthCellRender,
-            monthCellContentRender: props.monthCellContentRender,
-            onMonthSelect: this.onSelect,
-            onValueChange: this.setValue,
-            onPanelChange: this.handlePanelChange
-          })
-        ),
-        _react2["default"].createElement(_CalendarFooter2["default"], {
+        { className: props.prefixCls + '-month-header-wrap' },
+        _react2["default"].createElement(_CalendarHeader2["default"], {
           prefixCls: props.prefixCls,
-          renderFooter: props.renderFooter
+          mode: mode,
+          value: value,
+          locale: props.locale,
+          disabledMonth: props.disabledDate,
+          monthCellRender: props.monthCellRender,
+          monthCellContentRender: props.monthCellContentRender,
+          onMonthSelect: this.onSelect,
+          onValueChange: this.setValue,
+          onPanelChange: this.handlePanelChange
+          // onChange={onChange}
+          , onClear: onClear
         })
-      )
+      ),
+      _react2["default"].createElement(_CalendarFooter2["default"], {
+        prefixCls: props.prefixCls,
+        renderFooter: props.renderFooter
+      })
     );
     return this.renderRoot({
       className: props.prefixCls + '-month-calendar',

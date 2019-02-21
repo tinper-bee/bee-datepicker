@@ -18,6 +18,14 @@ var _MonthTable = require('./MonthTable');
 
 var _MonthTable2 = _interopRequireDefault(_MonthTable);
 
+var _DateInput = require('../date/DateInput');
+
+var _DateInput2 = _interopRequireDefault(_DateInput);
+
+var _moment = require('moment');
+
+var _moment2 = _interopRequireDefault(_moment);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
@@ -62,6 +70,30 @@ var MonthPanel = function (_React$Component) {
       }
     };
 
+    _this.onInputChange = function (value) {
+      var _this$props = _this.props,
+          onChange = _this$props.onChange,
+          format = _this$props.format;
+
+      _this.setState({
+        value: value ? value : (0, _moment2["default"])()
+      });
+      onChange && onChange(value);
+    };
+
+    _this.onClear = function () {
+      var _this$props2 = _this.props,
+          onChange = _this$props2.onChange,
+          format = _this$props2.format,
+          onClear = _this$props2.onClear;
+
+      _this.setState({
+        value: (0, _moment2["default"])()
+      });
+      onChange && onChange('', '');
+      onClear && onClear('', '');
+    };
+
     _this.nextYear = goYear.bind(_this, 1);
     _this.previousYear = goYear.bind(_this, -1);
     _this.prefixCls = props.rootPrefixCls + '-month-panel';
@@ -90,7 +122,10 @@ var MonthPanel = function (_React$Component) {
     var locale = props.locale,
         cellRender = props.cellRender,
         contentRender = props.contentRender,
-        renderFooter = props.renderFooter;
+        renderFooter = props.renderFooter,
+        showDateInput = props.showDateInput,
+        format = props.format,
+        rootPrefixCls = props.rootPrefixCls;
 
     var year = value.year();
     var prefixCls = this.prefixCls;
@@ -103,6 +138,16 @@ var MonthPanel = function (_React$Component) {
       _react2["default"].createElement(
         'div',
         null,
+        showDateInput ? _react2["default"].createElement(_DateInput2["default"], {
+          value: value,
+          prefixCls: rootPrefixCls,
+          showClear: true,
+          locale: locale,
+          format: format,
+          onChange: this.onInputChange,
+          selectedValue: value,
+          onClear: this.onClear
+        }) : '',
         _react2["default"].createElement(
           'div',
           { className: prefixCls + '-header' },
@@ -174,7 +219,8 @@ MonthPanel.propTypes = {
 };
 MonthPanel.defaultProps = {
   onChange: noop,
-  onSelect: noop
+  onSelect: noop,
+  format: 'YYYY-MM'
 };
 
 

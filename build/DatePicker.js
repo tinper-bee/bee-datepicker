@@ -44,6 +44,10 @@ var _beeInputGroup = require("bee-input-group");
 
 var _beeInputGroup2 = _interopRequireDefault(_beeInputGroup);
 
+var _zh_CN = require("./locale/zh_CN");
+
+var _zh_CN2 = _interopRequireDefault(_zh_CN);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
@@ -332,7 +336,8 @@ DatePicker.defaultProps = {
   focusOnOpen: true,
   defultSelect: false,
   onOpenChange: function onOpenChange() {},
-  onChange: function onChange() {}
+  onChange: function onChange() {},
+  locale: _zh_CN2["default"]
 };
 
 exports["default"] = DatePicker;

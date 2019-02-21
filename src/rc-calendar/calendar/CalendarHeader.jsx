@@ -146,12 +146,15 @@ export default class CalendarHeader extends React.Component {
       enablePrev,
       disabledMonth,
       renderFooter,
+      onChange,
+      onClear
     } = props;
 
     let panel = null;
     if (mode === 'month') {
       panel = (
         <MonthPanel
+          showDateInput={true}
           locale={locale}
           defaultValue={value}
           rootPrefixCls={prefixCls}
@@ -161,6 +164,8 @@ export default class CalendarHeader extends React.Component {
           cellRender={props.monthCellRender}
           contentRender={props.monthCellContentRender}
           renderFooter={renderFooter}
+          onChange={onChange}
+          onClear={onClear}
         />
       );
     }

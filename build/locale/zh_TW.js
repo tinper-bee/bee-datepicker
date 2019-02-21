@@ -27,6 +27,9 @@ exports["default"] = {
   previousDecade: '上一年代',
   nextDecade: '下一年代',
   previousCentury: '上一世紀',
-  nextCentury: '下一世紀'
+  nextCentury: '下一世紀',
+  lastWeek: '上一週',
+  nowWeek: '本週',
+  nextWeek: '下一週'
 };
 module.exports = exports['default'];

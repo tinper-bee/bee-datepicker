@@ -660,6 +660,10 @@ class RangeCalendar extends React.Component {
     const isClosestMonths = nextMonthOfStart.year() === endValue.year() &&
       nextMonthOfStart.month() === endValue.month();
 
+    // console.warn('Render:', selectedValue.map(t => t.format('YYYY-MM-DD')).join(', '));
+    // console.log('start:', startValue.format('YYYY-MM-DD'));
+    // console.log('end:', endValue.format('YYYY-MM-DD'));
+
     const extraFooter = props.renderFooter();
 
     return (

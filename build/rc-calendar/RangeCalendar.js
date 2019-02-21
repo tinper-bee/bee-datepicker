@@ -226,6 +226,10 @@ var RangeCalendar = function (_React$Component) {
     var nextMonthOfStart = startValue.clone().add(1, 'months');
     var isClosestMonths = nextMonthOfStart.year() === endValue.year() && nextMonthOfStart.month() === endValue.month();
 
+    // console.warn('Render:', selectedValue.map(t => t.format('YYYY-MM-DD')).join(', '));
+    // console.log('start:', startValue.format('YYYY-MM-DD'));
+    // console.log('end:', endValue.format('YYYY-MM-DD'));
+
     var extraFooter = props.renderFooter();
 
     return _react2["default"].createElement(

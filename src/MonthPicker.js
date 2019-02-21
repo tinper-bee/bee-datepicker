@@ -8,6 +8,7 @@ import Picker from "./rc-calendar/Picker";
 import FormControl from "bee-form-control";
 import Icon from "bee-icon";
 import InputGroup from 'bee-input-group';
+import zhCN from "./locale/zh_CN";
 
 class MonthPicker extends Component {
   constructor(props, context) {
@@ -21,12 +22,12 @@ class MonthPicker extends Component {
     };
   }
 
-  onChange = (value,valueString) => {
+  onChange = (value) => {
     this.setState({
       value
     });
     let { onChange,onClear,onSelect,format } = this.props;
-    onChange&&onChange(value,valueString);
+    onChange&&onChange(value,value?value.format(format):'');
   };
 
   onOpenChange = open => {
@@ -110,7 +111,8 @@ class MonthPicker extends Component {
 MonthPicker.defaultProps = {
     renderIcon: () => <Icon type="uf-calendar" />,
     format:'YYYY-MM',
-    showDateInput:true
+    showDateInput:true,
+    locale:zhCN
 }
 
 export default MonthPicker;

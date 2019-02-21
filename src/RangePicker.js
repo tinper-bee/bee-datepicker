@@ -10,7 +10,6 @@ import Icon from "bee-icon";
 import classNames from 'classnames';
 
 import zhCN from "./locale/zh_CN";
-import enUS from "./locale/en_US";
 
 import moment from "moment";
 import "moment/locale/zh-cn";
@@ -161,7 +160,8 @@ class Picker extends Component {
 }
 
 Picker.defaultProps = {
-    renderIcon: () => <Icon type="uf-calendar" />
+    renderIcon: () => <Icon type="uf-calendar" />,
+    locale:zhCN
 }
 
 export default Picker;
