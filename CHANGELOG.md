@@ -1,3 +1,13 @@
+<a name="2.0.0-beta2"></a>
+# [2.0.0-beta2](https://github.com/tinper-bee/bee-datepicker/compare/v2.0.0-beta1...v2.0.0-beta2) (2019-02-21)
+
+
+### Features
+
+* **bee-datepicker:** 交互修改 ([6fb8560](https://github.com/tinper-bee/bee-datepicker/commit/6fb8560))
+
+
+
 <a name="2.0.0-beta1"></a>
 # [2.0.0-beta1](https://github.com/tinper-bee/bee-datepicker/compare/v2.0.0-beta...v2.0.0-beta1) (2019-02-20)
 
