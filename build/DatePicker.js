@@ -337,7 +337,8 @@ DatePicker.defaultProps = {
   defultSelect: false,
   onOpenChange: function onOpenChange() {},
   onChange: function onChange() {},
-  locale: _zh_CN2["default"]
+  locale: _zh_CN2["default"],
+  showMonthInput: false
 };
 
 exports["default"] = DatePicker;

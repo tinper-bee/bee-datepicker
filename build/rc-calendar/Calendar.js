@@ -117,7 +117,8 @@ var Calendar = function (_React$Component) {
         timePicker = props.timePicker,
         disabledTime = props.disabledTime,
         clearIcon = props.clearIcon,
-        renderFooter = props.renderFooter;
+        renderFooter = props.renderFooter,
+        showMonthInput = props.showMonthInput;
     var value = state.value,
         selectedValue = state.selectedValue,
         mode = state.mode;
@@ -184,7 +185,8 @@ var Calendar = function (_React$Component) {
           onPanelChange: this.onPanelChange,
           renderFooter: renderFooter,
           showTimePicker: showTimePicker,
-          prefixCls: prefixCls
+          prefixCls: prefixCls,
+          showMonthInput: showMonthInput
         }),
         timePicker && showTimePicker ? _react2["default"].createElement(
           'div',

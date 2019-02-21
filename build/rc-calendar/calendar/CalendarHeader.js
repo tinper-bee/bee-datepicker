@@ -87,7 +87,8 @@ var CalendarHeader = function (_React$Component) {
         disabledMonth = props.disabledMonth,
         renderFooter = props.renderFooter,
         onChange = props.onChange,
-        onClear = props.onClear;
+        onClear = props.onClear,
+        showMonthInput = props.showMonthInput;
 
 
     var panel = null;
@@ -95,6 +96,7 @@ var CalendarHeader = function (_React$Component) {
       panel = _react2["default"].createElement(_MonthPanel2["default"], {
         showDateInput: true,
         locale: locale,
+        showMonthInput: showMonthInput,
         defaultValue: value,
         rootPrefixCls: prefixCls,
         onSelect: this.onMonthSelect,

@@ -1,13 +1,17 @@
-"use strict";
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports["default"] = OkButton;
 
-var _react = require("react");
+var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
+
+var _beeButton = require('bee-button');
+
+var _beeButton2 = _interopRequireDefault(_beeButton);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -17,18 +21,19 @@ function OkButton(_ref) {
       okDisabled = _ref.okDisabled,
       onOk = _ref.onOk;
 
-  var className = prefixCls + "-ok-btn";
-  if (okDisabled) {
-    className += " " + prefixCls + "-ok-btn-disabled";
-  }
+  var className = prefixCls + '-btn-ok';
+  // if (okDisabled) {
+  //   className += ` ${prefixCls}-ok-btn-disabled`;
+  // }
   return _react2["default"].createElement(
-    "a",
+    _beeButton2["default"],
     {
       className: className,
-      role: "button",
+      size: 'sm', colors: 'primary',
+      disabled: okDisabled,
       onClick: okDisabled ? null : onOk
     },
     locale.ok
   );
 }
-module.exports = exports["default"];
+module.exports = exports['default'];

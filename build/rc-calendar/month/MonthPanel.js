@@ -122,6 +122,7 @@ var MonthPanel = function (_React$Component) {
     var locale = props.locale,
         cellRender = props.cellRender,
         contentRender = props.contentRender,
+        showMonthInput = props.showMonthInput,
         renderFooter = props.renderFooter,
         showDateInput = props.showDateInput,
         format = props.format,
@@ -138,7 +139,7 @@ var MonthPanel = function (_React$Component) {
       _react2["default"].createElement(
         'div',
         null,
-        showDateInput ? _react2["default"].createElement(_DateInput2["default"], {
+        showDateInput && showMonthInput ? _react2["default"].createElement(_DateInput2["default"], {
           value: value,
           prefixCls: rootPrefixCls,
           showClear: true,
@@ -220,7 +221,8 @@ MonthPanel.propTypes = {
 MonthPanel.defaultProps = {
   onChange: noop,
   onSelect: noop,
-  format: 'YYYY-MM'
+  format: 'YYYY-MM',
+  showMonthInput: true
 };
 
 
