@@ -147,7 +147,8 @@ export default class CalendarHeader extends React.Component {
       disabledMonth,
       renderFooter,
       onChange,
-      onClear
+      onClear,
+      showMonthInput
     } = props;
 
     let panel = null;
@@ -156,6 +157,7 @@ export default class CalendarHeader extends React.Component {
         <MonthPanel
           showDateInput={true}
           locale={locale}
+          showMonthInput={showMonthInput}
           defaultValue={value}
           rootPrefixCls={prefixCls}
           onSelect={this.onMonthSelect}

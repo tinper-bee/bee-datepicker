@@ -380,7 +380,7 @@
   text-align: center;
 }
 .rc-calendar-date:hover {
-  background: $hover-bg-color-base;
+  background: #EBECF0;
   cursor: pointer;
 }
 .rc-calendar-selected-day .rc-calendar-date {
@@ -414,7 +414,7 @@
 }
 .rc-calendar-last-month-cell .rc-calendar-date,
 .rc-calendar-next-month-btn-day .rc-calendar-date {
-  color: #C1C7D0;
+  color: #909090;
 }
 .rc-calendar-footer {
   border-top: 1px solid #ccc;
@@ -471,12 +471,12 @@
 .rc-calendar-today-btn-disabled,
 .rc-calendar-ok-btn-disabled,
 .rc-calendar-time-picker-btn-disabled {
-  color: #C1C7D0;
+  color: #909090;
 }
 .rc-calendar-today-btn-disabled:hover,
 .rc-calendar-ok-btn-disabled:hover,
 .rc-calendar-time-picker-btn-disabled:hover {
-  color: #C1C7D0;
+  color: #909090;
 }
 .rc-calendar-today-btn {
   padding-left: 10px;
@@ -671,7 +671,7 @@
   text-align: center;
 }
 .rc-calendar-month-panel-cell .rc-calendar-month-panel-month:hover {
-  background: $hover-bg-color-base;
+  background: #EBECF0;
   cursor: pointer;
 }
 .rc-calendar-month-panel-cell-disabled .rc-calendar-month-panel-month {
@@ -727,7 +727,7 @@
 }
 .rc-calendar-year-panel-header > a {
   display: inline-block;
-  padding: 4px 5px;
+  padding: 1px 5px;
   text-align: center;
   width: 30px;
 }
@@ -797,7 +797,7 @@
   text-align: center;
 }
 .rc-calendar-year-panel-year:hover {
-  background: $hover-bg-color-base;
+  background: #EBECF0;
   cursor: pointer;
 }
 .rc-calendar-year-panel-selected-cell .rc-calendar-year-panel-year {
@@ -911,7 +911,7 @@
   text-align: center;
 }
 .rc-calendar-decade-panel-decade:hover {
-  background: $hover-bg-color-base;
+  background: #EBECF0;
   cursor: pointer;
 }
 .rc-calendar-decade-panel-selected-cell .rc-calendar-decade-panel-decade {
@@ -1123,87 +1123,6 @@
 }
 
 
-//非rc
-.calendar-picker.u-input-group{
-  .uf-close-c{
-    color: #424242;
-    opacity: .7;
-  }
-}
-.rc-calendar{
-  .rc-calendar-year-panel{
-    position: relative;
-  }
-}
-.datepicker-input-group{
-  &.u-input-group{
-    display: block;
-    cursor: pointer;
-  }
-  .u-input-group-btn{
-    .uf-close-c{
-      color: #424242;
-      opacity: .7;
-    }
-  }
-}
-//年
-.rc-calendar-year-panel{
-  .rc-calendar-decade-panel{
-    top: 35px;
-  }
-}
-//年月
-// .rc-calendar-month-calendar{
-// 	.rc-calendar-decade-panel-header{
-//     display: none
-// 	}
-// }
-.rc-calendar-month-header-wrap {
-  position: relative;
-  height: 274px;
-}
-//周
-.week-calendar-footer-button{
-  padding: 3px 5px;
-  color: $brand-primary;
-  position: relative;
-  display: inline-block;
-  font-weight: 500;
-  line-height: 1;
-  letter-spacing: 0;
-  overflow: hidden;
-  will-change: box-shadow, transform;
-  outline: none;
-  cursor: pointer;
-  text-decoration: none;
-  text-align: center;
-  vertical-align: middle;
-  font-size: 12px;
-  line-height: 32px;
-}
-.week-calendar .rc-calendar-tbody > tr:hover
-.rc-calendar-date {
-  background: $hover-bg-color-base;
-}
-.week-calendar .rc-calendar-tbody > tr:hover
-.rc-calendar-selected-day .rc-calendar-date {
-    background: $brand-primary;
-}
-.week-calendar .week-calendar-footer {
-  position:absolute;
-  top:0;
-  left:0;
-  bottom:0;
-  width:100%;
-  border-right: 1px solid #ccc;
-}
-
-
-
-
-
-
 //timepicker
 .rc-time-picker {
   display: inline-block;
@@ -1360,4 +1279,95 @@ li.rc-time-picker-panel-select-option-disabled {
 li.rc-time-picker-panel-select-option-disabled:hover {
   background: transparent;
   cursor: not-allowed;
+}
+
+
+//非rc
+.calendar-picker.u-input-group{
+  .uf-close-c{
+    color: #424242;
+    opacity: .7;
+  }
+}
+.rc-calendar{
+  >.rc-calendar-year-panel{
+    position: relative;
+    border: 1px solid #ccc;
+    box-shadow: 0 1px 5px #ccc;
+  }
+}
+.datepicker-input-group{
+  &.u-input-group{
+    display: block;
+    cursor: pointer;
+  }
+  .u-input-group-btn{
+    .uf-close-c{
+      color: #424242;
+      opacity: .7;
+    }
+  }
+}
+//年
+.rc-calendar-year-panel{
+  .rc-calendar-decade-panel{
+    color: #212121;
+  }
+}
+//年月
+// .rc-calendar-month-calendar{
+// 	.rc-calendar-decade-panel-header{
+//     display: none
+// 	}
+// }
+.rc-calendar-month-header-wrap {
+  position: relative;
+  height: 274px;
+}
+//周
+.week-calendar-footer-button{
+  padding: 3px 5px;
+  color: $brand-primary;
+  position: relative;
+  display: inline-block;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0;
+  overflow: hidden;
+  will-change: box-shadow, transform;
+  outline: none;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 12px;
+  line-height: 32px;
+}
+.week-calendar .rc-calendar-tbody > tr:hover
+.rc-calendar-date {
+  background: #EBECF0;
+}
+.week-calendar .rc-calendar-tbody > tr:hover
+.rc-calendar-selected-day .rc-calendar-date {
+    background: $brand-primary;
+}
+.week-calendar .week-calendar-footer {
+  position:absolute;
+  top:0;
+  left:0;
+  bottom:0;
+  width:100%;
+  border-right: 1px solid #ccc;
+}
+.rc-calendar-btn-ok{
+  padding: 0;
+  min-width: 40px;
+  position: relative;
+  top: -2px;
+}
+.datepicker-input-group.u-input-group:hover>input{
+  border-color: $brand-primary;
+}
+.calendar-picker.u-input-group:hover>input{
+  border-color: $brand-primary;
 }

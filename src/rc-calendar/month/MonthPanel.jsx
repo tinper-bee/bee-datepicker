@@ -29,7 +29,8 @@ class MonthPanel extends React.Component {
   static defaultProps = {
     onChange: noop,
     onSelect: noop,
-    format:'YYYY-MM'
+    format:'YYYY-MM',
+    showMonthInput:true
   }
 
   constructor(props) {
@@ -92,7 +93,7 @@ class MonthPanel extends React.Component {
   render() {
     const props = this.props;
     const value = this.state.value;
-    const { locale, cellRender, contentRender, renderFooter,showDateInput,format,rootPrefixCls } = props;
+    const { locale, cellRender, contentRender, showMonthInput,renderFooter,showDateInput,format,rootPrefixCls } = props;
     const year = value.year();
     const prefixCls = this.prefixCls;
 
@@ -102,7 +103,7 @@ class MonthPanel extends React.Component {
       <div className={prefixCls} style={props.style}>
         <div>
         {
-          showDateInput?<DateInput 
+          showDateInput&&showMonthInput?<DateInput 
             value={value}
             prefixCls={rootPrefixCls}
             showClear={true}
