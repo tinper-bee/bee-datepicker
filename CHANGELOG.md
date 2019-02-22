@@ -1,3 +1,13 @@
+<a name="2.0.0"></a>
+# [2.0.0](https://github.com/tinper-bee/bee-datepicker/compare/v2.0.0-beta3...v2.0.0) (2019-02-22)
+
+
+### Features
+
+* **bee-datepicker:** 所有类型新增输入框，升级rc ([b990af1](https://github.com/tinper-bee/bee-datepicker/commit/b990af1))
+
+
+
 <a name="2.0.0-beta3"></a>
 # [2.0.0-beta3](https://github.com/tinper-bee/bee-datepicker/compare/v2.0.0-beta2...v2.0.0-beta3) (2019-02-21)
 
