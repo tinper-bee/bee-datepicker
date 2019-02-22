@@ -154,7 +154,7 @@ class WeekPicker extends Component {
       showClose: true
     })
   }
-  clear = (e) => {
+  onClear = (e) => { 
     e.stopPropagation();
     this.setState({
       value: ''
@@ -179,6 +179,7 @@ class WeekPicker extends Component {
         showDateInput
         onChange={this.handleCalendarChange}
         showToday={false}
+        onClear={this.onClear}
       />
     );
     return (
@@ -209,7 +210,7 @@ class WeekPicker extends Component {
                     {
                         this.state.value&&this.state.showClose&&(!props.disabled)?(
                         <InputGroup.Button shape="border" 
-                            onClick={this.clear}>
+                            onClick={this.onClear}>
                             <i className="uf uf-close-c"></i>
                         </InputGroup.Button>
                         ):<InputGroup.Button shape="border">

@@ -194,7 +194,7 @@ var WeekPicker = function (_Component) {
       });
     };
 
-    _this.clear = function (e) {
+    _this.onClear = function (e) {
       e.stopPropagation();
       _this.setState({
         value: ''
@@ -228,7 +228,8 @@ var WeekPicker = function (_Component) {
       defaultValue: now,
       showDateInput: true,
       onChange: this.handleCalendarChange,
-      showToday: false
+      showToday: false,
+      onClear: this.onClear
     });
     return _react2["default"].createElement(
       "div",
@@ -262,7 +263,7 @@ var WeekPicker = function (_Component) {
             _this2.state.value && _this2.state.showClose && !props.disabled ? _react2["default"].createElement(
               _beeInputGroup2["default"].Button,
               { shape: "border",
-                onClick: _this2.clear },
+                onClick: _this2.onClear },
               _react2["default"].createElement("i", { className: "uf uf-close-c" })
             ) : _react2["default"].createElement(
               _beeInputGroup2["default"].Button,
