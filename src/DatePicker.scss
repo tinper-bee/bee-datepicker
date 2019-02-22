@@ -704,7 +704,7 @@
   outline: none;
 }
 .rc-calendar-year-panel > div {
-  height: 100%;
+  // height: 100%;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-direction: column;
@@ -1312,6 +1312,14 @@ li.rc-time-picker-panel-select-option-disabled:hover {
   .rc-calendar-decade-panel{
     color: #212121;
     top: 35px;
+    // .rc-calendar-decade-panel-body {
+    //   background: #fff;
+    //   border: 1px solid #ccc;
+    //   box-sizing: border-box;
+    //   margin-left: -1px;
+    //   margin-right: -1px;
+    //   box-shadow: 0 1px 5px #ccc;
+    // }
   }
 }
 //年月

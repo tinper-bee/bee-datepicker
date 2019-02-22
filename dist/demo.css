@@ -7169,7 +7169,6 @@ input.u-button[type="submit"] {
   outline: none; }
 
 .rc-calendar-year-panel > div {
-  height: 100%;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-direction: column;
