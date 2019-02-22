@@ -7469,7 +7469,8 @@ input.u-button[type="submit"] {
 .rc-calendar-range .rc-calendar-year-panel,
 .rc-calendar-range .rc-calendar-month-panel,
 .rc-calendar-range .rc-calendar-decade-panel {
-  top: 35px; }
+  top: 36px;
+  height: 198px; }
   .rc-calendar-range .rc-calendar-year-panel > .rc-calendar-decade-panel-header,
   .rc-calendar-range .rc-calendar-month-panel > .rc-calendar-decade-panel-header,
   .rc-calendar-range .rc-calendar-decade-panel > .rc-calendar-decade-panel-header {
