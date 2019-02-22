@@ -46,12 +46,7 @@ class Demo1 extends Component {
         return (<Icon type="uf-search"></Icon>)
     }
     onOpenChange = d => {
-        console.log(d);
-    }
-    open = d => {
-        this.setState({
-            open: true
-        })
+        console.log(d)
     }
     onClick = (e,d,str) => {
         console.log(d);
@@ -74,6 +69,7 @@ class Demo1 extends Component {
                             onSelect={onSelect}
                             onChange={this.onChange}
                             locale={zhCN}
+                            open={this.state.open}
                             value={this.state.value}
                             onOpenChange={this.onOpenChange.bind(this)}
                             placeholder={dateInputPlaceholder}

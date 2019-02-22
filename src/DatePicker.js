@@ -45,7 +45,7 @@ class DatePicker extends Component {
         if(e.keyCode == KeyCode.DELETE){
           input.value = '';
           this.props.onChange('','');
-        }else if(e.keyCode == KeyCode.ESC){
+        }else if(e.keyCode == KeyCode.ESC||e.keyCode == KeyCode.ENTER){
           this.setState({
             open:false
           });
@@ -142,6 +142,12 @@ class DatePicker extends Component {
       }else{
         this.props.onChange(null,value);
       }
+    }
+    else if(e.keyCode == KeyCode.F2){
+      this.setState({
+        open:true
+      });
+      this.onOpenChange(true);
     }
     this.props.outInputKeydown&&this.props.outInputKeydown(e);
   }

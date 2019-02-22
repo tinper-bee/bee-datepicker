@@ -189,7 +189,7 @@ var _initialiseProps = function _initialiseProps() {
         if (e.keyCode == _tinperBeeCore.KeyCode.DELETE) {
           input.value = '';
           _this3.props.onChange('', '');
-        } else if (e.keyCode == _tinperBeeCore.KeyCode.ESC) {
+        } else if (e.keyCode == _tinperBeeCore.KeyCode.ESC || e.keyCode == _tinperBeeCore.KeyCode.ENTER) {
           _this3.setState({
             open: false
           });
@@ -281,6 +281,11 @@ var _initialiseProps = function _initialiseProps() {
       } else {
         _this3.props.onChange(null, value);
       }
+    } else if (e.keyCode == _tinperBeeCore.KeyCode.F2) {
+      _this3.setState({
+        open: true
+      });
+      _this3.onOpenChange(true);
     }
     _this3.props.outInputKeydown && _this3.props.outInputKeydown(e);
   };
