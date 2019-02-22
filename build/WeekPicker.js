@@ -219,6 +219,7 @@ var WeekPicker = function (_Component) {
     var calendar = _react2["default"].createElement(_rcCalendar2["default"], {
       className: "week-calendar",
       showWeekNumber: true,
+      showMonthInput: false,
       renderFooter: this.renderFooter,
       dateRender: this.dateRender,
       locale: cn ? _zh_CN2["default"] : _en_US2["default"],

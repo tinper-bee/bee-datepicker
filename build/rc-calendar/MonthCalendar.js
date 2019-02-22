@@ -30,6 +30,10 @@ var _CalendarMixin = require('./mixin/CalendarMixin');
 
 var _CommonMixin = require('./mixin/CommonMixin');
 
+var _DateInput = require('./date/DateInput');
+
+var _DateInput2 = _interopRequireDefault(_DateInput);
+
 var _moment = require('moment');
 
 var _moment2 = _interopRequireDefault(_moment);
@@ -106,6 +110,32 @@ var MonthCalendar = function (_React$Component) {
       }
     };
 
+    _this.onInputChange = function (value) {
+      var _this$props = _this.props,
+          onChange = _this$props.onChange,
+          format = _this$props.format;
+
+      _this.setState({
+        value: value ? value : (0, _moment2["default"])()
+      });
+      _this.setValue(value);
+      onChange && onChange(value);
+    };
+
+    _this.onClear = function () {
+      var _this$props2 = _this.props,
+          onChange = _this$props2.onChange,
+          format = _this$props2.format,
+          onClear = _this$props2.onClear;
+
+      _this.setState({
+        value: (0, _moment2["default"])()
+      });
+      _this.setValue((0, _moment2["default"])());
+      onChange && onChange('', '');
+      onClear && onClear('', '');
+    };
+
     _this.state = {
       mode: 'month',
       value: props.value || props.defaultValue || (0, _moment2["default"])(),
@@ -119,13 +149,16 @@ var MonthCalendar = function (_React$Component) {
         state = this.state;
     var mode = state.mode,
         value = state.value;
+
+    console.log(props);
     var prefixCls = props.prefixCls,
         locale = props.locale,
         format = props.format,
         showDateInput = props.showDateInput,
         onChange = props.onChange,
         onSelect = props.onSelect,
-        onClear = props.onClear;
+        onClear = props.onClear,
+        showMonthInput = props.showMonthInput;
 
     var children = _react2["default"].createElement(
       'div',
@@ -133,6 +166,16 @@ var MonthCalendar = function (_React$Component) {
       _react2["default"].createElement(
         'div',
         { className: props.prefixCls + '-month-header-wrap' },
+        showDateInput && showMonthInput ? _react2["default"].createElement(_DateInput2["default"], {
+          value: value,
+          prefixCls: prefixCls,
+          showClear: true,
+          locale: locale,
+          format: format,
+          onChange: this.onInputChange,
+          selectedValue: value,
+          onClear: this.onClear
+        }) : '',
         _react2["default"].createElement(_CalendarHeader2["default"], {
           prefixCls: props.prefixCls,
           mode: mode,

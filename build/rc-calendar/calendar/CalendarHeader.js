@@ -108,7 +108,8 @@ var CalendarHeader = function (_React$Component) {
         contentRender: props.monthCellContentRender,
         renderFooter: renderFooter,
         onChange: onChange,
-        onClear: onClear
+        onClear: onClear,
+        value: value
       });
     }
     if (mode === 'year') {
@@ -136,7 +137,7 @@ var CalendarHeader = function (_React$Component) {
       { className: prefixCls + '-header' },
       _react2["default"].createElement(
         'div',
-        { style: { position: 'relative' } },
+        { style: { position: 'relative' }, className: prefixCls + '-header-btns' },
         showIf(enablePrev && !showTimePicker, _react2["default"].createElement('a', {
           className: prefixCls + '-prev-year-btn',
           role: 'button',

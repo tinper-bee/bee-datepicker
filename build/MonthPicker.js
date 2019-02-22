@@ -171,6 +171,7 @@ MonthPicker.defaultProps = {
   },
   format: 'YYYY-MM',
   showDateInput: true,
+  showMonthInput: true,
   locale: _zh_CN2["default"]
 };
 
