@@ -7311,7 +7311,6 @@ input.u-button[type="submit"] {
   border-bottom: 1px solid #ccc; }
 
 .rc-calendar-decade-panel-header > a {
-  font-weight: bold;
   display: inline-block;
   padding: 0px 5px;
   text-align: center;
@@ -7759,8 +7758,9 @@ li.rc-time-picker-panel-select-option-disabled:hover {
   color: #424242;
   opacity: .7; }
 
-.rc-calendar-year-panel .rc-calendar-decade-panel {
-  color: #212121; }
+.rc-calendar > .rc-calendar-year-panel .rc-calendar-decade-panel {
+  color: #212121;
+  top: 35px; }
 
 .rc-calendar-month-header-wrap {
   position: relative;

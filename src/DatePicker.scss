@@ -846,7 +846,6 @@
   border-bottom: 1px solid #ccc;
 }
 .rc-calendar-decade-panel-header > a {
-  font-weight: bold;
   display: inline-block;
   padding: 0px 5px;
   text-align: center;
@@ -1309,9 +1308,10 @@ li.rc-time-picker-panel-select-option-disabled:hover {
   }
 }
 //年
-.rc-calendar-year-panel{
+.rc-calendar>.rc-calendar-year-panel{
   .rc-calendar-decade-panel{
     color: #212121;
+    top: 35px;
   }
 }
 //年月

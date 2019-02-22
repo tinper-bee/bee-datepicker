@@ -139,6 +139,16 @@ class YearPanel extends React.Component {
         rootPrefixCls={props.rootPrefixCls}
         onSelect={this.onDecadePanelSelect}
       />);
+    }else{
+      decadePanel = (
+          <div className={`${prefixCls}-body`}>
+            <table className={`${prefixCls}-table`} cellSpacing="0" role="grid">
+              <tbody className={`${prefixCls}-tbody`}>
+              {yeasEls}
+              </tbody>
+            </table>
+          </div>
+      );
     }
     let { showDateInput,rootPrefixCls,format } = props;
     return (
@@ -182,13 +192,7 @@ class YearPanel extends React.Component {
               title={locale.nextDecade}
             />
           </div>
-          <div className={`${prefixCls}-body`}>
-            <table className={`${prefixCls}-table`} cellSpacing="0" role="grid">
-              <tbody className={`${prefixCls}-tbody`}>
-              {yeasEls}
-              </tbody>
-            </table>
-          </div>
+          
         </div>
         {decadePanel}
       </div>);
