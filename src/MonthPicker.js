@@ -112,6 +112,7 @@ MonthPicker.defaultProps = {
     renderIcon: () => <Icon type="uf-calendar" />,
     format:'YYYY-MM',
     showDateInput:true,
+    showMonthInput:true,
     locale:zhCN
 }
 

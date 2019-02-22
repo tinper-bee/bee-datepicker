@@ -29,8 +29,6 @@ class MonthPanel extends React.Component {
   static defaultProps = {
     onChange: noop,
     onSelect: noop,
-    format:'YYYY-MM',
-    showMonthInput:true
   }
 
   constructor(props) {
@@ -74,26 +72,11 @@ class MonthPanel extends React.Component {
       });
     }
   }
-  onInputChange=value=>{
-    let { onChange,format } = this.props;
-      this.setState({
-        value:value ? value : moment()
-      })
-      onChange&&onChange(value);
-  }
-  onClear = () =>{
-    let { onChange,format,onClear } = this.props;
-    this.setState({
-      value:moment()
-    })
-    onChange&&onChange('','');
-    onClear&&onClear('','');
-  }
 
   render() {
     const props = this.props;
     const value = this.state.value;
-    const { locale, cellRender, contentRender, showMonthInput,renderFooter,showDateInput,format,rootPrefixCls } = props;
+    const { locale, cellRender, contentRender,renderFooter,rootPrefixCls } = props;
     const year = value.year();
     const prefixCls = this.prefixCls;
 
@@ -102,18 +85,6 @@ class MonthPanel extends React.Component {
     return (
       <div className={prefixCls} style={props.style}>
         <div>
-        {
-          showDateInput&&showMonthInput?<DateInput 
-            value={value}
-            prefixCls={rootPrefixCls}
-            showClear={true}
-            locale={locale}
-            format={format}
-            onChange={this.onInputChange}
-            selectedValue={value}
-            onClear={this.onClear}
-          />:''
-        }
           <div className={`${prefixCls}-header`}>
             <a
               className={`${prefixCls}-prev-year-btn`}

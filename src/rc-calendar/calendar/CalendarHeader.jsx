@@ -168,6 +168,7 @@ export default class CalendarHeader extends React.Component {
           renderFooter={renderFooter}
           onChange={onChange}
           onClear={onClear}
+          value={value}
         />
       );
     }
@@ -196,7 +197,7 @@ export default class CalendarHeader extends React.Component {
     }
 
     return (<div className={`${prefixCls}-header`}>
-      <div style={{ position: 'relative' }}>
+      <div style={{ position: 'relative' }} className={`${prefixCls}-header-btns`}>
         {showIf(enablePrev && !showTimePicker,
           <a
             className={`${prefixCls}-prev-year-btn`}

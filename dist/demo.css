@@ -7470,6 +7470,10 @@ input.u-button[type="submit"] {
 .rc-calendar-range .rc-calendar-month-panel,
 .rc-calendar-range .rc-calendar-decade-panel {
   top: 35px; }
+  .rc-calendar-range .rc-calendar-year-panel > .rc-calendar-decade-panel-header,
+  .rc-calendar-range .rc-calendar-month-panel > .rc-calendar-decade-panel-header,
+  .rc-calendar-range .rc-calendar-decade-panel > .rc-calendar-decade-panel-header {
+    display: none; }
 
 .rc-calendar-range .rc-calendar-month-panel .rc-calendar-year-panel {
   top: 0; }
@@ -7760,7 +7764,17 @@ li.rc-time-picker-panel-select-option-disabled:hover {
 
 .rc-calendar > .rc-calendar-year-panel .rc-calendar-decade-panel {
   color: #212121;
-  top: 35px; }
+  top: 35px;
+  border: 1px solid #ccc; }
+
+.rc-calendar-month-calendar .rc-calendar-year-panel {
+  position: relative; }
+
+.rc-calendar-month-calendar .rc-calendar-month-panel {
+  position: relative; }
+
+.rc-calendar-month-calendar .rc-calendar-month-header-wrap .rc-calendar-header-btns {
+  display: none; }
 
 .rc-calendar-month-header-wrap {
   position: relative;

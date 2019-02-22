@@ -27382,7 +27382,8 @@
 	        contentRender: props.monthCellContentRender,
 	        renderFooter: renderFooter,
 	        onChange: onChange,
-	        onClear: onClear
+	        onClear: onClear,
+	        value: value
 	      });
 	    }
 	    if (mode === 'year') {
@@ -27410,7 +27411,7 @@
 	      { className: prefixCls + '-header' },
 	      _react2['default'].createElement(
 	        'div',
-	        { style: { position: 'relative' } },
+	        { style: { position: 'relative' }, className: prefixCls + '-header-btns' },
 	        showIf(enablePrev && !showTimePicker, _react2['default'].createElement('a', {
 	          className: prefixCls + '-prev-year-btn',
 	          role: 'button',
@@ -27662,30 +27663,6 @@
 	      }
 	    };
 	
-	    _this.onInputChange = function (value) {
-	      var _this$props = _this.props,
-	          onChange = _this$props.onChange,
-	          format = _this$props.format;
-	
-	      _this.setState({
-	        value: value ? value : (0, _moment2['default'])()
-	      });
-	      onChange && onChange(value);
-	    };
-	
-	    _this.onClear = function () {
-	      var _this$props2 = _this.props,
-	          onChange = _this$props2.onChange,
-	          format = _this$props2.format,
-	          onClear = _this$props2.onClear;
-	
-	      _this.setState({
-	        value: (0, _moment2['default'])()
-	      });
-	      onChange && onChange('', '');
-	      onClear && onClear('', '');
-	    };
-	
 	    _this.nextYear = goYear.bind(_this, 1);
 	    _this.previousYear = goYear.bind(_this, -1);
 	    _this.prefixCls = props.rootPrefixCls + '-month-panel';
@@ -27714,10 +27691,7 @@
 	    var locale = props.locale,
 	        cellRender = props.cellRender,
 	        contentRender = props.contentRender,
-	        showMonthInput = props.showMonthInput,
 	        renderFooter = props.renderFooter,
-	        showDateInput = props.showDateInput,
-	        format = props.format,
 	        rootPrefixCls = props.rootPrefixCls;
 	
 	    var year = value.year();
@@ -27731,16 +27705,6 @@
 	      _react2['default'].createElement(
 	        'div',
 	        null,
-	        showDateInput && showMonthInput ? _react2['default'].createElement(_DateInput2['default'], {
-	          value: value,
-	          prefixCls: rootPrefixCls,
-	          showClear: true,
-	          locale: locale,
-	          format: format,
-	          onChange: this.onInputChange,
-	          selectedValue: value,
-	          onClear: this.onClear
-	        }) : '',
 	        _react2['default'].createElement(
 	          'div',
 	          { className: prefixCls + '-header' },
@@ -27812,9 +27776,7 @@
 	};
 	MonthPanel.defaultProps = {
 	  onChange: noop,
-	  onSelect: noop,
-	  format: 'YYYY-MM',
-	  showMonthInput: true
+	  onSelect: noop
 	};
 	
 	
@@ -36402,6 +36364,7 @@
 	  },
 	  format: 'YYYY-MM',
 	  showDateInput: true,
+	  showMonthInput: true,
 	  locale: _zh_CN2["default"]
 	};
 	
@@ -36443,6 +36406,10 @@
 	var _CalendarMixin = __webpack_require__(237);
 	
 	var _CommonMixin = __webpack_require__(238);
+	
+	var _DateInput = __webpack_require__(230);
+	
+	var _DateInput2 = _interopRequireDefault(_DateInput);
 	
 	var _moment = __webpack_require__(94);
 	
@@ -36520,6 +36487,32 @@
 	      }
 	    };
 	
+	    _this.onInputChange = function (value) {
+	      var _this$props = _this.props,
+	          onChange = _this$props.onChange,
+	          format = _this$props.format;
+	
+	      _this.setState({
+	        value: value ? value : (0, _moment2['default'])()
+	      });
+	      _this.setValue(value);
+	      onChange && onChange(value);
+	    };
+	
+	    _this.onClear = function () {
+	      var _this$props2 = _this.props,
+	          onChange = _this$props2.onChange,
+	          format = _this$props2.format,
+	          onClear = _this$props2.onClear;
+	
+	      _this.setState({
+	        value: (0, _moment2['default'])()
+	      });
+	      _this.setValue((0, _moment2['default'])());
+	      onChange && onChange('', '');
+	      onClear && onClear('', '');
+	    };
+	
 	    _this.state = {
 	      mode: 'month',
 	      value: props.value || props.defaultValue || (0, _moment2['default'])(),
@@ -36533,13 +36526,16 @@
 	        state = this.state;
 	    var mode = state.mode,
 	        value = state.value;
+	
+	    console.log(props);
 	    var prefixCls = props.prefixCls,
 	        locale = props.locale,
 	        format = props.format,
 	        showDateInput = props.showDateInput,
 	        onChange = props.onChange,
 	        onSelect = props.onSelect,
-	        onClear = props.onClear;
+	        onClear = props.onClear,
+	        showMonthInput = props.showMonthInput;
 	
 	    var children = _react2['default'].createElement(
 	      'div',
@@ -36547,6 +36543,16 @@
 	      _react2['default'].createElement(
 	        'div',
 	        { className: props.prefixCls + '-month-header-wrap' },
+	        showDateInput && showMonthInput ? _react2['default'].createElement(_DateInput2['default'], {
+	          value: value,
+	          prefixCls: prefixCls,
+	          showClear: true,
+	          locale: locale,
+	          format: format,
+	          onChange: this.onInputChange,
+	          selectedValue: value,
+	          onClear: this.onClear
+	        }) : '',
 	        _react2['default'].createElement(_CalendarHeader2['default'], {
 	          prefixCls: props.prefixCls,
 	          mode: mode,

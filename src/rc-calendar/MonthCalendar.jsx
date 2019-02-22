@@ -9,6 +9,7 @@ import {
   calendarMixinDefaultProps,
 } from './mixin/CalendarMixin';
 import { commonMixinWrapper, propType, defaultProp } from './mixin/CommonMixin';
+import DateInput from './date/DateInput';
 import moment from 'moment';
 
 class MonthCalendar extends React.Component {
@@ -91,13 +92,45 @@ class MonthCalendar extends React.Component {
     }
   }
 
+  onInputChange=value=>{
+    let { onChange,format } = this.props;
+      this.setState({
+        value:value ? value : moment()
+      })
+      this.setValue(value);
+      onChange&&onChange(value);
+  }
+  onClear = () =>{
+    let { onChange,format,onClear } = this.props;
+    this.setState({
+      value:moment()
+    })
+    this.setValue(moment());
+    onChange&&onChange('','');
+    onClear&&onClear('','');
+  }
+
   render() {
     const { props, state } = this;
     const { mode, value } = state;
-    const { prefixCls,locale,format,showDateInput,onChange,onSelect,onClear } = props;
+    console.log(props);
+    const { prefixCls,locale,format,showDateInput,onChange,onSelect,
+      onClear,showMonthInput } = props;
     const children = (
       <div className={`${props.prefixCls}-month-calendar-content`}>
         <div className={`${props.prefixCls}-month-header-wrap`}>
+        {
+          showDateInput&&showMonthInput?<DateInput 
+            value={value}
+            prefixCls={prefixCls}
+            showClear={true}
+            locale={locale}
+            format={format}
+            onChange={this.onInputChange}
+            selectedValue={value}
+            onClear={this.onClear}
+          />:''
+        }
           <CalendarHeader
             prefixCls={props.prefixCls}
             mode={mode}
