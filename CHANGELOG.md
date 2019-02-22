@@ -1,3 +1,13 @@
+<a name="1.3.15"></a>
+## [1.3.15](https://github.com/tinper-bee/bee-datepicker/compare/v1.3.14...v1.3.15) (2019-02-22)
+
+
+### Features
+
+* **bee-datepicker:** f2打开，enter关闭 ([ec081db](https://github.com/tinper-bee/bee-datepicker/commit/ec081db))
+
+
+
 <a name="1.3.14"></a>
 ## [1.3.14](https://github.com/tinper-bee/bee-datepicker/compare/v1.3.13...v1.3.14) (2019-01-29)
 
