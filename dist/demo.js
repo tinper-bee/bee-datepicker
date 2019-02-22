@@ -28471,20 +28471,6 @@
 	        rootPrefixCls: props.rootPrefixCls,
 	        onSelect: this.onDecadePanelSelect
 	      });
-	    } else {
-	      decadePanel = _react2['default'].createElement(
-	        'div',
-	        { className: prefixCls + '-body' },
-	        _react2['default'].createElement(
-	          'table',
-	          { className: prefixCls + '-table', cellSpacing: '0', role: 'grid' },
-	          _react2['default'].createElement(
-	            'tbody',
-	            { className: prefixCls + '-tbody' },
-	            yeasEls
-	          )
-	        )
-	      );
 	    }
 	    var showDateInput = props.showDateInput,
 	        rootPrefixCls = props.rootPrefixCls,
@@ -28542,6 +28528,19 @@
 	            onClick: this.nextDecade,
 	            title: locale.nextDecade
 	          })
+	        ),
+	        _react2['default'].createElement(
+	          'div',
+	          { className: prefixCls + '-body' },
+	          _react2['default'].createElement(
+	            'table',
+	            { className: prefixCls + '-table', cellSpacing: '0', role: 'grid' },
+	            _react2['default'].createElement(
+	              'tbody',
+	              { className: prefixCls + '-tbody' },
+	              yeasEls
+	            )
+	          )
 	        )
 	      ),
 	      decadePanel
