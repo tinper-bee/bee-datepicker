@@ -6812,6 +6812,10 @@ input.u-button[type="submit"] {
 .rc-calendar td {
   border: none; }
 
+.rc-calendar .rc-calendar-today .rc-calendar-date {
+  border: 1px solid #2196F3;
+  color: #2196F3; }
+
 .rc-calendar-table {
   border-spacing: 0;
   margin-bottom: 0; }
@@ -6850,11 +6854,11 @@ input.u-button[type="submit"] {
 
 .rc-calendar-selected-day .rc-calendar-date {
   background: rgb(30,136,229);
-  color: #fff; }
+  color: #fff !important; }
 
 .rc-calendar-selected-date .rc-calendar-date {
   background: rgb(30,136,229);
-  color: #fff; }
+  color: #fff !important; }
 
 .rc-calendar-selected-date .rc-calendar-date:hover {
   background: rgb(30,136,229); }
