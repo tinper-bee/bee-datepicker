@@ -79,10 +79,16 @@ class DatePicker extends Component {
         value: nextProps.value
       });
     }
-    this.setState({
-      renderIcon: nextProps.renderIcon,
-      open: nextProps.open || false
-    });
+    if ("open" in nextProps) {
+      this.setState({
+        open: nextProps.open 
+      });
+    }
+    if ("renderIcon" in nextProps) {
+      this.setState({
+        renderIcon: nextProps.renderIcon
+      });
+    }
   }
   handleCalendarChange = (value) => {
       const props = this.props;
