@@ -82,7 +82,7 @@ class DatePicker extends Component {
     }
     if ("renderIcon" in nextProps) {
       this.setState({
-        open: nextProps.renderIcon
+        renderIcon: nextProps.renderIcon
       });
     }
   }

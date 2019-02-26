@@ -5261,7 +5261,7 @@ a, .mdl-accordion, .mdl-button, .mdl-card, .mdl-checkbox, .mdl-dropdown-menu,
 .u-button {
   background: rgb(224,224,224);
   border: none;
-  border-radius: 4px;
+  border-radius: 3px;
   color: rgb(0,0,0);
   position: relative;
   min-width: 72px;
