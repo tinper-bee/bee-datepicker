@@ -1,3 +1,13 @@
+<a name="1.3.17"></a>
+## [1.3.17](https://github.com/tinper-bee/bee-datepicker/compare/v1.3.16...v1.3.17) (2019-02-26)
+
+
+### Bug Fixes
+
+* **bee-datepicker:** willReceiveProps open加判断 ([dabed15](https://github.com/tinper-bee/bee-datepicker/commit/dabed15))
+
+
+
 <a name="1.3.16"></a>
 ## [1.3.16](https://github.com/tinper-bee/bee-datepicker/compare/v1.3.15...v1.3.16) (2019-02-26)
 
