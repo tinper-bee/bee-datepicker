@@ -72,13 +72,13 @@ class YearPicker extends Component {
         return (
             <div>
                 <Picker
-                    {...props}
                     onOpenChange={this.onOpenChange}
                     onChange={this.handleChange}
                     animation="slide-up"
                     calendar={Calendar}
                     prefixCls={'rc-calendar'}
                     value={state.value||moment()}
+                    {...props}
                 >
                     {({  }) => {
                         return (

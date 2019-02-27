@@ -90,7 +90,7 @@ var MonthPicker = function (_Component) {
         _Picker2["default"],
         {
           onOpenChange: this.onOpenChange,
-          animation: "slide-up",
+          animation: 'animation' in props ? props.animation : "slide-up",
           calendar: monthCalendar,
           open: this.state.open,
           value: state.value,

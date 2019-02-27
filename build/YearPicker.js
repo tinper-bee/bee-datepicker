@@ -96,14 +96,14 @@ var YearPicker = function (_Component) {
             null,
             _react2["default"].createElement(
                 _Picker2["default"],
-                _extends({}, props, {
+                _extends({
                     onOpenChange: this.onOpenChange,
                     onChange: this.handleChange,
                     animation: "slide-up",
                     calendar: Calendar,
                     prefixCls: 'rc-calendar',
                     value: state.value || (0, _moment2["default"])()
-                }),
+                }, props),
                 function (_ref) {
                     _objectDestructuringEmpty(_ref);
 

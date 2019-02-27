@@ -113,7 +113,7 @@ class Picker extends Component {
       return (
           <DatePicker
               value = {this.state.value}
-              animation="slide-up"
+              animation={'animation' in props ? props.animation: "slide-up"}
               calendar={calendar}
           >
               {
