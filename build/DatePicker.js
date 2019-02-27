@@ -143,9 +143,10 @@ var DatePicker = function (_Component) {
       { className: props.className },
       _react2["default"].createElement(
         _Picker2["default"],
-        _extends({}, props, pickerChangeHandler, {
+        _extends({
+          animation: "slide-up"
+        }, props, pickerChangeHandler, {
           onOpenChange: this.onOpenChange,
-          animation: "slide-up",
           calendar: calendar,
           mode: 'year',
           open: this.state.open,

@@ -70,7 +70,7 @@ class MonthPicker extends Component {
       <div>
         <Picker
           onOpenChange={this.onOpenChange}
-          animation="slide-up"
+          animation={'animation' in props ? props.animation : "slide-up"}
           calendar={monthCalendar}
           open={this.state.open}
           value={state.value}

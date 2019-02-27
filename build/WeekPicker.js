@@ -236,10 +236,11 @@ var WeekPicker = function (_Component) {
       null,
       _react2["default"].createElement(
         _Picker2["default"],
-        _extends({}, props, {
+        _extends({
+          animation: "slide-up"
+        }, props, {
           onOpenChange: this.onOpenChange,
           open: this.state.open,
-          animation: "slide-up",
           calendar: calendar,
           value: state.value
         }),

@@ -186,10 +186,10 @@ class WeekPicker extends Component {
       <div>
         {/* <style dangerouslySetInnerHTML={{ __html: style }} /> */}
         <Picker
+          animation="slide-up"
           {...props}
           onOpenChange={this.onOpenChange}
           open={this.state.open}
-          animation="slide-up"
           calendar={calendar}
           value={state.value}
         >

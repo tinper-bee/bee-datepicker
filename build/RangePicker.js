@@ -132,7 +132,7 @@ var Picker = function (_Component) {
             _Picker2["default"],
             {
                 value: this.state.value,
-                animation: "slide-up",
+                animation: 'animation' in props ? props.animation : "slide-up",
                 calendar: calendar
             },
             function (_ref) {
