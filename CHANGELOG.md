@@ -1,3 +1,13 @@
+<a name="2.0.4"></a>
+## [2.0.4](https://github.com/tinper-bee/bee-datepicker/compare/v2.0.3...v2.0.4) (2019-02-27)
+
+
+### Features
+
+* **bee-datepicker:** 是否使用动画效果 ([0aed6f6](https://github.com/tinper-bee/bee-datepicker/commit/0aed6f6))
+
+
+
 <a name="2.0.3"></a>
 ## [2.0.3](https://github.com/tinper-bee/bee-datepicker/compare/v2.0.2...v2.0.3) (2019-02-26)
 
