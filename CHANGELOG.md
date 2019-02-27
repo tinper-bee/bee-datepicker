@@ -1,3 +1,13 @@
+<a name="1.3.18"></a>
+## [1.3.18](https://github.com/tinper-bee/bee-datepicker/compare/v1.3.17...v1.3.18) (2019-02-27)
+
+
+### Features
+
+* **bee-datepicker:** 自定义动画显示 ([17e5434](https://github.com/tinper-bee/bee-datepicker/commit/17e5434))
+
+
+
 <a name="1.3.17"></a>
 ## [1.3.17](https://github.com/tinper-bee/bee-datepicker/compare/v1.3.16...v1.3.17) (2019-02-26)
 
