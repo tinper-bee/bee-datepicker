@@ -198,10 +198,10 @@ class DatePicker extends Component {
     return (
       <div className={props.className}>
         <Picker
+          animation="slide-up"
           {...props}
           {...pickerChangeHandler}
           onOpenChange={this.onOpenChange}
-          animation="slide-up"
           calendar={calendar}
           mode = {'year'}
           open={this.state.open}
