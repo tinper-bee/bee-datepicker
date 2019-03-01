@@ -2152,13 +2152,13 @@
   color: rgb(255,255,255) !important; }
 
 .bg-primary {
-  background-color: rgb(30,136,229) !important; }
+  background-color: rgb(245, 60, 50) !important; }
 
 .bg-primary-contrast {
   background-color: rgb(255,255,255) !important; }
 
 .bg-primary-dark {
-  background-color: rgb(21,101,192) !important; }
+  background-color: rgb(230, 0, 18) !important; }
 
 .bg-accent {
   background-color: rgb(67,160,71) !important; }
@@ -2167,13 +2167,13 @@
   background-color: rgb(255,255,255) !important; }
 
 .text-primary {
-  color: rgb(30,136,229) !important; }
+  color: rgb(245, 60, 50) !important; }
 
 .text-primary-contrast {
   color: rgb(255,255,255) !important; }
 
 .text-primary-dark {
-  color: rgb(21,101,192) !important; }
+  color: rgb(230, 0, 18) !important; }
 
 .text-accent {
   color: rgb(67,160,71) !important; }
@@ -5289,7 +5289,7 @@ a, .mdl-accordion, .mdl-button, .mdl-card, .mdl-checkbox, .mdl-dropdown-menu,
     background-color: rgb(189,189,189);
     border-color: rgb(189,189,189); }
   .u-button.colored {
-    color: rgb(30,136,229); }
+    color: rgb(245, 60, 50); }
     .u-button.colored:focus:not(:active) {
       background-color: rgb(238,238,238);
       border-color: rgb(189,189,189); }
@@ -5312,7 +5312,7 @@ input.u-button[type="submit"] {
   width: 38px;
   padding: 0;
   line-height: normal;
-  border: 1px solid rgb(189,189,189); }
+  border: 1px solid rgb(165, 173, 186); }
   .u-button-floating.colored {
     background: rgb(67,160,71);
     color: rgb(255,255,255);
@@ -5340,31 +5340,31 @@ input.u-button[type="submit"] {
 
 .u-button-border {
   color: rgb(0,0,0);
-  border: 1px solid rgb(189,189,189);
+  border: 1px solid rgb(165, 173, 186);
   background: rgb(255,255,255); }
   .u-button-border:hover {
     color: rgb(0,0,0);
     background-color: rgb(238,238,238);
-    border-color: rgb(189,189,189); }
+    border-color: rgb(165, 173, 186); }
   .u-button-border:active {
     color: rgb(0,0,0);
     background-color: rgb(189,189,189);
-    border-color: rgb(189,189,189); }
+    border-color: rgb(165, 173, 186); }
   .u-button-border:focus:not(:active) {
     color: rgb(0,0,0);
     background-color: rgb(238,238,238);
-    border-color: rgb(189,189,189); }
+    border-color: rgb(165, 173, 186); }
 
 .u-button.u-button-primary {
   color: rgb(255,255,255);
-  background-color: rgb(30,136,229);
-  border: 1px rgb(30,136,229) solid; }
+  background-color: rgb(245, 60, 50);
+  border: 1px rgb(245, 60, 50) solid; }
   .u-button.u-button-primary.focus, .u-button.u-button-primary:focus, .u-button.u-button-primary:hover {
-    background-color: rgb(66,165,245);
-    border-color: rgb(66,165,245); }
+    background-color: rgb(230, 0, 18);
+    border-color: rgb(230, 0, 18); }
   .u-button.u-button-primary.active, .u-button.u-button-primary:active {
-    background-color: rgb(21,101,192);
-    border-color: rgb(21,101,192); }
+    background-color: rgb(230, 0, 18);
+    border-color: rgb(230, 0, 18); }
 
 .u-button.u-button-secondary {
   color: rgb(0,0,0);
@@ -5496,17 +5496,17 @@ input.u-button[type="submit"] {
     border-color: rgb(0,151,167); }
 
 .u-button-border.u-button-primary {
-  color: rgb(30,136,229);
+  color: rgb(245, 60, 50);
   background-color: #fff;
-  border: 1px rgb(30,136,229) solid; }
+  border: 1px rgb(245, 60, 50) solid; }
   .u-button-border.u-button-primary.focus, .u-button-border.u-button-primary:focus, .u-button-border.u-button-primary:hover {
-    background-color: rgb(66,165,245);
-    border-color: rgb(66,165,245);
+    background-color: rgb(230, 0, 18);
+    border-color: rgb(230, 0, 18);
     color: #fff; }
   .u-button-border.u-button-primary.active, .u-button-border.u-button-primary:active {
     color: #fff;
-    background-color: rgb(21,101,192);
-    border-color: rgb(21,101,192); }
+    background-color: rgb(230, 0, 18);
+    border-color: rgb(230, 0, 18); }
 
 .u-button-border.u-button-secondary {
   color: rgb(224,224,224);
@@ -5556,7 +5556,7 @@ input.u-button[type="submit"] {
   width: 32px;
   padding: 0;
   line-height: normal;
-  border: 1px solid rgb(189,189,189); }
+  border: 1px solid rgb(165, 173, 186); }
 
 .u-button-lg {
   padding: 8px 15px;
@@ -6692,7 +6692,7 @@ input.u-button[type="submit"] {
   border-radius: 3px;
   box-shadow: 0 1px 5px #ccc;
   background-clip: padding-box;
-  border: 1px solid #ccc;
+  border: 1px solid rgb(224,224,224);
   line-height: 1.5; }
 
 .rc-calendar-date-panel,
@@ -6727,7 +6727,7 @@ input.u-button[type="submit"] {
 
 .rc-calendar-header > a:hover {
   cursor: pointer;
-  color: rgb(30,136,229); }
+  color: rgb(245, 60, 50); }
 
 .rc-calendar-header .rc-calendar-prev-month-btn {
   position: absolute;
@@ -6756,7 +6756,7 @@ input.u-button[type="submit"] {
 .rc-calendar-month-select:hover,
 .rc-calendar-day-select:hover {
   cursor: pointer;
-  color: rgb(66,165,245); }
+  color: rgb(230, 0, 18); }
 
 .rc-calendar-year-select.rc-calendar-time-status:hover,
 .rc-calendar-month-select.rc-calendar-time-status:hover,
@@ -6782,7 +6782,7 @@ input.u-button[type="submit"] {
 .rc-calendar-next-month-btn:hover,
 .rc-calendar-prev-year-btn:hover,
 .rc-calendar-next-year-btn:hover {
-  color: rgb(66,165,245); }
+  color: rgb(230, 0, 18); }
 
 .rc-calendar-next-year-btn {
   right: 0; }
@@ -6813,7 +6813,7 @@ input.u-button[type="submit"] {
   border: none; }
 
 .rc-calendar .rc-calendar-today .rc-calendar-date {
-  border: 1px solid rgb(30,136,229); }
+  border: 1px solid rgb(245, 60, 50); }
 
 .rc-calendar-table {
   border-spacing: 0;
@@ -6839,7 +6839,7 @@ input.u-button[type="submit"] {
   display: block;
   margin: 0 auto;
   color: #212121;
-  border-radius: 4px 4px;
+  border-radius: 3px 3px;
   width: 26px;
   height: 26px;
   padding: 0;
@@ -6848,20 +6848,20 @@ input.u-button[type="submit"] {
   text-align: center; }
 
 .rc-calendar-date:hover {
-  background: rgb(243,243,243);
-  color: rgb(30,136,229);
+  background: rgb(235, 236, 240);
+  color: rgb(245, 60, 50);
   cursor: pointer; }
 
 .rc-calendar-selected-day .rc-calendar-date {
-  background: rgb(30,136,229);
+  background: rgb(245, 60, 50);
   color: #fff !important; }
 
 .rc-calendar-selected-date .rc-calendar-date {
-  background: rgb(30,136,229);
+  background: rgb(245, 60, 50);
   color: #fff !important; }
 
 .rc-calendar-selected-date .rc-calendar-date:hover {
-  background: rgb(30,136,229); }
+  background: rgb(245, 60, 50); }
 
 .rc-calendar-disabled-cell .rc-calendar-date {
   cursor: not-allowed;
@@ -6877,12 +6877,12 @@ input.u-button[type="submit"] {
   background: #f3f3f3; }
 
 .rc-calendar-disabled-cell-first-of-row .rc-calendar-date {
-  border-top-left-radius: 4px;
-  border-bottom-left-radius: 4px; }
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px; }
 
 .rc-calendar-disabled-cell-last-of-row .rc-calendar-date {
-  border-top-right-radius: 4px;
-  border-bottom-right-radius: 4px; }
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px; }
 
 .rc-calendar-last-month-cell .rc-calendar-date,
 .rc-calendar-next-month-btn-day .rc-calendar-date {
@@ -6932,13 +6932,13 @@ input.u-button[type="submit"] {
 .rc-calendar-time-picker-btn {
   display: inline-block;
   text-align: center;
-  color: rgb(30,136,229); }
+  color: rgb(245, 60, 50); }
 
 .rc-calendar-today-btn:hover,
 .rc-calendar-ok-btn:hover,
 .rc-calendar-time-picker-btn:hover {
   cursor: pointer;
-  color: rgb(66,165,245); }
+  color: rgb(230, 0, 18); }
 
 .rc-calendar-today-btn-disabled,
 .rc-calendar-ok-btn-disabled,
@@ -6968,11 +6968,11 @@ input.u-button[type="submit"] {
   width: 40px; }
 
 .rc-calendar-time-input:hover {
-  border-color: rgb(30,136,229); }
+  border-color: rgb(245, 60, 50); }
 
 .rc-calendar-time-input:focus {
-  border-color: rgb(30,136,229);
-  box-shadow: 0 0 3px rgb(30,136,229); }
+  border-color: rgb(245, 60, 50);
+  box-shadow: 0 0 3px rgb(245, 60, 50); }
 
 .rc-calendar-time-panel {
   left: 0;
@@ -7032,11 +7032,11 @@ input.u-button[type="submit"] {
   cursor: pointer; }
 
 .rc-calendar-time-panel-selected-cell .rc-calendar-time-panel-time {
-  background: rgb(30,136,229);
+  background: rgb(245, 60, 50);
   color: #fff; }
 
 .rc-calendar-time-panel-selected-cell .rc-calendar-time-panel-time:hover {
-  background: rgb(30,136,229);
+  background: rgb(245, 60, 50);
   color: #fff; }
 
 .rc-calendar-month-panel {
@@ -7079,7 +7079,7 @@ input.u-button[type="submit"] {
 
 .rc-calendar-month-panel-header > a:hover {
   cursor: pointer;
-  color: rgb(66,165,245); }
+  color: rgb(230, 0, 18); }
 
 .rc-calendar-month-panel-prev-year-btn,
 .rc-calendar-month-panel-next-year-btn {
@@ -7135,7 +7135,7 @@ input.u-button[type="submit"] {
   width: 46px;
   margin: 0 auto;
   color: #212121;
-  border-radius: 4px 4px;
+  border-radius: 3px 3px;
   height: 36px;
   padding: 0;
   background: transparent;
@@ -7143,8 +7143,8 @@ input.u-button[type="submit"] {
   text-align: center; }
 
 .rc-calendar-month-panel-cell .rc-calendar-month-panel-month:hover {
-  background: rgb(243,243,243);
-  color: rgb(30,136,229);
+  background: rgb(235, 236, 240);
+  color: rgb(245, 60, 50);
   cursor: pointer; }
 
 .rc-calendar-month-panel-cell-disabled .rc-calendar-month-panel-month {
@@ -7155,11 +7155,11 @@ input.u-button[type="submit"] {
   cursor: not-allowed; }
 
 .rc-calendar-month-panel-selected-cell .rc-calendar-month-panel-month {
-  background: rgb(30,136,229);
+  background: rgb(245, 60, 50);
   color: #fff; }
 
 .rc-calendar-month-panel-selected-cell .rc-calendar-month-panel-month:hover {
-  background: rgb(30,136,229);
+  background: rgb(245, 60, 50);
   color: #fff; }
 
 .rc-calendar-month-header-wrap {
@@ -7206,7 +7206,7 @@ input.u-button[type="submit"] {
 
 .rc-calendar-year-panel-header > a:hover {
   cursor: pointer;
-  color: rgb(66,165,245); }
+  color: rgb(230, 0, 18); }
 
 .rc-calendar-year-panel-prev-decade-btn,
 .rc-calendar-year-panel-next-decade-btn {
@@ -7262,7 +7262,7 @@ input.u-button[type="submit"] {
   width: 46px;
   margin: 0 auto;
   color: #212121;
-  border-radius: 4px 4px;
+  border-radius: 3px 3px;
   height: 36px;
   padding: 0;
   background: transparent;
@@ -7270,16 +7270,16 @@ input.u-button[type="submit"] {
   text-align: center; }
 
 .rc-calendar-year-panel-year:hover {
-  background: rgb(243,243,243);
-  color: rgb(30,136,229);
+  background: rgb(235, 236, 240);
+  color: rgb(245, 60, 50);
   cursor: pointer; }
 
 .rc-calendar-year-panel-selected-cell .rc-calendar-year-panel-year {
-  background: rgb(30,136,229);
+  background: rgb(245, 60, 50);
   color: #fff; }
 
 .rc-calendar-year-panel-selected-cell .rc-calendar-year-panel-year:hover {
-  background: rgb(30,136,229);
+  background: rgb(245, 60, 50);
   color: #fff; }
 
 .rc-calendar-year-panel-last-decade-cell .rc-calendar-year-panel-year,
@@ -7327,7 +7327,7 @@ input.u-button[type="submit"] {
 
 .rc-calendar-decade-panel-header > a:hover {
   cursor: pointer;
-  color: rgb(30,136,229); }
+  color: rgb(245, 60, 50); }
 
 .rc-calendar-decade-panel-prev-century-btn,
 .rc-calendar-decade-panel-next-century-btn {
@@ -7376,7 +7376,7 @@ input.u-button[type="submit"] {
   display: block;
   margin: 0 auto;
   color: #212121;
-  border-radius: 4px 4px;
+  border-radius: 3px 3px;
   height: 36px;
   padding: 0;
   background: transparent;
@@ -7384,16 +7384,16 @@ input.u-button[type="submit"] {
   text-align: center; }
 
 .rc-calendar-decade-panel-decade:hover {
-  background: rgb(243,243,243);
-  color: rgb(30,136,229);
+  background: rgb(235, 236, 240);
+  color: rgb(245, 60, 50);
   cursor: pointer; }
 
 .rc-calendar-decade-panel-selected-cell .rc-calendar-decade-panel-decade {
-  background: rgb(30,136,229);
+  background: rgb(245, 60, 50);
   color: #fff; }
 
 .rc-calendar-decade-panel-selected-cell .rc-calendar-decade-panel-decade:hover {
-  background: rgb(30,136,229);
+  background: rgb(245, 60, 50);
   color: #fff; }
 
 .rc-calendar-decade-panel-last-century-cell .rc-calendar-decade-panel-decade,
@@ -7538,13 +7538,13 @@ input.u-button[type="submit"] {
   display: inline-block; }
 
 .rc-calendar-full-header-switcher-normal:hover {
-  border-color: rgb(30,136,229);
-  box-shadow: 0 0 2px rgb(30,136,229);
+  border-color: rgb(245, 60, 50);
+  box-shadow: 0 0 2px rgb(245, 60, 50);
   cursor: pointer; }
 
 .rc-calendar-full-header-switcher-focus {
-  border-color: rgb(30,136,229);
-  background-color: rgb(30,136,229);
+  border-color: rgb(245, 60, 50);
+  background-color: rgb(245, 60, 50);
   color: #fff; }
 
 .rc-calendar-full-header-switcher > span {
@@ -7793,7 +7793,7 @@ li.rc-time-picker-panel-select-option-disabled:hover {
 
 .week-calendar-footer-button {
   padding: 3px 20px;
-  color: rgb(30,136,229);
+  color: rgb(245, 60, 50);
   position: relative;
   display: inline-block;
   font-weight: 500;
@@ -7815,7 +7815,7 @@ li.rc-time-picker-panel-select-option-disabled:hover {
 
 .week-calendar .rc-calendar-tbody > tr:hover
 .rc-calendar-selected-day .rc-calendar-date {
-  background: rgb(30,136,229); }
+  background: rgb(245, 60, 50); }
 
 .week-calendar .rc-calendar-footer {
   padding: 0;
@@ -7828,10 +7828,10 @@ li.rc-time-picker-panel-select-option-disabled:hover {
   top: -2px; }
 
 .datepicker-input-group.u-input-group:hover > input {
-  border-color: rgb(30,136,229); }
+  border-color: rgb(245, 60, 50); }
 
 .calendar-picker.u-input-group:hover > input {
-  border-color: rgb(30,136,229); }
+  border-color: rgb(245, 60, 50); }
 
 .u-input-group {
   width: 100%; }
