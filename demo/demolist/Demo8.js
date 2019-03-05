@@ -60,7 +60,7 @@ class Demo8 extends Component {
         return (
             <div>
                 <Row>
-                    <Col md={8}>
+                    <Col md={6}>
                         <DatePicker
                             format={format}
                             onSelect={this.onSelect}

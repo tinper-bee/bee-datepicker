@@ -1516,7 +1516,7 @@ li.rc-time-picker-panel-select-option-disabled:hover {
   top: -2px; }
 
 .datepicker-input-group.u-input-group:hover > input {
-  border-color: rgb(245, 60, 50); }
+  border-color: #66afe9; }
 
 .calendar-picker.u-input-group:hover > input {
-  border-color: rgb(245, 60, 50); }
+  border-color: #66afe9; }

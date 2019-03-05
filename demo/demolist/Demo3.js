@@ -32,7 +32,7 @@ class Demo3 extends Component {
     return (
       <div>
         <Row>
-          <Col md={12}>
+          <Col md={6}>
             <DatePicker
               format={format}
               onSelect={this.onSelect}

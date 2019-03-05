@@ -5371,8 +5371,8 @@ input.u-button[type="submit"] {
   background-color: rgb(224,224,224);
   border: 1px rgb(224,224,224) solid; }
   .u-button.u-button-secondary.focus, .u-button.u-button-secondary:focus, .u-button.u-button-secondary:hover {
-    background-color: rgb(238,238,238);
-    border-color: rgb(238,238,238); }
+    background-color: rgb(189,189,189);
+    border-color: rgb(189,189,189); }
   .u-button.u-button-secondary.active, .u-button.u-button-secondary:active {
     background-color: rgb(189,189,189);
     border-color: rgb(189,189,189); }
@@ -5513,8 +5513,8 @@ input.u-button[type="submit"] {
   background-color: #fff;
   border: 1px rgb(224,224,224) solid; }
   .u-button-border.u-button-secondary.focus, .u-button-border.u-button-secondary:focus, .u-button-border.u-button-secondary:hover {
-    background-color: rgb(238,238,238);
-    border-color: rgb(238,238,238);
+    background-color: rgb(189,189,189);
+    border-color: rgb(189,189,189);
     color: #fff; }
   .u-button-border.u-button-secondary.active, .u-button-border.u-button-secondary:active {
     color: #fff;
@@ -5615,7 +5615,7 @@ input.u-button[type="submit"] {
   box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.1);
   background-color: #fff;
   border: 1px solid transparent;
-  border-radius: 3px; }
+  border-radius: 4px; }
   .u-panel .u-panel-heading {
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
@@ -7823,10 +7823,10 @@ li.rc-time-picker-panel-select-option-disabled:hover {
   top: -2px; }
 
 .datepicker-input-group.u-input-group:hover > input {
-  border-color: rgb(245, 60, 50); }
+  border-color: #66afe9; }
 
 .calendar-picker.u-input-group:hover > input {
-  border-color: rgb(245, 60, 50); }
+  border-color: #66afe9; }
 
 .u-input-group {
   width: 100%; }

@@ -40,7 +40,7 @@ class Demo5 extends Component {
     return (
       <div>
         <Row>
-          <Col md={8}>
+          <Col md={6}>
             <DatePicker
               format={format}
               locale={zhCN}
