@@ -133,7 +133,8 @@ var Picker = function (_Component) {
             {
                 value: this.state.value,
                 animation: 'animation' in props ? props.animation : "slide-up",
-                calendar: calendar
+                calendar: calendar,
+                disabled: props.disabled
             },
             function (_ref) {
                 _objectDestructuringEmpty(_ref);

@@ -128,6 +128,7 @@ class Picker extends Component {
               value = {this.state.value}
               animation={'animation' in props ? props.animation : "slide-up"}
               calendar={calendar}
+              disabled={props.disabled}
           >
               {
                   ({}) => {
