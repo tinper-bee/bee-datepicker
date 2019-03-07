@@ -135,7 +135,8 @@ var Picker = function (_Component) {
             {
                 value: this.state.value,
                 animation: 'animation' in props ? props.animation : "slide-up",
-                calendar: calendar
+                calendar: calendar,
+                disabled: props.disabled
             },
             function (_ref) {
                 _objectDestructuringEmpty(_ref);
@@ -144,6 +145,7 @@ var Picker = function (_Component) {
                     "div",
                     { className: classNames('calendar-picker', 'u-input-group', 'simple', props.className) },
                     _react2["default"].createElement(_beeFormControl2["default"], {
+                        disabled: props.disabled,
                         placeholder: _this2.props.placeholder ? _this2.props.placeholder : 'start ~ end',
                         value: isValidRange(value) && format(value[0], formatStr) + " ~ " + format(value[1], formatStr) || ''
                     }),

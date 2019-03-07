@@ -115,12 +115,14 @@ class Picker extends Component {
               value = {this.state.value}
               animation={'animation' in props ? props.animation: "slide-up"}
               calendar={calendar}
+              disabled={props.disabled}
           >
               {
                   ({}) => {
                       return (
                     <div className={classNames('calendar-picker','u-input-group','simple',props.className)}>
                         <FormControl
+                            disabled={props.disabled}
                             placeholder={this.props.placeholder?this.props.placeholder:'start ~ end'}
                             value={isValidRange(value) && `${format(value[0],formatStr)} ~ ${format(value[1],formatStr)}` || ''}
                         />
