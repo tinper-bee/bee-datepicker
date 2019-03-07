@@ -1,3 +1,13 @@
+<a name="1.3.21"></a>
+## [1.3.21](https://github.com/tinper-bee/bee-datepicker/compare/v1.3.20...v1.3.21) (2019-03-07)
+
+
+### Bug Fixes
+
+* **bee-datepicker:** rangePicker disabled无效 ([e63c316](https://github.com/tinper-bee/bee-datepicker/commit/e63c316))
+
+
+
 <a name="1.3.20"></a>
 ## [1.3.20](https://github.com/tinper-bee/bee-datepicker/compare/v1.3.19...v1.3.20) (2019-02-27)
 
