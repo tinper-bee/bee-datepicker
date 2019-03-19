@@ -787,6 +787,7 @@
   -ms-flex: 1;
       flex: 1;
   padding: 9px 10px 10px;
+  min-height: 210px;
 }
 .rc-calendar-year-panel-footer {
   border-top: 1px solid #ccc;
@@ -1355,7 +1356,7 @@ li.rc-time-picker-panel-select-option-disabled:hover {
 }
 .rc-calendar-month-header-wrap {
   position: relative;
-  height: 274px;
+  height: 280px;
 }
 //周
 .week-calendar-footer-button{
