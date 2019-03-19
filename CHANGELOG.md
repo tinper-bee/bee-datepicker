@@ -1,3 +1,18 @@
+<a name="2.0.10"></a>
+## [2.0.10](https://github.com/tinper-bee/bee-datepicker/compare/v2.0.9...v2.0.10) (2019-03-19)
+
+
+### Bug Fixes
+
+* **bee-datepicker:** ie11选年无背景色bug ([2da89e3](https://github.com/tinper-bee/bee-datepicker/commit/2da89e3))
+
+
+
+<a name="2.0.9"></a>
+## [2.0.9](https://github.com/tinper-bee/bee-datepicker/compare/v2.0.7...v2.0.9) (2019-03-13)
+
+
+
 <a name="2.0.7"></a>
 ## [2.0.7](https://github.com/tinper-bee/bee-datepicker/compare/v2.0.6...v2.0.7) (2019-03-07)
 
