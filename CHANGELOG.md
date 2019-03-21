@@ -1,3 +1,13 @@
+<a name="1.3.22"></a>
+## [1.3.22](https://github.com/tinper-bee/bee-datepicker/compare/v1.3.21...v1.3.22) (2019-03-21)
+
+
+### Bug Fixes
+
+* **bee-datepicker:** 双击加节流 ([3959a61](https://github.com/tinper-bee/bee-datepicker/commit/3959a61))
+
+
+
 <a name="1.3.21"></a>
 ## [1.3.21](https://github.com/tinper-bee/bee-datepicker/compare/v1.3.20...v1.3.21) (2019-03-07)
 
