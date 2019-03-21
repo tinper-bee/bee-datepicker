@@ -54,6 +54,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var timePickerElement = _react2["default"].createElement(_Panel2["default"], { defaultValue: (0, _moment2["default"])((0, _moment2["default"])().format("HH:mm:ss"), "HH:mm:ss") });
 
+var timerDatePicker = true;
+
 var DatePicker = function (_Component) {
   _inherits(DatePicker, _Component);
 
@@ -229,7 +231,15 @@ var _initialiseProps = function _initialiseProps() {
   this.handleChange = function (value) {
     var props = _this3.props;
     _this3.setState({ value: value, inputValue: value && value.format(props.format) || '' });
-    props.onChange(value, value && value.format(props.format) || '');
+    // props.onChange(value, (value && value.format(props.format)) || '');
+    if (timerDatePicker) {
+      clearTimeout(_this3.timerout);
+      props.onChange(value, value && value.format(props.format) || '');
+      timerDatePicker = false;
+      _this3.timerout = window.setTimeout(function () {
+        timerDatePicker = true;
+      }, 300);
+    }
   };
 
   this.onClick = function (e) {

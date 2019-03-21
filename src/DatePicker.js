@@ -16,6 +16,8 @@ const timePickerElement = (
   <TimePickerPanel defaultValue={moment(moment().format("HH:mm:ss"), "HH:mm:ss")} />
 );
 
+let timerDatePicker = true;
+
 class DatePicker extends Component {
   constructor(props, context) {
     super(props, context);
@@ -94,7 +96,15 @@ class DatePicker extends Component {
   handleChange = value => {
     const props = this.props;
     this.setState({ value,inputValue:(value && value.format(props.format)) || '' });
-    props.onChange(value, (value && value.format(props.format)) || '');
+    // props.onChange(value, (value && value.format(props.format)) || '');
+    if(timerDatePicker){
+      clearTimeout(this.timerout);
+      props.onChange(value, (value && value.format(props.format)) || '');
+      timerDatePicker=false;
+      this.timerout = window.setTimeout(()=>{
+        timerDatePicker=true
+      },300)
+    }
   }
   onClick = (e) =>{
     const props = this.props;
