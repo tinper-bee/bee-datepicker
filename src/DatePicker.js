@@ -185,11 +185,11 @@ class DatePicker extends Component {
     })
     this.props.onChange&&this.props.onChange('','');
   }
-  handleSelect=(value)=>{console.log('select',value);
+  handleSelect=(value)=>{
     this.setState({
       value:value
     })
-    this.props.onSelect(value, (value && value.format(this.props.format)) || '');
+    this.props.onSelect&&this.props.onSelect(value, (value && value.format(this.props.format)) || '');
     // ReactDOM.findDOMNode(this.outInput).focus()
   }
   render() {

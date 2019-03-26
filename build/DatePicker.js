@@ -349,11 +349,10 @@ var _initialiseProps = function _initialiseProps() {
   };
 
   this.handleSelect = function (value) {
-    console.log('select', value);
     _this3.setState({
       value: value
     });
-    _this3.props.onSelect(value, value && value.format(_this3.props.format) || '');
+    _this3.props.onSelect && _this3.props.onSelect(value, value && value.format(_this3.props.format) || '');
     // ReactDOM.findDOMNode(this.outInput).focus()
   };
 };
