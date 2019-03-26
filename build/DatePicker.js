@@ -221,7 +221,7 @@ var _initialiseProps = function _initialiseProps() {
         if (e.keyCode == _tinperBeeCore.KeyCode.DELETE) {
           input.value = '';
           _this3.props.onChange('', '');
-        } else if (e.keyCode == _tinperBeeCore.KeyCode.ESC) {
+        } else if (e.keyCode == _tinperBeeCore.KeyCode.ESC || e.keyCode == _tinperBeeCore.KeyCode.ENTER) {
           _this3.setState({
             open: false
           });
@@ -295,7 +295,6 @@ var _initialiseProps = function _initialiseProps() {
   };
 
   this.outInputFocus = function (e) {
-    console.log('focussssssss');
     if (_this3.props.hasOwnProperty('open')) e.stopPropagation();
     _this3.props.outInputFocus && _this3.props.outInputFocus(e);
   };
@@ -350,8 +349,12 @@ var _initialiseProps = function _initialiseProps() {
   };
 
   this.handleSelect = function (value) {
+    console.log('select', value);
+    _this3.setState({
+      value: value
+    });
     _this3.props.onSelect(value, value && value.format(_this3.props.format) || '');
-    _reactDom2["default"].findDOMNode(_this3.outInput).focus();
+    // ReactDOM.findDOMNode(this.outInput).focus()
   };
 };
 

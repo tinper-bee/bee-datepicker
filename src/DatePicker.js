@@ -52,7 +52,7 @@ class DatePicker extends Component {
         if(e.keyCode == KeyCode.DELETE){
           input.value = '';
           this.props.onChange('','');
-        }else if(e.keyCode == KeyCode.ESC){
+        }else if(e.keyCode == KeyCode.ESC||e.keyCode == KeyCode.ENTER){
           this.setState({
             open:false
           });
@@ -139,7 +139,7 @@ class DatePicker extends Component {
       this.props.onChange(null,value);
     }
   }
-  outInputFocus = (e)=>{console.log('focussssssss')
+  outInputFocus = (e)=>{
     if(this.props.hasOwnProperty('open'))e.stopPropagation();
     this.props.outInputFocus&&this.props.outInputFocus(e);
   }
@@ -187,9 +187,12 @@ class DatePicker extends Component {
     })
     this.props.onChange&&this.props.onChange('','');
   }
-  handleSelect=(value)=>{
+  handleSelect=(value)=>{console.log('select',value);
+    this.setState({
+      value:value
+    })
     this.props.onSelect(value, (value && value.format(this.props.format)) || '');
-    ReactDOM.findDOMNode(this.outInput).focus()
+    // ReactDOM.findDOMNode(this.outInput).focus()
   }
   render() {
     let state = this.state;
