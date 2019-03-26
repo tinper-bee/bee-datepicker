@@ -239,10 +239,10 @@ var _initialiseProps = function _initialiseProps() {
     _this3.setState({
       open: open
     });
+    var value = self.state.value;
+    props.onOpenChange(open, value, value && value.format(props.format) || '');
     if (open) {
       setTimeout(function () {
-        var value = self.state.value;
-        props.onOpenChange(open, value, value && value.format(props.format) || '');
         self.inputFocus();
       }, 200);
     }

@@ -70,15 +70,13 @@ class DatePicker extends Component {
       this.setState({
         open
       }); 
+      const value = self.state.value;
+      props.onOpenChange(open,value, (value && value.format(props.format)) || '');
       if(open){
         setTimeout(function () {
-          const value = self.state.value;
-          props.onOpenChange(open,value, (value && value.format(props.format)) || '');
           self.inputFocus()
         },200)
       }
-      
-      
   };
   componentWillReceiveProps(nextProps) {
     if ("value" in nextProps) {
