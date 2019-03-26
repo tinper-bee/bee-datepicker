@@ -1,3 +1,13 @@
+<a name="2.0.16"></a>
+## [2.0.16](https://github.com/tinper-bee/bee-datepicker/compare/v2.0.15...v2.0.16) (2019-03-26)
+
+
+### Bug Fixes
+
+* **bee-datepicker:** 去掉多余console ([26cfb0d](https://github.com/tinper-bee/bee-datepicker/commit/26cfb0d))
+
+
+
 <a name="2.0.15"></a>
 ## [2.0.15](https://github.com/tinper-bee/bee-datepicker/compare/v2.0.15-beta...v2.0.15) (2019-03-26)
 
