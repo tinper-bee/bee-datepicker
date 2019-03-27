@@ -1,3 +1,13 @@
+<a name="2.0.18"></a>
+## [2.0.18](https://github.com/tinper-bee/bee-datepicker/compare/v2.0.17...v2.0.18) (2019-03-27)
+
+
+### Bug Fixes
+
+* **bee-datepicker:** ncc展开面板无法选中输入框内容 ([bbe2943](https://github.com/tinper-bee/bee-datepicker/commit/bbe2943))
+
+
+
 <a name="2.0.17"></a>
 ## [2.0.17](https://github.com/tinper-bee/bee-datepicker/compare/v2.0.16...v2.0.17) (2019-03-27)
 
