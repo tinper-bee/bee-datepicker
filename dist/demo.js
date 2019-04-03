@@ -36413,15 +36413,16 @@
 	    });
 	  };
 	
-	  this.onKeyDown = function (_ref) {
-	    var keyCode = _ref.keyCode;
+	  this.onKeyDown = function (e) {
 	    var _props2 = _this2.props,
 	        onSelect = _props2.onSelect,
-	        value = _props2.value;
+	        value = _props2.value,
+	        onKeyDown = _props2.onKeyDown;
 	
-	    if (keyCode === _KeyCode2['default'].ENTER && onSelect) {
+	    if (e.keyCode === _KeyCode2['default'].ENTER && onSelect) {
 	      onSelect(value.clone());
 	    }
+	    onKeyDown && onKeyDown(e);
 	  };
 	
 	  this.getRootDOMNode = function () {
@@ -36516,10 +36517,18 @@
 	
 	    var _this = _possibleConstructorReturn(this, _React$Component.call(this, props));
 	
-	    _this.onInputChange = function (value) {
+	    _this.yearSelect = function (value) {
 	      var _this$props = _this.props,
-	          onChange = _this$props.onChange,
+	          onSelect = _this$props.onSelect,
 	          format = _this$props.format;
+	
+	      onSelect && onSelect(value, value ? value.format(format) : '');
+	    };
+	
+	    _this.onInputChange = function (value) {
+	      var _this$props2 = _this.props,
+	          onChange = _this$props2.onChange,
+	          format = _this$props2.format;
 	
 	      _this.setState({
 	        value: value ? value : (0, _moment2['default'])()
@@ -36528,10 +36537,10 @@
 	    };
 	
 	    _this.onClear = function () {
-	      var _this$props2 = _this.props,
-	          onChange = _this$props2.onChange,
-	          format = _this$props2.format,
-	          onClear = _this$props2.onClear;
+	      var _this$props3 = _this.props,
+	          onChange = _this$props3.onChange,
+	          format = _this$props3.format,
+	          onClear = _this$props3.onClear;
 	
 	      _this.setState({
 	        value: (0, _moment2['default'])()
@@ -36665,7 +36674,8 @@
 	          format: format,
 	          onChange: this.onInputChange,
 	          selectedValue: value,
-	          onClear: this.onClear
+	          onClear: this.onClear,
+	          onSelect: this.yearSelect
 	        }) : '',
 	        _react2['default'].createElement(
 	          'div',
@@ -44015,6 +44025,8 @@
 	
 	var _MonthCalendar2 = _interopRequireDefault(_MonthCalendar);
 	
+	var _tinperBeeCore = __webpack_require__(26);
+	
 	var _react = __webpack_require__(1);
 	
 	var _react2 = _interopRequireDefault(_react);
@@ -44039,6 +44051,10 @@
 	
 	var _zh_CN2 = _interopRequireDefault(_zh_CN);
 	
+	var _moment = __webpack_require__(163);
+	
+	var _moment2 = _interopRequireDefault(_moment);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
 	function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
@@ -44060,22 +44076,62 @@
 	    var _this = _possibleConstructorReturn(this, _Component.call(this, props, context));
 	
 	    _this.onChange = function (value) {
-	      _this.setState({
-	        value: value
-	      });
 	      var _this$props = _this.props,
 	          onChange = _this$props.onChange,
 	          onClear = _this$props.onClear,
 	          onSelect = _this$props.onSelect,
 	          format = _this$props.format;
+	      // if(value){
+	      //   this.setState({
+	      //     value:value
+	      //   });
+	      // }else{
+	      //   this.setState({
+	      //     value:moment()
+	      //   })
+	      // }
 	
+	      _this.setState({
+	        value: value
+	      });
 	      onChange && onChange(value, value ? value.format(format) : '');
 	    };
 	
+	    _this.inputFocus = function () {
+	      var self = _this;
+	      var input = document.querySelector('.rc-calendar-input');
+	      if (input) {
+	        if (input.value) {
+	          input.select();
+	        } else {
+	          input.focus();
+	        }
+	        input.onkeydown = function (e) {
+	          if (e.keyCode == _tinperBeeCore.KeyCode.DELETE) {
+	            input.value = '';
+	            self.props.onChange && self.props.onChange('', '');
+	          } else if (e.keyCode == _tinperBeeCore.KeyCode.ESC) {
+	            self.setState({
+	              open: false
+	            });
+	            var v = self.state.value;
+	            self.props.onOpenChange && self.props.onOpenChange(false, v, v && v.format(self.props.format) || '');
+	            ReactDOM.findDOMNode(self.outInput).focus(); // 按esc时候焦点回到input输入框
+	          }
+	        };
+	      }
+	    };
+	
 	    _this.onOpenChange = function (open) {
+	      var self = _this;
 	      _this.setState({
 	        open: open
 	      });
+	      if (open) {
+	        setTimeout(function () {
+	          self.inputFocus();
+	        }, 200);
+	      }
 	    };
 	
 	    _this.onTypeChange = function (type) {
@@ -44146,6 +44202,9 @@
 	              onMouseLeave: _this2.onMouseLeave
 	            },
 	            _react2["default"].createElement(_beeFormControl2["default"], {
+	              ref: function ref(_ref2) {
+	                return _this2.outInput = _ref2;
+	              },
 	              placeholder: _this2.props.placeholder,
 	              className: _this2.props.className,
 	              value: value && value.format(props.format) || "",
@@ -44339,7 +44398,7 @@
 	    var mode = state.mode,
 	        value = state.value;
 	
-	    console.log(props);
+	    value = value ? value : (0, _moment2['default'])();
 	    var prefixCls = props.prefixCls,
 	        locale = props.locale,
 	        format = props.format,
@@ -46045,6 +46104,8 @@
 	
 	var _YearPanel2 = _interopRequireDefault(_YearPanel);
 	
+	var _tinperBeeCore = __webpack_require__(26);
+	
 	var _react = __webpack_require__(1);
 	
 	var _react2 = _interopRequireDefault(_react);
@@ -46129,6 +46190,7 @@
 	            prefixCls: 'rc-calendar-picker',
 	            rootPrefixCls: 'rc-calendar'
 	        }, props, { focus: function focus() {},
+	            onSelect: this.onSelect,
 	            showDateInput: true
 	        }));
 	
@@ -46144,7 +46206,8 @@
 	                    onChange: this.handleChange,
 	                    calendar: Calendar,
 	                    prefixCls: 'rc-calendar',
-	                    value: state.value || (0, _moment2["default"])()
+	                    value: state.value || (0, _moment2["default"])(),
+	                    open: this.state.open
 	                }),
 	                function (_ref) {
 	                    _objectDestructuringEmpty(_ref);
@@ -46156,6 +46219,9 @@
 	                            onMouseLeave: _this2.onMouseLeave
 	                        },
 	                        _react2["default"].createElement(_beeFormControl2["default"], {
+	                            ref: function ref(_ref2) {
+	                                return _this2.outInput = _ref2;
+	                            },
 	                            placeholder: _this2.props.placeholder,
 	                            className: _this2.props.className,
 	                            disabled: props.disabled,
@@ -46190,10 +46256,41 @@
 	        });
 	    };
 	
+	    this.inputFocus = function () {
+	        var self = _this3;
+	        var input = document.querySelector('.rc-calendar-input');
+	        if (input) {
+	            if (input.value) {
+	                input.select();
+	            } else {
+	                input.focus();
+	            }
+	            input.onkeydown = function (e) {
+	                if (e.keyCode == _tinperBeeCore.KeyCode.DELETE) {
+	                    input.value = '';
+	                    self.props.onChange && self.props.onChange('', '');
+	                } else if (e.keyCode == _tinperBeeCore.KeyCode.ESC) {
+	                    self.setState({
+	                        open: false
+	                    });
+	                    var v = self.state.value;
+	                    self.props.onOpenChange && self.props.onOpenChange(false, v, v && v.format(self.props.format) || '');
+	                    ReactDOM.findDOMNode(self.outInput).focus(); // 按esc时候焦点回到input输入框
+	                }
+	            };
+	        }
+	    };
+	
 	    this.onOpenChange = function (open) {
+	        var self = _this3;
 	        _this3.setState({
 	            open: open
 	        });
+	        if (open) {
+	            setTimeout(function () {
+	                self.inputFocus();
+	            }, 200);
+	        }
 	    };
 	
 	    this.handleChange = function (value) {
@@ -46220,6 +46317,18 @@
 	            value: ''
 	        });
 	        _this3.props.onChange && _this3.props.onChange('', '');
+	    };
+	
+	    this.onSelect = function (value) {
+	        var _props = _this3.props,
+	            onSelect = _props.onSelect,
+	            format = _props.format;
+	
+	        _this3.setState({
+	            open: false
+	        });
+	        onSelect && onSelect(value, value ? value.format(format) : '');
+	        ReactDOM.findDOMNode(_this3.outInput).focus();
 	    };
 	};
 	
