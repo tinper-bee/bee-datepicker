@@ -1,3 +1,13 @@
+<a name="2.0.19"></a>
+## [2.0.19](https://github.com/tinper-bee/bee-datepicker/compare/v2.0.18...v2.0.19) (2019-04-03)
+
+
+### Features
+
+* **bee-datepicker:** yearpicker 组件 快捷键 ([d85d125](https://github.com/tinper-bee/bee-datepicker/commit/d85d125))
+
+
+
 <a name="2.0.18"></a>
 ## [2.0.18](https://github.com/tinper-bee/bee-datepicker/compare/v2.0.17...v2.0.18) (2019-03-27)
 
