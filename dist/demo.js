@@ -16454,6 +16454,10 @@
 	
 	var _beeIcon2 = _interopRequireDefault(_beeIcon);
 	
+	var _classnames = __webpack_require__(5);
+	
+	var _classnames2 = _interopRequireDefault(_classnames);
+	
 	var _beeInputGroup = __webpack_require__(423);
 	
 	var _beeInputGroup2 = _interopRequireDefault(_beeInputGroup);
@@ -16555,10 +16559,10 @@
 	      keyboardInputProps.readOnly = true;
 	      keyboardInputProps.value = value && value.format(props.format) || "";
 	    }
-	
+	    var classes = (0, _classnames2["default"])(props.className, "datepicker-container");
 	    return _react2["default"].createElement(
 	      "div",
-	      { className: props.className },
+	      { className: classes },
 	      _react2["default"].createElement(
 	        _Picker2["default"],
 	        _extends({
@@ -44047,6 +44051,10 @@
 	
 	var _beeInputGroup2 = _interopRequireDefault(_beeInputGroup);
 	
+	var _classnames = __webpack_require__(5);
+	
+	var _classnames2 = _interopRequireDefault(_classnames);
+	
 	var _zh_CN = __webpack_require__(428);
 	
 	var _zh_CN2 = _interopRequireDefault(_zh_CN);
@@ -44179,9 +44187,10 @@
 	    var monthCalendar = _react2["default"].createElement(_MonthCalendar2["default"], _extends({}, props, {
 	      onChange: this.onChange
 	    }));
+	    var classes = (0, _classnames2["default"])(props.className, "datepicker-container");
 	    return _react2["default"].createElement(
 	      "div",
-	      null,
+	      { className: classes },
 	      _react2["default"].createElement(
 	        _Picker2["default"],
 	        {
@@ -45812,6 +45821,10 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _classnames = __webpack_require__(5);
+	
+	var _classnames2 = _interopRequireDefault(_classnames);
+	
 	var _Picker = __webpack_require__(310);
 	
 	var _Picker2 = _interopRequireDefault(_Picker);
@@ -46029,9 +46042,10 @@
 	      showToday: false,
 	      onClear: this.onClear
 	    });
+	    var classes = (0, _classnames2["default"])(props.className, "datepicker-container");
 	    return _react2["default"].createElement(
 	      "div",
-	      null,
+	      { className: classes },
 	      _react2["default"].createElement(
 	        _Picker2["default"],
 	        _extends({
@@ -46126,6 +46140,10 @@
 	
 	var _beeIcon2 = _interopRequireDefault(_beeIcon);
 	
+	var _classnames = __webpack_require__(5);
+	
+	var _classnames2 = _interopRequireDefault(_classnames);
+	
 	var _moment = __webpack_require__(163);
 	
 	var _moment2 = _interopRequireDefault(_moment);
@@ -46193,10 +46211,10 @@
 	            onSelect: this.onSelect,
 	            showDateInput: true
 	        }));
-	
+	        var classes = (0, _classnames2["default"])(props.className, "datepicker-container");
 	        return _react2["default"].createElement(
 	            "div",
-	            null,
+	            { className: classes },
 	            _react2["default"].createElement(
 	                _Picker2["default"],
 	                _extends({
