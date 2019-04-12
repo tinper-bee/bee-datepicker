@@ -86,10 +86,16 @@ var YearPicker = function (_Component) {
                 value: nextProps.value
             });
         }
-        this.setState({
-            renderIcon: nextProps.renderIcon,
-            open: nextProps.open
-        });
+        if ("open" in nextProps) {
+            this.setState({
+                open: nextProps.open
+            });
+        }
+        if ("renderIcon" in nextProps) {
+            this.setState({
+                renderIcon: nextProps.renderIcon
+            });
+        }
     };
 
     YearPicker.prototype.render = function render() {
