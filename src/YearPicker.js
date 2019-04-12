@@ -86,7 +86,7 @@ class YearPicker extends Component {
     handleChange = value => {
         const props = this.props;
         this.setState({ value });
-        props.onChange(value, (value && value.format(props.format)) || '');
+        props.onChange&&props.onChange(value, (value && value.format(props.format)) || '');
     }
     onMouseLeave = (e) => {
         this.setState({

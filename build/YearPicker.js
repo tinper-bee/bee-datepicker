@@ -210,7 +210,7 @@ var _initialiseProps = function _initialiseProps() {
     this.handleChange = function (value) {
         var props = _this3.props;
         _this3.setState({ value: value });
-        props.onChange(value, value && value.format(props.format) || '');
+        props.onChange && props.onChange(value, value && value.format(props.format) || '');
     };
 
     this.onMouseLeave = function (e) {
