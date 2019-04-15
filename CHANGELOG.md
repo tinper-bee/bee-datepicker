@@ -1,3 +1,13 @@
+<a name="2.0.24"></a>
+## [2.0.24](https://github.com/tinper-bee/bee-datepicker/compare/v2.0.23...v2.0.24) (2019-04-15)
+
+
+### Bug Fixes
+
+* **bee-datepicker:** 双击节流、rangepicker打开选择第一个、reangepicker外层清空bug ([85d70a3](https://github.com/tinper-bee/bee-datepicker/commit/85d70a3))
+
+
+
 <a name="2.0.23"></a>
 ## [2.0.23](https://github.com/tinper-bee/bee-datepicker/compare/v2.0.22...v2.0.23) (2019-04-12)
 
