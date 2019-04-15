@@ -20,6 +20,7 @@ const timePickerElement = (
 );
 
 let timerDatePicker = true;
+let openChangeStop = true;
 
 
 class DatePicker extends Component {
@@ -78,7 +79,15 @@ class DatePicker extends Component {
         }
       }); 
       const value = self.state.value;
-      props.onOpenChange(open,value, (value && value.format(props.format)) || '');
+      if(openChangeStop){
+        clearTimeout(this.openChangeStop);
+        props.onOpenChange(open,value, (value && value.format(props.format)) || '');
+        openChangeStop=false;
+        this.openChangeStop = window.setTimeout(()=>{
+          openChangeStop=true
+        },300)
+      }
+      
       if(open){
         setTimeout(()=>{
           self.inputFocus()

@@ -33059,6 +33059,7 @@
 	var timePickerElement = _react2["default"].createElement(_Panel2["default"], { defaultValue: (0, _moment2["default"])((0, _moment2["default"])().format("HH:mm:ss"), "HH:mm:ss") });
 	
 	var timerDatePicker = true;
+	var openChangeStop = true;
 	
 	var DatePicker = function (_Component) {
 	  _inherits(DatePicker, _Component);
@@ -33242,7 +33243,15 @@
 	      }
 	    });
 	    var value = self.state.value;
-	    props.onOpenChange(open, value, value && value.format(props.format) || '');
+	    if (openChangeStop) {
+	      clearTimeout(_this3.openChangeStop);
+	      props.onOpenChange(open, value, value && value.format(props.format) || '');
+	      openChangeStop = false;
+	      _this3.openChangeStop = window.setTimeout(function () {
+	        openChangeStop = true;
+	      }, 300);
+	    }
+	
 	    if (open) {
 	      setTimeout(function () {
 	        self.inputFocus();
@@ -60477,11 +60486,11 @@
 	    now.locale("en-gb").utcOffset(0);
 	}
 	
-	var Picker = function (_Component) {
-	    _inherits(Picker, _Component);
+	var RangePicker = function (_Component) {
+	    _inherits(RangePicker, _Component);
 	
-	    function Picker(props, context) {
-	        _classCallCheck(this, Picker);
+	    function RangePicker(props, context) {
+	        _classCallCheck(this, RangePicker);
 	
 	        var _this = _possibleConstructorReturn(this, _Component.call(this, props, context));
 	
@@ -60494,7 +60503,7 @@
 	        return _this;
 	    }
 	
-	    Picker.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
+	    RangePicker.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
 	        if ("value" in nextProps) {
 	            this.setState({
 	                value: nextProps.value
@@ -60505,7 +60514,7 @@
 	        });
 	    };
 	
-	    Picker.prototype.render = function render() {
+	    RangePicker.prototype.render = function render() {
 	        var _this2 = this;
 	
 	        var props = this.props;
@@ -60525,7 +60534,8 @@
 	            disabledDate: props.disabledDate,
 	            showClear: props.showClear || false,
 	            showOk: props.showOk || true,
-	            renderFooter: props.renderFooter
+	            renderFooter: props.renderFooter,
+	            selectedValue: this.state.value
 	        });
 	
 	        return _react2["default"].createElement(
@@ -60534,7 +60544,8 @@
 	                value: this.state.value,
 	                animation: 'animation' in props ? props.animation : "slide-up",
 	                calendar: calendar,
-	                disabled: props.disabled
+	                disabled: props.disabled,
+	                onOpenChange: this.onOpenChange
 	            },
 	            function (_ref) {
 	                _objectDestructuringEmpty(_ref);
@@ -60565,7 +60576,7 @@
 	        );
 	    };
 	
-	    return Picker;
+	    return RangePicker;
 	}(_react.Component);
 	
 	var _initialiseProps = function _initialiseProps() {
@@ -60613,20 +60624,40 @@
 	    this.clear = function (e) {
 	        e.stopPropagation();
 	        _this3.setState({
-	            value: ''
+	            value: [],
+	            hoverValue: []
 	        });
 	        _this3.props.onChange && _this3.props.onChange('', '');
 	    };
+	
+	    this.inputFocus = function () {
+	        var input = document.querySelector('.rc-calendar-input');
+	        if (input) {
+	            if (input.value) {
+	                input.select();
+	            } else {
+	                input.focus();
+	            }
+	        }
+	    };
+	
+	    this.onOpenChange = function (open) {
+	        if (open) {
+	            setTimeout(function () {
+	                _this3.inputFocus();
+	            }, 300);
+	        }
+	    };
 	};
 	
-	Picker.defaultProps = {
+	RangePicker.defaultProps = {
 	    renderIcon: function renderIcon() {
 	        return _react2["default"].createElement(_beeIcon2["default"], { type: "uf-calendar" });
 	    },
 	    locale: _zh_CN2["default"]
 	};
 	
-	exports["default"] = Picker;
+	exports["default"] = RangePicker;
 	module.exports = exports["default"];
 
 /***/ }),
