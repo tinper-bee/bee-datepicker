@@ -298,8 +298,9 @@ var _initialiseProps = function _initialiseProps() {
 
   this.onKeyDown = function (event) {
     if (event.target.nodeName.toLowerCase() === 'input') {
-      // this.props.onKeyDown&&this.props.onKeyDown(event);
       return undefined;
+    } else {
+      _this2.props.onKeyDown && _this2.props.onKeyDown(event);
     }
     var keyCode = event.keyCode;
     // mac
@@ -355,9 +356,6 @@ var _initialiseProps = function _initialiseProps() {
           });
         }
         event.preventDefault();
-        return 1;
-      default:
-        _this2.props.onKeyDown(event);
         return 1;
     }
   };

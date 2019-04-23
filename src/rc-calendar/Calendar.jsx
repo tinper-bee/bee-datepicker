@@ -93,8 +93,9 @@ class Calendar extends React.Component {
 
   onKeyDown = (event) => {
     if (event.target.nodeName.toLowerCase() === 'input') {
-      // this.props.onKeyDown&&this.props.onKeyDown(event);
       return undefined;
+    }else{
+      this.props.onKeyDown&&this.props.onKeyDown(event);
     }
     const keyCode = event.keyCode;
     // mac
@@ -153,9 +154,6 @@ class Calendar extends React.Component {
           });
         }
         event.preventDefault();
-        return 1;
-      default:
-        this.props.onKeyDown(event);
         return 1;
     }
   }
