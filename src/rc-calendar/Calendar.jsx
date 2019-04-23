@@ -92,8 +92,8 @@ class Calendar extends React.Component {
   }
 
   onKeyDown = (event) => {
-    this.props.onKeyDown&&this.props.onKeyDown(event);
     if (event.target.nodeName.toLowerCase() === 'input') {
+      // this.props.onKeyDown&&this.props.onKeyDown(event);
       return undefined;
     }
     const keyCode = event.keyCode;
@@ -154,8 +154,10 @@ class Calendar extends React.Component {
         }
         event.preventDefault();
         return 1;
+      default:
+        this.props.onKeyDown(event);
+        return 1;
     }
-    this.props.onKeyDown(event);
   }
 
   onClear = () => {

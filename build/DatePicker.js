@@ -233,7 +233,7 @@ var _initialiseProps = function _initialiseProps() {
           _this3.props.onOpenChange(false, v, v && v.format(_this3.props.format) || '');
           _reactDom2["default"].findDOMNode(_this3.outInput).focus(); // 按esc时候焦点回到input输入框
         }
-        // this.props.onKeyDown&&this.props.onKeyDown(e)
+        _this3.props.onKeyDown && _this3.props.onKeyDown(e);
       };
     }
   };
