@@ -154,10 +154,8 @@ class Calendar extends React.Component {
         }
         event.preventDefault();
         return 1;
-      default:
-        this.props.onKeyDown(event);
-        return 1;
     }
+    this.props.onKeyDown(event);
   }
 
   onClear = () => {

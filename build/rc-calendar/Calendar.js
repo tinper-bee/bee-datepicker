@@ -356,10 +356,8 @@ var _initialiseProps = function _initialiseProps() {
         }
         event.preventDefault();
         return 1;
-      default:
-        _this2.props.onKeyDown(event);
-        return 1;
     }
+    _this2.props.onKeyDown(event);
   };
 
   this.onClear = function () {
