@@ -34,8 +34,6 @@ class Demo1 extends Component {
                             onSelect={this.onSelect}
                             onChange={this.onChange}
                             onClick={this.onClick}
-                            onKeyDown={(e)=>{console.log('keydown',e.keyCode)}}
-                            outInputKeydown={()=>{console.log('outInputKeydown')}}
                         />
                     </Col>
                 </Row>
