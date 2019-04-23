@@ -297,6 +297,7 @@ var _initialiseProps = function _initialiseProps() {
   };
 
   this.onKeyDown = function (event) {
+    _this2.props.onKeyDown && _this2.props.onKeyDown(event);
     if (event.target.nodeName.toLowerCase() === 'input') {
       return undefined;
     }

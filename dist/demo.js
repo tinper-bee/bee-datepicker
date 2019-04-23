@@ -10143,7 +10143,7 @@
 	
 	        return _react2["default"].createElement(
 	            _beeTooltip2["default"],
-	            {
+	            { className: 'u-clipboard-tooltip',
 	                positionTop: '20px',
 	                overlay: tootipContent,
 	                placement: 'top' },
@@ -28300,7 +28300,7 @@
 		  };
 		}();
 	
-		/*:: import type {ControlPosition, MouseTouchEvent} from './types';*/
+		/*:: import type {ControlPosition, PositionOffsetControlPosition, MouseTouchEvent} from './types';*/
 	
 	
 		var matchesSelectorFunc = '';
@@ -28406,19 +28406,26 @@
 		  return { x: x, y: y };
 		}
 	
-		function createCSSTransform(_ref) /*: Object*/ {
-		  var x = _ref.x,
-		      y = _ref.y;
-	
-		  // Replace unitless items with px
-		  return defineProperty({}, browserPrefixToKey('transform', browserPrefix), 'translate(' + x + 'px,' + y + 'px)');
+		function createCSSTransform(controlPos /*: ControlPosition*/, positionOffset /*: PositionOffsetControlPosition*/) /*: Object*/ {
+		  var translation = getTranslation(controlPos, positionOffset, 'px');
+		  return defineProperty({}, browserPrefixToKey('transform', browserPrefix), translation);
 		}
 	
-		function createSVGTransform(_ref3) /*: string*/ {
-		  var x = _ref3.x,
-		      y = _ref3.y;
+		function createSVGTransform(controlPos /*: ControlPosition*/, positionOffset /*: PositionOffsetControlPosition*/) /*: string*/ {
+		  var translation = getTranslation(controlPos, positionOffset, '');
+		  return translation;
+		}
+		function getTranslation(_ref2, positionOffset /*: PositionOffsetControlPosition*/, unitSuffix /*: string*/) /*: string*/ {
+		  var x = _ref2.x,
+		      y = _ref2.y;
 	
-		  return 'translate(' + x + ',' + y + ')';
+		  var translation = 'translate(' + x + unitSuffix + ',' + y + unitSuffix + ')';
+		  if (positionOffset) {
+		    var defaultX = '' + (typeof positionOffset.x === 'string' ? positionOffset.x : positionOffset.x + unitSuffix);
+		    var defaultY = '' + (typeof positionOffset.y === 'string' ? positionOffset.y : positionOffset.y + unitSuffix);
+		    translation = 'translate(' + defaultX + ', ' + defaultY + ')' + translation;
+		  }
+		  return translation;
 		}
 	
 		function getTouch(e /*: MouseTouchEvent*/, identifier /*: number*/) /*: ?{clientX: number, clientY: number}*/ {
@@ -28673,6 +28680,7 @@
 		};*/
 		/*:: export type DraggableEventHandler = (e: MouseEvent, data: DraggableData) => void;*/
 		/*:: export type ControlPosition = {x: number, y: number};*/
+		/*:: export type PositionOffsetControlPosition = {x: number|string, y: number|string};*/
 	
 	
 		//
@@ -29074,6 +29082,7 @@
 		  defaultClassNameDragging: string,
 		  defaultClassNameDragged: string,
 		  defaultPosition: ControlPosition,
+		  positionOffset: PositionOffsetControlPosition,
 		  position: ControlPosition,
 		  scale: number
 		};*/
@@ -29247,13 +29256,13 @@
 	
 		      // If this element was SVG, we use the `transform` attribute.
 		      if (this.state.isElementSVG) {
-		        svgTransform = createSVGTransform(transformOpts);
+		        svgTransform = createSVGTransform(transformOpts, this.props.positionOffset);
 		      } else {
 		        // Add a CSS transform to move the element around. This allows us to move the element around
 		        // without worrying about whether or not it is relatively or absolutely positioned.
 		        // If the item you are dragging already has a transform set, wrap it in a <span> so <Draggable>
 		        // has a clean slate.
-		        style = createCSSTransform(transformOpts);
+		        style = createCSSTransform(transformOpts, this.props.positionOffset);
 		      }
 	
 		      var _props = this.props,
@@ -29358,6 +29367,10 @@
 		  defaultPosition: propTypes.shape({
 		    x: propTypes.number,
 		    y: propTypes.number
+		  }),
+		  positionOffset: propTypes.shape({
+		    x: propTypes.oneOfType([propTypes.number, propTypes.string]),
+		    y: propTypes.oneOfType([propTypes.number, propTypes.string])
 		  }),
 	
 		  /**
@@ -32767,13 +32780,15 @@
 	        _this.handleKeyDown = function (e) {
 	            var _this$props = _this.props,
 	                onSearch = _this$props.onSearch,
-	                type = _this$props.type;
+	                type = _this$props.type,
+	                onKeyDown = _this$props.onKeyDown;
 	
 	            if (e.keyCode === 13 && type === "search") {
 	                if (onSearch) {
 	                    onSearch(_this.input.value);
 	                }
 	            }
+	            onKeyDown && onKeyDown(e);
 	        };
 	
 	        _this.handleSearch = function (e) {
@@ -33368,7 +33383,8 @@
 	  onOpenChange: function onOpenChange() {},
 	  onChange: function onChange() {},
 	  locale: _zh_CN2["default"],
-	  showMonthInput: false
+	  showMonthInput: false,
+	  onKeyDown: function onKeyDown() {}
 	};
 	
 	exports["default"] = DatePicker;
@@ -33696,6 +33712,7 @@
 	  };
 	
 	  this.onKeyDown = function (event) {
+	    _this2.props.onKeyDown && _this2.props.onKeyDown(event);
 	    if (event.target.nodeName.toLowerCase() === 'input') {
 	      return undefined;
 	    }
@@ -54330,6 +54347,7 @@
 	      event.stopPropagation();
 	      _this2.close(_this2.focus);
 	    }
+	    _this2.props.onKeyDown && _this2.props.onKeyDown(event);
 	  };
 	
 	  this.onCalendarSelect = function (value) {
@@ -54352,6 +54370,7 @@
 	      _this2.open();
 	      event.preventDefault();
 	    }
+	    _this2.props.onKeyDown && _this2.props.onKeyDown(event);
 	  };
 	
 	  this.onCalendarOk = function () {
@@ -58607,11 +58626,11 @@
 	
 	function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 	
+	function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 	
 	function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-	
-	function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 	
 	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 	
@@ -58655,7 +58674,7 @@
 	
 	    _this = _possibleConstructorReturn(this, _getPrototypeOf(Panel).call(this, props));
 	
-	    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "onChange", function (newValue) {
+	    _defineProperty(_assertThisInitialized(_this), "onChange", function (newValue) {
 	      var onChange = _this.props.onChange;
 	
 	      _this.setState({
@@ -58665,18 +58684,18 @@
 	      onChange(newValue);
 	    });
 	
-	    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "onAmPmChange", function (ampm) {
+	    _defineProperty(_assertThisInitialized(_this), "onAmPmChange", function (ampm) {
 	      var onAmPmChange = _this.props.onAmPmChange;
 	      onAmPmChange(ampm);
 	    });
 	
-	    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "onCurrentSelectPanelChange", function (currentSelectPanel) {
+	    _defineProperty(_assertThisInitialized(_this), "onCurrentSelectPanelChange", function (currentSelectPanel) {
 	      _this.setState({
 	        currentSelectPanel: currentSelectPanel
 	      });
 	    });
 	
-	    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "disabledHours", function () {
+	    _defineProperty(_assertThisInitialized(_this), "disabledHours", function () {
 	      var _this$props = _this.props,
 	          use12Hours = _this$props.use12Hours,
 	          disabledHours = _this$props.disabledHours;
@@ -58734,8 +58753,6 @@
 	  }, {
 	    key: "render",
 	    value: function render() {
-	      var _classNames;
-	
 	      var _this$props2 = this.props,
 	          prefixCls = _this$props2.prefixCls,
 	          className = _this$props2.className,
@@ -58743,7 +58760,6 @@
 	          disabledMinutes = _this$props2.disabledMinutes,
 	          disabledSeconds = _this$props2.disabledSeconds,
 	          hideDisabledOptions = _this$props2.hideDisabledOptions,
-	          allowEmpty = _this$props2.allowEmpty,
 	          showHour = _this$props2.showHour,
 	          showMinute = _this$props2.showMinute,
 	          showSecond = _this$props2.showSecond,
@@ -58771,7 +58787,7 @@
 	      var secondOptions = generateOptions(60, disabledSecondOptions, hideDisabledOptions, secondStep);
 	      var validDefaultOpenValue = toNearestValidTime(defaultOpenValue, hourOptions, minuteOptions, secondOptions);
 	      return _react["default"].createElement("div", {
-	        className: (0, _classnames["default"])((_classNames = {}, _defineProperty(_classNames, "".concat(prefixCls, "-inner"), true), _defineProperty(_classNames, className, !!className), _classNames))
+	        className: (0, _classnames["default"])(className, "".concat(prefixCls, "-inner"))
 	      }, _react["default"].createElement(_Header["default"], {
 	        clearText: clearText,
 	        prefixCls: prefixCls,
@@ -58788,7 +58804,6 @@
 	        disabledMinutes: disabledMinutes,
 	        disabledSeconds: disabledSeconds,
 	        onChange: this.onChange,
-	        allowEmpty: allowEmpty,
 	        focusOnOpen: focusOnOpen,
 	        onKeyDown: onKeyDown,
 	        inputReadOnly: inputReadOnly,
@@ -58835,7 +58850,6 @@
 	  onChange: _propTypes["default"].func,
 	  onAmPmChange: _propTypes["default"].func,
 	  onEsc: _propTypes["default"].func,
-	  allowEmpty: _propTypes["default"].bool,
 	  showHour: _propTypes["default"].bool,
 	  showMinute: _propTypes["default"].bool,
 	  showSecond: _propTypes["default"].bool,
@@ -58883,6 +58897,8 @@
 	
 	var _moment = _interopRequireDefault(__webpack_require__(271));
 	
+	var _classnames = _interopRequireDefault(__webpack_require__(5));
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj["default"] = obj; return newObj; } }
@@ -58897,11 +58913,11 @@
 	
 	function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 	
+	function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 	
 	function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-	
-	function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 	
 	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 	
@@ -58917,7 +58933,7 @@
 	
 	    _this = _possibleConstructorReturn(this, _getPrototypeOf(Header).call(this, props));
 	
-	    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "onInputChange", function (event) {
+	    _defineProperty(_assertThisInitialized(_this), "onInputChange", function (event) {
 	      var str = event.target.value;
 	
 	      _this.setState({
@@ -58932,8 +58948,7 @@
 	          disabledHours = _this$props.disabledHours,
 	          disabledMinutes = _this$props.disabledMinutes,
 	          disabledSeconds = _this$props.disabledSeconds,
-	          onChange = _this$props.onChange,
-	          allowEmpty = _this$props.allowEmpty;
+	          onChange = _this$props.onChange;
 	
 	      if (str) {
 	        var originalValue = _this.props.value;
@@ -58985,14 +59000,8 @@
 	        } else if (originalValue !== value) {
 	          onChange(value);
 	        }
-	      } else if (allowEmpty) {
-	        onChange(null);
 	      } else {
-	        _this.setState({
-	          invalid: true
-	        });
-	
-	        return;
+	        onChange(null);
 	      }
 	
 	      _this.setState({
@@ -59000,7 +59009,7 @@
 	      });
 	    });
 	
-	    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "onKeyDown", function (e) {
+	    _defineProperty(_assertThisInitialized(_this), "onKeyDown", function (e) {
 	      var _this$props2 = _this.props,
 	          onEsc = _this$props2.onEsc,
 	          onKeyDown = _this$props2.onKeyDown;
@@ -59070,7 +59079,7 @@
 	          str = _this$state.str;
 	      var invalidClass = invalid ? "".concat(prefixCls, "-input-invalid") : '';
 	      return _react["default"].createElement("input", {
-	        className: "".concat(prefixCls, "-input  ").concat(invalidClass),
+	        className: (0, _classnames["default"])("".concat(prefixCls, "-input"), invalidClass),
 	        ref: function ref(_ref) {
 	          _this3.refInput = _ref;
 	        },
@@ -59110,7 +59119,6 @@
 	  disabledSeconds: _propTypes["default"].func,
 	  onChange: _propTypes["default"].func,
 	  onEsc: _propTypes["default"].func,
-	  allowEmpty: _propTypes["default"].bool,
 	  defaultOpenValue: _propTypes["default"].object,
 	  currentSelectPanel: _propTypes["default"].string,
 	  focusOnOpen: _propTypes["default"].bool,
@@ -59156,11 +59164,11 @@
 	
 	function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 	
+	function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 	
 	function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-	
-	function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 	
 	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 	
@@ -59201,7 +59209,7 @@
 	
 	    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(Combobox)).call.apply(_getPrototypeOf2, [this].concat(args)));
 	
-	    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "onItemChange", function (type, itemValue) {
+	    _defineProperty(_assertThisInitialized(_this), "onItemChange", function (type, itemValue) {
 	      var _this$props = _this.props,
 	          onChange = _this$props.onChange,
 	          defaultOpenValue = _this$props.defaultOpenValue,
@@ -59246,7 +59254,7 @@
 	      onChange(value);
 	    });
 	
-	    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "onEnterSelectPanel", function (range) {
+	    _defineProperty(_assertThisInitialized(_this), "onEnterSelectPanel", function (range) {
 	      var onCurrentSelectPanelChange = _this.props.onCurrentSelectPanelChange;
 	      onCurrentSelectPanelChange(range);
 	    });
@@ -59454,7 +59462,7 @@
 	
 	var _reactDom = _interopRequireDefault(__webpack_require__(2));
 	
-	var _classnames3 = _interopRequireDefault(__webpack_require__(5));
+	var _classnames = _interopRequireDefault(__webpack_require__(5));
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
@@ -59470,11 +59478,11 @@
 	
 	function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 	
+	function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 	
 	function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-	
-	function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 	
 	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 	
@@ -59516,18 +59524,18 @@
 	
 	    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(Select)).call.apply(_getPrototypeOf2, [this].concat(args)));
 	
-	    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "state", {
+	    _defineProperty(_assertThisInitialized(_this), "state", {
 	      active: false
 	    });
 	
-	    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "onSelect", function (value) {
+	    _defineProperty(_assertThisInitialized(_this), "onSelect", function (value) {
 	      var _this$props = _this.props,
 	          onSelect = _this$props.onSelect,
 	          type = _this$props.type;
 	      onSelect(type, value);
 	    });
 	
-	    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "handleMouseEnter", function (e) {
+	    _defineProperty(_assertThisInitialized(_this), "handleMouseEnter", function (e) {
 	      var onMouseEnter = _this.props.onMouseEnter;
 	
 	      _this.setState({
@@ -59537,13 +59545,13 @@
 	      onMouseEnter(e);
 	    });
 	
-	    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "handleMouseLeave", function () {
+	    _defineProperty(_assertThisInitialized(_this), "handleMouseLeave", function () {
 	      _this.setState({
 	        active: false
 	      });
 	    });
 	
-	    _defineProperty(_assertThisInitialized(_assertThisInitialized(_this)), "saveList", function (node) {
+	    _defineProperty(_assertThisInitialized(_this), "saveList", function (node) {
 	      _this.list = node;
 	    });
 	
@@ -59575,9 +59583,9 @@
 	          selectedIndex = _this$props2.selectedIndex,
 	          prefixCls = _this$props2.prefixCls;
 	      return options.map(function (item, index) {
-	        var _classnames;
+	        var _classNames;
 	
-	        var cls = (0, _classnames3["default"])((_classnames = {}, _defineProperty(_classnames, "".concat(prefixCls, "-select-option-selected"), selectedIndex === index), _defineProperty(_classnames, "".concat(prefixCls, "-select-option-disabled"), item.disabled), _classnames));
+	        var cls = (0, _classnames["default"])((_classNames = {}, _defineProperty(_classNames, "".concat(prefixCls, "-select-option-selected"), selectedIndex === index), _defineProperty(_classNames, "".concat(prefixCls, "-select-option-disabled"), item.disabled), _classNames));
 	        var onClick = item.disabled ? undefined : function () {
 	          _this2.onSelect(item.value);
 	        };
@@ -59626,7 +59634,7 @@
 	        return null;
 	      }
 	
-	      var cls = (0, _classnames3["default"])("".concat(prefixCls, "-select"), _defineProperty({}, "".concat(prefixCls, "-select-active"), active));
+	      var cls = (0, _classnames["default"])("".concat(prefixCls, "-select"), _defineProperty({}, "".concat(prefixCls, "-select-active"), active));
 	      return _react["default"].createElement("div", {
 	        className: cls,
 	        onMouseEnter: this.handleMouseEnter,

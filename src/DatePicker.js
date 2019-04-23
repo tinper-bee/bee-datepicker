@@ -296,6 +296,7 @@ DatePicker.defaultProps = {
   onChange:()=>{},
   locale:zhCN,
   showMonthInput:false,
+  onKeyDown:()=>{}
 }
 
 export default DatePicker;
