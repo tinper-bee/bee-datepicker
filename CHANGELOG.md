@@ -1,10 +1,11 @@
-<a name="2.0.24"></a>
-## [2.0.24](https://github.com/tinper-bee/bee-datepicker/compare/v2.0.23...v2.0.24) (2019-04-23)
+<a name="2.0.25"></a>
+## [2.0.25](https://github.com/tinper-bee/bee-datepicker/compare/v2.0.23...v2.0.25) (2019-04-23)
 
 
 ### Features
 
 * **bee-datepicker:** datepicker 加onKeydown ([eba4480](https://github.com/tinper-bee/bee-datepicker/commit/eba4480))
+* **bee-datepicker:** datepicker 新增keydown回调 ([87be9c2](https://github.com/tinper-bee/bee-datepicker/commit/87be9c2))
 
 
 
