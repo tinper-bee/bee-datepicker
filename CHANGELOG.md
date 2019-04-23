@@ -1,3 +1,13 @@
+<a name="2.0.26"></a>
+## [2.0.26](https://github.com/tinper-bee/bee-datepicker/compare/v2.0.25...v2.0.26) (2019-04-23)
+
+
+### Features
+
+* datepicker keydown事件 ([f01890f](https://github.com/tinper-bee/bee-datepicker/commit/f01890f))
+
+
+
 <a name="2.0.25"></a>
 ## [2.0.25](https://github.com/tinper-bee/bee-datepicker/compare/v2.0.23...v2.0.25) (2019-04-23)
 
