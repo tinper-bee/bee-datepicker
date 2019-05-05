@@ -1,3 +1,13 @@
+<a name="2.0.31"></a>
+## [2.0.31](https://github.com/tinper-bee/bee-datepicker/compare/v2.0.30...v2.0.31) (2019-05-05)
+
+
+### Features
+
+* **bee-datepicker:** 日期校验不正确，不关闭日期面板 ([7e706fb](https://github.com/tinper-bee/bee-datepicker/commit/7e706fb))
+
+
+
 <a name="2.0.30"></a>
 ## [2.0.30](https://github.com/tinper-bee/bee-datepicker/compare/v2.0.29...v2.0.30) (2019-05-05)
 
