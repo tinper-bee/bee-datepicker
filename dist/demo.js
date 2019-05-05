@@ -60133,7 +60133,8 @@
 	          calendar: monthCalendar,
 	          open: this.state.open,
 	          value: state.value,
-	          onChange: this.onChange
+	          onChange: this.onChange,
+	          dropdownClassName: props.dropdownClassName
 	        },
 	        function (_ref) {
 	          var value = _ref.value;
@@ -60494,11 +60495,11 @@
 	    now.locale("en-gb").utcOffset(0);
 	}
 	
-	var Picker = function (_Component) {
-	    _inherits(Picker, _Component);
+	var RangePicker = function (_Component) {
+	    _inherits(RangePicker, _Component);
 	
-	    function Picker(props, context) {
-	        _classCallCheck(this, Picker);
+	    function RangePicker(props, context) {
+	        _classCallCheck(this, RangePicker);
 	
 	        var _this = _possibleConstructorReturn(this, _Component.call(this, props, context));
 	
@@ -60511,7 +60512,7 @@
 	        return _this;
 	    }
 	
-	    Picker.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
+	    RangePicker.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
 	        if ("value" in nextProps) {
 	            this.setState({
 	                value: nextProps.value
@@ -60522,7 +60523,7 @@
 	        });
 	    };
 	
-	    Picker.prototype.render = function render() {
+	    RangePicker.prototype.render = function render() {
 	        var _this2 = this;
 	
 	        var props = this.props;
@@ -60551,7 +60552,8 @@
 	                value: this.state.value,
 	                animation: 'animation' in props ? props.animation : "slide-up",
 	                calendar: calendar,
-	                disabled: props.disabled
+	                disabled: props.disabled,
+	                dropdownClassName: props.dropdownClassName
 	            },
 	            function (_ref) {
 	                _objectDestructuringEmpty(_ref);
@@ -60582,7 +60584,7 @@
 	        );
 	    };
 	
-	    return Picker;
+	    return RangePicker;
 	}(_react.Component);
 	
 	var _initialiseProps = function _initialiseProps() {
@@ -60636,14 +60638,14 @@
 	    };
 	};
 	
-	Picker.defaultProps = {
+	RangePicker.defaultProps = {
 	    renderIcon: function renderIcon() {
 	        return _react2["default"].createElement(_beeIcon2["default"], { type: "uf-calendar" });
 	    },
 	    locale: _zh_CN2["default"]
 	};
 	
-	exports["default"] = Picker;
+	exports["default"] = RangePicker;
 	module.exports = exports["default"];
 
 /***/ }),
