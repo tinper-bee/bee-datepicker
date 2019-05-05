@@ -8,10 +8,6 @@
 ## 如何使用
 
 ```
-import { DatePicker } from 'tinper-bee';
-
-or
-
 import DatePicker from 'bee-datepicker';
 import 'bee-datepicker/build/DatePicker.css';
 
