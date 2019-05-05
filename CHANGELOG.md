@@ -1,3 +1,13 @@
+<a name="2.0.30"></a>
+## [2.0.30](https://github.com/tinper-bee/bee-datepicker/compare/v2.0.29...v2.0.30) (2019-05-05)
+
+
+### Bug Fixes
+
+* **bee-datepicker:** 新增 dropdownClassName 面板类名 ([1f0389e](https://github.com/tinper-bee/bee-datepicker/commit/1f0389e))
+
+
+
 <a name="2.0.29"></a>
 ## [2.0.29](https://github.com/tinper-bee/bee-datepicker/compare/v2.0.28...v2.0.29) (2019-04-25)
 
