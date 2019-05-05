@@ -33231,6 +33231,8 @@
 	  };
 	
 	  this.inputFocus = function () {
+	    var format = _this3.props.format;
+	
 	    var input = document.querySelector('.rc-calendar-input');
 	    if (input) {
 	      if (input.value) {
@@ -33242,13 +33244,23 @@
 	        if (e.keyCode == _tinperBeeCore.KeyCode.DELETE) {
 	          input.value = '';
 	          _this3.props.onChange('', '');
-	        } else if (e.keyCode == _tinperBeeCore.KeyCode.ESC || e.keyCode == _tinperBeeCore.KeyCode.ENTER) {
+	        } else if (e.keyCode == _tinperBeeCore.KeyCode.ESC) {
 	          _this3.setState({
 	            open: false
 	          });
 	          var v = _this3.state.value;
 	          _this3.props.onOpenChange(false, v, v && _this3.getValue(v) || '');
 	          _reactDom2["default"].findDOMNode(_this3.outInput).focus(); // 按esc时候焦点回到input输入框
+	        } else if (e.keyCode == _tinperBeeCore.KeyCode.ENTER) {
+	          var parsed = (0, _moment2["default"])(input.value, format, true);
+	          if (parsed.isValid()) {
+	            _this3.setState({
+	              open: false
+	            });
+	            var _v = _this3.state.value;
+	            _this3.props.onOpenChange(false, _v, _v && _this3.getValue(_v) || '');
+	            _reactDom2["default"].findDOMNode(_this3.outInput).focus();
+	          }
 	        }
 	        _this3.props.onKeyDown && _this3.props.onKeyDown(e);
 	      };
@@ -53009,11 +53021,19 @@
 	    var _props2 = _this2.props,
 	        onSelect = _props2.onSelect,
 	        value = _props2.value,
-	        onKeyDown = _props2.onKeyDown;
+	        onKeyDown = _props2.onKeyDown,
+	        format = _props2.format;
 	
-	    if (e.keyCode === _KeyCode2['default'].ENTER && onSelect) {
-	      onSelect(value.clone());
+	    var str = e.target.value;
+	    var parsed = (0, _moment2['default'])(str, format, true);
+	    if (e.keyCode === _KeyCode2['default'].ENTER) {
+	      if (parsed.isValid() && onSelect) {
+	        onSelect(value.clone());
+	      }
 	    }
+	    // if (e.keyCode === KeyCode.ENTER && onSelect) {
+	    //   onSelect(value.clone());
+	    // }
 	    onKeyDown && onKeyDown(e);
 	  };
 	
