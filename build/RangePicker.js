@@ -32,6 +32,8 @@ var _classnames = require("classnames");
 
 var _classnames2 = _interopRequireDefault(_classnames);
 
+var _tinperBeeCore = require("tinper-bee-core");
+
 var _zh_CN = require("./locale/zh_CN");
 
 var _zh_CN2 = _interopRequireDefault(_zh_CN);
@@ -89,7 +91,8 @@ var RangePicker = function (_Component) {
 
         _this.state = {
             hoverValue: [],
-            value: props.value || props.defaultValue || []
+            value: props.value || props.defaultValue || [],
+            open: false
         };
         return _this;
     }
@@ -135,7 +138,9 @@ var RangePicker = function (_Component) {
                 animation: 'animation' in props ? props.animation : "slide-up",
                 calendar: calendar,
                 disabled: props.disabled,
-                dropdownClassName: props.dropdownClassName
+                dropdownClassName: props.dropdownClassName,
+                onOpenChange: this.onOpenChange,
+                open: this.state.open
             },
             function (_ref) {
                 _objectDestructuringEmpty(_ref);
@@ -217,6 +222,37 @@ var _initialiseProps = function _initialiseProps() {
             value: ''
         });
         _this3.props.onChange && _this3.props.onChange('', '');
+    };
+
+    this.onOpenChange = function (open) {
+        _this3.setState({
+            open: open
+        }, function () {
+            setTimeout(function () {
+                if (open) _this3.inputFocus();
+            }, 0);
+        });
+    };
+
+    this.inputFocus = function () {
+        var format = _this3.props.format;
+
+        var inputs = document.querySelectorAll('.rc-calendar-input');
+        if (inputs[0].value) {
+            inputs[0].select();
+        } else {
+            inputs[0].focus();
+        }
+        inputs[0].onkeydown = _this3.keydown;
+        inputs[1].onkeydown = _this3.keydown;
+    };
+
+    this.keydown = function (e) {
+        if (e.keyCode == _tinperBeeCore.KeyCode.ESC) {
+            _this3.setState({
+                open: false
+            });
+        }
     };
 };
 

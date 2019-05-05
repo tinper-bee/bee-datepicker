@@ -8,6 +8,7 @@ import Picker from "./rc-calendar/Picker";
 import InputGroup from 'bee-input-group';
 import Icon from "bee-icon";
 import classNames from 'classnames';
+import { KeyCode } from 'tinper-bee-core';
 
 import zhCN from "./locale/zh_CN";
 
@@ -42,6 +43,7 @@ class RangePicker extends Component {
     this.state = {
         hoverValue: [],
         value: props.value || props.defaultValue || [],
+        open:false,
     };
   }
     componentWillReceiveProps(nextProps){
@@ -101,6 +103,33 @@ class RangePicker extends Component {
         })
         this.props.onChange && this.props.onChange('', '');
     }
+    onOpenChange=(open)=>{
+        this.setState({
+            open
+        },()=>{
+            setTimeout(() => {
+                if(open)this.inputFocus()
+            }, 0);
+        })
+    }
+    inputFocus=()=>{
+        const { format } = this.props;
+        let inputs = document.querySelectorAll('.rc-calendar-input');
+        if(inputs[0].value){
+            inputs[0].select()
+        }else{
+            inputs[0].focus()
+        }
+        inputs[0].onkeydown=this.keydown;
+        inputs[1].onkeydown=this.keydown;
+    }
+    keydown=(e)=>{
+        if(e.keyCode == KeyCode.ESC){
+            this.setState({
+                open:false
+            });
+        }
+    }
     render() {
     const props = this.props;
     const { showValue } = props;
@@ -130,6 +159,8 @@ class RangePicker extends Component {
               calendar={calendar}
               disabled={props.disabled}
               dropdownClassName={props.dropdownClassName}
+              onOpenChange={this.onOpenChange}
+              open={this.state.open}
           >
               {
                   ({}) => {

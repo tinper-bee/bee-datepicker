@@ -60470,6 +60470,8 @@
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
+	var _tinperBeeCore = __webpack_require__(26);
+	
 	var _zh_CN = __webpack_require__(493);
 	
 	var _zh_CN2 = _interopRequireDefault(_zh_CN);
@@ -60527,7 +60529,8 @@
 	
 	        _this.state = {
 	            hoverValue: [],
-	            value: props.value || props.defaultValue || []
+	            value: props.value || props.defaultValue || [],
+	            open: false
 	        };
 	        return _this;
 	    }
@@ -60573,7 +60576,9 @@
 	                animation: 'animation' in props ? props.animation : "slide-up",
 	                calendar: calendar,
 	                disabled: props.disabled,
-	                dropdownClassName: props.dropdownClassName
+	                dropdownClassName: props.dropdownClassName,
+	                onOpenChange: this.onOpenChange,
+	                open: this.state.open
 	            },
 	            function (_ref) {
 	                _objectDestructuringEmpty(_ref);
@@ -60655,6 +60660,37 @@
 	            value: ''
 	        });
 	        _this3.props.onChange && _this3.props.onChange('', '');
+	    };
+	
+	    this.onOpenChange = function (open) {
+	        _this3.setState({
+	            open: open
+	        }, function () {
+	            setTimeout(function () {
+	                if (open) _this3.inputFocus();
+	            }, 0);
+	        });
+	    };
+	
+	    this.inputFocus = function () {
+	        var format = _this3.props.format;
+	
+	        var inputs = document.querySelectorAll('.rc-calendar-input');
+	        if (inputs[0].value) {
+	            inputs[0].select();
+	        } else {
+	            inputs[0].focus();
+	        }
+	        inputs[0].onkeydown = _this3.keydown;
+	        inputs[1].onkeydown = _this3.keydown;
+	    };
+	
+	    this.keydown = function (e) {
+	        if (e.keyCode == _tinperBeeCore.KeyCode.ESC) {
+	            _this3.setState({
+	                open: false
+	            });
+	        }
 	    };
 	};
 	
@@ -60912,7 +60948,6 @@
 	        ref: this.saveRoot,
 	        className: classes,
 	        style: props.style,
-	        tabIndex: '0',
 	        onKeyDown: this.onKeyDown
 	      },
 	      props.renderSidebar(),
@@ -60953,7 +60988,8 @@
 	            showTimePicker: showTimePicker,
 	            enablePrev: true,
 	            enableNext: !isClosestMonths || this.isMonthYearPanelShow(mode[1]),
-	            clearIcon: clearIcon
+	            clearIcon: clearIcon,
+	            tabIndex: '0'
 	          })),
 	          _react2['default'].createElement(
 	            'span',
@@ -61695,7 +61731,7 @@
 	      dateInputElement,
 	      _react2['default'].createElement(
 	        'div',
-	        { style: { outline: 'none' } },
+	        { style: { outline: 'none' }, tabIndex: props.tabIndex },
 	        _react2['default'].createElement(_CalendarHeader2['default'], _extends({}, newProps, {
 	          mode: mode,
 	          enableNext: enableNext,
