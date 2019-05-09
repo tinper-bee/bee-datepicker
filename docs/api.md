@@ -45,6 +45,7 @@ import 'bee-datepicker/build/DatePicker.css';
 | showOk|底边栏是否显示ok按钮| Boolean | auto |
 | onSelect|选择日期的回调函数|Function(date: moment)| - |
 | onChange|日期改变的回调函数|Function(date: moment)| - |
+| onOk|点击确定按钮的回调|Function(date: moment)| - |
 | onKeyDown |keydown回调|Function|-|
 | dateInputPlaceholder|日期的placeholder| String | - |
 | showTime | 是否显示时间选择面板 | Boolean | - |
