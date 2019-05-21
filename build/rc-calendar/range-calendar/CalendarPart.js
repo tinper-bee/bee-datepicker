@@ -67,7 +67,8 @@ var CalendarPart = function (_React$Component) {
         onInputSelect = props.onInputSelect,
         enablePrev = props.enablePrev,
         enableNext = props.enableNext,
-        clearIcon = props.clearIcon;
+        clearIcon = props.clearIcon,
+        renderError = props.renderError;
 
     var shouldShowTimePicker = showTimePicker && timePicker;
     var disabledTimeConfig = shouldShowTimePicker && disabledTime ? (0, _index.getTimeConfig)(selectedValue, disabledTime) : null;
@@ -102,7 +103,8 @@ var CalendarPart = function (_React$Component) {
       selectedValue: selectedValue[index],
       onChange: onInputChange,
       onSelect: onInputSelect,
-      clearIcon: clearIcon
+      clearIcon: clearIcon,
+      renderError: renderError
     });
 
     return _react2["default"].createElement(

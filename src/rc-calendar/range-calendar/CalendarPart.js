@@ -41,7 +41,7 @@ export default class CalendarPart extends React.Component {
       disabledDate, timePicker, disabledTime,
       timePickerDisabledTime, showTimePicker,
       onInputChange, onInputSelect, enablePrev, enableNext,
-      clearIcon,
+      clearIcon,renderError
     } = props;
     const shouldShowTimePicker = showTimePicker && timePicker;
     const disabledTimeConfig = shouldShowTimePicker && disabledTime ?
@@ -82,6 +82,7 @@ export default class CalendarPart extends React.Component {
         onChange={onInputChange}
         onSelect={onInputSelect}
         clearIcon={clearIcon}
+        renderError={renderError}
       />;
 
     return (

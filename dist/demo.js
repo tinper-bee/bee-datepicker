@@ -34394,7 +34394,8 @@
 	  onChange: function onChange() {},
 	  locale: _zh_CN2["default"],
 	  showMonthInput: false,
-	  onKeyDown: function onKeyDown() {}
+	  onKeyDown: function onKeyDown() {},
+	  renderError: function renderError() {}
 	};
 	
 	exports["default"] = DatePicker;
@@ -34543,7 +34544,8 @@
 	        disabledTime = props.disabledTime,
 	        clearIcon = props.clearIcon,
 	        renderFooter = props.renderFooter,
-	        showMonthInput = props.showMonthInput;
+	        showMonthInput = props.showMonthInput,
+	        renderError = props.renderError;
 	    var value = state.value,
 	        selectedValue = state.selectedValue,
 	        mode = state.mode;
@@ -34570,7 +34572,6 @@
 	
 	      timePickerEle = _react2['default'].cloneElement(timePicker, timePickerProps);
 	    }
-	
 	    var dateInputElement = props.showDateInput ? _react2['default'].createElement(_DateInput2['default'], {
 	      format: this.getFormat(),
 	      key: 'date-input',
@@ -34585,7 +34586,8 @@
 	      selectedValue: selectedValue,
 	      onChange: this.onDateInputChange,
 	      onSelect: this.onDateInputSelect,
-	      clearIcon: clearIcon
+	      clearIcon: clearIcon,
+	      renderError: renderError
 	    }) : null;
 	
 	    var children = [];
@@ -53880,7 +53882,8 @@
 	    var locale = props.locale,
 	        prefixCls = props.prefixCls,
 	        placeholder = props.placeholder,
-	        clearIcon = props.clearIcon;
+	        clearIcon = props.clearIcon,
+	        renderError = props.renderError;
 	
 	    var invalidClass = invalid ? prefixCls + '-input-invalid' : '';
 	    return _react2['default'].createElement(
@@ -53899,7 +53902,8 @@
 	          onKeyDown: this.onKeyDown,
 	          onFocus: this.onFocus,
 	          onBlur: this.onBlur
-	        })
+	        }),
+	        invalid && renderError ? renderError() : ''
 	      ),
 	      props.showClear ? _react2['default'].createElement(
 	        'a',
@@ -61466,6 +61470,8 @@
 	
 	var _tinperBeeCore = __webpack_require__(26);
 	
+	var _util = __webpack_require__(402);
+	
 	var _zh_CN = __webpack_require__(494);
 	
 	var _zh_CN2 = _interopRequireDefault(_zh_CN);
@@ -61491,9 +61497,17 @@
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
 	
 	
-	function format(v, f) {
-	    return v ? v.format && v.format(f) : '';
-	}
+	// function formatDate(value,format) {
+	//     if (!value) {
+	//         return '';
+	//       }
+	
+	//       if (Array.isArray(format)) {
+	//         format = format[0];
+	//       }
+	
+	//       return value.formatDate(format);
+	// }
 	
 	var fullFormat = "YYYY-MM-DD";
 	
@@ -61564,7 +61578,8 @@
 	            showOk: props.showOk,
 	            showToday: props.showToday,
 	            renderFooter: props.renderFooter,
-	            timePicker: props.showTime ? timePickerElement : null
+	            timePicker: props.showTime ? timePickerElement : null,
+	            renderError: props.renderError
 	        });
 	
 	        return _react2["default"].createElement(
@@ -61589,7 +61604,7 @@
 	                    },
 	                    _react2["default"].createElement(_beeFormControl2["default"], {
 	                        placeholder: _this2.props.placeholder ? _this2.props.placeholder : 'start ~ end',
-	                        value: isValidRange(value) && format(value[0], formatStr) + " ~ " + format(value[1], formatStr) || '',
+	                        value: isValidRange(value) && (0, _util.formatDate)(value[0], formatStr) + " ~ " + (0, _util.formatDate)(value[1], formatStr) || '',
 	                        disabled: props.disabled
 	                    }),
 	                    _this2.state.value && _this2.state.showClose && !props.disabled ? _react2["default"].createElement(
@@ -61623,7 +61638,7 @@
 	        //传入value和dateString
 	        if (props.onChange && isValidRange(value) || value.length == 0) {
 	            if (value.length > 0) {
-	                props.onChange(value, "[\"" + format(value[0], formatStr) + "\" , \"" + format(value[1], formatStr) + "\"]");
+	                props.onChange(value, "[\"" + (0, _util.formatDate)(value[0], formatStr) + "\" , \"" + (0, _util.formatDate)(value[1], formatStr) + "\"]");
 	            } else {
 	                props.onChange(null);
 	            }
@@ -61945,7 +61960,6 @@
 	    // console.log('end:', endValue.format('YYYY-MM-DD'));
 	
 	    var extraFooter = props.renderFooter();
-	
 	    return _react2['default'].createElement(
 	      'div',
 	      {
@@ -62689,7 +62703,8 @@
 	        onInputSelect = props.onInputSelect,
 	        enablePrev = props.enablePrev,
 	        enableNext = props.enableNext,
-	        clearIcon = props.clearIcon;
+	        clearIcon = props.clearIcon,
+	        renderError = props.renderError;
 	
 	    var shouldShowTimePicker = showTimePicker && timePicker;
 	    var disabledTimeConfig = shouldShowTimePicker && disabledTime ? (0, _index.getTimeConfig)(selectedValue, disabledTime) : null;
@@ -62724,7 +62739,8 @@
 	      selectedValue: selectedValue[index],
 	      onChange: onInputChange,
 	      onSelect: onInputSelect,
-	      clearIcon: clearIcon
+	      clearIcon: clearIcon,
+	      renderError: renderError
 	    });
 	
 	    return _react2['default'].createElement(

@@ -38,6 +38,8 @@ var _classnames2 = _interopRequireDefault(_classnames);
 
 var _tinperBeeCore = require("tinper-bee-core");
 
+var _util = require("./rc-calendar/util");
+
 var _zh_CN = require("./locale/zh_CN");
 
 var _zh_CN2 = _interopRequireDefault(_zh_CN);
@@ -63,9 +65,17 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 */
 
 
-function format(v, f) {
-    return v ? v.format && v.format(f) : '';
-}
+// function formatDate(value,format) {
+//     if (!value) {
+//         return '';
+//       }
+
+//       if (Array.isArray(format)) {
+//         format = format[0];
+//       }
+
+//       return value.formatDate(format);
+// }
 
 var fullFormat = "YYYY-MM-DD";
 
@@ -136,7 +146,8 @@ var RangePicker = function (_Component) {
             showOk: props.showOk,
             showToday: props.showToday,
             renderFooter: props.renderFooter,
-            timePicker: props.showTime ? timePickerElement : null
+            timePicker: props.showTime ? timePickerElement : null,
+            renderError: props.renderError
         });
 
         return _react2["default"].createElement(
@@ -161,7 +172,7 @@ var RangePicker = function (_Component) {
                     },
                     _react2["default"].createElement(_beeFormControl2["default"], {
                         placeholder: _this2.props.placeholder ? _this2.props.placeholder : 'start ~ end',
-                        value: isValidRange(value) && format(value[0], formatStr) + " ~ " + format(value[1], formatStr) || '',
+                        value: isValidRange(value) && (0, _util.formatDate)(value[0], formatStr) + " ~ " + (0, _util.formatDate)(value[1], formatStr) || '',
                         disabled: props.disabled
                     }),
                     _this2.state.value && _this2.state.showClose && !props.disabled ? _react2["default"].createElement(
@@ -195,7 +206,7 @@ var _initialiseProps = function _initialiseProps() {
         //传入value和dateString
         if (props.onChange && isValidRange(value) || value.length == 0) {
             if (value.length > 0) {
-                props.onChange(value, "[\"" + format(value[0], formatStr) + "\" , \"" + format(value[1], formatStr) + "\"]");
+                props.onChange(value, "[\"" + (0, _util.formatDate)(value[0], formatStr) + "\" , \"" + (0, _util.formatDate)(value[1], formatStr) + "\"]");
             } else {
                 props.onChange(null);
             }

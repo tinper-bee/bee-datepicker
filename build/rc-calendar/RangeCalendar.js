@@ -231,7 +231,6 @@ var RangeCalendar = function (_React$Component) {
     // console.log('end:', endValue.format('YYYY-MM-DD'));
 
     var extraFooter = props.renderFooter();
-
     return _react2["default"].createElement(
       'div',
       {

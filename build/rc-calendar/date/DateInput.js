@@ -99,7 +99,8 @@ var DateInput = function (_React$Component) {
     var locale = props.locale,
         prefixCls = props.prefixCls,
         placeholder = props.placeholder,
-        clearIcon = props.clearIcon;
+        clearIcon = props.clearIcon,
+        renderError = props.renderError;
 
     var invalidClass = invalid ? prefixCls + '-input-invalid' : '';
     return _react2["default"].createElement(
@@ -118,7 +119,8 @@ var DateInput = function (_React$Component) {
           onKeyDown: this.onKeyDown,
           onFocus: this.onFocus,
           onBlur: this.onBlur
-        })
+        }),
+        invalid && renderError ? renderError() : ''
       ),
       props.showClear ? _react2["default"].createElement(
         'a',

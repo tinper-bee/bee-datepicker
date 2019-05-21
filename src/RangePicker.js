@@ -10,15 +10,23 @@ import InputGroup from 'bee-input-group';
 import Icon from "bee-icon";
 import classNames from 'classnames';
 import { KeyCode } from 'tinper-bee-core';
-
+import { formatDate } from './rc-calendar/util';
 import zhCN from "./locale/zh_CN";
 
 import moment from "moment";
 import "moment/locale/zh-cn";
 
-function format(v,f) {
-    return v ? v.format&&v.format(f) : '';
-}
+// function formatDate(value,format) {
+//     if (!value) {
+//         return '';
+//       }
+    
+//       if (Array.isArray(format)) {
+//         format = format[0];
+//       }
+    
+//       return value.formatDate(format);
+// }
 
 const fullFormat = "YYYY-MM-DD";
 
@@ -73,7 +81,7 @@ class RangePicker extends Component {
         //传入value和dateString
         if(props.onChange&&isValidRange(value)||value.length==0){
             if(value.length>0){
-                props.onChange(value,`["${format(value[0],formatStr)}" , "${format(value[1],formatStr)}"]`);
+                props.onChange(value,`["${formatDate(value[0],formatStr)}" , "${formatDate(value[1],formatStr)}"]`);
             }
             else {
                 props.onChange(null)
@@ -157,6 +165,7 @@ class RangePicker extends Component {
             showToday={props.showToday}
             renderFooter={props.renderFooter}
             timePicker={props.showTime ? timePickerElement : null}
+            renderError={props.renderError}
         />
     );
 
@@ -179,7 +188,7 @@ class RangePicker extends Component {
                     >
                         <FormControl
                             placeholder={this.props.placeholder?this.props.placeholder:'start ~ end'}
-                            value={isValidRange(value) && `${format(value[0],formatStr)} ~ ${format(value[1],formatStr)}` || ''}
+                            value={isValidRange(value) && `${formatDate(value[0],formatStr)} ~ ${formatDate(value[1],formatStr)}` || ''}
                             disabled={props.disabled}
                         />
                         {

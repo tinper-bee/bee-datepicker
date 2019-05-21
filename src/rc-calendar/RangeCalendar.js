@@ -9,7 +9,7 @@ import TodayButton from './calendar/TodayButton';
 import OkButton from './calendar/OkButton';
 import TimePickerButton from './calendar/TimePickerButton';
 import { commonMixinWrapper, propType, defaultProp } from './mixin/CommonMixin';
-import { syncTime, getTodayTime, isAllowedDate } from './util';
+import { syncTime, getTodayTime, isAllowedDate, formatDate } from './util';
 import { goTime, goStartMonth, goEndMonth, includesTime } from './util/toTime';
 
 function noop() { }
@@ -665,7 +665,6 @@ class RangeCalendar extends React.Component {
     // console.log('end:', endValue.format('YYYY-MM-DD'));
 
     const extraFooter = props.renderFooter();
-
     return (
       <div
         ref={this.saveRoot}

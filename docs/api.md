@@ -31,6 +31,7 @@ import 'bee-datepicker/build/DatePicker.css';
 |dateRender|日期表格|(current, value) => React.Node| - |
 |renderSidebar|侧边栏|() => React.Node| - |
 |renderFooter|扩展底边栏|() => React.Node| - |
+|renderError|当输入格式不对的时候显示在输入框下边的错误提示|() => React.Node| - |
 | defaultValue|默认值，输入框的默认值| moment| - |
 | value|日期| moment| - |
 | locale| 语言包 | Object |zh_CN |

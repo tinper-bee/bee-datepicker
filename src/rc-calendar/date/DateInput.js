@@ -170,7 +170,7 @@ class DateInput extends React.Component {
   render() {
     const props = this.props;
     const { invalid, str } = this.state;
-    const { locale, prefixCls, placeholder, clearIcon } = props;
+    const { locale, prefixCls, placeholder, clearIcon, renderError } = props;
     const invalidClass = invalid ? `${prefixCls}-input-invalid` : '';
     return (
       <div className={`${prefixCls}-input-wrap`}>
@@ -186,6 +186,7 @@ class DateInput extends React.Component {
             onFocus={this.onFocus}
             onBlur={this.onBlur}
           />
+          {invalid&&renderError?renderError():''}
         </div>
         {props.showClear ? (
           <a
