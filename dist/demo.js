@@ -53883,7 +53883,8 @@
 	        prefixCls = props.prefixCls,
 	        placeholder = props.placeholder,
 	        clearIcon = props.clearIcon,
-	        renderError = props.renderError;
+	        renderError = props.renderError,
+	        inputTabIndex = props.inputTabIndex;
 	
 	    var invalidClass = invalid ? prefixCls + '-input-invalid' : '';
 	    return _react2['default'].createElement(
@@ -53901,7 +53902,8 @@
 	          onChange: this.onInputChange,
 	          onKeyDown: this.onKeyDown,
 	          onFocus: this.onFocus,
-	          onBlur: this.onBlur
+	          onBlur: this.onBlur,
+	          tabIndex: inputTabIndex
 	        }),
 	        invalid && renderError ? renderError() : ''
 	      ),
@@ -61686,23 +61688,37 @@
 	    };
 	
 	    this.inputFocus = function () {
-	        var format = _this3.props.format;
-	
 	        var inputs = document.querySelectorAll('.rc-calendar-input');
 	        if (inputs[0].value) {
 	            inputs[0].select();
 	        } else {
 	            inputs[0].focus();
 	        }
-	        inputs[0].onkeydown = _this3.keydown;
-	        inputs[1].onkeydown = _this3.keydown;
+	        inputs[0].onkeydown = _this3.keydownLeft;
+	        inputs[1].onkeydown = _this3.keydownRight;
 	    };
 	
-	    this.keydown = function (e) {
+	    this.keydownLeft = function (e) {
+	        var inputs = document.querySelectorAll('.rc-calendar-input');
 	        if (e.keyCode == _tinperBeeCore.KeyCode.ESC) {
 	            _this3.setState({
 	                open: false
 	            });
+	        }
+	        if (e.keyCode == _tinperBeeCore.KeyCode.RIGHT || e.keyCode == _tinperBeeCore.KeyCode.LEFT) {
+	            inputs[1].focus();
+	        }
+	    };
+	
+	    this.keydownRight = function (e) {
+	        var inputs = document.querySelectorAll('.rc-calendar-input');
+	        if (e.keyCode == _tinperBeeCore.KeyCode.ESC) {
+	            _this3.setState({
+	                open: false
+	            });
+	        }
+	        if (e.keyCode == _tinperBeeCore.KeyCode.LEFT || e.keyCode == _tinperBeeCore.KeyCode.RIGHT) {
+	            inputs[0].focus();
 	        }
 	    };
 	};
@@ -62033,7 +62049,9 @@
 	            disabledMonth: this.disabledEndMonth,
 	            enablePrev: !isClosestMonths || this.isMonthYearPanelShow(mode[0]),
 	            enableNext: true,
-	            clearIcon: clearIcon
+	            clearIcon: clearIcon,
+	            tabIndex: '0',
+	            inputTabIndex: '-1'
 	          }))
 	        ),
 	        _react2['default'].createElement(
@@ -62704,7 +62722,8 @@
 	        enablePrev = props.enablePrev,
 	        enableNext = props.enableNext,
 	        clearIcon = props.clearIcon,
-	        renderError = props.renderError;
+	        renderError = props.renderError,
+	        inputTabIndex = props.inputTabIndex;
 	
 	    var shouldShowTimePicker = showTimePicker && timePicker;
 	    var disabledTimeConfig = shouldShowTimePicker && disabledTime ? (0, _index.getTimeConfig)(selectedValue, disabledTime) : null;
@@ -62740,7 +62759,8 @@
 	      onChange: onInputChange,
 	      onSelect: onInputSelect,
 	      clearIcon: clearIcon,
-	      renderError: renderError
+	      renderError: renderError,
+	      inputTabIndex: inputTabIndex
 	    });
 	
 	    return _react2['default'].createElement(
@@ -62751,7 +62771,7 @@
 	      dateInputElement,
 	      _react2['default'].createElement(
 	        'div',
-	        { style: { outline: 'none' }, tabIndex: props.tabIndex },
+	        { style: { outline: 'none' }, tabIndex: props.tabIndex, className: rangeClassName + '-out' },
 	        _react2['default'].createElement(_CalendarHeader2['default'], _extends({}, newProps, {
 	          mode: mode,
 	          enableNext: enableNext,
@@ -63022,7 +63042,7 @@
 	    };
 	
 	    _this.onClear = function (e) {
-	      e.stopPropagation();
+	      e && e.stopPropagation && e.stopPropagation();
 	      _this.setState({
 	        value: ''
 	      });

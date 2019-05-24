@@ -68,7 +68,8 @@ var CalendarPart = function (_React$Component) {
         enablePrev = props.enablePrev,
         enableNext = props.enableNext,
         clearIcon = props.clearIcon,
-        renderError = props.renderError;
+        renderError = props.renderError,
+        inputTabIndex = props.inputTabIndex;
 
     var shouldShowTimePicker = showTimePicker && timePicker;
     var disabledTimeConfig = shouldShowTimePicker && disabledTime ? (0, _index.getTimeConfig)(selectedValue, disabledTime) : null;
@@ -104,7 +105,8 @@ var CalendarPart = function (_React$Component) {
       onChange: onInputChange,
       onSelect: onInputSelect,
       clearIcon: clearIcon,
-      renderError: renderError
+      renderError: renderError,
+      inputTabIndex: inputTabIndex
     });
 
     return _react2["default"].createElement(
@@ -115,7 +117,7 @@ var CalendarPart = function (_React$Component) {
       dateInputElement,
       _react2["default"].createElement(
         'div',
-        { style: { outline: 'none' }, tabIndex: props.tabIndex },
+        { style: { outline: 'none' }, tabIndex: props.tabIndex, className: rangeClassName + '-out' },
         _react2["default"].createElement(_CalendarHeader2["default"], _extends({}, newProps, {
           mode: mode,
           enableNext: enableNext,

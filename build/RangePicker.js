@@ -254,23 +254,37 @@ var _initialiseProps = function _initialiseProps() {
     };
 
     this.inputFocus = function () {
-        var format = _this3.props.format;
-
         var inputs = document.querySelectorAll('.rc-calendar-input');
         if (inputs[0].value) {
             inputs[0].select();
         } else {
             inputs[0].focus();
         }
-        inputs[0].onkeydown = _this3.keydown;
-        inputs[1].onkeydown = _this3.keydown;
+        inputs[0].onkeydown = _this3.keydownLeft;
+        inputs[1].onkeydown = _this3.keydownRight;
     };
 
-    this.keydown = function (e) {
+    this.keydownLeft = function (e) {
+        var inputs = document.querySelectorAll('.rc-calendar-input');
         if (e.keyCode == _tinperBeeCore.KeyCode.ESC) {
             _this3.setState({
                 open: false
             });
+        }
+        if (e.keyCode == _tinperBeeCore.KeyCode.RIGHT || e.keyCode == _tinperBeeCore.KeyCode.LEFT) {
+            inputs[1].focus();
+        }
+    };
+
+    this.keydownRight = function (e) {
+        var inputs = document.querySelectorAll('.rc-calendar-input');
+        if (e.keyCode == _tinperBeeCore.KeyCode.ESC) {
+            _this3.setState({
+                open: false
+            });
+        }
+        if (e.keyCode == _tinperBeeCore.KeyCode.LEFT || e.keyCode == _tinperBeeCore.KeyCode.RIGHT) {
+            inputs[0].focus();
         }
     };
 };

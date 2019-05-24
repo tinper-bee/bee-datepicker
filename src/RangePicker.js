@@ -12,6 +12,7 @@ import classNames from 'classnames';
 import { KeyCode } from 'tinper-bee-core';
 import { formatDate } from './rc-calendar/util';
 import zhCN from "./locale/zh_CN";
+import { fireKeyEvent } from './rc-calendar/util'
 
 import moment from "moment";
 import "moment/locale/zh-cn";
@@ -127,21 +128,36 @@ class RangePicker extends Component {
         })
     }
     inputFocus=()=>{
-        const { format } = this.props;
         let inputs = document.querySelectorAll('.rc-calendar-input');
         if(inputs[0].value){
             inputs[0].select()
         }else{
             inputs[0].focus()
         }
-        inputs[0].onkeydown=this.keydown;
-        inputs[1].onkeydown=this.keydown;
+        inputs[0].onkeydown=this.keydownLeft;
+        inputs[1].onkeydown=this.keydownRight;
     }
-    keydown=(e)=>{
+
+    keydownLeft=(e)=>{
+        let inputs = document.querySelectorAll('.rc-calendar-input');
         if(e.keyCode == KeyCode.ESC){
             this.setState({
                 open:false
             });
+        }
+        if(e.keyCode == KeyCode.RIGHT||e.keyCode == KeyCode.LEFT){
+            inputs[1].focus()
+        }
+    }
+    keydownRight=(e)=>{
+        let inputs = document.querySelectorAll('.rc-calendar-input');
+        if(e.keyCode == KeyCode.ESC){
+            this.setState({
+                open:false
+            });
+        }
+        if(e.keyCode == KeyCode.LEFT||e.keyCode == KeyCode.RIGHT){
+            inputs[0].focus()
         }
     }
     render() {

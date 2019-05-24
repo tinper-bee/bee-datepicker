@@ -733,6 +733,8 @@ class RangeCalendar extends React.Component {
               enablePrev={!isClosestMonths || this.isMonthYearPanelShow(mode[0])}
               enableNext
               clearIcon={clearIcon}
+              tabIndex='0'
+              inputTabIndex='-1'
             />
           </div>
           <div className={cls}>

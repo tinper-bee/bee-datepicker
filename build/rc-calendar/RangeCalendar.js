@@ -304,7 +304,9 @@ var RangeCalendar = function (_React$Component) {
             disabledMonth: this.disabledEndMonth,
             enablePrev: !isClosestMonths || this.isMonthYearPanelShow(mode[0]),
             enableNext: true,
-            clearIcon: clearIcon
+            clearIcon: clearIcon,
+            tabIndex: '0',
+            inputTabIndex: '-1'
           }))
         ),
         _react2["default"].createElement(
