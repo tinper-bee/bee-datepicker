@@ -1,3 +1,13 @@
+<a name="2.0.37"></a>
+## [2.0.37](https://github.com/tinper-bee/bee-datepicker/compare/v2.0.36...v2.0.37) (2019-05-24)
+
+
+### Features
+
+* **bee-datepicker:** rangepicker 快捷键逻辑修改 ([f0cbf5f](https://github.com/tinper-bee/bee-datepicker/commit/f0cbf5f))
+
+
+
 <a name="2.0.36"></a>
 ## [2.0.36](https://github.com/tinper-bee/bee-datepicker/compare/v2.0.35...v2.0.36) (2019-05-21)
 
