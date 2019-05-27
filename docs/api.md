@@ -75,7 +75,6 @@ import 'bee-datepicker/build/DatePicker.css';
 |style|添加内联样式| Object| - |
 | value |当前值，如输入框的值|moment| - |
 | defaultValue|默认值，输入框的默认值| moment| - |
-| locale|语言 | Object |en_US |
 | disabledDate |禁用的日期|Function(current:moment):Boolean| - |
 | onSelect|选择日期的回调函数|Function(date: moment)| - |
 | onChange|日期改变的回调函数|Function(date: moment)| - |
