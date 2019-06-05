@@ -128,6 +128,8 @@ var RangePicker = function (_Component) {
             renderIcon: nextProps.renderIcon
         });
     };
+    //日期面板中输入框的失焦事件
+
 
     RangePicker.prototype.render = function render() {
         var _this2 = this;
@@ -154,7 +156,9 @@ var RangePicker = function (_Component) {
             showToday: props.showToday,
             renderFooter: props.renderFooter,
             timePicker: props.showTime ? timePickerElement : null,
-            renderError: props.renderError
+            renderError: props.renderError,
+            onStartInputBlur: this.onStartInputBlur,
+            onEndInputBlur: this.onEndInputBlur
         });
 
         return _react2["default"].createElement(
@@ -316,6 +320,14 @@ var _initialiseProps = function _initialiseProps() {
         if (e.keyCode == _tinperBeeCore.KeyCode.LEFT || e.keyCode == _tinperBeeCore.KeyCode.RIGHT) {
             inputs[0].focus();
         }
+    };
+
+    this.onStartInputBlur = function (e) {
+        _this3.props.onStartInputBlur && _this3.props.onStartInputBlur(e);
+    };
+
+    this.onEndInputBlur = function (e) {
+        _this3.props.onEndInputBlur && _this3.props.onEndInputBlur(e);
     };
 };
 
