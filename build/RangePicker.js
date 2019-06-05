@@ -323,11 +323,21 @@ var _initialiseProps = function _initialiseProps() {
     };
 
     this.onStartInputBlur = function (e) {
-        _this3.props.onStartInputBlur && _this3.props.onStartInputBlur(e);
+        var inputs = document.querySelectorAll('.rc-calendar-input');
+        var startValue = void 0;
+        if (inputs) {
+            startValue = inputs[0].value ? inputs[0].value : '';
+        }
+        _this3.props.onStartInputBlur && _this3.props.onStartInputBlur(e, startValue);
     };
 
     this.onEndInputBlur = function (e) {
-        _this3.props.onEndInputBlur && _this3.props.onEndInputBlur(e);
+        var inputs = document.querySelectorAll('.rc-calendar-input');
+        var endValue = void 0;
+        if (inputs) {
+            endValue = inputs[1].value ? inputs[1].value : '';
+        }
+        _this3.props.onEndInputBlur && _this3.props.onEndInputBlur(e, endValue);
     };
 };
 

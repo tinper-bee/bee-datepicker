@@ -395,7 +395,12 @@ var _initialiseProps = function _initialiseProps() {
   };
 
   this.onDateInputBlur = function (e) {
-    _this3.props.onDateInputBlur && _this3.props.onDateInputBlur(e);
+    var input = document.querySelector('.rc-calendar-input');
+    var value = void 0;
+    if (input) {
+      value = input.value ? input.value : '';
+    }
+    _this3.props.onDateInputBlur && _this3.props.onDateInputBlur(e, value);
   };
 };
 

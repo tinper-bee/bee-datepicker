@@ -222,7 +222,12 @@ class DatePicker extends Component {
   }
   //日期面板中输入框的失焦事件
   onDateInputBlur = (e) => {
-    this.props.onDateInputBlur && this.props.onDateInputBlur(e);
+    let input = document.querySelector('.rc-calendar-input');
+    let value;
+    if(input) {
+      value = input.value ? input.value : '';
+    }
+    this.props.onDateInputBlur && this.props.onDateInputBlur(e,value);
   }
   render() {
     let state = this.state;
