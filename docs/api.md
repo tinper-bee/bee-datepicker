@@ -60,6 +60,7 @@ import 'bee-datepicker/build/DatePicker.css';
 | onOpenChange |日期面板收起/展开状态改变时的回调|Function|-|
 | showClose |外层输入框是否显示清空按钮|Boolean|true|
 | onDateInputBlur |日期面板中输入框失去焦点的回调|Function|-|
+| placement | 日期面板弹出位置，可选 `bottomLeft/bottomRight/topRight/topLeft` | string | - | 
 
 
 
@@ -88,6 +89,7 @@ import 'bee-datepicker/build/DatePicker.css';
 | locale| 语言包 | Object |zh_CN |
 | closeIcon |鼠标划过清空内容的icon|Function| () => <Icon type="uf-close-c" />|
 | showClose |外层输入框是否显示清空按钮|Boolean|true|
+| placement | 日期面板弹出位置，可选 `bottomLeft/bottomRight/topRight/topLeft` | string | - | 
 
 ### RangePicker
 
@@ -125,6 +127,7 @@ import 'bee-datepicker/build/DatePicker.css';
 | onPanelChange |日期日期改变时的回调|Function|-|
 | onStartInputBlur |日期面板中 左输入框失去焦点的回调|Function|-|
 | onEndInputBlur |日期面板中 右输入框失去焦点的回调|Function|-|
+| placement | 日期面板弹出位置，可选 `bottomLeft/bottomRight/topRight/topLeft` | string | - | 
 
 ### WeekPicker
 
@@ -149,6 +152,7 @@ import 'bee-datepicker/build/DatePicker.css';
 | locale| 语言包 | Object |zh_CN |
 | closeIcon |鼠标划过清空内容的icon|Function| () => <Icon type="uf-close-c" />|
 | showClose |外层输入框是否显示清空按钮|Boolean|true|
+| placement | 日期面板弹出位置，可选 `bottomLeft/bottomRight/topRight/topLeft` | string | - | 
 
 
 ### Moment.js
