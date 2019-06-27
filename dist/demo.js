@@ -62012,7 +62012,8 @@
 	            timePicker: props.showTime ? timePickerElement : null,
 	            renderError: props.renderError,
 	            onStartInputBlur: this.onStartInputBlur,
-	            onEndInputBlur: this.onEndInputBlur
+	            onEndInputBlur: this.onEndInputBlur,
+	            onClear: this.clear
 	        });
 	
 	        return _react2["default"].createElement(
@@ -62043,7 +62044,7 @@
 	                            _this2.outInputFocus(e);
 	                        }
 	                    }),
-	                    showClose && _this2.state.value.length > 0 && _this2.state.showClose && !props.disabled ? _react2["default"].createElement(
+	                    showClose && _this2.state.value && _this2.state.value.length > 0 && _this2.state.showClose && !props.disabled ? _react2["default"].createElement(
 	                        _beeInputGroup2["default"].Button,
 	                        { shape: "border",
 	                            onClick: _this2.clear },
@@ -62107,11 +62108,11 @@
 	    };
 	
 	    this.clear = function (e) {
-	        e.stopPropagation();
+	        e && e.stopPropagation && e.stopPropagation();
 	        _this3.setState({
-	            value: ''
+	            value: []
 	        });
-	        _this3.props.onChange && _this3.props.onChange('', '');
+	        _this3.props.onChange && _this3.props.onChange([], []);
 	    };
 	
 	    this.onOpenChange = function (open) {
@@ -62356,7 +62357,7 @@
 	
 	    _initialiseProps.call(_this);
 	
-	    var selectedValue = props.selectedValue || props.defaultSelectedValue;
+	    var selectedValue = props.selectedValue || props.defaultSelectedValue || [];
 	    var value = normalizeAnchor(props, 1);
 	    _this.state = {
 	      selectedValue: selectedValue,
@@ -63099,7 +63100,7 @@
 	
 	  this.clear = function () {
 	    _this2.fireSelectValueChange([], true);
-	    _this2.props.onClear();
+	    _this2.props.onClear([]);
 	  };
 	
 	  this.disabledStartTime = function (time) {
