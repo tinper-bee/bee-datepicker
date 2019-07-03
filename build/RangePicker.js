@@ -227,6 +227,8 @@ var _initialiseProps = function _initialiseProps() {
             }
         } else {
             props.onPanelChange && props.onPanelChange(value);
+            //只选择开始日期，并关闭日期面板时，触发 onChange 事件
+            props.onChange([null, null]);
         }
     };
 
