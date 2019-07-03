@@ -34584,7 +34584,6 @@
 	  this.onOpenChange = function (open) {
 	    var props = _this3.props;
 	    var self = _this3;
-	    if ('open' in props) return;
 	    _this3.setState({
 	      open: open
 	    }, function () {
@@ -62007,9 +62006,16 @@
 	var _initialiseProps = function _initialiseProps() {
 	    var _this3 = this;
 	
+	    this.clearHoverValue = function () {
+	        return _this3.setState({ hoverValue: [] });
+	    };
+	
 	    this.onChange = function (value) {
 	        var props = _this3.props;
 	        var formatStr = props.format || 'YYYY-MM-DD';
+	        if (value.length < 2) {
+	            return;
+	        }
 	        _this3.setState({
 	            value: value
 	        });
@@ -62023,8 +62029,6 @@
 	            }
 	        } else {
 	            props.onPanelChange && props.onPanelChange(value);
-	            //只选择开始日期，并关闭日期面板时，触发 onChange 事件
-	            props.onChange([null, null]);
 	        }
 	    };
 	
@@ -62062,6 +62066,11 @@
 	    this.onOpenChange = function (open) {
 	        var props = _this3.props;
 	        var self = _this3;
+	
+	        if (open === false) {
+	            _this3.clearHoverValue();
+	        }
+	
 	        _this3.setState({
 	            open: open
 	        }, function () {
@@ -62086,6 +62095,9 @@
 	
 	    this.inputFocus = function () {
 	        var inputs = document.querySelectorAll('.rc-calendar-input');
+	        if (!inputs) {
+	            return;
+	        }
 	        if (inputs[0].value) {
 	            inputs[0].select();
 	        } else {
