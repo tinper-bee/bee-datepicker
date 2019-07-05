@@ -63027,7 +63027,9 @@
 	      _this2.fireHoverValueChange(selectedValue.concat());
 	    }
 	    selectedValue.map(function (item) {
-	      item._type = 'range';
+	      if (item) {
+	        item._type = 'range';
+	      }
 	    });
 	    _this2.props.onChange(selectedValue);
 	    if (direct || selectedValue[0] && selectedValue[1]) {
