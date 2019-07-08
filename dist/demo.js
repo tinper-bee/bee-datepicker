@@ -34611,7 +34611,7 @@
 	  this.handleChange = function (value) {
 	    var props = _this3.props;
 	    _this3.setState({
-	      value: _extends(value, { _type: 'date' }),
+	      value: value && _extends(value, { _type: 'date' }) || value,
 	      inputValue: value && _this3.getValue(value) || ''
 	    });
 	    if (timerDatePicker) {
@@ -54144,9 +54144,7 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _KeyCode = __webpack_require__(272);
-	
-	var _KeyCode2 = _interopRequireDefault(_KeyCode);
+	var _tinperBeeCore = __webpack_require__(26);
 	
 	var _reactLifecyclesCompat = __webpack_require__(92);
 	
@@ -54306,7 +54304,7 @@
 	    if (!str) {
 	      onChange(null);
 	      _this2.setState({
-	        invalid: false,
+	        // invalid: false,
 	        str: str
 	      });
 	      return;
@@ -54316,7 +54314,7 @@
 	    var parsed = (0, _moment2['default'])(str, format, true);
 	    if (!parsed.isValid()) {
 	      _this2.setState({
-	        invalid: true,
+	        // invalid: true,
 	        str: str
 	      });
 	      return;
@@ -54327,7 +54325,7 @@
 	
 	    if (!value || disabledDate && disabledDate(value)) {
 	      _this2.setState({
-	        invalid: true,
+	        // invalid: true,
 	        str: str
 	      });
 	      return;
@@ -54335,7 +54333,7 @@
 	
 	    if (selectedValue !== value || selectedValue && value && !selectedValue.isSame(value)) {
 	      _this2.setState({
-	        invalid: false,
+	        // invalid: false,
 	        str: str
 	      });
 	      onChange(value);
@@ -54347,6 +54345,47 @@
 	  };
 	
 	  this.onBlur = function (e) {
+	    var str = e.target.value;
+	    var _props2 = _this2.props,
+	        disabledDate = _props2.disabledDate,
+	        format = _props2.format,
+	        onChange = _props2.onChange,
+	        selectedValue = _props2.selectedValue;
+	
+	    // 没有内容，合法并直接退出
+	
+	    if (!str) {
+	      _this2.setState({
+	        invalid: false
+	      });
+	      return;
+	    }
+	
+	    // 不合法直接退出
+	    var parsed = (0, _moment2['default'])(str, format, true);
+	    if (!parsed.isValid()) {
+	      _this2.setState({
+	        invalid: true
+	      });
+	      return;
+	    }
+	
+	    var value = _this2.props.value.clone();
+	    value.year(parsed.year()).month(parsed.month()).date(parsed.date()).hour(parsed.hour()).minute(parsed.minute()).second(parsed.second());
+	
+	    if (!value || disabledDate && disabledDate(value)) {
+	      _this2.setState({
+	        invalid: true
+	      });
+	      return;
+	    }
+	
+	    if (selectedValue !== value || selectedValue && value && !selectedValue.isSame(value)) {
+	      _this2.setState({
+	        invalid: false
+	      });
+	    }
+	
 	    _this2.setState(function (prevState, prevProps) {
 	      return {
 	        hasFocus: false,
@@ -54357,18 +54396,23 @@
 	  };
 	
 	  this.onKeyDown = function (e) {
-	    var _props2 = _this2.props,
-	        onSelect = _props2.onSelect,
-	        value = _props2.value,
-	        onKeyDown = _props2.onKeyDown,
-	        format = _props2.format,
-	        isRange = _props2.isRange;
+	    var _props3 = _this2.props,
+	        onSelect = _props3.onSelect,
+	        value = _props3.value,
+	        onKeyDown = _props3.onKeyDown,
+	        format = _props3.format,
+	        isRange = _props3.isRange;
 	
 	    var str = e.target.value;
 	    var parsed = (0, _moment2['default'])(str, format, true);
-	    if (e.keyCode === _KeyCode2['default'].ENTER) {
+	    if (e.keyCode === _tinperBeeCore.KeyCode.ENTER) {
 	      if (parsed.isValid() && onSelect) {
 	        isRange ? onSelect(parsed.clone()) : onSelect(value.clone()); //FIX https://github.com/iuap-design/tinper-bee/issues/183
+	      }
+	      if (!parsed.isValid()) {
+	        _this2.setState({
+	          invalid: true
+	        });
 	      }
 	    }
 	    // if (e.keyCode === KeyCode.ENTER && onSelect) {
