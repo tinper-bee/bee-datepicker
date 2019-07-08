@@ -36,7 +36,8 @@ import 'bee-datepicker/build/DatePicker.css';
 | value|日期| moment| - |
 | locale| 语言包 | Object |zh_CN |
 | format|日期格式化| String | - |
-| open|日期组件隐藏、显示| Boolean | false |
+| open|日期组件显示/隐藏，该值可动态改变| Boolean | false |
+| defaultPanelShown |设置日期组件显示/隐藏的默认状态，该值不可更改|Boolean|false|
 | disabled|是否禁用功能|Boolean| false |
 | disabledDate |禁用的日期|Function(current:moment):Boolean| - |
 | disabledTime |禁用的时间|Function(current:moment):Object| - |

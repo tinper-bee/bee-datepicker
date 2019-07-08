@@ -34430,7 +34430,8 @@
 	
 	    var state = this.state;
 	    var props = this.props;
-	    var showClose = props.showClose;
+	    var showClose = props.showClose,
+	        defaultPanelShown = props.defaultPanelShown;
 	
 	    var value = state.value;
 	    var pickerChangeHandler = {};
@@ -34478,7 +34479,7 @@
 	          onOpenChange: this.onOpenChange,
 	          calendar: calendar,
 	          mode: 'year',
-	          open: this.state.open,
+	          open: 'defaultPanelShown' in props ? defaultPanelShown : this.state.open,
 	          value: state.value
 	        }),
 	        function () {

@@ -235,7 +235,7 @@ class DatePicker extends Component {
   render() {
     let state = this.state;
     let props = this.props;
-    const { showClose } = props;
+    const { showClose,defaultPanelShown } = props;
     let value = state.value;
     let pickerChangeHandler = {};
     let calendarHandler = {};
@@ -282,7 +282,7 @@ class DatePicker extends Component {
           onOpenChange={this.onOpenChange}
           calendar={calendar}
           mode = {'year'}
-          open={this.state.open}
+          open={'defaultPanelShown' in props ? defaultPanelShown : this.state.open}
           value={state.value}
         >
           {() => {
