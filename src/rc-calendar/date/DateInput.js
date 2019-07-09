@@ -168,6 +168,15 @@ class DateInput extends React.Component {
       if(parsed.isValid()&& onSelect){
         isRange?onSelect(parsed.clone()):onSelect(value.clone());//FIX https://github.com/iuap-design/tinper-bee/issues/183
       }
+      // 没有内容，回填默认值，并关闭面板
+      if (!str) {
+        this.setState({
+          invalid: false
+        });
+        onSelect && onSelect(moment());
+        return;
+      }
+      // 有内容，判断是否合法
       if (!parsed.isValid()) {
         this.setState({
           invalid: true

@@ -281,6 +281,15 @@ var _initialiseProps = function _initialiseProps() {
       if (parsed.isValid() && onSelect) {
         isRange ? onSelect(parsed.clone()) : onSelect(value.clone()); //FIX https://github.com/iuap-design/tinper-bee/issues/183
       }
+      // 没有内容，回填默认值，并关闭面板
+      if (!str) {
+        _this2.setState({
+          invalid: false
+        });
+        onSelect && onSelect((0, _moment2["default"])());
+        return;
+      }
+      // 有内容，判断是否合法
       if (!parsed.isValid()) {
         _this2.setState({
           invalid: true

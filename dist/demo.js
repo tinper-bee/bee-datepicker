@@ -54410,6 +54410,15 @@
 	      if (parsed.isValid() && onSelect) {
 	        isRange ? onSelect(parsed.clone()) : onSelect(value.clone()); //FIX https://github.com/iuap-design/tinper-bee/issues/183
 	      }
+	      // 没有内容，回填默认值，并关闭面板
+	      if (!str) {
+	        _this2.setState({
+	          invalid: false
+	        });
+	        onSelect && onSelect((0, _moment2['default'])());
+	        return;
+	      }
+	      // 有内容，判断是否合法
 	      if (!parsed.isValid()) {
 	        _this2.setState({
 	          invalid: true
@@ -61451,7 +61460,7 @@
 	      // }
 	
 	      _this.setState({
-	        value: _extends(value, { _type: 'month' })
+	        value: value && _extends(value, { _type: 'month' }) || value
 	      });
 	      onChange && onChange(value, value ? value.format(format) : '');
 	    };
@@ -63518,7 +63527,7 @@
 	
 	    _this.handleCalendarChange = function (value) {
 	      _this.setState({
-	        value: _extends(value, { _type: 'week' })
+	        value: value && _extends(value, { _type: 'week' }) || value
 	      });
 	    };
 	
@@ -63860,7 +63869,7 @@
 	    this.handleChange = function (value) {
 	        var props = _this3.props;
 	        _this3.setState({
-	            value: _extends(value, { _type: 'year' })
+	            value: value && _extends(value, { _type: 'year' }) || value
 	        });
 	        props.onChange && props.onChange(value, value && value.format(props.format) || '');
 	    };
