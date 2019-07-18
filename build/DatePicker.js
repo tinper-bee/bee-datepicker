@@ -80,7 +80,7 @@ var DatePicker = function (_Component) {
 
     _this.state = {
       type: "month",
-      value: props.value || props.defaultValue || _moment2["default"].Moment,
+      value: (0, _moment2["default"])(props.value) || (0, _moment2["default"])(props.defaultValue) || _moment2["default"].Moment,
       open: props.open || false,
       inputValue: props.value && _this.getValue(props.value) || props.defaultValue && _this.getValue(props.defaultValue) || '',
       showClose: false
@@ -92,7 +92,7 @@ var DatePicker = function (_Component) {
   DatePicker.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
     if ("value" in nextProps) {
       this.setState({
-        value: nextProps.value
+        value: (0, _moment2["default"])(nextProps.value)
       });
     }
     if ("open" in nextProps) {
