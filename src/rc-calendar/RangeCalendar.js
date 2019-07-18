@@ -606,6 +606,10 @@ class RangeCalendar extends React.Component {
     return month.isSameOrBefore(value[0], 'month');
   }
 
+  onMouseOver = (e) => {
+    e.stopPropagation();
+  }
+
   render() {
     const { props, state } = this;
     const {
@@ -678,7 +682,7 @@ class RangeCalendar extends React.Component {
         onKeyDown={this.onKeyDown}
       >
         {props.renderSidebar()}
-        <div className={`${prefixCls}-panel`}>
+        <div className={`${prefixCls}-panel`} onMouseOver={this.onMouseOver}>
           {showClear && selectedValue[0] && selectedValue[1] ?
             <a
               role="button"

@@ -244,7 +244,7 @@ var RangeCalendar = function (_React$Component) {
       props.renderSidebar(),
       _react2["default"].createElement(
         'div',
-        { className: prefixCls + '-panel' },
+        { className: prefixCls + '-panel', onMouseOver: this.onMouseOver },
         showClear && selectedValue[0] && selectedValue[1] ? _react2["default"].createElement(
           'a',
           {
@@ -904,6 +904,10 @@ var _initialiseProps = function _initialiseProps() {
     var value = _this2.state.value;
 
     return month.isSameOrBefore(value[0], 'month');
+  };
+
+  this.onMouseOver = function (e) {
+    e.stopPropagation();
   };
 };
 

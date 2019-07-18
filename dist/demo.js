@@ -34969,7 +34969,8 @@
 	        'div',
 	        {
 	          tabIndex: this.props.focusablePanel ? 0 : undefined,
-	          className: prefixCls + '-date-panel'
+	          className: prefixCls + '-date-panel',
+	          onMouseOver: this.onMouseOver
 	        },
 	        _react2['default'].createElement(_CalendarHeader2['default'], {
 	          locale: locale,
@@ -35215,6 +35216,10 @@
 	
 	  this.goTime = function (direction, unit) {
 	    _this2.setValue((0, _toTime.goTime)(_this2.state.value, direction, unit));
+	  };
+	
+	  this.onMouseOver = function (e) {
+	    e.stopPropagation();
 	  };
 	};
 	
@@ -53665,7 +53670,7 @@
 	    var prefixCls = props.prefixCls;
 	    var locale = props.locale;
 	    var value = props.value;
-	    var localeData = value.localeData();
+	    var localeData = value.localeData && value.localeData();
 	    var monthBeforeYear = locale.monthBeforeYear;
 	    var selectClassName = prefixCls + '-' + (monthBeforeYear ? 'my-select' : 'ym-select');
 	    var timeClassName = showTimePicker ? ' ' + prefixCls + '-time-status' : '';
@@ -62498,7 +62503,7 @@
 	      props.renderSidebar(),
 	      _react2['default'].createElement(
 	        'div',
-	        { className: prefixCls + '-panel' },
+	        { className: prefixCls + '-panel', onMouseOver: this.onMouseOver },
 	        showClear && selectedValue[0] && selectedValue[1] ? _react2['default'].createElement(
 	          'a',
 	          {
@@ -63158,6 +63163,10 @@
 	    var value = _this2.state.value;
 	
 	    return month.isSameOrBefore(value[0], 'month');
+	  };
+	
+	  this.onMouseOver = function (e) {
+	    e.stopPropagation();
 	  };
 	};
 	
