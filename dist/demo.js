@@ -53363,7 +53363,9 @@
 	
 	function getTodayTime(value) {
 	  var today = (0, _moment2['default'])();
-	  today.locale(value.locale()).utcOffset(value.utcOffset());
+	  if (typeof value !== 'undefined') {
+	    today.locale(value.locale()).utcOffset(value.utcOffset());
+	  }
 	  return today;
 	}
 	
@@ -62148,7 +62150,10 @@
 	    this.onOpenChange = function (open) {
 	        var props = _this3.props;
 	        var self = _this3;
-	
+	        // let {value} = this.state;
+	        // if(!isValidRange(value)){
+	        //     debugger
+	        // }
 	        if (open === false) {
 	            _this3.clearHoverValue();
 	        }
@@ -62382,7 +62387,11 @@
 	  var selectedValue = originalValue.concat();
 	  var index = direction === 'left' ? 0 : 1;
 	  selectedValue[index] = value;
+	  // console.log(selectedValue[0], selectedValue[1], this.compare(selectedValue[0], selectedValue[1]))
 	  if (selectedValue[0] && this.compare(selectedValue[0], selectedValue[1]) > 0) {
+	    selectedValue[1] = this.state.showTimePicker ? selectedValue[index] : undefined;
+	  }
+	  if (selectedValue[0] && !selectedValue[1]) {
 	    selectedValue[1 - index] = this.state.showTimePicker ? selectedValue[index] : undefined;
 	  }
 	  this.props.onInputSelect(selectedValue);
@@ -63071,7 +63080,7 @@
 	    if (_this2.props.timePicker) {
 	      return v1.diff(v2);
 	    }
-	    return v1.diff(v2, 'days');
+	    return v1 && v1.diff(v2, 'days');
 	  };
 	
 	  this.fireSelectValueChange = function (selectedValue, direct, cause) {

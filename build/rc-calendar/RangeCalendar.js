@@ -121,7 +121,11 @@ function onInputSelect(direction, value, cause) {
   var selectedValue = originalValue.concat();
   var index = direction === 'left' ? 0 : 1;
   selectedValue[index] = value;
+  // console.log(selectedValue[0], selectedValue[1], this.compare(selectedValue[0], selectedValue[1]))
   if (selectedValue[0] && this.compare(selectedValue[0], selectedValue[1]) > 0) {
+    selectedValue[1] = this.state.showTimePicker ? selectedValue[index] : undefined;
+  }
+  if (selectedValue[0] && !selectedValue[1]) {
     selectedValue[1 - index] = this.state.showTimePicker ? selectedValue[index] : undefined;
   }
   this.props.onInputSelect(selectedValue);
@@ -810,7 +814,7 @@ var _initialiseProps = function _initialiseProps() {
     if (_this2.props.timePicker) {
       return v1.diff(v2);
     }
-    return v1.diff(v2, 'days');
+    return v1 && v1.diff(v2, 'days');
   };
 
   this.fireSelectValueChange = function (selectedValue, direct, cause) {
