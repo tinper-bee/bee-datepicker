@@ -193,7 +193,7 @@ class WeekPicker extends Component {
     );
     let classes = classnames(props.className, "datepicker-container");
     return (
-      <div className={classes} onClick={this.stopPropagation}>
+      <div className={classes} onClick={this.stopPropagation} onMouseOver={this.stopPropagation}>
         {/* <style dangerouslySetInnerHTML={{ __html: style }} /> */}
         <Picker
           animation="slide-up"

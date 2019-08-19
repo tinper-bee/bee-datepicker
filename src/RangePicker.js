@@ -250,7 +250,7 @@ class RangePicker extends Component {
     );
 
       return (
-          <div onClick={this.stopPropagation}>
+          <div onClick={this.stopPropagation} onMouseOver={this.stopPropagation}>
           <Picker
               value = {value}
               animation={'animation' in props ? props.animation : "slide-up"}

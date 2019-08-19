@@ -143,7 +143,7 @@ class YearPicker extends Component {
         />;
         let classes = classnames(props.className, "datepicker-container");
         return (
-            <div className={classes} onClick={this.stopPropagation}>
+            <div className={classes} onClick={this.stopPropagation} onMouseOver={this.stopPropagation}>
                 <Picker
                     animation="slide-up"
                     {...props}

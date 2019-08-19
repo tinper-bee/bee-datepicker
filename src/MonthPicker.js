@@ -114,7 +114,7 @@ class MonthPicker extends Component {
     />;
     let classes = classnames(props.className, "datepicker-container");
     return (
-      <div className={classes} onClick={this.stopPropagation}>
+      <div className={classes} onClick={this.stopPropagation} onMouseOver={this.stopPropagation}>
         <Picker
           onOpenChange={this.onOpenChange}
           animation={'animation' in props ? props.animation : "slide-up"}
