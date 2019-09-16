@@ -192,7 +192,8 @@ YearPicker.defaultProps = {
     closeIcon:()=><Icon type="uf-close-c"/>,
     renderIcon: () => <Icon type="uf-calendar" />,
     disabled:false,
-    showClose:true
+    showClose:true,
+    format:'YYYY',
 }
 
 export default YearPicker;

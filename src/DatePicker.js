@@ -353,7 +353,8 @@ DatePicker.defaultProps = {
   showMonthInput:false,
   onKeyDown:()=>{},
   renderError:()=>{},
-  showClose:true
+  showClose:true,
+  format: "YYYY-MM-DD"	
 }
 
 export default DatePicker;

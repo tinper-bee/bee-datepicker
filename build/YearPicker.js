@@ -270,7 +270,8 @@ YearPicker.defaultProps = {
         return _react2["default"].createElement(_beeIcon2["default"], { type: "uf-calendar" });
     },
     disabled: false,
-    showClose: true
+    showClose: true,
+    format: 'YYYY'
 };
 
 exports["default"] = YearPicker;
