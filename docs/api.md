@@ -35,7 +35,7 @@ import 'bee-datepicker/build/DatePicker.css';
 | defaultValue|默认值，输入框的默认值| moment| - |
 | value|日期| moment| - |
 | locale| 语言包 | Object |zh_CN |
-| format|日期格式化| String | - |
+| format|日期格式化| String | "YYYY-MM-DD" |
 | open|日期组件显示/隐藏，该值可动态改变| Boolean | false |
 | defaultPanelShown |设置日期组件显示/隐藏的默认状态，该值不可更改|Boolean|false|
 | disabled|是否禁用功能|Boolean| false |
@@ -91,6 +91,7 @@ import 'bee-datepicker/build/DatePicker.css';
 | closeIcon |鼠标划过清空内容的icon|Function| () => <Icon type="uf-close-c" />|
 | showClose |外层输入框是否显示清空按钮|Boolean|true|
 | placement | 日期面板弹出位置，可选 `bottomLeft/bottomRight/topRight/topLeft` | string | bottomLeft | 
+| format|日期格式化| String | "YYYY-MM" |
 
 ### RangePicker
 
@@ -150,7 +151,7 @@ import 'bee-datepicker/build/DatePicker.css';
 | placeholder |输入框placeholder|String| - |
 | defaultValue|默认值|moment| 当前年 |
 | getCalendarContainer |更改默认渲染位置|Function| - |
-| format|日期格式化| String | - |
+| format|日期格式化| String | "YYYY" |
 | disabled|是否禁用功能|Boolean| false |
 | locale| 语言包 | Object |zh_CN |
 | closeIcon |鼠标划过清空内容的icon|Function| () => <Icon type="uf-close-c" />|

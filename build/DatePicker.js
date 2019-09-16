@@ -447,7 +447,8 @@ DatePicker.defaultProps = {
   showMonthInput: false,
   onKeyDown: function onKeyDown() {},
   renderError: function renderError() {},
-  showClose: true
+  showClose: true,
+  format: "YYYY-MM-DD"
 };
 
 exports["default"] = DatePicker;
