@@ -453,15 +453,16 @@ $disabled-border-color: #DFE1E6;
 .rc-calendar-footer-show-ok {
   text-align: right;
 }
-// .rc-calendar-footer-show-ok .rc-calendar-footer-btn {
-//   padding-right: 12px;
-// }
+.rc-calendar-footer-show-ok .rc-calendar-footer-btn {
+  padding-right: 0;
+}
 .rc-calendar-footer-show-ok .rc-calendar-time-picker-btn {
   margin-left: 0;
   padding: 0 12px;
 }
 .rc-calendar-footer-show-ok .rc-calendar-today-btn {
   float: left;
+  padding-left: 0;
 }
 .rc-calendar-footer-show-ok .rc-calendar-footer-btn {
   text-align: right;
@@ -507,9 +508,9 @@ $disabled-border-color: #DFE1E6;
 .rc-calendar-time-picker-btn-disabled:hover {
   color: $disabled-color-base;
 }
-// .rc-calendar-today-btn {
-//   padding-left: 10px;
-// }
+.rc-calendar-today-btn {
+  padding-left: 0;
+}
 .rc-calendar-time-input {
   height: 25px;
   position: relative;
@@ -1059,7 +1060,7 @@ $disabled-border-color: #DFE1E6;
   border-top: none;
 }
 .rc-calendar-range .rc-calendar-footer-btn {
-  padding: 8px 0;
+  padding: 8px 8px;
 }
 .rc-calendar-range .rc-calendar-ok-btn {
   position: static;
