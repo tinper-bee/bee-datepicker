@@ -9,6 +9,7 @@ export default {
   timeSelect: 'Vali aeg',
   dateSelect: 'Vali kuupäev',
   monthSelect: 'Vali kuu',
+  monthFormat: 'M.YYYY',
   yearSelect: 'Vali aasta',
   decadeSelect: 'Vali dekaad',
   yearFormat: 'YYYY',

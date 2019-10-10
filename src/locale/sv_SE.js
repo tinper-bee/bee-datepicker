@@ -9,6 +9,7 @@ export default {
   timeSelect: 'Välj tidpunkt',
   dateSelect: 'Välj datum',
   monthSelect: 'Välj månad',
+  monthFormat: 'YYYY-MM',
   yearSelect: 'Välj år',
   decadeSelect: 'Välj årtionde',
   yearFormat: 'YYYY',

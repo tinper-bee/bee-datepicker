@@ -9,6 +9,7 @@ export default {
   timeSelect: 'Seleccionar hora',
   dateSelect: 'Seleccionar data',
   monthSelect: 'Escollir un mes',
+  monthFormat: 'M/YYYY',
   yearSelect: 'Escollir un any',
   decadeSelect: 'Escollir una dècada',
   yearFormat: 'YYYY',
