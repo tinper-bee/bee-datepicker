@@ -14,6 +14,7 @@ exports["default"] = {
   timeSelect: 'Vybrat čas',
   dateSelect: 'Vybrat datum',
   monthSelect: 'Vyberte měsíc',
+  monthFormat: 'M.YYYY',
   yearSelect: 'Vyberte rok',
   decadeSelect: 'Vyberte dekádu',
   yearFormat: 'YYYY',

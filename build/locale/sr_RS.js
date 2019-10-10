@@ -14,6 +14,7 @@ exports["default"] = {
   timeSelect: 'Izaberi vreme',
   dateSelect: 'Izaberi datum',
   monthSelect: 'Izaberi mesec',
+  monthFormat: 'MM.YYYY',
   yearSelect: 'Izaberi godinu',
   decadeSelect: 'Izaberi deceniju',
   yearFormat: 'YYYY',

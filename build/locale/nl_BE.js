@@ -14,6 +14,7 @@ exports["default"] = {
   timeSelect: 'Selecteer tijd',
   dateSelect: 'Selecteer datum',
   monthSelect: 'Kies een maand',
+  monthFormat: 'M-YYYY',
   yearSelect: 'Kies een jaar',
   decadeSelect: 'Kies een decennium',
   yearFormat: 'YYYY',

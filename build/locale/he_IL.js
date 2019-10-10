@@ -15,6 +15,7 @@ exports["default"] = {
   dateSelect: 'בחר תאריך',
   weekSelect: 'בחר שבוע',
   monthSelect: 'בחר חודש',
+  monthFormat: 'M/YYYY',
   yearSelect: 'בחר שנה',
   decadeSelect: 'בחר עשור',
   yearFormat: 'YYYY',
