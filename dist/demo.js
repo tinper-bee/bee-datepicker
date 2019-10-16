@@ -54308,6 +54308,7 @@
 	        renderError = props.renderError,
 	        inputTabIndex = props.inputTabIndex;
 	
+	    console.log('=========', str, (0, _util.formatDate)(props.selectedValue, props.format));
 	    var invalidClass = invalid ? prefixCls + '-input-invalid' : '';
 	    return _react2['default'].createElement(
 	      'div',
@@ -54318,7 +54319,7 @@
 	        _react2['default'].createElement('input', {
 	          ref: this.saveDateInput,
 	          className: prefixCls + '-input ' + invalidClass,
-	          value: str,
+	          value: str ? str : (0, _util.formatDate)(props.selectedValue, props.format),
 	          disabled: props.disabled,
 	          placeholder: placeholder,
 	          onChange: this.onInputChange,
@@ -55614,6 +55615,7 @@
 	  dateSelect: 'select date',
 	  weekSelect: 'Choose a week',
 	  monthSelect: 'Choose a month',
+	  monthFormat: 'M/YYYY',
 	  yearSelect: 'Choose a year',
 	  decadeSelect: 'Choose a decade',
 	  yearFormat: 'YYYY',
@@ -61433,6 +61435,7 @@
 	  previousMonth: '上个月 (翻页上键)',
 	  nextMonth: '下个月 (翻页下键)',
 	  monthSelect: '选择月份',
+	  monthFormat: 'YYYY年M月',
 	  yearSelect: '选择年份',
 	  decadeSelect: '选择年代',
 	  yearFormat: 'YYYY年',
