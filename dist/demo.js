@@ -55615,7 +55615,7 @@
 	  dateSelect: 'select date',
 	  weekSelect: 'Choose a week',
 	  monthSelect: 'Choose a month',
-	  monthFormat: 'M/YYYY',
+	  monthFormat: 'M',
 	  yearSelect: 'Choose a year',
 	  decadeSelect: 'Choose a decade',
 	  yearFormat: 'YYYY',
@@ -61435,7 +61435,7 @@
 	  previousMonth: '上个月 (翻页上键)',
 	  nextMonth: '下个月 (翻页下键)',
 	  monthSelect: '选择月份',
-	  monthFormat: 'YYYY年M月',
+	  monthFormat: 'M月',
 	  yearSelect: '选择年份',
 	  decadeSelect: '选择年代',
 	  yearFormat: 'YYYY年',
@@ -61948,9 +61948,9 @@
 	          monthCellContentRender: props.monthCellContentRender,
 	          onMonthSelect: this.onSelect,
 	          onValueChange: this.setValue,
-	          onPanelChange: this.handlePanelChange
-	          // onChange={onChange}
-	          , onClear: onClear
+	          onPanelChange: this.handlePanelChange,
+	          onChange: onChange,
+	          onClear: onClear
 	        })
 	      ),
 	      _react2['default'].createElement(_CalendarFooter2['default'], {

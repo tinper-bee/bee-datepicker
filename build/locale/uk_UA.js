@@ -14,7 +14,7 @@ exports["default"] = {
   timeSelect: 'Обрати час',
   dateSelect: 'Обрати дату',
   monthSelect: 'Обрати місяць',
-  monthFormat: 'M-YYYY',
+  monthFormat: 'M',
   yearSelect: 'Обрати рік',
   decadeSelect: 'Обрати десятиріччя',
   yearFormat: 'YYYY',

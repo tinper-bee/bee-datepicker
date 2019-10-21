@@ -14,7 +14,7 @@ exports["default"] = {
   timeSelect: 'เลือกเวลา',
   dateSelect: 'เลือกวัน',
   monthSelect: 'เลือกเดือน',
-  monthFormat: 'M/YYYY',
+  monthFormat: 'M',
   yearSelect: 'เลือกปี',
   decadeSelect: 'เลือกทศวรรษ',
   yearFormat: 'YYYY',

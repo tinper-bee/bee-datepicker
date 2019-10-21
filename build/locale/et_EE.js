@@ -14,7 +14,7 @@ exports["default"] = {
   timeSelect: 'Vali aeg',
   dateSelect: 'Vali kuupäev',
   monthSelect: 'Vali kuu',
-  monthFormat: 'M.YYYY',
+  monthFormat: 'M',
   yearSelect: 'Vali aasta',
   decadeSelect: 'Vali dekaad',
   yearFormat: 'YYYY',

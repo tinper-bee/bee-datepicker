@@ -15,7 +15,7 @@ exports["default"] = {
   dateSelect: 'Chọn ngày',
   weekSelect: 'Chọn tuần',
   monthSelect: 'Chọn tháng',
-  monthFormat: 'M/YYYY',
+  monthFormat: 'M',
   yearSelect: 'Chọn năm',
   decadeSelect: 'Chọn thập kỷ',
   yearFormat: 'YYYY',

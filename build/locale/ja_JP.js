@@ -16,7 +16,7 @@ exports["default"] = {
   previousMonth: '前月 (ページアップキー)',
   nextMonth: '翌月 (ページダウンキー)',
   monthSelect: '月を選択',
-  monthFormat: 'YYYY年M月',
+  monthFormat: 'M月',
   yearSelect: '年を選択',
   decadeSelect: '年代を選択',
   yearFormat: 'YYYY年',

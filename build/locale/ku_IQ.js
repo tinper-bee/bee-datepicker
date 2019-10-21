@@ -14,7 +14,7 @@ exports["default"] = {
   timeSelect: 'Demê hilbijêre',
   dateSelect: 'Dîrok hilbijêre',
   monthSelect: 'Meh hilbijêre',
-  monthFormat: 'M/YYYY',
+  monthFormat: 'M',
   yearSelect: 'Sal hilbijêre',
   decadeSelect: 'Dehsal hilbijêre',
   yearFormat: 'YYYY',

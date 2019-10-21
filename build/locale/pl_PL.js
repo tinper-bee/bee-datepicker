@@ -14,7 +14,7 @@ exports["default"] = {
   timeSelect: 'Ustaw czas',
   dateSelect: 'Ustaw datę',
   monthSelect: 'Wybierz miesiąc',
-  monthFormat: 'M/YYYY',
+  monthFormat: 'M',
   yearSelect: 'Wybierz rok',
   decadeSelect: 'Wybierz dekadę',
   yearFormat: 'YYYY',

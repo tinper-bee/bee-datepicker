@@ -9,7 +9,7 @@ export default {
   timeSelect: 'Izberite čas',
   dateSelect: 'Izberite datum',
   monthSelect: 'Izberite mesec',
-  monthFormat: 'MM.YYYY',
+  monthFormat: 'MM',
   yearSelect: 'Izberite leto',
   decadeSelect: 'Izberite desetletje',
   yearFormat: 'YYYY',

@@ -14,7 +14,7 @@ exports["default"] = {
   timeSelect: 'انتخاب زمان',
   dateSelect: 'انتخاب تاریخ',
   monthSelect: 'یک ماه را انتخاب کنید',
-  monthFormat: 'M/YYYY',
+  monthFormat: 'M',
   yearSelect: 'یک سال را انتخاب کنید',
   decadeSelect: 'یک دهه را انتخاب کنید',
   yearFormat: 'YYYY',
