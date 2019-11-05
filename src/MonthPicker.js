@@ -13,6 +13,7 @@ import InputGroup from 'bee-input-group';
 import classnames from 'classnames';
 import zhCN from "./locale/zh_CN";
 import omit from 'omit.js';
+import moment from "moment";
 
 class MonthPicker extends Component {
   constructor(props, context) {
@@ -26,17 +27,46 @@ class MonthPicker extends Component {
     };
   }
 
+  componentDidMount(){
+    let value = this.props.value || this.props.defaultValue;
+    if(value){
+      if(value.format){
+        value = value;
+      }else{
+        if(moment(value).isValid()){
+          value = moment(value);
+        }else{
+          console.error('value is not in the correct format');
+          value = null
+        }
+      }
+    }
+    this.setState({
+      value
+    })
+  }
+
+  componentWillReceiveProps(nextProps){
+    if('value' in nextProps){
+        let value = nextProps.value;
+        if(value){
+            if(value.format){
+                
+            }else{
+                value = moment(value)
+            }
+        }else{
+            value=null;
+        }
+        this.setState({
+            value
+        })
+    }
+}
+
   onChange = (value) => {
     let { onChange,onClear,onSelect,format } = this.props;
-    // if(value){
-    //   this.setState({
-    //     value:value
-    //   });
-    // }else{
-    //   this.setState({
-    //     value:moment()
-    //   })
-    // }
+
     this.setState({
       value: value && Object.assign(value, {_type:'month'}) || value
     });
@@ -115,10 +145,10 @@ class MonthPicker extends Component {
   }
   render() {
     let state = this.state;
-
     let props = this.props;
-    const { showClose, ...others } = props;
+    const { showClose,value, ...others } = props;
     const monthCalendar = <MonthCalendar {...props}
+      value = {state.value}
       onChange={this.onChange} 
     />;
     let classes = classnames(props.className, "datepicker-container");
@@ -144,8 +174,10 @@ class MonthPicker extends Component {
           value={state.value}
           onChange={this.onChange} 
           dropdownClassName={props.dropdownClassName}
+          selectedValue={state.value}
         >
           {({ value }) => {
+            if(value&&value.format)value=value.format(props.format);
             return (
                 <InputGroup simple className="datepicker-input-group"
                   onMouseEnter={this.onMouseEnter}
@@ -155,7 +187,7 @@ class MonthPicker extends Component {
                     ref = { ref => this.outInput = ref }
                     placeholder={this.props.placeholder}
                     className={this.props.className}
-                    value={(value && value.format(props.format)) || ""}
+                    value={value}
                     disabled={props.disabled}
                   />
                   {
