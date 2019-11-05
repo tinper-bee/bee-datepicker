@@ -1,3 +1,13 @@
+<a name="2.2.13"></a>
+## [2.2.13](https://github.com/tinper-bee/bee-datepicker/compare/v2.2.12...v2.2.13) (2019-11-05)
+
+
+### Bug Fixes
+
+* **bee-datepicker:** monthpicker 使用 form报错bug,并新增normal示例 ([4ff86c6](https://github.com/tinper-bee/bee-datepicker/commit/4ff86c6))
+
+
+
 <a name="2.2.12"></a>
 ## [2.2.12](https://github.com/tinper-bee/bee-datepicker/compare/v2.2.11...v2.2.12) (2019-10-21)
 
