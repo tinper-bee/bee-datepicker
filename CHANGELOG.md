@@ -1,3 +1,13 @@
+<a name="2.2.14"></a>
+## [2.2.14](https://github.com/tinper-bee/bee-datepicker/compare/v2.2.13...v2.2.14) (2019-11-12)
+
+
+### Features
+
+* **bee-datepicker:** MonthPicker支持传数组 ([3488133](https://github.com/tinper-bee/bee-datepicker/commit/3488133))
+
+
+
 <a name="2.2.13"></a>
 ## [2.2.13](https://github.com/tinper-bee/bee-datepicker/compare/v2.2.12...v2.2.13) (2019-11-05)
 
