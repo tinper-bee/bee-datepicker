@@ -164,7 +164,8 @@ class MonthPicker extends Component {
         'locale',
         'placeholder',
         'onClear',
-        'renderFooter'
+        'renderFooter',
+        'renderError',
       ])}
       >
         <Picker
@@ -176,6 +177,7 @@ class MonthPicker extends Component {
           onChange={this.onChange} 
           dropdownClassName={props.dropdownClassName}
           selectedValue={state.value}
+          renderError={props.renderError}
         >
           {({ value }) => {
             if(value&&value.format)value=formatDate(value,props.format);
@@ -215,6 +217,7 @@ MonthPicker.defaultProps = {
     closeIcon:()=><Icon type="uf-close-c"/>,
     renderIcon: () => <Icon type="uf-calendar" />,
     format:'YYYY-MM',
+    renderError:()=>{},
     showDateInput:true,
     showMonthInput:true,
     locale:zhCN,

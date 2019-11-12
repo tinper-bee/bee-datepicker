@@ -115,7 +115,7 @@ class MonthCalendar extends React.Component {
     let { mode, value } = state;
     value = value?value:moment()
     const { prefixCls,locale,format,showDateInput,onChange,onSelect,
-      onClear,showMonthInput } = props;
+      onClear,showMonthInput,renderError } = props;
     const children = (
       <div className={`${props.prefixCls}-month-calendar-content`}>
         <div className={`${props.prefixCls}-month-header-wrap`}>
@@ -129,6 +129,7 @@ class MonthCalendar extends React.Component {
             onChange={this.onInputChange}
             selectedValue={value}
             onClear={this.onClear}
+            renderError={renderError}
           />:''
         }
           <CalendarHeader

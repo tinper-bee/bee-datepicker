@@ -91,7 +91,9 @@ import 'bee-datepicker/build/DatePicker.css';
 | closeIcon |鼠标划过清空内容的icon|Function| () => <Icon type="uf-close-c" />|
 | showClose |外层输入框是否显示清空按钮|Boolean|true|
 | placement | 日期面板弹出位置，可选 `bottomLeft/bottomRight/topRight/topLeft` | string | bottomLeft | 
-| format|日期格式化| String | "YYYY-MM" |
+| format|日期格式化| String/Array | "YYYY-MM" |
+|renderError|当输入格式不对的时候显示在输入框下边的错误提示|() => React.Node| - |
+
 
 ### RangePicker
 

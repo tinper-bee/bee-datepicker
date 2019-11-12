@@ -158,7 +158,8 @@ var MonthCalendar = function (_React$Component) {
         onChange = props.onChange,
         onSelect = props.onSelect,
         onClear = props.onClear,
-        showMonthInput = props.showMonthInput;
+        showMonthInput = props.showMonthInput,
+        renderError = props.renderError;
 
     var children = _react2["default"].createElement(
       'div',
@@ -174,7 +175,8 @@ var MonthCalendar = function (_React$Component) {
           format: format,
           onChange: this.onInputChange,
           selectedValue: value,
-          onClear: this.onClear
+          onClear: this.onClear,
+          renderError: renderError
         }) : '',
         _react2["default"].createElement(_CalendarHeader2["default"], {
           prefixCls: props.prefixCls,

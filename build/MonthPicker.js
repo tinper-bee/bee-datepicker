@@ -142,7 +142,7 @@ var MonthPicker = function (_Component) {
     return _react2["default"].createElement(
       "div",
       _extends({ className: classes, onClick: this.stopPropagation, onMouseOver: this.stopPropagation
-      }, (0, _omit2["default"])(others, ['closeIcon', 'renderIcon', 'format', 'showDateInput', 'showMonthInput', 'locale', 'placeholder', 'onClear', 'renderFooter'])),
+      }, (0, _omit2["default"])(others, ['closeIcon', 'renderIcon', 'format', 'showDateInput', 'showMonthInput', 'locale', 'placeholder', 'onClear', 'renderFooter', 'renderError'])),
       _react2["default"].createElement(
         _Picker2["default"],
         {
@@ -153,7 +153,8 @@ var MonthPicker = function (_Component) {
           value: state.value,
           onChange: this.onChange,
           dropdownClassName: props.dropdownClassName,
-          selectedValue: state.value
+          selectedValue: state.value,
+          renderError: props.renderError
         },
         function (_ref) {
           var value = _ref.value;
@@ -295,6 +296,7 @@ MonthPicker.defaultProps = {
     return _react2["default"].createElement(_beeIcon2["default"], { type: "uf-calendar" });
   },
   format: 'YYYY-MM',
+  renderError: function renderError() {},
   showDateInput: true,
   showMonthInput: true,
   locale: _zh_CN2["default"],
