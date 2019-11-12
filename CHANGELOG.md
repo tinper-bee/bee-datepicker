@@ -1,3 +1,13 @@
+<a name="2.2.16"></a>
+## [2.2.16](https://github.com/tinper-bee/bee-datepicker/compare/v2.2.15...v2.2.16) (2019-11-12)
+
+
+### Features
+
+* **bee-datepicker:** Monthpicker 下键打开面板，直接录入，再tab切换，可以上下左右选择日期( 当前打开面板, 直接可以上下左右, 要加一层tab 操作隔离) ([4e336cd](https://github.com/tinper-bee/bee-datepicker/commit/4e336cd))
+
+
+
 <a name="2.2.15"></a>
 ## [2.2.15](https://github.com/tinper-bee/bee-datepicker/compare/v2.2.14...v2.2.15) (2019-11-12)
 
