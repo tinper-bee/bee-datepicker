@@ -52,6 +52,8 @@ var _moment = require("moment");
 
 var _moment2 = _interopRequireDefault(_moment);
 
+var _util = require("./rc-calendar/util");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
@@ -156,7 +158,7 @@ var MonthPicker = function (_Component) {
         function (_ref) {
           var value = _ref.value;
 
-          if (value && value.format) value = value.format(props.format);
+          if (value && value.format) value = (0, _util.formatDate)(value, props.format);
           return _react2["default"].createElement(
             _beeInputGroup2["default"],
             { simple: true, className: "datepicker-input-group",
@@ -205,7 +207,7 @@ var _initialiseProps = function _initialiseProps() {
     _this3.setState({
       value: value && _extends(value, { _type: 'month' }) || value
     });
-    onChange && onChange(value, value ? value.format(format) : '');
+    onChange && onChange(value, value ? (0, _util.formatDate)(value, format) : '');
   };
 
   this.inputFocus = function () {
@@ -226,7 +228,7 @@ var _initialiseProps = function _initialiseProps() {
             open: false
           });
           var v = self.state.value;
-          self.props.onOpenChange && self.props.onOpenChange(false, v, v && v.format(self.props.format) || '');
+          self.props.onOpenChange && self.props.onOpenChange(false, v, v && (0, _util.formatDate)(v, self.props.format) || '');
           _reactDom2["default"].findDOMNode(self.outInput).focus(); // 按esc时候焦点回到input输入框
         }
       };
@@ -246,7 +248,7 @@ var _initialiseProps = function _initialiseProps() {
       }
     });
     var value = self.state.value;
-    props.onOpenChange && props.onOpenChange(open, value, value && value.format(self.props.format) || '');
+    props.onOpenChange && props.onOpenChange(open, value, value && (0, _util.formatDate)(value, self.props.format) || '');
     if (open) {
       setTimeout(function () {
         self.inputFocus();

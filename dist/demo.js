@@ -80,7 +80,7 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
 	
-	var Demo1 = __webpack_require__(507);var Demo2 = __webpack_require__(508);var Demo3 = __webpack_require__(509);var Demo4 = __webpack_require__(510);var Demo5 = __webpack_require__(511);var Demo6 = __webpack_require__(512);var Demo7 = __webpack_require__(513);var Demo8 = __webpack_require__(514);var Demo9 = __webpack_require__(624);var Demo10 = __webpack_require__(625);var DemoArray = [{ "example": _react2['default'].createElement(Demo1, null), "title": " 选择日期", "code": "/**\r\n *\r\n * @title 选择日期\r\n * @description 以「日期」为基本单位，基础的日期选择控件\r\n */\r\n\r\nimport React, {Component} from \"react\";\nimport { Row, Col } from 'tinper-bee';\r\n\nimport DatePicker from \"bee-datepicker/index\";\r\n\r\nconst format = \"YYYY-MM-DD dddd\";\r\nconst dateInputPlaceholder = \"选择日期\";\r\n\r\nclass Demo1 extends Component {\r\n    onSelect = (d, dataString)  => {\r\n        console.log('select')\r\n        console.log(d, dataString);\r\n    }\r\n    onClick = d => {\r\n        console.log('click')\r\n    }\r\n    onChange = (d, dataString) => {\r\n        console.log('change')\r\n        console.log(d, dataString)\r\n    };\r\n    onDateInputBlur = (e,v) => {\r\n        console.log(e,v);\r\n    }\r\n    render() {\r\n        var self = this;\r\n        return (\r\n            <div>\r\n                <Row>\r\n                    <Col md={6}>\r\n                        <DatePicker\r\n                            format={format}\r\n                            onSelect={this.onSelect}\r\n                            onChange={this.onChange}\r\n                            onClick={this.onClick}\r\n                            onDateInputBlur={this.onDateInputBlur}\r\n                        />\r\n                    </Col>\r\n                </Row>\r\n            </div>\r\n        );\r\n    }\r\n}\r\n\r\nexport default Demo1;\r\n", "desc": " 以「日期」为基本单位，基础的日期选择控件" }, { "example": _react2['default'].createElement(Demo2, null), "title": " 禁用日期", "code": "/**\n *\n * @title 禁用日期\n * @description 设置 disabled\n */\n\nimport React, {Component} from \"react\";\nimport { Row, Col } from 'tinper-bee';\nimport DatePicker from \"bee-datepicker/index\";\nimport moment from \"moment\";\n\nconst format = \"YYYY-MM-DD dddd\";\nconst dateInputPlaceholder = \"选择日期\";\n\nclass Demo2 extends Component {\n    onSelect = d => {\n        console.log(d);\n    }\n    onChange = (d, dataString) => {\n        console.log(dataString);\n    };\n    render() {\n        var self = this;\n        return (\n            <div>\n                <Row>\n                    <Col md={6}>\n                        <DatePicker\n                            format={format}\n                            onSelect={this.onSelect}\n                            onChange={this.onChange}\n                            disabled\n                            defaultValue={moment()}\n                        />\n                    </Col>\n                </Row>\n            </div>\n        );\n    }\n}\n\nexport default Demo2;\n", "desc": " 设置 disabled" }, { "example": _react2['default'].createElement(Demo3, null), "title": " 不可选择日期和时间", "code": "/**\r\n *\r\n * @title 不可选择日期和时间\r\n * @description 可用 disabledDate 和 disabledTime 分别禁止选择部分日期和时间，其中 disabledTime 需要和 showTime 一起使用。\r\n */\r\n\r\nimport React, { Component } from \"react\";\nimport {  Row, Col  } from 'tinper-bee';\r\n\nimport DatePicker from \"bee-datepicker/index\";\r\n\r\nimport zhCN from \"../../src/locale/zh_CN\";\r\nimport moment from \"moment\";\r\n\r\nconst format = \"YYYY-MM-DD\";\r\n\r\nconst dateInputPlaceholder = \"选择日期\";\r\n\r\n\r\nfunction disabledDate(current) {\r\n  return current && current.valueOf() < Date.now();\r\n}\r\n\r\nclass Demo3 extends Component {\r\n  onSelect = d => {\r\n    console.log(d);\r\n  }\r\n  \r\n  onChange = d => {\r\n    console.log(d);\r\n  }\r\n  render() {\r\n    return (\r\n      <div>\r\n        <Row>\r\n          <Col md={6}>\r\n            <DatePicker\r\n              format={format}\r\n              onSelect={this.onSelect}\r\n              onChange={this.onChange}\r\n              locale={zhCN}\r\n              disabledDate={disabledDate}\r\n              defaultValue={moment()}\r\n              placeholder={dateInputPlaceholder}\r\n            />\r\n          </Col>\r\n        </Row>\r\n      </div>\r\n    );\r\n  }\r\n}\r\n\r\nexport default Demo3;\r\n", "desc": " 可用 disabledDate 和 disabledTime 分别禁止选择部分日期和时间，其中 disabledTime 需要和 showTime 一起使用。" }, { "example": _react2['default'].createElement(Demo4, null), "title": " 选择年，年月，周，日期范围", "code": "/**\n *\n * @title 选择年，年月，周，日期范围\n * @description 选择年，年月，周，日期范围基本示例\n */\n\nimport React, { Component } from \"react\";\nimport {  Row, Col  } from 'tinper-bee';\nimport DatePicker from \"bee-datepicker/index\";\nimport moment from \"moment\";\nimport zhCN from \"../../src/locale/zh_CN\";\nconst { YearPicker,MonthPicker,WeekPicker,RangePicker } = DatePicker;\n\n\nclass Demo4 extends Component {\n    onChange = (d, dataString) => {\n        console.log('change')\n        console.log(d);\n        console.log(dataString);\n    };\n    onSelect = d => {\n        console.log('select')\n        console.log(d);\n    }\n    onClear = () => {\n        console.log('clear')\n    }\n    /**\n     *@param e 事件对象\n     *@param startValue 开始时间\n     *@param array 包含开始时间和结束时间的数组\n     */\n    onStartInputBlur = (e,startValue,array) => {\n        console.log('RangePicker面板 左输入框的失焦事件',startValue,array)\n    }\n    /**\n     *@param e 事件对象\n     *@param endValue 结束时间\n     *@param array 包含开始时间和结束时间的数组\n     */\n    onEndInputBlur = (e,endValue,array) => {\n        console.log('RangePicker面板 右输入框的失焦事件',endValue,array)\n    }\n    render() {\n        return (\n            <div>\n                <Row style={{'marginBottom':'10px'}}>\n                    <Col md={6}>\n                        <YearPicker\n                            format=\"YYYY\"\n                            onChange={this.onChange}\n                            onSelect={this.onSelect}\n                            locale={zhCN}\n                            placeholder=\"选择年\"\n                            defaultValue={moment()}\n                            showClose={false}\n                        />\n                    </Col>\n                    <Col md={6} style={{'marginBottom':'10px'}}>\n                        <MonthPicker\n                            format=\"YYYY-MM\"\n                            onSelect={this.onSelect}\n                            onChange={this.onChange}\n                            locale={zhCN}\n                            defaultValue={moment()}\n                            placeholder=\"选择年月\"\n                            onClear={this.onClear} \n                            showClose={false}\n                        />\n                    </Col>\n                    <Col md={6} style={{'marginBottom':'10px'}}>\n                        <WeekPicker \n                        defaultValue={moment()}\n                        onSelect={this.onSelect}\n                        onChange={this.onChange}\n                        placeholder=\"选择周\" \n                        showClose={false}\n                        />\n                    </Col>\n                    <Col md={6} style={{'marginBottom':'10px'}}>\n                        <RangePicker\n                            placeholder={'开始 ~ 结束'}\n                            dateInputPlaceholder={['开始', '结束']}\n                            showClear={true}\n                            onChange={this.onChange}\n                            onPanelChange={(v)=>{console.log('onPanelChange',v)}}\n                            showClose={true}\n                            onStartInputBlur={this.onStartInputBlur}\n                            onEndInputBlur={this.onEndInputBlur}\n                        />\n                    </Col>\n                </Row>\n            </div>\n        );\n    }\n}\n\nexport default Demo4;\n", "desc": " 选择年，年月，周，日期范围基本示例" }, { "example": _react2['default'].createElement(Demo5, null), "title": " 动态的改变时间", "code": "/**\n *\n * @title 动态的改变时间\n * @description 以「日期时间」为基本单位，基础的日期时间选择控件\n */\n\nimport React, { Component } from \"react\";\nimport { Button,  Row, Col  } from 'tinper-bee';\nimport DatePicker from \"bee-datepicker/index\";\nimport moment from \"moment\";\nimport zhCN from \"../../src/locale/zh_CN\";\nconst format = \"YYYY-MM-DD HH:mm:ss\";\nconst dateInputPlaceholder = \"选择日期\";\n\nclass Demo5 extends Component {\n  constructor(props) {\n    super(props);\n    this.state = {\n      value: moment()\n    };\n  }\n\n  handleChange = value => {\n    this.setState({\n      value: value\n    });\n  };\n  onSelect = d => {\n    console.log(d);\n  };\n\n  handlerChangeDate = () => {\n    this.setState({\n      value: moment(\"2011-11-11 11:11:11\")\n    });\n    console.log(\"click\");\n  };\n  render() {\n    return (\n      <div>\n        <Row>\n          <Col md={6}>\n            <DatePicker\n              format={format}\n              locale={zhCN}\n              onSelect={this.onSelect}\n              onChange={this.handleChange}\n              value={this.state.value}\n              placeholder={dateInputPlaceholder}\n            />\n          </Col>\n          <Col md={3}>\n            <Button onClick={this.handlerChangeDate}>变</Button>\n          </Col>\n        </Row>\n      </div>\n    );\n  }\n}\n\nexport default Demo5;\n", "desc": " 以「日期时间」为基本单位，基础的日期时间选择控件" }, { "example": _react2['default'].createElement(Demo6, null), "title": " 自定义日期渲染父级容器，扩展底边栏\t", "code": "/**\n *\n * @title 自定义日期渲染父级容器，扩展底边栏\t\n * @description getCalendarContainer自定义日期渲染父级容器，renderFooter扩展底边栏\n */\n\nimport React, { Component } from \"react\";\nimport {  Row, Col  } from 'tinper-bee';\nimport DatePicker from \"bee-datepicker/index\";\n\nimport zhCN from \"../../src/locale/zh_CN\";\nimport enUS from \"../../src/locale/en_US\";\nimport moment from \"moment\";\n\nconst format = \"YYYY-MM-DD\";\n\nconst dateInputPlaceholder = \"选择日期\";\n\nclass Demo6 extends Component {\n    constructor(props) {\n        super(props);\n    }\n    getCalendarContainer() {\n        return this.d || document.getElementById('d');\n    }\n    onChange = d => {\n        console.log(d);\n    };\n    render() {\n        return (\n            <div id=\"d\" >\n                <Row>\n                    <Col md={6}>\n                        <DatePicker\n                            format={format}\n                            onChange={this.onChange}\n                            locale={zhCN}\n                            defaultValue={moment()}\n                            placeholder={dateInputPlaceholder}\n                            getCalendarContainer={this.getCalendarContainer}\n                            showToday={false}//是否显示今天\n                            renderFooter={()=>{\n                                return (\n                                    <span> 我是底部 </span>\n                                )\n                            }}\n                        />\n                    </Col>\n                </Row>\n            </div>\n        );\n    }\n}\n\nexport default Demo6;\n", "desc": " getCalendarContainer自定义日期渲染父级容器，renderFooter扩展底边栏" }, { "example": _react2['default'].createElement(Demo7, null), "title": " 自定义展示日期面板，外层输入框可输入", "code": "/**\n *\n * @title 自定义展示日期面板，外层输入框可输入\n * @description open设置面板展开收起，keyboardInput外层input是否可输入，showDateInput是否显示内层input\n */\n\nimport React, {Component} from \"react\";\nimport { Icon, Row, Col } from 'tinper-bee';\nimport DatePicker from \"bee-datepicker/index\";\nimport zhCN from \"../../src/locale/zh_CN\";\nimport enUS from \"../../src/locale/en_US\";\nimport moment from \"moment\";\nimport 'moment/locale/zh-cn';\n\nmoment.locale('zh-cn');\n\nconst format = \"YYYY-MM-DD\";\n\nconst dateInputPlaceholder = \"选择日期\";\n\nclass Demo7 extends Component {\n    constructor(props) {\n        super(props);\n        this.state = {\n            value: '',\n            open: false\n        };\n    }\n    onSelect = d=> {\n        console.log(d);\n    }\n    onChange = (d, dataString) => {\n        this.setState({\n            value:d\n        })\n        console.log('onChange',dataString)\n    };\n    onOpenChange = open => {\n        console.log(open)\n    }\n    open = d => {\n        this.setState({\n            open: !this.state.open\n        })\n    }\n    onClick = (e,d,str) => {\n        console.log(d);\n    }\n    outInputKeydown = ()=>{\n        console.log('keydown')\n    }\n    render() {\n        return (\n            <div>\n                <Row>\n                    <Col md={6}>\n                        <DatePicker\n                            format={format}\n                            onSelect={this.onSelect}\n                            onChange={this.onChange}\n                            locale={zhCN}\n                            open={this.state.open}\n                            defaultValue={moment('2018-01-01')}\n                            value={this.state.value}\n                            onOpenChange={this.onOpenChange}\n                            placeholder={dateInputPlaceholder}\n                            className={\"Demo7\"}\n                            onClick={this.onClick}\n                            keyboardInput={true}\n                            showDateInput={false}\n                        />\n                    </Col>\n                    <Col md={3}>\n                        <button className=\"u-button\" onClick={this.open}>展开面板</button>\n                    </Col>\n                </Row>\n            </div>\n        );\n    }\n}\n\nexport default Demo7;\n", "desc": " open设置面板展开收起，keyboardInput外层input是否可输入，showDateInput是否显示内层input" }, { "example": _react2['default'].createElement(Demo8, null), "title": " 自定义展示日期面板，外层输入框可输入，配合form使用", "code": "/**\r\n *\r\n * @title 自定义展示日期面板，外层输入框可输入，配合form使用\r\n * @description open设置面板展开收起，keyboardInput外层input是否可输入，showDateInput是否显示内层input\r\n */\r\n\r\nimport React, {Component} from \"react\";\nimport { Form, Row, Col } from 'tinper-bee';\r\n\nimport DatePicker from \"bee-datepicker/index\";\r\nimport zhCN from \"../../src/locale/zh_CN\";\r\nimport enUS from \"../../src/locale/en_US\";\r\nimport moment from \"moment\";\r\nimport 'moment/locale/zh-cn';\r\n\n\r\nmoment.locale('zh-cn');\r\n\r\nconst format = \"YYYY-MM-DD\";\r\n\r\nconst dateInputPlaceholder = \"选择日期\";\r\n\r\n\r\nclass Demo8 extends Component {\r\n    constructor(props) {\r\n        super(props);\r\n        this.state = {\r\n            value: '',\r\n            open: false\r\n        };\r\n    }\r\n    onOpenChange = open => {\r\n        console.log(open)\r\n    }\r\n    open = d => {\r\n        this.setState({\r\n            open: !this.state.open\r\n        })\r\n    }\r\n    onClick = (e,d,str) => {\r\n        console.log(d);\r\n    }\r\n    onSelect(d) {\r\n        console.log(\"select:\"+d);\r\n    }\r\n    outInputKeydown = ()=>{\r\n        console.log('keydown')\r\n    }\r\n    submit = (e) => {\r\n        this.props.form.validateFields((err, values) => {\r\n            if (err) {\r\n                console.log('校验失败', values);\r\n            } else {\r\n                console.log('提交成功', values, moment(values.date).format('YYYY-MM-DD'));\r\n            }\r\n        });\r\n    }\r\n    render() {\r\n        var self = this; \r\n        const { getFieldProps, getFieldError } = this.props.form;\r\n        return (\r\n            <div>\r\n                <Row>\r\n                    <Col md={6}>\r\n                        <DatePicker\r\n                            format={format}\r\n                            onSelect={this.onSelect}\r\n                            onChange={this.onChange}\r\n                            locale={zhCN}\r\n                            open={this.state.open}\r\n                            onOpenChange={this.onOpenChange.bind(this)}\r\n                            placeholder={dateInputPlaceholder}\r\n                            className={\"demo11\"}\r\n                            onClick={this.onClick}\r\n                            keyboardInput={true}\r\n                            showDateInput={false}\r\n                            iconClick={this.open}\r\n                            outInputKeydown={this.outInputKeydown}\r\n                            {...getFieldProps('date', {\r\n                                validateTrigger: 'onBlur',\r\n                                initialValue:moment('2018-01-01'),\r\n                                rules: [{\r\n                                    required: true, message: '请输入日期',\r\n                                }],\r\n                            }) }\r\n                        />\r\n                    </Col>\r\n                    <Col md={3}>\r\n                        <button className=\"u-button\" onClick={this.open}>展开/收起面板</button>\r\n                        <button className=\"u-button\" onClick={this.submit}>获得值</button>\r\n                    </Col>\r\n                </Row>\r\n            </div>\r\n        );\r\n    }\r\n}\r\n\r\nexport default Form.createForm()(Demo8);\r\n", "desc": " open设置面板展开收起，keyboardInput外层input是否可输入，showDateInput是否显示内层input" }, { "example": _react2['default'].createElement(Demo9, null), "title": " 额外的页脚", "code": "/**\r\n *\r\n * @title 额外的页脚\r\n * @description 在浮层中加入额外的页脚，以满足某些定制信息的需求。\r\n */\r\n\r\nimport React, {Component} from \"react\";\nimport { Row, Col } from 'tinper-bee';\r\n\nimport DatePicker from \"bee-datepicker/index\";\r\n\r\nconst { RangePicker, MonthPicker } = DatePicker;\r\n\r\nclass Demo9 extends Component {\r\n    render() {\r\n        return (\r\n            <div className=\"demo9\">\r\n                <Row>\r\n                    <Col md={6}>\r\n                        <DatePicker renderFooter={() => '额外页脚'} placeholder=\"选择日期\"/>\r\n                    </Col>\r\n                    \r\n                    <Col md={6}>\r\n                        <DatePicker renderFooter={() => '额外页脚'} showTime placeholder=\"选择日期\"/>\r\n                    </Col>\r\n                    \r\n                    <Col md={6}>\r\n                        <RangePicker renderFooter={() => '额外页脚'} placeholder={'开始 ~ 结束'}/>\r\n                    </Col>\r\n                    \r\n                    <Col md={6}>\r\n                        <RangePicker renderFooter={() => '额外页脚'} showTime placeholder={'开始 ~ 结束'}/>\r\n                    </Col>\r\n                    \r\n                    <Col md={6}>\r\n                        <MonthPicker renderFooter={() => '额外页脚'} placeholder=\"选择月\" />\r\n                    </Col>\r\n                </Row>\r\n            </div>\r\n        );\r\n    }\r\n}\r\n\r\nexport default Demo9;\r\n", "desc": " 在浮层中加入额外的页脚，以满足某些定制信息的需求。", "scss_code": ".demo9 {\r\n    .u-row .u-col-md-6 {\r\n        margin-bottom: 10px;\r\n    }\r\n}" }, { "example": _react2['default'].createElement(Demo10, null), "title": " 使用normal格式化", "code": "/**\n *\n * @title 使用normal格式化\n * @description 配合form 使用normal格式化，已 MothPicker 为例\n */\n\nimport React, { Component } from \"react\";\nimport { Form,  Row, Col  } from 'tinper-bee';\nimport DatePicker from \"bee-datepicker/index\";\n\nconst { MonthPicker } = DatePicker;\n\n\nclass Demo4 extends Component {\n    submit = (e) => {\n        this.props.form.validateFields((err, values) => {\n            if (err) {\n                console.log('校验失败', values);\n            } else {\n                console.log('提交成功', values);\n            }\n        });\n    }\n    render() {\n        const { getFieldProps, getFieldError } = this.props.form;\n        return (\n            <div>\n                <Row style={{'marginBottom':'10px'}}>\n                    <Col md={6} style={{'marginBottom':'10px'}}>\n                        <MonthPicker\n                            format=\"YYYY-MM\"\n                            {...getFieldProps('date', {\n                                validateTrigger: 'onBlur',\n                                initialValue:null,\n                                normalize:(value)=>{\n                                    if(value&&value.format){\n                                        return value.format('YYYY-MM')\n                                    }else{\n                                        return value\n                                    }\n                                },\n                                rules: [{\n                                    required: true, message: '请输入日期',\n                                }],\n                            }) }\n                        />\n                    </Col>\n                    <button className=\"u-button\" onClick={this.submit}>获得值</button>\n                </Row>\n            </div>\n        );\n    }\n}\n\nexport default Form.createForm()(Demo4);\n", "desc": " 配合form 使用normal格式化，已 MothPicker 为例" }];
+	var Demo1 = __webpack_require__(507);var Demo2 = __webpack_require__(508);var Demo3 = __webpack_require__(509);var Demo4 = __webpack_require__(510);var Demo5 = __webpack_require__(511);var Demo6 = __webpack_require__(512);var Demo7 = __webpack_require__(513);var Demo8 = __webpack_require__(514);var Demo9 = __webpack_require__(629);var Demo10 = __webpack_require__(630);var DemoArray = [{ "example": _react2['default'].createElement(Demo1, null), "title": " 选择日期", "code": "/**\r\n *\r\n * @title 选择日期\r\n * @description 以「日期」为基本单位，基础的日期选择控件\r\n */\r\n\r\nimport React, {Component} from \"react\";\nimport { Row, Col } from 'tinper-bee';\r\n\nimport DatePicker from \"bee-datepicker/index\";\r\n\r\nconst format = \"YYYY-MM-DD dddd\";\r\nconst dateInputPlaceholder = \"选择日期\";\r\n\r\nclass Demo1 extends Component {\r\n    onSelect = (d, dataString)  => {\r\n        console.log('select')\r\n        console.log(d, dataString);\r\n    }\r\n    onClick = d => {\r\n        console.log('click')\r\n    }\r\n    onChange = (d, dataString) => {\r\n        console.log('change')\r\n        console.log(d, dataString)\r\n    };\r\n    onDateInputBlur = (e,v) => {\r\n        console.log(e,v);\r\n    }\r\n    render() {\r\n        var self = this;\r\n        return (\r\n            <div>\r\n                <Row>\r\n                    <Col md={6}>\r\n                        <DatePicker\r\n                            format={format}\r\n                            onSelect={this.onSelect}\r\n                            onChange={this.onChange}\r\n                            onClick={this.onClick}\r\n                            onDateInputBlur={this.onDateInputBlur}\r\n                        />\r\n                    </Col>\r\n                </Row>\r\n            </div>\r\n        );\r\n    }\r\n}\r\n\r\nexport default Demo1;\r\n", "desc": " 以「日期」为基本单位，基础的日期选择控件" }, { "example": _react2['default'].createElement(Demo2, null), "title": " 禁用日期", "code": "/**\n *\n * @title 禁用日期\n * @description 设置 disabled\n */\n\nimport React, {Component} from \"react\";\nimport { Row, Col } from 'tinper-bee';\nimport DatePicker from \"bee-datepicker/index\";\nimport moment from \"moment\";\n\nconst format = \"YYYY-MM-DD dddd\";\nconst dateInputPlaceholder = \"选择日期\";\n\nclass Demo2 extends Component {\n    onSelect = d => {\n        console.log(d);\n    }\n    onChange = (d, dataString) => {\n        console.log(dataString);\n    };\n    render() {\n        var self = this;\n        return (\n            <div>\n                <Row>\n                    <Col md={6}>\n                        <DatePicker\n                            format={format}\n                            onSelect={this.onSelect}\n                            onChange={this.onChange}\n                            disabled\n                            defaultValue={moment()}\n                        />\n                    </Col>\n                </Row>\n            </div>\n        );\n    }\n}\n\nexport default Demo2;\n", "desc": " 设置 disabled" }, { "example": _react2['default'].createElement(Demo3, null), "title": " 不可选择日期和时间", "code": "/**\r\n *\r\n * @title 不可选择日期和时间\r\n * @description 可用 disabledDate 和 disabledTime 分别禁止选择部分日期和时间，其中 disabledTime 需要和 showTime 一起使用。\r\n */\r\n\r\nimport React, { Component } from \"react\";\nimport {  Row, Col  } from 'tinper-bee';\r\n\nimport DatePicker from \"bee-datepicker/index\";\r\n\r\nimport zhCN from \"../../src/locale/zh_CN\";\r\nimport moment from \"moment\";\r\n\r\nconst format = \"YYYY-MM-DD\";\r\n\r\nconst dateInputPlaceholder = \"选择日期\";\r\n\r\n\r\nfunction disabledDate(current) {\r\n  return current && current.valueOf() < Date.now();\r\n}\r\n\r\nclass Demo3 extends Component {\r\n  onSelect = d => {\r\n    console.log(d);\r\n  }\r\n  \r\n  onChange = d => {\r\n    console.log(d);\r\n  }\r\n  render() {\r\n    return (\r\n      <div>\r\n        <Row>\r\n          <Col md={6}>\r\n            <DatePicker\r\n              format={format}\r\n              onSelect={this.onSelect}\r\n              onChange={this.onChange}\r\n              locale={zhCN}\r\n              disabledDate={disabledDate}\r\n              defaultValue={moment()}\r\n              placeholder={dateInputPlaceholder}\r\n            />\r\n          </Col>\r\n        </Row>\r\n      </div>\r\n    );\r\n  }\r\n}\r\n\r\nexport default Demo3;\r\n", "desc": " 可用 disabledDate 和 disabledTime 分别禁止选择部分日期和时间，其中 disabledTime 需要和 showTime 一起使用。" }, { "example": _react2['default'].createElement(Demo4, null), "title": " 选择年，年月，周，日期范围", "code": "/**\n *\n * @title 选择年，年月，周，日期范围\n * @description 选择年，年月，周，日期范围基本示例\n */\n\nimport React, { Component } from \"react\";\nimport {  Row, Col  } from 'tinper-bee';\nimport DatePicker from \"bee-datepicker/index\";\nimport moment from \"moment\";\nimport zhCN from \"../../src/locale/zh_CN\";\nconst { YearPicker,MonthPicker,WeekPicker,RangePicker } = DatePicker;\n\n\nclass Demo4 extends Component {\n    onChange = (d, dataString) => {\n        console.log('change')\n        console.log(d);\n        console.log(dataString);\n    };\n    onSelect = d => {\n        console.log('select')\n        console.log(d);\n    }\n    onClear = () => {\n        console.log('clear')\n    }\n    /**\n     *@param e 事件对象\n     *@param startValue 开始时间\n     *@param array 包含开始时间和结束时间的数组\n     */\n    onStartInputBlur = (e,startValue,array) => {\n        console.log('RangePicker面板 左输入框的失焦事件',startValue,array)\n    }\n    /**\n     *@param e 事件对象\n     *@param endValue 结束时间\n     *@param array 包含开始时间和结束时间的数组\n     */\n    onEndInputBlur = (e,endValue,array) => {\n        console.log('RangePicker面板 右输入框的失焦事件',endValue,array)\n    }\n    render() {\n        return (\n            <div>\n                <Row style={{'marginBottom':'10px'}}>\n                    <Col md={6}>\n                        <YearPicker\n                            format=\"YYYY\"\n                            onChange={this.onChange}\n                            onSelect={this.onSelect}\n                            locale={zhCN}\n                            placeholder=\"选择年\"\n                            defaultValue={moment()}\n                            showClose={false}\n                        />\n                    </Col>\n                    <Col md={6} style={{'marginBottom':'10px'}}>\n                        <MonthPicker\n                            format={'YYYY-MM'}\n                            onSelect={this.onSelect}\n                            onChange={this.onChange}\n                            locale={zhCN}\n                            defaultValue={moment()}\n                            placeholder=\"选择年月\"\n                            onClear={this.onClear} \n                            showClose={false}\n                        />\n                    </Col>\n                    <Col md={6} style={{'marginBottom':'10px'}}>\n                        <WeekPicker \n                        defaultValue={moment()}\n                        onSelect={this.onSelect}\n                        onChange={this.onChange}\n                        placeholder=\"选择周\" \n                        showClose={false}\n                        />\n                    </Col>\n                    <Col md={6} style={{'marginBottom':'10px'}}>\n                        <RangePicker\n                            placeholder={'开始 ~ 结束'}\n                            dateInputPlaceholder={['开始', '结束']}\n                            showClear={true}\n                            onChange={this.onChange}\n                            onPanelChange={(v)=>{console.log('onPanelChange',v)}}\n                            showClose={true}\n                            onStartInputBlur={this.onStartInputBlur}\n                            onEndInputBlur={this.onEndInputBlur}\n                        />\n                    </Col>\n                </Row>\n            </div>\n        );\n    }\n}\n\nexport default Demo4;\n", "desc": " 选择年，年月，周，日期范围基本示例" }, { "example": _react2['default'].createElement(Demo5, null), "title": " 动态的改变时间", "code": "/**\n *\n * @title 动态的改变时间\n * @description 以「日期时间」为基本单位，基础的日期时间选择控件\n */\n\nimport React, { Component } from \"react\";\nimport { Button,  Row, Col  } from 'tinper-bee';\nimport DatePicker from \"bee-datepicker/index\";\nimport moment from \"moment\";\nimport zhCN from \"../../src/locale/zh_CN\";\nconst format = \"YYYY-MM-DD HH:mm:ss\";\nconst dateInputPlaceholder = \"选择日期\";\n\nclass Demo5 extends Component {\n  constructor(props) {\n    super(props);\n    this.state = {\n      value: moment()\n    };\n  }\n\n  handleChange = value => {\n    this.setState({\n      value: value\n    });\n  };\n  onSelect = d => {\n    console.log(d);\n  };\n\n  handlerChangeDate = () => {\n    this.setState({\n      value: moment(\"2011-11-11 11:11:11\")\n    });\n    console.log(\"click\");\n  };\n  render() {\n    return (\n      <div>\n        <Row>\n          <Col md={6}>\n            <DatePicker\n              format={format}\n              locale={zhCN}\n              onSelect={this.onSelect}\n              onChange={this.handleChange}\n              value={this.state.value}\n              placeholder={dateInputPlaceholder}\n            />\n          </Col>\n          <Col md={3}>\n            <Button onClick={this.handlerChangeDate}>变</Button>\n          </Col>\n        </Row>\n      </div>\n    );\n  }\n}\n\nexport default Demo5;\n", "desc": " 以「日期时间」为基本单位，基础的日期时间选择控件" }, { "example": _react2['default'].createElement(Demo6, null), "title": " 自定义日期渲染父级容器，扩展底边栏\t", "code": "/**\n *\n * @title 自定义日期渲染父级容器，扩展底边栏\t\n * @description getCalendarContainer自定义日期渲染父级容器，renderFooter扩展底边栏\n */\n\nimport React, { Component } from \"react\";\nimport {  Row, Col  } from 'tinper-bee';\nimport DatePicker from \"bee-datepicker/index\";\n\nimport zhCN from \"../../src/locale/zh_CN\";\nimport enUS from \"../../src/locale/en_US\";\nimport moment from \"moment\";\n\nconst format = \"YYYY-MM-DD\";\n\nconst dateInputPlaceholder = \"选择日期\";\n\nclass Demo6 extends Component {\n    constructor(props) {\n        super(props);\n    }\n    getCalendarContainer() {\n        return this.d || document.getElementById('d');\n    }\n    onChange = d => {\n        console.log(d);\n    };\n    render() {\n        return (\n            <div id=\"d\" >\n                <Row>\n                    <Col md={6}>\n                        <DatePicker\n                            format={format}\n                            onChange={this.onChange}\n                            locale={zhCN}\n                            defaultValue={moment()}\n                            placeholder={dateInputPlaceholder}\n                            getCalendarContainer={this.getCalendarContainer}\n                            showToday={false}//是否显示今天\n                            renderFooter={()=>{\n                                return (\n                                    <span> 我是底部 </span>\n                                )\n                            }}\n                        />\n                    </Col>\n                </Row>\n            </div>\n        );\n    }\n}\n\nexport default Demo6;\n", "desc": " getCalendarContainer自定义日期渲染父级容器，renderFooter扩展底边栏" }, { "example": _react2['default'].createElement(Demo7, null), "title": " 自定义展示日期面板，外层输入框可输入", "code": "/**\n *\n * @title 自定义展示日期面板，外层输入框可输入\n * @description open设置面板展开收起，keyboardInput外层input是否可输入，showDateInput是否显示内层input\n */\n\nimport React, {Component} from \"react\";\nimport { Icon, Row, Col } from 'tinper-bee';\nimport DatePicker from \"bee-datepicker/index\";\nimport zhCN from \"../../src/locale/zh_CN\";\nimport enUS from \"../../src/locale/en_US\";\nimport moment from \"moment\";\nimport 'moment/locale/zh-cn';\n\nmoment.locale('zh-cn');\n\nconst format = \"YYYY-MM-DD\";\n\nconst dateInputPlaceholder = \"选择日期\";\n\nclass Demo7 extends Component {\n    constructor(props) {\n        super(props);\n        this.state = {\n            value: '',\n            open: false\n        };\n    }\n    onSelect = d=> {\n        console.log(d);\n    }\n    onChange = (d, dataString) => {\n        this.setState({\n            value:d\n        })\n        console.log('onChange',dataString)\n    };\n    onOpenChange = open => {\n        console.log(open)\n    }\n    open = d => {\n        this.setState({\n            open: !this.state.open\n        })\n    }\n    onClick = (e,d,str) => {\n        console.log(d);\n    }\n    outInputKeydown = ()=>{\n        console.log('keydown')\n    }\n    render() {\n        return (\n            <div>\n                <Row>\n                    <Col md={6}>\n                        <DatePicker\n                            format={format}\n                            onSelect={this.onSelect}\n                            onChange={this.onChange}\n                            locale={zhCN}\n                            open={this.state.open}\n                            defaultValue={moment('2018-01-01')}\n                            value={this.state.value}\n                            onOpenChange={this.onOpenChange}\n                            placeholder={dateInputPlaceholder}\n                            className={\"Demo7\"}\n                            onClick={this.onClick}\n                            keyboardInput={true}\n                            showDateInput={false}\n                        />\n                    </Col>\n                    <Col md={3}>\n                        <button className=\"u-button\" onClick={this.open}>展开面板</button>\n                    </Col>\n                </Row>\n            </div>\n        );\n    }\n}\n\nexport default Demo7;\n", "desc": " open设置面板展开收起，keyboardInput外层input是否可输入，showDateInput是否显示内层input" }, { "example": _react2['default'].createElement(Demo8, null), "title": " 自定义展示日期面板，外层输入框可输入，配合form使用", "code": "/**\r\n *\r\n * @title 自定义展示日期面板，外层输入框可输入，配合form使用\r\n * @description open设置面板展开收起，keyboardInput外层input是否可输入，showDateInput是否显示内层input\r\n */\r\n\r\nimport React, {Component} from \"react\";\nimport { Form, Row, Col } from 'tinper-bee';\r\n\nimport DatePicker from \"bee-datepicker/index\";\r\nimport zhCN from \"../../src/locale/zh_CN\";\r\nimport enUS from \"../../src/locale/en_US\";\r\nimport moment from \"moment\";\r\nimport 'moment/locale/zh-cn';\r\n\n\r\nmoment.locale('zh-cn');\r\n\r\nconst format = \"YYYY-MM-DD\";\r\n\r\nconst dateInputPlaceholder = \"选择日期\";\r\n\r\n\r\nclass Demo8 extends Component {\r\n    constructor(props) {\r\n        super(props);\r\n        this.state = {\r\n            value: '',\r\n            open: false\r\n        };\r\n    }\r\n    onOpenChange = open => {\r\n        console.log(open)\r\n    }\r\n    open = d => {\r\n        this.setState({\r\n            open: !this.state.open\r\n        })\r\n    }\r\n    onClick = (e,d,str) => {\r\n        console.log(d);\r\n    }\r\n    onSelect(d) {\r\n        console.log(\"select:\"+d);\r\n    }\r\n    outInputKeydown = ()=>{\r\n        console.log('keydown')\r\n    }\r\n    submit = (e) => {\r\n        this.props.form.validateFields((err, values) => {\r\n            if (err) {\r\n                console.log('校验失败', values);\r\n            } else {\r\n                console.log('提交成功', values, moment(values.date).format('YYYY-MM-DD'));\r\n            }\r\n        });\r\n    }\r\n    render() {\r\n        var self = this; \r\n        const { getFieldProps, getFieldError } = this.props.form;\r\n        return (\r\n            <div>\r\n                <Row>\r\n                    <Col md={6}>\r\n                        <DatePicker\r\n                            format={format}\r\n                            onSelect={this.onSelect}\r\n                            onChange={this.onChange}\r\n                            locale={zhCN}\r\n                            open={this.state.open}\r\n                            onOpenChange={this.onOpenChange.bind(this)}\r\n                            placeholder={dateInputPlaceholder}\r\n                            className={\"demo11\"}\r\n                            onClick={this.onClick}\r\n                            keyboardInput={true}\r\n                            showDateInput={false}\r\n                            iconClick={this.open}\r\n                            outInputKeydown={this.outInputKeydown}\r\n                            {...getFieldProps('date', {\r\n                                validateTrigger: 'onBlur',\r\n                                initialValue:moment('2018-01-01'),\r\n                                rules: [{\r\n                                    required: true, message: '请输入日期',\r\n                                }],\r\n                            }) }\r\n                        />\r\n                    </Col>\r\n                    <Col md={3}>\r\n                        <button className=\"u-button\" onClick={this.open}>展开/收起面板</button>\r\n                        <button className=\"u-button\" onClick={this.submit}>获得值</button>\r\n                    </Col>\r\n                </Row>\r\n            </div>\r\n        );\r\n    }\r\n}\r\n\r\nexport default Form.createForm()(Demo8);\r\n", "desc": " open设置面板展开收起，keyboardInput外层input是否可输入，showDateInput是否显示内层input" }, { "example": _react2['default'].createElement(Demo9, null), "title": " 额外的页脚", "code": "/**\r\n *\r\n * @title 额外的页脚\r\n * @description 在浮层中加入额外的页脚，以满足某些定制信息的需求。\r\n */\r\n\r\nimport React, {Component} from \"react\";\nimport { Row, Col } from 'tinper-bee';\r\n\nimport DatePicker from \"bee-datepicker/index\";\r\n\r\nconst { RangePicker, MonthPicker } = DatePicker;\r\n\r\nclass Demo9 extends Component {\r\n    render() {\r\n        return (\r\n            <div className=\"demo9\">\r\n                <Row>\r\n                    <Col md={6}>\r\n                        <DatePicker renderFooter={() => '额外页脚'} placeholder=\"选择日期\"/>\r\n                    </Col>\r\n                    \r\n                    <Col md={6}>\r\n                        <DatePicker renderFooter={() => '额外页脚'} showTime placeholder=\"选择日期\"/>\r\n                    </Col>\r\n                    \r\n                    <Col md={6}>\r\n                        <RangePicker renderFooter={() => '额外页脚'} placeholder={'开始 ~ 结束'}/>\r\n                    </Col>\r\n                    \r\n                    <Col md={6}>\r\n                        <RangePicker renderFooter={() => '额外页脚'} showTime placeholder={'开始 ~ 结束'}/>\r\n                    </Col>\r\n                    \r\n                    <Col md={6}>\r\n                        <MonthPicker renderFooter={() => '额外页脚'} placeholder=\"选择月\" />\r\n                    </Col>\r\n                </Row>\r\n            </div>\r\n        );\r\n    }\r\n}\r\n\r\nexport default Demo9;\r\n", "desc": " 在浮层中加入额外的页脚，以满足某些定制信息的需求。", "scss_code": ".demo9 {\r\n    .u-row .u-col-md-6 {\r\n        margin-bottom: 10px;\r\n    }\r\n}" }, { "example": _react2['default'].createElement(Demo10, null), "title": " 使用normal格式化", "code": "/**\n *\n * @title 使用normal格式化\n * @description 配合form 使用normal格式化，已 MothPicker 为例\n */\n\nimport React, { Component } from \"react\";\nimport { Form,  Row, Col  } from 'tinper-bee';\nimport DatePicker from \"bee-datepicker/index\";\n\nconst { MonthPicker } = DatePicker;\n\n\nclass Demo4 extends Component {\n    submit = (e) => {\n        this.props.form.validateFields((err, values) => {\n            if (err) {\n                console.log('校验失败', values);\n            } else {\n                console.log('提交成功', values);\n            }\n        });\n    }\n    render() {\n        const { getFieldProps, getFieldError } = this.props.form;\n        return (\n            <div>\n                <Row style={{'marginBottom':'10px'}}>\n                    <Col md={6} style={{'marginBottom':'10px'}}>\n                        <MonthPicker\n                            format=\"YYYY-MM\"\n                            {...getFieldProps('date', {\n                                validateTrigger: 'onBlur',\n                                initialValue:null,\n                                normalize:(value)=>{\n                                    if(value&&value.format){\n                                        return value.format('YYYY-MM')\n                                    }else{\n                                        return value\n                                    }\n                                },\n                                rules: [{\n                                    required: true, message: '请输入日期',\n                                }],\n                            }) }\n                        />\n                    </Col>\n                    <button className=\"u-button\" onClick={this.submit}>获得值</button>\n                </Row>\n            </div>\n        );\n    }\n}\n\nexport default Form.createForm()(Demo4);\n", "desc": " 配合form 使用normal格式化，已 MothPicker 为例" }];
 	
 	var Demo = function (_Component) {
 	    _inherits(Demo, _Component);
@@ -61592,6 +61592,8 @@
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
+	var _util = __webpack_require__(406);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
 	function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
@@ -61696,7 +61698,7 @@
 	        function (_ref) {
 	          var value = _ref.value;
 	
-	          if (value && value.format) value = value.format(props.format);
+	          if (value && value.format) value = (0, _util.formatDate)(value, props.format);
 	          return _react2["default"].createElement(
 	            _beeInputGroup2["default"],
 	            { simple: true, className: "datepicker-input-group",
@@ -61745,7 +61747,7 @@
 	    _this3.setState({
 	      value: value && _extends(value, { _type: 'month' }) || value
 	    });
-	    onChange && onChange(value, value ? value.format(format) : '');
+	    onChange && onChange(value, value ? (0, _util.formatDate)(value, format) : '');
 	  };
 	
 	  this.inputFocus = function () {
@@ -61766,7 +61768,7 @@
 	            open: false
 	          });
 	          var v = self.state.value;
-	          self.props.onOpenChange && self.props.onOpenChange(false, v, v && v.format(self.props.format) || '');
+	          self.props.onOpenChange && self.props.onOpenChange(false, v, v && (0, _util.formatDate)(v, self.props.format) || '');
 	          _reactDom2["default"].findDOMNode(self.outInput).focus(); // 按esc时候焦点回到input输入框
 	        }
 	      };
@@ -61786,7 +61788,7 @@
 	      }
 	    });
 	    var value = self.state.value;
-	    props.onOpenChange && props.onOpenChange(open, value, value && value.format(self.props.format) || '');
+	    props.onOpenChange && props.onOpenChange(open, value, value && (0, _util.formatDate)(value, self.props.format) || '');
 	    if (open) {
 	      setTimeout(function () {
 	        self.inputFocus();
@@ -64611,7 +64613,7 @@
 	                    _beeLayout.Col,
 	                    { md: 6, style: { 'marginBottom': '10px' } },
 	                    _react2["default"].createElement(MonthPicker, {
-	                        format: "YYYY-MM",
+	                        format: 'YYYY-MM',
 	                        onSelect: this.onSelect,
 	                        onChange: this.onChange,
 	                        locale: _zh_CN2["default"],
@@ -65211,7 +65213,7 @@
 	
 	var _Form2 = _interopRequireDefault(_Form);
 	
-	var _FormItem = __webpack_require__(623);
+	var _FormItem = __webpack_require__(628);
 	
 	var _FormItem2 = _interopRequireDefault(_FormItem);
 	
@@ -65315,25 +65317,21 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.createForm = exports.formShape = exports.createFormField = undefined;
+	exports.createFormField = exports.createForm = undefined;
 	
 	var _createForm = __webpack_require__(518);
 	
 	var _createForm2 = _interopRequireDefault(_createForm);
 	
-	var _createFormField = __webpack_require__(620);
+	var _createFormField = __webpack_require__(626);
 	
 	var _createFormField2 = _interopRequireDefault(_createFormField);
 	
-	var _propTypes = __webpack_require__(622);
-	
-	var _propTypes2 = _interopRequireDefault(_propTypes);
-	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
+	// export this package's api
+	exports.createForm = _createForm2['default'];
 	exports.createFormField = _createFormField2['default'];
-	exports.formShape = _propTypes2['default'];
-	exports.createForm = _createForm2['default']; // export this package's api
 
 /***/ }),
 /* 518 */
@@ -65401,9 +65399,9 @@
 	
 	var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 	
-	var _extends5 = __webpack_require__(426);
+	var _extends2 = __webpack_require__(426);
 	
-	var _extends6 = _interopRequireDefault(_extends5);
+	var _extends3 = _interopRequireDefault(_extends2);
 	
 	var _toConsumableArray2 = __webpack_require__(520);
 	
@@ -65429,24 +65427,23 @@
 	
 	var _get2 = _interopRequireDefault(_get);
 	
-	var _set = __webpack_require__(613);
+	var _has = __webpack_require__(613);
+	
+	var _has2 = _interopRequireDefault(_has);
+	
+	var _set = __webpack_require__(620);
 	
 	var _set2 = _interopRequireDefault(_set);
 	
-	var _eq = __webpack_require__(598);
-	
-	var _eq2 = _interopRequireDefault(_eq);
-	
-	var _createFieldsStore = __webpack_require__(619);
+	var _createFieldsStore = __webpack_require__(625);
 	
 	var _createFieldsStore2 = _interopRequireDefault(_createFieldsStore);
 	
-	var _utils = __webpack_require__(621);
+	var _utils = __webpack_require__(627);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var DEFAULT_TRIGGER = 'onChange'; /* eslint-disable react/prefer-es6-class */
-	/* eslint-disable prefer-promise-reject-errors */
+	var DEFAULT_TRIGGER = 'onChange';
 	
 	function createBaseForm() {
 	  var option = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
@@ -65462,7 +65459,6 @@
 	      fieldDataProp = option.fieldDataProp,
 	      _option$formPropName = option.formPropName,
 	      formPropName = _option$formPropName === undefined ? 'form' : _option$formPropName,
-	      formName = option.name,
 	      withRef = option.withRef;
 	
 	
@@ -65481,13 +65477,9 @@
 	        this.instances = {};
 	        this.cachedBind = {};
 	        this.clearedFieldMetaCache = {};
-	
-	        this.renderFields = {};
-	        this.domFields = {};
-	
 	        // HACK: https://github.com/ant-design/ant-design/issues/6406
 	        ['getFieldsValue', 'getFieldValue', 'setFieldsInitialValue', 'getFieldsError', 'getFieldError', 'isFieldValidating', 'isFieldsValidating', 'isFieldsTouched', 'isFieldTouched'].forEach(function (key) {
-	          _this[key] = function () {
+	          return _this[key] = function () {
 	            var _fieldsStore;
 	
 	            if (process.env.NODE_ENV !== 'production') {
@@ -65501,16 +65493,10 @@
 	          submitting: false
 	        };
 	      },
-	      componentDidMount: function componentDidMount() {
-	        this.cleanUpUselessFields();
-	      },
 	      componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
 	        if (mapPropsToFields) {
 	          this.fieldsStore.updateFields(mapPropsToFields(nextProps));
 	        }
-	      },
-	      componentDidUpdate: function componentDidUpdate() {
-	        this.cleanUpUselessFields();
 	      },
 	      onCollectCommon: function onCollectCommon(name, action, args) {
 	        var fieldMeta = this.fieldsStore.getFieldMeta(name);
@@ -65529,10 +65515,10 @@
 	          Object.keys(valuesAll).forEach(function (key) {
 	            return (0, _set2['default'])(valuesAllSet, key, valuesAll[key]);
 	          });
-	          onValuesChange((0, _extends6['default'])((0, _defineProperty3['default'])({}, formPropName, this.getForm()), this.props), (0, _set2['default'])({}, name, value), valuesAllSet);
+	          onValuesChange(this.props, (0, _set2['default'])({}, name, value), valuesAllSet);
 	        }
 	        var field = this.fieldsStore.getField(name);
-	        return { name: name, field: (0, _extends6['default'])({}, field, { value: value, touched: true }), fieldMeta: fieldMeta };
+	        return { name: name, field: (0, _extends3['default'])({}, field, { value: value, touched: true }), fieldMeta: fieldMeta };
 	      },
 	      onCollect: function onCollect(name_, action) {
 	        for (var _len = arguments.length, args = Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
@@ -65546,10 +65532,7 @@
 	
 	        var validate = fieldMeta.validate;
 	
-	
-	        this.fieldsStore.setFieldsAsDirty();
-	
-	        var newField = (0, _extends6['default'])({}, field, {
+	        var newField = (0, _extends3['default'])({}, field, {
 	          dirty: (0, _utils.hasRules)(validate)
 	        });
 	        this.setFields((0, _defineProperty3['default'])({}, name, newField));
@@ -65563,12 +65546,9 @@
 	            field = _onCollectCommon2.field,
 	            fieldMeta = _onCollectCommon2.fieldMeta;
 	
-	        var newField = (0, _extends6['default'])({}, field, {
+	        var newField = (0, _extends3['default'])({}, field, {
 	          dirty: true
 	        });
-	
-	        this.fieldsStore.setFieldsAsDirty();
-	
 	        this.validateFieldsInternal([newField], {
 	          action: action,
 	          options: {
@@ -65581,22 +65561,23 @@
 	          this.cachedBind[name] = {};
 	        }
 	        var cache = this.cachedBind[name];
-	        if (!cache[action] || cache[action].oriFn !== fn) {
-	          cache[action] = {
-	            fn: fn.bind(this, name, action),
-	            oriFn: fn
-	          };
+	        if (!cache[action]) {
+	          cache[action] = fn.bind(this, name, action);
 	        }
-	        return cache[action].fn;
+	        return cache[action];
+	      },
+	      recoverClearedField: function recoverClearedField(name) {
+	        if (this.clearedFieldMetaCache[name]) {
+	          this.fieldsStore.setFields((0, _defineProperty3['default'])({}, name, this.clearedFieldMetaCache[name].field));
+	          this.fieldsStore.setFieldMeta(name, this.clearedFieldMetaCache[name].meta);
+	          delete this.clearedFieldMetaCache[name];
+	        }
 	      },
 	      getFieldDecorator: function getFieldDecorator(name, fieldOption) {
 	        var _this2 = this;
 	
 	        var props = this.getFieldProps(name, fieldOption);
 	        return function (fieldElem) {
-	          // We should put field in record if it is rendered
-	          _this2.renderFields[name] = true;
-	
 	          var fieldMeta = _this2.fieldsStore.getFieldMeta(name);
 	          var originalProps = fieldElem.props;
 	          if (process.env.NODE_ENV !== 'production') {
@@ -65607,7 +65588,7 @@
 	          }
 	          fieldMeta.originalProps = originalProps;
 	          fieldMeta.ref = fieldElem.ref;
-	          return _react2['default'].cloneElement(fieldElem, (0, _extends6['default'])({}, props, _this2.fieldsStore.getFieldValuePropValue(fieldMeta)));
+	          return _react2['default'].cloneElement(fieldElem, (0, _extends3['default'])({}, props, _this2.fieldsStore.getFieldValuePropValue(fieldMeta)));
 	        };
 	      },
 	      getFieldProps: function getFieldProps(name) {
@@ -65619,13 +65600,13 @@
 	          throw new Error('Must call `getFieldProps` with valid name string!');
 	        }
 	        if (process.env.NODE_ENV !== 'production') {
-	          (0, _warning2['default'])(this.fieldsStore.isValidNestedFieldName(name), 'One field name cannot be part of another, e.g. `a` and `a.b`. Check field: ' + name);
+	          (0, _warning2['default'])(this.fieldsStore.isValidNestedFieldName(name), 'One field name cannot be part of another, e.g. `a` and `a.b`.');
 	          (0, _warning2['default'])(!('exclusive' in usersFieldOption), '`option.exclusive` of `getFieldProps`|`getFieldDecorator` had been remove.');
 	        }
 	
 	        delete this.clearedFieldMetaCache[name];
 	
-	        var fieldOption = (0, _extends6['default'])({
+	        var fieldOption = (0, _extends3['default'])({
 	          name: name,
 	          trigger: DEFAULT_TRIGGER,
 	          valuePropName: 'value',
@@ -65644,11 +65625,11 @@
 	          fieldMeta.initialValue = fieldOption.initialValue;
 	        }
 	
-	        var inputProps = (0, _extends6['default'])({}, this.fieldsStore.getFieldValuePropValue(fieldOption), {
+	        var inputProps = (0, _extends3['default'])({}, this.fieldsStore.getFieldValuePropValue(fieldOption), {
 	          ref: this.getCacheBind(name, name + '__ref', this.saveRef)
 	        });
 	        if (fieldNameProp) {
-	          inputProps[fieldNameProp] = formName ? formName + '_' + name : name;
+	          inputProps[fieldNameProp] = name;
 	        }
 	
 	        var validateRules = (0, _utils.normalizeValidateRules)(validate, rules, validateTrigger);
@@ -65663,7 +65644,7 @@
 	          inputProps[trigger] = this.getCacheBind(name, trigger, this.onCollect);
 	        }
 	
-	        var meta = (0, _extends6['default'])({}, fieldMeta, fieldOption, {
+	        var meta = (0, _extends3['default'])({}, fieldMeta, fieldOption, {
 	          validate: validateRules
 	        });
 	        this.fieldsStore.setFieldMeta(name, meta);
@@ -65674,9 +65655,6 @@
 	        if (fieldDataProp) {
 	          inputProps[fieldDataProp] = this.fieldsStore.getField(name);
 	        }
-	
-	        // This field is rendered, record it
-	        this.renderFields[name] = true;
 	
 	        return inputProps;
 	      },
@@ -65691,7 +65669,7 @@
 	        });
 	        return (0, _utils.flattenArray)(actionRules);
 	      },
-	      setFields: function setFields(maybeNestedFields, callback) {
+	      setFields: function setFields(maybeNestedFields) {
 	        var _this4 = this;
 	
 	        var fields = this.fieldsStore.flattenRegisteredFields(maybeNestedFields);
@@ -65700,11 +65678,27 @@
 	          var changedFields = Object.keys(fields).reduce(function (acc, name) {
 	            return (0, _set2['default'])(acc, name, _this4.fieldsStore.getField(name));
 	          }, {});
-	          onFieldsChange((0, _extends6['default'])((0, _defineProperty3['default'])({}, formPropName, this.getForm()), this.props), changedFields, this.fieldsStore.getNestedAllFields());
+	          onFieldsChange(this.props, changedFields, this.fieldsStore.getNestedAllFields());
 	        }
-	        this.forceUpdate(callback);
+	        this.forceUpdate();
 	      },
-	      setFieldsValue: function setFieldsValue(changedValues, callback) {
+	      resetFields: function resetFields(ns) {
+	        var _this5 = this;
+	
+	        var newFields = this.fieldsStore.resetFields(ns);
+	        if (Object.keys(newFields).length > 0) {
+	          this.setFields(newFields);
+	        }
+	        if (ns) {
+	          var names = Array.isArray(ns) ? ns : [ns];
+	          names.forEach(function (name) {
+	            return delete _this5.clearedFieldMetaCache[name];
+	          });
+	        } else {
+	          this.clearedFieldMetaCache = {};
+	        }
+	      },
+	      setFieldsValue: function setFieldsValue(changedValues) {
 	        var fieldsMeta = this.fieldsStore.fieldsMeta;
 	
 	        var values = this.fieldsStore.flattenRegisteredFields(changedValues);
@@ -65721,27 +65715,24 @@
 	          }
 	          return acc;
 	        }, {});
-	        this.setFields(newFields, callback);
+	        this.setFields(newFields);
 	        if (onValuesChange) {
 	          var allValues = this.fieldsStore.getAllValues();
-	          onValuesChange((0, _extends6['default'])((0, _defineProperty3['default'])({}, formPropName, this.getForm()), this.props), changedValues, allValues);
+	          onValuesChange(this.props, changedValues, allValues);
 	        }
 	      },
 	      saveRef: function saveRef(name, _, component) {
 	        if (!component) {
-	          var _fieldMeta = this.fieldsStore.getFieldMeta(name);
-	          if (!_fieldMeta.preserve) {
-	            // after destroy, delete data
-	            this.clearedFieldMetaCache[name] = {
-	              field: this.fieldsStore.getField(name),
-	              meta: _fieldMeta
-	            };
-	            this.clearField(name);
-	          }
-	          delete this.domFields[name];
+	          // after destroy, delete data
+	          this.clearedFieldMetaCache[name] = {
+	            field: this.fieldsStore.getField(name),
+	            meta: this.fieldsStore.getFieldMeta(name)
+	          };
+	          this.fieldsStore.clearField(name);
+	          delete this.instances[name];
+	          delete this.cachedBind[name];
 	          return;
 	        }
-	        this.domFields[name] = true;
 	        this.recoverClearedField(name);
 	        var fieldMeta = this.fieldsStore.getFieldMeta(name);
 	        if (fieldMeta) {
@@ -65749,58 +65740,14 @@
 	          if (ref) {
 	            if (typeof ref === 'string') {
 	              throw new Error('can not set ref string for ' + name);
-	            } else if (typeof ref === 'function') {
-	              ref(component);
-	            } else if (Object.prototype.hasOwnProperty.call(ref, 'current')) {
-	              ref.current = component;
 	            }
+	            ref(component);
 	          }
 	        }
 	        this.instances[name] = component;
 	      },
-	      cleanUpUselessFields: function cleanUpUselessFields() {
-	        var _this5 = this;
-	
-	        var fieldList = this.fieldsStore.getAllFieldsName();
-	        var removedList = fieldList.filter(function (field) {
-	          var fieldMeta = _this5.fieldsStore.getFieldMeta(field);
-	          return !_this5.renderFields[field] && !_this5.domFields[field] && !fieldMeta.preserve;
-	        });
-	        if (removedList.length) {
-	          removedList.forEach(this.clearField);
-	        }
-	        this.renderFields = {};
-	      },
-	      clearField: function clearField(name) {
-	        this.fieldsStore.clearField(name);
-	        delete this.instances[name];
-	        delete this.cachedBind[name];
-	      },
-	      resetFields: function resetFields(ns) {
-	        var _this6 = this;
-	
-	        var newFields = this.fieldsStore.resetFields(ns);
-	        if (Object.keys(newFields).length > 0) {
-	          this.setFields(newFields);
-	        }
-	        if (ns) {
-	          var names = Array.isArray(ns) ? ns : [ns];
-	          names.forEach(function (name) {
-	            return delete _this6.clearedFieldMetaCache[name];
-	          });
-	        } else {
-	          this.clearedFieldMetaCache = {};
-	        }
-	      },
-	      recoverClearedField: function recoverClearedField(name) {
-	        if (this.clearedFieldMetaCache[name]) {
-	          this.fieldsStore.setFields((0, _defineProperty3['default'])({}, name, this.clearedFieldMetaCache[name].field));
-	          this.fieldsStore.setFieldMeta(name, this.clearedFieldMetaCache[name].meta);
-	          delete this.clearedFieldMetaCache[name];
-	        }
-	      },
 	      validateFieldsInternal: function validateFieldsInternal(fields, _ref, callback) {
-	        var _this7 = this;
+	        var _this6 = this;
 	
 	        var fieldNames = _ref.fieldNames,
 	            action = _ref.action,
@@ -65819,19 +65766,19 @@
 	            }
 	            return;
 	          }
-	          var fieldMeta = _this7.fieldsStore.getFieldMeta(name);
-	          var newField = (0, _extends6['default'])({}, field);
+	          var fieldMeta = _this6.fieldsStore.getFieldMeta(name);
+	          var newField = (0, _extends3['default'])({}, field);
 	          newField.errors = undefined;
 	          newField.validating = true;
 	          newField.dirty = true;
-	          allRules[name] = _this7.getRules(fieldMeta, action);
+	          allRules[name] = _this6.getRules(fieldMeta, action);
 	          allValues[name] = newField.value;
 	          allFields[name] = newField;
 	        });
 	        this.setFields(allFields);
 	        // in case normalize
 	        Object.keys(allValues).forEach(function (f) {
-	          allValues[f] = _this7.fieldsStore.getFieldValue(f);
+	          allValues[f] = _this6.fieldsStore.getFieldValue(f);
 	        });
 	        if (callback && (0, _utils.isEmptyObject)(allFields)) {
 	          callback((0, _utils.isEmptyObject)(alreadyErrors) ? null : alreadyErrors, this.fieldsStore.getFieldsValue(fieldNames));
@@ -65842,43 +65789,11 @@
 	          validator.messages(validateMessages);
 	        }
 	        validator.validate(allValues, options, function (errors) {
-	          var errorsGroup = (0, _extends6['default'])({}, alreadyErrors);
+	          var errorsGroup = (0, _extends3['default'])({}, alreadyErrors);
 	          if (errors && errors.length) {
 	            errors.forEach(function (e) {
-	              var errorFieldName = e.field;
-	              var fieldName = errorFieldName;
-	
-	              // Handle using array validation rule.
-	              // ref: https://github.com/ant-design/ant-design/issues/14275
-	              Object.keys(allRules).some(function (ruleFieldName) {
-	                var rules = allRules[ruleFieldName] || [];
-	
-	                // Exist if match rule
-	                if (ruleFieldName === errorFieldName) {
-	                  fieldName = ruleFieldName;
-	                  return true;
-	                }
-	
-	                // Skip if not match array type
-	                if (rules.every(function (_ref2) {
-	                  var type = _ref2.type;
-	                  return type !== 'array';
-	                }) && errorFieldName.indexOf(ruleFieldName) !== 0) {
-	                  return false;
-	                }
-	
-	                // Exist if match the field name
-	                var restPath = errorFieldName.slice(ruleFieldName.length + 1);
-	                if (/^\d+$/.test(restPath)) {
-	                  fieldName = ruleFieldName;
-	                  return true;
-	                }
-	
-	                return false;
-	              });
-	
-	              var field = (0, _get2['default'])(errorsGroup, fieldName);
-	              if (typeof field !== 'object' || Array.isArray(field)) {
+	              var fieldName = e.field;
+	              if (!(0, _has2['default'])(errorsGroup, fieldName)) {
 	                (0, _set2['default'])(errorsGroup, fieldName, { errors: [] });
 	              }
 	              var fieldErrors = (0, _get2['default'])(errorsGroup, fieldName.concat('.errors'));
@@ -65889,9 +65804,9 @@
 	          var nowAllFields = {};
 	          Object.keys(allRules).forEach(function (name) {
 	            var fieldErrors = (0, _get2['default'])(errorsGroup, name);
-	            var nowField = _this7.fieldsStore.getField(name);
+	            var nowField = _this6.fieldsStore.getField(name);
 	            // avoid concurrency problems
-	            if (!(0, _eq2['default'])(nowField.value, allValues[name])) {
+	            if (nowField.value !== allValues[name]) {
 	              expired.push({
 	                name: name
 	              });
@@ -65903,11 +65818,11 @@
 	              nowAllFields[name] = nowField;
 	            }
 	          });
-	          _this7.setFields(nowAllFields);
+	          _this6.setFields(nowAllFields);
 	          if (callback) {
 	            if (expired.length) {
-	              expired.forEach(function (_ref3) {
-	                var name = _ref3.name;
+	              expired.forEach(function (_ref2) {
+	                var name = _ref2.name;
 	
 	                var fieldErrors = [{
 	                  message: name + ' need to revalidate',
@@ -65920,67 +65835,43 @@
 	              });
 	            }
 	
-	            callback((0, _utils.isEmptyObject)(errorsGroup) ? null : errorsGroup, _this7.fieldsStore.getFieldsValue(fieldNames));
+	            callback((0, _utils.isEmptyObject)(errorsGroup) ? null : errorsGroup, _this6.fieldsStore.getFieldsValue(fieldNames));
 	          }
 	        });
 	      },
 	      validateFields: function validateFields(ns, opt, cb) {
-	        var _this8 = this;
+	        var _this7 = this;
 	
-	        var pending = new Promise(function (resolve, reject) {
-	          var _getParams = (0, _utils.getParams)(ns, opt, cb),
-	              names = _getParams.names,
-	              options = _getParams.options;
+	        var _getParams = (0, _utils.getParams)(ns, opt, cb),
+	            names = _getParams.names,
+	            callback = _getParams.callback,
+	            options = _getParams.options;
 	
-	          var _getParams2 = (0, _utils.getParams)(ns, opt, cb),
-	              callback = _getParams2.callback;
-	
-	          if (!callback || typeof callback === 'function') {
-	            var oldCb = callback;
-	            callback = function callback(errors, values) {
-	              if (oldCb) {
-	                oldCb(errors, values);
-	              }
-	              if (errors) {
-	                reject({ errors: errors, values: values });
-	              } else {
-	                resolve(values);
-	              }
-	            };
+	        var fieldNames = names ? this.fieldsStore.getValidFieldsFullName(names) : this.fieldsStore.getValidFieldsName();
+	        var fields = fieldNames.filter(function (name) {
+	          var fieldMeta = _this7.fieldsStore.getFieldMeta(name);
+	          return (0, _utils.hasRules)(fieldMeta.validate);
+	        }).map(function (name) {
+	          var field = _this7.fieldsStore.getField(name);
+	          field.value = _this7.fieldsStore.getFieldValue(name);
+	          return field;
+	        });
+	        if (!fields.length) {
+	          if (callback) {
+	            callback(null, this.fieldsStore.getFieldsValue(fieldNames));
 	          }
-	          var fieldNames = names ? _this8.fieldsStore.getValidFieldsFullName(names) : _this8.fieldsStore.getValidFieldsName();
-	          var fields = fieldNames.filter(function (name) {
-	            var fieldMeta = _this8.fieldsStore.getFieldMeta(name);
-	            return (0, _utils.hasRules)(fieldMeta.validate);
-	          }).map(function (name) {
-	            var field = _this8.fieldsStore.getField(name);
-	            field.value = _this8.fieldsStore.getFieldValue(name);
-	            return field;
+	          return;
+	        }
+	        if (!('firstFields' in options)) {
+	          options.firstFields = fieldNames.filter(function (name) {
+	            var fieldMeta = _this7.fieldsStore.getFieldMeta(name);
+	            return !!fieldMeta.validateFirst;
 	          });
-	          if (!fields.length) {
-	            callback(null, _this8.fieldsStore.getFieldsValue(fieldNames));
-	            return;
-	          }
-	          if (!('firstFields' in options)) {
-	            options.firstFields = fieldNames.filter(function (name) {
-	              var fieldMeta = _this8.fieldsStore.getFieldMeta(name);
-	              return !!fieldMeta.validateFirst;
-	            });
-	          }
-	          _this8.validateFieldsInternal(fields, {
-	            fieldNames: fieldNames,
-	            options: options
-	          }, callback);
-	        });
-	        pending['catch'](function (e) {
-	          // eslint-disable-next-line no-console
-	          if (console.error && process.env.NODE_ENV !== 'production') {
-	            // eslint-disable-next-line no-console
-	            console.error(e);
-	          }
-	          return e;
-	        });
-	        return pending;
+	        }
+	        this.validateFieldsInternal(fields, {
+	          fieldNames: fieldNames,
+	          options: options
+	        }, callback);
 	      },
 	      isSubmitting: function isSubmitting() {
 	        if (process.env.NODE_ENV !== 'production' && process.env.NODE_ENV !== 'test') {
@@ -65989,13 +65880,13 @@
 	        return this.state.submitting;
 	      },
 	      submit: function submit(callback) {
-	        var _this9 = this;
+	        var _this8 = this;
 	
 	        if (process.env.NODE_ENV !== 'production' && process.env.NODE_ENV !== 'test') {
-	          (0, _warning2['default'])(false, '`submit` is deprecated. ' + 'Actually, it\'s more convenient to handle submitting status by yourself.');
+	          (0, _warning2['default'])(false, '`submit` is deprecated.' + 'Actually, it\'s more convenient to handle submitting status by yourself.');
 	        }
 	        var fn = function fn() {
-	          _this9.setState({
+	          _this8.setState({
 	            submitting: false
 	          });
 	        };
@@ -66007,7 +65898,7 @@
 	      render: function render() {
 	        var _props = this.props,
 	            wrappedComponentRef = _props.wrappedComponentRef,
-	            restProps = (0, _objectWithoutProperties3['default'])(_props, ['wrappedComponentRef']); // eslint-disable-line
+	            restProps = (0, _objectWithoutProperties3['default'])(_props, ['wrappedComponentRef']);
 	
 	        var formProps = (0, _defineProperty3['default'])({}, formPropName, this.getForm());
 	        if (withRef) {
@@ -66018,7 +65909,7 @@
 	        } else if (wrappedComponentRef) {
 	          formProps.ref = wrappedComponentRef;
 	        }
-	        var props = mapProps.call(this, (0, _extends6['default'])({}, formProps, restProps));
+	        var props = mapProps.call(this, (0, _extends3['default'])({}, formProps, restProps));
 	        return _react2['default'].createElement(WrappedComponent, props);
 	      }
 	    });
@@ -70618,7 +70509,256 @@
 /* 613 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var baseSet = __webpack_require__(614);
+	var baseHas = __webpack_require__(614),
+	    hasPath = __webpack_require__(615);
+	
+	/**
+	 * Checks if `path` is a direct property of `object`.
+	 *
+	 * @static
+	 * @since 0.1.0
+	 * @memberOf _
+	 * @category Object
+	 * @param {Object} object The object to query.
+	 * @param {Array|string} path The path to check.
+	 * @returns {boolean} Returns `true` if `path` exists, else `false`.
+	 * @example
+	 *
+	 * var object = { 'a': { 'b': 2 } };
+	 * var other = _.create({ 'a': _.create({ 'b': 2 }) });
+	 *
+	 * _.has(object, 'a');
+	 * // => true
+	 *
+	 * _.has(object, 'a.b');
+	 * // => true
+	 *
+	 * _.has(object, ['a', 'b']);
+	 * // => true
+	 *
+	 * _.has(other, 'a');
+	 * // => false
+	 */
+	function has(object, path) {
+	  return object != null && hasPath(object, path, baseHas);
+	}
+	
+	module.exports = has;
+
+
+/***/ }),
+/* 614 */
+/***/ (function(module, exports) {
+
+	/** Used for built-in method references. */
+	var objectProto = Object.prototype;
+	
+	/** Used to check objects for own properties. */
+	var hasOwnProperty = objectProto.hasOwnProperty;
+	
+	/**
+	 * The base implementation of `_.has` without support for deep paths.
+	 *
+	 * @private
+	 * @param {Object} [object] The object to query.
+	 * @param {Array|string} key The key to check.
+	 * @returns {boolean} Returns `true` if `key` exists, else `false`.
+	 */
+	function baseHas(object, key) {
+	  return object != null && hasOwnProperty.call(object, key);
+	}
+	
+	module.exports = baseHas;
+
+
+/***/ }),
+/* 615 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var castPath = __webpack_require__(563),
+	    isArguments = __webpack_require__(616),
+	    isArray = __webpack_require__(564),
+	    isIndex = __webpack_require__(618),
+	    isLength = __webpack_require__(619),
+	    toKey = __webpack_require__(612);
+	
+	/**
+	 * Checks if `path` exists on `object`.
+	 *
+	 * @private
+	 * @param {Object} object The object to query.
+	 * @param {Array|string} path The path to check.
+	 * @param {Function} hasFunc The function to check properties.
+	 * @returns {boolean} Returns `true` if `path` exists, else `false`.
+	 */
+	function hasPath(object, path, hasFunc) {
+	  path = castPath(path, object);
+	
+	  var index = -1,
+	      length = path.length,
+	      result = false;
+	
+	  while (++index < length) {
+	    var key = toKey(path[index]);
+	    if (!(result = object != null && hasFunc(object, key))) {
+	      break;
+	    }
+	    object = object[key];
+	  }
+	  if (result || ++index != length) {
+	    return result;
+	  }
+	  length = object == null ? 0 : object.length;
+	  return !!length && isLength(length) && isIndex(key, length) &&
+	    (isArray(object) || isArguments(object));
+	}
+	
+	module.exports = hasPath;
+
+
+/***/ }),
+/* 616 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var baseIsArguments = __webpack_require__(617),
+	    isObjectLike = __webpack_require__(573);
+	
+	/** Used for built-in method references. */
+	var objectProto = Object.prototype;
+	
+	/** Used to check objects for own properties. */
+	var hasOwnProperty = objectProto.hasOwnProperty;
+	
+	/** Built-in value references. */
+	var propertyIsEnumerable = objectProto.propertyIsEnumerable;
+	
+	/**
+	 * Checks if `value` is likely an `arguments` object.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @since 0.1.0
+	 * @category Lang
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is an `arguments` object,
+	 *  else `false`.
+	 * @example
+	 *
+	 * _.isArguments(function() { return arguments; }());
+	 * // => true
+	 *
+	 * _.isArguments([1, 2, 3]);
+	 * // => false
+	 */
+	var isArguments = baseIsArguments(function() { return arguments; }()) ? baseIsArguments : function(value) {
+	  return isObjectLike(value) && hasOwnProperty.call(value, 'callee') &&
+	    !propertyIsEnumerable.call(value, 'callee');
+	};
+	
+	module.exports = isArguments;
+
+
+/***/ }),
+/* 617 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var baseGetTag = __webpack_require__(567),
+	    isObjectLike = __webpack_require__(573);
+	
+	/** `Object#toString` result references. */
+	var argsTag = '[object Arguments]';
+	
+	/**
+	 * The base implementation of `_.isArguments`.
+	 *
+	 * @private
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is an `arguments` object,
+	 */
+	function baseIsArguments(value) {
+	  return isObjectLike(value) && baseGetTag(value) == argsTag;
+	}
+	
+	module.exports = baseIsArguments;
+
+
+/***/ }),
+/* 618 */
+/***/ (function(module, exports) {
+
+	/** Used as references for various `Number` constants. */
+	var MAX_SAFE_INTEGER = 9007199254740991;
+	
+	/** Used to detect unsigned integer values. */
+	var reIsUint = /^(?:0|[1-9]\d*)$/;
+	
+	/**
+	 * Checks if `value` is a valid array-like index.
+	 *
+	 * @private
+	 * @param {*} value The value to check.
+	 * @param {number} [length=MAX_SAFE_INTEGER] The upper bounds of a valid index.
+	 * @returns {boolean} Returns `true` if `value` is a valid index, else `false`.
+	 */
+	function isIndex(value, length) {
+	  var type = typeof value;
+	  length = length == null ? MAX_SAFE_INTEGER : length;
+	
+	  return !!length &&
+	    (type == 'number' ||
+	      (type != 'symbol' && reIsUint.test(value))) &&
+	        (value > -1 && value % 1 == 0 && value < length);
+	}
+	
+	module.exports = isIndex;
+
+
+/***/ }),
+/* 619 */
+/***/ (function(module, exports) {
+
+	/** Used as references for various `Number` constants. */
+	var MAX_SAFE_INTEGER = 9007199254740991;
+	
+	/**
+	 * Checks if `value` is a valid array-like length.
+	 *
+	 * **Note:** This method is loosely based on
+	 * [`ToLength`](http://ecma-international.org/ecma-262/7.0/#sec-tolength).
+	 *
+	 * @static
+	 * @memberOf _
+	 * @since 4.0.0
+	 * @category Lang
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is a valid length, else `false`.
+	 * @example
+	 *
+	 * _.isLength(3);
+	 * // => true
+	 *
+	 * _.isLength(Number.MIN_VALUE);
+	 * // => false
+	 *
+	 * _.isLength(Infinity);
+	 * // => false
+	 *
+	 * _.isLength('3');
+	 * // => false
+	 */
+	function isLength(value) {
+	  return typeof value == 'number' &&
+	    value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
+	}
+	
+	module.exports = isLength;
+
+
+/***/ }),
+/* 620 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var baseSet = __webpack_require__(621);
 	
 	/**
 	 * Sets the value at `path` of `object`. If a portion of `path` doesn't exist,
@@ -70656,10 +70796,10 @@
 
 
 /***/ }),
-/* 614 */
+/* 621 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var assignValue = __webpack_require__(615),
+	var assignValue = __webpack_require__(622),
 	    castPath = __webpack_require__(563),
 	    isIndex = __webpack_require__(618),
 	    isObject = __webpack_require__(585),
@@ -70709,10 +70849,10 @@
 
 
 /***/ }),
-/* 615 */
+/* 622 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var baseAssignValue = __webpack_require__(616),
+	var baseAssignValue = __webpack_require__(623),
 	    eq = __webpack_require__(598);
 	
 	/** Used for built-in method references. */
@@ -70743,10 +70883,10 @@
 
 
 /***/ }),
-/* 616 */
+/* 623 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var defineProperty = __webpack_require__(617);
+	var defineProperty = __webpack_require__(624);
 	
 	/**
 	 * The base implementation of `assignValue` and `assignMergeValue` without
@@ -70774,7 +70914,7 @@
 
 
 /***/ }),
-/* 617 */
+/* 624 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var getNative = __webpack_require__(582);
@@ -70791,38 +70931,7 @@
 
 
 /***/ }),
-/* 618 */
-/***/ (function(module, exports) {
-
-	/** Used as references for various `Number` constants. */
-	var MAX_SAFE_INTEGER = 9007199254740991;
-	
-	/** Used to detect unsigned integer values. */
-	var reIsUint = /^(?:0|[1-9]\d*)$/;
-	
-	/**
-	 * Checks if `value` is a valid array-like index.
-	 *
-	 * @private
-	 * @param {*} value The value to check.
-	 * @param {number} [length=MAX_SAFE_INTEGER] The upper bounds of a valid index.
-	 * @returns {boolean} Returns `true` if `value` is a valid index, else `false`.
-	 */
-	function isIndex(value, length) {
-	  var type = typeof value;
-	  length = length == null ? MAX_SAFE_INTEGER : length;
-	
-	  return !!length &&
-	    (type == 'number' ||
-	      (type != 'symbol' && reIsUint.test(value))) &&
-	        (value > -1 && value % 1 == 0 && value < length);
-	}
-	
-	module.exports = isIndex;
-
-
-/***/ }),
-/* 619 */
+/* 625 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -70849,26 +70958,20 @@
 	
 	exports['default'] = createFieldsStore;
 	
-	var _set = __webpack_require__(613);
+	var _set = __webpack_require__(620);
 	
 	var _set2 = _interopRequireDefault(_set);
 	
-	var _createFormField = __webpack_require__(620);
+	var _createFormField = __webpack_require__(626);
 	
 	var _createFormField2 = _interopRequireDefault(_createFormField);
 	
-	var _utils = __webpack_require__(621);
+	var _utils = __webpack_require__(627);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
 	function partOf(a, b) {
 	  return b.indexOf(a) === 0 && ['.', '['].indexOf(b[a.length]) !== -1;
-	}
-	
-	function internalFlattenFields(fields) {
-	  return (0, _utils.flattenFields)(fields, function (_, node) {
-	    return (0, _createFormField.isFormField)(node);
-	  }, 'You must wrap field data with `createFormField`.');
 	}
 	
 	var FieldsStore = function () {
@@ -70877,14 +70980,21 @@
 	
 	    _initialiseProps.call(this);
 	
-	    this.fields = internalFlattenFields(fields);
+	    this.fields = this.flattenFields(fields);
 	    this.fieldsMeta = {};
 	  }
 	
 	  (0, _createClass3['default'])(FieldsStore, [{
 	    key: 'updateFields',
 	    value: function updateFields(fields) {
-	      this.fields = internalFlattenFields(fields);
+	      this.fields = this.flattenFields(fields);
+	    }
+	  }, {
+	    key: 'flattenFields',
+	    value: function flattenFields(fields) {
+	      return (0, _utils.flattenFields)(fields, function (_, node) {
+	        return (0, _createFormField.isFormField)(node);
+	      }, 'You must wrap field data with `createFormField`.');
 	    }
 	  }, {
 	    key: 'flattenRegisteredFields',
@@ -70892,7 +71002,7 @@
 	      var validFieldsName = this.getAllFieldsName();
 	      return (0, _utils.flattenFields)(fields, function (path) {
 	        return validFieldsName.indexOf(path) >= 0;
-	      }, 'You cannot set a form field before rendering a field associated with the value.');
+	      }, 'You cannot set field before registering it.');
 	    }
 	  }, {
 	    key: 'setFields',
@@ -70903,7 +71013,7 @@
 	      var nowFields = (0, _extends3['default'])({}, this.fields, fields);
 	      var nowValues = {};
 	      Object.keys(fieldsMeta).forEach(function (f) {
-	        nowValues[f] = _this.getValueFromFields(f, nowFields);
+	        return nowValues[f] = _this.getValueFromFields(f, nowFields);
 	      });
 	      Object.keys(nowValues).forEach(function (f) {
 	        var value = nowValues[f];
@@ -70939,21 +71049,6 @@
 	      this.fieldsMeta[name] = meta;
 	    }
 	  }, {
-	    key: 'setFieldsAsDirty',
-	    value: function setFieldsAsDirty() {
-	      var _this2 = this;
-	
-	      Object.keys(this.fields).forEach(function (name) {
-	        var field = _this2.fields[name];
-	        var fieldMeta = _this2.fieldsMeta[name];
-	        if (field && fieldMeta && (0, _utils.hasRules)(fieldMeta.validate)) {
-	          _this2.fields[name] = (0, _extends3['default'])({}, field, {
-	            dirty: true
-	          });
-	        }
-	      });
-	    }
-	  }, {
 	    key: 'getFieldMeta',
 	    value: function getFieldMeta(name) {
 	      this.fieldsMeta[name] = this.fieldsMeta[name] || {};
@@ -70972,12 +71067,12 @@
 	  }, {
 	    key: 'getValidFieldsName',
 	    value: function getValidFieldsName() {
-	      var _this3 = this;
+	      var _this2 = this;
 	
 	      var fieldsMeta = this.fieldsMeta;
 	
 	      return fieldsMeta ? Object.keys(fieldsMeta).filter(function (name) {
-	        return !_this3.getFieldMeta(name).hidden;
+	        return !_this2.getFieldMeta(name).hidden;
 	      }) : [];
 	    }
 	  }, {
@@ -71021,16 +71116,15 @@
 	  }, {
 	    key: 'getNotCollectedFields',
 	    value: function getNotCollectedFields() {
-	      var _this4 = this;
+	      var _this3 = this;
 	
-	      var fieldsName = this.getValidFieldsName();
-	      return fieldsName.filter(function (name) {
-	        return !_this4.fields[name];
+	      return this.getValidFieldsName().filter(function (name) {
+	        return !_this3.fields[name];
 	      }).map(function (name) {
 	        return {
 	          name: name,
 	          dirty: false,
-	          value: _this4.getFieldMeta(name).initialValue
+	          value: _this3.getFieldMeta(name).initialValue
 	        };
 	      }).reduce(function (acc, field) {
 	        return (0, _set2['default'])(acc, field.name, (0, _createFormField2['default'])(field));
@@ -71039,10 +71133,10 @@
 	  }, {
 	    key: 'getNestedAllFields',
 	    value: function getNestedAllFields() {
-	      var _this5 = this;
+	      var _this4 = this;
 	
 	      return Object.keys(this.fields).reduce(function (acc, name) {
-	        return (0, _set2['default'])(acc, name, (0, _createFormField2['default'])(_this5.fields[name]));
+	        return (0, _set2['default'])(acc, name, (0, _createFormField2['default'])(_this4.fields[name]));
 	      }, this.getNotCollectedFields());
 	    }
 	  }, {
@@ -71096,14 +71190,14 @@
 	}();
 	
 	var _initialiseProps = function _initialiseProps() {
-	  var _this6 = this;
+	  var _this5 = this;
 	
 	  this.setFieldsInitialValue = function (initialValues) {
-	    var flattenedInitialValues = _this6.flattenRegisteredFields(initialValues);
-	    var fieldsMeta = _this6.fieldsMeta;
+	    var flattenedInitialValues = _this5.flattenRegisteredFields(initialValues);
+	    var fieldsMeta = _this5.fieldsMeta;
 	    Object.keys(flattenedInitialValues).forEach(function (name) {
 	      if (fieldsMeta[name]) {
-	        _this6.setFieldMeta(name, (0, _extends3['default'])({}, _this6.getFieldMeta(name), {
+	        _this5.setFieldMeta(name, (0, _extends3['default'])({}, _this5.getFieldMeta(name), {
 	          initialValue: flattenedInitialValues[name]
 	        }));
 	      }
@@ -71111,55 +71205,55 @@
 	  };
 	
 	  this.getAllValues = function () {
-	    var fieldsMeta = _this6.fieldsMeta,
-	        fields = _this6.fields;
+	    var fieldsMeta = _this5.fieldsMeta,
+	        fields = _this5.fields;
 	
 	    return Object.keys(fieldsMeta).reduce(function (acc, name) {
-	      return (0, _set2['default'])(acc, name, _this6.getValueFromFields(name, fields));
+	      return (0, _set2['default'])(acc, name, _this5.getValueFromFields(name, fields));
 	    }, {});
 	  };
 	
 	  this.getFieldsValue = function (names) {
-	    return _this6.getNestedFields(names, _this6.getFieldValue);
+	    return _this5.getNestedFields(names, _this5.getFieldValue);
 	  };
 	
 	  this.getFieldValue = function (name) {
-	    var fields = _this6.fields;
+	    var fields = _this5.fields;
 	
-	    return _this6.getNestedField(name, function (fullName) {
-	      return _this6.getValueFromFields(fullName, fields);
+	    return _this5.getNestedField(name, function (fullName) {
+	      return _this5.getValueFromFields(fullName, fields);
 	    });
 	  };
 	
 	  this.getFieldsError = function (names) {
-	    return _this6.getNestedFields(names, _this6.getFieldError);
+	    return _this5.getNestedFields(names, _this5.getFieldError);
 	  };
 	
 	  this.getFieldError = function (name) {
-	    return _this6.getNestedField(name, function (fullName) {
-	      return (0, _utils.getErrorStrs)(_this6.getFieldMember(fullName, 'errors'));
+	    return _this5.getNestedField(name, function (fullName) {
+	      return (0, _utils.getErrorStrs)(_this5.getFieldMember(fullName, 'errors'));
 	    });
 	  };
 	
 	  this.isFieldValidating = function (name) {
-	    return _this6.getFieldMember(name, 'validating');
+	    return _this5.getFieldMember(name, 'validating');
 	  };
 	
 	  this.isFieldsValidating = function (ns) {
-	    var names = ns || _this6.getValidFieldsName();
+	    var names = ns || _this5.getValidFieldsName();
 	    return names.some(function (n) {
-	      return _this6.isFieldValidating(n);
+	      return _this5.isFieldValidating(n);
 	    });
 	  };
 	
 	  this.isFieldTouched = function (name) {
-	    return _this6.getFieldMember(name, 'touched');
+	    return _this5.getFieldMember(name, 'touched');
 	  };
 	
 	  this.isFieldsTouched = function (ns) {
-	    var names = ns || _this6.getValidFieldsName();
+	    var names = ns || _this5.getValidFieldsName();
 	    return names.some(function (n) {
-	      return _this6.isFieldTouched(n);
+	      return _this5.isFieldTouched(n);
 	    });
 	  };
 	};
@@ -71170,7 +71264,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 620 */
+/* 626 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -71210,7 +71304,7 @@
 	}
 
 /***/ }),
-/* 621 */
+/* 627 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -71222,6 +71316,10 @@
 	var _extends2 = __webpack_require__(426);
 	
 	var _extends3 = _interopRequireDefault(_extends2);
+	
+	var _typeof2 = __webpack_require__(430);
+	
+	var _typeof3 = _interopRequireDefault(_typeof2);
 	
 	exports.argumentContainer = argumentContainer;
 	exports.identity = identity;
@@ -71240,10 +71338,6 @@
 	var _hoistNonReactStatics = __webpack_require__(224);
 	
 	var _hoistNonReactStatics2 = _interopRequireDefault(_hoistNonReactStatics);
-	
-	var _warning = __webpack_require__(31);
-	
-	var _warning2 = _interopRequireDefault(_warning);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -71275,16 +71369,16 @@
 	
 	  if (isLeafNode(path, tree)) {
 	    callback(path, tree);
-	  } else if (tree === undefined || tree === null) {
-	    // Do nothing
+	  } else if (tree === undefined) {
+	    return;
 	  } else if (Array.isArray(tree)) {
 	    tree.forEach(function (subTree, index) {
 	      return treeTraverse(path + '[' + index + ']', subTree, isLeafNode, errorMessage, callback);
 	    });
 	  } else {
 	    // It's object and not a leaf node
-	    if (typeof tree !== 'object') {
-	      (0, _warning2['default'])(false, errorMessage);
+	    if ((typeof tree === 'undefined' ? 'undefined' : (0, _typeof3['default'])(tree)) !== 'object') {
+	      console.error(errorMessage);
 	      return;
 	    }
 	    Object.keys(tree).forEach(function (subTreeKey) {
@@ -71400,47 +71494,7 @@
 	}
 
 /***/ }),
-/* 622 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _propTypes = __webpack_require__(6);
-	
-	var _propTypes2 = _interopRequireDefault(_propTypes);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-	
-	var formShape = _propTypes2['default'].shape({
-	  getFieldsValue: _propTypes2['default'].func,
-	  getFieldValue: _propTypes2['default'].func,
-	  getFieldInstance: _propTypes2['default'].func,
-	  setFieldsValue: _propTypes2['default'].func,
-	  setFields: _propTypes2['default'].func,
-	  setFieldsInitialValue: _propTypes2['default'].func,
-	  getFieldDecorator: _propTypes2['default'].func,
-	  getFieldProps: _propTypes2['default'].func,
-	  getFieldsError: _propTypes2['default'].func,
-	  getFieldError: _propTypes2['default'].func,
-	  isFieldValidating: _propTypes2['default'].func,
-	  isFieldsValidating: _propTypes2['default'].func,
-	  isFieldsTouched: _propTypes2['default'].func,
-	  isFieldTouched: _propTypes2['default'].func,
-	  isSubmitting: _propTypes2['default'].func,
-	  submit: _propTypes2['default'].func,
-	  validateFields: _propTypes2['default'].func,
-	  resetFields: _propTypes2['default'].func
-	});
-	
-	exports['default'] = formShape;
-	module.exports = exports['default'];
-
-/***/ }),
-/* 623 */
+/* 628 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -71517,7 +71571,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 624 */
+/* 629 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -71615,7 +71669,7 @@
 	module.exports = exports["default"];
 
 /***/ }),
-/* 625 */
+/* 630 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";

@@ -14,6 +14,7 @@ import classnames from 'classnames';
 import zhCN from "./locale/zh_CN";
 import omit from 'omit.js';
 import moment from "moment";
+import { formatDate } from './rc-calendar/util';
 
 class MonthPicker extends Component {
   constructor(props, context) {
@@ -70,7 +71,7 @@ class MonthPicker extends Component {
     this.setState({
       value: value && Object.assign(value, {_type:'month'}) || value
     });
-    onChange&&onChange(value,value?value.format(format):'');
+    onChange&&onChange(value,value?formatDate(value,format):'');
   };
   inputFocus=()=>{
     const self = this;
@@ -90,7 +91,7 @@ class MonthPicker extends Component {
                 open:false
             });
           let v = self.state.value;
-          self.props.onOpenChange&&self.props.onOpenChange(false,v, (v && v.format(self.props.format)) || '');
+          self.props.onOpenChange&&self.props.onOpenChange(false,v, (v && formatDate(v,self.props.format)) || '');
           ReactDOM.findDOMNode(self.outInput).focus();// 按esc时候焦点回到input输入框
         }
       }
@@ -109,7 +110,7 @@ class MonthPicker extends Component {
       }
     }); 
     const value = self.state.value;
-    props.onOpenChange && props.onOpenChange(open,value, (value && value.format(self.props.format)) || '');
+    props.onOpenChange && props.onOpenChange(open,value, (value && formatDate(value,self.props.format)) || '');
     if(open){
       setTimeout(()=>{
         self.inputFocus()
@@ -177,7 +178,7 @@ class MonthPicker extends Component {
           selectedValue={state.value}
         >
           {({ value }) => {
-            if(value&&value.format)value=value.format(props.format);
+            if(value&&value.format)value=formatDate(value,props.format);
             return (
                 <InputGroup simple className="datepicker-input-group"
                   onMouseEnter={this.onMouseEnter}
