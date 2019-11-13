@@ -1,3 +1,13 @@
+<a name="2.2.17"></a>
+## [2.2.17](https://github.com/tinper-bee/bee-datepicker/compare/v2.2.16...v2.2.17) (2019-11-13)
+
+
+### Features
+
+* **bee-datepicker:** MonthPicker Enter和tab键快捷键需求根据ncc修改 ([4019594](https://github.com/tinper-bee/bee-datepicker/commit/4019594))
+
+
+
 <a name="2.2.16"></a>
 ## [2.2.16](https://github.com/tinper-bee/bee-datepicker/compare/v2.2.15...v2.2.16) (2019-11-12)
 
