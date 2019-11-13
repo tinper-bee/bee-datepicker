@@ -75,6 +75,7 @@ class MonthPicker extends Component {
   };
   inputFocus=()=>{
     const self = this;
+    const { format } = self.props;
     let input = document.querySelector('.rc-calendar-input');
     if(input){
       if(input.value){
@@ -93,6 +94,16 @@ class MonthPicker extends Component {
           let v = self.state.value;
           self.props.onOpenChange&&self.props.onOpenChange(false,v, (v && formatDate(v,self.props.format)) || '');
           ReactDOM.findDOMNode(self.outInput).focus();// 按esc时候焦点回到input输入框
+        }else if(e.keyCode == KeyCode.ENTER){
+          let parsed = moment(input.value, format, true);
+          if(parsed.isValid()){
+              self.setState({
+                open:false
+              });
+              let v = self.state.value;
+              self.props.onOpenChange&&self.props.onOpenChange(false,v, (v && formatDate(v,format)) || '');
+              ReactDOM.findDOMNode(self.outInput).focus();
+          }
         }
       }
     }

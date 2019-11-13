@@ -61753,6 +61753,8 @@
 	
 	  this.inputFocus = function () {
 	    var self = _this3;
+	    var format = self.props.format;
+	
 	    var input = document.querySelector('.rc-calendar-input');
 	    if (input) {
 	      if (input.value) {
@@ -61771,6 +61773,16 @@
 	          var v = self.state.value;
 	          self.props.onOpenChange && self.props.onOpenChange(false, v, v && (0, _util.formatDate)(v, self.props.format) || '');
 	          _reactDom2["default"].findDOMNode(self.outInput).focus(); // 按esc时候焦点回到input输入框
+	        } else if (e.keyCode == _tinperBeeCore.KeyCode.ENTER) {
+	          var parsed = (0, _moment2["default"])(input.value, format, true);
+	          if (parsed.isValid()) {
+	            self.setState({
+	              open: false
+	            });
+	            var _v = self.state.value;
+	            self.props.onOpenChange && self.props.onOpenChange(false, _v, _v && (0, _util.formatDate)(_v, format) || '');
+	            _reactDom2["default"].findDOMNode(self.outInput).focus();
+	          }
 	        }
 	      };
 	    }
@@ -61909,6 +61921,11 @@
 	    var _this = _possibleConstructorReturn(this, _React$Component.call(this, props));
 	
 	    _this.onKeyDown = function (event) {
+	      if (event.target.nodeName.toLowerCase() === 'input') {
+	        return undefined;
+	      } else {
+	        _this.props.onKeyDown && _this.props.onKeyDown(event);
+	      }
 	      var keyCode = event.keyCode;
 	      var ctrlKey = event.ctrlKey || event.metaKey;
 	      var stateValue = _this.state.value;

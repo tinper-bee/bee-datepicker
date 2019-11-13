@@ -40,6 +40,11 @@ class MonthCalendar extends React.Component {
   }
 
   onKeyDown = (event) => {
+    if (event.target.nodeName.toLowerCase() === 'input') {
+      return undefined;
+    }else{
+      this.props.onKeyDown&&this.props.onKeyDown(event);
+    }
     const keyCode = event.keyCode;
     const ctrlKey = event.ctrlKey || event.metaKey;
     const stateValue = this.state.value;

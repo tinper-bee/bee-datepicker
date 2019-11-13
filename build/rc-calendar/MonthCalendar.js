@@ -57,6 +57,11 @@ var MonthCalendar = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, _React$Component.call(this, props));
 
     _this.onKeyDown = function (event) {
+      if (event.target.nodeName.toLowerCase() === 'input') {
+        return undefined;
+      } else {
+        _this.props.onKeyDown && _this.props.onKeyDown(event);
+      }
       var keyCode = event.keyCode;
       var ctrlKey = event.ctrlKey || event.metaKey;
       var stateValue = _this.state.value;
