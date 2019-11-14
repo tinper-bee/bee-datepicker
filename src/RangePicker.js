@@ -227,7 +227,7 @@ class RangePicker extends Component {
     }
     render() {
     const props = this.props;
-    const { showClose , ...others } = props;
+    const { showClose ,onChange, ...others } = props;
     const {value,open} = this.state;
     let formatStr = props.format || 'YYYY-MM-DD';
 

@@ -147,7 +147,8 @@ var RangePicker = function (_Component) {
         var props = this.props;
 
         var showClose = props.showClose,
-            others = _objectWithoutProperties(props, ["showClose"]);
+            onChange = props.onChange,
+            others = _objectWithoutProperties(props, ["showClose", "onChange"]);
 
         var _state = this.state,
             value = _state.value,
