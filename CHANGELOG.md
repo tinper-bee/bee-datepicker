@@ -1,3 +1,13 @@
+<a name="2.3.0"></a>
+# [2.3.0](https://github.com/tinper-bee/bee-datepicker/compare/v2.2.19...v2.3.0) (2019-11-18)
+
+
+### Features
+
+* **bee-datepicker:** 所有类型日期都可传字符串,新增form使用示例 ([3d9a382](https://github.com/tinper-bee/bee-datepicker/commit/3d9a382))
+
+
+
 <a name="2.2.19"></a>
 ## [2.2.19](https://github.com/tinper-bee/bee-datepicker/compare/v2.2.18...v2.2.19) (2019-11-14)
 
