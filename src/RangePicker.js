@@ -57,14 +57,34 @@ class RangePicker extends Component {
         super(props, context);
         this.state = {
             hoverValue: [],
-            value: props.value || props.defaultValue || [],
+            value: this.initValue(props),
             open: props.open||false
         };
+    }
+    initValue=(props)=>{
+        let valueProp = props.value || props.defaultValue||[];
+        let values = [];
+        for(let i = 0;i<2;i++){
+            let value = valueProp[i];
+            if(value){
+                if(value.format){
+                  values.push(value);
+                }else{
+                  if(moment(value).isValid()){
+                    values.push(moment(value));
+                  }else{
+                    console.error('value is not in the correct format');
+                    values.push=('');
+                  }
+                }
+            }
+        }
+        return values;
     }
     componentWillReceiveProps(nextProps){
         if ("value" in nextProps) {
             this.setState({
-                value: nextProps.value
+                value: this.initValue(nextProps)
             });
         }
         if ("open" in nextProps) {

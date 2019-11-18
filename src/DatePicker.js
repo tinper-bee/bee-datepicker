@@ -30,14 +30,47 @@ class DatePicker extends Component {
         defaultValue = props.defaultValue && moment(props.defaultValue);
     this.state = {
       type: "month",
-      value: value || defaultValue || moment.Moment,
+      value: this.initValue(props),
       open: props.open||false,
-      inputValue:(props.value&&this.getValue(props.value)) || (props.defaultValue&&this.getValue(props.defaultValue)) || '',
+      inputValue:this.initValue(props),
       showClose:false
     };
 
   }
-  
+  initValue=(props)=>{
+    let value = props.value || props.defaultValue;
+    if(value){
+      if(value.format){
+        value = value;
+      }else{
+        if(moment(value).isValid()){
+          value = moment(value);
+        }else{
+          console.error('value is not in the correct format');
+          value = ''
+        }
+      }
+    }
+    return value;
+  }
+  componentWillReceiveProps(nextProps) {
+    if ("value" in nextProps) {
+      this.setState({
+        value: this.initValue(nextProps)
+      });
+    }
+    if ("open" in nextProps) {
+      this.setState({
+        open: nextProps.open 
+      });
+    }
+    if ("renderIcon" in nextProps) {
+      this.setState({
+        renderIcon: nextProps.renderIcon
+      });
+    }
+  }
+
   getValue = value =>{
     let { format } = this.props;
     if(typeof format == 'string'){
@@ -109,23 +142,7 @@ class DatePicker extends Component {
         },200);
       }
   };
-  componentWillReceiveProps(nextProps) {
-    if ("value" in nextProps) {
-      this.setState({
-        value: nextProps.value && moment(nextProps.value)
-      });
-    }
-    if ("open" in nextProps) {
-      this.setState({
-        open: nextProps.open 
-      });
-    }
-    if ("renderIcon" in nextProps) {
-      this.setState({
-        renderIcon: nextProps.renderIcon
-      });
-    }
-  }
+  
   handleCalendarChange = (value) => {
       const props = this.props;
       this.setState({ value: value,inputValue:(value && this.getValue(value)) || '' });
