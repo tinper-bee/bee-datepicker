@@ -23,7 +23,7 @@ class Demo11 extends Component {
     }
 
     componentWillMount(){
-        //1、如果初始值需要接口返回，则需要在组件初始化之前，获得初始值。 这里模拟设置初始值
+        //如果初始值需要接口返回，则需要在组件初始化之前，获得初始值。 这里模拟设置初始值
         this.setState({
             initialValues:{
                 date:'2019-02-03',
