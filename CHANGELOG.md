@@ -1,3 +1,13 @@
+<a name="2.3.1"></a>
+## [2.3.1](https://github.com/tinper-bee/bee-datepicker/compare/v2.3.0...v2.3.1) (2019-11-22)
+
+
+### Features
+
+* **bee-datepicker:** datepicker showTime时,面板初始时间为打开面板时的时间 ([72bfa18](https://github.com/tinper-bee/bee-datepicker/commit/72bfa18))
+
+
+
 <a name="2.3.0"></a>
 # [2.3.0](https://github.com/tinper-bee/bee-datepicker/compare/v2.2.19...v2.3.0) (2019-11-18)
 
