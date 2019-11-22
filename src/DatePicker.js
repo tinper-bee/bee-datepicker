@@ -291,7 +291,7 @@ class DatePicker extends Component {
 
     const calendar = (
       <Calendar
-        timePicker={props.showTime ? timePickerElement : null}
+        timePicker={props.showTime ? <TimePickerPanel defaultValue={moment(moment().format("HH:mm:ss"), "HH:mm:ss")} /> : null}
         {...props}
         onSelect={this.handleSelect}
         onChange={this.handleCalendarChange}

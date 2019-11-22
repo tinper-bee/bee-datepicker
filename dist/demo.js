@@ -34533,7 +34533,7 @@
 	    }
 	
 	    var calendar = _react2["default"].createElement(_rcCalendar2["default"], _extends({
-	      timePicker: props.showTime ? timePickerElement : null
+	      timePicker: props.showTime ? _react2["default"].createElement(_Panel2["default"], { defaultValue: (0, _moment2["default"])((0, _moment2["default"])().format("HH:mm:ss"), "HH:mm:ss") }) : null
 	    }, props, {
 	      onSelect: this.handleSelect,
 	      onChange: this.handleCalendarChange,
