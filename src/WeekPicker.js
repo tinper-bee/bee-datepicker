@@ -60,20 +60,24 @@ class WeekPicker extends Component {
   }
 
   initValue=(props)=>{
-    let value = props.value || props.defaultValue;
+    let value = props.value || props.defaultValue||'';
     let format = props.format;
     if(value){
-      if(value.format){
-        value = value;
-      }else{
+      if(typeof value == 'string'){
         if(moment(value,format).isValid()){
           value = moment(value,format);
         }else{
           console.error('value is not in the correct format');
           value = ''
         }
+      }else if(value.format&&value.isValid()){
+        value = value;
+      }else{
+        console.error('value is not in the correct format');
+        value = ''
       }
     }
+    
     return value;
   }
   componentWillReceiveProps(nextProps) {

@@ -33,15 +33,18 @@ class YearPicker extends Component {
     initValue=(props)=>{
         let value = props.value || props.defaultValue;
         if(value){
-          if(value.format){
+          if(typeof value == 'string'){
+            if(moment(value).isValid()){
+                value = moment(value);
+            }else{
+                console.error('value is not in the correct format');
+                value = ''
+            }
+          }else if(value.format&&value.isValid()){
             value = value;
           }else{
-            if(moment(value).isValid()){
-              value = moment(value);
-            }else{
-              console.error('value is not in the correct format');
-              value = ''
-            }
+            console.error('value is not in the correct format');
+            value = ''
           }
         }
         return value;

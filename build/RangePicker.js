@@ -235,18 +235,23 @@ var _initialiseProps = function _initialiseProps() {
         var valueProp = props.value || props.defaultValue || [];
         var values = [];
         for (var i = 0; i < 2; i++) {
-            var value = valueProp[i];
+            var value = valueProp[i] || '';
             if (value) {
-                if (value.format) {
-                    values.push(value);
-                } else {
+                if (typeof value == 'string') {
                     if ((0, _moment2["default"])(value).isValid()) {
                         values.push((0, _moment2["default"])(value));
                     } else {
                         console.error('value is not in the correct format');
-                        values.push = '';
+                        values.push('');
                     }
+                } else if (value.format && value.isValid()) {
+                    values.push(value);
+                } else {
+                    console.error('value is not in the correct format');
+                    values = [];
                 }
+            } else {
+                values.push('');
             }
         }
         return values;

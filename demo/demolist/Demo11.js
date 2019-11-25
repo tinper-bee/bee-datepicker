@@ -160,14 +160,14 @@ class Demo11 extends Component {
                                 normalize:(value)=>{
                                     let values = [];
                                     if(value[0]&&value[0].format){
-                                        values.push(value[0].format('YYYY-MM-DD'))
+                                        values.push(value[0].format('YYYY-MM-DD')||'')
                                     }else{
-                                        values.push(value[0])
+                                        values.push(value[0]||'')
                                     }
                                     if(value[1]&&value[1].format){
-                                        values.push(value[1].format('YYYY-MM-DD'))
+                                        values.push(value[1].format('YYYY-MM-DD')||'')
                                     }else{
-                                        values.push(value[1])
+                                        values.push(value[1]||'')
                                     }
                                     return values;
                                 },

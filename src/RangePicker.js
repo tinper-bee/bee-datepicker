@@ -65,18 +65,23 @@ class RangePicker extends Component {
         let valueProp = props.value || props.defaultValue||[];
         let values = [];
         for(let i = 0;i<2;i++){
-            let value = valueProp[i];
+            let value = valueProp[i]||'';
             if(value){
-                if(value.format){
-                  values.push(value);
-                }else{
-                  if(moment(value).isValid()){
-                    values.push(moment(value));
+                if(typeof value == 'string'){
+                    if(moment(value).isValid()){
+                        values.push(moment(value));
+                    }else{
+                        console.error('value is not in the correct format');
+                        values.push('');
+                    }
+                  }else if(value.format&&value.isValid()){
+                    values.push(value);
                   }else{
                     console.error('value is not in the correct format');
-                    values.push=('');
+                    values = []
                   }
-                }
+            }else{
+                values.push('')
             }
         }
         return values;
