@@ -5,7 +5,7 @@
  */
 
 import React, { Component } from "react";
-import { Row, Col } from "bee-layout";
+import { Row } from "bee-layout";
 import DatePicker from "../../src/index";
 import Form from 'bee-form';
 import Button from 'bee-button';
@@ -17,7 +17,7 @@ class Demo11 extends Component {
         super(props);
         this.state={
           initialValues:{
-
+            
           }  
         }
     }
@@ -59,7 +59,10 @@ class Demo11 extends Component {
             }
         })
     }
-
+    reset=()=>{
+        //此方法将所有元素还原到初始值。即还原到 componentWillMount 设置的值
+        this.props.form.resetFields()
+    }
 
     render() {
         const { getFieldProps, getFieldError } = this.props.form;
@@ -178,6 +181,7 @@ class Demo11 extends Component {
                 <Row>
                     <Button className='options-btns' colors='primary' onClick={this.change}>改变初始值</Button>
                     <Button className='options-btns' colors='primary' onClick={this.submit}>获得所有值</Button>
+                    <Button className='options-btns' colors='primary' onClick={this.reset}>还原所有值</Button>
                 </Row>
                 
             </div>
