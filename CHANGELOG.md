@@ -1,3 +1,13 @@
+<a name="2.3.2"></a>
+## [2.3.2](https://github.com/tinper-bee/bee-datepicker/compare/v2.3.1...v2.3.2) (2019-11-25)
+
+
+### Bug Fixes
+
+* **bee-datepicker:** initValue string类型判断更改 ([6e4ae1a](https://github.com/tinper-bee/bee-datepicker/commit/6e4ae1a))
+
+
+
 <a name="2.3.1"></a>
 ## [2.3.1](https://github.com/tinper-bee/bee-datepicker/compare/v2.3.0...v2.3.1) (2019-11-22)
 
