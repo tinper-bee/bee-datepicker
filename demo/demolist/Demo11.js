@@ -60,7 +60,8 @@ class Demo11 extends Component {
         })
     }
     reset=()=>{
-        //此方法将所有元素还原到初始值。即还原到 componentWillMount 设置的值
+        //此方法将所有元素还原到初始值。即还原到 componentWillMount 设置的值。
+        // 注意：this.props.form.resetFields() 并不是清空值，而是还原到 initialValue 的值
         this.props.form.resetFields()
     }
 
