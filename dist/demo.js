@@ -34537,7 +34537,7 @@
 	    }, props, {
 	      onSelect: this.handleSelect,
 	      onChange: this.handleCalendarChange,
-	      value: this.state.value,
+	      value: value,
 	      onInputBlur: this.onDateInputBlur
 	    }));
 	
@@ -34545,7 +34545,7 @@
 	    if (props.keyboardInput) {
 	      keyboardInputProps.readOnly = false;
 	      keyboardInputProps.onChange = this.inputChange;
-	      keyboardInputProps.value = state.inputValue;
+	      keyboardInputProps.value = state.inputValue.format && state.inputValue.isValid() ? state.inputValue.format(props.format) : state.inputValue;
 	    } else {
 	      keyboardInputProps.readOnly = true;
 	      keyboardInputProps.value = value && this.getValue(value) || "";
@@ -34587,6 +34587,7 @@
 	                _this2.outInputFocus(e);
 	              },
 	              onKeyDown: _this2.outInputKeydown
+	              // value={(value && value.format(props.format)) || ""}
 	            }, keyboardInputProps, autofocus)),
 	            showClose && _this2.state.value && _this2.state.showClose && !props.disabled ? _react2["default"].createElement(
 	              _beeInputGroup2["default"].Button,
@@ -34616,15 +34617,18 @@
 	  this.initValue = function (props) {
 	    var value = props.value || props.defaultValue;
 	    if (value) {
-	      if (value.format) {
-	        value = value;
-	      } else {
+	      if (typeof value == 'string') {
 	        if ((0, _moment2["default"])(value).isValid()) {
 	          value = (0, _moment2["default"])(value);
 	        } else {
 	          console.error('value is not in the correct format');
 	          value = '';
 	        }
+	      } else if (value.format && value.isValid()) {
+	        value = value;
+	      } else {
+	        console.error('value is not in the correct format');
+	        value = '';
 	      }
 	    }
 	    return value;
