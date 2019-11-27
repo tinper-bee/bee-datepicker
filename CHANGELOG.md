@@ -1,3 +1,13 @@
+<a name="2.3.4"></a>
+## [2.3.4](https://github.com/tinper-bee/bee-datepicker/compare/v2.3.3...v2.3.4) (2019-11-27)
+
+
+### Bug Fixes
+
+* **bee-datepicker:** yearpanel bug fix ([3853447](https://github.com/tinper-bee/bee-datepicker/commit/3853447))
+
+
+
 <a name="2.3.3"></a>
 ## [2.3.3](https://github.com/tinper-bee/bee-datepicker/compare/v2.3.2...v2.3.3) (2019-11-25)
 
