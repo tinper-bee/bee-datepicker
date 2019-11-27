@@ -1035,10 +1035,13 @@ $disabled-border-color: #DFE1E6;
 .rc-calendar-range .rc-calendar-year-panel,
 .rc-calendar-range .rc-calendar-month-panel,
 .rc-calendar-range .rc-calendar-decade-panel {
-  top: 36px;
+  top: 0;
   >.rc-calendar-decade-panel-header{
-    display: none;
+    display: block;
   }
+}
+.rc-calendar-range .rc-calendar-panel .rc-calendar-date-panel .rc-calendar-range-part .rc-calendar-range-out{
+  position: relative;
 }
 .rc-calendar-range .rc-calendar-month-panel .rc-calendar-year-panel {
   top: 0;
