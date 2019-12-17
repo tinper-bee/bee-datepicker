@@ -467,8 +467,6 @@ var _initialiseProps = function _initialiseProps() {
     _this3.fileChange = false;
     _this3.fileChangeTimer = window.setTimeout(function () {
       _this3.fileChange = true;
-      clearTimeout(_this3.fileChangeTimer);
-      _this3.fileChangeTimer = null;
     }, 10);
   };
 };

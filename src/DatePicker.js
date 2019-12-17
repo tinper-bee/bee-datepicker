@@ -270,8 +270,6 @@ class DatePicker extends Component {
     this.fileChange = false;
     this.fileChangeTimer = window.setTimeout(()=>{
       this.fileChange = true;
-      clearTimeout(this.fileChangeTimer);
-      this.fileChangeTimer = null;
     },10)
   }
   render() {
