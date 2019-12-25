@@ -35655,7 +35655,7 @@
 	  this.handleCalendarChange = function (value) {
 	    var props = _this3.props;
 	    _this3.setState({ value: value, inputValue: value && _this3.getValue(value) || '' });
-	    _this3.fireChange(value, value && _this3.getValue(value) || '');
+	    // this.fireChange(value, (value && this.getValue(value)) || '');
 	  };
 	
 	  this.handleChange = function (value) {
@@ -61811,7 +61811,7 @@
 	
 	    var monthCalendar = _react2["default"].createElement(_MonthCalendar2["default"], (0, _extends3["default"])({}, props, {
 	      value: state.value,
-	      onChange: this.onChange
+	      onChange: this.handleCalendarChange
 	    }));
 	    var classes = (0, _classnames2["default"])(props.className, "datepicker-container");
 	    return _react2["default"].createElement(
@@ -61873,6 +61873,12 @@
 	
 	var _initialiseProps = function _initialiseProps() {
 	  var _this3 = this;
+	
+	  this.handleCalendarChange = function (value) {
+	    _this3.setState({
+	      value: value && (0, _extends3["default"])(value, { _type: 'month' }) || value
+	    });
+	  };
 	
 	  this.onChange = function (value) {
 	    var _props = _this3.props,
