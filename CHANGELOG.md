@@ -1,3 +1,13 @@
+<a name="2.3.9"></a>
+## [2.3.9](https://github.com/tinper-bee/bee-datepicker/compare/v2.3.8...v2.3.9) (2019-12-27)
+
+
+### Features
+
+* **bee-datepicker:** placement不生效问题修复 ([af6a6a8](https://github.com/tinper-bee/bee-datepicker/commit/af6a6a8))
+
+
+
 <a name="2.3.8"></a>
 ## [2.3.8](https://github.com/tinper-bee/bee-datepicker/compare/v2.3.7...v2.3.8) (2019-12-25)
 
