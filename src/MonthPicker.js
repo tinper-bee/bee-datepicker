@@ -185,10 +185,11 @@ class MonthPicker extends Component {
         'renderFooter',
         'renderError',
         'disabledDate',
-        'disabledTime'
+        'disabledTime',
       ])}
       >
         <Picker
+          {...props}
           onOpenChange={this.onOpenChange}
           animation={'animation' in props ? props.animation : "slide-up"}
           calendar={monthCalendar}

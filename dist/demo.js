@@ -61820,7 +61820,7 @@
 	      }, (0, _omit2["default"])(others, ['closeIcon', 'renderIcon', 'format', 'showDateInput', 'showMonthInput', 'locale', 'placeholder', 'onClear', 'renderFooter', 'renderError', 'disabledDate', 'disabledTime'])),
 	      _react2["default"].createElement(
 	        _Picker2["default"],
-	        {
+	        (0, _extends3["default"])({}, props, {
 	          onOpenChange: this.onOpenChange,
 	          animation: 'animation' in props ? props.animation : "slide-up",
 	          calendar: monthCalendar,
@@ -61830,7 +61830,7 @@
 	          dropdownClassName: props.dropdownClassName,
 	          selectedValue: state.value,
 	          renderError: props.renderError
-	        },
+	        }),
 	        function (_ref) {
 	          var value = _ref.value;
 	
@@ -62437,7 +62437,7 @@
 	            }, (0, _omit2["default"])(others, ['closeIcon', 'renderIcon', 'showClear', 'showToday', 'locale', 'placeholder', 'showOk', 'dateInputPlaceholder', 'onPanelChange', 'onStartInputBlur', 'onEndInputBlur', 'renderFooter', 'showTime', 'disabledDate', 'disabledTime'])),
 	            _react2["default"].createElement(
 	                _Picker2["default"],
-	                {
+	                (0, _extends3["default"])({}, props, {
 	                    value: value,
 	                    animation: 'animation' in props ? props.animation : "slide-up",
 	                    calendar: calendar,
@@ -62445,7 +62445,8 @@
 	                    dropdownClassName: props.dropdownClassName,
 	                    onOpenChange: this.onOpenChange,
 	                    open: open
-	                },
+	
+	                }),
 	                function (_ref) {
 	                    (0, _objectDestructuringEmpty3["default"])(_ref);
 	

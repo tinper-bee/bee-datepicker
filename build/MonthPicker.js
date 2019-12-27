@@ -148,7 +148,7 @@ var MonthPicker = function (_Component) {
       }, (0, _omit2["default"])(others, ['closeIcon', 'renderIcon', 'format', 'showDateInput', 'showMonthInput', 'locale', 'placeholder', 'onClear', 'renderFooter', 'renderError', 'disabledDate', 'disabledTime'])),
       _react2["default"].createElement(
         _Picker2["default"],
-        {
+        _extends({}, props, {
           onOpenChange: this.onOpenChange,
           animation: 'animation' in props ? props.animation : "slide-up",
           calendar: monthCalendar,
@@ -158,7 +158,7 @@ var MonthPicker = function (_Component) {
           dropdownClassName: props.dropdownClassName,
           selectedValue: state.value,
           renderError: props.renderError
-        },
+        }),
         function (_ref) {
           var value = _ref.value;
 
