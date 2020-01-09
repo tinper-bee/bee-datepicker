@@ -2121,7 +2121,8 @@
   .rc-calendar-range-part .rc-calendar-time-picker .rc-calendar-time-picker-panel {
     margin-top: -35px;
     height: 218px;
-    border-bottom: 1px solid #e9e9e9; }
+    border-bottom: 1px solid #e9e9e9;
+    background: #fff; }
 
 .rc-calendar-range-part .rc-calendar-time-picker-panel-select {
   width: 77px; }

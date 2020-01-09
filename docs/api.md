@@ -61,7 +61,10 @@ import 'bee-datepicker/build/DatePicker.css';
 | onOpenChange |日期面板收起/展开状态改变时的回调|Function|-|
 | showClose |外层输入框是否显示清空按钮|Boolean|true|
 | onDateInputBlur |日期面板中输入框失去焦点的回调|Function|-|
-| placement | 日期面板弹出位置，可选 `bottomLeft/bottomRight/topRight/topLeft` | string | bottomLeft | 
+| placement | 日期面板弹出位置，可选 `bottomLeft/bottomRight/topRight/topLeft` | string | bottomLeft |
+| showHour | 设置`showTime={true}`时候，是否显示小时 |Boolean|true|
+| showMinute | 设置`showTime={true}`时候，是否显示分钟 |Boolean|true|
+| showSecond | 设置`showTime={true}`时候，是否显示秒 |Boolean|true|
 
 
 
@@ -134,6 +137,9 @@ import 'bee-datepicker/build/DatePicker.css';
 | onStartInputBlur |日期面板中 左输入框失去焦点的回调|Function|`e` : 事件对象<br>`startValue` :  开始时间<br>`[startValue,endValue]` : 包含开始时间和结束时间的数组|
 | onEndInputBlur |日期面板中 右输入框失去焦点的回调|Function|`e` : 事件对象<br>`endValue` :  结束时间<br>`[startValue,endValue]` : 包含开始时间和结束时间的数组|
 | placement | 日期面板弹出位置，可选 `bottomLeft/bottomRight/topRight/topLeft` | string | bottomLeft | 
+| showHour | 设置`showTime={true}`时候，是否显示小时 |Boolean|true|
+| showMinute | 设置`showTime={true}`时候，是否显示分钟 |Boolean|true|
+| showSecond | 设置`showTime={true}`时候，是否显示秒 |Boolean|true|
 
 ### WeekPicker
 
