@@ -1,3 +1,13 @@
+<a name="2.3.12"></a>
+## [2.3.12](https://github.com/tinper-bee/bee-datepicker/compare/v2.3.11...v2.3.12) (2020-01-09)
+
+
+### Features
+
+* **bee-datepicker:** showHour,showMinute,showSecond  样式调整 ([fac15e2](https://github.com/tinper-bee/bee-datepicker/commit/fac15e2))
+
+
+
 <a name="2.3.11"></a>
 ## [2.3.11](https://github.com/tinper-bee/bee-datepicker/compare/v2.3.10...v2.3.11) (2020-01-09)
 
