@@ -1219,13 +1219,33 @@
   box-shadow: none; }
 
 .rc-calendar-time-picker-panel .rc-time-picker-panel-select {
-  width: 84px;
   max-height: 217px; }
 
 .rc-calendar-time-picker-panel .rc-time-picker-panel-select li {
   text-align: center;
   padding: 0;
   outline: none; }
+
+.rc-calendar-time-picker-panel .time-split-3 {
+  width: 100%; }
+  .rc-calendar-time-picker-panel .time-split-3 .rc-time-picker-panel-combobox {
+    width: 100%; }
+    .rc-calendar-time-picker-panel .time-split-3 .rc-time-picker-panel-combobox .rc-time-picker-panel-select {
+      width: 33%; }
+
+.rc-calendar-time-picker-panel .time-split-2 {
+  width: 100%; }
+  .rc-calendar-time-picker-panel .time-split-2 .rc-time-picker-panel-combobox {
+    width: 100%; }
+    .rc-calendar-time-picker-panel .time-split-2 .rc-time-picker-panel-combobox .rc-time-picker-panel-select {
+      width: 50%; }
+
+.rc-calendar-time-picker-panel .time-split-1 {
+  width: 100%; }
+  .rc-calendar-time-picker-panel .time-split-1 .rc-time-picker-panel-combobox {
+    width: 100%; }
+    .rc-calendar-time-picker-panel .time-split-1 .rc-time-picker-panel-combobox .rc-time-picker-panel-select {
+      width: 100%; }
 
 .rc-calendar-time-picker-wrap {
   float: left;

@@ -148,8 +148,14 @@ var DatePicker = function (_Component) {
       };
     }
 
+    var splitNumber = '3';
+    if (!showHour) splitNumber -= 1;
+    if (!showMinute) splitNumber -= 1;
+    if (!showSecond) splitNumber -= 1;
+
     var calendar = _react2["default"].createElement(_rcCalendar2["default"], _extends({
       timePicker: props.showTime ? _react2["default"].createElement(_Panel2["default"], {
+        className: 'time-split-' + splitNumber,
         showHour: showHour, showMinute: showMinute, showSecond: showSecond,
         defaultValue: (0, _moment2["default"])((0, _moment2["default"])().format("HH:mm:ss"), "HH:mm:ss") }) : null
     }, props, {

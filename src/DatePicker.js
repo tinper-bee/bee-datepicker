@@ -292,9 +292,16 @@ class DatePicker extends Component {
       };
     }
 
+
+    let splitNumber = '3';
+    if(!showHour)splitNumber-=1;
+    if(!showMinute)splitNumber-=1;
+    if(!showSecond)splitNumber-=1;
+
     const calendar = (
       <Calendar
         timePicker={props.showTime ? <TimePickerPanel 
+          className={'time-split-'+splitNumber}
           showHour={showHour} showMinute={showMinute} showSecond={showSecond}
           defaultValue={moment(moment().format("HH:mm:ss"), "HH:mm:ss")} /> : null}
         {...props}
