@@ -35,7 +35,7 @@ import 'bee-datepicker/build/DatePicker.css';
 | defaultValue|默认值，输入框的默认值| moment| - |
 | value|日期| moment| - |
 | locale| 语言包 | Object |zh_CN |
-| format|日期格式化| String | "YYYY-MM-DD" |
+| format| 设置日期格式，为数组时支持多格式匹配，展示以第一个为准。配置参考 [moment.js](https://momentjs.com/) | string / string[] | "YYYY-MM-DD" |
 | open|日期组件显示/隐藏，该值可动态改变| Boolean | false |
 | defaultPanelShown |设置日期组件显示/隐藏的默认状态，该值不可更改|Boolean|false|
 | disabled|是否禁用功能|Boolean| false |
