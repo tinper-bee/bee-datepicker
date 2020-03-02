@@ -49,6 +49,7 @@ import 'bee-datepicker/build/DatePicker.css';
 | onChange|日期改变的回调函数|Function(date: moment)| - |
 | onOk|点击确定按钮的回调|Function(date: moment)| - |
 | onKeyDown |keydown回调|Function|-|
+| enterKeyDown | enter 键是否打开日期面板 |Boolean|true|
 | dateInputPlaceholder|日期的placeholder| String | - |
 | showTime | 是否显示时间选择面板 | Boolean | - |
 | renderIcon |更改默认的图标|Function| () => <Icon type="uf-calendar" />|
