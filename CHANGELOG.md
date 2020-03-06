@@ -1,3 +1,13 @@
+<a name="2.3.13"></a>
+## [2.3.13](https://github.com/tinper-bee/bee-datepicker/compare/v2.3.12...v2.3.13) (2020-03-06)
+
+
+### Features
+
+* 增加参数enterKeyDown，回车不打开面板 ([b193ae2](https://github.com/tinper-bee/bee-datepicker/commit/b193ae2))
+
+
+
 <a name="2.3.12"></a>
 ## [2.3.12](https://github.com/tinper-bee/bee-datepicker/compare/v2.3.11...v2.3.12) (2020-01-09)
 
