@@ -1,3 +1,13 @@
+<a name="2.3.14"></a>
+## [2.3.14](https://github.com/tinper-bee/bee-datepicker/compare/v2.3.13...v2.3.14) (2020-03-11)
+
+
+### Features
+
+* **bee-datepicker:** 输入框校验宽松,支持moment所有合法类型 ([f1ecfa8](https://github.com/tinper-bee/bee-datepicker/commit/f1ecfa8))
+
+
+
 <a name="2.3.13"></a>
 ## [2.3.13](https://github.com/tinper-bee/bee-datepicker/compare/v2.3.12...v2.3.13) (2020-03-06)
 
