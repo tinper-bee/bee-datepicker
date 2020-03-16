@@ -1,3 +1,13 @@
+<a name="2.3.15"></a>
+## [2.3.15](https://github.com/tinper-bee/bee-datepicker/compare/v2.3.14...v2.3.15) (2020-03-16)
+
+
+### Bug Fixes
+
+* **bee-datepicker:** moment(str,format)||moment(str) ([800b856](https://github.com/tinper-bee/bee-datepicker/commit/800b856))
+
+
+
 <a name="2.3.14"></a>
 ## [2.3.14](https://github.com/tinper-bee/bee-datepicker/compare/v2.3.13...v2.3.14) (2020-03-11)
 
