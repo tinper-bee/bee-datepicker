@@ -1,3 +1,13 @@
+<a name="2.3.16"></a>
+## [2.3.16](https://github.com/tinper-bee/bee-datepicker/compare/v2.3.15...v2.3.16) (2020-03-21)
+
+
+### Features
+
+* **bee-datepicker:** 多次触发onChange问题 ([8d18951](https://github.com/tinper-bee/bee-datepicker/commit/8d18951))
+
+
+
 <a name="2.3.15"></a>
 ## [2.3.15](https://github.com/tinper-bee/bee-datepicker/compare/v2.3.14...v2.3.15) (2020-03-16)
 
