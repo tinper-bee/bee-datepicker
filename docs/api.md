@@ -66,7 +66,7 @@ import 'bee-datepicker/build/DatePicker.css';
 | showHour | 设置`showTime={true}`时候，是否显示小时 |Boolean|true|
 | showMinute | 设置`showTime={true}`时候，是否显示分钟 |Boolean|true|
 | showSecond | 设置`showTime={true}`时候，是否显示秒 |Boolean|true|
-| validatorFunc | 日期面板中输入框内容自定义校验。返回`true`校验成功，返回`false`校验失败 |Function|`()=>{return true;}`|
+
 
 
 注：使用keyboardInput时，以下api变化
