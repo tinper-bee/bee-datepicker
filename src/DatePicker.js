@@ -323,7 +323,7 @@ class DatePicker extends Component {
     }
     let classes = classnames(props.className, "datepicker-container");
     return (
-      <div className={classes} onMouseEnter={this.onDateHover} onClick={this.stopPropagation} onMouseOver={this.stopPropagation} 
+      <div className={classes} onMouseEnter={this.onDateHover} onClick={this.stopPropagation} 
       {...omit(others, [
         'onDateInputBlur',
         'getCalendarContainer',
