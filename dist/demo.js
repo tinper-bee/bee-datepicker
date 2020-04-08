@@ -37520,7 +37520,7 @@
 	    var classes = (0, _classnames2["default"])(props.className, "datepicker-container");
 	    return _react2["default"].createElement(
 	      "div",
-	      _extends({ className: classes, onMouseEnter: this.onDateHover, onClick: this.stopPropagation, onMouseOver: this.stopPropagation
+	      _extends({ className: classes, onMouseEnter: this.onDateHover, onClick: this.stopPropagation
 	      }, (0, _omit2["default"])(others, ['onDateInputBlur', 'getCalendarContainer', 'showToday', 'renderFooter', 'keyboardInput', 'showDateInput', 'showTime', 'closeIcon', 'renderIcon', 'focusOnOpen', 'defultSelect', 'onOpenChange', 'locale', 'showMonthInput', 'onKeyDown', 'renderError', 'format', 'placeholder', 'disabledTime', 'onChange', 'disabledDate', 'iconClick', 'outInputKeydown'])),
 	      _react2["default"].createElement(
 	        _Picker2["default"],
@@ -37678,7 +37678,7 @@
 	  this.handleCalendarChange = function (value) {
 	    var props = _this3.props;
 	    _this3.setState({ value: value, inputValue: value && _this3.getValue(value) || '' });
-	    // this.fireChange(value, (value && this.getValue(value)) || '');
+	    _this3.fireChange(value, value && _this3.getValue(value) || '');
 	  };
 	
 	  this.handleChange = function (value) {

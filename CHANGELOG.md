@@ -1,10 +1,11 @@
 <a name="2.3.17"></a>
-## [2.3.17](https://github.com/tinper-bee/bee-datepicker/compare/v2.3.16...v2.3.17) (2020-04-08)
+## [2.3.17](https://github.com/tinper-bee/bee-datepicker/compare/v2.3.16...v2.3.17) (2020-04-03)
 
 
-### Features
+### Bug Fixes
 
-* **bee-datepicker:** 更新多语资源 ([e261890](https://github.com/tinper-bee/bee-datepicker/commit/e261890))
+* 切换年月触发onChange ([4085b83](https://github.com/tinper-bee/bee-datepicker/commit/4085b83))
+* 组件不能阻止onMouseOver事件冒泡 ([5acd4f5](https://github.com/tinper-bee/bee-datepicker/commit/5acd4f5))
 
 
 
