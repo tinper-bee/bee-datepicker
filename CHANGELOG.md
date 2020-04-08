@@ -1,3 +1,13 @@
+<a name="2.3.17"></a>
+## [2.3.17](https://github.com/tinper-bee/bee-datepicker/compare/v2.3.16...v2.3.17) (2020-04-08)
+
+
+### Features
+
+* **bee-datepicker:** 更新多语资源 ([e261890](https://github.com/tinper-bee/bee-datepicker/commit/e261890))
+
+
+
 <a name="2.3.16"></a>
 ## [2.3.16](https://github.com/tinper-bee/bee-datepicker/compare/v2.3.15...v2.3.16) (2020-03-21)
 
