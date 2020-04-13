@@ -1,3 +1,13 @@
+<a name="2.3.20"></a>
+## [2.3.20](https://github.com/tinper-bee/bee-datepicker/compare/v2.3.19...v2.3.20) (2020-04-13)
+
+
+### Features
+
+* **bee-datepickr:** Rangepicker 新增空值判断，当值为空的时候hover不显示close按钮 ([846f5b6](https://github.com/tinper-bee/bee-datepicker/commit/846f5b6))
+
+
+
 <a name="2.3.19"></a>
 ## [2.3.19](https://github.com/tinper-bee/bee-datepicker/compare/v2.3.18...v2.3.19) (2020-04-13)
 
