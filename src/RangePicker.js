@@ -276,6 +276,7 @@ class RangePicker extends Component {
             onEndInputBlur={this.onEndInputBlur}
             onClear={this.clear}
             onOk={this.onOk}
+            validatorFunc={props.validatorFunc}
         />
     );
 
@@ -352,7 +353,10 @@ RangePicker.defaultProps = {
     showClose:true,
     showSecond:true,
     showHour:true,
-    showMinute:true
+    showMinute:true,
+    validatorFunc:()=>{
+        return true;
+    }
 }
 
 export default RangePicker;

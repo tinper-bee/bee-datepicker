@@ -57908,7 +57908,8 @@
 	    }
 	    var showDateInput = props.showDateInput,
 	        rootPrefixCls = props.rootPrefixCls,
-	        format = props.format;
+	        format = props.format,
+	        validatorFunc = props.validatorFunc;
 	
 	    return _react2['default'].createElement(
 	      'div',
@@ -57925,7 +57926,8 @@
 	          onChange: this.onInputChange,
 	          selectedValue: value,
 	          onClear: this.onClear,
-	          onSelect: this.yearSelect
+	          onSelect: this.yearSelect,
+	          validatorFunc: validatorFunc
 	        }) : '',
 	        _react2['default'].createElement(
 	          'div',
@@ -65068,7 +65070,10 @@
 	  showDateInput: true,
 	  showMonthInput: true,
 	  locale: _zh_CN2["default"],
-	  showClose: true
+	  showClose: true,
+	  validatorFunc: function validatorFunc() {
+	    return true;
+	  }
 	};
 	
 	exports["default"] = MonthPicker;
@@ -65244,7 +65249,8 @@
 	        onSelect = props.onSelect,
 	        onClear = props.onClear,
 	        showMonthInput = props.showMonthInput,
-	        renderError = props.renderError;
+	        renderError = props.renderError,
+	        validatorFunc = props.validatorFunc;
 	
 	    var children = _react2['default'].createElement(
 	      'div',
@@ -65261,7 +65267,8 @@
 	          onChange: this.onInputChange,
 	          selectedValue: value,
 	          onClear: this.onClear,
-	          renderError: renderError
+	          renderError: renderError,
+	          validatorFunc: validatorFunc
 	        }) : '',
 	        _react2['default'].createElement(_CalendarHeader2['default'], {
 	          prefixCls: props.prefixCls,
@@ -65490,7 +65497,8 @@
 	            onStartInputBlur: this.onStartInputBlur,
 	            onEndInputBlur: this.onEndInputBlur,
 	            onClear: this.clear,
-	            onOk: this.onOk
+	            onOk: this.onOk,
+	            validatorFunc: props.validatorFunc
 	        });
 	
 	        return _react2["default"].createElement(
@@ -65750,7 +65758,10 @@
 	    showClose: true,
 	    showSecond: true,
 	    showHour: true,
-	    showMinute: true
+	    showMinute: true,
+	    validatorFunc: function validatorFunc() {
+	        return true;
+	    }
 	};
 	
 	exports["default"] = RangePicker;
@@ -66757,7 +66768,8 @@
 	        clearIcon = props.clearIcon,
 	        renderError = props.renderError,
 	        inputTabIndex = props.inputTabIndex,
-	        onInputBlur = props.onInputBlur;
+	        onInputBlur = props.onInputBlur,
+	        validatorFunc = props.validatorFunc;
 	
 	    var shouldShowTimePicker = showTimePicker && timePicker;
 	    var disabledTimeConfig = shouldShowTimePicker && disabledTime ? (0, _index.getTimeConfig)(selectedValue, disabledTime) : null;
@@ -66796,7 +66808,8 @@
 	      clearIcon: clearIcon,
 	      renderError: renderError,
 	      inputTabIndex: inputTabIndex,
-	      onBlur: onInputBlur
+	      onBlur: onInputBlur,
+	      validatorFunc: validatorFunc
 	    });
 	
 	    return _react2['default'].createElement(
@@ -67546,7 +67559,10 @@
 	    disabled: false,
 	    showClose: true,
 	    locale: _zh_CN2["default"],
-	    format: 'YYYY'
+	    format: 'YYYY',
+	    validatorFunc: function validatorFunc() {
+	        return true;
+	    }
 	};
 	
 	exports["default"] = YearPicker;

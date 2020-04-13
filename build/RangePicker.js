@@ -177,7 +177,8 @@ var RangePicker = function (_Component) {
             onStartInputBlur: this.onStartInputBlur,
             onEndInputBlur: this.onEndInputBlur,
             onClear: this.clear,
-            onOk: this.onOk
+            onOk: this.onOk,
+            validatorFunc: props.validatorFunc
         });
 
         return _react2["default"].createElement(
@@ -437,7 +438,10 @@ RangePicker.defaultProps = {
     showClose: true,
     showSecond: true,
     showHour: true,
-    showMinute: true
+    showMinute: true,
+    validatorFunc: function validatorFunc() {
+        return true;
+    }
 };
 
 exports["default"] = RangePicker;
