@@ -1,3 +1,13 @@
+<a name="2.3.19"></a>
+## [2.3.19](https://github.com/tinper-bee/bee-datepicker/compare/v2.3.18...v2.3.19) (2020-04-13)
+
+
+### Features
+
+* **bee-datepicker:** MonthPicker YearPicker RangePicker 新增validatorFunc校验回调 ([5ef27cc](https://github.com/tinper-bee/bee-datepicker/commit/5ef27cc))
+
+
+
 <a name="2.3.18"></a>
 ## [2.3.18](https://github.com/tinper-bee/bee-datepicker/compare/v2.3.17...v2.3.18) (2020-04-08)
 
