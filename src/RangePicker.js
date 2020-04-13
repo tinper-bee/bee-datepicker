@@ -139,9 +139,26 @@ class RangePicker extends Component {
         })
     }
     onMouseEnter = (e) => {
-        this.setState({
-            showClose: true
-        })
+        if(!this.valueIsEmpty(this.state.value)){
+            this.setState({
+                showClose: true
+            })
+        }
+    }
+    //判断value是否为空
+    valueIsEmpty=(value)=>{
+        if(value){
+            if(value.length==0){
+                return true;
+            }else{//value.length>0
+                let flag = true;
+                if(value[0]||value[1])flag=false;
+                return flag;
+            }
+        }else{
+            return true
+        }
+        
     }
     clear = (e) => {
         e&&e.stopPropagation&&e.stopPropagation();
@@ -279,7 +296,6 @@ class RangePicker extends Component {
             validatorFunc={props.validatorFunc}
         />
     );
-
       return (
           <div onClick={this.stopPropagation} onMouseOver={this.stopPropagation} 
           {...omit(others, [
@@ -325,7 +341,7 @@ class RangePicker extends Component {
                             onFocus={(v,e)=>{this.outInputFocus(e)}}
                         />
                         {
-                            showClose&&(this.state.value&&this.state.value.length>0)&&this.state.showClose&&(!props.disabled)?(
+                            showClose&&(!this.valueIsEmpty(value))&&this.state.showClose&&(!props.disabled)?(
                             <InputGroup.Button shape="border" 
                                 onClick={this.clear}>
                                 { props.closeIcon() }
