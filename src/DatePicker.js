@@ -82,7 +82,7 @@ class DatePicker extends Component {
   };
 
   inputFocus=()=>{
-    const { format,validatorFunc } = this.props;
+    const { format,validatorFunc, disabledDate } = this.props;
     let input = document.querySelector('.rc-calendar-input');
     if(input){
       if(input.value){
@@ -103,7 +103,8 @@ class DatePicker extends Component {
           ReactDOM.findDOMNode(this.outInput).focus();// 按esc时候焦点回到input输入框
         }else if(e.keyCode == KeyCode.ENTER){
           let parsed = moment(input.value, format, true);
-          if(parsed.isValid()&&validatorFunc(input.value)){
+          let isDisabled = disabledDate && disabledDate(parsed);
+          if(parsed.isValid()&&validatorFunc(input.value) && !isDisabled){
             this.setState({
               open:false
             });

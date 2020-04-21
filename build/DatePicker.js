@@ -275,7 +275,8 @@ var _initialiseProps = function _initialiseProps() {
   this.inputFocus = function () {
     var _props = _this3.props,
         format = _props.format,
-        validatorFunc = _props.validatorFunc;
+        validatorFunc = _props.validatorFunc,
+        disabledDate = _props.disabledDate;
 
     var input = document.querySelector('.rc-calendar-input');
     if (input) {
@@ -297,7 +298,8 @@ var _initialiseProps = function _initialiseProps() {
           _reactDom2["default"].findDOMNode(_this3.outInput).focus(); // 按esc时候焦点回到input输入框
         } else if (e.keyCode == _tinperBeeCore.KeyCode.ENTER) {
           var parsed = (0, _moment2["default"])(input.value, format, true);
-          if (parsed.isValid() && validatorFunc(input.value)) {
+          var isDisabled = disabledDate && disabledDate(parsed);
+          if (parsed.isValid() && validatorFunc(input.value) && !isDisabled) {
             _this3.setState({
               open: false
             });
