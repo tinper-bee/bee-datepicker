@@ -1,3 +1,13 @@
+## [2.3.22](https://github.com/tinper-bee/bee-datepicker/compare/v2.3.21...v2.3.22) (2020-04-26)
+
+
+### Bug Fixes
+
+* 延迟calendar-input 聚焦 ([caa6f07](https://github.com/tinper-bee/bee-datepicker/commit/caa6f073f65ca2a24df54261cf729efac649563d))
+* 自动化 ([e3e54dc](https://github.com/tinper-bee/bee-datepicker/commit/e3e54dc388b974a32277f545befd0c31c916a69e))
+
+
+
 <a name="2.3.21"></a>
 ## [2.3.21](https://github.com/tinper-bee/bee-datepicker/compare/v2.3.20...v2.3.21) (2020-04-21)
 
