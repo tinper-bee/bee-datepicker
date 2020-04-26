@@ -37461,7 +37461,7 @@
 	      if (open) {
 	        setTimeout(function () {
 	          self.inputFocus();
-	        }, 0);
+	        }, 300);
 	      }
 	    });
 	    var value = self.state.value;

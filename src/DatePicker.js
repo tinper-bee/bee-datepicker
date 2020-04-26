@@ -127,7 +127,7 @@ class DatePicker extends Component {
         if(open){
           setTimeout(() => {
             self.inputFocus()
-          }, 0);
+          }, 300);
         }
       }); 
       const value = self.state.value;
