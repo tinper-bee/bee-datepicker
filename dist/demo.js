@@ -37446,6 +37446,11 @@
 	            _this3.props.onOpenChange(false, _v, _v && _this3.getValue(_v) || '');
 	            _reactDom2["default"].findDOMNode(_this3.outInput).focus();
 	          }
+	          if (!input.value) {
+	            _this3.setState({
+	              open: false
+	            });
+	          }
 	        }
 	        _this3.props.onKeyDown && _this3.props.onKeyDown(e);
 	      };
@@ -37461,7 +37466,7 @@
 	      if (open) {
 	        setTimeout(function () {
 	          self.inputFocus();
-	        }, 300);
+	        }, 0);
 	      }
 	    });
 	    var value = self.state.value;

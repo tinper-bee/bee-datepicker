@@ -112,6 +112,11 @@ class DatePicker extends Component {
             this.props.onOpenChange(false,v, (v && this.getValue(v)) || '');
             ReactDOM.findDOMNode(this.outInput).focus();
           }
+          if (!input.value) {
+            this.setState({
+              open:false
+            });
+          }
         }
         this.props.onKeyDown&&this.props.onKeyDown(e);
       }
@@ -127,7 +132,7 @@ class DatePicker extends Component {
         if(open){
           setTimeout(() => {
             self.inputFocus()
-          }, 300);
+          }, 0);
         }
       }); 
       const value = self.state.value;
