@@ -1,3 +1,12 @@
+## [2.3.23](https://github.com/tinper-bee/bee-datepicker/compare/v2.3.22...v2.3.23) (2020-04-27)
+
+
+### Bug Fixes
+
+* 回车如果没有值，回填默认时间，并关闭面板TINPER-2642 ([f53612f](https://github.com/tinper-bee/bee-datepicker/commit/f53612f7661cbe5f43d5c056fb8e3509ec9878e6))
+
+
+
 ## [2.3.22](https://github.com/tinper-bee/bee-datepicker/compare/v2.3.21...v2.3.22) (2020-04-26)
 
 
