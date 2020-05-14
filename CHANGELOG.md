@@ -1,3 +1,12 @@
+## [2.3.24](https://github.com/tinper-bee/bee-datepicker/compare/v2.3.23...v2.3.24) (2020-05-14)
+
+
+### Bug Fixes
+
+* 日期范围不能选择bug，触发两次onChange，第二次为undefined ([a7b2b7c](https://github.com/tinper-bee/bee-datepicker/commit/a7b2b7cdc92f835e2221aadff482a42320194db0))
+
+
+
 ## [2.3.23](https://github.com/tinper-bee/bee-datepicker/compare/v2.3.22...v2.3.23) (2020-04-27)
 
 
