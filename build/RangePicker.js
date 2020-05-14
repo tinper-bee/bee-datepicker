@@ -168,7 +168,7 @@ var RangePicker = function (_Component) {
             format: formatStr,
             dateInputPlaceholder: props.dateInputPlaceholder || ['start', 'end'],
             locale: props.locale || _zh_CN2["default"],
-            onChange: this.onChange,
+            onChange: this.handleCalendarChange,
             disabledDate: props.disabledDate,
             showClear: props.showClear,
             showOk: props.showOk,
@@ -195,8 +195,8 @@ var RangePicker = function (_Component) {
                     disabled: props.disabled,
                     dropdownClassName: props.dropdownClassName,
                     onOpenChange: this.onOpenChange,
-                    open: open
-
+                    open: open,
+                    onChange: this.onChange
                 }),
                 function (_ref) {
                     _objectDestructuringEmpty(_ref);

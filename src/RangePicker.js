@@ -281,7 +281,7 @@ class RangePicker extends Component {
             format={formatStr}
             dateInputPlaceholder={props.dateInputPlaceholder||['start', 'end']}
             locale={props.locale || zhCN }
-            onChange={this.onChange}
+            onChange={this.handleCalendarChange}
             disabledDate={props.disabledDate}
             showClear={ props.showClear }
             showOk={props.showOk}
@@ -325,7 +325,7 @@ class RangePicker extends Component {
               dropdownClassName={props.dropdownClassName}
               onOpenChange={this.onOpenChange}
               open={open}
-              
+              onChange={this.onChange}
           >
               {
                   ({}) => {
