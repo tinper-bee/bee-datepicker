@@ -266,10 +266,6 @@ class DatePicker extends Component {
       this.fireChange(value, newValue || '')
     }
   }
-  //阻止组件内部事件冒泡到组件外部容器
-  stopPropagation = (e) => {
-    e.stopPropagation();
-  }
 
   fireChange = (value,stringValue)=>{
     this.fileChange&&this.props.onChange(value,stringValue);
@@ -329,7 +325,7 @@ class DatePicker extends Component {
     }
     let classes = classnames(props.className, "datepicker-container");
     return (
-      <div className={classes} onMouseEnter={this.onDateHover} onClick={this.stopPropagation} 
+      <div className={classes} onMouseEnter={this.onDateHover} 
       {...omit(others, [
         'onDateInputBlur',
         'getCalendarContainer',
