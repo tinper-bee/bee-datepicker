@@ -318,7 +318,7 @@ class DatePicker extends Component {
     if(props.keyboardInput){
       keyboardInputProps.readOnly=false;
       keyboardInputProps.onChange=this.inputChange;
-      keyboardInputProps.value=state.inputValue.format&&(state.inputValue.isValid()&&this.props.validatorFunc(state.inputValue))?state.inputValue.format(props.format):state.inputValue;
+      keyboardInputProps.value=state.inputValue && state.inputValue.format&&(state.inputValue.isValid()&&this.props.validatorFunc(state.inputValue))?state.inputValue.format(props.format):state.inputValue;
     }else{
       keyboardInputProps.readOnly=true;
       keyboardInputProps.value=(value && this.getValue(value)) || ""
