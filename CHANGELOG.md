@@ -1,3 +1,7 @@
+## [2.3.26](https://github.com/tinper-bee/bee-datepicker/compare/v2.3.25...v2.3.26) (2020-08-03)
+
+
+
 ## [2.3.25](https://github.com/tinper-bee/bee-datepicker/compare/v2.3.24...v2.3.25) (2020-07-24)
 
 
