@@ -22,8 +22,8 @@ import 'bee-datepicker/build/DatePicker.css';
 
 ### DatePicker
 
-|参数|说明|类型|默认值|
-|:---|:-----|:----|:------|
+|参数|说明|类型|默认值|版本|
+|:---|:-----|:----|:------|:------|
 |prefixCls|组件的前缀|String| - |
 |className|添加输入框的样式|String| - |
 |dropdownClassName|添加下拉面板的样式|String| - |
@@ -66,6 +66,7 @@ import 'bee-datepicker/build/DatePicker.css';
 | showHour | 设置`showTime={true}`时候，是否显示小时 |Boolean|true|
 | showMinute | 设置`showTime={true}`时候，是否显示分钟 |Boolean|true|
 | showSecond | 设置`showTime={true}`时候，是否显示秒 |Boolean|true|
+| autoTriggerChange | 点击日期面板的切换年月按钮，是否自动触发 onChange。|Boolean|true|bee-datepicker@2.3.28新增|
 
 
 
