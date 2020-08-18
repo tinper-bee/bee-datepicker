@@ -1,3 +1,12 @@
+## [2.3.29](https://github.com/tinper-bee/bee-datepicker/compare/v2.3.28...v2.3.29) (2020-08-18)
+
+
+### Bug Fixes
+
+* 切换年月失败 ([2ab3315](https://github.com/tinper-bee/bee-datepicker/commit/2ab3315ca2a83240a523c1d6a3ff20f4bdef2eec))
+
+
+
 ## [2.3.28](https://github.com/tinper-bee/bee-datepicker/compare/v2.3.27...v2.3.28) (2020-08-13)
 
 
