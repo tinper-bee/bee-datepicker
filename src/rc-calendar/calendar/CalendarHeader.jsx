@@ -5,6 +5,7 @@ import MonthPanel from '../month/MonthPanel';
 import YearPanel from '../year/YearPanel';
 import DecadePanel from '../decade/DecadePanel';
 
+function noop() {}
 function goMonth(direction) {
   const next = this.props.value.clone();
   next.add(direction, 'months');
@@ -148,9 +149,16 @@ export default class CalendarHeader extends React.Component {
       renderFooter,
       onChange,
       onClear,
+      autoTriggerChange,
       showMonthInput
     } = props;
-
+    let calendarProps = {};
+    if(autoTriggerChange) {
+      calendarProps.value = value;
+      calendarProps.onChange = onChange;
+    } else {
+      calendarProps.onChange = noop;
+    }
     let panel = null;
     if (mode === 'month') {
       panel = (
@@ -166,9 +174,8 @@ export default class CalendarHeader extends React.Component {
           cellRender={props.monthCellRender}
           contentRender={props.monthCellContentRender}
           renderFooter={renderFooter}
-          onChange={onChange}
           onClear={onClear}
-          value={value}
+          {...calendarProps}
         />
       );
     }

@@ -37326,7 +37326,7 @@
 	        className: 'time-split-' + splitNumber,
 	        showHour: showHour, showMinute: showMinute, showSecond: showSecond,
 	        defaultValue: (0, _moment2["default"])((0, _moment2["default"])().format("HH:mm:ss"), "HH:mm:ss") }) : null
-	    }, props, calendarProps, {
+	    }, (0, _omit2["default"])(props, ['value']), calendarProps, {
 	      onSelect: this.handleSelect,
 	      onInputBlur: this.onDateInputBlur
 	    }));
@@ -56485,6 +56485,8 @@
 	  value: true
 	});
 	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
 	var _react = __webpack_require__(1);
 	
 	var _react2 = _interopRequireDefault(_react);
@@ -56519,6 +56521,7 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
 	
+	function noop() {}
 	function goMonth(direction) {
 	  var next = this.props.value.clone();
 	  next.add(direction, 'months');
@@ -56569,12 +56572,19 @@
 	        renderFooter = props.renderFooter,
 	        onChange = props.onChange,
 	        onClear = props.onClear,
+	        autoTriggerChange = props.autoTriggerChange,
 	        showMonthInput = props.showMonthInput;
 	
-	
+	    var calendarProps = {};
+	    if (autoTriggerChange) {
+	      calendarProps.value = value;
+	      calendarProps.onChange = onChange;
+	    } else {
+	      calendarProps.onChange = noop;
+	    }
 	    var panel = null;
 	    if (mode === 'month') {
-	      panel = _react2['default'].createElement(_MonthPanel2['default'], {
+	      panel = _react2['default'].createElement(_MonthPanel2['default'], _extends({
 	        showDateInput: true,
 	        locale: locale,
 	        showMonthInput: showMonthInput,
@@ -56588,10 +56598,8 @@
 	        cellRender: props.monthCellRender,
 	        contentRender: props.monthCellContentRender,
 	        renderFooter: renderFooter,
-	        onChange: onChange,
-	        onClear: onClear,
-	        value: value
-	      });
+	        onClear: onClear
+	      }, calendarProps));
 	    }
 	    if (mode === 'year') {
 	      panel = _react2['default'].createElement(_YearPanel2['default'], {
@@ -64894,6 +64902,7 @@
 	  showMonthInput: true,
 	  locale: _zh_CN2["default"],
 	  showClose: true,
+	  autoTriggerChange: true,
 	  validatorFunc: function validatorFunc() {
 	    return true;
 	  }

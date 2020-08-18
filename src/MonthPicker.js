@@ -240,6 +240,7 @@ MonthPicker.defaultProps = {
     showMonthInput:true,
     locale:zhCN,
     showClose:true,
+    autoTriggerChange:true,
     validatorFunc:()=>{
       return true;
     }

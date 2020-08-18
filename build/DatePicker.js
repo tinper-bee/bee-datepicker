@@ -167,7 +167,7 @@ var DatePicker = function (_Component) {
         className: 'time-split-' + splitNumber,
         showHour: showHour, showMinute: showMinute, showSecond: showSecond,
         defaultValue: (0, _moment2["default"])((0, _moment2["default"])().format("HH:mm:ss"), "HH:mm:ss") }) : null
-    }, props, calendarProps, {
+    }, (0, _omit2["default"])(props, ['value']), calendarProps, {
       onSelect: this.handleSelect,
       onInputBlur: this.onDateInputBlur
     }));

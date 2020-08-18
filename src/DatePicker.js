@@ -316,7 +316,7 @@ class DatePicker extends Component {
         className={'time-split-'+splitNumber}
         showHour={showHour} showMinute={showMinute} showSecond={showSecond}
         defaultValue={moment(moment().format("HH:mm:ss"), "HH:mm:ss")} /> : null}
-        {...props}
+        {...omit(props, ['value'])}
         {...calendarProps}
         onSelect={this.handleSelect}
         onInputBlur={this.onDateInputBlur}
