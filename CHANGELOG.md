@@ -1,3 +1,12 @@
+## [2.3.30](https://github.com/tinper-bee/bee-datepicker/compare/v2.3.29...v2.3.30) (2020-08-20)
+
+
+### Bug Fixes
+
+* value.format is not a function ([abc85c7](https://github.com/tinper-bee/bee-datepicker/commit/abc85c7a96bdb87c7dfcbe263d25d84f91b7437c))
+
+
+
 ## [2.3.29](https://github.com/tinper-bee/bee-datepicker/compare/v2.3.28...v2.3.29) (2020-08-18)
 
 
