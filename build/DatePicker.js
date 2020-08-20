@@ -268,11 +268,14 @@ var _initialiseProps = function _initialiseProps() {
   this.getValue = function (value) {
     var format = _this3.props.format;
 
-    if (typeof format == 'string') {
-      return value.format(format);
-    } else {
-      return value.format(format[0]);
+    if (value.format) {
+      if (typeof format == 'string') {
+        return value.format(format);
+      } else {
+        return value.format(format[0]);
+      }
     }
+    return value;
   };
 
   this.onChange = function (value) {

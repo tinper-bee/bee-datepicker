@@ -72,11 +72,14 @@ class DatePicker extends Component {
 
   getValue = value =>{
     let { format } = this.props;
-    if(typeof format == 'string'){
-      return value.format(format)
-    }else{
-      return value.format(format[0])
+    if(value.format){
+      if(typeof format == 'string'){
+        return value.format(format)
+      }else{
+        return value.format(format[0])
+      }
     }
+    return value
   }
 
   onChange = value => {
