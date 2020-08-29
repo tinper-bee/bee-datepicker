@@ -31,10 +31,7 @@ class Demo7 extends Component {
         console.log(d);
     }
     onChange = (d, dataString) => {
-        this.setState({
-            value:d
-        })
-        console.log('onChange',dataString)
+        console.log(d, dataString)
     };
     onOpenChange = open => {
         console.log(open)
@@ -62,7 +59,6 @@ class Demo7 extends Component {
                             locale={zhCN}
                             open={this.state.open}
                             defaultValue={moment('2018-01-01')}
-                            value={this.state.value}
                             onOpenChange={this.onOpenChange}
                             placeholder={dateInputPlaceholder}
                             className={"Demo7"}

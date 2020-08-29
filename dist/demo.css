@@ -996,6 +996,21 @@
 .uf-globe:before {
   content: "\e9db"; }
 
+.uf-yybs:before {
+  content: "\e9dc"; }
+
+.uf-iuap5:before {
+  content: "\e9dd"; }
+
+.uf-iuap5c:before {
+  content: "\e9ff"; }
+
+.uf-qingkong:before {
+  content: "\e666"; }
+
+.uf-location:before {
+  content: "\e78b"; }
+
 .u-form-control {
   position: relative;
   display: inline-block;
@@ -1096,6 +1111,10 @@
 .u-form-control-close:hover .uf-close-c {
   opacity: 1; }
 
+.u-form-control.rc-textarea {
+  min-height: 32px;
+  transition: all .3s,height 0s; }
+
 /* FormGroup */
 /*  Navlayout  */
 /* FormGroup */
@@ -1125,6 +1144,9 @@
 
 /* FormGroup */
 /*  Navlayout  */
+.u-input-group-addon {
+  font-size: 14px; }
+
 .u-input-group-btn {
   font-size: 0;
   white-space: nowrap;

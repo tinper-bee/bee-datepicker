@@ -45,6 +45,9 @@ class Demo8 extends Component {
     outInputKeydown = ()=>{
         console.log('keydown')
     }
+    onChange = (d, dataString) => {
+        console.log(d, dataString)
+    };
     submit = (e) => {
         this.props.form.validateFields((err, values) => {
             if (err) {
@@ -75,13 +78,6 @@ class Demo8 extends Component {
                             showDateInput={false}
                             iconClick={this.open}
                             outInputKeydown={this.outInputKeydown}
-                            {...getFieldProps('date', {
-                                validateTrigger: 'onBlur',
-                                initialValue:moment('2018-01-01'),
-                                rules: [{
-                                    required: true, message: '请输入日期',
-                                }],
-                            }) }
                         />
                     </Col>
                     <Col md={3}>

@@ -184,7 +184,7 @@ class DatePicker extends Component {
     this.setState({
       inputValue:value
     });
-    if(moment(value,this.props.format).isValid()&&this.props.validatorFunc(value)){
+    if(moment(value,this.props.format, true).isValid()&&this.props.validatorFunc(value)){
       this.setState({
         value:moment(value,this.props.format)
       });
