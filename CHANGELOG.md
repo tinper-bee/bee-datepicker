@@ -1,3 +1,12 @@
+## [2.3.31](https://github.com/tinper-bee/bee-datepicker/compare/v2.3.30...v2.3.31) (2020-08-29)
+
+
+### Bug Fixes
+
+* 开启keyboardInput为true时，无法正常录入日期 ([4eaf748](https://github.com/tinper-bee/bee-datepicker/commit/4eaf748ca691c0fd85761769893320a80aabd7f6))
+
+
+
 ## [2.3.30](https://github.com/tinper-bee/bee-datepicker/compare/v2.3.29...v2.3.30) (2020-08-20)
 
 
