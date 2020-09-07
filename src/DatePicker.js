@@ -282,7 +282,7 @@ class DatePicker extends Component {
   render() {
     let state = this.state;
     let props = this.props;
-    const { showClose, defaultPanelShown,onBlur,showHour,showMinute,showSecond,autoTriggerChange,...others} = props;
+    const { showClose, defaultPanelShown,onBlur,showHour,showMinute,showSecond,autoTriggerChange,inputShowValue,...others} = props;
     let value = state.value;
     let pickerChangeHandler = {};
     let calendarHandler = {};
@@ -330,10 +330,10 @@ class DatePicker extends Component {
     if(props.keyboardInput){
       keyboardInputProps.readOnly=false;
       keyboardInputProps.onChange=this.inputChange;
-      keyboardInputProps.value=state.inputValue && state.inputValue.format&&(state.inputValue.isValid()&&this.props.validatorFunc(state.inputValue))?state.inputValue.format(props.format):state.inputValue;
+      keyboardInputProps.value=inputShowValue||(state.inputValue && state.inputValue.format&&(state.inputValue.isValid()&&this.props.validatorFunc(state.inputValue))?state.inputValue.format(props.format):state.inputValue) ;
     }else{
       keyboardInputProps.readOnly=true;
-      keyboardInputProps.value=(value && this.getValue(value)) || ""
+      keyboardInputProps.value=inputShowValue||((value && this.getValue(value)) || "")
     }
     let classes = classnames(props.className, "datepicker-container");
     return (
