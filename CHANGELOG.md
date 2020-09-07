@@ -1,3 +1,12 @@
+## [2.3.35](https://github.com/tinper-bee/bee-datepicker/compare/v2.3.34...v2.3.35) (2020-09-07)
+
+
+### Features
+
+* 增加inputShowValue作为日期框显示的字符串 ([f0c4eb0](https://github.com/tinper-bee/bee-datepicker/commit/f0c4eb038d34f45a10ad45058c8859b230a8a7e5))
+
+
+
 ## [2.3.34](https://github.com/tinper-bee/bee-datepicker/compare/v2.3.33...v2.3.34) (2020-08-29)
 
 
