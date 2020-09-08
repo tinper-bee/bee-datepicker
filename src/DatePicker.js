@@ -249,14 +249,14 @@ class DatePicker extends Component {
   }
   //fix:更改系统时区后，日期框需要触发 onChange 事件
   onDateHover = ()=>{
-    let {format} = this.props;
+    let {format, inputShowValue} = this.props;
     let {value} = this.state,
         newValue = value && this.getValue(value);
       
     let inputValue = this.outInput.state.value;
     inputValue = format ? inputValue : ( inputValue && this.getValue(moment(inputValue)) );
     
-    if(newValue && inputValue !== newValue) {
+    if(newValue && (!inputShowValue) && inputValue !== newValue) {
       this.fireChange(value, newValue || '')
     }
   }
@@ -275,7 +275,7 @@ class DatePicker extends Component {
   render() {
     let state = this.state;
     let props = this.props;
-    const { showClose, defaultPanelShown,onBlur,showHour,showMinute,showSecond,...others} = props;
+    const { showClose, defaultPanelShown,onBlur,showHour,showMinute,showSecond,inputShowValue,...others} = props;
     let value = state.value;
     let pickerChangeHandler = {};
     let calendarHandler = {};
@@ -316,10 +316,10 @@ class DatePicker extends Component {
     if(props.keyboardInput){
       keyboardInputProps.readOnly=false;
       keyboardInputProps.onChange=this.inputChange;
-      keyboardInputProps.value=state.inputValue.format&&state.inputValue.isValid()?state.inputValue.format(props.format):state.inputValue;
+      keyboardInputProps.value=inputShowValue||(state.inputValue.format&&state.inputValue.isValid()?state.inputValue.format(props.format):state.inputValue);
     }else{
       keyboardInputProps.readOnly=true;
-      keyboardInputProps.value=(value && this.getValue(value)) || ""
+      keyboardInputProps.value=inputShowValue||((value && this.getValue(value)) || "");
     }
     let classes = classnames(props.className, "datepicker-container");
     return (
