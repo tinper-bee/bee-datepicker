@@ -130,7 +130,8 @@ var DatePicker = function (_Component) {
         showHour = props.showHour,
         showMinute = props.showMinute,
         showSecond = props.showSecond,
-        others = _objectWithoutProperties(props, ["showClose", "defaultPanelShown", "onBlur", "showHour", "showMinute", "showSecond"]);
+        inputShowValue = props.inputShowValue,
+        others = _objectWithoutProperties(props, ["showClose", "defaultPanelShown", "onBlur", "showHour", "showMinute", "showSecond", "inputShowValue"]);
 
     var value = state.value;
     var pickerChangeHandler = {};
@@ -169,10 +170,10 @@ var DatePicker = function (_Component) {
     if (props.keyboardInput) {
       keyboardInputProps.readOnly = false;
       keyboardInputProps.onChange = this.inputChange;
-      keyboardInputProps.value = state.inputValue.format && state.inputValue.isValid() ? state.inputValue.format(props.format) : state.inputValue;
+      keyboardInputProps.value = inputShowValue || (state.inputValue.format && state.inputValue.isValid() ? state.inputValue.format(props.format) : state.inputValue);
     } else {
       keyboardInputProps.readOnly = true;
-      keyboardInputProps.value = value && this.getValue(value) || "";
+      keyboardInputProps.value = inputShowValue || value && this.getValue(value) || "";
     }
     var classes = (0, _classnames2["default"])(props.className, "datepicker-container");
     return _react2["default"].createElement(
@@ -451,7 +452,9 @@ var _initialiseProps = function _initialiseProps() {
   };
 
   this.onDateHover = function () {
-    var format = _this3.props.format;
+    var _props = _this3.props,
+        format = _props.format,
+        inputShowValue = _props.inputShowValue;
     var value = _this3.state.value,
         newValue = value && _this3.getValue(value);
 
@@ -459,7 +462,7 @@ var _initialiseProps = function _initialiseProps() {
     var inputValue = _this3.outInput.state.value;
     inputValue = format ? inputValue : inputValue && _this3.getValue((0, _moment2["default"])(inputValue));
 
-    if (newValue && inputValue !== newValue) {
+    if (newValue && !inputShowValue && inputValue !== newValue) {
       _this3.fireChange(value, newValue || '');
     }
   };

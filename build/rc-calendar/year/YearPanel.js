@@ -162,15 +162,15 @@ var YearPanel = function (_React$Component) {
       var tds = row.map(function (yearData) {
         var _classNameMap;
 
-        var classNameMap = (_classNameMap = {}, _defineProperty(_classNameMap, prefixCls + '-cell', 1), _defineProperty(_classNameMap, prefixCls + '-selected-cell', yearData.year === currentYear), _defineProperty(_classNameMap, prefixCls + '-last-decade-cell', yearData.year < startYear), _defineProperty(_classNameMap, prefixCls + '-next-decade-cell', yearData.year > endYear), _classNameMap);
+        var classNameMap = (_classNameMap = {}, _defineProperty(_classNameMap, prefixCls + '-cell', 1), _defineProperty(_classNameMap, prefixCls + '-selected-cell', yearData.year === currentYear), _classNameMap);
         var clickHandler = void 0;
-        if (yearData.year < startYear) {
-          clickHandler = _this2.previousDecade;
-        } else if (yearData.year > endYear) {
-          clickHandler = _this2.nextDecade;
-        } else {
-          clickHandler = chooseYear.bind(_this2, yearData.year);
-        }
+        // if (yearData.year < startYear) {
+        //   clickHandler = this.previousDecade;
+        // } else if (yearData.year > endYear) {
+        //   clickHandler = this.nextDecade;
+        // } else {
+        clickHandler = chooseYear.bind(_this2, yearData.year);
+        // }
         return _react2["default"].createElement(
           'td',
           {
