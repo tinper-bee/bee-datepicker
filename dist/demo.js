@@ -71199,7 +71199,7 @@
 	                        },
 	                        _react2["default"].createElement(_beeFormControl2["default"], {
 	                            placeholder: _this2.props.placeholder ? _this2.props.placeholder : 'start ~ end',
-	                            value: isValidRange(value) && (0, _util.formatDate)(value[0], formatStr) + " ~ " + (0, _util.formatDate)(value[1], formatStr) || '',
+	                            value: isValidRange(value) && (_this2.props.inputShowValue && _this2.props.inputShowValue[0] && _this2.props.inputShowValue[1] ? _this2.props.inputShowValue[0] + " ~ " + _this2.props.inputShowValue[1] : (0, _util.formatDate)(value[0], formatStr) + " ~ " + (0, _util.formatDate)(value[1], formatStr)) || '',
 	                            disabled: props.disabled,
 	                            onFocus: function onFocus(v, e) {
 	                                _this2.outInputFocus(e);

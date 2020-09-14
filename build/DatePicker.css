@@ -1008,6 +1008,9 @@
 .uf-qingkong:before {
   content: "\e666"; }
 
+.uf-location:before {
+  content: "\e78b"; }
+
 .u-form-control {
   position: relative;
   display: inline-block;

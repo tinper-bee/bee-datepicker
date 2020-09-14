@@ -207,7 +207,7 @@ var RangePicker = function (_Component) {
                         },
                         _react2["default"].createElement(_beeFormControl2["default"], {
                             placeholder: _this2.props.placeholder ? _this2.props.placeholder : 'start ~ end',
-                            value: isValidRange(value) && (0, _util.formatDate)(value[0], formatStr) + " ~ " + (0, _util.formatDate)(value[1], formatStr) || '',
+                            value: isValidRange(value) && (_this2.props.inputShowValue && _this2.props.inputShowValue[0] && _this2.props.inputShowValue[1] ? _this2.props.inputShowValue[0] + " ~ " + _this2.props.inputShowValue[1] : (0, _util.formatDate)(value[0], formatStr) + " ~ " + (0, _util.formatDate)(value[1], formatStr)) || '',
                             disabled: props.disabled,
                             onFocus: function onFocus(v, e) {
                                 _this2.outInputFocus(e);
@@ -248,7 +248,7 @@ var _initialiseProps = function _initialiseProps() {
                         console.error('value is not in the correct format');
                         values.push('');
                     }
-                } else if (value.format && value.isValid()) {
+                } else if (value.format && value.isValid() || _this3.props.inputShowValue) {
                     values.push(value);
                 } else {
                     console.error('value is not in the correct format');
@@ -393,12 +393,14 @@ var _initialiseProps = function _initialiseProps() {
     };
 
     this.onStartInputBlur = function (e) {
+        var inputShowValue = _this3.props.inputShowValue;
+
         var inputs = document.querySelectorAll('.rc-calendar-input');
         var startValue = void 0,
             endValue = void 0;
         if (inputs) {
-            startValue = inputs[0].value ? inputs[0].value : '';
-            endValue = inputs[1].value ? inputs[1].value : '';
+            startValue = inputShowValue || (inputs[0].value ? inputs[0].value : '');
+            endValue = inputShowValue || (inputs[1].value ? inputs[1].value : '');
         }
         _this3.props.onStartInputBlur && _this3.props.onStartInputBlur(e, startValue, "[\"" + startValue + "\" , \"" + endValue + "\"]");
     };
