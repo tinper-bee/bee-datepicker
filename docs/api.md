@@ -67,7 +67,7 @@ import 'bee-datepicker/build/DatePicker.css';
 | showMinute | 设置`showTime={true}`时候，是否显示分钟 |Boolean|true|
 | showSecond | 设置`showTime={true}`时候，是否显示秒 |Boolean|true|
 | autoTriggerChange | 点击日期面板的切换年月按钮，是否自动触发 onChange。|Boolean|true|bee-datepicker@2.3.28新增|
-
+| inputShowValue |外层输入框可自定义显示的字符串|String| - |
 
 
 注：使用keyboardInput时，以下api变化
