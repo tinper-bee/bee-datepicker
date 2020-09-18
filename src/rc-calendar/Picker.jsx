@@ -82,8 +82,12 @@ class Picker extends React.Component {
   }
 
   onCalendarKeyDown = (event) => {
-    if (event.keyCode === KeyCode.ESC) {
+    if (event.keyCode === KeyCode.ESC || event.keyCode === KeyCode.TAB) {
       event.stopPropagation();
+      event.target._dataTransfer = {
+        owner: ReactDOM.findDOMNode(this.outInput),
+        _target: e.target
+      }
       this.close(this.focus);
     }
     this.props.onKeyDown&&this.props.onKeyDown(event);
@@ -108,11 +112,33 @@ class Picker extends React.Component {
     props.onChange(value);
   }
 
-  onKeyDown = (event) => {
+  onKeyDown = (event) => { // formcontrol onKeyDown
     const { enterKeyDown } = this.props;
+    console.debug('++++++++++++++++++++++++ [bee Picker.js] [event.keyCode ===' + event.keyCode + '] ');
     if (event.keyCode === KeyCode.DOWN || (enterKeyDown && event.keyCode === KeyCode.ENTER) ) {
-      if(!this.state.open) this.open();
+      if(!this.state.open) {
+        this.open();
+        event.nativeEvent.stopImmediatePropagation();
+        // event.target._dataTransfer = {
+        //   owner: e
+        // }
+      }
       event.preventDefault();
+      event.stopPropagation();
+      // delete event.keyCode;
+      console.debug('++++++++++++++++++++++++ [bee Picker.js] event.stopPropagation(); event.nativeEvent.stopImmediatePropagation(); ');
+    } else if (event.keyCode === KeyCode.TAB) {      
+      if (this.state.open) {
+        console.debug('+TABTABTABTABTABTABTABTABTABTAB [bee Picker.js] this.close() event.stopPropagation()');
+        this.close();        
+        this.focus();
+        event.preventDefault();
+        event.stopPropagation();   
+      } else {
+        console.debug('+TABTABTABTABTABTABTABTABTABTAB [bee Picker.js] nothing to do');
+      }
+    } else {
+      console.debug('NONONONONONONONOONONO [bee Picker.js] nothing to do');
     }
     this.props.onKeyDown&&this.props.onKeyDown(event);
   }
@@ -184,6 +210,11 @@ class Picker extends React.Component {
     if (!this.state.open) {
       ReactDOM.findDOMNode(this).focus();
     }
+    // } else {      
+    //   // ReactDOM.findDOMNode(this).focus();
+    //   if(this.calendarInstance)
+    //     this.calendarInstance.focus();
+    // }
   }
 
   focusCalendar = () => {
