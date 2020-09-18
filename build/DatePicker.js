@@ -297,16 +297,22 @@ var _initialiseProps = function _initialiseProps() {
         input.focus();
       }
       input.onkeydown = function (e) {
+        // 日历的input
         if (e.keyCode == _tinperBeeCore.KeyCode.DELETE) {
           input.value = '';
           _this3.fireChange('', '');
-        } else if (e.keyCode == _tinperBeeCore.KeyCode.ESC) {
+        } else if (e.keyCode == _tinperBeeCore.KeyCode.ESC || e.keyCode == _tinperBeeCore.KeyCode.TAB) {
+          if (e.keyCode == _tinperBeeCore.KeyCode.TAB) {
+            console.debug('[bee-datepicker] [DatePicker] e.keyCode == KeyCode.TAB');
+          }
           _this3.setState({
             open: false
           });
           var v = _this3.state.value;
           _this3.props.onOpenChange(false, v, v && _this3.getValue(v) || '');
+          console.debug(' [bee-datepicker] [DatePicker] ReactDOM.findDOMNode(this.outInput)', _reactDom2["default"].findDOMNode(_this3.outInput));
           _reactDom2["default"].findDOMNode(_this3.outInput).focus(); // 按esc时候焦点回到input输入框
+          // e.stopPropagation();
         } else if (e.keyCode == _tinperBeeCore.KeyCode.ENTER) {
           var parsed = (0, _moment2["default"])(input.value, format, true);
           var isDisabled = disabledDate && disabledDate(parsed);
@@ -323,6 +329,13 @@ var _initialiseProps = function _initialiseProps() {
               open: false
             });
           }
+        } else if (e.keyCode >= 37 && e.keyCode <= 40) {
+          // 向下
+          e.target._dataTransfer = {
+            owner: _reactDom2["default"].findDOMNode(_this3.outInput),
+            _target: e.target
+            // e.target.___onCalendarKeyDown = true;
+          };
         }
         _this3.props.onKeyDown && _this3.props.onKeyDown(e);
       };
@@ -429,7 +442,10 @@ var _initialiseProps = function _initialiseProps() {
         _this3.fireChange(null, value);
       }
     }
-    _this3.props.outInputKeydown && _this3.props.outInputKeydown(e);
+    if (_this3.props.outInputKeydown) {
+      console.debug('[bee-datepicker] [DatePicker] exist this.props.outInputKeydown and the props is ,' + _this3.props);
+      _this3.props.outInputKeydown(e);
+    }
   };
 
   this.onMouseLeave = function (e) {

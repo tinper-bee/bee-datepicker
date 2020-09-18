@@ -95,17 +95,22 @@ class DatePicker extends Component {
       }else{
         input.focus()
       }
-      input.onkeydown=(e)=>{
+      input.onkeydown=(e)=>{ // 日历的input
         if(e.keyCode == KeyCode.DELETE){
           input.value = '';
           this.fireChange('','');
-        }else if(e.keyCode == KeyCode.ESC){
+        }else if(e.keyCode == KeyCode.ESC || e.keyCode == KeyCode.TAB){
+          if(e.keyCode == KeyCode.TAB){
+            console.debug('[bee-datepicker] [DatePicker] e.keyCode == KeyCode.TAB')
+          }
           this.setState({
             open:false
           });
           let v = this.state.value;
           this.props.onOpenChange(false,v, (v && this.getValue(v)) || '');
+          console.debug(' [bee-datepicker] [DatePicker] ReactDOM.findDOMNode(this.outInput)',  ReactDOM.findDOMNode(this.outInput))
           ReactDOM.findDOMNode(this.outInput).focus();// 按esc时候焦点回到input输入框
+          // e.stopPropagation();
         }else if(e.keyCode == KeyCode.ENTER){
           let parsed = moment(input.value, format, true);
           let isDisabled = disabledDate && disabledDate(parsed);
@@ -122,6 +127,13 @@ class DatePicker extends Component {
               open:false
             });
           }
+        } else if(e.keyCode >= 37 && e.keyCode <= 40){ // 向下
+          // 自定义_dataTransfer
+          e.target._dataTransfer = {
+            owner: ReactDOM.findDOMNode(this.outInput),
+            _target: e.target
+          }
+          // e.target.___onCalendarKeyDown = true;
         }
         this.props.onKeyDown&&this.props.onKeyDown(e);
       }
@@ -222,7 +234,10 @@ class DatePicker extends Component {
         this.fireChange(null,value);
       }
     }
-    this.props.outInputKeydown&&this.props.outInputKeydown(e);
+    if (this.props.outInputKeydown) {
+      console.debug('[bee-datepicker] [DatePicker] exist this.props.outInputKeydown and the props is ,' + this.props);
+      this.props.outInputKeydown(e);
+    }
   }
   onMouseLeave=(e)=>{
     this.setState({
