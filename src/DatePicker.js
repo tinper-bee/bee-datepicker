@@ -95,22 +95,33 @@ class DatePicker extends Component {
       }else{
         input.focus()
       }
-      input.onkeydown=(e)=>{ // 日历的input
+      input.onkeydown = (e)=> { // 日历的input
         if(e.keyCode == KeyCode.DELETE){
           input.value = '';
           this.fireChange('','');
-        }else if(e.keyCode == KeyCode.ESC || e.keyCode == KeyCode.TAB){
-          if(e.keyCode == KeyCode.TAB){
+        } else if (e.keyCode == KeyCode.ESC || e.keyCode == KeyCode.TAB) {
+          if (e.keyCode == KeyCode.TAB) {
             console.debug('[bee-datepicker] [DatePicker] e.keyCode == KeyCode.TAB')
           }
           this.setState({
             open:false
           });
+          e.target._dataTransfer = {
+            owner: ReactDOM.findDOMNode(this.outInput),
+            _target: e.target,
+            open: false
+          }
+
+          console.debug(' [bee-datepicker] [DatePicker] ReactDOM.findDOMNode(this.outInput)',  ReactDOM.findDOMNode(this.outInput))
+          // input.blur();
+          
+          // 按esc时候焦点回到input输入框
+          ReactDOM.findDOMNode(this.outInput).focus();
+          ReactDOM.findDOMNode(this.outInput).select();
+          // e.stopPropagation();
+
           let v = this.state.value;
           this.props.onOpenChange(false,v, (v && this.getValue(v)) || '');
-          console.debug(' [bee-datepicker] [DatePicker] ReactDOM.findDOMNode(this.outInput)',  ReactDOM.findDOMNode(this.outInput))
-          ReactDOM.findDOMNode(this.outInput).focus();// 按esc时候焦点回到input输入框
-          // e.stopPropagation();
         }else if(e.keyCode == KeyCode.ENTER){
           let parsed = moment(input.value, format, true);
           let isDisabled = disabledDate && disabledDate(parsed);
@@ -131,9 +142,9 @@ class DatePicker extends Component {
           // 自定义_dataTransfer
           e.target._dataTransfer = {
             owner: ReactDOM.findDOMNode(this.outInput),
-            _target: e.target
+            _target: e.target,
+            open: this.state.open
           }
-          // e.target.___onCalendarKeyDown = true;
         }
         this.props.onKeyDown&&this.props.onKeyDown(e);
       }
@@ -213,16 +224,23 @@ class DatePicker extends Component {
   iconClick=(e)=>{
     this.props.iconClick&&this.props.iconClick(e);
   }
-  outInputKeydown=(e)=>{
+  outInputKeydown = (e)=>{ // 外部（非弹窗日历）核心input
     if(e.keyCode == KeyCode.DELETE){
       this.setState({
         inputValue:''
       });
       this.fireChange('','');
     }else if(e.keyCode == KeyCode.ESC){
+      console.debug('==========================[bee-datepicker] [DatePicker] e.keyCode == KeyCode.ESC');
       this.setState({
         open:false
       });
+      e.target._dataTransfer = {
+        open: false,
+        owner: e.target,
+        _target: e.target,
+        ownerIsTarget: true
+      }
       let value = this.state.inputValue;
       if(moment(value,this.props.format).isValid()&&this.props.validatorFunc(value)){
         this.setState({
@@ -233,10 +251,14 @@ class DatePicker extends Component {
       }else{
         this.fireChange(null,value);
       }
+    } else {
+      console.debug('==========================[bee-datepicker] [DatePicker] e.keyCode == ' + e.keyCode);
     }
     if (this.props.outInputKeydown) {
-      console.debug('[bee-datepicker] [DatePicker] exist this.props.outInputKeydown and the props is ,' + this.props);
+      console.debug('======================[bee-datepicker] [DatePicker] exist this.props.outInputKeydown and the props is ,' + this.props);
       this.props.outInputKeydown(e);
+    } else {
+      console.debug('======================[bee-datepicker] [DatePicker] don\'t exist this.props.outInputKeydown and the props is ,' + this.props);
     }
   }
   onMouseLeave=(e)=>{
@@ -301,7 +323,7 @@ class DatePicker extends Component {
     let value = state.value;
     let pickerChangeHandler = {};
     let calendarHandler = {};
-    const autofocus = this.props.autofocus?{autofocus:'autofocus'}:null;
+    const autofocus = !this.state.open && this.props.autofocus?{autofocus:'autofocus'}:null;
 
     if (props.showTime) {
       calendarHandler = {
@@ -425,6 +447,12 @@ class DatePicker extends Component {
         </Picker>
       </div>
     );
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.open && !this.state.open) {
+      ReactDOM.findDOMNode(this.outInput).focus();// 按esc时候焦点回到input输入框
+    }
   }
 }
 

@@ -206,7 +206,7 @@ var _initialiseProps = function _initialiseProps() {
     // formcontrol onKeyDown
     var enterKeyDown = _this2.props.enterKeyDown;
 
-    console.debug('++++++++++++++++++++++++ [bee Picker.js] [event.keyCode ===' + event.keyCode + '] ');
+    console.debug('------------------ [bee-datepicker] [Picker] [event.keyCode ===' + event.keyCode + '] ');
     if (event.keyCode === _KeyCode2["default"].DOWN || enterKeyDown && event.keyCode === _KeyCode2["default"].ENTER) {
       if (!_this2.state.open) {
         _this2.open();
@@ -218,19 +218,25 @@ var _initialiseProps = function _initialiseProps() {
       event.preventDefault();
       event.stopPropagation();
       // delete event.keyCode;
-      console.debug('++++++++++++++++++++++++ [bee Picker.js] event.stopPropagation(); event.nativeEvent.stopImmediatePropagation(); ');
+      console.debug('------------------ [bee-datepicker] [Picker] [event.keyCode === ' + event.keyCode + '], event.stopPropagation(); event.nativeEvent.stopImmediatePropagation(); ');
     } else if (event.keyCode === _KeyCode2["default"].TAB) {
       if (_this2.state.open) {
-        console.debug('+TABTABTABTABTABTABTABTABTABTAB [bee Picker.js] this.close() event.stopPropagation()');
+        console.debug('------------------ [bee-datepicker] [Picker] [event.keyCode === KeyCode.TAB], this.close(); event.stopPropagation()');
         _this2.close();
         _this2.focus();
         event.preventDefault();
         event.stopPropagation();
       } else {
-        console.debug('+TABTABTABTABTABTABTABTABTABTAB [bee Picker.js] nothing to do');
+        console.debug('------------------ [bee-datepicker] [Picker] [event.keyCode === KeyCode.TAB], this.state.open is ' + _this2.state.open + ',nothing to do');
       }
     } else {
-      console.debug('NONONONONONONONOONONO [bee Picker.js] nothing to do');
+      event.target._dataTransfer = {
+        open: _this2.state.open,
+        owner: event.target,
+        _target: event.target,
+        ownerIsTarget: true
+      };
+      console.debug('------------------NOTHING TO DO [bee-datepicker] [Picker] nothing to do and event.keyCode == ' + event.keyCode);
     }
     _this2.props.onKeyDown && _this2.props.onKeyDown(event);
   };
