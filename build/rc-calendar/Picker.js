@@ -174,8 +174,12 @@ var _initialiseProps = function _initialiseProps() {
   var _this2 = this;
 
   this.onCalendarKeyDown = function (event) {
-    if (event.keyCode === _KeyCode2["default"].ESC) {
+    if (event.keyCode === _KeyCode2["default"].ESC || event.keyCode === _KeyCode2["default"].TAB) {
       event.stopPropagation();
+      event.target._dataTransfer = {
+        owner: _reactDom2["default"].findDOMNode(_this2.outInput),
+        _target: e.target
+      };
       _this2.close(_this2.focus);
     }
     _this2.props.onKeyDown && _this2.props.onKeyDown(event);
@@ -199,11 +203,40 @@ var _initialiseProps = function _initialiseProps() {
   };
 
   this.onKeyDown = function (event) {
+    // formcontrol onKeyDown
     var enterKeyDown = _this2.props.enterKeyDown;
 
+    console.debug('------------------ [bee-datepicker] [Picker] [event.keyCode ===' + event.keyCode + '] ');
     if (event.keyCode === _KeyCode2["default"].DOWN || enterKeyDown && event.keyCode === _KeyCode2["default"].ENTER) {
-      if (!_this2.state.open) _this2.open();
+      if (!_this2.state.open) {
+        _this2.open();
+        event.nativeEvent.stopImmediatePropagation();
+        // event.target._dataTransfer = {
+        //   owner: e
+        // }
+      }
       event.preventDefault();
+      event.stopPropagation();
+      // delete event.keyCode;
+      console.debug('------------------ [bee-datepicker] [Picker] [event.keyCode === ' + event.keyCode + '], event.stopPropagation(); event.nativeEvent.stopImmediatePropagation(); ');
+    } else if (event.keyCode === _KeyCode2["default"].TAB) {
+      if (_this2.state.open) {
+        console.debug('------------------ [bee-datepicker] [Picker] [event.keyCode === KeyCode.TAB], this.close(); event.stopPropagation()');
+        _this2.close();
+        _this2.focus();
+        event.preventDefault();
+        event.stopPropagation();
+      } else {
+        console.debug('------------------ [bee-datepicker] [Picker] [event.keyCode === KeyCode.TAB], this.state.open is ' + _this2.state.open + ',nothing to do');
+      }
+    } else {
+      event.target._dataTransfer = {
+        open: _this2.state.open,
+        owner: event.target,
+        _target: event.target,
+        ownerIsTarget: true
+      };
+      console.debug('------------------NOTHING TO DO [bee-datepicker] [Picker] nothing to do and event.keyCode == ' + event.keyCode);
     }
     _this2.props.onKeyDown && _this2.props.onKeyDown(event);
   };
@@ -265,6 +298,11 @@ var _initialiseProps = function _initialiseProps() {
     if (!_this2.state.open) {
       _reactDom2["default"].findDOMNode(_this2).focus();
     }
+    // } else {      
+    //   // ReactDOM.findDOMNode(this).focus();
+    //   if(this.calendarInstance)
+    //     this.calendarInstance.focus();
+    // }
   };
 
   this.focusCalendar = function () {

@@ -82,8 +82,12 @@ class Picker extends React.Component {
   }
 
   onCalendarKeyDown = (event) => {
-    if (event.keyCode === KeyCode.ESC) {
+    if (event.keyCode === KeyCode.ESC || event.keyCode === KeyCode.TAB) {
       event.stopPropagation();
+      event.target._dataTransfer = {
+        owner: ReactDOM.findDOMNode(this.outInput),
+        _target: e.target
+      }
       this.close(this.focus);
     }
     this.props.onKeyDown&&this.props.onKeyDown(event);
@@ -108,11 +112,39 @@ class Picker extends React.Component {
     props.onChange(value);
   }
 
-  onKeyDown = (event) => {
+  onKeyDown = (event) => { // formcontrol onKeyDown
     const { enterKeyDown } = this.props;
+    console.debug('------------------ [bee-datepicker] [Picker] [event.keyCode ===' + event.keyCode + '] ');
     if (event.keyCode === KeyCode.DOWN || (enterKeyDown && event.keyCode === KeyCode.ENTER) ) {
-      if(!this.state.open) this.open();
+      if(!this.state.open) {
+        this.open();
+        event.nativeEvent.stopImmediatePropagation();
+        // event.target._dataTransfer = {
+        //   owner: e
+        // }
+      }
       event.preventDefault();
+      event.stopPropagation();
+      // delete event.keyCode;
+      console.debug('------------------ [bee-datepicker] [Picker] [event.keyCode === ' + event.keyCode + '], event.stopPropagation(); event.nativeEvent.stopImmediatePropagation(); ');
+    } else if (event.keyCode === KeyCode.TAB) {      
+      if (this.state.open) {
+        console.debug('------------------ [bee-datepicker] [Picker] [event.keyCode === KeyCode.TAB], this.close(); event.stopPropagation()');
+        this.close();        
+        this.focus();
+        event.preventDefault();
+        event.stopPropagation();   
+      } else {
+        console.debug('------------------ [bee-datepicker] [Picker] [event.keyCode === KeyCode.TAB], this.state.open is ' + this.state.open + ',nothing to do');
+      }
+    } else {
+      event.target._dataTransfer = {
+        open: this.state.open,
+        owner: event.target,
+        _target: event.target,
+        ownerIsTarget: true
+      }
+      console.debug('------------------NOTHING TO DO [bee-datepicker] [Picker] nothing to do and event.keyCode == ' + event.keyCode);
     }
     this.props.onKeyDown&&this.props.onKeyDown(event);
   }
@@ -184,6 +216,11 @@ class Picker extends React.Component {
     if (!this.state.open) {
       ReactDOM.findDOMNode(this).focus();
     }
+    // } else {      
+    //   // ReactDOM.findDOMNode(this).focus();
+    //   if(this.calendarInstance)
+    //     this.calendarInstance.focus();
+    // }
   }
 
   focusCalendar = () => {
