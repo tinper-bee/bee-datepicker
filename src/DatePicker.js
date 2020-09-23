@@ -297,14 +297,12 @@ class DatePicker extends Component {
   }
   //fix:更改系统时区后，日期框需要触发 onChange 事件
   onDateHover = ()=>{
-    let {format} = this.props;
+    let {format, inputShowValue} = this.props;
     let {value} = this.state,
         newValue = value && this.getValue(value);
-      
     let inputValue = this.outInput.state.value;
     inputValue = format ? inputValue : ( inputValue && this.getValue(moment(inputValue)) );
-    
-    if(newValue && inputValue !== newValue) {
+    if(newValue && (!inputShowValue) && inputValue !== newValue) {
       this.fireChange(value, newValue || '')
     }
   }
