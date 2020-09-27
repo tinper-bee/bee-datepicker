@@ -1,3 +1,12 @@
+## [2.3.39](https://github.com/tinper-bee/bee-datepicker/compare/v2.3.38...v2.3.39) (2020-09-27)
+
+
+### Bug Fixes
+
+* 修改tabIndex导致的tab键跳转问题 ([a9b861f](https://github.com/tinper-bee/bee-datepicker/commit/a9b861f76b48717ec8027fc6dc673f89bc747e44))
+
+
+
 ## [2.3.38](https://github.com/tinper-bee/bee-datepicker/compare/v2.3.36...v2.3.38) (2020-09-23)
 
 
