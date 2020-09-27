@@ -317,11 +317,11 @@ class DatePicker extends Component {
   render() {
     let state = this.state;
     let props = this.props;
-    const { showClose, defaultPanelShown,onBlur,showHour,showMinute,showSecond,autoTriggerChange,inputShowValue,...others} = props;
+    const { showClose, defaultPanelShown,onBlur,showHour,showMinute,showSecond,autoTriggerChange,inputShowValue,tabIndex,...others} = props;
     let value = state.value;
     let pickerChangeHandler = {};
     let calendarHandler = {};
-    const autofocus = !this.state.open && this.props.autofocus?{autofocus:'autofocus'}:null;
+    const autofocus = (!this.state.open && this.props.autofocus)?{autofocus:'autofocus'}:null;
 
     if (props.showTime) {
       calendarHandler = {
@@ -416,6 +416,7 @@ class DatePicker extends Component {
                 onMouseLeave={this.onMouseLeave}
               >
                   <FormControl
+                    tabIndex={tabIndex}
                     ref = { ref => this.outInput = ref }
                     disabled={props.disabled}
                     placeholder={this.props.placeholder}

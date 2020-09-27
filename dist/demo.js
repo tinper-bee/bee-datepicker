@@ -39669,7 +39669,8 @@
 	        showSecond = props.showSecond,
 	        autoTriggerChange = props.autoTriggerChange,
 	        inputShowValue = props.inputShowValue,
-	        others = _objectWithoutProperties(props, ["showClose", "defaultPanelShown", "onBlur", "showHour", "showMinute", "showSecond", "autoTriggerChange", "inputShowValue"]);
+	        tabIndex = props.tabIndex,
+	        others = _objectWithoutProperties(props, ["showClose", "defaultPanelShown", "onBlur", "showHour", "showMinute", "showSecond", "autoTriggerChange", "inputShowValue", "tabIndex"]);
 	
 	    var value = state.value;
 	    var pickerChangeHandler = {};
@@ -39743,6 +39744,7 @@
 	              onMouseLeave: _this2.onMouseLeave
 	            },
 	            _react2["default"].createElement(_beeFormControl2["default"], _extends({
+	              tabIndex: tabIndex,
 	              ref: function ref(_ref) {
 	                return _this2.outInput = _ref;
 	              },
@@ -71282,7 +71284,8 @@
 	            showHour = props.showHour,
 	            showMinute = props.showMinute,
 	            showSecond = props.showSecond,
-	            others = _objectWithoutProperties(props, ["showClose", "onChange", "showHour", "showMinute", "showSecond"]);
+	            tabIndex = props.tabIndex,
+	            others = _objectWithoutProperties(props, ["showClose", "onChange", "showHour", "showMinute", "showSecond", "tabIndex"]);
 	
 	        var _state = this.state,
 	            value = _state.value,
@@ -71343,7 +71346,8 @@
 	                            disabled: props.disabled,
 	                            onFocus: function onFocus(v, e) {
 	                                _this2.outInputFocus(e);
-	                            }
+	                            },
+	                            tabIndex: tabIndex
 	                        }),
 	                        showClose && !_this2.valueIsEmpty(value) && _this2.state.showClose && !props.disabled ? _react2["default"].createElement(
 	                            _beeInputGroup2["default"].Button,
