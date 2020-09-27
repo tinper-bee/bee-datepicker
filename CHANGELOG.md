@@ -1,3 +1,13 @@
+## [2.3.38](https://github.com/tinper-bee/bee-datepicker/compare/v2.3.36...v2.3.38) (2020-09-23)
+
+
+### Bug Fixes
+
+* 修正hover到日期框就调用onChange的问题 ([8672da4](https://github.com/tinper-bee/bee-datepicker/commit/8672da440941cce2cda6763b95b5a4bf7524ebb7))
+* 更新属性inputShowValue至api文档 ([1d6f75a](https://github.com/tinper-bee/bee-datepicker/commit/1d6f75ab5b5d28f1747b91aaa501a9c4dd27809e))
+
+
+
 ## [2.3.36](https://github.com/tinper-bee/bee-datepicker/compare/v2.3.34...v2.3.36) (2020-09-07)
 
 
