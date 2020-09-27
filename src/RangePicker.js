@@ -248,7 +248,7 @@ class RangePicker extends Component {
     }
     render() {
     const props = this.props;
-    const { showClose ,onChange, showHour,showMinute,showSecond,...others } = props;
+    const { showClose ,onChange, showHour,showMinute,showSecond,tabIndex,...others } = props;
     const {value,open} = this.state;
     let formatStr = props.format || 'YYYY-MM-DD';
     const timePickerElement = (
@@ -322,6 +322,7 @@ class RangePicker extends Component {
                             value={isValidRange(value) && (this.props.inputShowValue&&this.props.inputShowValue[0]&&this.props.inputShowValue[1]?`${this.props.inputShowValue[0]} ~ ${this.props.inputShowValue[1]}`:`${formatDate(value[0],formatStr)} ~ ${formatDate(value[1],formatStr)}`) || ''}
                             disabled={props.disabled}
                             onFocus={(v,e)=>{this.outInputFocus(e)}}
+                            tabIndex={tabIndex}
                         />
                         {
                             showClose&&(this.state.value&&this.state.value.length>0)&&this.state.showClose&&(!props.disabled)?(
