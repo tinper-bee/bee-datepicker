@@ -231,7 +231,7 @@ class DatePicker extends Component {
       });
       this.fireChange('','');
     }else if(e.keyCode == KeyCode.ESC){
-      console.debug('==========================[bee-datepicker] [DatePicker] e.keyCode == KeyCode.ESC');
+      console.debug('c%==========================[bee-datepicker] [DatePicker] [outInputKeydown()] e.keyCode == KeyCode.ESC', 'color:blue');
       this.setState({
         open:false
       });
@@ -252,13 +252,13 @@ class DatePicker extends Component {
         this.fireChange(null,value);
       }
     } else {
-      console.debug('==========================[bee-datepicker] [DatePicker] e.keyCode == ' + e.keyCode);
+      console.debug('==========================[bee-datepicker] [DatePicker] [outInputKeydown()] e.keyCode == ' + e.keyCode);
     }
     if (this.props.outInputKeydown) {
-      console.debug('======================[bee-datepicker] [DatePicker] exist this.props.outInputKeydown and the props is ,' + this.props);
+      console.debug('======================[bee-datepicker] [DatePicker] [outInputKeydown()] exist this.props.outInputKeydown and the props is ,' + this.props);
       this.props.outInputKeydown(e);
     } else {
-      console.debug('======================[bee-datepicker] [DatePicker] don\'t exist this.props.outInputKeydown and the props is ,' + this.props);
+      console.debug('======================[bee-datepicker] [DatePicker] [outInputKeydown()] don\'t exist this.props.outInputKeydown and the props is ,' + this.props);
     }
   }
   onMouseLeave=(e)=>{

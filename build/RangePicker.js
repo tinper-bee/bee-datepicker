@@ -149,7 +149,8 @@ var RangePicker = function (_Component) {
             showHour = props.showHour,
             showMinute = props.showMinute,
             showSecond = props.showSecond,
-            others = _objectWithoutProperties(props, ["showClose", "onChange", "showHour", "showMinute", "showSecond"]);
+            tabIndex = props.tabIndex,
+            others = _objectWithoutProperties(props, ["showClose", "onChange", "showHour", "showMinute", "showSecond", "tabIndex"]);
 
         var _state = this.state,
             value = _state.value,
@@ -210,7 +211,8 @@ var RangePicker = function (_Component) {
                             disabled: props.disabled,
                             onFocus: function onFocus(v, e) {
                                 _this2.outInputFocus(e);
-                            }
+                            },
+                            tabIndex: tabIndex
                         }),
                         showClose && !_this2.valueIsEmpty(value) && _this2.state.showClose && !props.disabled ? _react2["default"].createElement(
                             _beeInputGroup2["default"].Button,

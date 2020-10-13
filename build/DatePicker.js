@@ -132,7 +132,8 @@ var DatePicker = function (_Component) {
         showSecond = props.showSecond,
         autoTriggerChange = props.autoTriggerChange,
         inputShowValue = props.inputShowValue,
-        others = _objectWithoutProperties(props, ["showClose", "defaultPanelShown", "onBlur", "showHour", "showMinute", "showSecond", "autoTriggerChange", "inputShowValue"]);
+        tabIndex = props.tabIndex,
+        others = _objectWithoutProperties(props, ["showClose", "defaultPanelShown", "onBlur", "showHour", "showMinute", "showSecond", "autoTriggerChange", "inputShowValue", "tabIndex"]);
 
     var value = state.value;
     var pickerChangeHandler = {};
@@ -206,6 +207,7 @@ var DatePicker = function (_Component) {
               onMouseLeave: _this2.onMouseLeave
             },
             _react2["default"].createElement(_beeFormControl2["default"], _extends({
+              tabIndex: tabIndex,
               ref: function ref(_ref) {
                 return _this2.outInput = _ref;
               },
@@ -447,7 +449,7 @@ var _initialiseProps = function _initialiseProps() {
       });
       _this3.fireChange('', '');
     } else if (e.keyCode == _tinperBeeCore.KeyCode.ESC) {
-      console.debug('==========================[bee-datepicker] [DatePicker] e.keyCode == KeyCode.ESC');
+      console.debug('c%==========================[bee-datepicker] [DatePicker] [outInputKeydown()] e.keyCode == KeyCode.ESC', 'color:blue');
       _this3.setState({
         open: false
       });
@@ -468,13 +470,13 @@ var _initialiseProps = function _initialiseProps() {
         _this3.fireChange(null, value);
       }
     } else {
-      console.debug('==========================[bee-datepicker] [DatePicker] e.keyCode == ' + e.keyCode);
+      console.debug('==========================[bee-datepicker] [DatePicker] [outInputKeydown()] e.keyCode == ' + e.keyCode);
     }
     if (_this3.props.outInputKeydown) {
-      console.debug('======================[bee-datepicker] [DatePicker] exist this.props.outInputKeydown and the props is ,' + _this3.props);
+      console.debug('======================[bee-datepicker] [DatePicker] [outInputKeydown()] exist this.props.outInputKeydown and the props is ,' + _this3.props);
       _this3.props.outInputKeydown(e);
     } else {
-      console.debug('======================[bee-datepicker] [DatePicker] don\'t exist this.props.outInputKeydown and the props is ,' + _this3.props);
+      console.debug('======================[bee-datepicker] [DatePicker] [outInputKeydown()] don\'t exist this.props.outInputKeydown and the props is ,' + _this3.props);
     }
   };
 
@@ -517,15 +519,15 @@ var _initialiseProps = function _initialiseProps() {
   };
 
   this.onDateHover = function () {
-    var format = _this3.props.format;
+    var _props2 = _this3.props,
+        format = _props2.format,
+        inputShowValue = _props2.inputShowValue;
     var value = _this3.state.value,
         newValue = value && _this3.getValue(value);
 
-
     var inputValue = _this3.outInput.state.value;
     inputValue = format ? inputValue : inputValue && _this3.getValue((0, _moment2["default"])(inputValue));
-
-    if (newValue && inputValue !== newValue) {
+    if (newValue && !inputShowValue && inputValue !== newValue) {
       _this3.fireChange(value, newValue || '');
     }
   };
