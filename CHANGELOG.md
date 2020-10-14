@@ -1,3 +1,12 @@
+## [2.3.40](https://github.com/tinper-bee/bee-datepicker/compare/v2.3.39...v2.3.40) (2020-10-14)
+
+
+### Bug Fixes
+
+* rangePicker增加inputShowValue用作自定义显示字符串 ([f348b7a](https://github.com/tinper-bee/bee-datepicker/commit/f348b7ae11cdf5cf88c19cae88fcbc9c53080a1b))
+
+
+
 ## [2.3.39](https://github.com/tinper-bee/bee-datepicker/compare/v2.3.38...v2.3.39) (2020-09-27)
 
 
