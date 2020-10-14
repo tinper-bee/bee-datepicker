@@ -39986,7 +39986,7 @@
 	      });
 	      _this3.fireChange('', '');
 	    } else if (e.keyCode == _tinperBeeCore.KeyCode.ESC) {
-	      console.debug('==========================[bee-datepicker] [DatePicker] e.keyCode == KeyCode.ESC');
+	      console.debug('c%==========================[bee-datepicker] [DatePicker] [outInputKeydown()] e.keyCode == KeyCode.ESC', 'color:blue');
 	      _this3.setState({
 	        open: false
 	      });
@@ -40007,13 +40007,13 @@
 	        _this3.fireChange(null, value);
 	      }
 	    } else {
-	      console.debug('==========================[bee-datepicker] [DatePicker] e.keyCode == ' + e.keyCode);
+	      console.debug('==========================[bee-datepicker] [DatePicker] [outInputKeydown()] e.keyCode == ' + e.keyCode);
 	    }
 	    if (_this3.props.outInputKeydown) {
-	      console.debug('======================[bee-datepicker] [DatePicker] exist this.props.outInputKeydown and the props is ,' + _this3.props);
+	      console.debug('======================[bee-datepicker] [DatePicker] [outInputKeydown()] exist this.props.outInputKeydown and the props is ,' + _this3.props);
 	      _this3.props.outInputKeydown(e);
 	    } else {
-	      console.debug('======================[bee-datepicker] [DatePicker] don\'t exist this.props.outInputKeydown and the props is ,' + _this3.props);
+	      console.debug('======================[bee-datepicker] [DatePicker] [outInputKeydown()] don\'t exist this.props.outInputKeydown and the props is ,' + _this3.props);
 	    }
 	  };
 	
@@ -71342,7 +71342,7 @@
 	                        },
 	                        _react2["default"].createElement(_beeFormControl2["default"], {
 	                            placeholder: _this2.props.placeholder ? _this2.props.placeholder : 'start ~ end',
-	                            value: isValidRange(value) && (0, _util.formatDate)(value[0], formatStr) + " ~ " + (0, _util.formatDate)(value[1], formatStr) || '',
+	                            value: isValidRange(value) && (_this2.props.inputShowValue && _this2.props.inputShowValue[0] && _this2.props.inputShowValue[1] ? _this2.props.inputShowValue[0] + " ~ " + _this2.props.inputShowValue[1] : (0, _util.formatDate)(value[0], formatStr) + " ~ " + (0, _util.formatDate)(value[1], formatStr)) || '',
 	                            disabled: props.disabled,
 	                            onFocus: function onFocus(v, e) {
 	                                _this2.outInputFocus(e);

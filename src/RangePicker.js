@@ -333,7 +333,7 @@ class RangePicker extends Component {
                     >
                         <FormControl
                             placeholder={this.props.placeholder?this.props.placeholder:'start ~ end'}
-                            value={isValidRange(value) && `${formatDate(value[0],formatStr)} ~ ${formatDate(value[1],formatStr)}` || ''}
+                            value={isValidRange(value) && (this.props.inputShowValue&&this.props.inputShowValue[0]&&this.props.inputShowValue[1]?`${this.props.inputShowValue[0]} ~ ${this.props.inputShowValue[1]}`:`${formatDate(value[0],formatStr)} ~ ${formatDate(value[1],formatStr)}`) || ''}
                             disabled={props.disabled}
                             onFocus={(v,e)=>{this.outInputFocus(e)}}
                             tabIndex={tabIndex}
