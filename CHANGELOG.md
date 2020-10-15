@@ -1,3 +1,12 @@
+## [2.3.43](https://github.com/tinper-bee/bee-datepicker/compare/v2.3.42...v2.3.43) (2020-10-15)
+
+
+### Bug Fixes
+
+* 添加依赖 ([59a554b](https://github.com/tinper-bee/bee-datepicker/commit/59a554b5e75690b24af2d3adea9a44ade778ddd5))
+
+
+
 ## [2.3.40](https://github.com/tinper-bee/bee-datepicker/compare/v2.3.39...v2.3.40) (2020-10-14)
 
 
