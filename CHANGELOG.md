@@ -1,3 +1,13 @@
+## [2.3.44](https://github.com/tinper-bee/bee-datepicker/compare/v2.3.43...v2.3.44) (2020-10-22)
+
+
+### Bug Fixes
+
+* 修复WeekPicker选择跨年周显示时间有误、日期清空面板变成英文的问题 ([c47b3af](https://github.com/tinper-bee/bee-datepicker/commit/c47b3afe102ace95a3b445a7e98af340b59773e5))
+* 修复WeekPicker选择跨年周显示时间有误、日期清空面板变成英文的问题 ([2dee17e](https://github.com/tinper-bee/bee-datepicker/commit/2dee17e8440ae4ddfb107013fb3035c4e608a2f7))
+
+
+
 ## [2.3.43](https://github.com/tinper-bee/bee-datepicker/compare/v2.3.42...v2.3.43) (2020-10-15)
 
 
