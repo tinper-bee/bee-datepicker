@@ -1,3 +1,12 @@
+## [2.3.45](https://github.com/tinper-bee/bee-datepicker/compare/v2.3.44...v2.3.45) (2020-10-22)
+
+
+### Bug Fixes
+
+* 修复配合表单使用的日期框和年月框输入中文后显示Invalid date ([9db0164](https://github.com/tinper-bee/bee-datepicker/commit/9db0164a8751526d0c7b6f59c978c43806d7925c))
+
+
+
 ## [2.3.44](https://github.com/tinper-bee/bee-datepicker/compare/v2.3.43...v2.3.44) (2020-10-22)
 
 
