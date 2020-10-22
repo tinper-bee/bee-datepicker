@@ -36,8 +36,8 @@ class DatePicker extends Component {
     let value = props.value || props.defaultValue;
     if(value){
       if(typeof value == 'string'){
-        if(moment(value).isValid()){
-          value = moment(value);
+        if(moment(value, this.props.format).isValid()){
+          value = moment(value, this.props.format);
         }else{
           console.error('value is not in the correct format');
           value = ''
