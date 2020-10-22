@@ -17,7 +17,7 @@ import "moment/locale/zh-cn";
 import "moment/locale/en-gb";
 import omit from 'omit.js';
 
-const cn = typeof window !== 'undefined' ? location.search.indexOf("cn") !== -1 : true;
+const cn = typeof window !== 'undefined' ? location.search.indexOf("cn") === -1 : true;
 
 const now = moment();
 if (cn) {
@@ -102,10 +102,20 @@ class WeekPicker extends Component {
 
   dateRender = current => {
     const selectedValue = this.state.value;
-    if (
-      selectedValue &&
+
+    let monday = moment(selectedValue).isoWeekday(1);//周一
+    let sunday = moment(selectedValue).isoWeekday(7);//周日
+    const startYear = monday.format("YYYY");
+    const endYear = sunday.format("YYYY");
+
+    let sundayStr = sunday.format("DD");
+    if ((selectedValue &&
       current.year() === selectedValue.year() &&
-      current.week() === selectedValue.week()
+      current.week() === selectedValue.week())
+        || (startYear !== endYear
+                 && ((parseInt(sundayStr) <= 3 && current.week() == monday.week() && sunday.day() < monday.day())
+                 ||(parseInt(sundayStr) > 3 && current.week() == sunday.week() && sunday.day()<monday.day())))
+    //  区分跨年的情况 如果周日小于等于3 就是前一年几十周
     ) {
       return (
         <div className="rc-calendar-selected-day">
@@ -196,6 +206,31 @@ class WeekPicker extends Component {
     this.props.onChange && this.props.onChange('', '');
   }
 
+  // 跨年周显示的转换
+  getShowValue = () => {
+    let {value} = this.state;
+
+    let monday = moment(value).isoWeekday(1);//周一
+    let sunday = moment(value).isoWeekday(7);//周日
+
+    const startYear = monday.format("YYYY");
+    const endYear = sunday.format("YYYY");
+
+    let showValue;
+    if (startYear !== endYear) { // 是跨年周
+      let sundayStr = sunday.format("DD");
+      if (parseInt(sundayStr) <= 3) {
+        // 周一出现在周五之后，取周一的 年-周
+        showValue = monday;
+      } else {
+        showValue = sunday
+      }
+    }else {
+      showValue = value
+    }
+    return showValue;
+  }
+
   render() {
     const state = this.state;
     const props = this.props;
@@ -219,6 +254,7 @@ class WeekPicker extends Component {
       />
     );
     let classes = classnames(props.className, "datepicker-container");
+    let showValue = this.getShowValue();
     return (
       <div className={classes}
       {...omit(others, [
@@ -236,7 +272,7 @@ class WeekPicker extends Component {
           onOpenChange={this.onOpenChange}
           open={this.state.open}
           calendar={calendar}
-          value={state.value}
+          value={showValue}
         >
           {({ }) => {
             return (
@@ -250,7 +286,7 @@ class WeekPicker extends Component {
                     readOnly
                     tabIndex="-1"
                     className={this.props.className}
-                    value={(value && value.format(format)) || ""}
+                    value={(showValue && showValue.format(format)) || ""}
                   />
                     {
                         showClose&&this.state.value&&this.state.showClose&&(!props.disabled)?(
