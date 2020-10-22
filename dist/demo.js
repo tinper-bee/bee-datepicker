@@ -72842,7 +72842,6 @@
 	        others = _objectWithoutProperties(props, ["showClose"]);
 	
 	    var value = state.value;
-	
 	    var calendar = _react2["default"].createElement(_rcCalendar2["default"], {
 	      className: "week-calendar",
 	      showWeekNumber: true,
@@ -72873,7 +72872,6 @@
 	          open: this.state.open,
 	          calendar: calendar,
 	          value: showValue
-	          // value={value}
 	        }),
 	        function (_ref) {
 	          _objectDestructuringEmpty(_ref);
@@ -72891,7 +72889,6 @@
 	              tabIndex: "-1",
 	              className: _this2.props.className,
 	              value: showValue && showValue.format(format) || ""
-	              // value = {value && value.format(format) || ""}
 	            }),
 	            showClose && _this2.state.value && _this2.state.showClose && !props.disabled ? _react2["default"].createElement(
 	              _beeInputGroup2["default"].Button,
