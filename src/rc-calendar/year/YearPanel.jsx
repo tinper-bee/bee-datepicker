@@ -105,17 +105,17 @@ class YearPanel extends React.Component {
         const classNameMap = {
           [`${prefixCls}-cell`]: 1,
           [`${prefixCls}-selected-cell`]: yearData.year === currentYear,
-          [`${prefixCls}-last-decade-cell`]: yearData.year < startYear,
-          [`${prefixCls}-next-decade-cell`]: yearData.year > endYear,
+          // [`${prefixCls}-last-decade-cell`]: yearData.year < startYear,
+          // [`${prefixCls}-next-decade-cell`]: yearData.year > endYear,
         };
         let clickHandler;
-        if (yearData.year < startYear) {
-          clickHandler = this.previousDecade;
-        } else if (yearData.year > endYear) {
-          clickHandler = this.nextDecade;
-        } else {
-          clickHandler = chooseYear.bind(this, yearData.year);
-        }
+        // if (yearData.year < startYear) {
+        //   clickHandler = this.previousDecade;
+        // } else if (yearData.year > endYear) {
+        //   clickHandler = this.nextDecade;
+        // } else {
+        clickHandler = chooseYear.bind(this, yearData.year);
+        // }
         return (
           <td
             role="gridcell"
