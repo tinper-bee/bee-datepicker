@@ -1,3 +1,12 @@
+## [2.3.46](https://github.com/tinper-bee/bee-datepicker/compare/v2.3.45...v2.3.46) (2020-11-04)
+
+
+### Bug Fixes
+
+* 取消年面板左上和右下翻页 ([da244f3](https://github.com/tinper-bee/bee-datepicker/commit/da244f3d1d7f30e02b41d68fce8897748020aca1))
+
+
+
 ## [2.3.45](https://github.com/tinper-bee/bee-datepicker/compare/v2.3.44...v2.3.45) (2020-10-22)
 
 
