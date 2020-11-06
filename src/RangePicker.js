@@ -21,11 +21,11 @@ import "moment/locale/zh-cn";
 //     if (!value) {
 //         return '';
 //       }
-    
+
 //       if (Array.isArray(format)) {
 //         format = format[0];
 //       }
-    
+
 //       return value.formatDate(format);
 // }
 
@@ -47,7 +47,7 @@ if (cn) {
   now.locale("en-gb").utcOffset(0);
 }
 
-  
+
 class RangePicker extends Component {
     constructor(props, context) {
         super(props, context);
@@ -90,7 +90,7 @@ class RangePicker extends Component {
         }
         if ("open" in nextProps) {
             this.setState({
-              open: nextProps.open 
+              open: nextProps.open
             });
         }
         this.setState({
@@ -158,7 +158,7 @@ class RangePicker extends Component {
         }else{
             return true
         }
-        
+
     }
     clear = (e) => {
         e&&e.stopPropagation&&e.stopPropagation();
@@ -178,7 +178,7 @@ class RangePicker extends Component {
         if (open === false) {
             this.clearHoverValue();
         }
-        
+
         this.setState({
           open
         },function(){
@@ -187,7 +187,7 @@ class RangePicker extends Component {
               self.inputFocus()
             }, 0);
           }
-        }); 
+        });
         props.onOpenChange && props.onOpenChange(open);
         if(open){
             setTimeout(()=>{
@@ -256,7 +256,10 @@ class RangePicker extends Component {
         }
         this.props.onEndInputBlur && this.props.onEndInputBlur(e, endValue, `["${startValue}" , "${endValue}"]`);
     }
-
+    //阻止组件内部事件冒泡到组件外部容器
+    stopPropagation = (e) => {
+        e.stopPropagation();
+    }
     onOk = (value) => {
         this.props.onOk && this.props.onOk(value);
     }
@@ -266,7 +269,7 @@ class RangePicker extends Component {
     const {value,open} = this.state;
     let formatStr = props.format || 'YYYY-MM-DD';
     const timePickerElement = (
-        <TimePickerPanel  
+        <TimePickerPanel
         showHour={showHour} showMinute={showMinute} showSecond={showSecond}
         defaultValue={moment(moment().format("HH:mm:ss"), "HH:mm:ss")} />
       );
@@ -278,7 +281,7 @@ class RangePicker extends Component {
             format={formatStr}
             dateInputPlaceholder={props.dateInputPlaceholder||['start', 'end']}
             locale={props.locale || zhCN }
-            onChange={this.handleCalendarChange}
+            onChange={this.onChange}
             disabledDate={props.disabledDate}
             showClear={ props.showClear }
             showOk={props.showOk}
@@ -295,6 +298,7 @@ class RangePicker extends Component {
     );
       return (
           <div
+              onClick={this.stopPropagation} onMouseOver={this.stopPropagation}
           {...omit(others, [
             'closeIcon',
             'renderIcon',
@@ -322,7 +326,6 @@ class RangePicker extends Component {
               dropdownClassName={props.dropdownClassName}
               onOpenChange={this.onOpenChange}
               open={open}
-              onChange={this.onChange}
           >
               {
                   ({}) => {
@@ -340,7 +343,7 @@ class RangePicker extends Component {
                         />
                         {
                             showClose&&(!this.valueIsEmpty(value))&&this.state.showClose&&(!props.disabled)?(
-                            <InputGroup.Button shape="border" 
+                            <InputGroup.Button shape="border"
                                 onClick={this.clear}>
                                 { props.closeIcon() }
                             </InputGroup.Button>
