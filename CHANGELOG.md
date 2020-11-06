@@ -1,3 +1,12 @@
+## [2.3.47](https://github.com/tinper-bee/bee-datepicker/compare/v2.3.46...v2.3.47) (2020-11-06)
+
+
+### Bug Fixes
+
+* 1、修复rangePicker输入后一个输入框前一个会被清空的问题。2、选中日期颜色设置为红色 ([47e13c1](https://github.com/tinper-bee/bee-datepicker/commit/47e13c12d8fe9b06dd53c8ddb3735fa609c9e449))
+
+
+
 ## [2.3.46](https://github.com/tinper-bee/bee-datepicker/compare/v2.3.45...v2.3.46) (2020-11-04)
 
 
