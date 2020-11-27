@@ -1,3 +1,12 @@
+## [2.3.48](https://github.com/tinper-bee/bee-datepicker/compare/v2.3.47...v2.3.48) (2020-11-27)
+
+
+### Bug Fixes
+
+* 修复输入由非法修改为合法值时，面板显示NaN的问题 ([60cd690](https://github.com/tinper-bee/bee-datepicker/commit/60cd6902e694849c8334c6119f865b2562f457d7))
+
+
+
 ## [2.3.47](https://github.com/tinper-bee/bee-datepicker/compare/v2.3.46...v2.3.47) (2020-11-06)
 
 
