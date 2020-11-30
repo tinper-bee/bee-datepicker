@@ -113,7 +113,11 @@ class DateInput extends React.Component {
         // invalid: false,
         str,
       });
-      onChange(value);
+      if (!value.isValid()){ // value不合法，把此次的新输入的合法值传到onChange中
+        onChange(parsed);
+      }else {
+        onChange(value);
+      }
     }
   }
 
