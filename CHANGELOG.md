@@ -1,3 +1,12 @@
+## [2.3.49](https://github.com/tinper-bee/bee-datepicker/compare/v2.3.48...v2.3.49) (2020-11-30)
+
+
+### Bug Fixes
+
+* 修复输入由非法修改为合法值时，onChange值仍是上次非法值的问题 ([497c64a](https://github.com/tinper-bee/bee-datepicker/commit/497c64a45bcbdcf7c56103c683f4969c62f32f9d))
+
+
+
 ## [2.3.48](https://github.com/tinper-bee/bee-datepicker/compare/v2.3.47...v2.3.48) (2020-11-27)
 
 
