@@ -93,7 +93,7 @@ class Picker extends React.Component {
     this.props.onKeyDown&&this.props.onKeyDown(event);
   }
 
-  onCalendarSelect = (value, cause = {}) => {
+  onCalendarSelect = (value, cause = {}, isRangePicker) => {
     const props = this.props;
     let isDisabled = props.disabledDate && props.disabledDate(value);
     if (isDisabled) return;
@@ -109,7 +109,9 @@ class Picker extends React.Component {
       cause.source === 'todayButton') {
       this.close(this.focus);
     }
-    props.onChange(value);
+    if (!isRangePicker){
+      props.onChange(value);
+    }
   }
 
   onKeyDown = (event) => { // formcontrol onKeyDown

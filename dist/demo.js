@@ -65333,6 +65333,7 @@
 	
 	  this.onCalendarSelect = function (value) {
 	    var cause = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+	    var isRangePicker = arguments[2];
 	
 	    var props = _this2.props;
 	    var isDisabled = props.disabledDate && props.disabledDate(value);
@@ -65345,7 +65346,9 @@
 	    if (cause.source === 'keyboard' || cause.source === 'dateInputSelect' || !props.calendar.props.timePicker && cause.source !== 'dateInput' || cause.source === 'todayButton') {
 	      _this2.close(_this2.focus);
 	    }
-	    props.onChange(value);
+	    if (!isRangePicker) {
+	      props.onChange(value);
+	    }
 	  };
 	
 	  this.onKeyDown = function (event) {
@@ -72942,7 +72945,8 @@
 	        firstSelectedValue: null
 	      });
 	      _this2.fireHoverValueChange([]);
-	      _this2.props.onSelect(selectedValue, cause);
+	      // 第三个参数标识是否是从rangePicker传过去的
+	      _this2.props.onSelect(selectedValue, cause, true);
 	    }
 	  };
 	

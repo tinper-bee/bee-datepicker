@@ -564,7 +564,8 @@ class RangeCalendar extends React.Component {
         firstSelectedValue: null,
       });
       this.fireHoverValueChange([]);
-      this.props.onSelect(selectedValue, cause);
+      // 第三个参数标识是否是从rangePicker传过去的
+      this.props.onSelect(selectedValue, cause, true);
     }
   }
 
