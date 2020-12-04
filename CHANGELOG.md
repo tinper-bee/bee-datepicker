@@ -1,3 +1,12 @@
+## [2.3.50](https://github.com/tinper-bee/bee-datepicker/compare/v2.3.49...v2.3.50) (2020-12-04)
+
+
+### Bug Fixes
+
+* 修复rangePicker触发两次onChange事件的问题 ([5bcc789](https://github.com/tinper-bee/bee-datepicker/commit/5bcc789ea0804efb747f95b77b91e0efb0ac66bc))
+
+
+
 ## [2.3.49](https://github.com/tinper-bee/bee-datepicker/compare/v2.3.48...v2.3.49) (2020-11-30)
 
 
