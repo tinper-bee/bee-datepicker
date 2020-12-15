@@ -1,3 +1,12 @@
+## [2.3.51](https://github.com/tinper-bee/bee-datepicker/compare/v2.3.50...v2.3.51) (2020-12-15)
+
+
+### Bug Fixes
+
+* 修复monthPicker在表单中使用时输入值报invalid date的问题。 ([8c223e4](https://github.com/tinper-bee/bee-datepicker/commit/8c223e4e49f4a0f97363b1b67bd7530653c2fb7f))
+
+
+
 ## [2.3.50](https://github.com/tinper-bee/bee-datepicker/compare/v2.3.49...v2.3.50) (2020-12-04)
 
 
