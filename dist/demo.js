@@ -71204,7 +71204,17 @@
 	        function (_ref) {
 	          var value = _ref.value;
 	
-	          if (value && value.format) value = (0, _util.formatDate)(value, props.format);
+	          var propsValStr = void 0;
+	          if (value && value.format && value.isValid()) {
+	            value = typeof value != 'string' ? (0, _util.formatDate)(value, props.format) : value;
+	            propsValStr = typeof props.value != 'string' ? (0, _util.formatDate)(props.value, props.format) : props.value;
+	            // 为了避免在输入框内输入月份的过程中显示invalid date
+	            if (value != propsValStr && propsValStr.length != 0) {
+	              value = props.value;
+	            }
+	          } else {
+	            value = props.value;
+	          }
 	          return _react2["default"].createElement(
 	            _beeInputGroup2["default"],
 	            { simple: true, className: "datepicker-input-group",
@@ -71530,7 +71540,7 @@
 	    var mode = state.mode,
 	        value = state.value;
 	
-	    value = value ? value : (0, _moment2['default'])();
+	    value = value.isValid() ? value : (0, _moment2['default'])();
 	    var prefixCls = props.prefixCls,
 	        locale = props.locale,
 	        format = props.format,

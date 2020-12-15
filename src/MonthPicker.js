@@ -199,7 +199,17 @@ class MonthPicker extends Component {
           renderError={props.renderError}
         >
           {({ value }) => {
-            if(value&&value.format)value=formatDate(value,props.format);
+            let propsValStr;
+            if(value&&value.format&&value.isValid()){
+              value = (typeof value != 'string') ? formatDate(value,props.format) : value;
+              propsValStr = (typeof props.value != 'string') ? formatDate(props.value,props.format) : props.value;
+              // 为了避免在输入框内输入月份的过程中显示invalid date
+              if (value != propsValStr && propsValStr.length != 0){
+                value = props.value;
+              }
+            }else {
+              value = props.value;
+            }
             return (
                 <InputGroup simple className="datepicker-input-group"
                   onMouseEnter={this.onMouseEnter}
