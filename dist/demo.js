@@ -73732,13 +73732,13 @@
 	        }, props, { focus: function focus() {},
 	            value: this.state.value,
 	            onSelect: this.onSelect,
-	            showDateInput: true
+	            showDateInput: props.showDateInput
 	        }));
 	        var classes = (0, _classnames2["default"])(props.className, "datepicker-container");
 	        return _react2["default"].createElement(
 	            "div",
 	            _extends({ className: classes
-	            }, (0, _omit2["default"])(others, ['closeIcon', 'renderIcon', 'disabled', 'format', 'locale', 'placeholder'])),
+	            }, (0, _omit2["default"])(others, ['closeIcon', 'renderIcon', 'disabled', 'format', 'locale', 'placeholder', 'showDateInput'])),
 	            _react2["default"].createElement(
 	                _Picker2["default"],
 	                _extends({
@@ -73907,6 +73907,7 @@
 	    showClose: true,
 	    locale: _zh_CN2["default"],
 	    format: 'YYYY',
+	    showDateInput: true,
 	    validatorFunc: function validatorFunc() {
 	        return true;
 	    }

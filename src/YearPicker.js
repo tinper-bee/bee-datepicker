@@ -156,7 +156,7 @@ class YearPicker extends Component {
         {...props} focus={()=>{}} 
         value={this.state.value}
         onSelect={this.onSelect}
-        showDateInput={true}
+        showDateInput={props.showDateInput}
         />;
         let classes = classnames(props.className, "datepicker-container");
         return (
@@ -167,7 +167,8 @@ class YearPicker extends Component {
                 'disabled',
                 'format',
                 'locale',
-                'placeholder'
+                'placeholder',
+                'showDateInput'
             ])}
             >
                 <Picker
@@ -221,6 +222,7 @@ YearPicker.defaultProps = {
     showClose:true,
     locale:zhCN,
     format:'YYYY',
+    showDateInput:true,
     validatorFunc:()=>{
         return true;
       }
