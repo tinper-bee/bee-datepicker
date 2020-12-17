@@ -1,3 +1,12 @@
+## [2.3.52](https://github.com/tinper-bee/bee-datepicker/compare/v2.3.51...v2.3.52) (2020-12-17)
+
+
+### Bug Fixes
+
+* 修复yearPicker添加showDateInput无效的问题 ([00076ff](https://github.com/tinper-bee/bee-datepicker/commit/00076ff567005b54331c3a3016f160e6c9c11404))
+
+
+
 ## [2.3.51](https://github.com/tinper-bee/bee-datepicker/compare/v2.3.50...v2.3.51) (2020-12-15)
 
 
