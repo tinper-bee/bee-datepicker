@@ -99,7 +99,7 @@ class DatePicker extends Component {
         if(e.keyCode == KeyCode.DELETE){
           input.value = '';
           this.fireChange('','');
-        } else if (e.keyCode == KeyCode.ESC || e.keyCode == KeyCode.TAB) {
+        } else if (e.keyCode == KeyCode.ESC || (e.keyCode == KeyCode.TAB && !inputTabKeyOpen)) {
           if (e.keyCode == KeyCode.TAB) {
             console.debug('[bee-datepicker] [DatePicker] e.keyCode == KeyCode.TAB')
           }
@@ -472,6 +472,7 @@ DatePicker.defaultProps = {
   showHour:true,
   showMinute:true,
   autoTriggerChange:true,
+  inputTabKeyOpen: false,
   validatorFunc:()=>{
     return true;
   }
