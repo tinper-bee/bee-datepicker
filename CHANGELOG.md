@@ -1,3 +1,12 @@
+## [2.3.54](https://github.com/tinper-bee/bee-datepicker/compare/v2.3.53...v2.3.54) (2020-12-22)
+
+
+### Bug Fixes
+
+* props 属性丢失 ([df17595](https://github.com/tinper-bee/bee-datepicker/commit/df175952d0abdffc5689b59426f6faa3bc64acfd))
+
+
+
 ## [2.3.53](https://github.com/tinper-bee/bee-datepicker/compare/v2.3.52...v2.3.53) (2020-12-22)
 
 
