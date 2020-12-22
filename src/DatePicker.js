@@ -87,7 +87,7 @@ class DatePicker extends Component {
   };
 
   inputFocus=()=>{
-    const { format,validatorFunc, disabledDate } = this.props;
+    const { format,validatorFunc, disabledDate, inputTabKeyOpen } = this.props;
     let input = document.querySelector('.rc-calendar-input');
     if(input){
       if(input.value){
