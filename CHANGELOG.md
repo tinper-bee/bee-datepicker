@@ -1,3 +1,12 @@
+## [2.3.53](https://github.com/tinper-bee/bee-datepicker/compare/v2.3.52...v2.3.53) (2020-12-22)
+
+
+### Bug Fixes
+
+* #JCJS-6410 输入框快捷键增加inputTabKeyOpen属性,当值为true则不关闭面板 ([22523db](https://github.com/tinper-bee/bee-datepicker/commit/22523dbc8d2a9e736d49c13d3b92e854005ee82b)), closes [#JCJS-6410](https://github.com/tinper-bee/bee-datepicker/issues/JCJS-6410)
+
+
+
 ## [2.3.52](https://github.com/tinper-bee/bee-datepicker/compare/v2.3.51...v2.3.52) (2020-12-17)
 
 
