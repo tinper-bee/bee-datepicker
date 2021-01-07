@@ -1,3 +1,12 @@
+## [2.3.55](https://github.com/tinper-bee/bee-datepicker/compare/v2.3.54...v2.3.55) (2021-01-07)
+
+
+### Bug Fixes
+
+* 去掉debug信息 ([4267e6b](https://github.com/tinper-bee/bee-datepicker/commit/4267e6bb5fbb2f553576675bd57222d9a2e385d1))
+
+
+
 ## [2.3.54](https://github.com/tinper-bee/bee-datepicker/compare/v2.3.53...v2.3.54) (2020-12-22)
 
 
