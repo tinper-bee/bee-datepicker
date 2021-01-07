@@ -116,7 +116,6 @@ class Picker extends React.Component {
 
   onKeyDown = (event) => { // formcontrol onKeyDown
     const { enterKeyDown } = this.props;
-    console.debug('------------------ [bee-datepicker] [Picker] [event.keyCode ===' + event.keyCode + '] ');
     if (event.keyCode === KeyCode.DOWN || (enterKeyDown && event.keyCode === KeyCode.ENTER) ) {
       if(!this.state.open) {
         this.open();
@@ -128,16 +127,12 @@ class Picker extends React.Component {
       event.preventDefault();
       event.stopPropagation();
       // delete event.keyCode;
-      console.debug('------------------ [bee-datepicker] [Picker] [event.keyCode === ' + event.keyCode + '], event.stopPropagation(); event.nativeEvent.stopImmediatePropagation(); ');
     } else if (event.keyCode === KeyCode.TAB) {      
       if (this.state.open) {
-        console.debug('------------------ [bee-datepicker] [Picker] [event.keyCode === KeyCode.TAB], this.close(); event.stopPropagation()');
         this.close();        
         this.focus();
         event.preventDefault();
         event.stopPropagation();   
-      } else {
-        console.debug('------------------ [bee-datepicker] [Picker] [event.keyCode === KeyCode.TAB], this.state.open is ' + this.state.open + ',nothing to do');
       }
     } else {
       event.target._dataTransfer = {
@@ -146,7 +141,6 @@ class Picker extends React.Component {
         _target: event.target,
         ownerIsTarget: true
       }
-      console.debug('------------------NOTHING TO DO [bee-datepicker] [Picker] nothing to do and event.keyCode == ' + event.keyCode);
     }
     this.props.onKeyDown&&this.props.onKeyDown(event);
   }
