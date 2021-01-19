@@ -67,7 +67,10 @@ class YearPanel extends React.Component {
     return years;
   }
   yearSelect=(value)=>{
-    let { onSelect,format } = this.props;
+    const props = this.props;
+    let { onSelect,format,disabledYear } = props;
+    let isDisabled = disabledYear && disabledYear(value);
+    if (isDisabled) return;
     onSelect&&onSelect(value,value?value.format(format):'');
   }
   showDecadePanel() {
@@ -102,9 +105,11 @@ class YearPanel extends React.Component {
 
     const yeasEls = years.map((row, index) => {
       const tds = row.map(yearData => {
+        const disabled = props.disabledYear && props.disabledYear(moment(yearData.title));
         const classNameMap = {
           [`${prefixCls}-cell`]: 1,
           [`${prefixCls}-selected-cell`]: yearData.year === currentYear,
+          [`${prefixCls}-disabled-cell`]: disabled,
           // [`${prefixCls}-last-decade-cell`]: yearData.year < startYear,
           // [`${prefixCls}-next-decade-cell`]: yearData.year > endYear,
         };
@@ -121,7 +126,7 @@ class YearPanel extends React.Component {
             role="gridcell"
             title={yearData.title}
             key={yearData.content}
-            onClick={clickHandler}
+            onClick={props.disabledYear && props.disabledYear(moment(yearData.title)) ? undefined : clickHandler}
             className={classnames(classNameMap)}
           >
             <a
@@ -204,6 +209,7 @@ YearPanel.propTypes = {
   rootPrefixCls: PropTypes.string,
   value: PropTypes.object,
   defaultValue: PropTypes.object,
+  disabledYear: PropTypes.bool
 };
 
 YearPanel.defaultProps = {

@@ -136,7 +136,9 @@ class YearPicker extends Component {
     }
 
     onSelect=(value)=>{
-        let { onSelect,format } = this.props;
+        let { onSelect,format,disabledYear } = this.props;
+        let isDisabled = disabledYear && disabledYear(value);
+        if (isDisabled) return;
         this.setState({
             open:false
         });
@@ -168,7 +170,8 @@ class YearPicker extends Component {
                 'format',
                 'locale',
                 'placeholder',
-                'showDateInput'
+                'showDateInput',
+                'disabledYear'
             ])}
             >
                 <Picker

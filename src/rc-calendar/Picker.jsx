@@ -96,7 +96,8 @@ class Picker extends React.Component {
   onCalendarSelect = (value, cause = {}, isRangePicker) => {
     const props = this.props;
     let isDisabled = props.disabledDate && props.disabledDate(value);
-    if (isDisabled) return;
+    let idYearDisabled = props.disabledYear && props.disabledYear(value);
+    if (isDisabled || idYearDisabled) return;
     if (!('value' in props)) {
       this.setState({
         value,

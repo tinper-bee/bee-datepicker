@@ -8,6 +8,7 @@ import React, { Component } from "react";
 import { Row, Col } from "bee-layout";
 import DatePicker from "../../src";
 import moment from "moment";
+import YearPicker from "../../src/YearPicker";
 
 const { MonthPicker, RangePicker } = DatePicker;
 
@@ -22,6 +23,11 @@ function range(start, end) {
 function disabledDate(current) {
   // Can not select days before today and today
   return current && current < moment().endOf('day');
+}
+
+function disabledYear(current) {
+    // Can not select days before year and year
+    return current && current > moment().endOf('year');
 }
 
 function disabledDateTime() {
@@ -60,6 +66,14 @@ class Demo3 extends Component {
               showTime={{ defaultValue: moment('00:00:00', 'HH:mm:ss') }}
             />
         </Row>
+          <Row className='demo3-item'>
+              <YearPicker
+                  placeholder="选择年"
+                  format="YYYY"
+                  disabledYear={disabledYear}
+                  showTime={{ defaultValue: moment().format('YYYY') }}
+              />
+          </Row>
         <Row className='demo3-item'>
             <MonthPicker disabledDate={disabledDate} placeholder="选择月份" />
         </Row>

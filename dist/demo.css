@@ -2013,13 +2013,26 @@
   background: rgb(235, 236, 240);
   cursor: pointer; }
 
-.rc-calendar-year-panel-selected-cell .rc-calendar-year-panel-year {
-  background: rgb(245, 60, 50);
-  color: #fff; }
+.rc-calendar-year-panel-disabled-cell .rc-calendar-year-panel-year {
+  cursor: not-allowed;
+  color: #bcbcbc;
+  background: #f3f3f3;
+  border-radius: 0;
+  width: auto; }
+
+.rc-calendar-year-panel-disabled-cell .rc-calendar-year-panel-selected-cell .rc-calendar-year-panel-year {
+  cursor: not-allowed;
+  color: #bcbcbc;
+  background: #f3f3f3;
+  border-radius: 0;
+  width: auto; }
 
 .rc-calendar-year-panel-selected-cell .rc-calendar-year-panel-year:hover {
-  background: rgb(245, 60, 50);
-  color: #fff; }
+  cursor: not-allowed;
+  color: #bcbcbc;
+  background: #f3f3f3;
+  border-radius: 0;
+  width: auto; }
 
 .rc-calendar-year-panel-last-decade-cell .rc-calendar-year-panel-year,
 .rc-calendar-year-panel-next-decade-cell .rc-calendar-year-panel-year {

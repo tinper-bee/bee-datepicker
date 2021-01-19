@@ -848,13 +848,33 @@ $disabled-border-color: #DFE1E6;
   background: $hover-bg-color-base;
   cursor: pointer;
 }
+.rc-calendar-year-panel-disabled-cell .rc-calendar-year-panel-year {
+  cursor: not-allowed;
+  color: #bcbcbc;
+  background: #f3f3f3;
+  border-radius: 0;
+  width: auto
+}
+//TODO
+.rc-calendar-year-panel-disabled-cell {
+  .rc-calendar-year-panel-selected-cell .rc-calendar-year-panel-year{
+    cursor: not-allowed;
+    color: #bcbcbc;
+    background: #f3f3f3;
+    border-radius: 0;
+    width: auto;
+  }
+}
 .rc-calendar-year-panel-selected-cell .rc-calendar-year-panel-year {
-  background: $brand-primary;
-  color: #fff;
+  //background: $brand-primary;
+  //color: #fff;
 }
 .rc-calendar-year-panel-selected-cell .rc-calendar-year-panel-year:hover {
-  background: $brand-primary;
-  color: #fff;
+  cursor: not-allowed;
+  color: #bcbcbc;
+  background: #f3f3f3;
+  border-radius: 0;
+  width: auto;
 }
 .rc-calendar-year-panel-last-decade-cell .rc-calendar-year-panel-year,
 .rc-calendar-year-panel-next-decade-cell .rc-calendar-year-panel-year {
