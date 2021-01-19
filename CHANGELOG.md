@@ -1,3 +1,12 @@
+# [2.4.0](https://github.com/tinper-bee/bee-datepicker/compare/v2.3.55...v2.4.0) (2021-01-19)
+
+
+### Features
+
+* yearPicker新增diabledYear参数，控制不可选的年份 ([1277340](https://github.com/tinper-bee/bee-datepicker/commit/127734034e679297a3a672dc6feabfd9327d41ff))
+
+
+
 ## [2.3.55](https://github.com/tinper-bee/bee-datepicker/compare/v2.3.54...v2.3.55) (2021-01-07)
 
 
