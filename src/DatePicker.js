@@ -25,6 +25,7 @@ class DatePicker extends Component {
     this.state = {
       type: "month",
       value: this.initValue(props),
+      panelValue: props.panelValue ? moment(props.panelValue) : '',
       open: props.open||false,
       inputValue:this.initValue(props),
       showClose:false
@@ -56,6 +57,11 @@ class DatePicker extends Component {
       this.setState({
         value: this.initValue(nextProps),
         inputValue: (nextProps.value && this.getValue(nextProps.value)) || ''
+      });
+    }
+    if ("panelValue" in nextProps) {
+      this.setState({
+        panelValue: nextProps.panelValue
       });
     }
     if ("open" in nextProps) {
@@ -323,8 +329,6 @@ class DatePicker extends Component {
         onChange: this.handleChange
       };
     }
-
-
     let splitNumber = '3';
     if(!showHour)splitNumber-=1;
     if(!showMinute)splitNumber-=1;
@@ -337,7 +341,6 @@ class DatePicker extends Component {
     } else {
       calendarProps.onChange = noop;
     }
-
     const calendar = (
       <Calendar
         timePicker={props.showTime ? <TimePickerPanel 
@@ -348,6 +351,7 @@ class DatePicker extends Component {
         {...calendarProps}
         onSelect={this.handleSelect}
         onInputBlur={this.onDateInputBlur}
+        panelValue={state.panelValue}
       />
     );
 

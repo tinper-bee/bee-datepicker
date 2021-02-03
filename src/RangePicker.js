@@ -54,7 +54,8 @@ class RangePicker extends Component {
         this.state = {
             hoverValue: [],
             value: this.initValue(props),
-            open: props.open||false
+            open: props.open||false,
+            panelValues: props.panelValues || null
         };
     }
     initValue=(props)=>{
@@ -86,6 +87,11 @@ class RangePicker extends Component {
         if ("value" in nextProps) {
             this.setState({
                 value: this.initValue(nextProps)
+            });
+        }
+        if ("panelValues" in nextProps) {
+            this.setState({
+                panelValues: nextProps.panelValues
             });
         }
         if ("open" in nextProps) {
@@ -294,6 +300,7 @@ class RangePicker extends Component {
             onClear={this.clear}
             onOk={this.onOk}
             validatorFunc={props.validatorFunc}
+            panelValues={this.state.panelValues || null}
         />
     );
       return (

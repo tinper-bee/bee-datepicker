@@ -134,6 +134,7 @@ class RangeCalendar extends React.Component {
       value,
       showTimePicker: false,
       mode: props.mode || ['date', 'date'],
+      panelValues: props.panelValues || null,
     };
   }
 
@@ -381,13 +382,13 @@ class RangeCalendar extends React.Component {
   onStartValueChange = (leftValue) => {
     const value = [...this.state.value];
     value[0] = leftValue;
-    return this.fireValueChange(value);
+    return this.fireValueChange(value, 'left');
   }
 
   onEndValueChange = (rightValue) => {
     const value = [...this.state.value];
     value[1] = rightValue;
-    return this.fireValueChange(value);
+    return this.fireValueChange(value, 'right');
   }
 
   onStartPanelChange = (value, mode) => {
@@ -569,11 +570,13 @@ class RangeCalendar extends React.Component {
     }
   }
 
-  fireValueChange = (value) => {
+  fireValueChange = (value, direction) => {
+    const { panelValues } = this.state
     const props = this.props;
     if (!('value' in props)) {
       this.setState({
         value,
+        panelValues: (direction === 'left' && panelValues) ? [null, panelValues[1]] : (direction === 'right' && panelValues) ? [panelValues[0], null] : null
       });
     }
     props.onValueChange(value);
@@ -626,6 +629,7 @@ class RangeCalendar extends React.Component {
       selectedValue,
       mode,
       showTimePicker,
+      panelValues
     } = state;
     const className = {
       [props.className]: !!props.className,
@@ -674,6 +678,8 @@ class RangeCalendar extends React.Component {
       nextMonthOfStart.month() === endValue.month();
 
     const extraFooter = props.renderFooter();
+    const leftPanelValue = panelValues && panelValues[0] ? { panelValue: moment(panelValues[0]) } : {}
+    const rightPanelValue = panelValues && panelValues[1] ? { panelValue: moment(panelValues[1]) } : {}
     return (
       <div
         ref={this.saveRoot}
@@ -719,6 +725,7 @@ class RangeCalendar extends React.Component {
               clearIcon={clearIcon}
               tabIndex='0'
               onInputBlur={onStartInputBlur}
+              {...leftPanelValue}
             />
             <span className={`${prefixCls}-range-middle`}>{seperator}</span>
             <CalendarPart
@@ -746,6 +753,7 @@ class RangeCalendar extends React.Component {
               tabIndex='0'
               inputTabIndex='-1'
               onInputBlur={onEndInputBlur}
+              {...rightPanelValue}
             />
           </div>
           <div className={cls}>
