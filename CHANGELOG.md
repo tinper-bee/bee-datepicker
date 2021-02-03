@@ -1,3 +1,12 @@
+## [2.4.2](https://github.com/tinper-bee/bee-datepicker/compare/v2.4.1...v2.4.2) (2021-02-03)
+
+
+### Bug Fixes
+
+* 支持同时传panelValue和value ([6d86958](https://github.com/tinper-bee/bee-datepicker/commit/6d869589c13ed35b9ba87f07a8762012f4c694e4))
+
+
+
 ## [2.4.1](https://github.com/tinper-bee/bee-datepicker/compare/v2.4.0...v2.4.1) (2021-02-03)
 
 
