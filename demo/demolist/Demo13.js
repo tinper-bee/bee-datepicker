@@ -16,24 +16,24 @@ const format = "YYYY-MM-DD dddd";
 class Demo13 extends Component {
     state = {
         datePickerPanelValue: '2004-05-09',
-        rangePickerPanelValues: ['2007-09-03', '2008-08-03'],
-        value: ''
+        rangePickerPanelValues: '2014-01-02',
+        dateValue: '2020-02-03',
+        // rangeValue: ['2098-09-02', '2099-08-06']
     }
     onSelect = d => {
         console.log(d);
     }
-    onDateChange = (d, dataString) => {
+    onDateChange = (d) => {
         this.setState({
-            datePickerPanelValue: null // 当DatePicker或RangePicker的值发生变化时，panelValue要清空
+            datePickerPanelValue: null,
+            dateValue: d
         })
-        console.log(dataString);
     };
-    onRangeChange = (d, dataString) => {
+    onRangeChange = (d) => {
         this.setState({
-            value: d,
+            rangeValue: d,
             rangePickerPanelValues: null
         })
-        console.log(dataString);
     };
     render() {
         var self = this;
@@ -46,7 +46,8 @@ class Demo13 extends Component {
                             format={format}
                             onSelect={this.onSelect}
                             onChange={this.onDateChange}
-                            panelValue={this.state.datePickerPanelValue} // 不可以传初始值或者默认值
+                            panelValue={this.state.datePickerPanelValue}
+                            value={this.state.dateValue}
                         />
                     </Col>
                     <Col md={6} style={{'marginBottom':'10px'}}>
@@ -60,6 +61,7 @@ class Demo13 extends Component {
                             onStartInputBlur={this.onStartInputBlur}
                             onEndInputBlur={this.onEndInputBlur}
                             panelValues={this.state.rangePickerPanelValues}
+                            value={this.state.rangeValue}
                         />
                     </Col>
                 </Row>

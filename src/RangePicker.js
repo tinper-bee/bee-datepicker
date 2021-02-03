@@ -55,8 +55,24 @@ class RangePicker extends Component {
             hoverValue: [],
             value: this.initValue(props),
             open: props.open||false,
-            panelValues: props.panelValues || null
+            panelValues: (props.value || props.defaultValue) ? null : this.modifyPanelValues(props.panelValues)
         };
+    }
+    modifyPanelValues = values => {
+        if (!values) return null
+        if (typeof values === 'string' && moment(values).isValid()) {
+            const nextMonthDate = moment(values).clone().add(1, 'months').format('YYYY-MM-DD')
+            return [values, nextMonthDate]
+        } else if (values && values.length && values.length === 2) {
+            return values.map(value => {
+                if (moment(value).isValid()) {
+                    return value
+                } else {
+                    return ''
+                }
+            })
+        }
+        return null
     }
     initValue=(props)=>{
         let valueProp = props.value || props.defaultValue||[];
@@ -84,14 +100,16 @@ class RangePicker extends Component {
         return values;
     }
     componentWillReceiveProps(nextProps){
+        let value = null
         if ("value" in nextProps) {
+            value = this.initValue(nextProps)
             this.setState({
-                value: this.initValue(nextProps)
+                value
             });
         }
         if ("panelValues" in nextProps) {
             this.setState({
-                panelValues: nextProps.panelValues
+                panelValues: value ? null : this.modifyPanelValues(nextProps.panelValues)
             });
         }
         if ("open" in nextProps) {
