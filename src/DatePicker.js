@@ -63,7 +63,7 @@ class DatePicker extends Component {
     }
     if ("panelValue" in nextProps) {
       this.setState({
-        panelValue: value ? null : nextProps.panelValue
+        panelValue: value ? null : moment(nextProps.panelValue)
       });
     }
     if ("open" in nextProps) {
@@ -273,7 +273,8 @@ class DatePicker extends Component {
     e.stopPropagation();
     this.setState({
       inputValue:'',
-      value:''
+      value:'',
+      panelValue: null
     })
     this.fireChange('','');
   }

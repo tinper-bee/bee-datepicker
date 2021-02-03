@@ -17,7 +17,7 @@ class Demo13 extends Component {
     state = {
         datePickerPanelValue: '2004-05-09',
         rangePickerPanelValues: '2014-01-02',
-        dateValue: '2020-02-03',
+        // dateValue: '2020-02-03',
         // rangeValue: ['2098-09-02', '2099-08-06']
     }
     onSelect = d => {
@@ -25,14 +25,14 @@ class Demo13 extends Component {
     }
     onDateChange = (d) => {
         this.setState({
-            datePickerPanelValue: null,
+            // datePickerPanelValue: null,
             dateValue: d
         })
     };
     onRangeChange = (d) => {
         this.setState({
             rangeValue: d,
-            rangePickerPanelValues: null
+            // rangePickerPanelValues: null
         })
     };
     render() {
