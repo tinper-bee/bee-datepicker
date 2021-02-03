@@ -1,3 +1,12 @@
+## [2.4.1](https://github.com/tinper-bee/bee-datepicker/compare/v2.4.0...v2.4.1) (2021-02-03)
+
+
+### Features
+
+* 增加默认展开的时间区间 ([ce9996d](https://github.com/tinper-bee/bee-datepicker/commit/ce9996db65e95f4a9d46d5c6334f503adef83f91))
+
+
+
 # [2.4.0](https://github.com/tinper-bee/bee-datepicker/compare/v2.3.55...v2.4.0) (2021-01-19)
 
 
