@@ -156,6 +156,15 @@ var DateTBody = function (_React$Component) {
           isCurrentWeek = true;
         }
 
+        var _props = this.props,
+            panelValue = _props.panelValue,
+            noCurrentDate = _props.noCurrentDate;
+
+        if (panelValue && !noCurrentDate && isSameDay(current, panelValue)) {
+          cls += ' ' + todayClass;
+          isCurrentWeek = true;
+        }
+
         var isBeforeCurrentMonthYear = beforeCurrentMonthYear(current, value);
         var isAfterCurrentMonthYear = afterCurrentMonthYear(current, value);
 

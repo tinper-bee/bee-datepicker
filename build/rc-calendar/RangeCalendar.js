@@ -150,7 +150,8 @@ var RangeCalendar = function (_React$Component) {
       hoverValue: props.hoverValue || [],
       value: value,
       showTimePicker: false,
-      mode: props.mode || ['date', 'date']
+      mode: props.mode || ['date', 'date'],
+      panelValues: props.panelValues || null
     };
     return _this;
   }
@@ -196,6 +197,7 @@ var RangeCalendar = function (_React$Component) {
     var hoverValue = state.hoverValue,
         selectedValue = state.selectedValue,
         mode = state.mode,
+        panelValues = state.panelValues,
         showTimePicker = state.showTimePicker;
 
     var className = (_className = {}, _defineProperty(_className, props.className, !!props.className), _defineProperty(_className, prefixCls, 1), _defineProperty(_className, prefixCls + '-hidden', !props.visible), _defineProperty(_className, prefixCls + '-range', 1), _defineProperty(_className, prefixCls + '-show-time-picker', showTimePicker), _defineProperty(_className, prefixCls + '-week-number', props.showWeekNumber), _className);
@@ -232,6 +234,8 @@ var RangeCalendar = function (_React$Component) {
     var isClosestMonths = nextMonthOfStart.year() === endValue.year() && nextMonthOfStart.month() === endValue.month();
 
     var extraFooter = props.renderFooter();
+    var leftPanelValue = panelValues && panelValues[0] ? { panelValue: (0, _moment2["default"])(panelValues[0]) } : {};
+    var rightPanelValue = panelValues && panelValues[1] ? { panelValue: (0, _moment2["default"])(panelValues[1]) } : {};
     return _react2["default"].createElement(
       'div',
       {
@@ -281,7 +285,7 @@ var RangeCalendar = function (_React$Component) {
             clearIcon: clearIcon,
             tabIndex: '0',
             onInputBlur: onStartInputBlur
-          })),
+          }, leftPanelValue)),
           _react2["default"].createElement(
             'span',
             { className: prefixCls + '-range-middle' },
@@ -310,6 +314,8 @@ var RangeCalendar = function (_React$Component) {
             tabIndex: '0',
             inputTabIndex: '-1',
             onInputBlur: onEndInputBlur
+          }, rightPanelValue, {
+            noCurrentDate: true
           }))
         ),
         _react2["default"].createElement(
@@ -683,13 +689,13 @@ var _initialiseProps = function _initialiseProps() {
   this.onStartValueChange = function (leftValue) {
     var value = [].concat(_toConsumableArray(_this2.state.value));
     value[0] = leftValue;
-    return _this2.fireValueChange(value);
+    return _this2.fireValueChange(value, 'left');
   };
 
   this.onEndValueChange = function (rightValue) {
     var value = [].concat(_toConsumableArray(_this2.state.value));
     value[1] = rightValue;
-    return _this2.fireValueChange(value);
+    return _this2.fireValueChange(value, 'right');
   };
 
   this.onStartPanelChange = function (value, mode) {
@@ -866,11 +872,14 @@ var _initialiseProps = function _initialiseProps() {
     }
   };
 
-  this.fireValueChange = function (value) {
+  this.fireValueChange = function (value, direction) {
     var props = _this2.props;
+    var panelValues = _this2.state.panelValues;
+
     if (!('value' in props)) {
       _this2.setState({
-        value: value
+        value: value,
+        panelValues: direction === 'left' && panelValues ? [null, panelValues[1]] : direction === 'right' && panelValues ? [panelValues[0], null] : null
       });
     }
     props.onValueChange(value);

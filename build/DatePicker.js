@@ -85,6 +85,7 @@ var DatePicker = function (_Component) {
     _this.state = {
       type: "month",
       value: _this.initValue(props),
+      panelValue: props.panelValue ? props.value || props.defaultValue ? null : (0, _moment2["default"])(props.panelValue) : '', // value和defaultValue的优先级高于panelValue
       open: props.open || false,
       inputValue: _this.initValue(props),
       showClose: false
@@ -95,9 +96,15 @@ var DatePicker = function (_Component) {
   }
 
   DatePicker.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
+    var value = null;
     if ("value" in nextProps) {
+      value = this.initValue(nextProps), this.setState({
+        value: value
+      });
+    }
+    if ("panelValue" in nextProps) {
       this.setState({
-        value: this.initValue(nextProps)
+        panelValue: value ? null : (0, _moment2["default"])(nextProps.panelValue)
       });
     }
     if ("open" in nextProps) {
@@ -162,7 +169,8 @@ var DatePicker = function (_Component) {
       onSelect: this.handleSelect,
       onChange: this.handleCalendarChange,
       value: value,
-      onInputBlur: this.onDateInputBlur
+      onInputBlur: this.onDateInputBlur,
+      panelValue: state.panelValue
     }));
 
     var keyboardInputProps = {};
@@ -428,7 +436,8 @@ var _initialiseProps = function _initialiseProps() {
     e.stopPropagation();
     _this3.setState({
       inputValue: '',
-      value: ''
+      value: '',
+      panelValue: null
     });
     _this3.fireChange('', '');
   };

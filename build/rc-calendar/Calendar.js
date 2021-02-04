@@ -77,7 +77,8 @@ var Calendar = function (_React$Component) {
     _this.state = {
       mode: _this.props.mode || 'date',
       value: props.value || props.defaultValue || (0, _moment2["default"])(),
-      selectedValue: props.selectedValue || props.defaultSelectedValue
+      selectedValue: props.selectedValue || props.defaultSelectedValue,
+      panelValue: props.panelValue || ''
     };
     return _this;
   }
@@ -90,7 +91,8 @@ var Calendar = function (_React$Component) {
 
   Calendar.getDerivedStateFromProps = function getDerivedStateFromProps(nextProps, state) {
     var value = nextProps.value,
-        selectedValue = nextProps.selectedValue;
+        selectedValue = nextProps.selectedValue,
+        panelValue = nextProps.panelValue;
 
     var newState = {};
 
@@ -103,7 +105,9 @@ var Calendar = function (_React$Component) {
     if ('selectedValue' in nextProps) {
       newState.selectedValue = selectedValue;
     }
-
+    if ('panelValue' in nextProps) {
+      newState.panelValue = panelValue;
+    }
     return newState;
   };
 
@@ -150,7 +154,7 @@ var Calendar = function (_React$Component) {
     var dateInputElement = props.showDateInput ? _react2["default"].createElement(_DateInput2["default"], {
       format: this.getFormat(),
       key: 'date-input',
-      value: value,
+      value: this.state.panelValue || value,
       locale: locale,
       placeholder: dateInputPlaceholder,
       showClear: true,
@@ -184,7 +188,7 @@ var Calendar = function (_React$Component) {
         _react2["default"].createElement(_CalendarHeader2["default"], {
           locale: locale,
           mode: mode,
-          value: value,
+          value: this.state.panelValue || value,
           onValueChange: this.setValue,
           onPanelChange: this.onPanelChange,
           renderFooter: renderFooter,
@@ -206,7 +210,7 @@ var Calendar = function (_React$Component) {
           { className: prefixCls + '-body' },
           _react2["default"].createElement(_DateTable2["default"], {
             locale: locale,
-            value: value,
+            value: this.state.panelValue || value,
             selectedValue: selectedValue,
             prefixCls: prefixCls,
             dateRender: props.dateRender,
@@ -393,6 +397,9 @@ var _initialiseProps = function _initialiseProps() {
     var timePicker = _this2.props.timePicker;
     var selectedValue = _this2.state.selectedValue;
 
+    _this2.setState({
+      panelValue: ''
+    });
     if (!selectedValue && timePicker) {
       var timePickerDefaultValue = timePicker.props.defaultValue;
       if (timePickerDefaultValue) {

@@ -111,18 +111,30 @@ var RangePicker = function (_Component) {
 
         _initialiseProps.call(_this);
 
+        var initialValue = props.value || props.defaultValue;
         _this.state = {
             hoverValue: [],
             value: _this.initValue(props),
-            open: props.open || false
+            open: props.open || false,
+            panelValues: initialValue && initialValue.length ? null : _this.modifyPanelValues(props.panelValues)
         };
         return _this;
     }
 
     RangePicker.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
+        var value = null;
         if ("value" in nextProps) {
+            value = this.initValue(nextProps);
             this.setState({
-                value: this.initValue(nextProps)
+                value: value
+            });
+        }
+        if ("panelValues" in nextProps) {
+            var isValueEmpty = !(value || []).some(function (item) {
+                return item;
+            });
+            this.setState({
+                panelValues: !isValueEmpty ? null : this.modifyPanelValues(nextProps.panelValues)
             });
         }
         if ("open" in nextProps) {
@@ -177,7 +189,8 @@ var RangePicker = function (_Component) {
             onStartInputBlur: this.onStartInputBlur,
             onEndInputBlur: this.onEndInputBlur,
             onClear: this.clear,
-            onOk: this.onOk
+            onOk: this.onOk,
+            panelValues: this.state.panelValues || null
         });
 
         return _react2["default"].createElement(
@@ -234,6 +247,23 @@ var RangePicker = function (_Component) {
 
 var _initialiseProps = function _initialiseProps() {
     var _this3 = this;
+
+    this.modifyPanelValues = function (values) {
+        if (!values) return null;
+        if (typeof values === 'string' && (0, _moment2["default"])(values).isValid()) {
+            var nextMonthDate = (0, _moment2["default"])(values).clone().add(1, 'months').format('YYYY-MM-DD');
+            return [values, nextMonthDate];
+        } else if (values && values.length && values.length === 2) {
+            return values.map(function (value) {
+                if ((0, _moment2["default"])(value).isValid()) {
+                    return value;
+                } else {
+                    return '';
+                }
+            });
+        }
+        return null;
+    };
 
     this.initValue = function (props) {
         var valueProp = props.value || props.defaultValue || [];
