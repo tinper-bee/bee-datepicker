@@ -74,6 +74,7 @@ class Calendar extends React.Component {
       mode: this.props.mode || 'date',
       value: props.value || props.defaultValue || moment(),
       selectedValue: props.selectedValue || props.defaultSelectedValue,
+      panelValue: props.panelValue || ''
     };
   }
 
@@ -185,6 +186,9 @@ class Calendar extends React.Component {
   onDateTableSelect = (value) => {
     const { timePicker } = this.props;
     const { selectedValue } = this.state;
+    this.setState({
+      panelValue: ''
+    })
     if (!selectedValue && timePicker) {
       const timePickerDefaultValue = timePicker.props.defaultValue;
       if (timePickerDefaultValue) {
@@ -203,7 +207,7 @@ class Calendar extends React.Component {
   }
 
   static getDerivedStateFromProps(nextProps, state) {
-    const { value, selectedValue } = nextProps;
+    const { value, selectedValue, panelValue } = nextProps;
     let newState = {};
 
     if ('mode' in nextProps && state.mode !== nextProps.mode) {
@@ -215,7 +219,9 @@ class Calendar extends React.Component {
     if ('selectedValue' in nextProps) {
       newState.selectedValue = selectedValue;
     }
-
+    if ('panelValue' in nextProps) {
+      newState.panelValue = panelValue;
+    }
     return newState;
   }
 
@@ -278,7 +284,7 @@ class Calendar extends React.Component {
       <DateInput
         format={this.getFormat()}
         key="date-input"
-        value={value}
+        value={this.state.panelValue || value}
         locale={locale}
         placeholder={dateInputPlaceholder}
         showClear
@@ -309,7 +315,7 @@ class Calendar extends React.Component {
         <CalendarHeader
           locale={locale}
           mode={mode}
-          value={value}
+          value={this.state.panelValue || value}
           onValueChange={this.setValue}
           onPanelChange={this.onPanelChange}
           renderFooter={renderFooter}

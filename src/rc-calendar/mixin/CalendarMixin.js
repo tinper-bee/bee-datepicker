@@ -100,6 +100,7 @@ export const calendarMixinWrapper = ComposeComponent => class extends ComposeCom
     if (!('value' in this.props)) {
       this.setState({
         value,
+        panelValue: ''
       });
     }
     if (

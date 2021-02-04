@@ -24,6 +24,7 @@ class DatePicker extends Component {
     this.state = {
       type: "month",
       value: this.initValue(props),
+      panelValue: props.panelValue ? (props.value || props.defaultValue) ? null : moment(props.panelValue) : '', // value和defaultValue的优先级高于panelValue
       open: props.open||false,
       inputValue:this.initValue(props),
       showClose:false
@@ -51,9 +52,16 @@ class DatePicker extends Component {
     return value;
   }
   componentWillReceiveProps(nextProps) {
+    let value = null
     if ("value" in nextProps) {
+      value = this.initValue(nextProps),
       this.setState({
-        value: this.initValue(nextProps)
+        value
+      });
+    }
+    if ("panelValue" in nextProps) {
+      this.setState({
+        panelValue: value ? null : moment(nextProps.panelValue)
       });
     }
     if ("open" in nextProps) {
@@ -227,7 +235,8 @@ class DatePicker extends Component {
     e.stopPropagation();
     this.setState({
       inputValue:'',
-      value:''
+      value:'',
+      panelValue: null
     })
     this.fireChange('','');
   }
@@ -309,6 +318,7 @@ class DatePicker extends Component {
         onChange={this.handleCalendarChange}
         value={value}
         onInputBlur={this.onDateInputBlur}
+        panelValue={state.panelValue}
       />
     );
 

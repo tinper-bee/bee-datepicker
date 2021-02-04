@@ -129,6 +129,12 @@ export default class DateTBody extends React.Component {
           isCurrentWeek = true;
         }
 
+        const { panelValue, noCurrentDate } = this.props
+        if (panelValue && !noCurrentDate && (isSameDay(current, panelValue))) {
+          cls += ` ${todayClass}`;
+          isCurrentWeek = true;
+        }
+
         const isBeforeCurrentMonthYear = beforeCurrentMonthYear(current, value);
         const isAfterCurrentMonthYear = afterCurrentMonthYear(current, value);
 

@@ -28,6 +28,20 @@ export default class CalendarPart extends React.Component {
     clearIcon: PropTypes.node,
   }
 
+  constructor (props) {
+    super(props)
+    this.state = {
+      panelValue: props.panelValue || ''
+    }
+  }
+
+  static getDerivedStateFromProps(nextProps, state) {
+    const { panelValue } = nextProps;
+    let newState = {};
+    newState.panelValue = panelValue;
+    return newState;
+  }
+
   render() {
     const props = this.props;
     const {
@@ -42,7 +56,7 @@ export default class CalendarPart extends React.Component {
       timePickerDisabledTime, showTimePicker,
       onInputChange, onInputSelect, enablePrev, enableNext,
       clearIcon,renderError,inputTabIndex,
-      onInputBlur
+      onInputBlur,noCurrentDate
     } = props;
     const shouldShowTimePicker = showTimePicker && timePicker;
     const disabledTimeConfig = shouldShowTimePicker && disabledTime ?
@@ -103,6 +117,7 @@ export default class CalendarPart extends React.Component {
             onValueChange={props.onValueChange}
             onPanelChange={props.onPanelChange}
             disabledMonth={props.disabledMonth}
+            value={this.state.panelValue || value}
           />
           {showTimePicker ? <div className={`${prefixCls}-time-picker`}>
             <div className={`${prefixCls}-time-picker-panel`}>
@@ -119,6 +134,9 @@ export default class CalendarPart extends React.Component {
               onDayHover={props.onDayHover}
               disabledDate={disabledDate}
               showWeekNumber={props.showWeekNumber}
+              value={this.state.panelValue || value}
+              panelValue={this.state.panelValue}
+              noCurrentDate={noCurrentDate}
             />
           </div>
         </div>
