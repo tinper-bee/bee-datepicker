@@ -1,3 +1,17 @@
+## [2.4.3](https://github.com/tinper-bee/bee-datepicker/compare/v2.4.2...v2.4.3) (2021-02-04)
+
+
+### Bug Fixes
+
+* 修改value和panelValue的变化 ([03c7e48](https://github.com/tinper-bee/bee-datepicker/commit/03c7e48643779083a0d22114e1a0eb847369f99c))
+
+
+### Features
+
+* 支持显示默认传入的日期高亮 ([ecf33c7](https://github.com/tinper-bee/bee-datepicker/commit/ecf33c7dd866b29abc0b1a259dad70928ac1bc23))
+
+
+
 ## [2.4.2](https://github.com/tinper-bee/bee-datepicker/compare/v2.4.1...v2.4.2) (2021-02-03)
 
 
