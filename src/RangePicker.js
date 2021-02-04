@@ -109,7 +109,7 @@ class RangePicker extends Component {
             });
         }
         if ("panelValues" in nextProps) {
-            const isValueEmpty = !value.some(item => item)
+            const isValueEmpty = !(value || []).some(item => item)
             this.setState({
                 panelValues: !isValueEmpty ? null : this.modifyPanelValues(nextProps.panelValues)
             });

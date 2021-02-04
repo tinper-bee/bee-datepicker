@@ -71772,7 +71772,7 @@
 	            });
 	        }
 	        if ("panelValues" in nextProps) {
-	            var isValueEmpty = !value.some(function (item) {
+	            var isValueEmpty = !(value || []).some(function (item) {
 	                return item;
 	            });
 	            this.setState({
