@@ -754,6 +754,7 @@ class RangeCalendar extends React.Component {
               inputTabIndex='-1'
               onInputBlur={onEndInputBlur}
               {...rightPanelValue}
+              noCurrentDate
             />
           </div>
           <div className={cls}>

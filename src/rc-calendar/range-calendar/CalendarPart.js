@@ -56,7 +56,7 @@ export default class CalendarPart extends React.Component {
       timePickerDisabledTime, showTimePicker,
       onInputChange, onInputSelect, enablePrev, enableNext,
       clearIcon,renderError,inputTabIndex,
-      onInputBlur,validatorFunc
+      onInputBlur,validatorFunc,noCurrentDate
     } = props;
     const shouldShowTimePicker = showTimePicker && timePicker;
     const disabledTimeConfig = shouldShowTimePicker && disabledTime ?
@@ -136,6 +136,8 @@ export default class CalendarPart extends React.Component {
               disabledDate={disabledDate}
               showWeekNumber={props.showWeekNumber}
               value={this.state.panelValue || value}
+              panelValue={this.state.panelValue}
+              noCurrentDate={noCurrentDate}
             />
           </div>
         </div>

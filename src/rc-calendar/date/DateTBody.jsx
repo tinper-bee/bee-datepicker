@@ -123,8 +123,12 @@ export default class DateTBody extends React.Component {
         let cls = cellClass;
         let disabled = false;
         let selected = false;
-
         if (isSameDay(current, today)) {
+          cls += ` ${todayClass}`;
+          isCurrentWeek = true;
+        }
+        const { panelValue, noCurrentDate } = this.props
+        if (panelValue && !noCurrentDate && (isSameDay(current, panelValue))) {
           cls += ` ${todayClass}`;
           isCurrentWeek = true;
         }

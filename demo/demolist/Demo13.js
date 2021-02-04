@@ -16,9 +16,9 @@ const format = "YYYY-MM-DD dddd";
 class Demo13 extends Component {
     state = {
         datePickerPanelValue: '2004-05-09',
-        rangePickerPanelValues: '2014-01-02',
-        // dateValue: '2020-02-03',
-        // rangeValue: ['2098-09-02', '2099-08-06']
+        rangePickerPanelValues: ['3409-09-02', '7876-10-19'],
+        dateValue: '2020-02-03',
+        rangeValue: ['2098-09-02', '2099-08-06']
     }
     onSelect = d => {
         console.log(d);
