@@ -1,3 +1,12 @@
+## [2.4.4](https://github.com/tinper-bee/bee-datepicker/compare/v2.4.3...v2.4.4) (2021-02-04)
+
+
+### Bug Fixes
+
+* array error ([5fd83b5](https://github.com/tinper-bee/bee-datepicker/commit/5fd83b53b7b37afd549c20df38703392678b22a7))
+
+
+
 ## [2.4.3](https://github.com/tinper-bee/bee-datepicker/compare/v2.4.2...v2.4.3) (2021-02-04)
 
 
