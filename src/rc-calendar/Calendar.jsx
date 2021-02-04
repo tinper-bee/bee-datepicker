@@ -333,7 +333,7 @@ class Calendar extends React.Component {
         <div className={`${prefixCls}-body`}>
           <DateTable
             locale={locale}
-            value={value}
+            value={this.state.panelValue || value}
             selectedValue={selectedValue}
             prefixCls={prefixCls}
             dateRender={props.dateRender}

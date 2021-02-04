@@ -40380,7 +40380,7 @@
 	          { className: prefixCls + '-body' },
 	          _react2['default'].createElement(_DateTable2['default'], {
 	            locale: locale,
-	            value: value,
+	            value: this.state.panelValue || value,
 	            selectedValue: selectedValue,
 	            prefixCls: prefixCls,
 	            dateRender: props.dateRender,
