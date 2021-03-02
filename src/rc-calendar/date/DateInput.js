@@ -98,7 +98,6 @@ class DateInput extends React.Component {
       });
       return;
     }
-
     // 如果上次值不合法，此次值合法，把此次值更新到datepicker的value中
     if(parsed.isValid() && !value.isValid()){
       this.setState({

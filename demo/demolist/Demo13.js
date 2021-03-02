@@ -11,14 +11,14 @@ import moment from "moment";
 
 const { RangePicker } = DatePicker
 
-const format = "YYYY-MM-DD dddd";
+const format = "YYYY-MM-DD";
 
 class Demo13 extends Component {
     state = {
         datePickerPanelValue: '2004-05-09',
-        rangePickerPanelValues: ['3409-09-02', '7876-10-19'],
-        dateValue: '2020-02-03',
-        rangeValue: ['2098-09-02', '2099-08-06']
+        rangePickerPanelValues: ['3409-09-02', '3476-10-19'],
+        // dateValue: '2020-02-03',
+        // rangeValue: ['2098-09-02', '2099-08-06']
     }
     onSelect = d => {
         console.log(d);
