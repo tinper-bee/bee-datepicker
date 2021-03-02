@@ -74,7 +74,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 * Created by chief on 17/4/6.
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 */
 
-var cn = typeof window !== 'undefined' ? location.search.indexOf("cn") !== -1 : true;
+var cn = typeof window !== 'undefined' ? location.search.indexOf("cn") === -1 : true;
 
 var now = (0, _moment2["default"])();
 if (cn) {
@@ -113,6 +113,9 @@ var WeekPicker = function (_Component) {
     }
   };
 
+  // 跨年周显示的转换
+
+
   WeekPicker.prototype.render = function render() {
     var _this2 = this;
 
@@ -139,6 +142,7 @@ var WeekPicker = function (_Component) {
       onClear: this.onClear
     });
     var classes = (0, _classnames2["default"])(props.className, "datepicker-container");
+    var showValue = this.getShowValue();
     return _react2["default"].createElement(
       "div",
       _extends({ className: classes
@@ -151,7 +155,7 @@ var WeekPicker = function (_Component) {
           onOpenChange: this.onOpenChange,
           open: this.state.open,
           calendar: calendar,
-          value: state.value
+          value: showValue
         }),
         function (_ref) {
           _objectDestructuringEmpty(_ref);
@@ -168,7 +172,7 @@ var WeekPicker = function (_Component) {
               readOnly: true,
               tabIndex: "-1",
               className: _this2.props.className,
-              value: value && value.format(format) || ""
+              value: showValue && showValue.format(format) || ""
             }),
             showClose && _this2.state.value && _this2.state.showClose && !props.disabled ? _react2["default"].createElement(
               _beeInputGroup2["default"].Button,
@@ -228,17 +232,26 @@ var _initialiseProps = function _initialiseProps() {
 
   this.dateRender = function (current) {
     var selectedValue = _this3.state.value;
-    if (selectedValue && current.year() === selectedValue.year() && current.week() === selectedValue.week()) {
-      return _react2["default"].createElement(
-        "div",
-        { className: "rc-calendar-selected-day" },
-        _react2["default"].createElement(
+
+    var monday = (0, _moment2["default"])(selectedValue).isoWeekday(1); //周一
+    var sunday = (0, _moment2["default"])(selectedValue).isoWeekday(7); //周日
+    var startYear = monday.format("YYYY");
+    var endYear = sunday.format("YYYY");
+
+    var sundayStr = sunday.format("DD");
+    if (selectedValue && current.year() === selectedValue.year() && current.week() === selectedValue.week() || startYear !== endYear && (parseInt(sundayStr) <= 3 && current.week() == monday.week() && sunday.day() < monday.day() || parseInt(sundayStr) > 3 && current.week() == sunday.week() && sunday.day() < monday.day())
+    //  区分跨年的情况 如果周日小于等于3 就是前一年几十周
+    ) {
+        return _react2["default"].createElement(
           "div",
-          { className: "rc-calendar-date" },
-          current.date()
-        )
-      );
-    }
+          { className: "rc-calendar-selected-day" },
+          _react2["default"].createElement(
+            "div",
+            { className: "rc-calendar-date" },
+            current.date()
+          )
+        );
+      }
     return _react2["default"].createElement(
       "div",
       { className: "rc-calendar-date" },
@@ -335,6 +348,32 @@ var _initialiseProps = function _initialiseProps() {
       value: ''
     });
     _this3.props.onChange && _this3.props.onChange('', '');
+  };
+
+  this.getShowValue = function () {
+    var value = _this3.state.value;
+
+
+    var monday = (0, _moment2["default"])(value).isoWeekday(1); //周一
+    var sunday = (0, _moment2["default"])(value).isoWeekday(7); //周日
+
+    var startYear = monday.format("YYYY");
+    var endYear = sunday.format("YYYY");
+
+    var showValue = void 0;
+    if (startYear !== endYear) {
+      // 是跨年周
+      var sundayStr = sunday.format("DD");
+      if (parseInt(sundayStr) <= 3) {
+        // 周一出现在周五之后，取周一的 年-周
+        showValue = monday;
+      } else {
+        showValue = sunday;
+      }
+    } else {
+      showValue = value;
+    }
+    return showValue;
   };
 };
 

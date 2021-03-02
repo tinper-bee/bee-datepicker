@@ -86,6 +86,7 @@ var DatePicker = function (_Component) {
     _this.state = {
       type: "month",
       value: _this.initValue(props),
+      panelValue: props.panelValue ? props.value || props.defaultValue ? null : (0, _moment2["default"])(props.panelValue) : '', // value和defaultValue的优先级高于panelValue
       open: props.open || false,
       inputValue: _this.initValue(props),
       showClose: false
@@ -96,10 +97,16 @@ var DatePicker = function (_Component) {
   }
 
   DatePicker.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
+    var value = null;
     if ("value" in nextProps) {
-      this.setState({
-        value: this.initValue(nextProps),
+      value = this.initValue(nextProps), this.setState({
+        value: value,
         inputValue: nextProps.value && this.getValue(nextProps.value) || ''
+      });
+    }
+    if ("panelValue" in nextProps) {
+      this.setState({
+        panelValue: value ? null : (0, _moment2["default"])(nextProps.panelValue)
       });
     }
     if ("open" in nextProps) {
@@ -150,7 +157,6 @@ var DatePicker = function (_Component) {
         onChange: this.handleChange
       };
     }
-
     var splitNumber = '3';
     if (!showHour) splitNumber -= 1;
     if (!showMinute) splitNumber -= 1;
@@ -163,7 +169,6 @@ var DatePicker = function (_Component) {
     } else {
       calendarProps.onChange = noop;
     }
-
     var calendar = _react2["default"].createElement(_rcCalendar2["default"], _extends({
       timePicker: props.showTime ? _react2["default"].createElement(_Panel2["default"], {
         className: 'time-split-' + splitNumber,
@@ -171,7 +176,8 @@ var DatePicker = function (_Component) {
         defaultValue: (0, _moment2["default"])((0, _moment2["default"])().format("HH:mm:ss"), "HH:mm:ss") }) : null
     }, (0, _omit2["default"])(props, ['value']), calendarProps, {
       onSelect: this.handleSelect,
-      onInputBlur: this.onDateInputBlur
+      onInputBlur: this.onDateInputBlur,
+      panelValue: state.panelValue
     }));
 
     var keyboardInputProps = {};
@@ -258,8 +264,8 @@ var _initialiseProps = function _initialiseProps() {
     var value = props.value || props.defaultValue;
     if (value) {
       if (typeof value == 'string') {
-        if ((0, _moment2["default"])(value).isValid()) {
-          value = (0, _moment2["default"])(value);
+        if ((0, _moment2["default"])(value, _this3.props.format).isValid()) {
+          value = (0, _moment2["default"])(value, _this3.props.format);
         } else {
           console.error('value is not in the correct format');
           value = '';
@@ -295,7 +301,8 @@ var _initialiseProps = function _initialiseProps() {
     var _props = _this3.props,
         format = _props.format,
         validatorFunc = _props.validatorFunc,
-        disabledDate = _props.disabledDate;
+        disabledDate = _props.disabledDate,
+        inputTabKeyOpen = _props.inputTabKeyOpen;
 
     var input = document.querySelector('.rc-calendar-input');
     if (input) {
@@ -309,10 +316,7 @@ var _initialiseProps = function _initialiseProps() {
         if (e.keyCode == _tinperBeeCore.KeyCode.DELETE) {
           input.value = '';
           _this3.fireChange('', '');
-        } else if (e.keyCode == _tinperBeeCore.KeyCode.ESC || e.keyCode == _tinperBeeCore.KeyCode.TAB) {
-          if (e.keyCode == _tinperBeeCore.KeyCode.TAB) {
-            console.debug('[bee-datepicker] [DatePicker] e.keyCode == KeyCode.TAB');
-          }
+        } else if (e.keyCode == _tinperBeeCore.KeyCode.ESC || e.keyCode == _tinperBeeCore.KeyCode.TAB && !inputTabKeyOpen) {
           _this3.setState({
             open: false
           });
@@ -320,13 +324,11 @@ var _initialiseProps = function _initialiseProps() {
             owner: _reactDom2["default"].findDOMNode(_this3.outInput),
             _target: e.target,
             open: false
-          };
 
-          console.debug(' [bee-datepicker] [DatePicker] ReactDOM.findDOMNode(this.outInput)', _reactDom2["default"].findDOMNode(_this3.outInput));
-          // input.blur();
+            // input.blur();
 
-          // 按esc时候焦点回到input输入框
-          _reactDom2["default"].findDOMNode(_this3.outInput).focus();
+            // 按esc时候焦点回到input输入框
+          };_reactDom2["default"].findDOMNode(_this3.outInput).focus();
           _reactDom2["default"].findDOMNode(_this3.outInput).select();
           // e.stopPropagation();
 
@@ -449,7 +451,6 @@ var _initialiseProps = function _initialiseProps() {
       });
       _this3.fireChange('', '');
     } else if (e.keyCode == _tinperBeeCore.KeyCode.ESC) {
-      console.debug('c%==========================[bee-datepicker] [DatePicker] [outInputKeydown()] e.keyCode == KeyCode.ESC', 'color:blue');
       _this3.setState({
         open: false
       });
@@ -469,14 +470,9 @@ var _initialiseProps = function _initialiseProps() {
       } else {
         _this3.fireChange(null, value);
       }
-    } else {
-      console.debug('==========================[bee-datepicker] [DatePicker] [outInputKeydown()] e.keyCode == ' + e.keyCode);
     }
     if (_this3.props.outInputKeydown) {
-      console.debug('======================[bee-datepicker] [DatePicker] [outInputKeydown()] exist this.props.outInputKeydown and the props is ,' + _this3.props);
       _this3.props.outInputKeydown(e);
-    } else {
-      console.debug('======================[bee-datepicker] [DatePicker] [outInputKeydown()] don\'t exist this.props.outInputKeydown and the props is ,' + _this3.props);
     }
   };
 
@@ -496,7 +492,8 @@ var _initialiseProps = function _initialiseProps() {
     e.stopPropagation();
     _this3.setState({
       inputValue: '',
-      value: ''
+      value: '',
+      panelValue: null
     });
     _this3.fireChange('', '');
   };
@@ -562,6 +559,7 @@ DatePicker.defaultProps = {
   showHour: true,
   showMinute: true,
   autoTriggerChange: true,
+  inputTabKeyOpen: false,
   validatorFunc: function validatorFunc() {
     return true;
   }
