@@ -84,7 +84,6 @@ class DateInput extends React.Component {
       .hour(parsed.hour())
       .minute(parsed.minute())
       .second(parsed.second());
-
     if (!value || (disabledDate && disabledDate(value))) {
       this.setState({
         invalid: true,

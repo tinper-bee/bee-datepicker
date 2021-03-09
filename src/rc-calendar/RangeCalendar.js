@@ -543,6 +543,12 @@ class RangeCalendar extends React.Component {
         selectedValue,
         value: getValueFromSelectedValue([startValue, endValue]),
       });
+    } else {
+      const startValue = selectedValue[0] || moment()
+      const endValue = selectedValue[1] || moment().clone().add(1, 'months');
+      this.setState({
+        value: getValueFromSelectedValue([startValue, endValue]),
+      });
     }
 
     if (selectedValue[0] && !selectedValue[1]) {
@@ -665,7 +671,6 @@ class RangeCalendar extends React.Component {
     // console.log('end:', endValue.format('YYYY-MM-DD'));
 
     const extraFooter = props.renderFooter();
-
     return (
       <div
         ref={this.saveRoot}
