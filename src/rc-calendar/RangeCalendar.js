@@ -61,7 +61,7 @@ function onInputSelect(direction, value, cause) {
   if (!value) {
     return;
   }
-  const originalValue = this.state.selectedValue;
+  const originalValue = this.state.selectedValue || ['', ''];
   const selectedValue = originalValue.concat();
   const index = direction === 'left' ? 0 : 1;
   selectedValue[index] = value;
