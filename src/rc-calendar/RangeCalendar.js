@@ -136,7 +136,7 @@ class RangeCalendar extends React.Component {
 
   onDatePanelEnter = () => {
     if (this.hasSelectedValue()) {
-      this.fireHoverValueChange(this.state.selectedValue.concat());
+      this.fireHoverValueChange((this.state.selectedValue || ['', '']).concat());
     }
   }
 
@@ -431,7 +431,7 @@ class RangeCalendar extends React.Component {
 
   getStartValue = () => {
     let value = this.state.value[0];
-    const selectedValue = this.state.selectedValue;
+    const selectedValue = this.state.selectedValue || ['', ''];
     // keep selectedTime when select date
     if (selectedValue[0] && this.props.timePicker) {
       value = value.clone();

@@ -388,7 +388,7 @@ var _initialiseProps = function _initialiseProps() {
 
   this.onDatePanelEnter = function () {
     if (_this2.hasSelectedValue()) {
-      _this2.fireHoverValueChange(_this2.state.selectedValue.concat());
+      _this2.fireHoverValueChange((_this2.state.selectedValue || ['', '']).concat());
     }
   };
 
@@ -714,7 +714,7 @@ var _initialiseProps = function _initialiseProps() {
 
   this.getStartValue = function () {
     var value = _this2.state.value[0];
-    var selectedValue = _this2.state.selectedValue;
+    var selectedValue = _this2.state.selectedValue || ['', ''];
     // keep selectedTime when select date
     if (selectedValue[0] && _this2.props.timePicker) {
       value = value.clone();
