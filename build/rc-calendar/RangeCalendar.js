@@ -231,7 +231,6 @@ var RangeCalendar = function (_React$Component) {
     // console.log('end:', endValue.format('YYYY-MM-DD'));
 
     var extraFooter = props.renderFooter();
-
     return _react2["default"].createElement(
       'div',
       {
@@ -835,6 +834,12 @@ var _initialiseProps = function _initialiseProps() {
       _this2.setState({
         selectedValue: selectedValue,
         value: getValueFromSelectedValue([startValue, endValue])
+      });
+    } else {
+      var _startValue = selectedValue[0] || (0, _moment2["default"])();
+      var _endValue = selectedValue[1] || (0, _moment2["default"])().clone().add(1, 'months');
+      _this2.setState({
+        value: getValueFromSelectedValue([_startValue, _endValue])
       });
     }
 

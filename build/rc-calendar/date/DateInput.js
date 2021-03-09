@@ -192,7 +192,6 @@ var _initialiseProps = function _initialiseProps() {
 
     var value = _this2.props.value.clone();
     value.year(parsed.year()).month(parsed.month()).date(parsed.date()).hour(parsed.hour()).minute(parsed.minute()).second(parsed.second());
-
     if (!value || disabledDate && disabledDate(value)) {
       _this2.setState({
         invalid: true,
