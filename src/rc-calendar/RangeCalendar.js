@@ -61,7 +61,7 @@ function onInputSelect(direction, value, cause) {
   if (!value) {
     return;
   }
-  const originalValue = this.state.selectedValue;
+  const originalValue = this.state.selectedValue || ['', ''];
   const selectedValue = originalValue.concat();
   const index = direction === 'left' ? 0 : 1;
   selectedValue[index] = value;
@@ -121,7 +121,7 @@ class RangeCalendar extends React.Component {
 
   constructor(props) {
     super(props);
-    const selectedValue = props.selectedValue || props.defaultSelectedValue;
+    const selectedValue = props.selectedValue || props.defaultSelectedValue || [];
     const value = normalizeAnchor(props, 1);
     this.state = {
       selectedValue,
@@ -580,7 +580,7 @@ class RangeCalendar extends React.Component {
 
   clear = () => {
     this.fireSelectValueChange([], true);
-    this.props.onClear();
+    this.props.onClear([]);
   }
 
   disabledStartTime = (time) => {

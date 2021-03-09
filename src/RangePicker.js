@@ -68,7 +68,7 @@ class Picker extends Component {
                 props.onChange(value,`["${format(value[0],formatStr)}" , "${format(value[1],formatStr)}"]`);
             }
             else {
-                props.onChange(null)
+                props.onChange(['', ''])
             }
 
         }

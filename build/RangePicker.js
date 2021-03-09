@@ -183,7 +183,7 @@ var _initialiseProps = function _initialiseProps() {
             if (value.length > 0) {
                 props.onChange(value, "[\"" + format(value[0], formatStr) + "\" , \"" + format(value[1], formatStr) + "\"]");
             } else {
-                props.onChange(null);
+                props.onChange(['', '']);
             }
         }
     };
