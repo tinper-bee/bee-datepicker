@@ -203,11 +203,13 @@ class DateInput extends React.Component {
         this.setState({
           invalid: true
         });
+        return;
       }
       if(!validatorFunc(str)){
         this.setState({
           invalid: true
         });
+        return;
       }
       value
         .year(parsed.year())

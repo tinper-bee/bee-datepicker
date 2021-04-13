@@ -322,11 +322,13 @@ var _initialiseProps = function _initialiseProps() {
         _this2.setState({
           invalid: true
         });
+        return;
       }
       if (!validatorFunc(str)) {
         _this2.setState({
           invalid: true
         });
+        return;
       }
       value.year(parsed.year()).month(parsed.month()).date(parsed.date()).hour(parsed.hour()).minute(parsed.minute()).second(parsed.second());
 
