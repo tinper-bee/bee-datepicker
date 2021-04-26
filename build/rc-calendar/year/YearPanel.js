@@ -66,37 +66,7 @@ var YearPanel = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, _React$Component.call(this, props));
 
-    _this.yearSelect = function (value) {
-      var _this$props = _this.props,
-          onSelect = _this$props.onSelect,
-          format = _this$props.format;
-
-      onSelect && onSelect(value, value ? value.format(format) : '');
-    };
-
-    _this.onInputChange = function (value) {
-      var _this$props2 = _this.props,
-          onChange = _this$props2.onChange,
-          format = _this$props2.format;
-
-      _this.setState({
-        value: value ? value : (0, _moment2["default"])()
-      });
-      onChange && onChange(value, value ? value.format(format) : '');
-    };
-
-    _this.onClear = function () {
-      var _this$props3 = _this.props,
-          onChange = _this$props3.onChange,
-          format = _this$props3.format,
-          onClear = _this$props3.onClear;
-
-      _this.setState({
-        value: (0, _moment2["default"])()
-      });
-      onChange && onChange('', '');
-      onClear && onClear('', '');
-    };
+    _initialiseProps.call(_this);
 
     _this.prefixCls = props.rootPrefixCls + '-year-panel';
     _this.state = {
@@ -162,22 +132,23 @@ var YearPanel = function (_React$Component) {
       var tds = row.map(function (yearData) {
         var _classNameMap;
 
-        var classNameMap = (_classNameMap = {}, _defineProperty(_classNameMap, prefixCls + '-cell', 1), _defineProperty(_classNameMap, prefixCls + '-selected-cell', yearData.year === currentYear), _defineProperty(_classNameMap, prefixCls + '-last-decade-cell', yearData.year < startYear), _defineProperty(_classNameMap, prefixCls + '-next-decade-cell', yearData.year > endYear), _classNameMap);
+        var disabled = props.disabledYear && props.disabledYear((0, _moment2["default"])(yearData.title));
+        var classNameMap = (_classNameMap = {}, _defineProperty(_classNameMap, prefixCls + '-cell', 1), _defineProperty(_classNameMap, prefixCls + '-selected-cell', yearData.year === currentYear), _defineProperty(_classNameMap, prefixCls + '-disabled-cell', disabled), _classNameMap);
         var clickHandler = void 0;
-        if (yearData.year < startYear) {
-          clickHandler = _this2.previousDecade;
-        } else if (yearData.year > endYear) {
-          clickHandler = _this2.nextDecade;
-        } else {
-          clickHandler = chooseYear.bind(_this2, yearData.year);
-        }
+        // if (yearData.year < startYear) {
+        //   clickHandler = this.previousDecade;
+        // } else if (yearData.year > endYear) {
+        //   clickHandler = this.nextDecade;
+        // } else {
+        clickHandler = chooseYear.bind(_this2, yearData.year);
+        // }
         return _react2["default"].createElement(
           'td',
           {
             role: 'gridcell',
             title: yearData.title,
             key: yearData.content,
-            onClick: clickHandler,
+            onClick: props.disabledYear && props.disabledYear((0, _moment2["default"])(yearData.title)) ? undefined : clickHandler,
             className: (0, _classnames2["default"])(classNameMap)
           },
           _react2["default"].createElement(
@@ -286,13 +257,53 @@ var YearPanel = function (_React$Component) {
   return YearPanel;
 }(_react2["default"].Component);
 
+var _initialiseProps = function _initialiseProps() {
+  var _this3 = this;
+
+  this.yearSelect = function (value) {
+    var props = _this3.props;
+    var onSelect = props.onSelect,
+        format = props.format,
+        disabledYear = props.disabledYear;
+
+    var isDisabled = disabledYear && disabledYear(value);
+    if (isDisabled) return;
+    onSelect && onSelect(value, value ? value.format(format) : '');
+  };
+
+  this.onInputChange = function (value) {
+    var _props = _this3.props,
+        onChange = _props.onChange,
+        format = _props.format;
+
+    _this3.setState({
+      value: value ? value : (0, _moment2["default"])()
+    });
+    onChange && onChange(value, value ? value.format(format) : '');
+  };
+
+  this.onClear = function () {
+    var _props2 = _this3.props,
+        onChange = _props2.onChange,
+        format = _props2.format,
+        onClear = _props2.onClear;
+
+    _this3.setState({
+      value: (0, _moment2["default"])()
+    });
+    onChange && onChange('', '');
+    onClear && onClear('', '');
+  };
+};
+
 exports["default"] = YearPanel;
 
 
 YearPanel.propTypes = {
   rootPrefixCls: _propTypes2["default"].string,
   value: _propTypes2["default"].object,
-  defaultValue: _propTypes2["default"].object
+  defaultValue: _propTypes2["default"].object,
+  disabledYear: _propTypes2["default"].bool
 };
 
 YearPanel.defaultProps = {

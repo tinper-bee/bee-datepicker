@@ -294,6 +294,7 @@ class RangePicker extends Component {
             onClear={this.clear}
             onOk={this.onOk}
             validatorFunc={props.validatorFunc}
+            style={props.dropdownStyle}
         />
     );
       return (

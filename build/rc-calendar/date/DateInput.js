@@ -210,12 +210,26 @@ var _initialiseProps = function _initialiseProps() {
       return;
     }
 
+    // 如果上次值不合法，此次值合法，把此次值更新到datepicker的value中
+    if (parsed.isValid() && !value.isValid()) {
+      _this2.setState({
+        str: str
+      }, function () {
+        return _this2.props.onChange(parsed);
+      });
+    }
+
     if (selectedValue !== value || selectedValue && value && !selectedValue.isSame(value)) {
       _this2.setState({
         // invalid: false,
         str: str
       });
-      onChange(value);
+      if (!value.isValid()) {
+        // value不合法，把此次的新输入的合法值传到onChange中
+        onChange(parsed);
+      } else {
+        onChange(value);
+      }
     }
   };
 

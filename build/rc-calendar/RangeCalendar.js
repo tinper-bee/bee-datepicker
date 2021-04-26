@@ -862,7 +862,8 @@ var _initialiseProps = function _initialiseProps() {
         firstSelectedValue: null
       });
       _this2.fireHoverValueChange([]);
-      _this2.props.onSelect(selectedValue, cause);
+      // 第三个参数标识是否是从rangePicker传过去的
+      _this2.props.onSelect(selectedValue, cause, true);
     }
   };
 

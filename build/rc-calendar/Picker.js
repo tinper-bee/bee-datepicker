@@ -187,10 +187,12 @@ var _initialiseProps = function _initialiseProps() {
 
   this.onCalendarSelect = function (value) {
     var cause = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+    var isRangePicker = arguments[2];
 
     var props = _this2.props;
     var isDisabled = props.disabledDate && props.disabledDate(value);
-    if (isDisabled) return;
+    var idYearDisabled = props.disabledYear && props.disabledYear(value);
+    if (isDisabled || idYearDisabled) return;
     if (!('value' in props)) {
       _this2.setState({
         value: value
@@ -199,14 +201,15 @@ var _initialiseProps = function _initialiseProps() {
     if (cause.source === 'keyboard' || cause.source === 'dateInputSelect' || !props.calendar.props.timePicker && cause.source !== 'dateInput' || cause.source === 'todayButton') {
       _this2.close(_this2.focus);
     }
-    props.onChange(value);
+    if (!isRangePicker) {
+      props.onChange(value);
+    }
   };
 
   this.onKeyDown = function (event) {
     // formcontrol onKeyDown
     var enterKeyDown = _this2.props.enterKeyDown;
 
-    console.debug('------------------ [bee-datepicker] [Picker] [event.keyCode ===' + event.keyCode + '] ');
     if (event.keyCode === _KeyCode2["default"].DOWN || enterKeyDown && event.keyCode === _KeyCode2["default"].ENTER) {
       if (!_this2.state.open) {
         _this2.open();
@@ -218,16 +221,12 @@ var _initialiseProps = function _initialiseProps() {
       event.preventDefault();
       event.stopPropagation();
       // delete event.keyCode;
-      console.debug('------------------ [bee-datepicker] [Picker] [event.keyCode === ' + event.keyCode + '], event.stopPropagation(); event.nativeEvent.stopImmediatePropagation(); ');
     } else if (event.keyCode === _KeyCode2["default"].TAB) {
       if (_this2.state.open) {
-        console.debug('------------------ [bee-datepicker] [Picker] [event.keyCode === KeyCode.TAB], this.close(); event.stopPropagation()');
         _this2.close();
         _this2.focus();
         event.preventDefault();
         event.stopPropagation();
-      } else {
-        console.debug('------------------ [bee-datepicker] [Picker] [event.keyCode === KeyCode.TAB], this.state.open is ' + _this2.state.open + ',nothing to do');
       }
     } else {
       event.target._dataTransfer = {
@@ -236,7 +235,6 @@ var _initialiseProps = function _initialiseProps() {
         _target: event.target,
         ownerIsTarget: true
       };
-      console.debug('------------------NOTHING TO DO [bee-datepicker] [Picker] nothing to do and event.keyCode == ' + event.keyCode);
     }
     _this2.props.onKeyDown && _this2.props.onKeyDown(event);
   };

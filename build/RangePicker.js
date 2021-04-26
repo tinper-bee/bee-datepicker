@@ -138,6 +138,8 @@ var RangePicker = function (_Component) {
 
     //日期面板中输入框的失焦事件
 
+    //阻止组件内部事件冒泡到组件外部容器
+
 
     RangePicker.prototype.render = function render() {
         var _this2 = this;
@@ -167,7 +169,7 @@ var RangePicker = function (_Component) {
             format: formatStr,
             dateInputPlaceholder: props.dateInputPlaceholder || ['start', 'end'],
             locale: props.locale || _zh_CN2["default"],
-            onChange: this.handleCalendarChange,
+            onChange: this.onChange,
             disabledDate: props.disabledDate,
             showClear: props.showClear,
             showOk: props.showOk,
@@ -179,11 +181,14 @@ var RangePicker = function (_Component) {
             onEndInputBlur: this.onEndInputBlur,
             onClear: this.clear,
             onOk: this.onOk,
-            validatorFunc: props.validatorFunc
+            validatorFunc: props.validatorFunc,
+            style: props.dropdownStyle
         });
         return _react2["default"].createElement(
             "div",
-            (0, _omit2["default"])(others, ['closeIcon', 'renderIcon', 'showClear', 'showToday', 'locale', 'placeholder', 'showOk', 'dateInputPlaceholder', 'onPanelChange', 'onStartInputBlur', 'onEndInputBlur', 'renderFooter', 'showTime', 'disabledDate', 'disabledTime']),
+            _extends({
+                onClick: this.stopPropagation, onMouseOver: this.stopPropagation
+            }, (0, _omit2["default"])(others, ['closeIcon', 'renderIcon', 'showClear', 'showToday', 'locale', 'placeholder', 'showOk', 'dateInputPlaceholder', 'onPanelChange', 'onStartInputBlur', 'onEndInputBlur', 'renderFooter', 'showTime', 'disabledDate', 'disabledTime'])),
             _react2["default"].createElement(
                 _Picker2["default"],
                 _extends({}, props, {
@@ -193,8 +198,7 @@ var RangePicker = function (_Component) {
                     disabled: props.disabled,
                     dropdownClassName: props.dropdownClassName,
                     onOpenChange: this.onOpenChange,
-                    open: open,
-                    onChange: this.onChange
+                    open: open
                 }),
                 function (_ref) {
                     _objectDestructuringEmpty(_ref);
@@ -207,7 +211,7 @@ var RangePicker = function (_Component) {
                         },
                         _react2["default"].createElement(_beeFormControl2["default"], {
                             placeholder: _this2.props.placeholder ? _this2.props.placeholder : 'start ~ end',
-                            value: isValidRange(value) && (0, _util.formatDate)(value[0], formatStr) + " ~ " + (0, _util.formatDate)(value[1], formatStr) || '',
+                            value: isValidRange(value) && (_this2.props.inputShowValue && _this2.props.inputShowValue[0] && _this2.props.inputShowValue[1] ? _this2.props.inputShowValue[0] + " ~ " + _this2.props.inputShowValue[1] : (0, _util.formatDate)(value[0], formatStr) + " ~ " + (0, _util.formatDate)(value[1], formatStr)) || '',
                             disabled: props.disabled,
                             onFocus: function onFocus(v, e) {
                                 _this2.outInputFocus(e);
@@ -430,6 +434,10 @@ var _initialiseProps = function _initialiseProps() {
             endValue = inputs[1].value ? inputs[1].value : '';
         }
         _this3.props.onEndInputBlur && _this3.props.onEndInputBlur(e, endValue, "[\"" + startValue + "\" , \"" + endValue + "\"]");
+    };
+
+    this.stopPropagation = function (e) {
+        e.stopPropagation();
     };
 
     this.onOk = function (value) {

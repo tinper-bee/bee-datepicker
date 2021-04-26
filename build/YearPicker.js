@@ -125,13 +125,13 @@ var YearPicker = function (_Component) {
         }, props, { focus: function focus() {},
             value: this.state.value,
             onSelect: this.onSelect,
-            showDateInput: true
+            showDateInput: props.showDateInput
         }));
         var classes = (0, _classnames2["default"])(props.className, "datepicker-container");
         return _react2["default"].createElement(
             "div",
             _extends({ className: classes
-            }, (0, _omit2["default"])(others, ['closeIcon', 'renderIcon', 'disabled', 'format', 'locale', 'placeholder'])),
+            }, (0, _omit2["default"])(others, ['closeIcon', 'renderIcon', 'disabled', 'format', 'locale', 'placeholder', 'showDateInput', 'disabledYear'])),
             _react2["default"].createElement(
                 _Picker2["default"],
                 _extends({
@@ -279,8 +279,11 @@ var _initialiseProps = function _initialiseProps() {
     this.onSelect = function (value) {
         var _props = _this3.props,
             onSelect = _props.onSelect,
-            format = _props.format;
+            format = _props.format,
+            disabledYear = _props.disabledYear;
 
+        var isDisabled = disabledYear && disabledYear(value);
+        if (isDisabled) return;
         _this3.setState({
             open: false
         });
@@ -300,6 +303,7 @@ YearPicker.defaultProps = {
     showClose: true,
     locale: _zh_CN2["default"],
     format: 'YYYY',
+    showDateInput: true,
     validatorFunc: function validatorFunc() {
         return true;
     }

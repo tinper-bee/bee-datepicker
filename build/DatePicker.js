@@ -258,8 +258,8 @@ var _initialiseProps = function _initialiseProps() {
     var value = props.value || props.defaultValue;
     if (value) {
       if (typeof value == 'string') {
-        if ((0, _moment2["default"])(value).isValid()) {
-          value = (0, _moment2["default"])(value);
+        if ((0, _moment2["default"])(value, _this3.props.format).isValid()) {
+          value = (0, _moment2["default"])(value, _this3.props.format);
         } else {
           console.error('value is not in the correct format');
           value = '';
@@ -295,7 +295,8 @@ var _initialiseProps = function _initialiseProps() {
     var _props = _this3.props,
         format = _props.format,
         validatorFunc = _props.validatorFunc,
-        disabledDate = _props.disabledDate;
+        disabledDate = _props.disabledDate,
+        inputTabKeyOpen = _props.inputTabKeyOpen;
 
     var input = document.querySelector('.rc-calendar-input');
     if (input) {
@@ -309,10 +310,7 @@ var _initialiseProps = function _initialiseProps() {
         if (e.keyCode == _tinperBeeCore.KeyCode.DELETE) {
           input.value = '';
           _this3.fireChange('', '');
-        } else if (e.keyCode == _tinperBeeCore.KeyCode.ESC || e.keyCode == _tinperBeeCore.KeyCode.TAB) {
-          if (e.keyCode == _tinperBeeCore.KeyCode.TAB) {
-            console.debug('[bee-datepicker] [DatePicker] e.keyCode == KeyCode.TAB');
-          }
+        } else if (e.keyCode == _tinperBeeCore.KeyCode.ESC || e.keyCode == _tinperBeeCore.KeyCode.TAB && !inputTabKeyOpen) {
           _this3.setState({
             open: false
           });
@@ -320,13 +318,11 @@ var _initialiseProps = function _initialiseProps() {
             owner: _reactDom2["default"].findDOMNode(_this3.outInput),
             _target: e.target,
             open: false
-          };
 
-          console.debug(' [bee-datepicker] [DatePicker] ReactDOM.findDOMNode(this.outInput)', _reactDom2["default"].findDOMNode(_this3.outInput));
-          // input.blur();
+            // input.blur();
 
-          // 按esc时候焦点回到input输入框
-          _reactDom2["default"].findDOMNode(_this3.outInput).focus();
+            // 按esc时候焦点回到input输入框
+          };_reactDom2["default"].findDOMNode(_this3.outInput).focus();
           _reactDom2["default"].findDOMNode(_this3.outInput).select();
           // e.stopPropagation();
 
@@ -449,7 +445,6 @@ var _initialiseProps = function _initialiseProps() {
       });
       _this3.fireChange('', '');
     } else if (e.keyCode == _tinperBeeCore.KeyCode.ESC) {
-      console.debug('c%==========================[bee-datepicker] [DatePicker] [outInputKeydown()] e.keyCode == KeyCode.ESC', 'color:blue');
       _this3.setState({
         open: false
       });
@@ -469,14 +464,9 @@ var _initialiseProps = function _initialiseProps() {
       } else {
         _this3.fireChange(null, value);
       }
-    } else {
-      console.debug('==========================[bee-datepicker] [DatePicker] [outInputKeydown()] e.keyCode == ' + e.keyCode);
     }
     if (_this3.props.outInputKeydown) {
-      console.debug('======================[bee-datepicker] [DatePicker] [outInputKeydown()] exist this.props.outInputKeydown and the props is ,' + _this3.props);
       _this3.props.outInputKeydown(e);
-    } else {
-      console.debug('======================[bee-datepicker] [DatePicker] [outInputKeydown()] don\'t exist this.props.outInputKeydown and the props is ,' + _this3.props);
     }
   };
 
@@ -562,6 +552,7 @@ DatePicker.defaultProps = {
   showHour: true,
   showMinute: true,
   autoTriggerChange: true,
+  inputTabKeyOpen: false,
   validatorFunc: function validatorFunc() {
     return true;
   }
