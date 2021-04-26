@@ -178,7 +178,7 @@ var _initialiseProps = function _initialiseProps() {
       event.stopPropagation();
       event.target._dataTransfer = {
         owner: _reactDom2["default"].findDOMNode(_this2.outInput),
-        _target: e.target
+        _target: event.target
       };
       _this2.close(_this2.focus);
     }

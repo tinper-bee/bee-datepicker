@@ -86,7 +86,7 @@ class Picker extends React.Component {
       event.stopPropagation();
       event.target._dataTransfer = {
         owner: ReactDOM.findDOMNode(this.outInput),
-        _target: e.target
+        _target: event.target
       }
       this.close(this.focus);
     }
