@@ -47,6 +47,22 @@ if (cn) {
   now.locale("en-gb").utcOffset(0);
 }
 
+/**
+ * @desc 阻止事件冒泡传播兼容ie
+ */
+function stopBubble(event) {
+//如果提供了事件对象，则这是一个非IE浏览器
+    if (event && event.stopPropagation) {
+        //因此它支持W3C的stopPropagation()方法
+        event.stopPropagation();
+        event.preventDefault();// 取消事件的默认行为
+    } else {
+        //否则，我们需要使用IE的方式来取消事件冒泡
+        window.event.cancelBubble = true;
+        window.event.returnValue = false;//阻止事件的默认行为
+    }
+}
+
 
 class RangePicker extends Component {
     constructor(props, context) {
@@ -187,7 +203,7 @@ class RangePicker extends Component {
 
     }
     clear = (e) => {
-        e&&e.stopPropagation&&e.stopPropagation();
+        stopBubble(e);
         this.setState({
             value: []
         })
@@ -223,7 +239,7 @@ class RangePicker extends Component {
     };
 
     outInputFocus = (e)=>{
-        if(this.props.hasOwnProperty('open'))e.stopPropagation();
+        if(this.props.hasOwnProperty('open'))this.isOpenStopPropagation(e);
         this.props.outInputFocus&&this.props.outInputFocus(e);
     }
 
@@ -283,8 +299,8 @@ class RangePicker extends Component {
         this.props.onEndInputBlur && this.props.onEndInputBlur(e, endValue, `["${startValue}" , "${endValue}"]`);
     }
     //阻止组件内部事件冒泡到组件外部容器
-    stopPropagation = (e) => {
-        e.stopPropagation();
+    isOpenStopPropagation = (e) => {
+        if(this.state.open) stopBubble(e);//只有日期面板被打开的时候才阻止冒泡，否则会影响外侧的tooltips触发
     }
     onOk = (value) => {
         this.props.onOk && this.props.onOk(value);
@@ -325,7 +341,7 @@ class RangePicker extends Component {
     );
       return (
           <div
-              onClick={this.stopPropagation} onMouseOver={this.stopPropagation}
+              onClick={this.isOpenStopPropagation} onMouseOver={this.isOpenStopPropagation}
           {...omit(others, [
             'closeIcon',
             'renderIcon',

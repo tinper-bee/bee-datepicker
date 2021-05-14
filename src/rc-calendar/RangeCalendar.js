@@ -337,7 +337,7 @@ class RangeCalendar extends React.Component {
   onToday = () => {
     const startValue = getTodayTime(this.state.value[0]);
     const endValue = startValue.clone().add(1, 'months');
-    this.setState({ value: [startValue, endValue] });
+    this.setState({ value: [startValue, endValue], panelValues: null });
   }
 
   onOpenTimePicker = () => {
@@ -545,6 +545,7 @@ class RangeCalendar extends React.Component {
       const endValue = selectedValue[1] || startValue.clone().add(1, 'months');
       this.setState({
         selectedValue,
+        panelValues: null,
         value: getValueFromSelectedValue([startValue, endValue]),
       });
     }
@@ -678,8 +679,8 @@ class RangeCalendar extends React.Component {
       nextMonthOfStart.month() === endValue.month();
 
     const extraFooter = props.renderFooter();
-    const leftPanelValue = panelValues && panelValues[0] ? { panelValue: moment(panelValues[0]) } : {}
-    const rightPanelValue = panelValues && panelValues[1] ? { panelValue: moment(panelValues[1]) } : {}
+    const leftPanelValue = !selectedValue[0] && panelValues && panelValues[0] ? { panelValue: moment(panelValues[0]) } : {}
+    const rightPanelValue = !selectedValue[1] && panelValues && panelValues[1] ? { panelValue: moment(panelValues[1]) } : {}
     return (
       <div
         ref={this.saveRoot}
