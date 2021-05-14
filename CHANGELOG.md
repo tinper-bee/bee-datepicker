@@ -1,3 +1,12 @@
+## [2.4.5](https://github.com/tinper-bee/bee-datepicker/compare/v2.4.4...v2.4.5) (2021-05-14)
+
+
+### Bug Fixes
+
+* 修改panelValues以及鼠标滑动事件问题 ([d6b0cbb](https://github.com/tinper-bee/bee-datepicker/commit/d6b0cbbb91480473919dee79b0d821e74cd76396))
+
+
+
 ## [2.4.4](https://github.com/tinper-bee/bee-datepicker/compare/v2.4.3...v2.4.4) (2021-02-04)
 
 
