@@ -1,3 +1,12 @@
+## [2.4.6](https://github.com/tinper-bee/bee-datepicker/compare/v2.4.5...v2.4.6) (2021-05-27)
+
+
+### Bug Fixes
+
+* 给RangePicker增加style属性 ([d46816a](https://github.com/tinper-bee/bee-datepicker/commit/d46816a7f7a98cb82a22529143e4f5daed670036))
+
+
+
 ## [2.4.5](https://github.com/tinper-bee/bee-datepicker/compare/v2.4.4...v2.4.5) (2021-05-14)
 
 
