@@ -337,6 +337,7 @@ class RangePicker extends Component {
             onOk={this.onOk}
             validatorFunc={props.validatorFunc}
             panelValues={this.state.panelValues || null}
+            style={props.dropdownStyle}
         />
     );
       return (
