@@ -171,7 +171,9 @@ class YearPicker extends Component {
                 'locale',
                 'placeholder',
                 'showDateInput',
-                'disabledYear'
+                'disabledYear',
+                'onChange',
+                'onSelect'
             ])}
             >
                 <Picker
