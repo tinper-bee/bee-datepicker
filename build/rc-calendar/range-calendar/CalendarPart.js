@@ -41,11 +41,24 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var CalendarPart = function (_React$Component) {
   _inherits(CalendarPart, _React$Component);
 
-  function CalendarPart() {
+  function CalendarPart(props) {
     _classCallCheck(this, CalendarPart);
 
-    return _possibleConstructorReturn(this, _React$Component.apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, _React$Component.call(this, props));
+
+    _this.state = {
+      panelValue: props.panelValue || ''
+    };
+    return _this;
   }
+
+  CalendarPart.getDerivedStateFromProps = function getDerivedStateFromProps(nextProps, state) {
+    var panelValue = nextProps.panelValue;
+
+    var newState = {};
+    newState.panelValue = panelValue;
+    return newState;
+  };
 
   CalendarPart.prototype.render = function render() {
     var props = this.props;
@@ -71,7 +84,8 @@ var CalendarPart = function (_React$Component) {
         renderError = props.renderError,
         inputTabIndex = props.inputTabIndex,
         onInputBlur = props.onInputBlur,
-        validatorFunc = props.validatorFunc;
+        validatorFunc = props.validatorFunc,
+        noCurrentDate = props.noCurrentDate;
 
     var shouldShowTimePicker = showTimePicker && timePicker;
     var disabledTimeConfig = shouldShowTimePicker && disabledTime ? (0, _index.getTimeConfig)(selectedValue, disabledTime) : null;
@@ -129,7 +143,8 @@ var CalendarPart = function (_React$Component) {
           enablePrev: enablePrev,
           onValueChange: props.onValueChange,
           onPanelChange: props.onPanelChange,
-          disabledMonth: props.disabledMonth
+          disabledMonth: props.disabledMonth,
+          value: this.state.panelValue || value
         })),
         showTimePicker ? _react2["default"].createElement(
           'div',
@@ -150,7 +165,10 @@ var CalendarPart = function (_React$Component) {
             onSelect: props.onSelect,
             onDayHover: props.onDayHover,
             disabledDate: disabledDate,
-            showWeekNumber: props.showWeekNumber
+            showWeekNumber: props.showWeekNumber,
+            value: this.state.panelValue || value,
+            panelValue: this.state.panelValue,
+            noCurrentDate: noCurrentDate
           }))
         )
       )

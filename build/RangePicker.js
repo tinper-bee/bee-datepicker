@@ -101,6 +101,22 @@ if (cn) {
     now.locale("en-gb").utcOffset(0);
 }
 
+/**
+ * @desc 阻止事件冒泡传播兼容ie
+ */
+function stopBubble(event) {
+    //如果提供了事件对象，则这是一个非IE浏览器
+    if (event && event.stopPropagation) {
+        //因此它支持W3C的stopPropagation()方法
+        event.stopPropagation();
+        event.preventDefault(); // 取消事件的默认行为
+    } else {
+        //否则，我们需要使用IE的方式来取消事件冒泡
+        window.event.cancelBubble = true;
+        window.event.returnValue = false; //阻止事件的默认行为
+    }
+}
+
 var RangePicker = function (_Component) {
     _inherits(RangePicker, _Component);
 
@@ -111,18 +127,30 @@ var RangePicker = function (_Component) {
 
         _initialiseProps.call(_this);
 
+        var initialValue = props.value || props.defaultValue;
         _this.state = {
             hoverValue: [],
             value: _this.initValue(props),
-            open: props.open || false
+            open: props.open || false,
+            panelValues: initialValue && initialValue.length ? null : _this.modifyPanelValues(props.panelValues)
         };
         return _this;
     }
 
     RangePicker.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
+        var value = null;
         if ("value" in nextProps) {
+            value = this.initValue(nextProps);
             this.setState({
-                value: this.initValue(nextProps)
+                value: value
+            });
+        }
+        if ("panelValues" in nextProps) {
+            var isValueEmpty = !(value || []).some(function (item) {
+                return item;
+            });
+            this.setState({
+                panelValues: !isValueEmpty ? null : this.modifyPanelValues(nextProps.panelValues)
             });
         }
         if ("open" in nextProps) {
@@ -137,6 +165,8 @@ var RangePicker = function (_Component) {
     //判断value是否为空
 
     //日期面板中输入框的失焦事件
+
+    //阻止组件内部事件冒泡到组件外部容器
 
 
     RangePicker.prototype.render = function render() {
@@ -167,7 +197,7 @@ var RangePicker = function (_Component) {
             format: formatStr,
             dateInputPlaceholder: props.dateInputPlaceholder || ['start', 'end'],
             locale: props.locale || _zh_CN2["default"],
-            onChange: this.handleCalendarChange,
+            onChange: this.onChange,
             disabledDate: props.disabledDate,
             showClear: props.showClear,
             showOk: props.showOk,
@@ -179,11 +209,15 @@ var RangePicker = function (_Component) {
             onEndInputBlur: this.onEndInputBlur,
             onClear: this.clear,
             onOk: this.onOk,
-            validatorFunc: props.validatorFunc
+            validatorFunc: props.validatorFunc,
+            panelValues: this.state.panelValues || null,
+            style: props.dropdownStyle
         });
         return _react2["default"].createElement(
             "div",
-            (0, _omit2["default"])(others, ['closeIcon', 'renderIcon', 'showClear', 'showToday', 'locale', 'placeholder', 'showOk', 'dateInputPlaceholder', 'onPanelChange', 'onStartInputBlur', 'onEndInputBlur', 'renderFooter', 'showTime', 'disabledDate', 'disabledTime']),
+            _extends({
+                onClick: this.isOpenStopPropagation, onMouseOver: this.isOpenStopPropagation
+            }, (0, _omit2["default"])(others, ['closeIcon', 'renderIcon', 'showClear', 'showToday', 'locale', 'placeholder', 'showOk', 'dateInputPlaceholder', 'onPanelChange', 'onStartInputBlur', 'onEndInputBlur', 'renderFooter', 'showTime', 'disabledDate', 'disabledTime'])),
             _react2["default"].createElement(
                 _Picker2["default"],
                 _extends({}, props, {
@@ -193,8 +227,7 @@ var RangePicker = function (_Component) {
                     disabled: props.disabled,
                     dropdownClassName: props.dropdownClassName,
                     onOpenChange: this.onOpenChange,
-                    open: open,
-                    onChange: this.onChange
+                    open: open
                 }),
                 function (_ref) {
                     _objectDestructuringEmpty(_ref);
@@ -207,7 +240,7 @@ var RangePicker = function (_Component) {
                         },
                         _react2["default"].createElement(_beeFormControl2["default"], {
                             placeholder: _this2.props.placeholder ? _this2.props.placeholder : 'start ~ end',
-                            value: isValidRange(value) && (0, _util.formatDate)(value[0], formatStr) + " ~ " + (0, _util.formatDate)(value[1], formatStr) || '',
+                            value: isValidRange(value) && (_this2.props.inputShowValue && _this2.props.inputShowValue[0] && _this2.props.inputShowValue[1] ? _this2.props.inputShowValue[0] + " ~ " + _this2.props.inputShowValue[1] : (0, _util.formatDate)(value[0], formatStr) + " ~ " + (0, _util.formatDate)(value[1], formatStr)) || '',
                             disabled: props.disabled,
                             onFocus: function onFocus(v, e) {
                                 _this2.outInputFocus(e);
@@ -235,6 +268,23 @@ var RangePicker = function (_Component) {
 
 var _initialiseProps = function _initialiseProps() {
     var _this3 = this;
+
+    this.modifyPanelValues = function (values) {
+        if (!values) return null;
+        if (typeof values === 'string' && (0, _moment2["default"])(values).isValid()) {
+            var nextMonthDate = (0, _moment2["default"])(values).clone().add(1, 'months').format('YYYY-MM-DD');
+            return [values, nextMonthDate];
+        } else if (values && values.length && values.length === 2) {
+            return values.map(function (value) {
+                if ((0, _moment2["default"])(value).isValid()) {
+                    return value;
+                } else {
+                    return '';
+                }
+            });
+        }
+        return null;
+    };
 
     this.initValue = function (props) {
         var valueProp = props.value || props.defaultValue || [];
@@ -329,7 +379,7 @@ var _initialiseProps = function _initialiseProps() {
     };
 
     this.clear = function (e) {
-        e && e.stopPropagation && e.stopPropagation();
+        stopBubble(e);
         _this3.setState({
             value: []
         });
@@ -366,7 +416,7 @@ var _initialiseProps = function _initialiseProps() {
     };
 
     this.outInputFocus = function (e) {
-        if (_this3.props.hasOwnProperty('open')) e.stopPropagation();
+        if (_this3.props.hasOwnProperty('open')) _this3.isOpenStopPropagation(e);
         _this3.props.outInputFocus && _this3.props.outInputFocus(e);
     };
 
@@ -430,6 +480,10 @@ var _initialiseProps = function _initialiseProps() {
             endValue = inputs[1].value ? inputs[1].value : '';
         }
         _this3.props.onEndInputBlur && _this3.props.onEndInputBlur(e, endValue, "[\"" + startValue + "\" , \"" + endValue + "\"]");
+    };
+
+    this.isOpenStopPropagation = function (e) {
+        if (_this3.state.open) stopBubble(e); //只有日期面板被打开的时候才阻止冒泡，否则会影响外侧的tooltips触发
     };
 
     this.onOk = function (value) {

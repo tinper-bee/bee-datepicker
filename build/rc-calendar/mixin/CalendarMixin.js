@@ -112,7 +112,8 @@ var calendarMixinWrapper = exports.calendarMixinWrapper = function calendarMixin
         var originalValue = _this.state.value;
         if (!('value' in _this.props)) {
           _this.setState({
-            value: value
+            value: value,
+            panelValue: ''
           });
         }
         if (originalValue && value && !originalValue.isSame(value) || !originalValue && value || originalValue && !value) {

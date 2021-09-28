@@ -155,7 +155,7 @@ var MonthCalendar = function (_React$Component) {
     var mode = state.mode,
         value = state.value;
 
-    value = value ? value : (0, _moment2["default"])();
+    value = value.isValid() ? value : (0, _moment2["default"])();
     var prefixCls = props.prefixCls,
         locale = props.locale,
         format = props.format,

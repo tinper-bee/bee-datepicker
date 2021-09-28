@@ -150,8 +150,15 @@ var DateTBody = function (_React$Component) {
         var cls = cellClass;
         var disabled = false;
         var selected = false;
-
         if (isSameDay(current, today)) {
+          cls += ' ' + todayClass;
+          isCurrentWeek = true;
+        }
+        var _props = this.props,
+            panelValue = _props.panelValue,
+            noCurrentDate = _props.noCurrentDate;
+
+        if (panelValue && !noCurrentDate && isSameDay(current, panelValue)) {
           cls += ' ' + todayClass;
           isCurrentWeek = true;
         }

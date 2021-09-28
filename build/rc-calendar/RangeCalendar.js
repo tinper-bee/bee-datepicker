@@ -150,7 +150,8 @@ var RangeCalendar = function (_React$Component) {
       hoverValue: props.hoverValue || [],
       value: value,
       showTimePicker: false,
-      mode: props.mode || ['date', 'date']
+      mode: props.mode || ['date', 'date'],
+      panelValues: props.panelValues || null
     };
     return _this;
   }
@@ -196,7 +197,8 @@ var RangeCalendar = function (_React$Component) {
     var hoverValue = state.hoverValue,
         selectedValue = state.selectedValue,
         mode = state.mode,
-        showTimePicker = state.showTimePicker;
+        showTimePicker = state.showTimePicker,
+        panelValues = state.panelValues;
 
     var className = (_className = {}, _defineProperty(_className, props.className, !!props.className), _defineProperty(_className, prefixCls, 1), _defineProperty(_className, prefixCls + '-hidden', !props.visible), _defineProperty(_className, prefixCls + '-range', 1), _defineProperty(_className, prefixCls + '-show-time-picker', showTimePicker), _defineProperty(_className, prefixCls + '-week-number', props.showWeekNumber), _className);
     var classes = (0, _classnames3["default"])(className);
@@ -232,6 +234,8 @@ var RangeCalendar = function (_React$Component) {
     var isClosestMonths = nextMonthOfStart.year() === endValue.year() && nextMonthOfStart.month() === endValue.month();
 
     var extraFooter = props.renderFooter();
+    var leftPanelValue = !selectedValue[0] && panelValues && panelValues[0] ? { panelValue: (0, _moment2["default"])(panelValues[0]) } : {};
+    var rightPanelValue = !selectedValue[1] && panelValues && panelValues[1] ? { panelValue: (0, _moment2["default"])(panelValues[1]) } : {};
     return _react2["default"].createElement(
       'div',
       {
@@ -281,7 +285,7 @@ var RangeCalendar = function (_React$Component) {
             clearIcon: clearIcon,
             tabIndex: '0',
             onInputBlur: onStartInputBlur
-          })),
+          }, leftPanelValue)),
           _react2["default"].createElement(
             'span',
             { className: prefixCls + '-range-middle' },
@@ -310,6 +314,8 @@ var RangeCalendar = function (_React$Component) {
             tabIndex: '0',
             inputTabIndex: '-1',
             onInputBlur: onEndInputBlur
+          }, rightPanelValue, {
+            noCurrentDate: true
           }))
         ),
         _react2["default"].createElement(
@@ -629,7 +635,7 @@ var _initialiseProps = function _initialiseProps() {
   this.onToday = function () {
     var startValue = (0, _util.getTodayTime)(_this2.state.value[0]);
     var endValue = startValue.clone().add(1, 'months');
-    _this2.setState({ value: [startValue, endValue] });
+    _this2.setState({ value: [startValue, endValue], panelValues: null });
   };
 
   this.onOpenTimePicker = function () {
@@ -683,13 +689,13 @@ var _initialiseProps = function _initialiseProps() {
   this.onStartValueChange = function (leftValue) {
     var value = [].concat(_toConsumableArray(_this2.state.value));
     value[0] = leftValue;
-    return _this2.fireValueChange(value);
+    return _this2.fireValueChange(value, 'left');
   };
 
   this.onEndValueChange = function (rightValue) {
     var value = [].concat(_toConsumableArray(_this2.state.value));
     value[1] = rightValue;
-    return _this2.fireValueChange(value);
+    return _this2.fireValueChange(value, 'right');
   };
 
   this.onStartPanelChange = function (value, mode) {
@@ -842,6 +848,7 @@ var _initialiseProps = function _initialiseProps() {
       var endValue = selectedValue[1] || startValue.clone().add(1, 'months');
       _this2.setState({
         selectedValue: selectedValue,
+        panelValues: null,
         value: getValueFromSelectedValue([startValue, endValue])
       });
     }
@@ -862,15 +869,19 @@ var _initialiseProps = function _initialiseProps() {
         firstSelectedValue: null
       });
       _this2.fireHoverValueChange([]);
-      _this2.props.onSelect(selectedValue, cause);
+      // 第三个参数标识是否是从rangePicker传过去的
+      _this2.props.onSelect(selectedValue, cause, true);
     }
   };
 
-  this.fireValueChange = function (value) {
+  this.fireValueChange = function (value, direction) {
+    var panelValues = _this2.state.panelValues;
+
     var props = _this2.props;
     if (!('value' in props)) {
       _this2.setState({
-        value: value
+        value: value,
+        panelValues: direction === 'left' && panelValues ? [null, panelValues[1]] : direction === 'right' && panelValues ? [panelValues[0], null] : null
       });
     }
     props.onValueChange(value);

@@ -89,10 +89,11 @@ var MonthPicker = function (_Component) {
 
   MonthPicker.prototype.componentDidMount = function componentDidMount() {
     var value = this.props.value || this.props.defaultValue;
+    var format = this.props.format;
     if (value) {
       if (typeof value == 'string') {
-        if ((0, _moment2["default"])(value).isValid()) {
-          value = (0, _moment2["default"])(value);
+        if ((0, _moment2["default"])(value, format).isValid()) {
+          value = (0, _moment2["default"])(value, format);
         } else {
           console.error('value is not in the correct format');
           value = '';
@@ -114,7 +115,7 @@ var MonthPicker = function (_Component) {
       var value = nextProps.value;
       if (value) {
         if (value.format && value.isValid()) {} else {
-          value = (0, _moment2["default"])(value);
+          value = (0, _moment2["default"])(value, this.props.format);
         }
       } else {
         value = '';
@@ -160,7 +161,17 @@ var MonthPicker = function (_Component) {
         function (_ref) {
           var value = _ref.value;
 
-          if (value && value.format) value = (0, _util.formatDate)(value, props.format);
+          var propsValStr = void 0;
+          if (value && value.format && value.isValid()) {
+            value = typeof value != 'string' ? (0, _util.formatDate)(value, props.format) : value;
+            propsValStr = typeof props.value != 'string' ? (0, _util.formatDate)(props.value, props.format) : props.value;
+            // 为了避免在输入框内输入月份的过程中显示invalid date
+            if (value != propsValStr && propsValStr.length != 0) {
+              value = props.value;
+            }
+          } else {
+            value = props.value;
+          }
           return _react2["default"].createElement(
             _beeInputGroup2["default"],
             { simple: true, className: "datepicker-input-group",
