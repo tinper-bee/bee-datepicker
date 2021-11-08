@@ -9,13 +9,13 @@ function noop() {}
 function goMonth(direction) {
   const next = this.props.value.clone();
   next.add(direction, 'months');
-  this.props.onValueChange(next);
+  this.props.onValueChange(next, false);
 }
 
 function goYear(direction) {
   const next = this.props.value.clone();
   next.add(direction, 'years');
-  this.props.onValueChange(next);
+  this.props.onValueChange(next, false);
 }
 
 function showIf(condition, el) {

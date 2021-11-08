@@ -30,8 +30,12 @@ function disabledYear(current) {
     return current && current > moment().endOf('year');
 }
 
-function disabledDateTime() {
-  return {
+function disabledDateTime(_) {
+  return _.get('month')<= 6 ? {
+    disabledHours: () => range(0, 24).splice(4, 2),
+    disabledMinutes: () => range(0, 30),
+    disabledSeconds: () => [55, 56],
+  } : {
     disabledHours: () => range(0, 24).splice(4, 20),
     disabledMinutes: () => range(30, 60),
     disabledSeconds: () => [55, 56],

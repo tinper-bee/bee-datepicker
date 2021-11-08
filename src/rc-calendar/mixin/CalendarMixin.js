@@ -95,7 +95,7 @@ export const calendarMixinWrapper = ComposeComponent => class extends ComposeCom
     // }
   }
 
-  setValue = (value) => {
+  setValue = (value, shouldChange=true) => {
     const originalValue = this.state.value;
     if (!('value' in this.props)) {
       this.setState({
@@ -108,7 +108,7 @@ export const calendarMixinWrapper = ComposeComponent => class extends ComposeCom
       (!originalValue && value) ||
       (originalValue && !value)
     ) {
-      this.props.onChange(value);
+      this.props.onChange(value, shouldChange);
     }
   }
 

@@ -175,11 +175,11 @@ class DatePicker extends Component {
         },200);
       }
   };
-  
-  handleCalendarChange = (value) => {
+
+  handleCalendarChange = (value, shouldChange) => {
       const props = this.props;
-      this.setState({ value: value,inputValue:(value && this.getValue(value)) || '' });
-      this.fireChange(value, (value && this.getValue(value)) || '');
+      this.setState({ value, inputValue:(value && this.getValue(value)) || '' });
+      shouldChange && this.fireChange(value, (value && this.getValue(value)) || '');
   }
   handleChange = value => {
     const props = this.props;

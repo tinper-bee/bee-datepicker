@@ -385,10 +385,10 @@ var _initialiseProps = function _initialiseProps() {
     }
   };
 
-  this.handleCalendarChange = function (value) {
+  this.handleCalendarChange = function (value, shouldChange) {
     var props = _this3.props;
     _this3.setState({ value: value, inputValue: value && _this3.getValue(value) || '' });
-    _this3.fireChange(value, value && _this3.getValue(value) || '');
+    shouldChange && _this3.fireChange(value, value && _this3.getValue(value) || '');
   };
 
   this.handleChange = function (value) {

@@ -58,15 +58,15 @@
 	
 	var _beePanel = __webpack_require__(9);
 	
-	var _beeDrawer = __webpack_require__(69);
+	var _beeDrawer = __webpack_require__(70);
 	
 	var _beeDrawer2 = _interopRequireDefault(_beeDrawer);
 	
-	var _beeClipboard = __webpack_require__(83);
+	var _beeClipboard = __webpack_require__(84);
 	
 	var _beeClipboard2 = _interopRequireDefault(_beeClipboard);
 	
-	var _src = __webpack_require__(297);
+	var _src = __webpack_require__(296);
 	
 	var _src2 = _interopRequireDefault(_src);
 	
@@ -80,7 +80,7 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
 	
-	var Demo1 = __webpack_require__(541);var Demo2 = __webpack_require__(542);var Demo3 = __webpack_require__(543);var Demo4 = __webpack_require__(544);var Demo5 = __webpack_require__(545);var Demo6 = __webpack_require__(546);var Demo7 = __webpack_require__(669);var Demo8 = __webpack_require__(670);var Demo9 = __webpack_require__(765);var Demo10 = __webpack_require__(766);var Demo11 = __webpack_require__(767);var Demo12 = __webpack_require__(768);var Demo13 = __webpack_require__(769);var DemoArray = [{ "example": _react2['default'].createElement(Demo1, null), "title": " 选择日期", "code": "/**\r\n *\r\n * @title 选择日期\r\n * @description 以「日期」为基本单位，基础的日期选择控件\r\n */\r\n\r\nimport React, {Component} from \"react\";\nimport { Row, Col } from 'tinper-bee';\r\n\nimport DatePicker from \"bee-datepicker\";\r\nimport moment from \"moment\";\r\nconst format = [\"YYYY.MM.DD\",\"DD.MM.YYYY\",\"YYYYMMDD\",\"DDMMYYYY\"];\r\nconst dateInputPlaceholder = \"选择日期\";\r\n\r\nclass Demo1 extends Component {\r\n    constructor(props) {\r\n        super(props);\r\n        this.state = {value: '2019-09-09'}\r\n    }\r\n    onSelect = (d, dataString)  => {\r\n        console.log('select')\r\n        console.log(d, dataString);\r\n    }\r\n    onChange = (d, dataString) => {\r\n        console.log('change')\r\n        console.log(d, dataString)\r\n    };\r\n\r\n    render() {\r\n        let value = this.state.value;\r\n        let {format = ['YYYY-MM-DD', 'YYYYMMDD', 'YYYY.MM.DD', 'YYYY/MM/DD'], } = this.props;\r\n        var self = this;\r\n        return (\r\n            <div>\r\n                <Row>\r\n                    <Col md={6}>\r\n                        <DatePicker\r\n                            animation=\"\"\r\n                            format={format}\r\n                            onChange={this.onChange}\r\n                            value={value ? moment(value) : null}\r\n                        />\r\n\r\n                    </Col>\r\n                </Row>\r\n            </div>\r\n        );\r\n    }\r\n}\r\n\r\nexport default Demo1;\r\n", "desc": " 以「日期」为基本单位，基础的日期选择控件" }, { "example": _react2['default'].createElement(Demo2, null), "title": " 禁用日期", "code": "/**\r\n *\r\n * @title 禁用日期\r\n * @description 设置 disabled\r\n */\r\n\r\nimport React, {Component} from \"react\";\nimport { Row, Col } from 'tinper-bee';\r\n\nimport DatePicker from \"bee-datepicker\";\r\nimport moment from \"moment\";\r\n\r\nconst format = \"YYYY-MM-DD dddd\";\r\nconst dateInputPlaceholder = \"选择日期\";\r\n\r\nclass Demo2 extends Component {\r\n    onSelect = d => {\r\n        console.log(d);\r\n    }\r\n    onChange = (d, dataString) => {\r\n        console.log(dataString);\r\n    };\r\n    render() {\r\n        var self = this;\r\n        return (\r\n            <div>\r\n                <Row>\r\n                    <Col md={6}>\r\n                        <DatePicker\r\n                            format={format}\r\n                            onSelect={this.onSelect}\r\n                            onChange={this.onChange}\r\n                            disabled\r\n                            defaultValue={moment()}\r\n                        />\r\n                    </Col>\r\n                </Row>\r\n            </div>\r\n        );\r\n    }\r\n}\r\n\r\nexport default Demo2;\r\n", "desc": " 设置 disabled" }, { "example": _react2['default'].createElement(Demo3, null), "title": " 不可选择日期和时间", "code": "/**\r\n *\r\n * @title 不可选择日期和时间\r\n * @description 可用 disabledDate 和 disabledTime 分别禁止选择部分日期和时间，其中 disabledTime 需要和 showTime 一起使用。\r\n */\r\n\r\nimport React, { Component } from \"react\";\nimport {  Row, Col  } from 'tinper-bee';\r\n\nimport DatePicker from \"bee-datepicker\";\r\nimport moment from \"moment\";\r\nimport YearPicker from \"bee-datepicker/build/YearPicker\";\r\n\r\nconst { MonthPicker, RangePicker } = DatePicker;\r\n\r\nfunction range(start, end) {\r\n  const result = [];\r\n  for (let i = start; i < end; i++) {\r\n    result.push(i);\r\n  }\r\n  return result;\r\n}\r\n\r\nfunction disabledDate(current) {\r\n  // Can not select days before today and today\r\n  return current && current < moment().endOf('day');\r\n}\r\n\r\nfunction disabledYear(current) {\r\n    // Can not select days before year and year\r\n    return current && current > moment().endOf('year');\r\n}\r\n\r\nfunction disabledDateTime() {\r\n  return {\r\n    disabledHours: () => range(0, 24).splice(4, 20),\r\n    disabledMinutes: () => range(30, 60),\r\n    disabledSeconds: () => [55, 56],\r\n  };\r\n}\r\n\r\nfunction disabledRangeTime(_, type) {\r\n  if (type === 'start') {\r\n    return {\r\n      disabledHours: () => range(0, 60).splice(4, 20),\r\n      disabledMinutes: () => range(30, 60),\r\n      disabledSeconds: () => [55, 56],\r\n    };\r\n  }\r\n  return {\r\n    disabledHours: () => range(0, 60).splice(20, 4),\r\n    disabledMinutes: () => range(0, 31),\r\n    disabledSeconds: () => [55, 56],\r\n  };\r\n}\r\n\r\nclass Demo3 extends Component {\r\n  render() {\r\n    return (\r\n      <div className='demo3'>\r\n        <Row className='demo3-item'>\r\n            <DatePicker\r\n              placeholder=\"选择日期\"\r\n              format=\"YYYY-MM-DD HH:mm:ss\"\r\n              disabledDate={disabledDate}\r\n              disabledTime={disabledDateTime}\r\n              showTime={{ defaultValue: moment('00:00:00', 'HH:mm:ss') }}\r\n            />\r\n        </Row>\r\n          <Row className='demo3-item'>\r\n              <YearPicker\r\n                  placeholder=\"选择年\"\r\n                  format=\"YYYY\"\r\n                  disabledYear={disabledYear}\r\n                  showTime={{ defaultValue: moment().format('YYYY') }}\r\n              />\r\n          </Row>\r\n        <Row className='demo3-item'>\r\n            <MonthPicker disabledDate={disabledDate} placeholder=\"选择月份\" />\r\n        </Row>\r\n        <Row className='demo3-item'>\r\n            <RangePicker\r\n              placeholder={'开始 ~ 结束'}\r\n              disabledDate={disabledDate}\r\n              disabledTime={disabledRangeTime}\r\n              showTime={{\r\n                hideDisabledOptions: true,\r\n                defaultValue: [moment('00:00:00', 'HH:mm:ss'), moment('11:59:59', 'HH:mm:ss')],\r\n              }}\r\n              format=\"YYYY-MM-DD HH:mm:ss\"\r\n            />\r\n        </Row>\r\n      </div>\r\n    );\r\n  }\r\n}\r\n\r\nexport default Demo3;\r\n", "desc": " 可用 disabledDate 和 disabledTime 分别禁止选择部分日期和时间，其中 disabledTime 需要和 showTime 一起使用。", "scss_code": ".demo3{\r\n    >.demo3-item{\r\n        margin: 0;\r\n        margin-bottom: 20px!important;\r\n    }\r\n}" }, { "example": _react2['default'].createElement(Demo4, null), "title": " 选择年，年月，周，日期范围", "code": "/**\r\n *\r\n * @title 选择年，年月，周，日期范围\r\n * @description 选择年，年月，周，日期范围基本示例\r\n */\r\n\r\nimport React, { Component } from \"react\";\nimport {  Row, Col  } from 'tinper-bee';\r\n\nimport DatePicker from \"bee-datepicker\";\r\nimport moment from \"moment\";\r\nimport zhCN from \"bee-datepicker/build/locale/zh_CN\";\r\nconst { YearPicker,MonthPicker,WeekPicker,RangePicker } = DatePicker;\r\n\r\n\r\nclass Demo4 extends Component {\r\n    onChange = (d, dataString) => {\r\n        console.log('change')\r\n        console.log(d);\r\n        console.log(dataString);\r\n    };\r\n    onSelect = d => {\r\n        console.log('select')\r\n        console.log(d);\r\n    }\r\n    onClear = () => {\r\n        console.log('clear')\r\n    }\r\n    /**\r\n     *@param e 事件对象\r\n     *@param startValue 开始时间\r\n     *@param array 包含开始时间和结束时间的数组\r\n     */\r\n    onStartInputBlur = (e,startValue,array) => {\r\n        console.log('RangePicker面板 左输入框的失焦事件',startValue,array)\r\n    }\r\n    /**\r\n     *@param e 事件对象\r\n     *@param endValue 结束时间\r\n     *@param array 包含开始时间和结束时间的数组\r\n     */\r\n    onEndInputBlur = (e,endValue,array) => {\r\n        console.log('RangePicker面板 右输入框的失焦事件',endValue,array)\r\n    }\r\n    render() {\r\n        return (\r\n            <div>\r\n                <Row style={{'marginBottom':'10px'}}>\r\n                    <Col md={6}>\r\n                        <YearPicker\r\n                            format=\"YYYY\"\r\n                            onChange={this.onChange}\r\n                            onSelect={this.onSelect}\r\n                            locale={zhCN}\r\n                            placeholder=\"选择年\"\r\n                            defaultValue={moment()}\r\n                            showClose={false}\r\n                        />\r\n                    </Col>\r\n                    <Col md={6} style={{'marginBottom':'10px'}}>\r\n                        <MonthPicker\r\n                            format='YYYY-MM'\r\n                            onSelect={this.onSelect}\r\n                            onChange={this.onChange}\r\n                            locale={zhCN}\r\n                            defaultValue={moment()}\r\n                            placeholder=\"选择年月\"\r\n                            onClear={this.onClear} \r\n                            showClose={false}\r\n                        />\r\n                    </Col>\r\n                    <Col md={6} style={{'marginBottom':'10px'}}>\r\n                        <WeekPicker \r\n                        defaultValue={moment()}\r\n                        onSelect={this.onSelect}\r\n                        onChange={this.onChange}\r\n                        placeholder=\"选择周\" \r\n                        showClose={false}\r\n                        />\r\n                    </Col>\r\n                    <Col md={6} style={{'marginBottom':'10px'}}>\r\n                        <RangePicker\r\n                            placeholder={'开始 ~ 结束'}\r\n                            dateInputPlaceholder={['开始', '结束']}\r\n                            showClear={true}\r\n                            onChange={this.onChange}\r\n                            onPanelChange={(v)=>{console.log('onPanelChange',v)}}\r\n                            showClose={true}\r\n                            onStartInputBlur={this.onStartInputBlur}\r\n                            onEndInputBlur={this.onEndInputBlur}\r\n                        />\r\n                    </Col>\r\n                </Row>\r\n            </div>\r\n        );\r\n    }\r\n}\r\n\r\nexport default Demo4;\r\n", "desc": " 选择年，年月，周，日期范围基本示例" }, { "example": _react2['default'].createElement(Demo5, null), "title": " 动态的改变时间", "code": "/**\r\n *\r\n * @title 动态的改变时间\r\n * @description 以「日期时间」为基本单位，基础的日期时间选择控件\r\n */\r\n\r\nimport React, { Component } from \"react\";\nimport { Button,  Row, Col  } from 'tinper-bee';\r\nimport DatePicker from \"bee-datepicker\";\r\nimport moment from \"moment\";\r\nimport zhCN from \"bee-datepicker/build/locale/zh_CN\";\r\n\n\nconst format = \"YYYY-MM-DD HH:mm:ss\";\r\nconst dateInputPlaceholder = \"选择日期\";\r\n\r\nclass Demo5 extends Component {\r\n  constructor(props) {\r\n    super(props);\r\n    this.state = {\r\n      value: moment()\r\n    };\r\n  }\r\n\r\n  handleChange = value => {\r\n    this.setState({\r\n      value: value\r\n    });\r\n  };\r\n  onSelect = d => {\r\n    console.log(d);\r\n  };\r\n\r\n  handlerChangeDate = () => {\r\n    this.setState({\r\n      value: moment(\"2011-11-11 11:11:11\")\r\n    });\r\n    console.log(\"click\");\r\n  };\r\n  render() {\r\n    return (\r\n      <div>\r\n        <Row>\r\n          <Col md={6}>\r\n            <DatePicker\r\n              format={format}\r\n              locale={zhCN}\r\n              onSelect={this.onSelect}\r\n              onChange={this.handleChange}\r\n              value={this.state.value}\r\n              placeholder={dateInputPlaceholder}\r\n            />\r\n          </Col>\r\n          <Col md={3}>\r\n            <Button onClick={this.handlerChangeDate}>变</Button>\r\n          </Col>\r\n        </Row>\r\n      </div>\r\n    );\r\n  }\r\n}\r\n\r\nexport default Demo5;\r\n", "desc": " 以「日期时间」为基本单位，基础的日期时间选择控件" }, { "example": _react2['default'].createElement(Demo6, null), "title": " 自定义日期渲染父级容器\t", "code": "/**\r\n *\r\n * @title 自定义日期渲染父级容器\t\r\n * @description getCalendarContainer自定义浮层渲染的父容器。该属性常用来将组件渲染到滚动区域内。\r\n */\r\n\r\nimport React, { Component } from \"react\";\nimport { Table } from 'tinper-bee';\r\nimport DatePicker from \"bee-datepicker\";\r\n\n\r\nconst dataSource = [\r\n    { a: \"ASVAL_20190328\", b: \"小张\", c: \"\", key: \"1\" },\r\n    { a: \"ASVAL_20190320\", b: \"小明\", c: \"\", key: \"2\" },\r\n    { a: \"ASVAL_20190312\", b: \"小红\", c: \"\", key: \"3\" },\r\n    { a: \"ASVAL_20190328\", b: \"小张\", c: \"\", key: \"4\" },\r\n    { a: \"ASVAL_20190320\", b: \"小明\", c: \"\", key: \"5\" },\r\n    { a: \"ASVAL_20190312\", b: \"小红\", c: \"\", key: \"6\" },\r\n    { a: \"ASVAL_20190328\", b: \"小张\", c: \"\", key: \"7\" },\r\n    { a: \"ASVAL_20190320\", b: \"小明\", c: \"\", key: \"8\" },\r\n    { a: \"ASVAL_20190312\", b: \"小红\", c: \"\", key: \"9\" },\r\n    { a: \"ASVAL_20190328\", b: \"小张\", c: \"\", key: \"10\" },\r\n    { a: \"ASVAL_20190320\", b: \"小明\", c: \"\", key: \"11\" },\r\n    { a: \"ASVAL_20190312\", b: \"小红\", c: \"\", key: \"12\" }\r\n];\r\n\r\nclass Demo6 extends Component {\r\n    constructor(props) {\r\n        super(props);\r\n    }\r\n    columns = [\r\n        { title: \"员工编号\", dataIndex: \"a\", key: \"a\", width: 150 },\r\n        { title: \"员工姓名\", dataIndex: \"b\", key: \"b\", width:100},\r\n        { title: \"出生日期\", dataIndex: \"c\", key: \"c\", render: () => {\r\n            return (\r\n                <DatePicker \r\n                placeholder=\"选择日期\"\r\n                showToday={false}\r\n                getCalendarContainer={trigger => trigger.parentNode} \r\n                />\r\n            )\r\n        }},\r\n        { title: \"\", dataIndex: \"\", key: \"\"}\r\n    ];\r\n    render() {\r\n        return (\r\n            <Table data={dataSource} columns={this.columns} scroll={{ y: 300 }} height={40}/>\r\n        );\r\n    }\r\n}\r\n\r\nexport default Demo6;\r\n", "desc": " getCalendarContainer自定义浮层渲染的父容器。该属性常用来将组件渲染到滚动区域内。" }, { "example": _react2['default'].createElement(Demo7, null), "title": " 自定义展示日期面板，外层输入框可输入", "code": "/**\r\n *\r\n * @title 自定义展示日期面板，外层输入框可输入\r\n * @description open设置面板展开收起，keyboardInput外层input是否可输入，showDateInput是否显示内层input\r\n */\r\n\r\nimport React, {Component} from \"react\";\nimport { Icon, Row, Col } from 'tinper-bee';\r\n\nimport DatePicker from \"bee-datepicker\";\r\nimport zhCN from \"bee-datepicker/build/locale/zh_CN\";\r\nimport enUS from \"bee-datepicker/build/locale/en_US\";\r\nimport moment from \"moment\";\r\n\nimport 'moment/locale/zh-cn';\r\n\r\nmoment.locale('zh-cn');\r\n\r\nconst format = \"YYYY-MM-DD\";\r\n\r\nconst dateInputPlaceholder = \"选择日期\";\r\n\r\nclass Demo7 extends Component {\r\n    constructor(props) {\r\n        super(props);\r\n        this.state = {\r\n            value: '',\r\n            open: false\r\n        };\r\n    }\r\n    onSelect = d=> {\r\n        console.log(d);\r\n    }\r\n    onChange = (d, dataString) => {\r\n        console.log(d, dataString)\r\n    };\r\n    onOpenChange = open => {\r\n        console.log(open)\r\n    }\r\n    open = d => {\r\n        this.setState({\r\n            open: !this.state.open\r\n        })\r\n    }\r\n    onClick = (e,d,str) => {\r\n        console.log(d);\r\n    }\r\n    outInputKeydown = ()=>{\r\n        console.log('keydown')\r\n    }\r\n    render() {\r\n        return (\r\n            <div>\r\n                <Row>\r\n                    <Col md={6}>\r\n                        <DatePicker\r\n                            format={format}\r\n                            onSelect={this.onSelect}\r\n                            onChange={this.onChange}\r\n                            locale={zhCN}\r\n                            open={this.state.open}\r\n                            defaultValue={moment('2018-01-01')}\r\n                            onOpenChange={this.onOpenChange}\r\n                            placeholder={dateInputPlaceholder}\r\n                            className={\"Demo7\"}\r\n                            onClick={this.onClick}\r\n                            keyboardInput={true}\r\n                            showDateInput={false}\r\n                        />\r\n                    </Col>\r\n                    <Col md={3}>\r\n                        <button className=\"u-button\" onClick={this.open}>展开面板</button>\r\n                    </Col>\r\n                </Row>\r\n            </div>\r\n        );\r\n    }\r\n}\r\n\r\nexport default Demo7;\r\n", "desc": " open设置面板展开收起，keyboardInput外层input是否可输入，showDateInput是否显示内层input" }, { "example": _react2['default'].createElement(Demo8, null), "title": " 自定义展示日期面板，外层输入框可输入，配合form使用", "code": "/**\r\n *\r\n * @title 自定义展示日期面板，外层输入框可输入，配合form使用\r\n * @description open设置面板展开收起，keyboardInput外层input是否可输入，showDateInput是否显示内层input\r\n */\r\n\r\nimport React, {Component} from \"react\";\nimport { Form, Row, Col } from 'tinper-bee';\r\n\nimport DatePicker from \"bee-datepicker\";\r\nimport zhCN from \"bee-datepicker/build/locale/zh_CN\";\r\nimport enUS from \"bee-datepicker/build/locale/en_US\";\r\nimport moment from \"moment\";\r\nimport 'moment/locale/zh-cn';\r\n\n\r\nmoment.locale('zh-cn');\r\n\r\nconst format = \"YYYY-MM-DD\";\r\n\r\nconst dateInputPlaceholder = \"选择日期\";\r\n\r\n\r\nclass Demo8 extends Component {\r\n    constructor(props) {\r\n        super(props);\r\n        this.state = {\r\n            value: '',\r\n            open: false\r\n        };\r\n    }\r\n    onOpenChange = open => {\r\n        console.log(open)\r\n    }\r\n    open = d => {\r\n        this.setState({\r\n            open: !this.state.open\r\n        })\r\n    }\r\n    onClick = (e,d,str) => {\r\n        console.log(d);\r\n    }\r\n    onSelect(d) {\r\n        console.log(\"select:\"+d);\r\n    }\r\n    outInputKeydown = ()=>{\r\n        console.log('keydown')\r\n    }\r\n    onChange = (d, dataString) => {\r\n        console.log(d, dataString)\r\n    };\r\n    submit = (e) => {\r\n        this.props.form.validateFields((err, values) => {\r\n            if (err) {\r\n                console.log('校验失败', values);\r\n            } else {\r\n                console.log('提交成功', values, moment(values.date).format('YYYY-MM-DD'));\r\n            }\r\n        });\r\n    }\r\n    render() {\r\n        var self = this; \r\n        const { getFieldProps, getFieldError } = this.props.form;\r\n        return (\r\n            <div>\r\n                <Row>\r\n                    <Col md={6}>\r\n                        <DatePicker\r\n                            format={format}\r\n                            onSelect={this.onSelect}\r\n                            onChange={this.onChange}\r\n                            locale={zhCN}\r\n                            open={this.state.open}\r\n                            onOpenChange={this.onOpenChange.bind(this)}\r\n                            placeholder={dateInputPlaceholder}\r\n                            className={\"demo11\"}\r\n                            onClick={this.onClick}\r\n                            keyboardInput={true}\r\n                            showDateInput={false}\r\n                            iconClick={this.open}\r\n                            outInputKeydown={this.outInputKeydown}\r\n                        />\r\n                    </Col>\r\n                    <Col md={3}>\r\n                        <button className=\"u-button\" onClick={this.open}>展开/收起面板</button>\r\n                        <button className=\"u-button\" onClick={this.submit}>获得值</button>\r\n                    </Col>\r\n                </Row>\r\n            </div>\r\n        );\r\n    }\r\n}\r\n\r\nexport default Form.createForm()(Demo8);\r\n", "desc": " open设置面板展开收起，keyboardInput外层input是否可输入，showDateInput是否显示内层input" }, { "example": _react2['default'].createElement(Demo9, null), "title": " 额外的页脚", "code": "/**\r\n *\r\n * @title 额外的页脚\r\n * @description 在浮层中加入额外的页脚，以满足某些定制信息的需求。\r\n */\r\n\r\nimport React, {Component} from \"react\";\nimport { Row, Col } from 'tinper-bee';\r\n\nimport DatePicker from \"bee-datepicker\";\r\n\r\nconst { RangePicker, MonthPicker } = DatePicker;\r\n\r\nclass Demo9 extends Component {\r\n    render() {\r\n        return (\r\n            <div className=\"demo9\">\r\n                <Row>\r\n                    <Col md={6}>\r\n                        <DatePicker renderFooter={() => '额外页脚'} placeholder=\"选择日期\"/>\r\n                    </Col>\r\n                    \r\n                    <Col md={6}>\r\n                        <DatePicker renderFooter={() => '额外页脚'} showTime placeholder=\"选择日期\"/>\r\n                    </Col>\r\n                    \r\n                    <Col md={6}>\r\n                        <RangePicker renderFooter={() => '额外页脚'} placeholder={'开始 ~ 结束'}/>\r\n                    </Col>\r\n                    \r\n                    <Col md={6}>\r\n                        <RangePicker renderFooter={() => '额外页脚'} showTime placeholder={'开始 ~ 结束'}/>\r\n                    </Col>\r\n                    \r\n                    <Col md={6}>\r\n                        <MonthPicker renderFooter={() => '额外页脚'} placeholder=\"选择月\" />\r\n                    </Col>\r\n                </Row>\r\n            </div>\r\n        );\r\n    }\r\n}\r\n\r\nexport default Demo9;\r\n", "desc": " 在浮层中加入额外的页脚，以满足某些定制信息的需求。", "scss_code": ".demo9 {\r\n    .u-row .u-col-md-6 {\r\n        margin-bottom: 10px;\r\n    }\r\n}" }, { "example": _react2['default'].createElement(Demo10, null), "title": " 使用normal格式化", "code": "/**\r\n *\r\n * @title 使用normal格式化\r\n * @description 配合form 使用normal格式化，已 MothPicker 为例\r\n */\r\n\r\nimport React, { Component } from \"react\";\nimport { Form,  Row, Col  } from 'tinper-bee';\r\n\nimport DatePicker from \"bee-datepicker\";\r\n\n\r\nconst { MonthPicker } = DatePicker;\r\n\r\n\r\nclass Demo4 extends Component {\r\n    submit = (e) => {\r\n        this.props.form.validateFields((err, values) => {\r\n            if (err) {\r\n                console.log('校验失败', values);\r\n            } else {\r\n                console.log('提交成功', values);\r\n            }\r\n        });\r\n    }\r\n    render() {\r\n        const { getFieldProps, getFieldError } = this.props.form;\r\n        return (\r\n            <div>\r\n                <Row style={{'marginBottom':'10px'}}>\r\n                    <Col md={6} style={{'marginBottom':'10px'}}>\r\n                        <MonthPicker\r\n                            format=\"YYYY-MM\"\r\n                            {...getFieldProps('date', {\r\n                                validateTrigger: 'onBlur',\r\n                                initialValue:null,\r\n                                normalize:(value)=>{\r\n                                    if(value&&value.format){\r\n                                        return value.format('YYYY-MM')\r\n                                    }else{\r\n                                        return value\r\n                                    }\r\n                                },\r\n                                rules: [{\r\n                                    required: true, message: '请输入日期',\r\n                                }],\r\n                            }) }\r\n                        />\r\n                    </Col>\r\n                    <button className=\"u-button\" onClick={this.submit}>获得值</button>\r\n                </Row>\r\n            </div>\r\n        );\r\n    }\r\n}\r\n\r\nexport default Form.createForm()(Demo4);\r\n", "desc": " 配合form 使用normal格式化，已 MothPicker 为例" }, { "example": _react2['default'].createElement(Demo11, null), "title": " 配合form使用", "code": "/**\r\n *\r\n * @title 配合form使用\r\n * @description 各类型组件配合form使用，注意事项\r\n */\r\n\r\nimport React, { Component } from \"react\";\nimport { Button, Form,  Row  } from 'tinper-bee';\r\n\nimport DatePicker from \"bee-datepicker\";\r\n\n\n\r\nconst { YearPicker,MonthPicker,WeekPicker,RangePicker } = DatePicker;\r\n\r\nclass Demo11 extends Component {\r\n    constructor(props){\r\n        super(props);\r\n        this.state={\r\n          initialValues:{\r\n            \r\n          }  \r\n        }\r\n    }\r\n\r\n    componentWillMount(){\r\n        //如果初始值需要接口返回，则需要在组件初始化之前，获得初始值。 这里模拟设置初始值\r\n        this.setState({\r\n            initialValues:{\r\n                date:'2019-02-03',\r\n                dateTime:'2009-10-11 12:13:14',\r\n                month:'2019-12',\r\n                year:'2019',\r\n                week:'2019-45',\r\n                range:['2019-11-12','2019-12-13']\r\n            }\r\n        })\r\n    }\r\n\r\n\r\n    submit = (e) => {\r\n        this.props.form.validateFields((err, values) => {\r\n            if (err) {\r\n                console.log('校验失败', values);\r\n            } else {\r\n                console.log('提交成功', values);\r\n            }\r\n        });\r\n    }\r\n\r\n    change=()=>{\r\n        this.setState({\r\n            initialValues:{\r\n                date:'2020-10-10',\r\n                dateTime:'2020-10-10 10:10:10',\r\n                month:'2020-10',\r\n                year:'2020',\r\n                week:'2020-20',\r\n                range:['2020-10-10','2020-12-12']\r\n            }\r\n        })\r\n    }\r\n    reset=()=>{\r\n        //此方法将所有元素还原到初始值。即还原到 componentWillMount 设置的值。\r\n        // 注意：this.props.form.resetFields() 并不是清空值，而是还原到 initialValue 的值\r\n        this.props.form.resetFields()\r\n    }\r\n\r\n    render() {\r\n        const { getFieldProps, getFieldError } = this.props.form;\r\n        return (\r\n            <div className='demo11'>\r\n                <Row className='demo11-item'>\r\n                    <DatePicker\r\n                        format='YYYY-MM-DD'\r\n                        {\r\n                            ...getFieldProps('date',{\r\n                                initialValue:this.state.initialValues.date,\r\n                                normalize:(value)=>{\r\n                                    if(value&&value.format){\r\n                                        return value.format('YYYY-MM-DD')\r\n                                    }else{\r\n                                        return value\r\n                                    }\r\n                                },\r\n                            })\r\n                        }\r\n                    />\r\n                </Row>\r\n                <Row className='demo11-item'>\r\n                    <DatePicker\r\n                        format='YYYY-MM-DD hh:mm:ss'\r\n                        showTime={true}\r\n                        {\r\n                            ...getFieldProps('dateTime',{\r\n                                initialValue:this.state.initialValues.dateTime,\r\n                                normalize:(value)=>{\r\n                                    if(value&&value.format){\r\n                                        return value.format('YYYY-MM-DD hh:mm:ss')\r\n                                    }else{\r\n                                        return value\r\n                                    }\r\n                                },\r\n                            })\r\n                        }\r\n                    />\r\n                </Row>\r\n                <Row className='demo11-item'>\r\n                    <MonthPicker\r\n                        format='YYYY-MM'\r\n                        {\r\n                            ...getFieldProps('month',{\r\n                                initialValue:this.state.initialValues.month,\r\n                                normalize:(value)=>{\r\n                                    if(value&&value.format){\r\n                                        return value.format('YYYY-MM')\r\n                                    }else{\r\n                                        return value\r\n                                    }\r\n                                },\r\n                            })\r\n                        }\r\n                    />\r\n                </Row>\r\n                <Row className='demo11-item'>\r\n                    <YearPicker\r\n                        format='YYYY'\r\n                        {\r\n                            ...getFieldProps('year',{\r\n                                initialValue:this.state.initialValues.year,\r\n                                normalize:(value)=>{\r\n                                    if(value&&value.format){\r\n                                        return value.format('YYYY')\r\n                                    }else{\r\n                                        return value\r\n                                    }\r\n                                },\r\n                            })\r\n                        }\r\n                    />\r\n                </Row>\r\n                <Row className='demo11-item'>\r\n                    <WeekPicker\r\n                        format='YYYY-WW'\r\n                        {\r\n                            ...getFieldProps('week',{\r\n                                initialValue:this.state.initialValues.week,\r\n                                normalize:(value)=>{\r\n                                    if(value&&value.format){\r\n                                        return value.format('YYYY-WW')\r\n                                    }else{\r\n                                        return value\r\n                                    }\r\n                                },\r\n                            })\r\n                        }\r\n                    />\r\n                </Row>\r\n                <Row className='demo11-item'>\r\n                    <RangePicker\r\n                        format='YYYY-MM-DD'\r\n                        {\r\n                            ...getFieldProps('range',{\r\n                                initialValue:this.state.initialValues.range,\r\n                                normalize:(value)=>{\r\n                                    let values = [];\r\n                                    if(value[0]&&value[0].format){\r\n                                        values.push(value[0].format('YYYY-MM-DD')||'')\r\n                                    }else{\r\n                                        values.push(value[0]||'')\r\n                                    }\r\n                                    if(value[1]&&value[1].format){\r\n                                        values.push(value[1].format('YYYY-MM-DD')||'')\r\n                                    }else{\r\n                                        values.push(value[1]||'')\r\n                                    }\r\n                                    return values;\r\n                                },\r\n                            })\r\n                        }\r\n                    />\r\n                </Row>\r\n                <Row className='demo11-item'>\r\n                    <Button className='options-btns' colors='primary' onClick={this.change}>改变初始值</Button>\r\n                    <Button className='options-btns' colors='primary' onClick={this.submit}>获得所有值</Button>\r\n                    <Button className='options-btns' colors='primary' onClick={this.reset}>还原所有值</Button>\r\n                </Row>\r\n                \r\n            </div>\r\n        );\r\n    }\r\n}\r\n\r\nexport default Form.createForm()(Demo11);\r\n", "desc": " 各类型组件配合form使用，注意事项", "scss_code": ".demo11{\r\n   >.demo11-item{\r\n        margin: 0;\r\n        margin-bottom: 20px!important;\r\n        .u-button{\r\n            margin-right: 20px;\r\n        }\r\n   }\r\n}" }, { "example": _react2['default'].createElement(Demo12, null), "title": " 多语示例", "code": "/**\r\n *\r\n * @title 多语示例\r\n * @description 设置locale属性，并设置moment语言\r\n */\r\n\r\nimport React, {Component} from \"react\";\nimport { Row, Col } from 'tinper-bee';\r\n\nimport DatePicker from \"bee-datepicker\";\r\nimport zhCN from \"bee-datepicker/build/locale/zh_CN\";//1、引入日期组件语言包\r\nimport enUS from \"bee-datepicker/build/locale/en_US\";\r\n\r\nimport moment from \"moment\";//2、引入 moment\r\n\r\nmoment.locale('zh-cn');//3、设置moment语言，更多语言参考 http://momentjs.cn/docs/#/i18n/\r\n\r\nconst format = \"YYYY-MM-DD dddd\";\r\n\r\nclass Demo12 extends Component {\r\n    \r\n    onChange = (d, dataString) => {\r\n        console.log('change')\r\n        console.log(d, dataString)\r\n    };\r\n    render() {\r\n        return (\r\n            <div>\r\n                <Row>\r\n                    <Col md={6}>\r\n                        <DatePicker\r\n                            locale={zhCN}//4、将需要的语言包传入到日期组件locale属性\r\n                            format={format}\r\n                            onChange={this.onChange}\r\n                        />\r\n                    </Col>\r\n                </Row>\r\n            </div>\r\n        );\r\n    }\r\n}\r\n\r\nexport default Demo12;\r\n", "desc": " 设置locale属性，并设置moment语言" }, { "example": _react2['default'].createElement(Demo13, null), "title": " 设置初始日期选择范围", "code": "/**\r\n *\r\n * @title 设置初始日期选择范围\r\n * @description 设置初始日期选择范围基本实例\r\n */\r\n\r\nimport React, {Component} from \"react\";\nimport { Row, Col } from 'tinper-bee';\r\n\nimport DatePicker from \"bee-datepicker\";\r\nimport moment from \"moment\";\r\n\r\nconst { RangePicker } = DatePicker\r\n\r\nconst format = \"YYYY-MM-DD dddd\";\r\n\r\nclass Demo13 extends Component {\r\n    state = {\r\n        datePickerPanelValue: '2004-05-09',\r\n        rangePickerPanelValues: ['3409-09-02', '7876-10-19'],\r\n        dateValue: '2020-02-03',\r\n        rangeValue: ['2098-09-02', '2099-08-06']\r\n    }\r\n    onSelect = d => {\r\n        console.log(d);\r\n    }\r\n    onDateChange = (d) => {\r\n        this.setState({\r\n            // datePickerPanelValue: null,\r\n            dateValue: d\r\n        })\r\n    };\r\n    onRangeChange = (d) => {\r\n        this.setState({\r\n            rangeValue: d,\r\n            // rangePickerPanelValues: null\r\n        })\r\n    };\r\n    render() {\r\n        var self = this;\r\n        const { value } = this.state\r\n        return (\r\n            <div>\r\n                <Row>\r\n                    <Col md={6}>\r\n                        <DatePicker\r\n                            format={format}\r\n                            onSelect={this.onSelect}\r\n                            onChange={this.onDateChange}\r\n                            panelValue={this.state.datePickerPanelValue}\r\n                            value={this.state.dateValue}\r\n                        />\r\n                    </Col>\r\n                    <Col md={6} style={{'marginBottom':'10px'}}>\r\n                        <RangePicker\r\n                            placeholder={'开始 ~ 结束'}\r\n                            dateInputPlaceholder={['开始', '结束']}\r\n                            showClear={true}\r\n                            onChange={this.onRangeChange}\r\n                            onPanelChange={(v)=>{console.log('onPanelChange',v)}}\r\n                            showClose={true}\r\n                            onStartInputBlur={this.onStartInputBlur}\r\n                            onEndInputBlur={this.onEndInputBlur}\r\n                            panelValues={this.state.rangePickerPanelValues}\r\n                            value={this.state.rangeValue}\r\n                        />\r\n                    </Col>\r\n                </Row>\r\n            </div>\r\n        );\r\n    }\r\n}\r\n\r\nexport default Demo13;\r\n", "desc": " 设置初始日期选择范围基本实例" }];
+	var Demo1 = __webpack_require__(540);var Demo2 = __webpack_require__(541);var Demo3 = __webpack_require__(542);var Demo4 = __webpack_require__(543);var Demo5 = __webpack_require__(544);var Demo6 = __webpack_require__(545);var Demo7 = __webpack_require__(671);var Demo8 = __webpack_require__(672);var Demo9 = __webpack_require__(767);var Demo10 = __webpack_require__(768);var Demo11 = __webpack_require__(769);var Demo12 = __webpack_require__(770);var Demo13 = __webpack_require__(771);var DemoArray = [{ "example": _react2['default'].createElement(Demo1, null), "title": " 选择日期", "code": "/**\r\n *\r\n * @title 选择日期\r\n * @description 以「日期」为基本单位，基础的日期选择控件\r\n */\r\n\r\nimport React, {Component} from \"react\";\nimport { Row, Col } from 'tinper-bee';\r\n\nimport DatePicker from \"bee-datepicker\";\r\nimport moment from \"moment\";\r\nconst format = [\"YYYY.MM.DD\",\"DD.MM.YYYY\",\"YYYYMMDD\",\"DDMMYYYY\"];\r\nconst dateInputPlaceholder = \"选择日期\";\r\n\r\nclass Demo1 extends Component {\r\n    constructor(props) {\r\n        super(props);\r\n        this.state = {value: '2019-09-09'}\r\n    }\r\n    onSelect = (d, dataString)  => {\r\n        console.log('select')\r\n        console.log(d, dataString);\r\n    }\r\n    onChange = (d, dataString) => {\r\n        console.log('change')\r\n        console.log(d, dataString)\r\n    };\r\n\r\n    render() {\r\n        let value = this.state.value;\r\n        let {format = ['YYYY-MM-DD', 'YYYYMMDD', 'YYYY.MM.DD', 'YYYY/MM/DD'], } = this.props;\r\n        var self = this;\r\n        return (\r\n            <div>\r\n                <Row>\r\n                    <Col md={6}>\r\n                        <DatePicker\r\n                            animation=\"\"\r\n                            format={format}\r\n                            onChange={this.onChange}\r\n                            value={value ? moment(value) : null}\r\n                        />\r\n\r\n                    </Col>\r\n                </Row>\r\n            </div>\r\n        );\r\n    }\r\n}\r\n\r\nexport default Demo1;\r\n", "desc": " 以「日期」为基本单位，基础的日期选择控件" }, { "example": _react2['default'].createElement(Demo2, null), "title": " 禁用日期", "code": "/**\r\n *\r\n * @title 禁用日期\r\n * @description 设置 disabled\r\n */\r\n\r\nimport React, {Component} from \"react\";\nimport { Row, Col } from 'tinper-bee';\r\n\nimport DatePicker from \"bee-datepicker\";\r\nimport moment from \"moment\";\r\n\r\nconst format = \"YYYY-MM-DD dddd\";\r\nconst dateInputPlaceholder = \"选择日期\";\r\n\r\nclass Demo2 extends Component {\r\n    onSelect = d => {\r\n        console.log(d);\r\n    }\r\n    onChange = (d, dataString) => {\r\n        console.log(dataString);\r\n    };\r\n    render() {\r\n        var self = this;\r\n        return (\r\n            <div>\r\n                <Row>\r\n                    <Col md={6}>\r\n                        <DatePicker\r\n                            format={format}\r\n                            onSelect={this.onSelect}\r\n                            onChange={this.onChange}\r\n                            disabled\r\n                            defaultValue={moment()}\r\n                        />\r\n                    </Col>\r\n                </Row>\r\n            </div>\r\n        );\r\n    }\r\n}\r\n\r\nexport default Demo2;\r\n", "desc": " 设置 disabled" }, { "example": _react2['default'].createElement(Demo3, null), "title": " 不可选择日期和时间", "code": "/**\r\n *\r\n * @title 不可选择日期和时间\r\n * @description 可用 disabledDate 和 disabledTime 分别禁止选择部分日期和时间，其中 disabledTime 需要和 showTime 一起使用。\r\n */\r\n\r\nimport React, { Component } from \"react\";\nimport {  Row, Col  } from 'tinper-bee';\r\n\nimport DatePicker from \"bee-datepicker\";\r\nimport moment from \"moment\";\r\nimport YearPicker from \"bee-datepicker/build/YearPicker\";\r\n\r\nconst { MonthPicker, RangePicker } = DatePicker;\r\n\r\nfunction range(start, end) {\r\n  const result = [];\r\n  for (let i = start; i < end; i++) {\r\n    result.push(i);\r\n  }\r\n  return result;\r\n}\r\n\r\nfunction disabledDate(current) {\r\n  // Can not select days before today and today\r\n  return current && current < moment().endOf('day');\r\n}\r\n\r\nfunction disabledYear(current) {\r\n    // Can not select days before year and year\r\n    return current && current > moment().endOf('year');\r\n}\r\n\r\nfunction disabledDateTime(_) {\r\n  return _.get('month')<= 6 ? {\r\n    disabledHours: () => range(0, 24).splice(4, 2),\r\n    disabledMinutes: () => range(0, 30),\r\n    disabledSeconds: () => [55, 56],\r\n  } : {\r\n    disabledHours: () => range(0, 24).splice(4, 20),\r\n    disabledMinutes: () => range(30, 60),\r\n    disabledSeconds: () => [55, 56],\r\n  };\r\n}\r\n\r\nfunction disabledRangeTime(_, type) {\r\n  if (type === 'start') {\r\n    return {\r\n      disabledHours: () => range(0, 60).splice(4, 20),\r\n      disabledMinutes: () => range(30, 60),\r\n      disabledSeconds: () => [55, 56],\r\n    };\r\n  }\r\n  return {\r\n    disabledHours: () => range(0, 60).splice(20, 4),\r\n    disabledMinutes: () => range(0, 31),\r\n    disabledSeconds: () => [55, 56],\r\n  };\r\n}\r\n\r\nclass Demo3 extends Component {\r\n  render() {\r\n    return (\r\n      <div className='demo3'>\r\n        <Row className='demo3-item'>\r\n            <DatePicker\r\n              placeholder=\"选择日期\"\r\n              format=\"YYYY-MM-DD HH:mm:ss\"\r\n              disabledDate={disabledDate}\r\n              disabledTime={disabledDateTime}\r\n              showTime={{ defaultValue: moment('00:00:00', 'HH:mm:ss') }}\r\n            />\r\n        </Row>\r\n          <Row className='demo3-item'>\r\n              <YearPicker\r\n                  placeholder=\"选择年\"\r\n                  format=\"YYYY\"\r\n                  disabledYear={disabledYear}\r\n                  showTime={{ defaultValue: moment().format('YYYY') }}\r\n              />\r\n          </Row>\r\n        <Row className='demo3-item'>\r\n            <MonthPicker disabledDate={disabledDate} placeholder=\"选择月份\" />\r\n        </Row>\r\n        <Row className='demo3-item'>\r\n            <RangePicker\r\n              placeholder={'开始 ~ 结束'}\r\n              disabledDate={disabledDate}\r\n              disabledTime={disabledRangeTime}\r\n              showTime={{\r\n                hideDisabledOptions: true,\r\n                defaultValue: [moment('00:00:00', 'HH:mm:ss'), moment('11:59:59', 'HH:mm:ss')],\r\n              }}\r\n              format=\"YYYY-MM-DD HH:mm:ss\"\r\n            />\r\n        </Row>\r\n      </div>\r\n    );\r\n  }\r\n}\r\n\r\nexport default Demo3;\r\n", "desc": " 可用 disabledDate 和 disabledTime 分别禁止选择部分日期和时间，其中 disabledTime 需要和 showTime 一起使用。", "scss_code": ".demo3{\r\n    >.demo3-item{\r\n        margin: 0;\r\n        margin-bottom: 20px!important;\r\n    }\r\n}" }, { "example": _react2['default'].createElement(Demo4, null), "title": " 选择年，年月，周，日期范围", "code": "/**\r\n *\r\n * @title 选择年，年月，周，日期范围\r\n * @description 选择年，年月，周，日期范围基本示例\r\n */\r\n\r\nimport React, { Component } from \"react\";\nimport {  Row, Col  } from 'tinper-bee';\r\n\nimport DatePicker from \"bee-datepicker\";\r\nimport moment from \"moment\";\r\nimport zhCN from \"bee-datepicker/build/locale/zh_CN\";\r\nconst { YearPicker,MonthPicker,WeekPicker,RangePicker } = DatePicker;\r\n\r\n\r\nclass Demo4 extends Component {\r\n    onChange = (d, dataString) => {\r\n        console.log('change')\r\n        console.log(d);\r\n        console.log(dataString);\r\n    };\r\n    onSelect = d => {\r\n        console.log('select')\r\n        console.log(d);\r\n    }\r\n    onClear = () => {\r\n        console.log('clear')\r\n    }\r\n    /**\r\n     *@param e 事件对象\r\n     *@param startValue 开始时间\r\n     *@param array 包含开始时间和结束时间的数组\r\n     */\r\n    onStartInputBlur = (e,startValue,array) => {\r\n        console.log('RangePicker面板 左输入框的失焦事件',startValue,array)\r\n    }\r\n    /**\r\n     *@param e 事件对象\r\n     *@param endValue 结束时间\r\n     *@param array 包含开始时间和结束时间的数组\r\n     */\r\n    onEndInputBlur = (e,endValue,array) => {\r\n        console.log('RangePicker面板 右输入框的失焦事件',endValue,array)\r\n    }\r\n    render() {\r\n        return (\r\n            <div>\r\n                <Row style={{'marginBottom':'10px'}}>\r\n                    <Col md={6}>\r\n                        <YearPicker\r\n                            format=\"YYYY\"\r\n                            onChange={this.onChange}\r\n                            onSelect={this.onSelect}\r\n                            locale={zhCN}\r\n                            placeholder=\"选择年\"\r\n                            defaultValue={moment()}\r\n                            showClose={false}\r\n                        />\r\n                    </Col>\r\n                    <Col md={6} style={{'marginBottom':'10px'}}>\r\n                        <MonthPicker\r\n                            format='YYYY-MM'\r\n                            onSelect={this.onSelect}\r\n                            onChange={this.onChange}\r\n                            locale={zhCN}\r\n                            defaultValue={moment()}\r\n                            placeholder=\"选择年月\"\r\n                            onClear={this.onClear} \r\n                            showClose={false}\r\n                        />\r\n                    </Col>\r\n                    <Col md={6} style={{'marginBottom':'10px'}}>\r\n                        <WeekPicker \r\n                        defaultValue={moment()}\r\n                        onSelect={this.onSelect}\r\n                        onChange={this.onChange}\r\n                        placeholder=\"选择周\" \r\n                        showClose={false}\r\n                        />\r\n                    </Col>\r\n                    <Col md={6} style={{'marginBottom':'10px'}}>\r\n                        <RangePicker\r\n                            placeholder={'开始 ~ 结束'}\r\n                            dateInputPlaceholder={['开始', '结束']}\r\n                            showClear={true}\r\n                            onChange={this.onChange}\r\n                            onPanelChange={(v)=>{console.log('onPanelChange',v)}}\r\n                            showClose={true}\r\n                            onStartInputBlur={this.onStartInputBlur}\r\n                            onEndInputBlur={this.onEndInputBlur}\r\n                        />\r\n                    </Col>\r\n                </Row>\r\n            </div>\r\n        );\r\n    }\r\n}\r\n\r\nexport default Demo4;\r\n", "desc": " 选择年，年月，周，日期范围基本示例" }, { "example": _react2['default'].createElement(Demo5, null), "title": " 动态的改变时间", "code": "/**\r\n *\r\n * @title 动态的改变时间\r\n * @description 以「日期时间」为基本单位，基础的日期时间选择控件\r\n */\r\n\r\nimport React, { Component } from \"react\";\nimport { Button,  Row, Col  } from 'tinper-bee';\r\nimport DatePicker from \"bee-datepicker\";\r\nimport moment from \"moment\";\r\nimport zhCN from \"bee-datepicker/build/locale/zh_CN\";\r\n\n\nconst format = \"YYYY-MM-DD HH:mm:ss\";\r\nconst dateInputPlaceholder = \"选择日期\";\r\n\r\nclass Demo5 extends Component {\r\n  constructor(props) {\r\n    super(props);\r\n    this.state = {\r\n      value: moment()\r\n    };\r\n  }\r\n\r\n  handleChange = value => {\r\n    this.setState({\r\n      value: value\r\n    });\r\n  };\r\n  onSelect = d => {\r\n    console.log(d);\r\n  };\r\n\r\n  handlerChangeDate = () => {\r\n    this.setState({\r\n      value: moment(\"2011-11-11 11:11:11\")\r\n    });\r\n    console.log(\"click\");\r\n  };\r\n  render() {\r\n    return (\r\n      <div>\r\n        <Row>\r\n          <Col md={6}>\r\n            <DatePicker\r\n              format={format}\r\n              locale={zhCN}\r\n              onSelect={this.onSelect}\r\n              onChange={this.handleChange}\r\n              value={this.state.value}\r\n              placeholder={dateInputPlaceholder}\r\n            />\r\n          </Col>\r\n          <Col md={3}>\r\n            <Button onClick={this.handlerChangeDate}>变</Button>\r\n          </Col>\r\n        </Row>\r\n      </div>\r\n    );\r\n  }\r\n}\r\n\r\nexport default Demo5;\r\n", "desc": " 以「日期时间」为基本单位，基础的日期时间选择控件" }, { "example": _react2['default'].createElement(Demo6, null), "title": " 自定义日期渲染父级容器\t", "code": "/**\r\n *\r\n * @title 自定义日期渲染父级容器\t\r\n * @description getCalendarContainer自定义浮层渲染的父容器。该属性常用来将组件渲染到滚动区域内。\r\n */\r\n\r\nimport React, { Component } from \"react\";\nimport { Table } from 'tinper-bee';\r\nimport DatePicker from \"bee-datepicker\";\r\n\n\r\nconst dataSource = [\r\n    { a: \"ASVAL_20190328\", b: \"小张\", c: \"\", key: \"1\" },\r\n    { a: \"ASVAL_20190320\", b: \"小明\", c: \"\", key: \"2\" },\r\n    { a: \"ASVAL_20190312\", b: \"小红\", c: \"\", key: \"3\" },\r\n    { a: \"ASVAL_20190328\", b: \"小张\", c: \"\", key: \"4\" },\r\n    { a: \"ASVAL_20190320\", b: \"小明\", c: \"\", key: \"5\" },\r\n    { a: \"ASVAL_20190312\", b: \"小红\", c: \"\", key: \"6\" },\r\n    { a: \"ASVAL_20190328\", b: \"小张\", c: \"\", key: \"7\" },\r\n    { a: \"ASVAL_20190320\", b: \"小明\", c: \"\", key: \"8\" },\r\n    { a: \"ASVAL_20190312\", b: \"小红\", c: \"\", key: \"9\" },\r\n    { a: \"ASVAL_20190328\", b: \"小张\", c: \"\", key: \"10\" },\r\n    { a: \"ASVAL_20190320\", b: \"小明\", c: \"\", key: \"11\" },\r\n    { a: \"ASVAL_20190312\", b: \"小红\", c: \"\", key: \"12\" }\r\n];\r\n\r\nclass Demo6 extends Component {\r\n    constructor(props) {\r\n        super(props);\r\n    }\r\n    columns = [\r\n        { title: \"员工编号\", dataIndex: \"a\", key: \"a\", width: 150 },\r\n        { title: \"员工姓名\", dataIndex: \"b\", key: \"b\", width:100},\r\n        { title: \"出生日期\", dataIndex: \"c\", key: \"c\", render: () => {\r\n            return (\r\n                <DatePicker \r\n                placeholder=\"选择日期\"\r\n                showToday={false}\r\n                getCalendarContainer={trigger => trigger.parentNode} \r\n                />\r\n            )\r\n        }},\r\n        { title: \"\", dataIndex: \"\", key: \"\"}\r\n    ];\r\n    render() {\r\n        return (\r\n            <Table data={dataSource} columns={this.columns} scroll={{ y: 300 }} height={40}/>\r\n        );\r\n    }\r\n}\r\n\r\nexport default Demo6;\r\n", "desc": " getCalendarContainer自定义浮层渲染的父容器。该属性常用来将组件渲染到滚动区域内。" }, { "example": _react2['default'].createElement(Demo7, null), "title": " 自定义展示日期面板，外层输入框可输入", "code": "/**\r\n *\r\n * @title 自定义展示日期面板，外层输入框可输入\r\n * @description open设置面板展开收起，keyboardInput外层input是否可输入，showDateInput是否显示内层input\r\n */\r\n\r\nimport React, {Component} from \"react\";\nimport { Icon, Row, Col } from 'tinper-bee';\r\n\nimport DatePicker from \"bee-datepicker\";\r\nimport zhCN from \"bee-datepicker/build/locale/zh_CN\";\r\nimport enUS from \"bee-datepicker/build/locale/en_US\";\r\nimport moment from \"moment\";\r\n\nimport 'moment/locale/zh-cn';\r\n\r\nmoment.locale('zh-cn');\r\n\r\nconst format = \"YYYY-MM-DD\";\r\n\r\nconst dateInputPlaceholder = \"选择日期\";\r\n\r\nclass Demo7 extends Component {\r\n    constructor(props) {\r\n        super(props);\r\n        this.state = {\r\n            value: '',\r\n            open: false\r\n        };\r\n    }\r\n    onSelect = d=> {\r\n        console.log(d);\r\n    }\r\n    onChange = (d, dataString) => {\r\n        console.log(d, dataString)\r\n    };\r\n    onOpenChange = open => {\r\n        console.log(open)\r\n    }\r\n    open = d => {\r\n        this.setState({\r\n            open: !this.state.open\r\n        })\r\n    }\r\n    onClick = (e,d,str) => {\r\n        console.log(d);\r\n    }\r\n    outInputKeydown = ()=>{\r\n        console.log('keydown')\r\n    }\r\n    render() {\r\n        return (\r\n            <div>\r\n                <Row>\r\n                    <Col md={6}>\r\n                        <DatePicker\r\n                            format={format}\r\n                            onSelect={this.onSelect}\r\n                            onChange={this.onChange}\r\n                            locale={zhCN}\r\n                            open={this.state.open}\r\n                            defaultValue={moment('2018-01-01')}\r\n                            onOpenChange={this.onOpenChange}\r\n                            placeholder={dateInputPlaceholder}\r\n                            className={\"Demo7\"}\r\n                            onClick={this.onClick}\r\n                            keyboardInput={true}\r\n                            showDateInput={false}\r\n                        />\r\n                    </Col>\r\n                    <Col md={3}>\r\n                        <button className=\"u-button\" onClick={this.open}>展开面板</button>\r\n                    </Col>\r\n                </Row>\r\n            </div>\r\n        );\r\n    }\r\n}\r\n\r\nexport default Demo7;\r\n", "desc": " open设置面板展开收起，keyboardInput外层input是否可输入，showDateInput是否显示内层input" }, { "example": _react2['default'].createElement(Demo8, null), "title": " 自定义展示日期面板，外层输入框可输入，配合form使用", "code": "/**\r\n *\r\n * @title 自定义展示日期面板，外层输入框可输入，配合form使用\r\n * @description open设置面板展开收起，keyboardInput外层input是否可输入，showDateInput是否显示内层input\r\n */\r\n\r\nimport React, {Component} from \"react\";\nimport { Form, Row, Col } from 'tinper-bee';\r\n\nimport DatePicker from \"bee-datepicker\";\r\nimport zhCN from \"bee-datepicker/build/locale/zh_CN\";\r\nimport enUS from \"bee-datepicker/build/locale/en_US\";\r\nimport moment from \"moment\";\r\nimport 'moment/locale/zh-cn';\r\n\n\r\nmoment.locale('zh-cn');\r\n\r\nconst format = \"YYYY-MM-DD\";\r\n\r\nconst dateInputPlaceholder = \"选择日期\";\r\n\r\n\r\nclass Demo8 extends Component {\r\n    constructor(props) {\r\n        super(props);\r\n        this.state = {\r\n            value: '',\r\n            open: false\r\n        };\r\n    }\r\n    onOpenChange = open => {\r\n        console.log(open)\r\n    }\r\n    open = d => {\r\n        this.setState({\r\n            open: !this.state.open\r\n        })\r\n    }\r\n    onClick = (e,d,str) => {\r\n        console.log(d);\r\n    }\r\n    onSelect(d) {\r\n        console.log(\"select:\"+d);\r\n    }\r\n    outInputKeydown = ()=>{\r\n        console.log('keydown')\r\n    }\r\n    onChange = (d, dataString) => {\r\n        console.log(d, dataString)\r\n    };\r\n    submit = (e) => {\r\n        this.props.form.validateFields((err, values) => {\r\n            if (err) {\r\n                console.log('校验失败', values);\r\n            } else {\r\n                console.log('提交成功', values, moment(values.date).format('YYYY-MM-DD'));\r\n            }\r\n        });\r\n    }\r\n    render() {\r\n        var self = this; \r\n        const { getFieldProps, getFieldError } = this.props.form;\r\n        return (\r\n            <div>\r\n                <Row>\r\n                    <Col md={6}>\r\n                        <DatePicker\r\n                            format={format}\r\n                            onSelect={this.onSelect}\r\n                            onChange={this.onChange}\r\n                            locale={zhCN}\r\n                            open={this.state.open}\r\n                            onOpenChange={this.onOpenChange.bind(this)}\r\n                            placeholder={dateInputPlaceholder}\r\n                            className={\"demo11\"}\r\n                            onClick={this.onClick}\r\n                            keyboardInput={true}\r\n                            showDateInput={false}\r\n                            iconClick={this.open}\r\n                            outInputKeydown={this.outInputKeydown}\r\n                        />\r\n                    </Col>\r\n                    <Col md={3}>\r\n                        <button className=\"u-button\" onClick={this.open}>展开/收起面板</button>\r\n                        <button className=\"u-button\" onClick={this.submit}>获得值</button>\r\n                    </Col>\r\n                </Row>\r\n            </div>\r\n        );\r\n    }\r\n}\r\n\r\nexport default Form.createForm()(Demo8);\r\n", "desc": " open设置面板展开收起，keyboardInput外层input是否可输入，showDateInput是否显示内层input" }, { "example": _react2['default'].createElement(Demo9, null), "title": " 额外的页脚", "code": "/**\r\n *\r\n * @title 额外的页脚\r\n * @description 在浮层中加入额外的页脚，以满足某些定制信息的需求。\r\n */\r\n\r\nimport React, {Component} from \"react\";\nimport { Row, Col } from 'tinper-bee';\r\n\nimport DatePicker from \"bee-datepicker\";\r\n\r\nconst { RangePicker, MonthPicker } = DatePicker;\r\n\r\nclass Demo9 extends Component {\r\n    render() {\r\n        return (\r\n            <div className=\"demo9\">\r\n                <Row>\r\n                    <Col md={6}>\r\n                        <DatePicker renderFooter={() => '额外页脚'} placeholder=\"选择日期\"/>\r\n                    </Col>\r\n                    \r\n                    <Col md={6}>\r\n                        <DatePicker renderFooter={() => '额外页脚'} showTime placeholder=\"选择日期\"/>\r\n                    </Col>\r\n                    \r\n                    <Col md={6}>\r\n                        <RangePicker renderFooter={() => '额外页脚'} placeholder={'开始 ~ 结束'}/>\r\n                    </Col>\r\n                    \r\n                    <Col md={6}>\r\n                        <RangePicker renderFooter={() => '额外页脚'} showTime placeholder={'开始 ~ 结束'}/>\r\n                    </Col>\r\n                    \r\n                    <Col md={6}>\r\n                        <MonthPicker renderFooter={() => '额外页脚'} placeholder=\"选择月\" />\r\n                    </Col>\r\n                </Row>\r\n            </div>\r\n        );\r\n    }\r\n}\r\n\r\nexport default Demo9;\r\n", "desc": " 在浮层中加入额外的页脚，以满足某些定制信息的需求。", "scss_code": ".demo9 {\r\n    .u-row .u-col-md-6 {\r\n        margin-bottom: 10px;\r\n    }\r\n}" }, { "example": _react2['default'].createElement(Demo10, null), "title": " 使用normal格式化", "code": "/**\r\n *\r\n * @title 使用normal格式化\r\n * @description 配合form 使用normal格式化，已 MothPicker 为例\r\n */\r\n\r\nimport React, { Component } from \"react\";\nimport { Form,  Row, Col  } from 'tinper-bee';\r\n\nimport DatePicker from \"bee-datepicker\";\r\n\n\r\nconst { MonthPicker } = DatePicker;\r\n\r\n\r\nclass Demo4 extends Component {\r\n    submit = (e) => {\r\n        this.props.form.validateFields((err, values) => {\r\n            if (err) {\r\n                console.log('校验失败', values);\r\n            } else {\r\n                console.log('提交成功', values);\r\n            }\r\n        });\r\n    }\r\n    render() {\r\n        const { getFieldProps, getFieldError } = this.props.form;\r\n        return (\r\n            <div>\r\n                <Row style={{'marginBottom':'10px'}}>\r\n                    <Col md={6} style={{'marginBottom':'10px'}}>\r\n                        <MonthPicker\r\n                            format=\"YYYY-MM\"\r\n                            {...getFieldProps('date', {\r\n                                validateTrigger: 'onBlur',\r\n                                initialValue:null,\r\n                                normalize:(value)=>{\r\n                                    if(value&&value.format){\r\n                                        return value.format('YYYY-MM')\r\n                                    }else{\r\n                                        return value\r\n                                    }\r\n                                },\r\n                                rules: [{\r\n                                    required: true, message: '请输入日期',\r\n                                }],\r\n                            }) }\r\n                        />\r\n                    </Col>\r\n                    <button className=\"u-button\" onClick={this.submit}>获得值</button>\r\n                </Row>\r\n            </div>\r\n        );\r\n    }\r\n}\r\n\r\nexport default Form.createForm()(Demo4);\r\n", "desc": " 配合form 使用normal格式化，已 MothPicker 为例" }, { "example": _react2['default'].createElement(Demo11, null), "title": " 配合form使用", "code": "/**\r\n *\r\n * @title 配合form使用\r\n * @description 各类型组件配合form使用，注意事项\r\n */\r\n\r\nimport React, { Component } from \"react\";\nimport { Button, Form,  Row  } from 'tinper-bee';\r\n\nimport DatePicker from \"bee-datepicker\";\r\n\n\n\r\nconst { YearPicker,MonthPicker,WeekPicker,RangePicker } = DatePicker;\r\n\r\nfunction range(start, end) {\r\n    const result = [];\r\n    for (let i = start; i < end; i++) {\r\n      result.push(i);\r\n    }\r\n    return result;\r\n  }\r\n  \r\nfunction disabledDateTime(_) {\r\n    return _.get('month')<= 6 ? {\r\n      disabledHours: () => range(0, 24).splice(4, 2),\r\n      disabledMinutes: () => range(0, 30),\r\n      disabledSeconds: () => [55, 56],\r\n    } : {\r\n      disabledHours: () => range(0, 24).splice(4, 20),\r\n      disabledMinutes: () => range(30, 60),\r\n      disabledSeconds: () => [55, 56],\r\n    };\r\n  }\r\n\r\nclass Demo11 extends Component {\r\n    constructor(props){\r\n        super(props);\r\n        this.state={\r\n          initialValues:{\r\n            \r\n          }  \r\n        }\r\n    }\r\n\r\n    componentWillMount(){\r\n        //如果初始值需要接口返回，则需要在组件初始化之前，获得初始值。 这里模拟设置初始值\r\n        this.setState({\r\n            initialValues:{\r\n                date:'2019-02-03',\r\n                dateTime:'2009-10-11 12:13:14',\r\n                month:'2019-12',\r\n                year:'2019',\r\n                week:'2019-45',\r\n                range:['2019-11-12','2019-12-13']\r\n            }\r\n        })\r\n    }\r\n\r\n\r\n    submit = (e) => {\r\n        this.props.form.validateFields((err, values) => {\r\n            if (err) {\r\n                console.log('校验失败', values);\r\n            } else {\r\n                console.log('提交成功', values);\r\n            }\r\n        });\r\n    }\r\n\r\n    change=()=>{\r\n        this.setState({\r\n            initialValues:{\r\n                date:'2020-10-10',\r\n                dateTime:'2020-10-10 10:10:10',\r\n                month:'2020-10',\r\n                year:'2020',\r\n                week:'2020-20',\r\n                range:['2020-10-10','2020-12-12']\r\n            }\r\n        })\r\n    }\r\n    reset=()=>{\r\n        //此方法将所有元素还原到初始值。即还原到 componentWillMount 设置的值。\r\n        // 注意：this.props.form.resetFields() 并不是清空值，而是还原到 initialValue 的值\r\n        this.props.form.resetFields()\r\n    }\r\n\r\n    render() {\r\n        const { getFieldProps, getFieldError } = this.props.form;\r\n        return (\r\n            <div className='demo11'>\r\n                <Row className='demo11-item'>\r\n                    <DatePicker\r\n                        format='YYYY-MM-DD'\r\n                        {\r\n                            ...getFieldProps('date',{\r\n                                initialValue:this.state.initialValues.date,\r\n                                normalize:(value)=>{\r\n                                    if(value&&value.format){\r\n                                        return value.format('YYYY-MM-DD')\r\n                                    }else{\r\n                                        return value\r\n                                    }\r\n                                },\r\n                            })\r\n                        }\r\n                    />\r\n                </Row>\r\n                <Row className='demo11-item'>\r\n                    <DatePicker\r\n                        format='YYYY-MM-DD hh:mm:ss'\r\n                        showTime={true}\r\n                        disabledTime={disabledDateTime}\r\n                        {\r\n                            ...getFieldProps('dateTime',{\r\n                                initialValue:this.state.initialValues.dateTime,\r\n                                normalize:(value)=>{\r\n                                    if(value&&value.format){\r\n                                        return value.format('YYYY-MM-DD hh:mm:ss')\r\n                                    }else{\r\n                                        return value\r\n                                    }\r\n                                },\r\n                            })\r\n                        }\r\n                    />\r\n                </Row>\r\n                <Row className='demo11-item'>\r\n                    <MonthPicker\r\n                        format='YYYY-MM'\r\n                        {\r\n                            ...getFieldProps('month',{\r\n                                initialValue:this.state.initialValues.month,\r\n                                normalize:(value)=>{\r\n                                    if(value&&value.format){\r\n                                        return value.format('YYYY-MM')\r\n                                    }else{\r\n                                        return value\r\n                                    }\r\n                                },\r\n                            })\r\n                        }\r\n                    />\r\n                </Row>\r\n                <Row className='demo11-item'>\r\n                    <YearPicker\r\n                        format='YYYY'\r\n                        {\r\n                            ...getFieldProps('year',{\r\n                                initialValue:this.state.initialValues.year,\r\n                                normalize:(value)=>{\r\n                                    if(value&&value.format){\r\n                                        return value.format('YYYY')\r\n                                    }else{\r\n                                        return value\r\n                                    }\r\n                                },\r\n                            })\r\n                        }\r\n                    />\r\n                </Row>\r\n                <Row className='demo11-item'>\r\n                    <WeekPicker\r\n                        format='YYYY-WW'\r\n                        {\r\n                            ...getFieldProps('week',{\r\n                                initialValue:this.state.initialValues.week,\r\n                                normalize:(value)=>{\r\n                                    if(value&&value.format){\r\n                                        return value.format('YYYY-WW')\r\n                                    }else{\r\n                                        return value\r\n                                    }\r\n                                },\r\n                            })\r\n                        }\r\n                    />\r\n                </Row>\r\n                <Row className='demo11-item'>\r\n                    <RangePicker\r\n                        format='YYYY-MM-DD'\r\n                        {\r\n                            ...getFieldProps('range',{\r\n                                initialValue:this.state.initialValues.range,\r\n                                normalize:(value)=>{\r\n                                    let values = [];\r\n                                    if(value[0]&&value[0].format){\r\n                                        values.push(value[0].format('YYYY-MM-DD')||'')\r\n                                    }else{\r\n                                        values.push(value[0]||'')\r\n                                    }\r\n                                    if(value[1]&&value[1].format){\r\n                                        values.push(value[1].format('YYYY-MM-DD')||'')\r\n                                    }else{\r\n                                        values.push(value[1]||'')\r\n                                    }\r\n                                    return values;\r\n                                },\r\n                            })\r\n                        }\r\n                    />\r\n                </Row>\r\n                <Row className='demo11-item'>\r\n                    <Button className='options-btns' colors='primary' onClick={this.change}>改变初始值</Button>\r\n                    <Button className='options-btns' colors='primary' onClick={this.submit}>获得所有值</Button>\r\n                    <Button className='options-btns' colors='primary' onClick={this.reset}>还原所有值</Button>\r\n                </Row>\r\n                \r\n            </div>\r\n        );\r\n    }\r\n}\r\n\r\nexport default Form.createForm()(Demo11);\r\n", "desc": " 各类型组件配合form使用，注意事项", "scss_code": ".demo11{\r\n   >.demo11-item{\r\n        margin: 0;\r\n        margin-bottom: 20px!important;\r\n        .u-button{\r\n            margin-right: 20px;\r\n        }\r\n   }\r\n}" }, { "example": _react2['default'].createElement(Demo12, null), "title": " 多语示例", "code": "/**\r\n *\r\n * @title 多语示例\r\n * @description 设置locale属性，并设置moment语言\r\n */\r\n\r\nimport React, {Component} from \"react\";\nimport { Row, Col } from 'tinper-bee';\r\n\nimport DatePicker from \"bee-datepicker\";\r\nimport zhCN from \"bee-datepicker/build/locale/zh_CN\";//1、引入日期组件语言包\r\nimport enUS from \"bee-datepicker/build/locale/en_US\";\r\n\r\nimport moment from \"moment\";//2、引入 moment\r\n\r\nmoment.locale('zh-cn');//3、设置moment语言，更多语言参考 http://momentjs.cn/docs/#/i18n/\r\n\r\nconst format = \"YYYY-MM-DD dddd\";\r\n\r\nclass Demo12 extends Component {\r\n    \r\n    onChange = (d, dataString) => {\r\n        console.log('change')\r\n        console.log(d, dataString)\r\n    };\r\n    render() {\r\n        return (\r\n            <div>\r\n                <Row>\r\n                    <Col md={6}>\r\n                        <DatePicker\r\n                            locale={zhCN}//4、将需要的语言包传入到日期组件locale属性\r\n                            format={format}\r\n                            onChange={this.onChange}\r\n                        />\r\n                    </Col>\r\n                </Row>\r\n            </div>\r\n        );\r\n    }\r\n}\r\n\r\nexport default Demo12;\r\n", "desc": " 设置locale属性，并设置moment语言" }, { "example": _react2['default'].createElement(Demo13, null), "title": " 设置初始日期选择范围", "code": "/**\r\n *\r\n * @title 设置初始日期选择范围\r\n * @description 设置初始日期选择范围基本实例\r\n */\r\n\r\nimport React, {Component} from \"react\";\nimport { Row, Col } from 'tinper-bee';\r\n\nimport DatePicker from \"bee-datepicker\";\r\nimport moment from \"moment\";\r\n\r\nconst { RangePicker } = DatePicker\r\n\r\nconst format = \"YYYY-MM-DD dddd\";\r\n\r\nclass Demo13 extends Component {\r\n    state = {\r\n        datePickerPanelValue: '2004-05-09',\r\n        rangePickerPanelValues: ['3409-09-02', '7876-10-19'],\r\n        dateValue: '2020-02-03',\r\n        rangeValue: ['2098-09-02', '2099-08-06']\r\n    }\r\n    onSelect = d => {\r\n        console.log(d);\r\n    }\r\n    onDateChange = (d) => {\r\n        this.setState({\r\n            // datePickerPanelValue: null,\r\n            dateValue: d\r\n        })\r\n    };\r\n    onRangeChange = (d) => {\r\n        this.setState({\r\n            rangeValue: d,\r\n            // rangePickerPanelValues: null\r\n        })\r\n    };\r\n    render() {\r\n        var self = this;\r\n        const { value } = this.state\r\n        return (\r\n            <div>\r\n                <Row>\r\n                    <Col md={6}>\r\n                        <DatePicker\r\n                            format={format}\r\n                            onSelect={this.onSelect}\r\n                            onChange={this.onDateChange}\r\n                            panelValue={this.state.datePickerPanelValue}\r\n                            value={this.state.dateValue}\r\n                        />\r\n                    </Col>\r\n                    <Col md={6} style={{'marginBottom':'10px'}}>\r\n                        <RangePicker\r\n                            placeholder={'开始 ~ 结束'}\r\n                            dateInputPlaceholder={['开始', '结束']}\r\n                            showClear={true}\r\n                            onChange={this.onRangeChange}\r\n                            onPanelChange={(v)=>{console.log('onPanelChange',v)}}\r\n                            showClose={true}\r\n                            onStartInputBlur={this.onStartInputBlur}\r\n                            onEndInputBlur={this.onEndInputBlur}\r\n                            panelValues={this.state.rangePickerPanelValues}\r\n                            value={this.state.rangeValue}\r\n                        />\r\n                    </Col>\r\n                </Row>\r\n            </div>\r\n        );\r\n    }\r\n}\r\n\r\nexport default Demo13;\r\n", "desc": " 设置初始日期选择范围基本实例" }];
 	
 	var Demo = function (_Component) {
 	    _inherits(Demo, _Component);
@@ -424,7 +424,7 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
-	  Copyright (c) 2017 Jed Watson.
+	  Copyright (c) 2018 Jed Watson.
 	  Licensed under the MIT License (MIT), see
 	  http://jedwatson.github.io/classnames
 	*/
@@ -435,7 +435,7 @@
 	
 		var hasOwn = {}.hasOwnProperty;
 	
-		function classNames () {
+		function classNames() {
 			var classes = [];
 	
 			for (var i = 0; i < arguments.length; i++) {
@@ -446,16 +446,22 @@
 	
 				if (argType === 'string' || argType === 'number') {
 					classes.push(arg);
-				} else if (Array.isArray(arg) && arg.length) {
-					var inner = classNames.apply(null, arg);
-					if (inner) {
-						classes.push(inner);
+				} else if (Array.isArray(arg)) {
+					if (arg.length) {
+						var inner = classNames.apply(null, arg);
+						if (inner) {
+							classes.push(inner);
+						}
 					}
 				} else if (argType === 'object') {
-					for (var key in arg) {
-						if (hasOwn.call(arg, key) && arg[key]) {
-							classes.push(key);
+					if (arg.toString === Object.prototype.toString) {
+						for (var key in arg) {
+							if (hasOwn.call(arg, key) && arg[key]) {
+								classes.push(key);
+							}
 						}
+					} else {
+						classes.push(arg.toString());
 					}
 				}
 			}
@@ -673,7 +679,7 @@
 	
 	var _Panel3 = _interopRequireDefault(_Panel2);
 	
-	var _PanelGroup2 = __webpack_require__(68);
+	var _PanelGroup2 = __webpack_require__(69);
 	
 	var _PanelGroup3 = _interopRequireDefault(_PanelGroup2);
 	
@@ -704,7 +710,7 @@
 	
 	var _beeTransition = __webpack_require__(11);
 	
-	var _beeMessage = __webpack_require__(52);
+	var _beeMessage = __webpack_require__(53);
 	
 	var _beeMessage2 = _interopRequireDefault(_beeMessage);
 	
@@ -712,7 +718,7 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _copyToClipboard = __webpack_require__(66);
+	var _copyToClipboard = __webpack_require__(67);
 	
 	var _copyToClipboard2 = _interopRequireDefault(_copyToClipboard);
 	
@@ -1015,7 +1021,7 @@
 	
 	var _Collapse3 = _interopRequireDefault(_Collapse2);
 	
-	var _Fade2 = __webpack_require__(51);
+	var _Fade2 = __webpack_require__(52);
 	
 	var _Fade3 = _interopRequireDefault(_Fade2);
 	
@@ -2030,59 +2036,82 @@
 	'use strict';
 	
 	exports.__esModule = true;
-	exports.Align = exports.toArray = exports.cssAnimation = exports.addEventListener = exports.contains = exports.KeyCode = exports.createChainedFunction = exports.splitComponent = exports.isRequiredForA11y = exports.elementType = exports.deprecated = exports.componentOrElement = exports.all = undefined;
+	exports.parentsUntil = exports.parent = exports.parents = exports.cssUtil = exports.Align = exports.toArray = exports.cssAnimation = exports.addEventListener = exports.contains = exports.KeyCode = exports.createChainedFunction = exports.splitComponent = exports.isRequiredForA11y = exports.elementType = exports.deprecated = exports.componentOrElement = exports.all = undefined;
 	
-	var _all2 = __webpack_require__(27);
+	var _cssUtil2 = __webpack_require__(27);
+	
+	Object.defineProperty(exports, 'parents', {
+	  enumerable: true,
+	  get: function get() {
+	    return _cssUtil2.parents;
+	  }
+	});
+	Object.defineProperty(exports, 'parent', {
+	  enumerable: true,
+	  get: function get() {
+	    return _cssUtil2.parent;
+	  }
+	});
+	Object.defineProperty(exports, 'parentsUntil', {
+	  enumerable: true,
+	  get: function get() {
+	    return _cssUtil2.parentsUntil;
+	  }
+	});
+	
+	var _all2 = __webpack_require__(28);
 	
 	var _all3 = _interopRequireDefault(_all2);
 	
-	var _componentOrElement2 = __webpack_require__(29);
+	var _componentOrElement2 = __webpack_require__(30);
 	
 	var _componentOrElement3 = _interopRequireDefault(_componentOrElement2);
 	
-	var _deprecated2 = __webpack_require__(30);
+	var _deprecated2 = __webpack_require__(31);
 	
 	var _deprecated3 = _interopRequireDefault(_deprecated2);
 	
-	var _elementType2 = __webpack_require__(33);
+	var _elementType2 = __webpack_require__(34);
 	
 	var _elementType3 = _interopRequireDefault(_elementType2);
 	
-	var _isRequiredForA11y2 = __webpack_require__(34);
+	var _isRequiredForA11y2 = __webpack_require__(35);
 	
 	var _isRequiredForA11y3 = _interopRequireDefault(_isRequiredForA11y2);
 	
-	var _splitComponent2 = __webpack_require__(35);
+	var _splitComponent2 = __webpack_require__(36);
 	
 	var _splitComponent3 = _interopRequireDefault(_splitComponent2);
 	
-	var _createChainedFunction2 = __webpack_require__(36);
+	var _createChainedFunction2 = __webpack_require__(37);
 	
 	var _createChainedFunction3 = _interopRequireDefault(_createChainedFunction2);
 	
-	var _keyCode = __webpack_require__(37);
+	var _keyCode = __webpack_require__(38);
 	
 	var _keyCode2 = _interopRequireDefault(_keyCode);
 	
-	var _contains2 = __webpack_require__(38);
+	var _contains2 = __webpack_require__(39);
 	
 	var _contains3 = _interopRequireDefault(_contains2);
 	
-	var _addEventListener2 = __webpack_require__(39);
+	var _addEventListener2 = __webpack_require__(40);
 	
 	var _addEventListener3 = _interopRequireDefault(_addEventListener2);
 	
-	var _cssAnimation2 = __webpack_require__(44);
+	var _cssAnimation2 = __webpack_require__(45);
 	
 	var _cssAnimation3 = _interopRequireDefault(_cssAnimation2);
 	
-	var _toArray2 = __webpack_require__(48);
+	var _toArray2 = __webpack_require__(49);
 	
 	var _toArray3 = _interopRequireDefault(_toArray2);
 	
-	var _Align2 = __webpack_require__(49);
+	var _Align2 = __webpack_require__(50);
 	
 	var _Align3 = _interopRequireDefault(_Align2);
+	
+	var _cssUtil3 = _interopRequireDefault(_cssUtil2);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -2101,9 +2130,79 @@
 	//export getContainerRenderMixin from './getContainerRenderMixin';
 	
 	exports.Align = _Align3.default;
+	exports.cssUtil = _cssUtil3.default;
 
 /***/ }),
 /* 27 */
+/***/ (function(module, exports) {
+
+	"use strict";
+	
+	exports.__esModule = true;
+	var cssUtil = {
+	    /**
+	     * 从指定元素开始遍历父级节点(向上)找到匹配样式的全部节点
+	     * @param elem
+	     * @param selector  css筛选器
+	     * @param isFirst  是否匹配到第一个就终止
+	     * @return {Array}
+	     */
+	    parents: function parents(elem, selector, isFirst) {
+	        var result = [];
+	        var loopMath = function loopMath(elem, selector) {
+	            var pel = elem.parentElement;
+	            var matchesSelector = pel ? pel.matches || pel.webkitMatchesSelector || pel.mozMatchesSelector || pel.msMatchesSelector : null;
+	            while (pel && pel.nodeType !== 9 && (isFirst ? result.length < 1 : true)) {
+	                //当父节点不存在或者父节点为document则表示向上遍历到了顶层节点
+	                if (matchesSelector && matchesSelector.call(pel, selector)) {
+	                    result.push(pel);
+	                }
+	                pel = pel.parentElement;
+	                matchesSelector = pel ? pel.matches || pel.webkitMatchesSelector || pel.mozMatchesSelector || pel.msMatchesSelector : null;
+	            }
+	        };
+	        loopMath(elem, selector);
+	        return result;
+	    },
+	    /**
+	     * 从指定元素开始遍历父级节点(向上)找到匹配样式的第一个父节点
+	     * @param elem
+	     * @param selector  css筛选器
+	     * @return {Object}
+	     */
+	    parent: function parent(elem, selector) {
+	        var result = cssUtil.parents(elem, selector, true);
+	        return result && result.length > 0 ? result[0] : null;
+	    },
+	    parentsUntil: function parentsUntil(elem) {
+	        var selectorArr = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [".u-modal-content", ".u-drawer-body"];
+	
+	        if (!elem) return document.body;
+	
+	        var container = null;
+	        if (Array.isArray(selectorArr)) {
+	            for (var i = 0; i < selectorArr.length; i++) {
+	                container = cssUtil.parent(elem, selectorArr[i]);
+	                if (container) {
+	                    break;
+	                }
+	            }
+	        } else {
+	            container = cssUtil.parent(elem, selectorArr);
+	        }
+	        return container || document.body;
+	    }
+	};
+	var parents = cssUtil.parents,
+	    parent = cssUtil.parent,
+	    parentsUntil = cssUtil.parentsUntil;
+	exports.parents = parents;
+	exports.parent = parent;
+	exports.parentsUntil = parentsUntil;
+	exports.default = cssUtil;
+
+/***/ }),
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2111,7 +2210,7 @@
 	exports.__esModule = true;
 	exports.default = all;
 	
-	var _createChainableTypeChecker = __webpack_require__(28);
+	var _createChainableTypeChecker = __webpack_require__(29);
 	
 	var _createChainableTypeChecker2 = _interopRequireDefault(_createChainableTypeChecker);
 	
@@ -2150,7 +2249,7 @@
 	   */
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -2199,7 +2298,7 @@
 	}
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2216,7 +2315,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _createChainableTypeChecker = __webpack_require__(28);
+	var _createChainableTypeChecker = __webpack_require__(29);
 	
 	var _createChainableTypeChecker2 = _interopRequireDefault(_createChainableTypeChecker);
 	
@@ -2240,7 +2339,7 @@
 	exports.default = (0, _createChainableTypeChecker2.default)(validate);
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2248,7 +2347,7 @@
 	exports.__esModule = true;
 	exports.default = deprecated;
 	
-	var _warning = __webpack_require__(31);
+	var _warning = __webpack_require__(32);
 	
 	var _warning2 = _interopRequireDefault(_warning);
 	
@@ -2288,7 +2387,7 @@
 	/* eslint-enable no-underscore-dangle */
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -2352,10 +2451,10 @@
 	
 	module.exports = warning;
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(32)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33)))
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, exports) {
 
 	// shim for using process in browser
@@ -2545,7 +2644,7 @@
 
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2562,7 +2661,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _createChainableTypeChecker = __webpack_require__(28);
+	var _createChainableTypeChecker = __webpack_require__(29);
 	
 	var _createChainableTypeChecker2 = _interopRequireDefault(_createChainableTypeChecker);
 	
@@ -2586,7 +2685,7 @@
 	exports.default = (0, _createChainableTypeChecker2.default)(elementType);
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -2615,7 +2714,7 @@
 	}
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -2662,7 +2761,7 @@
 	}
 
 /***/ }),
-/* 36 */
+/* 37 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -2701,7 +2800,7 @@
 	exports.default = createChainedFunction;
 
 /***/ }),
-/* 37 */
+/* 38 */
 /***/ (function(module, exports) {
 
 	/**
@@ -3230,7 +3329,7 @@
 	module.exports = KeyCode;
 
 /***/ }),
-/* 38 */
+/* 39 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -3254,7 +3353,7 @@
 	}
 
 /***/ }),
-/* 39 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3262,7 +3361,7 @@
 	exports.__esModule = true;
 	exports.default = addEventListenerWrap;
 	
-	var _addDomEventListener = __webpack_require__(40);
+	var _addDomEventListener = __webpack_require__(41);
 	
 	var _addDomEventListener2 = _interopRequireDefault(_addDomEventListener);
 	
@@ -3285,7 +3384,7 @@
 	}
 
 /***/ }),
-/* 40 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3297,7 +3396,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _EventObject = __webpack_require__(41);
+	var _EventObject = __webpack_require__(42);
 	
 	var _EventObject2 = _interopRequireDefault(_EventObject);
 	
@@ -3341,7 +3440,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 41 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/**
@@ -3358,11 +3457,11 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _EventBaseObject = __webpack_require__(42);
+	var _EventBaseObject = __webpack_require__(43);
 	
 	var _EventBaseObject2 = _interopRequireDefault(_EventBaseObject);
 	
-	var _objectAssign = __webpack_require__(43);
+	var _objectAssign = __webpack_require__(44);
 	
 	var _objectAssign2 = _interopRequireDefault(_objectAssign);
 	
@@ -3624,7 +3723,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 42 */
+/* 43 */
 /***/ (function(module, exports) {
 
 	/**
@@ -3692,7 +3791,7 @@
 	module.exports = exports["default"];
 
 /***/ }),
-/* 43 */
+/* 44 */
 /***/ (function(module, exports) {
 
 	/*
@@ -3788,7 +3887,7 @@
 
 
 /***/ }),
-/* 44 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -3801,11 +3900,11 @@
 	                                                                                                                                                                                                                                                                               */
 	
 	
-	var _Event = __webpack_require__(45);
+	var _Event = __webpack_require__(46);
 	
 	var _Event2 = _interopRequireDefault(_Event);
 	
-	var _componentClasses = __webpack_require__(46);
+	var _componentClasses = __webpack_require__(47);
 	
 	var _componentClasses2 = _interopRequireDefault(_componentClasses);
 	
@@ -3984,7 +4083,7 @@
 	exports.default = cssAnimation;
 
 /***/ }),
-/* 45 */
+/* 46 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -4078,7 +4177,7 @@
 	exports.default = TransitionEvents;
 
 /***/ }),
-/* 46 */
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/**
@@ -4086,9 +4185,9 @@
 	 */
 	
 	try {
-	  var index = __webpack_require__(47);
+	  var index = __webpack_require__(48);
 	} catch (err) {
-	  var index = __webpack_require__(47);
+	  var index = __webpack_require__(48);
 	}
 	
 	/**
@@ -4275,7 +4374,7 @@
 
 
 /***/ }),
-/* 47 */
+/* 48 */
 /***/ (function(module, exports) {
 
 	module.exports = function(arr, obj){
@@ -4287,7 +4386,7 @@
 	};
 
 /***/ }),
-/* 48 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4313,7 +4412,7 @@
 	   */
 
 /***/ }),
-/* 49 */
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -4332,11 +4431,11 @@
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _domAlign = __webpack_require__(50);
+	var _domAlign = __webpack_require__(51);
 	
 	var _domAlign2 = _interopRequireDefault(_domAlign);
 	
-	var _addEventListener = __webpack_require__(39);
+	var _addEventListener = __webpack_require__(40);
 	
 	var _addEventListener2 = _interopRequireDefault(_addEventListener);
 	
@@ -4513,7 +4612,7 @@
 	exports.default = Align;
 
 /***/ }),
-/* 50 */
+/* 51 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -4631,6 +4730,8 @@
 	}
 	
 	function _typeof(obj) {
+	  "@babel/helpers - typeof";
+	
 	  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
 	    _typeof = function _typeof(obj) {
 	      return typeof obj;
@@ -5100,7 +5201,6 @@
 	
 	  var which = name === 'width' ? ['Left', 'Right'] : ['Top', 'Bottom'];
 	  var borderBoxValue = name === 'width' ? elem.getBoundingClientRect().width : elem.getBoundingClientRect().height;
-	  var computedStyle = getComputedStyleX(elem);
 	  var isBorderBox = isBorderBoxFn(elem);
 	  var cssBoxValue = 0;
 	
@@ -5181,7 +5281,6 @@
 	
 	    if (val !== undefined) {
 	      if (elem) {
-	        var computedStyle = getComputedStyleX(elem);
 	        var isBorderBox = isBorderBoxFn(elem);
 	
 	        if (isBorderBox) {
@@ -5329,7 +5428,8 @@
 	  var body = doc.body;
 	  var parent = null;
 	
-	  for (parent = getParent$1(element); parent && parent !== body; parent = getParent$1(parent)) {
+	  for (parent = getParent$1(element); // 修复元素位于 document.documentElement 下导致崩溃问题
+	  parent && parent !== body && parent !== doc; parent = getParent$1(parent)) {
 	    var positionStyle = utils.css(parent, 'position');
 	
 	    if (positionStyle === 'fixed') {
@@ -5768,9 +5868,13 @@
 	
 	  if (Object.getOwnPropertySymbols) {
 	    var symbols = Object.getOwnPropertySymbols(object);
-	    if (enumerableOnly) symbols = symbols.filter(function (sym) {
-	      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-	    });
+	
+	    if (enumerableOnly) {
+	      symbols = symbols.filter(function (sym) {
+	        return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+	      });
+	    }
+	
 	    keys.push.apply(keys, symbols);
 	  }
 	
@@ -5782,13 +5886,13 @@
 	    var source = arguments[i] != null ? arguments[i] : {};
 	
 	    if (i % 2) {
-	      ownKeys(source, true).forEach(function (key) {
+	      ownKeys(Object(source), true).forEach(function (key) {
 	        _defineProperty(target, key, source[key]);
 	      });
 	    } else if (Object.getOwnPropertyDescriptors) {
 	      Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
 	    } else {
-	      ownKeys(source).forEach(function (key) {
+	      ownKeys(Object(source)).forEach(function (key) {
 	        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
 	      });
 	    }
@@ -5847,7 +5951,7 @@
 	  var pointInView = pageX >= 0 && pageX <= scrollX + viewportWidth && pageY >= 0 && pageY <= scrollY + viewportHeight; // Provide default target point
 	
 	  var points = [align.points[0], 'cc'];
-	  return doAlign(el, tgtRegion, _objectSpread({}, align, {
+	  return doAlign(el, tgtRegion, _objectSpread(_objectSpread({}, align), {}, {
 	    points: points
 	  }), pointInView);
 	}
@@ -5859,7 +5963,7 @@
 
 
 /***/ }),
-/* 51 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5980,7 +6084,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 52 */
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5989,7 +6093,7 @@
 	  value: true
 	});
 	
-	var _Message = __webpack_require__(53);
+	var _Message = __webpack_require__(54);
 	
 	var _Message2 = _interopRequireDefault(_Message);
 	
@@ -5999,7 +6103,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 53 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -6016,7 +6120,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _beeNotification = __webpack_require__(54);
+	var _beeNotification = __webpack_require__(55);
 	
 	var _beeNotification2 = _interopRequireDefault(_beeNotification);
 	
@@ -6224,7 +6328,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 54 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -6233,7 +6337,7 @@
 	  value: true
 	});
 	
-	var _Notification = __webpack_require__(55);
+	var _Notification = __webpack_require__(56);
 	
 	var _Notification2 = _interopRequireDefault(_Notification);
 	
@@ -6243,7 +6347,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 55 */
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -6266,19 +6370,19 @@
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _beeAnimate = __webpack_require__(56);
+	var _beeAnimate = __webpack_require__(57);
 	
 	var _beeAnimate2 = _interopRequireDefault(_beeAnimate);
 	
-	var _createChainedFunction = __webpack_require__(36);
+	var _createChainedFunction = __webpack_require__(37);
 	
 	var _createChainedFunction2 = _interopRequireDefault(_createChainedFunction);
 	
-	var _ownerDocument = __webpack_require__(61);
+	var _ownerDocument = __webpack_require__(62);
 	
 	var _ownerDocument2 = _interopRequireDefault(_ownerDocument);
 	
-	var _addEventListener = __webpack_require__(63);
+	var _addEventListener = __webpack_require__(64);
 	
 	var _addEventListener2 = _interopRequireDefault(_addEventListener);
 	
@@ -6286,7 +6390,7 @@
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _Notice = __webpack_require__(65);
+	var _Notice = __webpack_require__(66);
 	
 	var _Notice2 = _interopRequireDefault(_Notice);
 	
@@ -6489,7 +6593,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 56 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -6498,7 +6602,7 @@
 	  value: true
 	});
 	
-	var _Animate = __webpack_require__(57);
+	var _Animate = __webpack_require__(58);
 	
 	var _Animate2 = _interopRequireDefault(_Animate);
 	
@@ -6508,7 +6612,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 57 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -6525,13 +6629,13 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _ChildrenUtils = __webpack_require__(58);
+	var _ChildrenUtils = __webpack_require__(59);
 	
-	var _AnimateChild = __webpack_require__(59);
+	var _AnimateChild = __webpack_require__(60);
 	
 	var _AnimateChild2 = _interopRequireDefault(_AnimateChild);
 	
-	var _util = __webpack_require__(60);
+	var _util = __webpack_require__(61);
 	
 	var _util2 = _interopRequireDefault(_util);
 	
@@ -6888,7 +6992,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 58 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -7010,7 +7114,7 @@
 	}
 
 /***/ }),
-/* 59 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -7035,7 +7139,7 @@
 	
 	var _tinperBeeCore = __webpack_require__(26);
 	
-	var _util = __webpack_require__(60);
+	var _util = __webpack_require__(61);
 	
 	var _util2 = _interopRequireDefault(_util);
 	
@@ -7153,7 +7257,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 60 */
+/* 61 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -7185,7 +7289,7 @@
 	module.exports = exports["default"];
 
 /***/ }),
-/* 61 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -7202,7 +7306,7 @@
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _ownerDocument = __webpack_require__(62);
+	var _ownerDocument = __webpack_require__(63);
 	
 	var _ownerDocument2 = _interopRequireDefault(_ownerDocument);
 	
@@ -7211,7 +7315,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 62 */
+/* 63 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -7226,7 +7330,7 @@
 	module.exports = exports["default"];
 
 /***/ }),
-/* 63 */
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -7249,7 +7353,7 @@
 	
 	var _on2 = _interopRequireDefault(_on);
 	
-	var _off = __webpack_require__(64);
+	var _off = __webpack_require__(65);
 	
 	var _off2 = _interopRequireDefault(_off);
 	
@@ -7258,7 +7362,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 64 */
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -7288,7 +7392,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 65 */
+/* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -7431,12 +7535,12 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 66 */
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
 	
-	var deselectCurrent = __webpack_require__(67);
+	var deselectCurrent = __webpack_require__(68);
 	
 	var clipboardToIE11Formatting = {
 	  "text/plain": "Text",
@@ -7550,7 +7654,7 @@
 
 
 /***/ }),
-/* 67 */
+/* 68 */
 /***/ (function(module, exports) {
 
 	
@@ -7595,7 +7699,7 @@
 
 
 /***/ }),
-/* 68 */
+/* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -7742,7 +7846,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 69 */
+/* 70 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -7751,7 +7855,7 @@
 	  value: true
 	});
 	
-	var _Drawer = __webpack_require__(70);
+	var _Drawer = __webpack_require__(71);
 	
 	var _Drawer2 = _interopRequireDefault(_Drawer);
 	
@@ -7761,7 +7865,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 70 */
+/* 71 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -7786,9 +7890,9 @@
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _common = __webpack_require__(71);
+	var _common = __webpack_require__(72);
 	
-	var _reactTransitionGroup = __webpack_require__(72);
+	var _reactTransitionGroup = __webpack_require__(73);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
@@ -8064,7 +8168,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 71 */
+/* 72 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -8091,18 +8195,18 @@
 	}
 
 /***/ }),
-/* 72 */
+/* 73 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
 	
-	var _CSSTransition = _interopRequireDefault(__webpack_require__(73));
+	var _CSSTransition = _interopRequireDefault(__webpack_require__(74));
 	
-	var _ReplaceTransition = _interopRequireDefault(__webpack_require__(80));
+	var _ReplaceTransition = _interopRequireDefault(__webpack_require__(81));
 	
-	var _TransitionGroup = _interopRequireDefault(__webpack_require__(81));
+	var _TransitionGroup = _interopRequireDefault(__webpack_require__(82));
 	
-	var _Transition = _interopRequireDefault(__webpack_require__(77));
+	var _Transition = _interopRequireDefault(__webpack_require__(78));
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -8114,7 +8218,7 @@
 	};
 
 /***/ }),
-/* 73 */
+/* 74 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {"use strict";
@@ -8124,15 +8228,15 @@
 	
 	var PropTypes = _interopRequireWildcard(__webpack_require__(6));
 	
-	var _addClass = _interopRequireDefault(__webpack_require__(74));
+	var _addClass = _interopRequireDefault(__webpack_require__(75));
 	
-	var _removeClass = _interopRequireDefault(__webpack_require__(76));
+	var _removeClass = _interopRequireDefault(__webpack_require__(77));
 	
 	var _react = _interopRequireDefault(__webpack_require__(1));
 	
-	var _Transition = _interopRequireDefault(__webpack_require__(77));
+	var _Transition = _interopRequireDefault(__webpack_require__(78));
 	
-	var _PropTypes = __webpack_require__(79);
+	var _PropTypes = __webpack_require__(80);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -8481,10 +8585,10 @@
 	var _default = CSSTransition;
 	exports.default = _default;
 	module.exports = exports["default"];
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(32)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33)))
 
 /***/ }),
-/* 74 */
+/* 75 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -8494,7 +8598,7 @@
 	});
 	exports.default = addClass;
 	
-	var _hasClass = __webpack_require__(75);
+	var _hasClass = __webpack_require__(76);
 	
 	var _hasClass2 = _interopRequireDefault(_hasClass);
 	
@@ -8506,7 +8610,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 75 */
+/* 76 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -8521,7 +8625,7 @@
 	module.exports = exports["default"];
 
 /***/ }),
-/* 76 */
+/* 77 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -8531,7 +8635,7 @@
 	};
 
 /***/ }),
-/* 77 */
+/* 78 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {"use strict";
@@ -8545,9 +8649,9 @@
 	
 	var _reactDom = _interopRequireDefault(__webpack_require__(2));
 	
-	var _reactLifecyclesCompat = __webpack_require__(78);
+	var _reactLifecyclesCompat = __webpack_require__(79);
 	
-	var _PropTypes = __webpack_require__(79);
+	var _PropTypes = __webpack_require__(80);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -9143,10 +9247,10 @@
 	var _default = (0, _reactLifecyclesCompat.polyfill)(Transition);
 	
 	exports.default = _default;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(32)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33)))
 
 /***/ }),
-/* 78 */
+/* 79 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -9314,7 +9418,7 @@
 
 
 /***/ }),
-/* 79 */
+/* 80 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {"use strict";
@@ -9345,10 +9449,10 @@
 	  exitActive: _propTypes.default.string
 	})]) : null;
 	exports.classNamesShape = classNamesShape;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(32)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33)))
 
 /***/ }),
-/* 80 */
+/* 81 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {"use strict";
@@ -9362,7 +9466,7 @@
 	
 	var _reactDom = __webpack_require__(2);
 	
-	var _TransitionGroup = _interopRequireDefault(__webpack_require__(81));
+	var _TransitionGroup = _interopRequireDefault(__webpack_require__(82));
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -9501,10 +9605,10 @@
 	var _default = ReplaceTransition;
 	exports.default = _default;
 	module.exports = exports["default"];
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(32)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33)))
 
 /***/ }),
-/* 81 */
+/* 82 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {"use strict";
@@ -9516,9 +9620,9 @@
 	
 	var _react = _interopRequireDefault(__webpack_require__(1));
 	
-	var _reactLifecyclesCompat = __webpack_require__(78);
+	var _reactLifecyclesCompat = __webpack_require__(79);
 	
-	var _ChildMapping = __webpack_require__(82);
+	var _ChildMapping = __webpack_require__(83);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -9715,10 +9819,10 @@
 	
 	exports.default = _default;
 	module.exports = exports["default"];
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(32)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33)))
 
 /***/ }),
-/* 82 */
+/* 83 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -9873,7 +9977,7 @@
 	}
 
 /***/ }),
-/* 83 */
+/* 84 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -9882,7 +9986,7 @@
 	  value: true
 	});
 	
-	var _Clipboard = __webpack_require__(84);
+	var _Clipboard = __webpack_require__(85);
 	
 	var _Clipboard2 = _interopRequireDefault(_Clipboard);
 	
@@ -9892,7 +9996,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 84 */
+/* 85 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -9905,7 +10009,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _clipboard = __webpack_require__(85);
+	var _clipboard = __webpack_require__(86);
 	
 	var _clipboard2 = _interopRequireDefault(_clipboard);
 	
@@ -9913,7 +10017,7 @@
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _beeIcon = __webpack_require__(93);
+	var _beeIcon = __webpack_require__(94);
 	
 	var _beeIcon2 = _interopRequireDefault(_beeIcon);
 	
@@ -9921,7 +10025,7 @@
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _beeTooltip = __webpack_require__(95);
+	var _beeTooltip = __webpack_require__(96);
 	
 	var _beeTooltip2 = _interopRequireDefault(_beeTooltip);
 	
@@ -9929,21 +10033,21 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _tool = __webpack_require__(118);
+	var _tool = __webpack_require__(119);
 	
-	var _i18n = __webpack_require__(119);
+	var _i18n = __webpack_require__(120);
 	
 	var _i18n2 = _interopRequireDefault(_i18n);
 	
-	var _beeModal = __webpack_require__(120);
+	var _beeModal = __webpack_require__(121);
 	
 	var _beeModal2 = _interopRequireDefault(_beeModal);
 	
-	var _beeFormControl = __webpack_require__(276);
+	var _beeFormControl = __webpack_require__(277);
 	
 	var _beeFormControl2 = _interopRequireDefault(_beeFormControl);
 	
-	var _beeButton = __webpack_require__(273);
+	var _beeButton = __webpack_require__(274);
 	
 	var _beeButton2 = _interopRequireDefault(_beeButton);
 	
@@ -10114,12 +10218,12 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 85 */
+/* 86 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
 	    if (true) {
-	        !(__WEBPACK_AMD_DEFINE_ARRAY__ = [module, __webpack_require__(86), __webpack_require__(88), __webpack_require__(89)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	        !(__WEBPACK_AMD_DEFINE_ARRAY__ = [module, __webpack_require__(87), __webpack_require__(89), __webpack_require__(90)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 	    } else if (typeof exports !== "undefined") {
 	        factory(module, require('./clipboard-action'), require('tiny-emitter'), require('good-listener'));
 	    } else {
@@ -10326,12 +10430,12 @@
 	});
 
 /***/ }),
-/* 86 */
+/* 87 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (global, factory) {
 	    if (true) {
-	        !(__WEBPACK_AMD_DEFINE_ARRAY__ = [module, __webpack_require__(87)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	        !(__WEBPACK_AMD_DEFINE_ARRAY__ = [module, __webpack_require__(88)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 	    } else if (typeof exports !== "undefined") {
 	        factory(module, require('select'));
 	    } else {
@@ -10560,7 +10664,7 @@
 	});
 
 /***/ }),
-/* 87 */
+/* 88 */
 /***/ (function(module, exports) {
 
 	function select(element) {
@@ -10609,7 +10713,7 @@
 
 
 /***/ }),
-/* 88 */
+/* 89 */
 /***/ (function(module, exports) {
 
 	function E () {
@@ -10682,11 +10786,11 @@
 
 
 /***/ }),
-/* 89 */
+/* 90 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var is = __webpack_require__(90);
-	var delegate = __webpack_require__(91);
+	var is = __webpack_require__(91);
+	var delegate = __webpack_require__(92);
 	
 	/**
 	 * Validates all params and calls the right
@@ -10783,7 +10887,7 @@
 
 
 /***/ }),
-/* 90 */
+/* 91 */
 /***/ (function(module, exports) {
 
 	/**
@@ -10838,10 +10942,10 @@
 
 
 /***/ }),
-/* 91 */
+/* 92 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var closest = __webpack_require__(92);
+	var closest = __webpack_require__(93);
 	
 	/**
 	 * Delegates event to a selector.
@@ -10922,7 +11026,7 @@
 
 
 /***/ }),
-/* 92 */
+/* 93 */
 /***/ (function(module, exports) {
 
 	var DOCUMENT_NODE_TYPE = 9;
@@ -10961,7 +11065,7 @@
 
 
 /***/ }),
-/* 93 */
+/* 94 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -10970,7 +11074,7 @@
 	  value: true
 	});
 	
-	var _Icon = __webpack_require__(94);
+	var _Icon = __webpack_require__(95);
 	
 	var _Icon2 = _interopRequireDefault(_Icon);
 	
@@ -10980,7 +11084,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 94 */
+/* 95 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -11059,7 +11163,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 95 */
+/* 96 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -11068,7 +11172,7 @@
 	  value: true
 	});
 	
-	var _Tooltip = __webpack_require__(96);
+	var _Tooltip = __webpack_require__(97);
 	
 	var _Tooltip2 = _interopRequireDefault(_Tooltip);
 	
@@ -11078,7 +11182,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 96 */
+/* 97 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -11101,7 +11205,7 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _OverlayTrigger = __webpack_require__(97);
+	var _OverlayTrigger = __webpack_require__(98);
 	
 	var _OverlayTrigger2 = _interopRequireDefault(_OverlayTrigger);
 	
@@ -11352,7 +11456,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 97 */
+/* 98 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -11363,7 +11467,7 @@
 	
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
-	var _contains = __webpack_require__(98);
+	var _contains = __webpack_require__(99);
 	
 	var _contains2 = _interopRequireDefault(_contains);
 	
@@ -11379,19 +11483,19 @@
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _warning = __webpack_require__(31);
+	var _warning = __webpack_require__(32);
 	
 	var _warning2 = _interopRequireDefault(_warning);
 	
-	var _Portal = __webpack_require__(99);
+	var _Portal = __webpack_require__(100);
 	
 	var _Portal2 = _interopRequireDefault(_Portal);
 	
-	var _Overlay = __webpack_require__(101);
+	var _Overlay = __webpack_require__(102);
 	
 	var _Overlay2 = _interopRequireDefault(_Overlay);
 	
-	var _createChainedFunction = __webpack_require__(117);
+	var _createChainedFunction = __webpack_require__(118);
 	
 	var _createChainedFunction2 = _interopRequireDefault(_createChainedFunction);
 	
@@ -11761,7 +11865,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 98 */
+/* 99 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -11795,7 +11899,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 99 */
+/* 100 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -11816,11 +11920,11 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _ownerDocument = __webpack_require__(61);
+	var _ownerDocument = __webpack_require__(62);
 	
 	var _ownerDocument2 = _interopRequireDefault(_ownerDocument);
 	
-	var _getContainer = __webpack_require__(100);
+	var _getContainer = __webpack_require__(101);
 	
 	var _getContainer2 = _interopRequireDefault(_getContainer);
 	
@@ -12003,7 +12107,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 100 */
+/* 101 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -12032,7 +12136,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 101 */
+/* 102 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -12055,13 +12159,13 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _BaseOverlay = __webpack_require__(102);
+	var _BaseOverlay = __webpack_require__(103);
 	
 	var _BaseOverlay2 = _interopRequireDefault(_BaseOverlay);
 	
 	var _tinperBeeCore = __webpack_require__(26);
 	
-	var _Fade = __webpack_require__(115);
+	var _Fade = __webpack_require__(116);
 	
 	var _Fade2 = _interopRequireDefault(_Fade);
 	
@@ -12192,7 +12296,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 102 */
+/* 103 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -12215,15 +12319,15 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _Portal = __webpack_require__(99);
+	var _Portal = __webpack_require__(100);
 	
 	var _Portal2 = _interopRequireDefault(_Portal);
 	
-	var _Position = __webpack_require__(103);
+	var _Position = __webpack_require__(104);
 	
 	var _Position2 = _interopRequireDefault(_Position);
 	
-	var _RootCloseWrapper = __webpack_require__(114);
+	var _RootCloseWrapper = __webpack_require__(115);
 	
 	var _RootCloseWrapper2 = _interopRequireDefault(_RootCloseWrapper);
 	
@@ -12450,7 +12554,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 103 */
+/* 104 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -12479,27 +12583,27 @@
 	
 	var _tinperBeeCore = __webpack_require__(26);
 	
-	var _requestAnimationFrame = __webpack_require__(104);
+	var _requestAnimationFrame = __webpack_require__(105);
 	
 	var _requestAnimationFrame2 = _interopRequireDefault(_requestAnimationFrame);
 	
-	var _calculatePosition = __webpack_require__(105);
+	var _calculatePosition = __webpack_require__(106);
 	
 	var _calculatePosition2 = _interopRequireDefault(_calculatePosition);
 	
-	var _getContainer = __webpack_require__(100);
+	var _getContainer = __webpack_require__(101);
 	
 	var _getContainer2 = _interopRequireDefault(_getContainer);
 	
-	var _ownerDocument = __webpack_require__(61);
+	var _ownerDocument = __webpack_require__(62);
 	
 	var _ownerDocument2 = _interopRequireDefault(_ownerDocument);
 	
-	var _ownerWindow = __webpack_require__(112);
+	var _ownerWindow = __webpack_require__(113);
 	
 	var _ownerWindow2 = _interopRequireDefault(_ownerWindow);
 	
-	var _addEventListener = __webpack_require__(63);
+	var _addEventListener = __webpack_require__(64);
 	
 	var _addEventListener2 = _interopRequireDefault(_addEventListener);
 	
@@ -12768,7 +12872,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 104 */
+/* 105 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -12828,7 +12932,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 105 */
+/* 106 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -12838,19 +12942,19 @@
 	});
 	exports["default"] = calculatePosition;
 	
-	var _offset = __webpack_require__(106);
+	var _offset = __webpack_require__(107);
 	
 	var _offset2 = _interopRequireDefault(_offset);
 	
-	var _position = __webpack_require__(108);
+	var _position = __webpack_require__(109);
 	
 	var _position2 = _interopRequireDefault(_position);
 	
-	var _scrollTop = __webpack_require__(110);
+	var _scrollTop = __webpack_require__(111);
 	
 	var _scrollTop2 = _interopRequireDefault(_scrollTop);
 	
-	var _ownerDocument = __webpack_require__(61);
+	var _ownerDocument = __webpack_require__(62);
 	
 	var _ownerDocument2 = _interopRequireDefault(_ownerDocument);
 	
@@ -13004,7 +13108,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 106 */
+/* 107 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -13014,15 +13118,15 @@
 	});
 	exports.default = offset;
 	
-	var _contains = __webpack_require__(98);
+	var _contains = __webpack_require__(99);
 	
 	var _contains2 = _interopRequireDefault(_contains);
 	
-	var _isWindow = __webpack_require__(107);
+	var _isWindow = __webpack_require__(108);
 	
 	var _isWindow2 = _interopRequireDefault(_isWindow);
 	
-	var _ownerDocument = __webpack_require__(62);
+	var _ownerDocument = __webpack_require__(63);
 	
 	var _ownerDocument2 = _interopRequireDefault(_ownerDocument);
 	
@@ -13056,7 +13160,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 107 */
+/* 108 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -13071,7 +13175,7 @@
 	module.exports = exports["default"];
 
 /***/ }),
-/* 108 */
+/* 109 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -13084,19 +13188,19 @@
 	
 	exports.default = position;
 	
-	var _offset = __webpack_require__(106);
+	var _offset = __webpack_require__(107);
 	
 	var _offset2 = _interopRequireDefault(_offset);
 	
-	var _offsetParent = __webpack_require__(109);
+	var _offsetParent = __webpack_require__(110);
 	
 	var _offsetParent2 = _interopRequireDefault(_offsetParent);
 	
-	var _scrollTop = __webpack_require__(110);
+	var _scrollTop = __webpack_require__(111);
 	
 	var _scrollTop2 = _interopRequireDefault(_scrollTop);
 	
-	var _scrollLeft = __webpack_require__(111);
+	var _scrollLeft = __webpack_require__(112);
 	
 	var _scrollLeft2 = _interopRequireDefault(_scrollLeft);
 	
@@ -13137,7 +13241,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 109 */
+/* 110 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -13147,7 +13251,7 @@
 	});
 	exports.default = offsetParent;
 	
-	var _ownerDocument = __webpack_require__(62);
+	var _ownerDocument = __webpack_require__(63);
 	
 	var _ownerDocument2 = _interopRequireDefault(_ownerDocument);
 	
@@ -13174,7 +13278,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 110 */
+/* 111 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -13184,7 +13288,7 @@
 	});
 	exports.default = scrollTop;
 	
-	var _isWindow = __webpack_require__(107);
+	var _isWindow = __webpack_require__(108);
 	
 	var _isWindow2 = _interopRequireDefault(_isWindow);
 	
@@ -13200,7 +13304,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 111 */
+/* 112 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -13210,7 +13314,7 @@
 	});
 	exports.default = scrollTop;
 	
-	var _isWindow = __webpack_require__(107);
+	var _isWindow = __webpack_require__(108);
 	
 	var _isWindow2 = _interopRequireDefault(_isWindow);
 	
@@ -13226,7 +13330,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 112 */
+/* 113 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -13243,7 +13347,7 @@
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _ownerWindow = __webpack_require__(113);
+	var _ownerWindow = __webpack_require__(114);
 	
 	var _ownerWindow2 = _interopRequireDefault(_ownerWindow);
 	
@@ -13252,7 +13356,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 113 */
+/* 114 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -13262,7 +13366,7 @@
 	});
 	exports.default = ownerWindow;
 	
-	var _ownerDocument = __webpack_require__(62);
+	var _ownerDocument = __webpack_require__(63);
 	
 	var _ownerDocument2 = _interopRequireDefault(_ownerDocument);
 	
@@ -13275,7 +13379,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 114 */
+/* 115 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -13284,7 +13388,7 @@
 	  value: true
 	});
 	
-	var _contains = __webpack_require__(98);
+	var _contains = __webpack_require__(99);
 	
 	var _contains2 = _interopRequireDefault(_contains);
 	
@@ -13300,11 +13404,11 @@
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _addEventListener = __webpack_require__(63);
+	var _addEventListener = __webpack_require__(64);
 	
 	var _addEventListener2 = _interopRequireDefault(_addEventListener);
 	
-	var _ownerDocument = __webpack_require__(61);
+	var _ownerDocument = __webpack_require__(62);
 	
 	var _ownerDocument2 = _interopRequireDefault(_ownerDocument);
 	
@@ -13437,7 +13541,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 115 */
+/* 116 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -13460,7 +13564,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Transition = __webpack_require__(116);
+	var _Transition = __webpack_require__(117);
 	
 	var _Transition2 = _interopRequireDefault(_Transition);
 	
@@ -13558,7 +13662,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 116 */
+/* 117 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -13907,7 +14011,7 @@
 	exports["default"] = Transition;
 
 /***/ }),
-/* 117 */
+/* 118 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -13955,7 +14059,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 118 */
+/* 119 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -13998,7 +14102,7 @@
 	}
 
 /***/ }),
-/* 119 */
+/* 120 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -14031,7 +14135,7 @@
 	};
 
 /***/ }),
-/* 120 */
+/* 121 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -14046,15 +14150,15 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Modal = __webpack_require__(121);
+	var _Modal = __webpack_require__(122);
 	
 	var _Modal2 = _interopRequireDefault(_Modal);
 	
-	var _confirm = __webpack_require__(272);
+	var _confirm = __webpack_require__(273);
 	
 	var _confirm2 = _interopRequireDefault(_confirm);
 	
-	var _beeIcon = __webpack_require__(93);
+	var _beeIcon = __webpack_require__(94);
 	
 	var _beeIcon2 = _interopRequireDefault(_beeIcon);
 	
@@ -14128,7 +14232,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 121 */
+/* 122 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -14148,11 +14252,11 @@
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _events = __webpack_require__(122);
+	var _events = __webpack_require__(123);
 	
 	var _events2 = _interopRequireDefault(_events);
 	
-	var _ownerDocument = __webpack_require__(62);
+	var _ownerDocument = __webpack_require__(63);
 	
 	var _ownerDocument2 = _interopRequireDefault(_ownerDocument);
 	
@@ -14160,11 +14264,11 @@
 	
 	var _inDOM2 = _interopRequireDefault(_inDOM);
 	
-	var _scrollbarSize = __webpack_require__(126);
+	var _scrollbarSize = __webpack_require__(127);
 	
 	var _scrollbarSize2 = _interopRequireDefault(_scrollbarSize);
 	
-	var _scrollTop = __webpack_require__(110);
+	var _scrollTop = __webpack_require__(111);
 	
 	var _scrollTop2 = _interopRequireDefault(_scrollTop);
 	
@@ -14176,11 +14280,11 @@
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _Modal = __webpack_require__(127);
+	var _Modal = __webpack_require__(128);
 	
 	var _Modal2 = _interopRequireDefault(_Modal);
 	
-	var _isOverflowing = __webpack_require__(133);
+	var _isOverflowing = __webpack_require__(134);
 	
 	var _isOverflowing2 = _interopRequireDefault(_isOverflowing);
 	
@@ -14188,23 +14292,23 @@
 	
 	var _beeTransition = __webpack_require__(11);
 	
-	var _ModalBody = __webpack_require__(138);
+	var _ModalBody = __webpack_require__(139);
 	
 	var _ModalBody2 = _interopRequireDefault(_ModalBody);
 	
-	var _ModalDialog = __webpack_require__(139);
+	var _ModalDialog = __webpack_require__(140);
 	
 	var _ModalDialog2 = _interopRequireDefault(_ModalDialog);
 	
-	var _ModalFooter = __webpack_require__(269);
+	var _ModalFooter = __webpack_require__(270);
 	
 	var _ModalFooter2 = _interopRequireDefault(_ModalFooter);
 	
-	var _ModalHeader = __webpack_require__(270);
+	var _ModalHeader = __webpack_require__(271);
 	
 	var _ModalHeader2 = _interopRequireDefault(_ModalHeader);
 	
-	var _ModalTitle = __webpack_require__(271);
+	var _ModalTitle = __webpack_require__(272);
 	
 	var _ModalTitle2 = _interopRequireDefault(_ModalTitle);
 	
@@ -14379,7 +14483,8 @@
 	      style: {},
 	      centered: props.centered,
 	      draging: false,
-	      draged: false
+	      draged: false,
+	      resized: false
 	    };
 	    _this.offsetTop = 0;
 	    _this.handleEntering = _this.handleEntering.bind(_this);
@@ -14400,6 +14505,17 @@
 	  Modal.prototype.componentWillUnmount = function componentWillUnmount() {
 	    // Clean up the listener if we need to.
 	    this.handleExited();
+	  };
+	
+	  Modal.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
+	    if (!nextProps.show) {
+	      // 关闭modal时，重置相关属性
+	      this.offsetTop = 0;
+	      this.setState({
+	        centered: nextProps.centered,
+	        resized: false
+	      });
+	    }
 	  };
 	
 	  Modal.prototype.handleEntering = function handleEntering() {
@@ -14426,7 +14542,6 @@
 	    if (e.target !== e.currentTarget) {
 	      return;
 	    }
-	
 	    this.props.onHide();
 	  };
 	
@@ -14458,8 +14573,9 @@
 	
 	  //计算 ModalDialog 的 offsetTop
 	  Modal.prototype.getOffsetTop = function getOffsetTop() {
-	    var modalDialog = document.getElementsByClassName("u-modal-dialog") && document.getElementsByClassName("u-modal-dialog")[0];
-	    var topPos = modalDialog && modalDialog.offsetTop;
+	    var modalDialogWrapper = this._modal.getDialogElement();
+	    var modalDialog = modalDialogWrapper ? modalDialogWrapper.querySelector('.u-modal-dialog') : null;
+	    var topPos = modalDialog ? modalDialog.offsetTop : 0;
 	    return topPos;
 	  };
 	
@@ -14494,11 +14610,12 @@
 	    var _state = this.state,
 	        centered = _state.centered,
 	        draging = _state.draging,
-	        draged = _state.draged;
+	        draged = _state.draged,
+	        resized = _state.resized;
 	
 	    var dialogMarginTop = 30;
 	    //ResizeStart 时，计算 ModalDialog 的 offsetTop
-	    var topPosStyle = this.offsetTop > 0 && !draging ? { top: this.offsetTop - dialogMarginTop } : null;
+	    var topPosStyle = this.offsetTop > 0 && !draging && !resized ? { top: this.offsetTop - dialogMarginTop } : null;
 	
 	    var _splitComponent = (0, _tinperBeeCore.splitComponent)(props, _Modal2["default"]),
 	        _splitComponent2 = _slicedToArray(_splitComponent, 2),
@@ -14556,6 +14673,7 @@
 	          clearCenteredCls: this.clearCenteredCls,
 	          onStart: function onStart() {
 	            _this2.setState({
+	              resized: true,
 	              draging: true,
 	              draged: false
 	            });
@@ -14603,7 +14721,7 @@
 	exports["default"] = Modal;
 
 /***/ }),
-/* 122 */
+/* 123 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -14617,15 +14735,15 @@
 	
 	var _on2 = _interopRequireDefault(_on);
 	
-	var _off = __webpack_require__(64);
+	var _off = __webpack_require__(65);
 	
 	var _off2 = _interopRequireDefault(_off);
 	
-	var _filter = __webpack_require__(123);
+	var _filter = __webpack_require__(124);
 	
 	var _filter2 = _interopRequireDefault(_filter);
 	
-	var _listen = __webpack_require__(125);
+	var _listen = __webpack_require__(126);
 	
 	var _listen2 = _interopRequireDefault(_listen);
 	
@@ -14638,7 +14756,7 @@
 	exports.default = { on: _on2.default, off: _off2.default, filter: _filter2.default, listen: _listen2.default };
 
 /***/ }),
-/* 123 */
+/* 124 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -14648,11 +14766,11 @@
 	});
 	exports.default = filterEvents;
 	
-	var _contains = __webpack_require__(98);
+	var _contains = __webpack_require__(99);
 	
 	var _contains2 = _interopRequireDefault(_contains);
 	
-	var _querySelectorAll = __webpack_require__(124);
+	var _querySelectorAll = __webpack_require__(125);
 	
 	var _querySelectorAll2 = _interopRequireDefault(_querySelectorAll);
 	
@@ -14672,7 +14790,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 124 */
+/* 125 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -14710,7 +14828,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 125 */
+/* 126 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -14727,7 +14845,7 @@
 	
 	var _on2 = _interopRequireDefault(_on);
 	
-	var _off = __webpack_require__(64);
+	var _off = __webpack_require__(65);
 	
 	var _off2 = _interopRequireDefault(_off);
 	
@@ -14748,7 +14866,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 126 */
+/* 127 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -14788,7 +14906,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 127 */
+/* 128 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -14808,29 +14926,29 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _warning = __webpack_require__(31);
+	var _warning = __webpack_require__(32);
 	
 	var _warning2 = _interopRequireDefault(_warning);
 	
 	var _tinperBeeCore = __webpack_require__(26);
 	
-	var _Portal = __webpack_require__(128);
+	var _Portal = __webpack_require__(129);
 	
 	var _Portal2 = _interopRequireDefault(_Portal);
 	
-	var _ModalManager = __webpack_require__(131);
+	var _ModalManager = __webpack_require__(132);
 	
 	var _ModalManager2 = _interopRequireDefault(_ModalManager);
 	
-	var _ownerDocument = __webpack_require__(129);
+	var _ownerDocument = __webpack_require__(130);
 	
 	var _ownerDocument2 = _interopRequireDefault(_ownerDocument);
 	
-	var _addEventListener = __webpack_require__(135);
+	var _addEventListener = __webpack_require__(136);
 	
 	var _addEventListener2 = _interopRequireDefault(_addEventListener);
 	
-	var _addFocusListener = __webpack_require__(136);
+	var _addFocusListener = __webpack_require__(137);
 	
 	var _addFocusListener2 = _interopRequireDefault(_addFocusListener);
 	
@@ -14838,15 +14956,15 @@
 	
 	var _inDOM2 = _interopRequireDefault(_inDOM);
 	
-	var _activeElement = __webpack_require__(137);
+	var _activeElement = __webpack_require__(138);
 	
 	var _activeElement2 = _interopRequireDefault(_activeElement);
 	
-	var _contains = __webpack_require__(98);
+	var _contains = __webpack_require__(99);
 	
 	var _contains2 = _interopRequireDefault(_contains);
 	
-	var _getContainer = __webpack_require__(130);
+	var _getContainer = __webpack_require__(131);
 	
 	var _getContainer2 = _interopRequireDefault(_getContainer);
 	
@@ -15332,7 +15450,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 128 */
+/* 129 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -15353,11 +15471,11 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _ownerDocument = __webpack_require__(129);
+	var _ownerDocument = __webpack_require__(130);
 	
 	var _ownerDocument2 = _interopRequireDefault(_ownerDocument);
 	
-	var _getContainer = __webpack_require__(130);
+	var _getContainer = __webpack_require__(131);
 	
 	var _getContainer2 = _interopRequireDefault(_getContainer);
 	
@@ -15540,7 +15658,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 129 */
+/* 130 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -15557,7 +15675,7 @@
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _ownerDocument = __webpack_require__(62);
+	var _ownerDocument = __webpack_require__(63);
 	
 	var _ownerDocument2 = _interopRequireDefault(_ownerDocument);
 	
@@ -15566,7 +15684,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 130 */
+/* 131 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -15595,7 +15713,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 131 */
+/* 132 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -15608,19 +15726,19 @@
 	
 	var _style2 = _interopRequireDefault(_style);
 	
-	var _class = __webpack_require__(132);
+	var _class = __webpack_require__(133);
 	
 	var _class2 = _interopRequireDefault(_class);
 	
-	var _scrollbarSize = __webpack_require__(126);
+	var _scrollbarSize = __webpack_require__(127);
 	
 	var _scrollbarSize2 = _interopRequireDefault(_scrollbarSize);
 	
-	var _isOverflowing = __webpack_require__(133);
+	var _isOverflowing = __webpack_require__(134);
 	
 	var _isOverflowing2 = _interopRequireDefault(_isOverflowing);
 	
-	var _manageAriaHidden = __webpack_require__(134);
+	var _manageAriaHidden = __webpack_require__(135);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
@@ -15776,7 +15894,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 132 */
+/* 133 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -15786,15 +15904,15 @@
 	});
 	exports.hasClass = exports.removeClass = exports.addClass = undefined;
 	
-	var _addClass = __webpack_require__(74);
+	var _addClass = __webpack_require__(75);
 	
 	var _addClass2 = _interopRequireDefault(_addClass);
 	
-	var _removeClass = __webpack_require__(76);
+	var _removeClass = __webpack_require__(77);
 	
 	var _removeClass2 = _interopRequireDefault(_removeClass);
 	
-	var _hasClass = __webpack_require__(75);
+	var _hasClass = __webpack_require__(76);
 	
 	var _hasClass2 = _interopRequireDefault(_hasClass);
 	
@@ -15806,7 +15924,7 @@
 	exports.default = { addClass: _addClass2.default, removeClass: _removeClass2.default, hasClass: _hasClass2.default };
 
 /***/ }),
-/* 133 */
+/* 134 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -15816,11 +15934,11 @@
 	});
 	exports["default"] = isOverflowing;
 	
-	var _isWindow = __webpack_require__(107);
+	var _isWindow = __webpack_require__(108);
 	
 	var _isWindow2 = _interopRequireDefault(_isWindow);
 	
-	var _ownerDocument = __webpack_require__(62);
+	var _ownerDocument = __webpack_require__(63);
 	
 	var _ownerDocument2 = _interopRequireDefault(_ownerDocument);
 	
@@ -15851,7 +15969,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 134 */
+/* 135 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -15905,7 +16023,7 @@
 	}
 
 /***/ }),
-/* 135 */
+/* 136 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -15928,7 +16046,7 @@
 	
 	var _on2 = _interopRequireDefault(_on);
 	
-	var _off = __webpack_require__(64);
+	var _off = __webpack_require__(65);
 	
 	var _off2 = _interopRequireDefault(_off);
 	
@@ -15937,7 +16055,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 136 */
+/* 137 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -15973,7 +16091,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 137 */
+/* 138 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -15983,7 +16101,7 @@
 	});
 	exports.default = activeElement;
 	
-	var _ownerDocument = __webpack_require__(62);
+	var _ownerDocument = __webpack_require__(63);
 	
 	var _ownerDocument2 = _interopRequireDefault(_ownerDocument);
 	
@@ -15999,7 +16117,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 138 */
+/* 139 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -16075,7 +16193,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 139 */
+/* 140 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -16102,11 +16220,11 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _beeDnd = __webpack_require__(140);
+	var _beeDnd = __webpack_require__(141);
 	
 	var _beeDnd2 = _interopRequireDefault(_beeDnd);
 	
-	var _reResizable = __webpack_require__(268);
+	var _reResizable = __webpack_require__(269);
 	
 	var _reResizable2 = _interopRequireDefault(_reResizable);
 	
@@ -16165,7 +16283,7 @@
 	      args[_key] = arguments[_key];
 	    }
 	
-	    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _React$Component.call.apply(_React$Component, [this].concat(args))), _this), _this.state = {
+	    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _React$Component.call.apply(_React$Component, [this].concat(args))), _this), _this.resized = false, _this.state = {
 	      draging: false,
 	      draged: false,
 	      original: {
@@ -16181,13 +16299,18 @@
 	        draging: true
 	      });
 	      var transfromDom = _this.resizable && _this.resizable.resizable || _this.resize;
-	      var pos = getPos(transfromDom);
 	      var transform = transfromDom.style && transfromDom.style.transform;
 	      // reg1 = /translate\((\d+)?px, (\d+)?px\)/;
 	      // 'translate(420px, 30px)'.match(reg1)
 	      // 兼容含有拖拽功能，点击模态框头部，开始突然往左上角抖一下的问题
-	      if (!transform || transform == 'translate(0px, 0px)' || transform == 'translate(0px)') {
-	        transfromDom.style.transform = 'translate(' + pos.left + 'px, ' + pos.top + 'px)';
+	      // 如果是resize了，那么就会有一定的偏移，这个transform也有值了
+	      // 可拖拽modal，在添加了margin或者padding的情况下，点击头部会出现向右下方有相应的位移问题 -shl
+	      var leftNum = parseInt(window.getComputedStyle(transfromDom, null).getPropertyValue('margin-left')) + parseInt(window.getComputedStyle(transfromDom, null).getPropertyValue('padding-left'));
+	      var topNum = parseInt(window.getComputedStyle(transfromDom, null).getPropertyValue('margin-top')) + parseInt(window.getComputedStyle(transfromDom, null).getPropertyValue('padding-top'));
+	      if ((!transform || transform == 'translate(0px, 0px)' || transform == 'translate(0px)' || _this.resized) && leftNum === 0 && topNum === 0) {
+	        var styleObj = transfromDom.getBoundingClientRect();
+	        transfromDom.style.transform = 'translate(' + Math.floor(styleObj.x) + 'px, ' + Math.floor(styleObj.y) + 'px)';
+	        _this.resized = false;
 	      }
 	      _this.props.onStart();
 	      if (event) {
@@ -16210,8 +16333,8 @@
 	        draged: true,
 	        draging: false,
 	        original: {
-	          x: delta.x,
-	          y: delta.y
+	          x: Math.floor(delta.x),
+	          y: Math.floor(delta.y)
 	        }
 	      });
 	      _this.props.onStop();
@@ -16253,7 +16376,9 @@
 	      }
 	
 	      if (x || y) {
-	        elementRef.style.transform = 'translate(' + x + 'px, ' + y + 'px)';
+	        var modifiedX = Math.floor(x);
+	        var modifiedY = Math.floor(y);
+	        elementRef.style.transform = 'translate(' + modifiedX + 'px, ' + modifiedY + 'px)';
 	      }
 	      if (delta.height) {
 	        _this.updateBodyH();
@@ -16271,6 +16396,7 @@
 	      }
 	
 	      typeof onResizeStop === "function" && onResizeStop(e, direction, elementRef, delta);
+	      _this.resized = true;
 	    }, _this.updateBodyH = function () {
 	      var $resizable = _reactDom2["default"].findDOMNode(_this.resizable);
 	      var $header = $resizable.querySelector(".u-modal-header");
@@ -16477,7 +16603,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 140 */
+/* 141 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -16486,7 +16612,7 @@
 	  value: true
 	});
 	
-	var _Dnd = __webpack_require__(141);
+	var _Dnd = __webpack_require__(142);
 	
 	var _Dnd2 = _interopRequireDefault(_Dnd);
 	
@@ -16496,7 +16622,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 141 */
+/* 142 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -16511,7 +16637,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactBeautifulDnd = __webpack_require__(142);
+	var _reactBeautifulDnd = __webpack_require__(143);
 	
 	var _reactDraggable = __webpack_require__(250);
 	
@@ -16525,15 +16651,15 @@
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
-	var _SortList = __webpack_require__(252);
+	var _SortList = __webpack_require__(253);
 	
 	var _SortList2 = _interopRequireDefault(_SortList);
 	
-	var _Between = __webpack_require__(254);
+	var _Between = __webpack_require__(255);
 	
 	var _Between2 = _interopRequireDefault(_Between);
 	
-	var _GridLayout = __webpack_require__(255);
+	var _GridLayout = __webpack_require__(256);
 	
 	var _GridLayout2 = _interopRequireDefault(_GridLayout);
 	
@@ -16653,7 +16779,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 142 */
+/* 143 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -16662,13 +16788,13 @@
 	
 	function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 	
-	var _extends = _interopDefault(__webpack_require__(143));
-	var invariant = _interopDefault(__webpack_require__(182));
-	var cssBoxModel = __webpack_require__(183);
-	var _Object$keys = _interopDefault(__webpack_require__(184));
-	var memoizeOne = _interopDefault(__webpack_require__(188));
-	var redux = __webpack_require__(189);
-	var _Object$assign = _interopDefault(__webpack_require__(144));
+	var _extends = _interopDefault(__webpack_require__(144));
+	var invariant = _interopDefault(__webpack_require__(183));
+	var cssBoxModel = __webpack_require__(184);
+	var _Object$keys = _interopDefault(__webpack_require__(185));
+	var memoizeOne = _interopDefault(__webpack_require__(189));
+	var redux = __webpack_require__(190);
+	var _Object$assign = _interopDefault(__webpack_require__(145));
 	var rafSchd = _interopDefault(__webpack_require__(193));
 	var _inheritsLoose = _interopDefault(__webpack_require__(194));
 	var React = __webpack_require__(1);
@@ -23094,13 +23220,13 @@
 	exports.Draggable = ConnectedDraggable;
 	exports.resetServerContext = resetServerContext;
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(32)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33)))
 
 /***/ }),
-/* 143 */
+/* 144 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var _Object$assign = __webpack_require__(144);
+	var _Object$assign = __webpack_require__(145);
 	
 	function _extends() {
 	  module.exports = _extends = _Object$assign || function (target) {
@@ -23117,44 +23243,46 @@
 	    return target;
 	  };
 	
+	  module.exports["default"] = module.exports, module.exports.__esModule = true;
 	  return _extends.apply(this, arguments);
 	}
 	
 	module.exports = _extends;
-
-/***/ }),
-/* 144 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	module.exports = __webpack_require__(145);
+	module.exports["default"] = module.exports, module.exports.__esModule = true;
 
 /***/ }),
 /* 145 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	__webpack_require__(146);
-	module.exports = __webpack_require__(149).Object.assign;
-
+	module.exports = __webpack_require__(146);
 
 /***/ }),
 /* 146 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	// 19.1.3.1 Object.assign(target, source)
-	var $export = __webpack_require__(147);
-	
-	$export($export.S + $export.F, 'Object', { assign: __webpack_require__(163) });
+	__webpack_require__(147);
+	module.exports = __webpack_require__(150).Object.assign;
 
 
 /***/ }),
 /* 147 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var global = __webpack_require__(148);
-	var core = __webpack_require__(149);
-	var ctx = __webpack_require__(150);
-	var hide = __webpack_require__(152);
-	var has = __webpack_require__(162);
+	// 19.1.3.1 Object.assign(target, source)
+	var $export = __webpack_require__(148);
+	
+	$export($export.S + $export.F, 'Object', { assign: __webpack_require__(164) });
+
+
+/***/ }),
+/* 148 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	var global = __webpack_require__(149);
+	var core = __webpack_require__(150);
+	var ctx = __webpack_require__(151);
+	var hide = __webpack_require__(153);
+	var has = __webpack_require__(163);
 	var PROTOTYPE = 'prototype';
 	
 	var $export = function (type, name, source) {
@@ -23215,7 +23343,7 @@
 
 
 /***/ }),
-/* 148 */
+/* 149 */
 /***/ (function(module, exports) {
 
 	// https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
@@ -23227,7 +23355,7 @@
 
 
 /***/ }),
-/* 149 */
+/* 150 */
 /***/ (function(module, exports) {
 
 	var core = module.exports = { version: '2.6.12' };
@@ -23235,11 +23363,11 @@
 
 
 /***/ }),
-/* 150 */
+/* 151 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	// optional / simple context binding
-	var aFunction = __webpack_require__(151);
+	var aFunction = __webpack_require__(152);
 	module.exports = function (fn, that, length) {
 	  aFunction(fn);
 	  if (that === undefined) return fn;
@@ -23261,7 +23389,7 @@
 
 
 /***/ }),
-/* 151 */
+/* 152 */
 /***/ (function(module, exports) {
 
 	module.exports = function (it) {
@@ -23271,12 +23399,12 @@
 
 
 /***/ }),
-/* 152 */
+/* 153 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var dP = __webpack_require__(153);
-	var createDesc = __webpack_require__(161);
-	module.exports = __webpack_require__(157) ? function (object, key, value) {
+	var dP = __webpack_require__(154);
+	var createDesc = __webpack_require__(162);
+	module.exports = __webpack_require__(158) ? function (object, key, value) {
 	  return dP.f(object, key, createDesc(1, value));
 	} : function (object, key, value) {
 	  object[key] = value;
@@ -23285,15 +23413,15 @@
 
 
 /***/ }),
-/* 153 */
+/* 154 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var anObject = __webpack_require__(154);
-	var IE8_DOM_DEFINE = __webpack_require__(156);
-	var toPrimitive = __webpack_require__(160);
+	var anObject = __webpack_require__(155);
+	var IE8_DOM_DEFINE = __webpack_require__(157);
+	var toPrimitive = __webpack_require__(161);
 	var dP = Object.defineProperty;
 	
-	exports.f = __webpack_require__(157) ? Object.defineProperty : function defineProperty(O, P, Attributes) {
+	exports.f = __webpack_require__(158) ? Object.defineProperty : function defineProperty(O, P, Attributes) {
 	  anObject(O);
 	  P = toPrimitive(P, true);
 	  anObject(Attributes);
@@ -23307,10 +23435,10 @@
 
 
 /***/ }),
-/* 154 */
+/* 155 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var isObject = __webpack_require__(155);
+	var isObject = __webpack_require__(156);
 	module.exports = function (it) {
 	  if (!isObject(it)) throw TypeError(it + ' is not an object!');
 	  return it;
@@ -23318,7 +23446,7 @@
 
 
 /***/ }),
-/* 155 */
+/* 156 */
 /***/ (function(module, exports) {
 
 	module.exports = function (it) {
@@ -23327,26 +23455,26 @@
 
 
 /***/ }),
-/* 156 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	module.exports = !__webpack_require__(157) && !__webpack_require__(158)(function () {
-	  return Object.defineProperty(__webpack_require__(159)('div'), 'a', { get: function () { return 7; } }).a != 7;
-	});
-
-
-/***/ }),
 /* 157 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	// Thank's IE8 for his funny defineProperty
-	module.exports = !__webpack_require__(158)(function () {
-	  return Object.defineProperty({}, 'a', { get: function () { return 7; } }).a != 7;
+	module.exports = !__webpack_require__(158) && !__webpack_require__(159)(function () {
+	  return Object.defineProperty(__webpack_require__(160)('div'), 'a', { get: function () { return 7; } }).a != 7;
 	});
 
 
 /***/ }),
 /* 158 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	// Thank's IE8 for his funny defineProperty
+	module.exports = !__webpack_require__(159)(function () {
+	  return Object.defineProperty({}, 'a', { get: function () { return 7; } }).a != 7;
+	});
+
+
+/***/ }),
+/* 159 */
 /***/ (function(module, exports) {
 
 	module.exports = function (exec) {
@@ -23359,11 +23487,11 @@
 
 
 /***/ }),
-/* 159 */
+/* 160 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var isObject = __webpack_require__(155);
-	var document = __webpack_require__(148).document;
+	var isObject = __webpack_require__(156);
+	var document = __webpack_require__(149).document;
 	// typeof document.createElement is 'object' in old IE
 	var is = isObject(document) && isObject(document.createElement);
 	module.exports = function (it) {
@@ -23372,11 +23500,11 @@
 
 
 /***/ }),
-/* 160 */
+/* 161 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	// 7.1.1 ToPrimitive(input [, PreferredType])
-	var isObject = __webpack_require__(155);
+	var isObject = __webpack_require__(156);
 	// instead of the ES6 spec version, we didn't implement @@toPrimitive case
 	// and the second argument - flag - preferred type is a string
 	module.exports = function (it, S) {
@@ -23390,7 +23518,7 @@
 
 
 /***/ }),
-/* 161 */
+/* 162 */
 /***/ (function(module, exports) {
 
 	module.exports = function (bitmap, value) {
@@ -23404,7 +23532,7 @@
 
 
 /***/ }),
-/* 162 */
+/* 163 */
 /***/ (function(module, exports) {
 
 	var hasOwnProperty = {}.hasOwnProperty;
@@ -23414,21 +23542,21 @@
 
 
 /***/ }),
-/* 163 */
+/* 164 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	// 19.1.2.1 Object.assign(target, source, ...)
-	var DESCRIPTORS = __webpack_require__(157);
-	var getKeys = __webpack_require__(164);
-	var gOPS = __webpack_require__(179);
-	var pIE = __webpack_require__(180);
-	var toObject = __webpack_require__(181);
-	var IObject = __webpack_require__(167);
+	var DESCRIPTORS = __webpack_require__(158);
+	var getKeys = __webpack_require__(165);
+	var gOPS = __webpack_require__(180);
+	var pIE = __webpack_require__(181);
+	var toObject = __webpack_require__(182);
+	var IObject = __webpack_require__(168);
 	var $assign = Object.assign;
 	
 	// should work with symbols and should have deterministic property order (V8 bug)
-	module.exports = !$assign || __webpack_require__(158)(function () {
+	module.exports = !$assign || __webpack_require__(159)(function () {
 	  var A = {};
 	  var B = {};
 	  // eslint-disable-next-line no-undef
@@ -23458,12 +23586,12 @@
 
 
 /***/ }),
-/* 164 */
+/* 165 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	// 19.1.2.14 / 15.2.3.14 Object.keys(O)
-	var $keys = __webpack_require__(165);
-	var enumBugKeys = __webpack_require__(178);
+	var $keys = __webpack_require__(166);
+	var enumBugKeys = __webpack_require__(179);
 	
 	module.exports = Object.keys || function keys(O) {
 	  return $keys(O, enumBugKeys);
@@ -23471,13 +23599,13 @@
 
 
 /***/ }),
-/* 165 */
+/* 166 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var has = __webpack_require__(162);
-	var toIObject = __webpack_require__(166);
-	var arrayIndexOf = __webpack_require__(170)(false);
-	var IE_PROTO = __webpack_require__(174)('IE_PROTO');
+	var has = __webpack_require__(163);
+	var toIObject = __webpack_require__(167);
+	var arrayIndexOf = __webpack_require__(171)(false);
+	var IE_PROTO = __webpack_require__(175)('IE_PROTO');
 	
 	module.exports = function (object, names) {
 	  var O = toIObject(object);
@@ -23494,23 +23622,23 @@
 
 
 /***/ }),
-/* 166 */
+/* 167 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	// to indexed object, toObject with fallback for non-array-like ES3 strings
-	var IObject = __webpack_require__(167);
-	var defined = __webpack_require__(169);
+	var IObject = __webpack_require__(168);
+	var defined = __webpack_require__(170);
 	module.exports = function (it) {
 	  return IObject(defined(it));
 	};
 
 
 /***/ }),
-/* 167 */
+/* 168 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	// fallback for non-array-like ES3 and non-enumerable old V8 strings
-	var cof = __webpack_require__(168);
+	var cof = __webpack_require__(169);
 	// eslint-disable-next-line no-prototype-builtins
 	module.exports = Object('z').propertyIsEnumerable(0) ? Object : function (it) {
 	  return cof(it) == 'String' ? it.split('') : Object(it);
@@ -23518,7 +23646,7 @@
 
 
 /***/ }),
-/* 168 */
+/* 169 */
 /***/ (function(module, exports) {
 
 	var toString = {}.toString;
@@ -23529,7 +23657,7 @@
 
 
 /***/ }),
-/* 169 */
+/* 170 */
 /***/ (function(module, exports) {
 
 	// 7.2.1 RequireObjectCoercible(argument)
@@ -23540,14 +23668,14 @@
 
 
 /***/ }),
-/* 170 */
+/* 171 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	// false -> Array#indexOf
 	// true  -> Array#includes
-	var toIObject = __webpack_require__(166);
-	var toLength = __webpack_require__(171);
-	var toAbsoluteIndex = __webpack_require__(173);
+	var toIObject = __webpack_require__(167);
+	var toLength = __webpack_require__(172);
+	var toAbsoluteIndex = __webpack_require__(174);
 	module.exports = function (IS_INCLUDES) {
 	  return function ($this, el, fromIndex) {
 	    var O = toIObject($this);
@@ -23569,11 +23697,11 @@
 
 
 /***/ }),
-/* 171 */
+/* 172 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	// 7.1.15 ToLength
-	var toInteger = __webpack_require__(172);
+	var toInteger = __webpack_require__(173);
 	var min = Math.min;
 	module.exports = function (it) {
 	  return it > 0 ? min(toInteger(it), 0x1fffffffffffff) : 0; // pow(2, 53) - 1 == 9007199254740991
@@ -23581,7 +23709,7 @@
 
 
 /***/ }),
-/* 172 */
+/* 173 */
 /***/ (function(module, exports) {
 
 	// 7.1.4 ToInteger
@@ -23593,10 +23721,10 @@
 
 
 /***/ }),
-/* 173 */
+/* 174 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var toInteger = __webpack_require__(172);
+	var toInteger = __webpack_require__(173);
 	var max = Math.max;
 	var min = Math.min;
 	module.exports = function (index, length) {
@@ -23606,22 +23734,22 @@
 
 
 /***/ }),
-/* 174 */
+/* 175 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var shared = __webpack_require__(175)('keys');
-	var uid = __webpack_require__(177);
+	var shared = __webpack_require__(176)('keys');
+	var uid = __webpack_require__(178);
 	module.exports = function (key) {
 	  return shared[key] || (shared[key] = uid(key));
 	};
 
 
 /***/ }),
-/* 175 */
+/* 176 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var core = __webpack_require__(149);
-	var global = __webpack_require__(148);
+	var core = __webpack_require__(150);
+	var global = __webpack_require__(149);
 	var SHARED = '__core-js_shared__';
 	var store = global[SHARED] || (global[SHARED] = {});
 	
@@ -23629,20 +23757,20 @@
 	  return store[key] || (store[key] = value !== undefined ? value : {});
 	})('versions', []).push({
 	  version: core.version,
-	  mode: __webpack_require__(176) ? 'pure' : 'global',
+	  mode: __webpack_require__(177) ? 'pure' : 'global',
 	  copyright: '© 2020 Denis Pushkarev (zloirock.ru)'
 	});
 
 
 /***/ }),
-/* 176 */
+/* 177 */
 /***/ (function(module, exports) {
 
 	module.exports = true;
 
 
 /***/ }),
-/* 177 */
+/* 178 */
 /***/ (function(module, exports) {
 
 	var id = 0;
@@ -23653,7 +23781,7 @@
 
 
 /***/ }),
-/* 178 */
+/* 179 */
 /***/ (function(module, exports) {
 
 	// IE 8- don't enum bug keys
@@ -23663,37 +23791,36 @@
 
 
 /***/ }),
-/* 179 */
+/* 180 */
 /***/ (function(module, exports) {
 
 	exports.f = Object.getOwnPropertySymbols;
 
 
 /***/ }),
-/* 180 */
+/* 181 */
 /***/ (function(module, exports) {
 
 	exports.f = {}.propertyIsEnumerable;
 
 
 /***/ }),
-/* 181 */
+/* 182 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	// 7.1.13 ToObject(argument)
-	var defined = __webpack_require__(169);
+	var defined = __webpack_require__(170);
 	module.exports = function (it) {
 	  return Object(defined(it));
 	};
 
 
 /***/ }),
-/* 182 */
+/* 183 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
 	
-	Object.defineProperty(exports, "__esModule", { value: true });
 	var isProduction = process.env.NODE_ENV === 'production';
 	var prefix = 'Invariant failed';
 	function invariant(condition, message) {
@@ -23703,14 +23830,17 @@
 	    if (isProduction) {
 	        throw new Error(prefix);
 	    }
-	    throw new Error(prefix + ": " + (message || ''));
+	    var provided = typeof message === 'function' ? message() : message;
+	    var value = provided ? prefix + ": " + provided : prefix;
+	    throw new Error(value);
 	}
-	exports.default = invariant;
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(32)))
+	module.exports = invariant;
+	
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33)))
 
 /***/ }),
-/* 183 */
+/* 184 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -23719,7 +23849,7 @@
 	
 	function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 	
-	var invariant = _interopDefault(__webpack_require__(182));
+	var invariant = _interopDefault(__webpack_require__(183));
 	
 	var getRect = function getRect(_ref) {
 	  var top = _ref.top,
@@ -23879,31 +24009,31 @@
 	exports.shrink = shrink;
 	exports.withScroll = withScroll;
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(32)))
-
-/***/ }),
-/* 184 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	module.exports = __webpack_require__(185);
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33)))
 
 /***/ }),
 /* 185 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	__webpack_require__(186);
-	module.exports = __webpack_require__(149).Object.keys;
-
+	module.exports = __webpack_require__(186);
 
 /***/ }),
 /* 186 */
 /***/ (function(module, exports, __webpack_require__) {
 
+	__webpack_require__(187);
+	module.exports = __webpack_require__(150).Object.keys;
+
+
+/***/ }),
+/* 187 */
+/***/ (function(module, exports, __webpack_require__) {
+
 	// 19.1.2.14 Object.keys(O)
-	var toObject = __webpack_require__(181);
-	var $keys = __webpack_require__(164);
+	var toObject = __webpack_require__(182);
+	var $keys = __webpack_require__(165);
 	
-	__webpack_require__(187)('keys', function () {
+	__webpack_require__(188)('keys', function () {
 	  return function keys(it) {
 	    return $keys(toObject(it));
 	  };
@@ -23911,13 +24041,13 @@
 
 
 /***/ }),
-/* 187 */
+/* 188 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	// most Object methods by ES6 should accept primitives
-	var $export = __webpack_require__(147);
-	var core = __webpack_require__(149);
-	var fails = __webpack_require__(158);
+	var $export = __webpack_require__(148);
+	var core = __webpack_require__(150);
+	var fails = __webpack_require__(159);
 	module.exports = function (KEY, exec) {
 	  var fn = (core.Object || {})[KEY] || Object[KEY];
 	  var exp = {};
@@ -23927,7 +24057,7 @@
 
 
 /***/ }),
-/* 188 */
+/* 189 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -23947,7 +24077,7 @@
 	  var calledOnce = false;
 	
 	  var isNewArgEqualToLast = function isNewArgEqualToLast(newArg, index) {
-	    return isEqual(newArg, lastArgs[index], index);
+	    return isEqual(newArg, lastArgs[index]);
 	  };
 	
 	  var result = function result() {
@@ -23973,16 +24103,34 @@
 
 
 /***/ }),
-/* 189 */
+/* 190 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
 	
 	Object.defineProperty(exports, '__esModule', { value: true });
 	
-	function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
+	var _objectSpread = __webpack_require__(191);
 	
-	var $$observable = _interopDefault(__webpack_require__(190));
+	function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+	
+	var _objectSpread__default = /*#__PURE__*/_interopDefaultLegacy(_objectSpread);
+	
+	/**
+	 * Adapted from React: https://github.com/facebook/react/blob/master/packages/shared/formatProdErrorMessage.js
+	 *
+	 * Do not require this module directly! Use normal throw error calls. These messages will be replaced with error codes
+	 * during build.
+	 * @param {number} code
+	 */
+	function formatProdErrorMessage(code) {
+	  return "Minified Redux error #" + code + "; visit https://redux.js.org/Errors?code=" + code + " for the full message or " + 'use the non-minified dev environment for full errors. ';
+	}
+	
+	// Inlined version of the `symbol-observable` polyfill
+	var $$observable = (function () {
+	  return typeof Symbol === 'function' && Symbol.observable || '@@observable';
+	})();
 	
 	/**
 	 * These are private action types reserved by Redux.
@@ -24017,6 +24165,65 @@
 	  return Object.getPrototypeOf(obj) === proto;
 	}
 	
+	// Inlined / shortened version of `kindOf` from https://github.com/jonschlinkert/kind-of
+	function miniKindOf(val) {
+	  if (val === void 0) return 'undefined';
+	  if (val === null) return 'null';
+	  var type = typeof val;
+	
+	  switch (type) {
+	    case 'boolean':
+	    case 'string':
+	    case 'number':
+	    case 'symbol':
+	    case 'function':
+	      {
+	        return type;
+	      }
+	  }
+	
+	  if (Array.isArray(val)) return 'array';
+	  if (isDate(val)) return 'date';
+	  if (isError(val)) return 'error';
+	  var constructorName = ctorName(val);
+	
+	  switch (constructorName) {
+	    case 'Symbol':
+	    case 'Promise':
+	    case 'WeakMap':
+	    case 'WeakSet':
+	    case 'Map':
+	    case 'Set':
+	      return constructorName;
+	  } // other
+	
+	
+	  return type.slice(8, -1).toLowerCase().replace(/\s/g, '');
+	}
+	
+	function ctorName(val) {
+	  return typeof val.constructor === 'function' ? val.constructor.name : null;
+	}
+	
+	function isError(val) {
+	  return val instanceof Error || typeof val.message === 'string' && val.constructor && typeof val.constructor.stackTraceLimit === 'number';
+	}
+	
+	function isDate(val) {
+	  if (val instanceof Date) return true;
+	  return typeof val.toDateString === 'function' && typeof val.getDate === 'function' && typeof val.setDate === 'function';
+	}
+	
+	function kindOf(val) {
+	  var typeOfVal = typeof val;
+	
+	  if (process.env.NODE_ENV !== 'production') {
+	    typeOfVal = miniKindOf(val);
+	  }
+	
+	  return typeOfVal;
+	}
+	
 	/**
 	 * Creates a Redux store that holds the state tree.
 	 * The only way to change the data in the store is to call `dispatch()` on it.
@@ -24047,7 +24254,7 @@
 	  var _ref2;
 	
 	  if (typeof preloadedState === 'function' && typeof enhancer === 'function' || typeof enhancer === 'function' && typeof arguments[3] === 'function') {
-	    throw new Error('It looks like you are passing several store enhancers to ' + 'createStore(). This is not supported. Instead, compose them ' + 'together to a single function.');
+	    throw new Error(process.env.NODE_ENV === "production" ? formatProdErrorMessage(0) : 'It looks like you are passing several store enhancers to ' + 'createStore(). This is not supported. Instead, compose them ' + 'together to a single function. See https://redux.js.org/tutorials/fundamentals/part-4-store#creating-a-store-with-enhancers for an example.');
 	  }
 	
 	  if (typeof preloadedState === 'function' && typeof enhancer === 'undefined') {
@@ -24057,14 +24264,14 @@
 	
 	  if (typeof enhancer !== 'undefined') {
 	    if (typeof enhancer !== 'function') {
-	      throw new Error('Expected the enhancer to be a function.');
+	      throw new Error(process.env.NODE_ENV === "production" ? formatProdErrorMessage(1) : "Expected the enhancer to be a function. Instead, received: '" + kindOf(enhancer) + "'");
 	    }
 	
 	    return enhancer(createStore)(reducer, preloadedState);
 	  }
 	
 	  if (typeof reducer !== 'function') {
-	    throw new Error('Expected the reducer to be a function.');
+	    throw new Error(process.env.NODE_ENV === "production" ? formatProdErrorMessage(2) : "Expected the root reducer to be a function. Instead, received: '" + kindOf(reducer) + "'");
 	  }
 	
 	  var currentReducer = reducer;
@@ -24094,7 +24301,7 @@
 	
 	  function getState() {
 	    if (isDispatching) {
-	      throw new Error('You may not call store.getState() while the reducer is executing. ' + 'The reducer has already received the state as an argument. ' + 'Pass it down from the top reducer instead of reading it from the store.');
+	      throw new Error(process.env.NODE_ENV === "production" ? formatProdErrorMessage(3) : 'You may not call store.getState() while the reducer is executing. ' + 'The reducer has already received the state as an argument. ' + 'Pass it down from the top reducer instead of reading it from the store.');
 	    }
 	
 	    return currentState;
@@ -24126,11 +24333,11 @@
 	
 	  function subscribe(listener) {
 	    if (typeof listener !== 'function') {
-	      throw new Error('Expected the listener to be a function.');
+	      throw new Error(process.env.NODE_ENV === "production" ? formatProdErrorMessage(4) : "Expected the listener to be a function. Instead, received: '" + kindOf(listener) + "'");
 	    }
 	
 	    if (isDispatching) {
-	      throw new Error('You may not call store.subscribe() while the reducer is executing. ' + 'If you would like to be notified after the store has been updated, subscribe from a ' + 'component and invoke store.getState() in the callback to access the latest state. ' + 'See https://redux.js.org/api-reference/store#subscribelistener for more details.');
+	      throw new Error(process.env.NODE_ENV === "production" ? formatProdErrorMessage(5) : 'You may not call store.subscribe() while the reducer is executing. ' + 'If you would like to be notified after the store has been updated, subscribe from a ' + 'component and invoke store.getState() in the callback to access the latest state. ' + 'See https://redux.js.org/api/store#subscribelistener for more details.');
 	    }
 	
 	    var isSubscribed = true;
@@ -24142,7 +24349,7 @@
 	      }
 	
 	      if (isDispatching) {
-	        throw new Error('You may not unsubscribe from a store listener while the reducer is executing. ' + 'See https://redux.js.org/api-reference/store#subscribelistener for more details.');
+	        throw new Error(process.env.NODE_ENV === "production" ? formatProdErrorMessage(6) : 'You may not unsubscribe from a store listener while the reducer is executing. ' + 'See https://redux.js.org/api/store#subscribelistener for more details.');
 	      }
 	
 	      isSubscribed = false;
@@ -24181,15 +24388,15 @@
 	
 	  function dispatch(action) {
 	    if (!isPlainObject(action)) {
-	      throw new Error('Actions must be plain objects. ' + 'Use custom middleware for async actions.');
+	      throw new Error(process.env.NODE_ENV === "production" ? formatProdErrorMessage(7) : "Actions must be plain objects. Instead, the actual type was: '" + kindOf(action) + "'. You may need to add middleware to your store setup to handle dispatching other values, such as 'redux-thunk' to handle dispatching functions. See https://redux.js.org/tutorials/fundamentals/part-4-store#middleware and https://redux.js.org/tutorials/fundamentals/part-6-async-logic#using-the-redux-thunk-middleware for examples.");
 	    }
 	
 	    if (typeof action.type === 'undefined') {
-	      throw new Error('Actions may not have an undefined "type" property. ' + 'Have you misspelled a constant?');
+	      throw new Error(process.env.NODE_ENV === "production" ? formatProdErrorMessage(8) : 'Actions may not have an undefined "type" property. You may have misspelled an action type string constant.');
 	    }
 	
 	    if (isDispatching) {
-	      throw new Error('Reducers may not dispatch actions.');
+	      throw new Error(process.env.NODE_ENV === "production" ? formatProdErrorMessage(9) : 'Reducers may not dispatch actions.');
 	    }
 	
 	    try {
@@ -24222,7 +24429,7 @@
 	
 	  function replaceReducer(nextReducer) {
 	    if (typeof nextReducer !== 'function') {
-	      throw new Error('Expected the nextReducer to be a function.');
+	      throw new Error(process.env.NODE_ENV === "production" ? formatProdErrorMessage(10) : "Expected the nextReducer to be a function. Instead, received: '" + kindOf(nextReducer));
 	    }
 	
 	    currentReducer = nextReducer; // This action has a similiar effect to ActionTypes.INIT.
@@ -24257,7 +24464,7 @@
 	       */
 	      subscribe: function subscribe(observer) {
 	        if (typeof observer !== 'object' || observer === null) {
-	          throw new TypeError('Expected the observer to be an object.');
+	          throw new Error(process.env.NODE_ENV === "production" ? formatProdErrorMessage(11) : "Expected the observer to be an object. Instead, received: '" + kindOf(observer) + "'");
 	        }
 	
 	        function observeState() {
@@ -24314,12 +24521,6 @@
 	
 	}
 	
-	function getUndefinedStateErrorMessage(key, action) {
-	  var actionType = action && action.type;
-	  var actionDescription = actionType && "action \"" + String(actionType) + "\"" || 'an action';
-	  return "Given " + actionDescription + ", reducer \"" + key + "\" returned undefined. " + "To ignore an action, you must explicitly return the previous state. " + "If you want this reducer to hold no value, you can return null instead of undefined.";
-	}
-	
 	function getUnexpectedStateShapeWarningMessage(inputState, reducers, action, unexpectedKeyCache) {
 	  var reducerKeys = Object.keys(reducers);
 	  var argumentName = action && action.type === ActionTypes.INIT ? 'preloadedState argument passed to createStore' : 'previous state received by the reducer';
@@ -24329,7 +24530,7 @@
 	  }
 	
 	  if (!isPlainObject(inputState)) {
-	    return "The " + argumentName + " has unexpected type of \"" + {}.toString.call(inputState).match(/\s([a-z|A-Z]+)/)[1] + "\". Expected argument to be an object with the following " + ("keys: \"" + reducerKeys.join('", "') + "\"");
+	    return "The " + argumentName + " has unexpected type of \"" + kindOf(inputState) + "\". Expected argument to be an object with the following " + ("keys: \"" + reducerKeys.join('", "') + "\"");
 	  }
 	
 	  var unexpectedKeys = Object.keys(inputState).filter(function (key) {
@@ -24353,13 +24554,13 @@
 	    });
 	
 	    if (typeof initialState === 'undefined') {
-	      throw new Error("Reducer \"" + key + "\" returned undefined during initialization. " + "If the state passed to the reducer is undefined, you must " + "explicitly return the initial state. The initial state may " + "not be undefined. If you don't want to set a value for this reducer, " + "you can use null instead of undefined.");
+	      throw new Error(process.env.NODE_ENV === "production" ? formatProdErrorMessage(12) : "The slice reducer for key \"" + key + "\" returned undefined during initialization. " + "If the state passed to the reducer is undefined, you must " + "explicitly return the initial state. The initial state may " + "not be undefined. If you don't want to set a value for this reducer, " + "you can use null instead of undefined.");
 	    }
 	
 	    if (typeof reducer(undefined, {
 	      type: ActionTypes.PROBE_UNKNOWN_ACTION()
 	    }) === 'undefined') {
-	      throw new Error("Reducer \"" + key + "\" returned undefined when probed with a random type. " + ("Don't try to handle " + ActionTypes.INIT + " or other actions in \"redux/*\" ") + "namespace. They are considered private. Instead, you must return the " + "current state for any unknown actions, unless it is undefined, " + "in which case you must return the initial state, regardless of the " + "action type. The initial state may not be undefined, but can be null.");
+	      throw new Error(process.env.NODE_ENV === "production" ? formatProdErrorMessage(13) : "The slice reducer for key \"" + key + "\" returned undefined when probed with a random type. " + ("Don't try to handle '" + ActionTypes.INIT + "' or other actions in \"redux/*\" ") + "namespace. They are considered private. Instead, you must return the " + "current state for any unknown actions, unless it is undefined, " + "in which case you must return the initial state, regardless of the " + "action type. The initial state may not be undefined, but can be null.");
 	    }
 	  });
 	}
@@ -24443,8 +24644,8 @@
 	      var nextStateForKey = reducer(previousStateForKey, action);
 	
 	      if (typeof nextStateForKey === 'undefined') {
-	        var errorMessage = getUndefinedStateErrorMessage(_key, action);
-	        throw new Error(errorMessage);
+	        var actionType = action && action.type;
+	        throw new Error(process.env.NODE_ENV === "production" ? formatProdErrorMessage(14) : "When called with an action of type " + (actionType ? "\"" + String(actionType) + "\"" : '(unknown type)') + ", the slice reducer for key \"" + _key + "\" returned undefined. " + "To ignore an action, you must explicitly return the previous state. " + "If you want this reducer to hold no value, you can return null instead of undefined.");
 	      }
 	
 	      nextState[_key] = nextStateForKey;
@@ -24490,7 +24691,7 @@
 	  }
 	
 	  if (typeof actionCreators !== 'object' || actionCreators === null) {
-	    throw new Error("bindActionCreators expected an object or a function, instead received " + (actionCreators === null ? 'null' : typeof actionCreators) + ". " + "Did you write \"import ActionCreators from\" instead of \"import * as ActionCreators from\"?");
+	    throw new Error(process.env.NODE_ENV === "production" ? formatProdErrorMessage(16) : "bindActionCreators expected an object or a function, but instead received: '" + kindOf(actionCreators) + "'. " + "Did you write \"import ActionCreators from\" instead of \"import * as ActionCreators from\"?");
 	  }
 	
 	  var boundActionCreators = {};
@@ -24504,54 +24705,6 @@
 	  }
 	
 	  return boundActionCreators;
-	}
-	
-	function _defineProperty(obj, key, value) {
-	  if (key in obj) {
-	    Object.defineProperty(obj, key, {
-	      value: value,
-	      enumerable: true,
-	      configurable: true,
-	      writable: true
-	    });
-	  } else {
-	    obj[key] = value;
-	  }
-	
-	  return obj;
-	}
-	
-	function ownKeys(object, enumerableOnly) {
-	  var keys = Object.keys(object);
-	
-	  if (Object.getOwnPropertySymbols) {
-	    keys.push.apply(keys, Object.getOwnPropertySymbols(object));
-	  }
-	
-	  if (enumerableOnly) keys = keys.filter(function (sym) {
-	    return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-	  });
-	  return keys;
-	}
-	
-	function _objectSpread2(target) {
-	  for (var i = 1; i < arguments.length; i++) {
-	    var source = arguments[i] != null ? arguments[i] : {};
-	
-	    if (i % 2) {
-	      ownKeys(source, true).forEach(function (key) {
-	        _defineProperty(target, key, source[key]);
-	      });
-	    } else if (Object.getOwnPropertyDescriptors) {
-	      Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
-	    } else {
-	      ownKeys(source).forEach(function (key) {
-	        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
-	      });
-	    }
-	  }
-	
-	  return target;
 	}
 	
 	/**
@@ -24613,7 +24766,7 @@
 	      var store = createStore.apply(void 0, arguments);
 	
 	      var _dispatch = function dispatch() {
-	        throw new Error('Dispatching while constructing your middleware is not allowed. ' + 'Other middleware would not be applied to this dispatch.');
+	        throw new Error(process.env.NODE_ENV === "production" ? formatProdErrorMessage(15) : 'Dispatching while constructing your middleware is not allowed. ' + 'Other middleware would not be applied to this dispatch.');
 	      };
 	
 	      var middlewareAPI = {
@@ -24626,7 +24779,7 @@
 	        return middleware(middlewareAPI);
 	      });
 	      _dispatch = compose.apply(void 0, chain)(store.dispatch);
-	      return _objectSpread2({}, store, {
+	      return _objectSpread__default['default'](_objectSpread__default['default']({}, store), {}, {
 	        dispatch: _dispatch
 	      });
 	    };
@@ -24651,86 +24804,76 @@
 	exports.compose = compose;
 	exports.createStore = createStore;
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(32)))
-
-/***/ }),
-/* 190 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(global, module) {'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _ponyfill = __webpack_require__(192);
-	
-	var _ponyfill2 = _interopRequireDefault(_ponyfill);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-	
-	var root; /* global window */
-	
-	
-	if (typeof self !== 'undefined') {
-	  root = self;
-	} else if (typeof window !== 'undefined') {
-	  root = window;
-	} else if (typeof global !== 'undefined') {
-	  root = global;
-	} else if (true) {
-	  root = module;
-	} else {
-	  root = Function('return this')();
-	}
-	
-	var result = (0, _ponyfill2['default'])(root);
-	exports['default'] = result;
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(191)(module)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33)))
 
 /***/ }),
 /* 191 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-	module.exports = function(module) {
-		if(!module.webpackPolyfill) {
-			module.deprecate = function() {};
-			module.paths = [];
-			// module.parent = undefined by default
-			module.children = [];
-			module.webpackPolyfill = 1;
-		}
-		return module;
+	var defineProperty = __webpack_require__(192);
+	
+	function ownKeys(object, enumerableOnly) {
+	  var keys = Object.keys(object);
+	
+	  if (Object.getOwnPropertySymbols) {
+	    var symbols = Object.getOwnPropertySymbols(object);
+	
+	    if (enumerableOnly) {
+	      symbols = symbols.filter(function (sym) {
+	        return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+	      });
+	    }
+	
+	    keys.push.apply(keys, symbols);
+	  }
+	
+	  return keys;
 	}
-
+	
+	function _objectSpread2(target) {
+	  for (var i = 1; i < arguments.length; i++) {
+	    var source = arguments[i] != null ? arguments[i] : {};
+	
+	    if (i % 2) {
+	      ownKeys(Object(source), true).forEach(function (key) {
+	        defineProperty(target, key, source[key]);
+	      });
+	    } else if (Object.getOwnPropertyDescriptors) {
+	      Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+	    } else {
+	      ownKeys(Object(source)).forEach(function (key) {
+	        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+	      });
+	    }
+	  }
+	
+	  return target;
+	}
+	
+	module.exports = _objectSpread2;
+	module.exports["default"] = module.exports, module.exports.__esModule = true;
 
 /***/ }),
 /* 192 */
 /***/ (function(module, exports) {
 
-	'use strict';
+	function _defineProperty(obj, key, value) {
+	  if (key in obj) {
+	    Object.defineProperty(obj, key, {
+	      value: value,
+	      enumerable: true,
+	      configurable: true,
+	      writable: true
+	    });
+	  } else {
+	    obj[key] = value;
+	  }
 	
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	exports['default'] = symbolObservablePonyfill;
-	function symbolObservablePonyfill(root) {
-		var result;
-		var _Symbol = root.Symbol;
+	  return obj;
+	}
 	
-		if (typeof _Symbol === 'function') {
-			if (_Symbol.observable) {
-				result = _Symbol.observable;
-			} else {
-				result = _Symbol('observable');
-				_Symbol.observable = result;
-			}
-		} else {
-			result = '@@observable';
-		}
-	
-		return result;
-	};
+	module.exports = _defineProperty;
+	module.exports["default"] = module.exports, module.exports.__esModule = true;
 
 /***/ }),
 /* 193 */
@@ -24789,6 +24932,7 @@
 	}
 	
 	module.exports = _inheritsLoose;
+	module.exports["default"] = module.exports, module.exports.__esModule = true;
 
 /***/ }),
 /* 195 */
@@ -24801,7 +24945,7 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 	__webpack_require__(197);
-	var $Object = __webpack_require__(149).Object;
+	var $Object = __webpack_require__(150).Object;
 	module.exports = function create(P, D) {
 	  return $Object.create(P, D);
 	};
@@ -24811,7 +24955,7 @@
 /* 197 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var $export = __webpack_require__(147);
+	var $export = __webpack_require__(148);
 	// 19.1.2.2 / 15.2.3.5 Object.create(O [, Properties])
 	$export($export.S, 'Object', { create: __webpack_require__(198) });
 
@@ -24821,17 +24965,17 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 	// 19.1.2.2 / 15.2.3.5 Object.create(O [, Properties])
-	var anObject = __webpack_require__(154);
+	var anObject = __webpack_require__(155);
 	var dPs = __webpack_require__(199);
-	var enumBugKeys = __webpack_require__(178);
-	var IE_PROTO = __webpack_require__(174)('IE_PROTO');
+	var enumBugKeys = __webpack_require__(179);
+	var IE_PROTO = __webpack_require__(175)('IE_PROTO');
 	var Empty = function () { /* empty */ };
 	var PROTOTYPE = 'prototype';
 	
 	// Create object with fake `null` prototype: use iframe Object with cleared prototype
 	var createDict = function () {
 	  // Thrash, waste and sodomy: IE GC bug
-	  var iframe = __webpack_require__(159)('iframe');
+	  var iframe = __webpack_require__(160)('iframe');
 	  var i = enumBugKeys.length;
 	  var lt = '<';
 	  var gt = '>';
@@ -24867,11 +25011,11 @@
 /* 199 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var dP = __webpack_require__(153);
-	var anObject = __webpack_require__(154);
-	var getKeys = __webpack_require__(164);
+	var dP = __webpack_require__(154);
+	var anObject = __webpack_require__(155);
+	var getKeys = __webpack_require__(165);
 	
-	module.exports = __webpack_require__(157) ? Object.defineProperties : function defineProperties(O, Properties) {
+	module.exports = __webpack_require__(158) ? Object.defineProperties : function defineProperties(O, Properties) {
 	  anObject(O);
 	  var keys = getKeys(Properties);
 	  var length = keys.length;
@@ -24886,7 +25030,7 @@
 /* 200 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var document = __webpack_require__(148).document;
+	var document = __webpack_require__(149).document;
 	module.exports = document && document.documentElement;
 
 
@@ -24902,10 +25046,12 @@
 	    return o;
 	  };
 	
+	  module.exports["default"] = module.exports, module.exports.__esModule = true;
 	  return _setPrototypeOf(o, p);
 	}
 	
 	module.exports = _setPrototypeOf;
+	module.exports["default"] = module.exports, module.exports.__esModule = true;
 
 /***/ }),
 /* 202 */
@@ -24918,7 +25064,7 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 	__webpack_require__(204);
-	module.exports = __webpack_require__(149).Object.setPrototypeOf;
+	module.exports = __webpack_require__(150).Object.setPrototypeOf;
 
 
 /***/ }),
@@ -24926,7 +25072,7 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 	// 19.1.3.19 Object.setPrototypeOf(O, proto)
-	var $export = __webpack_require__(147);
+	var $export = __webpack_require__(148);
 	$export($export.S, 'Object', { setPrototypeOf: __webpack_require__(205).set });
 
 
@@ -24936,8 +25082,8 @@
 
 	// Works with __proto__ only. Old v8 can't work with null proto objects.
 	/* eslint-disable no-proto */
-	var isObject = __webpack_require__(155);
-	var anObject = __webpack_require__(154);
+	var isObject = __webpack_require__(156);
+	var anObject = __webpack_require__(155);
 	var check = function (O, proto) {
 	  anObject(O);
 	  if (!isObject(proto) && proto !== null) throw TypeError(proto + ": can't set as prototype!");
@@ -24946,7 +25092,7 @@
 	  set: Object.setPrototypeOf || ('__proto__' in {} ? // eslint-disable-line
 	    function (test, buggy, set) {
 	      try {
-	        set = __webpack_require__(150)(Function.call, __webpack_require__(206).f(Object.prototype, '__proto__').set, 2);
+	        set = __webpack_require__(151)(Function.call, __webpack_require__(206).f(Object.prototype, '__proto__').set, 2);
 	        set(test, []);
 	        buggy = !(test instanceof Array);
 	      } catch (e) { buggy = true; }
@@ -24965,15 +25111,15 @@
 /* 206 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var pIE = __webpack_require__(180);
-	var createDesc = __webpack_require__(161);
-	var toIObject = __webpack_require__(166);
-	var toPrimitive = __webpack_require__(160);
-	var has = __webpack_require__(162);
-	var IE8_DOM_DEFINE = __webpack_require__(156);
+	var pIE = __webpack_require__(181);
+	var createDesc = __webpack_require__(162);
+	var toIObject = __webpack_require__(167);
+	var toPrimitive = __webpack_require__(161);
+	var has = __webpack_require__(163);
+	var IE8_DOM_DEFINE = __webpack_require__(157);
 	var gOPD = Object.getOwnPropertyDescriptor;
 	
-	exports.f = __webpack_require__(157) ? gOPD : function getOwnPropertyDescriptor(O, P) {
+	exports.f = __webpack_require__(158) ? gOPD : function getOwnPropertyDescriptor(O, P) {
 	  O = toIObject(O);
 	  P = toPrimitive(P, true);
 	  if (IE8_DOM_DEFINE) try {
@@ -25019,26 +25165,25 @@
 	}
 	
 	module.exports = _interopRequireDefault;
+	module.exports["default"] = module.exports, module.exports.__esModule = true;
 
 /***/ }),
 /* 209 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var _typeof = __webpack_require__(210);
+	var _typeof = __webpack_require__(210)["default"];
 	
-	function _getRequireWildcardCache() {
+	function _getRequireWildcardCache(nodeInterop) {
 	  if (typeof WeakMap !== "function") return null;
-	  var cache = new WeakMap();
-	
-	  _getRequireWildcardCache = function _getRequireWildcardCache() {
-	    return cache;
-	  };
-	
-	  return cache;
+	  var cacheBabelInterop = new WeakMap();
+	  var cacheNodeInterop = new WeakMap();
+	  return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) {
+	    return nodeInterop ? cacheNodeInterop : cacheBabelInterop;
+	  })(nodeInterop);
 	}
 	
-	function _interopRequireWildcard(obj) {
-	  if (obj && obj.__esModule) {
+	function _interopRequireWildcard(obj, nodeInterop) {
+	  if (!nodeInterop && obj && obj.__esModule) {
 	    return obj;
 	  }
 	
@@ -25048,7 +25193,7 @@
 	    };
 	  }
 	
-	  var cache = _getRequireWildcardCache();
+	  var cache = _getRequireWildcardCache(nodeInterop);
 	
 	  if (cache && cache.has(obj)) {
 	    return cache.get(obj);
@@ -25058,7 +25203,7 @@
 	  var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor;
 	
 	  for (var key in obj) {
-	    if (Object.prototype.hasOwnProperty.call(obj, key)) {
+	    if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) {
 	      var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null;
 	
 	      if (desc && (desc.get || desc.set)) {
@@ -25079,6 +25224,7 @@
 	}
 	
 	module.exports = _interopRequireWildcard;
+	module.exports["default"] = module.exports, module.exports.__esModule = true;
 
 /***/ }),
 /* 210 */
@@ -25091,16 +25237,21 @@
 	    module.exports = _typeof = function _typeof(obj) {
 	      return typeof obj;
 	    };
+	
+	    module.exports["default"] = module.exports, module.exports.__esModule = true;
 	  } else {
 	    module.exports = _typeof = function _typeof(obj) {
 	      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
 	    };
+	
+	    module.exports["default"] = module.exports, module.exports.__esModule = true;
 	  }
 	
 	  return _typeof(obj);
 	}
 	
 	module.exports = _typeof;
+	module.exports["default"] = module.exports, module.exports.__esModule = true;
 
 /***/ }),
 /* 211 */
@@ -25196,7 +25347,7 @@
 	var _default = createProvider();
 	
 	exports.default = _default;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(32)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33)))
 
 /***/ }),
 /* 212 */
@@ -25211,6 +25362,7 @@
 	}
 	
 	module.exports = _inheritsLoose;
+	module.exports["default"] = module.exports, module.exports.__esModule = true;
 
 /***/ }),
 /* 213 */
@@ -25222,10 +25374,12 @@
 	    return o;
 	  };
 	
+	  module.exports["default"] = module.exports, module.exports.__esModule = true;
 	  return _setPrototypeOf(o, p);
 	}
 	
 	module.exports = _setPrototypeOf;
+	module.exports["default"] = module.exports, module.exports.__esModule = true;
 
 /***/ }),
 /* 214 */
@@ -25615,7 +25769,7 @@
 	    return (0, _hoistNonReactStatics.default)(Connect, WrappedComponent);
 	  };
 	}
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(32)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33)))
 
 /***/ }),
 /* 217 */
@@ -25630,6 +25784,7 @@
 	}
 	
 	module.exports = _assertThisInitialized;
+	module.exports["default"] = module.exports, module.exports.__esModule = true;
 
 /***/ }),
 /* 218 */
@@ -25650,10 +25805,12 @@
 	    return target;
 	  };
 	
+	  module.exports["default"] = module.exports, module.exports.__esModule = true;
 	  return _extends.apply(this, arguments);
 	}
 	
 	module.exports = _extends;
+	module.exports["default"] = module.exports, module.exports.__esModule = true;
 
 /***/ }),
 /* 219 */
@@ -25675,6 +25832,7 @@
 	}
 	
 	module.exports = _objectWithoutPropertiesLoose;
+	module.exports["default"] = module.exports, module.exports.__esModule = true;
 
 /***/ }),
 /* 220 */
@@ -25797,7 +25955,7 @@
 	  module.exports = __webpack_require__(223);
 	}
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(32)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33)))
 
 /***/ }),
 /* 222 */
@@ -26006,7 +26164,7 @@
 	  })();
 	}
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(32)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33)))
 
 /***/ }),
 /* 224 */
@@ -26062,7 +26220,7 @@
 	
 	module.exports = invariant;
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(32)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33)))
 
 /***/ }),
 /* 225 */
@@ -26331,7 +26489,7 @@
 	exports.whenMapDispatchToPropsIsObject = whenMapDispatchToPropsIsObject;
 	exports.default = void 0;
 	
-	var _redux = __webpack_require__(189);
+	var _redux = __webpack_require__(190);
 	
 	var _wrapMapToProps = __webpack_require__(229);
 	
@@ -26436,7 +26594,7 @@
 	    return proxy;
 	  };
 	}
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(32)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33)))
 
 /***/ }),
 /* 230 */
@@ -26569,7 +26727,7 @@
 	
 	var _default = [whenMergePropsIsFunction, whenMergePropsIsOmitted];
 	exports.default = _default;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(32)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33)))
 
 /***/ }),
 /* 234 */
@@ -26674,7 +26832,7 @@
 	  var selectorFactory = options.pure ? pureFinalPropsSelectorFactory : impureFinalPropsSelectorFactory;
 	  return selectorFactory(mapStateToProps, mapDispatchToProps, mergeProps, dispatch, options);
 	}
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(32)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33)))
 
 /***/ }),
 /* 235 */
@@ -27156,7 +27314,7 @@
 	
 	//# sourceMappingURL=performance-now.js.map
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(32)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33)))
 
 /***/ }),
 /* 242 */
@@ -28273,7 +28431,7 @@
 	}
 	
 	module.exports = exports['default'];
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(32)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33)))
 
 /***/ }),
 /* 250 */
@@ -32348,10 +32506,26 @@
 	
 	module.exports = isEqual;
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(191)(module)))
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(252)(module)))
 
 /***/ }),
 /* 252 */
+/***/ (function(module, exports) {
+
+	module.exports = function(module) {
+		if(!module.webpackPolyfill) {
+			module.deprecate = function() {};
+			module.paths = [];
+			// module.parent = undefined by default
+			module.children = [];
+			module.webpackPolyfill = 1;
+		}
+		return module;
+	}
+
+
+/***/ }),
+/* 253 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32368,9 +32542,9 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactBeautifulDnd = __webpack_require__(142);
+	var _reactBeautifulDnd = __webpack_require__(143);
 	
-	var _util = __webpack_require__(253);
+	var _util = __webpack_require__(254);
 	
 	var _classnames = __webpack_require__(5);
 	
@@ -32501,7 +32675,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 253 */
+/* 254 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -32550,7 +32724,7 @@
 	};
 
 /***/ }),
-/* 254 */
+/* 255 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32571,9 +32745,9 @@
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _reactBeautifulDnd = __webpack_require__(142);
+	var _reactBeautifulDnd = __webpack_require__(143);
 	
-	var _util = __webpack_require__(253);
+	var _util = __webpack_require__(254);
 	
 	var _classnames = __webpack_require__(5);
 	
@@ -32813,7 +32987,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 255 */
+/* 256 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32822,7 +32996,7 @@
 	  value: true
 	});
 	
-	var _reactGridLayout = __webpack_require__(256);
+	var _reactGridLayout = __webpack_require__(257);
 	
 	var _reactGridLayout2 = _interopRequireDefault(_reactGridLayout);
 	
@@ -32832,18 +33006,18 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 256 */
+/* 257 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(257).default;
-	module.exports.utils = __webpack_require__(258);
-	module.exports.Responsive = __webpack_require__(265).default;
-	module.exports.Responsive.utils = __webpack_require__(266);
-	module.exports.WidthProvider = __webpack_require__(267).default;
+	module.exports = __webpack_require__(258).default;
+	module.exports.utils = __webpack_require__(259);
+	module.exports.Responsive = __webpack_require__(266).default;
+	module.exports.Responsive.utils = __webpack_require__(267);
+	module.exports.WidthProvider = __webpack_require__(268).default;
 
 
 /***/ }),
-/* 257 */
+/* 258 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {"use strict";
@@ -32868,9 +33042,9 @@
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _utils = __webpack_require__(258);
+	var _utils = __webpack_require__(259);
 	
-	var _GridItem = __webpack_require__(259);
+	var _GridItem = __webpack_require__(260);
 	
 	var _GridItem2 = _interopRequireDefault(_GridItem);
 	
@@ -33458,10 +33632,10 @@
 	};
 	
 	exports.default = ReactGridLayout;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(32)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33)))
 
 /***/ }),
-/* 258 */
+/* 259 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {"use strict";
@@ -34026,10 +34200,10 @@
 	}
 	
 	var noop = exports.noop = function noop() {};
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(32)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33)))
 
 /***/ }),
-/* 259 */
+/* 260 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -34048,9 +34222,9 @@
 	
 	var _reactDraggable = __webpack_require__(250);
 	
-	var _reactResizable = __webpack_require__(260);
+	var _reactResizable = __webpack_require__(261);
 	
-	var _utils = __webpack_require__(258);
+	var _utils = __webpack_require__(259);
 	
 	var _classnames = __webpack_require__(5);
 	
@@ -34540,7 +34714,7 @@
 	exports.default = GridItem;
 
 /***/ }),
-/* 260 */
+/* 261 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -34548,12 +34722,12 @@
 	  throw new Error("Don't instantiate Resizable directly! Use require('react-resizable').Resizable");
 	};
 	
-	module.exports.Resizable = __webpack_require__(261).default;
-	module.exports.ResizableBox = __webpack_require__(264).default;
+	module.exports.Resizable = __webpack_require__(262).default;
+	module.exports.ResizableBox = __webpack_require__(265).default;
 
 
 /***/ }),
-/* 261 */
+/* 262 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -34565,9 +34739,9 @@
 	
 	var _reactDraggable = __webpack_require__(250);
 	
-	var _utils = __webpack_require__(262);
+	var _utils = __webpack_require__(263);
 	
-	var _propTypes = __webpack_require__(263);
+	var _propTypes = __webpack_require__(264);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -34829,7 +35003,7 @@
 	});
 
 /***/ }),
-/* 262 */
+/* 263 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -34861,7 +35035,7 @@
 	}
 
 /***/ }),
-/* 263 */
+/* 264 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -34978,7 +35152,7 @@
 	exports.resizableProps = resizableProps;
 
 /***/ }),
-/* 264 */
+/* 265 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -34990,9 +35164,9 @@
 	
 	var _propTypes = _interopRequireDefault(__webpack_require__(6));
 	
-	var _Resizable = _interopRequireDefault(__webpack_require__(261));
+	var _Resizable = _interopRequireDefault(__webpack_require__(262));
 	
-	var _propTypes2 = __webpack_require__(263);
+	var _propTypes2 = __webpack_require__(264);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -35121,7 +35295,7 @@
 	}));
 
 /***/ }),
-/* 265 */
+/* 266 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -35142,11 +35316,11 @@
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
-	var _utils = __webpack_require__(258);
+	var _utils = __webpack_require__(259);
 	
-	var _responsiveUtils = __webpack_require__(266);
+	var _responsiveUtils = __webpack_require__(267);
 	
-	var _ReactGridLayout = __webpack_require__(257);
+	var _ReactGridLayout = __webpack_require__(258);
 	
 	var _ReactGridLayout2 = _interopRequireDefault(_ReactGridLayout);
 	
@@ -35353,7 +35527,7 @@
 	exports.default = ResponsiveReactGridLayout;
 
 /***/ }),
-/* 266 */
+/* 267 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -35364,7 +35538,7 @@
 	exports.findOrGenerateResponsiveLayout = findOrGenerateResponsiveLayout;
 	exports.sortBreakpoints = sortBreakpoints;
 	
-	var _utils = __webpack_require__(258);
+	var _utils = __webpack_require__(259);
 	
 	/**
 	 * Given a width, find the highest breakpoint that matches is valid for it (width > breakpoint).
@@ -35445,7 +35619,7 @@
 	}
 
 /***/ }),
-/* 267 */
+/* 268 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -35544,7 +35718,7 @@
 	}
 
 /***/ }),
-/* 268 */
+/* 269 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -36292,7 +36466,7 @@
 
 
 /***/ }),
-/* 269 */
+/* 270 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -36368,7 +36542,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 270 */
+/* 271 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -36499,7 +36673,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 271 */
+/* 272 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -36576,7 +36750,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 272 */
+/* 273 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -36601,19 +36775,19 @@
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _Modal = __webpack_require__(121);
+	var _Modal = __webpack_require__(122);
 	
 	var _Modal2 = _interopRequireDefault(_Modal);
 	
-	var _beeButton = __webpack_require__(273);
+	var _beeButton = __webpack_require__(274);
 	
 	var _beeButton2 = _interopRequireDefault(_beeButton);
 	
-	var _ConfirmModal = __webpack_require__(275);
+	var _ConfirmModal = __webpack_require__(276);
 	
 	var _ConfirmModal2 = _interopRequireDefault(_ConfirmModal);
 	
-	var _beeIcon = __webpack_require__(93);
+	var _beeIcon = __webpack_require__(94);
 	
 	var _beeIcon2 = _interopRequireDefault(_beeIcon);
 	
@@ -36826,7 +37000,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 273 */
+/* 274 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -36835,7 +37009,7 @@
 	  value: true
 	});
 	
-	var _Button = __webpack_require__(274);
+	var _Button = __webpack_require__(275);
 	
 	var _Button2 = _interopRequireDefault(_Button);
 	
@@ -36845,7 +37019,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 274 */
+/* 275 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -37020,7 +37194,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 275 */
+/* 276 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -37037,15 +37211,15 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _beeButton = __webpack_require__(273);
+	var _beeButton = __webpack_require__(274);
 	
 	var _beeButton2 = _interopRequireDefault(_beeButton);
 	
-	var _beeIcon = __webpack_require__(93);
+	var _beeIcon = __webpack_require__(94);
 	
 	var _beeIcon2 = _interopRequireDefault(_beeIcon);
 	
-	var _Modal = __webpack_require__(121);
+	var _Modal = __webpack_require__(122);
 	
 	var _Modal2 = _interopRequireDefault(_Modal);
 	
@@ -37188,7 +37362,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 276 */
+/* 277 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -37197,7 +37371,7 @@
 	  value: true
 	});
 	
-	var _FormControl = __webpack_require__(277);
+	var _FormControl = __webpack_require__(278);
 	
 	var _FormControl2 = _interopRequireDefault(_FormControl);
 	
@@ -37207,7 +37381,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 277 */
+/* 278 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -37226,7 +37400,7 @@
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _beeIcon = __webpack_require__(93);
+	var _beeIcon = __webpack_require__(94);
 	
 	var _beeIcon2 = _interopRequireDefault(_beeIcon);
 	
@@ -37234,9 +37408,11 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _rcTextarea = __webpack_require__(278);
+	var _rcTextarea = __webpack_require__(279);
 	
 	var _rcTextarea2 = _interopRequireDefault(_rcTextarea);
+	
+	var _tinperBeeCore = __webpack_require__(26);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
@@ -37300,6 +37476,7 @@
 	        };
 	        _this.input = {};
 	        _this.clickClearBtn = false;
+	        _this.isAutoFocusFlag = true;
 	        return _this;
 	    }
 	
@@ -37310,6 +37487,15 @@
 	                    value: nextProp.value
 	                });
 	            }
+	        }
+	    };
+	
+	    FormControl.prototype.componentDidUpdate = function componentDidUpdate() {
+	        // 判断modal中包含input时自动获取焦点失败问题
+	        var parentNode = _tinperBeeCore.cssUtil && _tinperBeeCore.cssUtil.parentsUntil(this.input); //兼容旧core包版本cssUtil不存在的情况
+	        if (this.props.autoFocus && this.isAutoFocusFlag && parentNode && parentNode.className === 'u-modal-content') {
+	            this.input.focus();
+	            this.isAutoFocusFlag = false;
 	        }
 	    };
 	
@@ -37574,7 +37760,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 278 */
+/* 279 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -37596,17 +37782,17 @@
 	
 	var _extends2 = _interopRequireDefault(__webpack_require__(218));
 	
-	var _classCallCheck2 = _interopRequireDefault(__webpack_require__(279));
+	var _classCallCheck2 = _interopRequireDefault(__webpack_require__(280));
 	
-	var _createClass2 = _interopRequireDefault(__webpack_require__(280));
+	var _createClass2 = _interopRequireDefault(__webpack_require__(281));
 	
-	var _inherits2 = _interopRequireDefault(__webpack_require__(281));
+	var _inherits2 = _interopRequireDefault(__webpack_require__(282));
 	
-	var _createSuper2 = _interopRequireDefault(__webpack_require__(282));
+	var _createSuper2 = _interopRequireDefault(__webpack_require__(283));
 	
 	var React = _interopRequireWildcard(__webpack_require__(1));
 	
-	var _ResizableTextArea = _interopRequireDefault(__webpack_require__(286));
+	var _ResizableTextArea = _interopRequireDefault(__webpack_require__(287));
 	
 	var TextArea = /*#__PURE__*/function (_React$Component) {
 	  (0, _inherits2.default)(TextArea, _React$Component);
@@ -37618,6 +37804,7 @@
 	
 	    (0, _classCallCheck2.default)(this, TextArea);
 	    _this = _super.call(this, props);
+	    _this.resizableTextArea = void 0;
 	
 	    _this.focus = function () {
 	      _this.resizableTextArea.textArea.focus();
@@ -37703,7 +37890,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 279 */
+/* 280 */
 /***/ (function(module, exports) {
 
 	function _classCallCheck(instance, Constructor) {
@@ -37713,9 +37900,10 @@
 	}
 	
 	module.exports = _classCallCheck;
+	module.exports["default"] = module.exports, module.exports.__esModule = true;
 
 /***/ }),
-/* 280 */
+/* 281 */
 /***/ (function(module, exports) {
 
 	function _defineProperties(target, props) {
@@ -37735,9 +37923,10 @@
 	}
 	
 	module.exports = _createClass;
+	module.exports["default"] = module.exports, module.exports.__esModule = true;
 
 /***/ }),
-/* 281 */
+/* 282 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var setPrototypeOf = __webpack_require__(213);
@@ -37758,16 +37947,17 @@
 	}
 	
 	module.exports = _inherits;
+	module.exports["default"] = module.exports, module.exports.__esModule = true;
 
 /***/ }),
-/* 282 */
+/* 283 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var getPrototypeOf = __webpack_require__(283);
+	var getPrototypeOf = __webpack_require__(284);
 	
-	var isNativeReflectConstruct = __webpack_require__(284);
+	var isNativeReflectConstruct = __webpack_require__(285);
 	
-	var possibleConstructorReturn = __webpack_require__(285);
+	var possibleConstructorReturn = __webpack_require__(286);
 	
 	function _createSuper(Derived) {
 	  var hasNativeReflectConstruct = isNativeReflectConstruct();
@@ -37787,22 +37977,25 @@
 	}
 	
 	module.exports = _createSuper;
+	module.exports["default"] = module.exports, module.exports.__esModule = true;
 
 /***/ }),
-/* 283 */
+/* 284 */
 /***/ (function(module, exports) {
 
 	function _getPrototypeOf(o) {
 	  module.exports = _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
 	    return o.__proto__ || Object.getPrototypeOf(o);
 	  };
+	  module.exports["default"] = module.exports, module.exports.__esModule = true;
 	  return _getPrototypeOf(o);
 	}
 	
 	module.exports = _getPrototypeOf;
+	module.exports["default"] = module.exports, module.exports.__esModule = true;
 
 /***/ }),
-/* 284 */
+/* 285 */
 /***/ (function(module, exports) {
 
 	function _isNativeReflectConstruct() {
@@ -37811,7 +38004,7 @@
 	  if (typeof Proxy === "function") return true;
 	
 	  try {
-	    Date.prototype.toString.call(Reflect.construct(Date, [], function () {}));
+	    Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
 	    return true;
 	  } catch (e) {
 	    return false;
@@ -37819,27 +38012,31 @@
 	}
 	
 	module.exports = _isNativeReflectConstruct;
+	module.exports["default"] = module.exports, module.exports.__esModule = true;
 
 /***/ }),
-/* 285 */
+/* 286 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var _typeof = __webpack_require__(210);
+	var _typeof = __webpack_require__(210)["default"];
 	
 	var assertThisInitialized = __webpack_require__(217);
 	
 	function _possibleConstructorReturn(self, call) {
 	  if (call && (_typeof(call) === "object" || typeof call === "function")) {
 	    return call;
+	  } else if (call !== void 0) {
+	    throw new TypeError("Derived constructors may only return object or undefined");
 	  }
 	
 	  return assertThisInitialized(self);
 	}
 	
 	module.exports = _possibleConstructorReturn;
+	module.exports["default"] = module.exports, module.exports.__esModule = true;
 
 /***/ }),
-/* 286 */
+/* 287 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -37855,27 +38052,27 @@
 	
 	var _extends2 = _interopRequireDefault(__webpack_require__(218));
 	
-	var _objectSpread2 = _interopRequireDefault(__webpack_require__(287));
+	var _objectSpread2 = _interopRequireDefault(__webpack_require__(191));
 	
-	var _defineProperty2 = _interopRequireDefault(__webpack_require__(288));
+	var _defineProperty2 = _interopRequireDefault(__webpack_require__(192));
 	
-	var _classCallCheck2 = _interopRequireDefault(__webpack_require__(279));
+	var _classCallCheck2 = _interopRequireDefault(__webpack_require__(280));
 	
-	var _createClass2 = _interopRequireDefault(__webpack_require__(280));
+	var _createClass2 = _interopRequireDefault(__webpack_require__(281));
 	
-	var _inherits2 = _interopRequireDefault(__webpack_require__(281));
+	var _inherits2 = _interopRequireDefault(__webpack_require__(282));
 	
-	var _createSuper2 = _interopRequireDefault(__webpack_require__(282));
+	var _createSuper2 = _interopRequireDefault(__webpack_require__(283));
 	
 	var React = _interopRequireWildcard(__webpack_require__(1));
 	
-	var _rcResizeObserver = _interopRequireDefault(__webpack_require__(289));
+	var _rcResizeObserver = _interopRequireDefault(__webpack_require__(288));
 	
-	var _omit = _interopRequireDefault(__webpack_require__(295));
+	var _omit = _interopRequireDefault(__webpack_require__(294));
 	
 	var _classnames = _interopRequireDefault(__webpack_require__(5));
 	
-	var _calculateNodeHeight = _interopRequireDefault(__webpack_require__(296));
+	var _calculateNodeHeight = _interopRequireDefault(__webpack_require__(295));
 	
 	// eslint-disable-next-line @typescript-eslint/naming-convention
 	var RESIZE_STATUS;
@@ -37896,6 +38093,9 @@
 	
 	    (0, _classCallCheck2.default)(this, ResizableTextArea);
 	    _this = _super.call(this, props);
+	    _this.nextFrameActionId = void 0;
+	    _this.resizeFrameId = void 0;
+	    _this.textArea = void 0;
 	
 	    _this.saveTextArea = function (textArea) {
 	      _this.textArea = textArea;
@@ -38046,70 +38246,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 287 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	var defineProperty = __webpack_require__(288);
-	
-	function ownKeys(object, enumerableOnly) {
-	  var keys = Object.keys(object);
-	
-	  if (Object.getOwnPropertySymbols) {
-	    var symbols = Object.getOwnPropertySymbols(object);
-	    if (enumerableOnly) symbols = symbols.filter(function (sym) {
-	      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-	    });
-	    keys.push.apply(keys, symbols);
-	  }
-	
-	  return keys;
-	}
-	
-	function _objectSpread2(target) {
-	  for (var i = 1; i < arguments.length; i++) {
-	    var source = arguments[i] != null ? arguments[i] : {};
-	
-	    if (i % 2) {
-	      ownKeys(Object(source), true).forEach(function (key) {
-	        defineProperty(target, key, source[key]);
-	      });
-	    } else if (Object.getOwnPropertyDescriptors) {
-	      Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
-	    } else {
-	      ownKeys(Object(source)).forEach(function (key) {
-	        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
-	      });
-	    }
-	  }
-	
-	  return target;
-	}
-	
-	module.exports = _objectSpread2;
-
-/***/ }),
 /* 288 */
-/***/ (function(module, exports) {
-
-	function _defineProperty(obj, key, value) {
-	  if (key in obj) {
-	    Object.defineProperty(obj, key, {
-	      value: value,
-	      enumerable: true,
-	      configurable: true,
-	      writable: true
-	    });
-	  } else {
-	    obj[key] = value;
-	  }
-	
-	  return obj;
-	}
-	
-	module.exports = _defineProperty;
-
-/***/ }),
-/* 289 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -38123,27 +38260,27 @@
 	});
 	exports.default = void 0;
 	
-	var _objectSpread2 = _interopRequireDefault(__webpack_require__(287));
+	var _objectSpread2 = _interopRequireDefault(__webpack_require__(191));
 	
-	var _classCallCheck2 = _interopRequireDefault(__webpack_require__(279));
+	var _classCallCheck2 = _interopRequireDefault(__webpack_require__(280));
 	
-	var _createClass2 = _interopRequireDefault(__webpack_require__(280));
+	var _createClass2 = _interopRequireDefault(__webpack_require__(281));
 	
-	var _inherits2 = _interopRequireDefault(__webpack_require__(281));
+	var _inherits2 = _interopRequireDefault(__webpack_require__(282));
 	
-	var _createSuper2 = _interopRequireDefault(__webpack_require__(282));
+	var _createSuper2 = _interopRequireDefault(__webpack_require__(283));
 	
 	var React = _interopRequireWildcard(__webpack_require__(1));
 	
-	var _findDOMNode = _interopRequireDefault(__webpack_require__(290));
+	var _findDOMNode = _interopRequireDefault(__webpack_require__(289));
 	
-	var _toArray = _interopRequireDefault(__webpack_require__(291));
+	var _toArray = _interopRequireDefault(__webpack_require__(290));
 	
-	var _warning = _interopRequireDefault(__webpack_require__(292));
+	var _warning = _interopRequireDefault(__webpack_require__(291));
 	
-	var _ref = __webpack_require__(293);
+	var _ref = __webpack_require__(292);
 	
-	var _resizeObserverPolyfill = _interopRequireDefault(__webpack_require__(294));
+	var _resizeObserverPolyfill = _interopRequireDefault(__webpack_require__(293));
 	
 	var INTERNAL_PREFIX_KEY = 'rc-observer-key'; // Still need to be compatible with React 15, we use class component here
 	
@@ -38156,7 +38293,12 @@
 	    var _this;
 	
 	    (0, _classCallCheck2.default)(this, ReactResizeObserver);
-	    _this = _super.apply(this, arguments);
+	
+	    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+	      args[_key] = arguments[_key];
+	    }
+	
+	    _this = _super.call.apply(_super, [this].concat(args));
 	    _this.resizeObserver = null;
 	    _this.childNode = null;
 	    _this.currentElement = null;
@@ -38197,11 +38339,13 @@
 	        _this.setState(size);
 	
 	        if (onResize) {
-	          // defer the callback but not defer to next frame
+	          var mergedOffsetWidth = offsetWidth === Math.round(width) ? width : offsetWidth;
+	          var mergedOffsetHeight = offsetHeight === Math.round(height) ? height : offsetHeight; // defer the callback but not defer to next frame
+	
 	          Promise.resolve().then(function () {
 	            onResize((0, _objectSpread2.default)((0, _objectSpread2.default)({}, size), {}, {
-	              offsetWidth: offsetWidth,
-	              offsetHeight: offsetHeight
+	              offsetWidth: mergedOffsetWidth,
+	              offsetHeight: mergedOffsetHeight
 	            }), target);
 	          });
 	        }
@@ -38303,7 +38447,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 290 */
+/* 289 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -38329,7 +38473,7 @@
 	}
 
 /***/ }),
-/* 291 */
+/* 290 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -38366,7 +38510,7 @@
 	}
 
 /***/ }),
-/* 292 */
+/* 291 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {"use strict";
@@ -38422,10 +38566,10 @@
 	/* eslint-enable */
 	
 	exports.default = _default;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(32)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33)))
 
 /***/ }),
-/* 293 */
+/* 292 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -38479,7 +38623,7 @@
 	/* eslint-enable */
 
 /***/ }),
-/* 294 */
+/* 293 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {(function (global, factory) {
@@ -39422,7 +39566,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ }),
-/* 295 */
+/* 294 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -39434,14 +39578,10 @@
 	});
 	exports.default = omit;
 	
-	var _defineProperty2 = _interopRequireDefault(__webpack_require__(288));
-	
-	function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-	
-	function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { (0, _defineProperty2.default)(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+	var _objectSpread2 = _interopRequireDefault(__webpack_require__(191));
 	
 	function omit(obj, fields) {
-	  var clone = _objectSpread({}, obj);
+	  var clone = (0, _objectSpread2.default)({}, obj);
 	
 	  if (Array.isArray(fields)) {
 	    fields.forEach(function (key) {
@@ -39453,7 +39593,7 @@
 	}
 
 /***/ }),
-/* 296 */
+/* 295 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -39469,7 +39609,7 @@
 	 * calculateNodeHeight(uiTextNode, useCache = false)
 	 */
 	var HIDDEN_TEXTAREA_STYLE = "\n  min-height:0 !important;\n  max-height:none !important;\n  height:0 !important;\n  visibility:hidden !important;\n  overflow:hidden !important;\n  position:absolute !important;\n  z-index:-1000 !important;\n  top:0 !important;\n  right:0 !important\n";
-	var SIZING_STYLE = ['letter-spacing', 'line-height', 'padding-top', 'padding-bottom', 'font-family', 'font-weight', 'font-size', 'font-variant', 'text-rendering', 'text-transform', 'width', 'text-indent', 'padding-left', 'padding-right', 'border-width', 'box-sizing'];
+	var SIZING_STYLE = ['letter-spacing', 'line-height', 'padding-top', 'padding-bottom', 'font-family', 'font-weight', 'font-size', 'font-variant', 'text-rendering', 'text-transform', 'width', 'text-indent', 'padding-left', 'padding-right', 'border-width', 'box-sizing', 'word-break'];
 	var computedStyleCache = {};
 	var hiddenTextarea;
 	
@@ -39585,7 +39725,7 @@
 	}
 
 /***/ }),
-/* 297 */
+/* 296 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -39598,23 +39738,23 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _DatePicker = __webpack_require__(298);
+	var _DatePicker = __webpack_require__(297);
 	
 	var _DatePicker2 = _interopRequireDefault(_DatePicker);
 	
-	var _MonthPicker = __webpack_require__(534);
+	var _MonthPicker = __webpack_require__(533);
 	
 	var _MonthPicker2 = _interopRequireDefault(_MonthPicker);
 	
-	var _RangePicker = __webpack_require__(536);
+	var _RangePicker = __webpack_require__(535);
 	
 	var _RangePicker2 = _interopRequireDefault(_RangePicker);
 	
-	var _WeekPicker = __webpack_require__(539);
+	var _WeekPicker = __webpack_require__(538);
 	
 	var _WeekPicker2 = _interopRequireDefault(_WeekPicker);
 	
-	var _YearPicker = __webpack_require__(540);
+	var _YearPicker = __webpack_require__(539);
 	
 	var _YearPicker2 = _interopRequireDefault(_YearPicker);
 	
@@ -39629,7 +39769,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 298 */
+/* 297 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -39640,7 +39780,7 @@
 	
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
-	var _rcCalendar = __webpack_require__(299);
+	var _rcCalendar = __webpack_require__(298);
 	
 	var _rcCalendar2 = _interopRequireDefault(_rcCalendar);
 	
@@ -39654,23 +39794,23 @@
 	
 	var _tinperBeeCore = __webpack_require__(26);
 	
-	var _Picker = __webpack_require__(459);
+	var _Picker = __webpack_require__(458);
 	
 	var _Picker2 = _interopRequireDefault(_Picker);
 	
-	var _beeFormControl = __webpack_require__(276);
+	var _beeFormControl = __webpack_require__(277);
 	
 	var _beeFormControl2 = _interopRequireDefault(_beeFormControl);
 	
-	var _Panel = __webpack_require__(523);
+	var _Panel = __webpack_require__(522);
 	
 	var _Panel2 = _interopRequireDefault(_Panel);
 	
-	var _moment = __webpack_require__(305);
+	var _moment = __webpack_require__(304);
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
-	var _beeIcon = __webpack_require__(93);
+	var _beeIcon = __webpack_require__(94);
 	
 	var _beeIcon2 = _interopRequireDefault(_beeIcon);
 	
@@ -39678,15 +39818,15 @@
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _beeInputGroup = __webpack_require__(527);
+	var _beeInputGroup = __webpack_require__(526);
 	
 	var _beeInputGroup2 = _interopRequireDefault(_beeInputGroup);
 	
-	var _zh_CN = __webpack_require__(532);
+	var _zh_CN = __webpack_require__(531);
 	
 	var _zh_CN2 = _interopRequireDefault(_zh_CN);
 	
-	var _omit = __webpack_require__(533);
+	var _omit = __webpack_require__(532);
 	
 	var _omit2 = _interopRequireDefault(_omit);
 	
@@ -40019,10 +40159,10 @@
 	    }
 	  };
 	
-	  this.handleCalendarChange = function (value) {
+	  this.handleCalendarChange = function (value, shouldChange) {
 	    var props = _this3.props;
 	    _this3.setState({ value: value, inputValue: value && _this3.getValue(value) || '' });
-	    _this3.fireChange(value, value && _this3.getValue(value) || '');
+	    shouldChange && _this3.fireChange(value, value && _this3.getValue(value) || '');
 	  };
 	
 	  this.handleChange = function (value) {
@@ -40203,7 +40343,7 @@
 	module.exports = exports["default"];
 
 /***/ }),
-/* 299 */
+/* 298 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -40212,7 +40352,7 @@
 	  value: true
 	});
 	
-	var _Calendar = __webpack_require__(300);
+	var _Calendar = __webpack_require__(299);
 	
 	var _Calendar2 = _interopRequireDefault(_Calendar);
 	
@@ -40222,7 +40362,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 300 */
+/* 299 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -40245,37 +40385,37 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _KeyCode = __webpack_require__(301);
+	var _KeyCode = __webpack_require__(300);
 	
 	var _KeyCode2 = _interopRequireDefault(_KeyCode);
 	
-	var _reactLifecyclesCompat = __webpack_require__(78);
+	var _reactLifecyclesCompat = __webpack_require__(79);
 	
-	var _DateTable = __webpack_require__(302);
+	var _DateTable = __webpack_require__(301);
 	
 	var _DateTable2 = _interopRequireDefault(_DateTable);
 	
-	var _CalendarHeader = __webpack_require__(444);
+	var _CalendarHeader = __webpack_require__(443);
 	
 	var _CalendarHeader2 = _interopRequireDefault(_CalendarHeader);
 	
-	var _CalendarFooter = __webpack_require__(451);
+	var _CalendarFooter = __webpack_require__(450);
 	
 	var _CalendarFooter2 = _interopRequireDefault(_CalendarFooter);
 	
-	var _CalendarMixin = __webpack_require__(455);
+	var _CalendarMixin = __webpack_require__(454);
 	
-	var _CommonMixin = __webpack_require__(456);
+	var _CommonMixin = __webpack_require__(455);
 	
-	var _DateInput = __webpack_require__(448);
+	var _DateInput = __webpack_require__(447);
 	
 	var _DateInput2 = _interopRequireDefault(_DateInput);
 	
-	var _util = __webpack_require__(443);
+	var _util = __webpack_require__(442);
 	
-	var _toTime = __webpack_require__(458);
+	var _toTime = __webpack_require__(457);
 	
-	var _moment = __webpack_require__(305);
+	var _moment = __webpack_require__(304);
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
@@ -40681,7 +40821,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 301 */
+/* 300 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -41317,7 +41457,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 302 */
+/* 301 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -41330,11 +41470,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _DateTHead = __webpack_require__(303);
+	var _DateTHead = __webpack_require__(302);
 	
 	var _DateTHead2 = _interopRequireDefault(_DateTHead);
 	
-	var _DateTBody = __webpack_require__(442);
+	var _DateTBody = __webpack_require__(441);
 	
 	var _DateTBody2 = _interopRequireDefault(_DateTBody);
 	
@@ -41375,7 +41515,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 303 */
+/* 302 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -41388,11 +41528,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _DateConstants = __webpack_require__(304);
+	var _DateConstants = __webpack_require__(303);
 	
 	var _DateConstants2 = _interopRequireDefault(_DateConstants);
 	
-	var _moment = __webpack_require__(305);
+	var _moment = __webpack_require__(304);
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
@@ -41481,7 +41621,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 304 */
+/* 303 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -41496,7 +41636,7 @@
 	module.exports = exports["default"];
 
 /***/ }),
-/* 305 */
+/* 304 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var require;/* WEBPACK VAR INJECTION */(function(module) {//! moment.js
@@ -43590,7 +43730,7 @@
 	            try {
 	                oldLocale = globalLocale._abbr;
 	                aliasedRequire = require;
-	                __webpack_require__(306)("./" + name);
+	                __webpack_require__(305)("./" + name);
 	                getSetGlobalLocale(oldLocale);
 	            } catch (e) {
 	                // mark as not found to avoid repeating expensive file require call causing high CPU
@@ -47170,283 +47310,283 @@
 	
 	})));
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(191)(module)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(252)(module)))
 
 /***/ }),
-/* 306 */
+/* 305 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var map = {
-		"./af": 307,
-		"./af.js": 307,
-		"./ar": 308,
-		"./ar-dz": 309,
-		"./ar-dz.js": 309,
-		"./ar-kw": 310,
-		"./ar-kw.js": 310,
-		"./ar-ly": 311,
-		"./ar-ly.js": 311,
-		"./ar-ma": 312,
-		"./ar-ma.js": 312,
-		"./ar-sa": 313,
-		"./ar-sa.js": 313,
-		"./ar-tn": 314,
-		"./ar-tn.js": 314,
-		"./ar.js": 308,
-		"./az": 315,
-		"./az.js": 315,
-		"./be": 316,
-		"./be.js": 316,
-		"./bg": 317,
-		"./bg.js": 317,
-		"./bm": 318,
-		"./bm.js": 318,
-		"./bn": 319,
-		"./bn-bd": 320,
-		"./bn-bd.js": 320,
-		"./bn.js": 319,
-		"./bo": 321,
-		"./bo.js": 321,
-		"./br": 322,
-		"./br.js": 322,
-		"./bs": 323,
-		"./bs.js": 323,
-		"./ca": 324,
-		"./ca.js": 324,
-		"./cs": 325,
-		"./cs.js": 325,
-		"./cv": 326,
-		"./cv.js": 326,
-		"./cy": 327,
-		"./cy.js": 327,
-		"./da": 328,
-		"./da.js": 328,
-		"./de": 329,
-		"./de-at": 330,
-		"./de-at.js": 330,
-		"./de-ch": 331,
-		"./de-ch.js": 331,
-		"./de.js": 329,
-		"./dv": 332,
-		"./dv.js": 332,
-		"./el": 333,
-		"./el.js": 333,
-		"./en-au": 334,
-		"./en-au.js": 334,
-		"./en-ca": 335,
-		"./en-ca.js": 335,
-		"./en-gb": 336,
-		"./en-gb.js": 336,
-		"./en-ie": 337,
-		"./en-ie.js": 337,
-		"./en-il": 338,
-		"./en-il.js": 338,
-		"./en-in": 339,
-		"./en-in.js": 339,
-		"./en-nz": 340,
-		"./en-nz.js": 340,
-		"./en-sg": 341,
-		"./en-sg.js": 341,
-		"./eo": 342,
-		"./eo.js": 342,
-		"./es": 343,
-		"./es-do": 344,
-		"./es-do.js": 344,
-		"./es-mx": 345,
-		"./es-mx.js": 345,
-		"./es-us": 346,
-		"./es-us.js": 346,
-		"./es.js": 343,
-		"./et": 347,
-		"./et.js": 347,
-		"./eu": 348,
-		"./eu.js": 348,
-		"./fa": 349,
-		"./fa.js": 349,
-		"./fi": 350,
-		"./fi.js": 350,
-		"./fil": 351,
-		"./fil.js": 351,
-		"./fo": 352,
-		"./fo.js": 352,
-		"./fr": 353,
-		"./fr-ca": 354,
-		"./fr-ca.js": 354,
-		"./fr-ch": 355,
-		"./fr-ch.js": 355,
-		"./fr.js": 353,
-		"./fy": 356,
-		"./fy.js": 356,
-		"./ga": 357,
-		"./ga.js": 357,
-		"./gd": 358,
-		"./gd.js": 358,
-		"./gl": 359,
-		"./gl.js": 359,
-		"./gom-deva": 360,
-		"./gom-deva.js": 360,
-		"./gom-latn": 361,
-		"./gom-latn.js": 361,
-		"./gu": 362,
-		"./gu.js": 362,
-		"./he": 363,
-		"./he.js": 363,
-		"./hi": 364,
-		"./hi.js": 364,
-		"./hr": 365,
-		"./hr.js": 365,
-		"./hu": 366,
-		"./hu.js": 366,
-		"./hy-am": 367,
-		"./hy-am.js": 367,
-		"./id": 368,
-		"./id.js": 368,
-		"./is": 369,
-		"./is.js": 369,
-		"./it": 370,
-		"./it-ch": 371,
-		"./it-ch.js": 371,
-		"./it.js": 370,
-		"./ja": 372,
-		"./ja.js": 372,
-		"./jv": 373,
-		"./jv.js": 373,
-		"./ka": 374,
-		"./ka.js": 374,
-		"./kk": 375,
-		"./kk.js": 375,
-		"./km": 376,
-		"./km.js": 376,
-		"./kn": 377,
-		"./kn.js": 377,
-		"./ko": 378,
-		"./ko.js": 378,
-		"./ku": 379,
-		"./ku.js": 379,
-		"./ky": 380,
-		"./ky.js": 380,
-		"./lb": 381,
-		"./lb.js": 381,
-		"./lo": 382,
-		"./lo.js": 382,
-		"./lt": 383,
-		"./lt.js": 383,
-		"./lv": 384,
-		"./lv.js": 384,
-		"./me": 385,
-		"./me.js": 385,
-		"./mi": 386,
-		"./mi.js": 386,
-		"./mk": 387,
-		"./mk.js": 387,
-		"./ml": 388,
-		"./ml.js": 388,
-		"./mn": 389,
-		"./mn.js": 389,
-		"./mr": 390,
-		"./mr.js": 390,
-		"./ms": 391,
-		"./ms-my": 392,
-		"./ms-my.js": 392,
-		"./ms.js": 391,
-		"./mt": 393,
-		"./mt.js": 393,
-		"./my": 394,
-		"./my.js": 394,
-		"./nb": 395,
-		"./nb.js": 395,
-		"./ne": 396,
-		"./ne.js": 396,
-		"./nl": 397,
-		"./nl-be": 398,
-		"./nl-be.js": 398,
-		"./nl.js": 397,
-		"./nn": 399,
-		"./nn.js": 399,
-		"./oc-lnc": 400,
-		"./oc-lnc.js": 400,
-		"./pa-in": 401,
-		"./pa-in.js": 401,
-		"./pl": 402,
-		"./pl.js": 402,
-		"./pt": 403,
-		"./pt-br": 404,
-		"./pt-br.js": 404,
-		"./pt.js": 403,
-		"./ro": 405,
-		"./ro.js": 405,
-		"./ru": 406,
-		"./ru.js": 406,
-		"./sd": 407,
-		"./sd.js": 407,
-		"./se": 408,
-		"./se.js": 408,
-		"./si": 409,
-		"./si.js": 409,
-		"./sk": 410,
-		"./sk.js": 410,
-		"./sl": 411,
-		"./sl.js": 411,
-		"./sq": 412,
-		"./sq.js": 412,
-		"./sr": 413,
-		"./sr-cyrl": 414,
-		"./sr-cyrl.js": 414,
-		"./sr.js": 413,
-		"./ss": 415,
-		"./ss.js": 415,
-		"./sv": 416,
-		"./sv.js": 416,
-		"./sw": 417,
-		"./sw.js": 417,
-		"./ta": 418,
-		"./ta.js": 418,
-		"./te": 419,
-		"./te.js": 419,
-		"./tet": 420,
-		"./tet.js": 420,
-		"./tg": 421,
-		"./tg.js": 421,
-		"./th": 422,
-		"./th.js": 422,
-		"./tk": 423,
-		"./tk.js": 423,
-		"./tl-ph": 424,
-		"./tl-ph.js": 424,
-		"./tlh": 425,
-		"./tlh.js": 425,
-		"./tr": 426,
-		"./tr.js": 426,
-		"./tzl": 427,
-		"./tzl.js": 427,
-		"./tzm": 428,
-		"./tzm-latn": 429,
-		"./tzm-latn.js": 429,
-		"./tzm.js": 428,
-		"./ug-cn": 430,
-		"./ug-cn.js": 430,
-		"./uk": 431,
-		"./uk.js": 431,
-		"./ur": 432,
-		"./ur.js": 432,
-		"./uz": 433,
-		"./uz-latn": 434,
-		"./uz-latn.js": 434,
-		"./uz.js": 433,
-		"./vi": 435,
-		"./vi.js": 435,
-		"./x-pseudo": 436,
-		"./x-pseudo.js": 436,
-		"./yo": 437,
-		"./yo.js": 437,
-		"./zh-cn": 438,
-		"./zh-cn.js": 438,
-		"./zh-hk": 439,
-		"./zh-hk.js": 439,
-		"./zh-mo": 440,
-		"./zh-mo.js": 440,
-		"./zh-tw": 441,
-		"./zh-tw.js": 441
+		"./af": 306,
+		"./af.js": 306,
+		"./ar": 307,
+		"./ar-dz": 308,
+		"./ar-dz.js": 308,
+		"./ar-kw": 309,
+		"./ar-kw.js": 309,
+		"./ar-ly": 310,
+		"./ar-ly.js": 310,
+		"./ar-ma": 311,
+		"./ar-ma.js": 311,
+		"./ar-sa": 312,
+		"./ar-sa.js": 312,
+		"./ar-tn": 313,
+		"./ar-tn.js": 313,
+		"./ar.js": 307,
+		"./az": 314,
+		"./az.js": 314,
+		"./be": 315,
+		"./be.js": 315,
+		"./bg": 316,
+		"./bg.js": 316,
+		"./bm": 317,
+		"./bm.js": 317,
+		"./bn": 318,
+		"./bn-bd": 319,
+		"./bn-bd.js": 319,
+		"./bn.js": 318,
+		"./bo": 320,
+		"./bo.js": 320,
+		"./br": 321,
+		"./br.js": 321,
+		"./bs": 322,
+		"./bs.js": 322,
+		"./ca": 323,
+		"./ca.js": 323,
+		"./cs": 324,
+		"./cs.js": 324,
+		"./cv": 325,
+		"./cv.js": 325,
+		"./cy": 326,
+		"./cy.js": 326,
+		"./da": 327,
+		"./da.js": 327,
+		"./de": 328,
+		"./de-at": 329,
+		"./de-at.js": 329,
+		"./de-ch": 330,
+		"./de-ch.js": 330,
+		"./de.js": 328,
+		"./dv": 331,
+		"./dv.js": 331,
+		"./el": 332,
+		"./el.js": 332,
+		"./en-au": 333,
+		"./en-au.js": 333,
+		"./en-ca": 334,
+		"./en-ca.js": 334,
+		"./en-gb": 335,
+		"./en-gb.js": 335,
+		"./en-ie": 336,
+		"./en-ie.js": 336,
+		"./en-il": 337,
+		"./en-il.js": 337,
+		"./en-in": 338,
+		"./en-in.js": 338,
+		"./en-nz": 339,
+		"./en-nz.js": 339,
+		"./en-sg": 340,
+		"./en-sg.js": 340,
+		"./eo": 341,
+		"./eo.js": 341,
+		"./es": 342,
+		"./es-do": 343,
+		"./es-do.js": 343,
+		"./es-mx": 344,
+		"./es-mx.js": 344,
+		"./es-us": 345,
+		"./es-us.js": 345,
+		"./es.js": 342,
+		"./et": 346,
+		"./et.js": 346,
+		"./eu": 347,
+		"./eu.js": 347,
+		"./fa": 348,
+		"./fa.js": 348,
+		"./fi": 349,
+		"./fi.js": 349,
+		"./fil": 350,
+		"./fil.js": 350,
+		"./fo": 351,
+		"./fo.js": 351,
+		"./fr": 352,
+		"./fr-ca": 353,
+		"./fr-ca.js": 353,
+		"./fr-ch": 354,
+		"./fr-ch.js": 354,
+		"./fr.js": 352,
+		"./fy": 355,
+		"./fy.js": 355,
+		"./ga": 356,
+		"./ga.js": 356,
+		"./gd": 357,
+		"./gd.js": 357,
+		"./gl": 358,
+		"./gl.js": 358,
+		"./gom-deva": 359,
+		"./gom-deva.js": 359,
+		"./gom-latn": 360,
+		"./gom-latn.js": 360,
+		"./gu": 361,
+		"./gu.js": 361,
+		"./he": 362,
+		"./he.js": 362,
+		"./hi": 363,
+		"./hi.js": 363,
+		"./hr": 364,
+		"./hr.js": 364,
+		"./hu": 365,
+		"./hu.js": 365,
+		"./hy-am": 366,
+		"./hy-am.js": 366,
+		"./id": 367,
+		"./id.js": 367,
+		"./is": 368,
+		"./is.js": 368,
+		"./it": 369,
+		"./it-ch": 370,
+		"./it-ch.js": 370,
+		"./it.js": 369,
+		"./ja": 371,
+		"./ja.js": 371,
+		"./jv": 372,
+		"./jv.js": 372,
+		"./ka": 373,
+		"./ka.js": 373,
+		"./kk": 374,
+		"./kk.js": 374,
+		"./km": 375,
+		"./km.js": 375,
+		"./kn": 376,
+		"./kn.js": 376,
+		"./ko": 377,
+		"./ko.js": 377,
+		"./ku": 378,
+		"./ku.js": 378,
+		"./ky": 379,
+		"./ky.js": 379,
+		"./lb": 380,
+		"./lb.js": 380,
+		"./lo": 381,
+		"./lo.js": 381,
+		"./lt": 382,
+		"./lt.js": 382,
+		"./lv": 383,
+		"./lv.js": 383,
+		"./me": 384,
+		"./me.js": 384,
+		"./mi": 385,
+		"./mi.js": 385,
+		"./mk": 386,
+		"./mk.js": 386,
+		"./ml": 387,
+		"./ml.js": 387,
+		"./mn": 388,
+		"./mn.js": 388,
+		"./mr": 389,
+		"./mr.js": 389,
+		"./ms": 390,
+		"./ms-my": 391,
+		"./ms-my.js": 391,
+		"./ms.js": 390,
+		"./mt": 392,
+		"./mt.js": 392,
+		"./my": 393,
+		"./my.js": 393,
+		"./nb": 394,
+		"./nb.js": 394,
+		"./ne": 395,
+		"./ne.js": 395,
+		"./nl": 396,
+		"./nl-be": 397,
+		"./nl-be.js": 397,
+		"./nl.js": 396,
+		"./nn": 398,
+		"./nn.js": 398,
+		"./oc-lnc": 399,
+		"./oc-lnc.js": 399,
+		"./pa-in": 400,
+		"./pa-in.js": 400,
+		"./pl": 401,
+		"./pl.js": 401,
+		"./pt": 402,
+		"./pt-br": 403,
+		"./pt-br.js": 403,
+		"./pt.js": 402,
+		"./ro": 404,
+		"./ro.js": 404,
+		"./ru": 405,
+		"./ru.js": 405,
+		"./sd": 406,
+		"./sd.js": 406,
+		"./se": 407,
+		"./se.js": 407,
+		"./si": 408,
+		"./si.js": 408,
+		"./sk": 409,
+		"./sk.js": 409,
+		"./sl": 410,
+		"./sl.js": 410,
+		"./sq": 411,
+		"./sq.js": 411,
+		"./sr": 412,
+		"./sr-cyrl": 413,
+		"./sr-cyrl.js": 413,
+		"./sr.js": 412,
+		"./ss": 414,
+		"./ss.js": 414,
+		"./sv": 415,
+		"./sv.js": 415,
+		"./sw": 416,
+		"./sw.js": 416,
+		"./ta": 417,
+		"./ta.js": 417,
+		"./te": 418,
+		"./te.js": 418,
+		"./tet": 419,
+		"./tet.js": 419,
+		"./tg": 420,
+		"./tg.js": 420,
+		"./th": 421,
+		"./th.js": 421,
+		"./tk": 422,
+		"./tk.js": 422,
+		"./tl-ph": 423,
+		"./tl-ph.js": 423,
+		"./tlh": 424,
+		"./tlh.js": 424,
+		"./tr": 425,
+		"./tr.js": 425,
+		"./tzl": 426,
+		"./tzl.js": 426,
+		"./tzm": 427,
+		"./tzm-latn": 428,
+		"./tzm-latn.js": 428,
+		"./tzm.js": 427,
+		"./ug-cn": 429,
+		"./ug-cn.js": 429,
+		"./uk": 430,
+		"./uk.js": 430,
+		"./ur": 431,
+		"./ur.js": 431,
+		"./uz": 432,
+		"./uz-latn": 433,
+		"./uz-latn.js": 433,
+		"./uz.js": 432,
+		"./vi": 434,
+		"./vi.js": 434,
+		"./x-pseudo": 435,
+		"./x-pseudo.js": 435,
+		"./yo": 436,
+		"./yo.js": 436,
+		"./zh-cn": 437,
+		"./zh-cn.js": 437,
+		"./zh-hk": 438,
+		"./zh-hk.js": 438,
+		"./zh-mo": 439,
+		"./zh-mo.js": 439,
+		"./zh-tw": 440,
+		"./zh-tw.js": 440
 	};
 	function webpackContext(req) {
 		return __webpack_require__(webpackContextResolve(req));
@@ -47459,11 +47599,11 @@
 	};
 	webpackContext.resolve = webpackContextResolve;
 	module.exports = webpackContext;
-	webpackContext.id = 306;
+	webpackContext.id = 305;
 
 
 /***/ }),
-/* 307 */
+/* 306 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -47471,7 +47611,7 @@
 	//! author : Werner Mollentze : https://github.com/wernerm
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -47550,7 +47690,7 @@
 
 
 /***/ }),
-/* 308 */
+/* 307 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -47560,7 +47700,7 @@
 	//! author : forabi https://github.com/forabi
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -47755,7 +47895,7 @@
 
 
 /***/ }),
-/* 309 */
+/* 308 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -47767,7 +47907,7 @@
 	//! author : Noureddine LOUAHEDJ : https://github.com/noureddinem
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -47927,7 +48067,7 @@
 
 
 /***/ }),
-/* 310 */
+/* 309 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -47935,7 +48075,7 @@
 	//! author : Nusret Parlak: https://github.com/nusretparlak
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -47997,7 +48137,7 @@
 
 
 /***/ }),
-/* 311 */
+/* 310 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -48005,7 +48145,7 @@
 	//! author : Ali Hmer: https://github.com/kikoanis
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -48184,7 +48324,7 @@
 
 
 /***/ }),
-/* 312 */
+/* 311 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -48193,7 +48333,7 @@
 	//! author : Abdel Said : https://github.com/abdelsaid
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -48255,7 +48395,7 @@
 
 
 /***/ }),
-/* 313 */
+/* 312 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -48263,7 +48403,7 @@
 	//! author : Suhail Alkowaileet : https://github.com/xsoh
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -48375,7 +48515,7 @@
 
 
 /***/ }),
-/* 314 */
+/* 313 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -48383,7 +48523,7 @@
 	//! author : Nader Toukabri : https://github.com/naderio
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -48445,7 +48585,7 @@
 
 
 /***/ }),
-/* 315 */
+/* 314 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -48453,7 +48593,7 @@
 	//! author : topchiyev : https://github.com/topchiyev
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -48562,7 +48702,7 @@
 
 
 /***/ }),
-/* 316 */
+/* 315 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -48572,7 +48712,7 @@
 	//! Author : Menelion Elensúle : https://github.com/Oire
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -48719,7 +48859,7 @@
 
 
 /***/ }),
-/* 317 */
+/* 316 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -48727,7 +48867,7 @@
 	//! author : Krasen Borisov : https://github.com/kraz
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -48822,7 +48962,7 @@
 
 
 /***/ }),
-/* 318 */
+/* 317 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -48830,7 +48970,7 @@
 	//! author : Estelle Comment : https://github.com/estellecomment
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -48889,7 +49029,7 @@
 
 
 /***/ }),
-/* 319 */
+/* 318 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -48897,7 +49037,7 @@
 	//! author : Kaushik Gandhi : https://github.com/kaushikgandhi
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -49023,7 +49163,7 @@
 
 
 /***/ }),
-/* 320 */
+/* 319 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -49031,7 +49171,7 @@
 	//! author : Asraf Hossain Patoary : https://github.com/ashwoolford
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -49167,7 +49307,7 @@
 
 
 /***/ }),
-/* 321 */
+/* 320 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -49175,7 +49315,7 @@
 	//! author : Thupten N. Chakrishar : https://github.com/vajradog
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -49305,7 +49445,7 @@
 
 
 /***/ }),
-/* 322 */
+/* 321 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -49313,7 +49453,7 @@
 	//! author : Jean-Baptiste Le Duigou : https://github.com/jbleduigou
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -49486,7 +49626,7 @@
 
 
 /***/ }),
-/* 323 */
+/* 322 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -49495,7 +49635,7 @@
 	//! based on (hr) translation by Bojan Marković
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -49651,7 +49791,7 @@
 
 
 /***/ }),
-/* 324 */
+/* 323 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -49659,7 +49799,7 @@
 	//! author : Juan G. Hurtado : https://github.com/juanghurtado
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -49764,7 +49904,7 @@
 
 
 /***/ }),
-/* 325 */
+/* 324 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -49772,7 +49912,7 @@
 	//! author : petrbela : https://github.com/petrbela
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -49951,7 +50091,7 @@
 
 
 /***/ }),
-/* 326 */
+/* 325 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -49959,7 +50099,7 @@
 	//! author : Anatoly Mironov : https://github.com/mirontoli
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -50029,7 +50169,7 @@
 
 
 /***/ }),
-/* 327 */
+/* 326 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -50038,7 +50178,7 @@
 	//! author : https://github.com/ryangreaves
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -50142,7 +50282,7 @@
 
 
 /***/ }),
-/* 328 */
+/* 327 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -50150,7 +50290,7 @@
 	//! author : Ulrik Nielsen : https://github.com/mrbase
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -50211,7 +50351,7 @@
 
 
 /***/ }),
-/* 329 */
+/* 328 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -50221,7 +50361,7 @@
 	//! author : Mikolaj Dadela : https://github.com/mik01aj
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -50305,7 +50445,7 @@
 
 
 /***/ }),
-/* 330 */
+/* 329 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -50316,7 +50456,7 @@
 	//! author : Mikolaj Dadela : https://github.com/mik01aj
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -50400,7 +50540,7 @@
 
 
 /***/ }),
-/* 331 */
+/* 330 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -50408,7 +50548,7 @@
 	//! author : sschueller : https://github.com/sschueller
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -50492,7 +50632,7 @@
 
 
 /***/ }),
-/* 332 */
+/* 331 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -50500,7 +50640,7 @@
 	//! author : Jawish Hameed : https://github.com/jawish
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -50598,7 +50738,7 @@
 
 
 /***/ }),
-/* 333 */
+/* 332 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -50606,7 +50746,7 @@
 	//! author : Aggelos Karalias : https://github.com/mehiel
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -50718,7 +50858,7 @@
 
 
 /***/ }),
-/* 334 */
+/* 333 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -50726,7 +50866,7 @@
 	//! author : Jared Morse : https://github.com/jarcoal
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -50802,7 +50942,7 @@
 
 
 /***/ }),
-/* 335 */
+/* 334 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -50810,7 +50950,7 @@
 	//! author : Jonathan Abourbih : https://github.com/jonbca
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -50882,7 +51022,7 @@
 
 
 /***/ }),
-/* 336 */
+/* 335 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -50890,7 +51030,7 @@
 	//! author : Chris Gedrim : https://github.com/chrisgedrim
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -50966,7 +51106,7 @@
 
 
 /***/ }),
-/* 337 */
+/* 336 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -50974,7 +51114,7 @@
 	//! author : Chris Cartlidge : https://github.com/chriscartlidge
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -51050,7 +51190,7 @@
 
 
 /***/ }),
-/* 338 */
+/* 337 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -51058,7 +51198,7 @@
 	//! author : Chris Gedrim : https://github.com/chrisgedrim
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -51130,7 +51270,7 @@
 
 
 /***/ }),
-/* 339 */
+/* 338 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -51138,7 +51278,7 @@
 	//! author : Jatin Agrawal : https://github.com/jatinag22
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -51214,7 +51354,7 @@
 
 
 /***/ }),
-/* 340 */
+/* 339 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -51222,7 +51362,7 @@
 	//! author : Luke McGregor : https://github.com/lukemcgregor
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -51298,7 +51438,7 @@
 
 
 /***/ }),
-/* 341 */
+/* 340 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -51306,7 +51446,7 @@
 	//! author : Matthew Castrillon-Madrigal : https://github.com/techdimension
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -51382,7 +51522,7 @@
 
 
 /***/ }),
-/* 342 */
+/* 341 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -51393,7 +51533,7 @@
 	//! comment : Vivakvo corrected the translation by colindean and miestasmia
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -51466,7 +51606,7 @@
 
 
 /***/ }),
-/* 343 */
+/* 342 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -51474,7 +51614,7 @@
 	//! author : Julio Napurí : https://github.com/julionc
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -51588,14 +51728,14 @@
 
 
 /***/ }),
-/* 344 */
+/* 343 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
 	//! locale : Spanish (Dominican Republic) [es-do]
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -51708,7 +51848,7 @@
 
 
 /***/ }),
-/* 345 */
+/* 344 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -51716,7 +51856,7 @@
 	//! author : JC Franco : https://github.com/jcfranco
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -51830,7 +51970,7 @@
 
 
 /***/ }),
-/* 346 */
+/* 345 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -51839,7 +51979,7 @@
 	//! author : chrisrodz : https://github.com/chrisrodz
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -51952,7 +52092,7 @@
 
 
 /***/ }),
-/* 347 */
+/* 346 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -51961,7 +52101,7 @@
 	//! improvements : Illimar Tambek : https://github.com/ragulka
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -52046,7 +52186,7 @@
 
 
 /***/ }),
-/* 348 */
+/* 347 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -52054,7 +52194,7 @@
 	//! author : Eneko Illarramendi : https://github.com/eillarra
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -52125,7 +52265,7 @@
 
 
 /***/ }),
-/* 349 */
+/* 348 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -52133,7 +52273,7 @@
 	//! author : Ebrahim Byagowi : https://github.com/ebraminio
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -52251,7 +52391,7 @@
 
 
 /***/ }),
-/* 350 */
+/* 349 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -52259,7 +52399,7 @@
 	//! author : Tarmo Aidantausta : https://github.com/bleadof
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -52388,7 +52528,7 @@
 
 
 /***/ }),
-/* 351 */
+/* 350 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -52397,7 +52537,7 @@
 	//! author : Matthew Co : https://github.com/matthewdeeco
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -52462,7 +52602,7 @@
 
 
 /***/ }),
-/* 352 */
+/* 351 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -52471,7 +52611,7 @@
 	//! author : Kristian Sakarisson : https://github.com/sakarisson
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -52534,7 +52674,7 @@
 
 
 /***/ }),
-/* 353 */
+/* 352 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -52542,7 +52682,7 @@
 	//! author : John Fischer : https://github.com/jfroffice
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -52654,7 +52794,7 @@
 
 
 /***/ }),
-/* 354 */
+/* 353 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -52662,7 +52802,7 @@
 	//! author : Jonathan Abourbih : https://github.com/jonbca
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -52739,7 +52879,7 @@
 
 
 /***/ }),
-/* 355 */
+/* 354 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -52747,7 +52887,7 @@
 	//! author : Gaspard Bucher : https://github.com/gaspard
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -52828,7 +52968,7 @@
 
 
 /***/ }),
-/* 356 */
+/* 355 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -52836,7 +52976,7 @@
 	//! author : Robin van der Vliet : https://github.com/robin0van0der0v
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -52921,7 +53061,7 @@
 
 
 /***/ }),
-/* 357 */
+/* 356 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -52929,7 +53069,7 @@
 	//! author : André Silva : https://github.com/askpt
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -53032,7 +53172,7 @@
 
 
 /***/ }),
-/* 358 */
+/* 357 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -53040,7 +53180,7 @@
 	//! author : Jon Ashdown : https://github.com/jonashdown
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -53143,7 +53283,7 @@
 
 
 /***/ }),
-/* 359 */
+/* 358 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -53151,7 +53291,7 @@
 	//! author : Juan G. Hurtado : https://github.com/juanghurtado
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -53233,7 +53373,7 @@
 
 
 /***/ }),
-/* 360 */
+/* 359 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -53241,7 +53381,7 @@
 	//! author : The Discoverer : https://github.com/WikiDiscoverer
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -53373,7 +53513,7 @@
 
 
 /***/ }),
-/* 361 */
+/* 360 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -53381,7 +53521,7 @@
 	//! author : The Discoverer : https://github.com/WikiDiscoverer
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -53513,7 +53653,7 @@
 
 
 /***/ }),
-/* 362 */
+/* 361 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -53521,7 +53661,7 @@
 	//! author : Kaushik Thanki : https://github.com/Kaushik1987
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -53650,7 +53790,7 @@
 
 
 /***/ }),
-/* 363 */
+/* 362 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -53660,7 +53800,7 @@
 	//! author : Tal Ater : https://github.com/TalAter
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -53760,7 +53900,7 @@
 
 
 /***/ }),
-/* 364 */
+/* 363 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -53768,7 +53908,7 @@
 	//! author : Mayank Singhal : https://github.com/mayanksinghal
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -53940,7 +54080,7 @@
 
 
 /***/ }),
-/* 365 */
+/* 364 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -53948,7 +54088,7 @@
 	//! author : Bojan Marković : https://github.com/bmarkovic
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -54110,7 +54250,7 @@
 
 
 /***/ }),
-/* 366 */
+/* 365 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -54119,7 +54259,7 @@
 	//! author : Peter Viszt  : https://github.com/passatgt
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -54244,7 +54384,7 @@
 
 
 /***/ }),
-/* 367 */
+/* 366 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -54252,7 +54392,7 @@
 	//! author : Armendarabyan : https://github.com/armendarabyan
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -54352,7 +54492,7 @@
 
 
 /***/ }),
-/* 368 */
+/* 367 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -54361,7 +54501,7 @@
 	//! reference: http://id.wikisource.org/wiki/Pedoman_Umum_Ejaan_Bahasa_Indonesia_yang_Disempurnakan
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -54444,7 +54584,7 @@
 
 
 /***/ }),
-/* 369 */
+/* 368 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -54452,7 +54592,7 @@
 	//! author : Hinrik Örn Sigurðsson : https://github.com/hinrik
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -54599,7 +54739,7 @@
 
 
 /***/ }),
-/* 370 */
+/* 369 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -54609,7 +54749,7 @@
 	//! author: Marco : https://github.com/Manfre98
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -54721,7 +54861,7 @@
 
 
 /***/ }),
-/* 371 */
+/* 370 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -54729,7 +54869,7 @@
 	//! author : xfh : https://github.com/xfh
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -54801,7 +54941,7 @@
 
 
 /***/ }),
-/* 372 */
+/* 371 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -54809,7 +54949,7 @@
 	//! author : LI Long : https://github.com/baryon
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -54965,7 +55105,7 @@
 
 
 /***/ }),
-/* 373 */
+/* 372 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -54974,7 +55114,7 @@
 	//! reference: http://jv.wikipedia.org/wiki/Basa_Jawa
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -55057,7 +55197,7 @@
 
 
 /***/ }),
-/* 374 */
+/* 373 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -55065,7 +55205,7 @@
 	//! author : Irakli Janiashvili : https://github.com/IrakliJani
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -55165,7 +55305,7 @@
 
 
 /***/ }),
-/* 375 */
+/* 374 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -55173,7 +55313,7 @@
 	//! authors : Nurlan Rakhimzhanov : https://github.com/nurlan
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -55263,7 +55403,7 @@
 
 
 /***/ }),
-/* 376 */
+/* 375 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -55271,7 +55411,7 @@
 	//! author : Kruy Vanna : https://github.com/kruyvanna
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -55381,7 +55521,7 @@
 
 
 /***/ }),
-/* 377 */
+/* 376 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -55389,7 +55529,7 @@
 	//! author : Rajeev Naik : https://github.com/rajeevnaikte
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -55520,7 +55660,7 @@
 
 
 /***/ }),
-/* 378 */
+/* 377 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -55529,7 +55669,7 @@
 	//! author : Jeeeyul Lee <jeeeyul@gmail.com>
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -55611,7 +55751,7 @@
 
 
 /***/ }),
-/* 379 */
+/* 378 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -55619,7 +55759,7 @@
 	//! author : Shahram Mebashar : https://github.com/ShahramMebashar
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -55745,7 +55885,7 @@
 
 
 /***/ }),
-/* 380 */
+/* 379 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -55753,7 +55893,7 @@
 	//! author : Chyngyz Arystan uulu : https://github.com/chyngyz
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -55845,7 +55985,7 @@
 
 
 /***/ }),
-/* 381 */
+/* 380 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -55854,7 +55994,7 @@
 	//! author : David Raison : https://github.com/kwisatz
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -55996,7 +56136,7 @@
 
 
 /***/ }),
-/* 382 */
+/* 381 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -56004,7 +56144,7 @@
 	//! author : Ryan Hart : https://github.com/ryanhart2
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -56077,7 +56217,7 @@
 
 
 /***/ }),
-/* 383 */
+/* 382 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -56085,7 +56225,7 @@
 	//! author : Mindaugas Mozūras : https://github.com/mmozuras
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -56216,7 +56356,7 @@
 
 
 /***/ }),
-/* 384 */
+/* 383 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -56225,7 +56365,7 @@
 	//! author : Jānis Elmeris : https://github.com/JanisE
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -56325,7 +56465,7 @@
 
 
 /***/ }),
-/* 385 */
+/* 384 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -56333,7 +56473,7 @@
 	//! author : Miodrag Nikač <miodrag@restartit.me> : https://github.com/miodragnikac
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -56459,7 +56599,7 @@
 
 
 /***/ }),
-/* 386 */
+/* 385 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -56467,7 +56607,7 @@
 	//! author : John Corrigan <robbiecloset@gmail.com> : https://github.com/johnideal
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -56534,7 +56674,7 @@
 
 
 /***/ }),
-/* 387 */
+/* 386 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -56543,7 +56683,7 @@
 	//! author : Sashko Todorov : https://github.com/bkyceh
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -56636,7 +56776,7 @@
 
 
 /***/ }),
-/* 388 */
+/* 387 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -56644,7 +56784,7 @@
 	//! author : Floyd Pink : https://github.com/floydpink
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -56732,7 +56872,7 @@
 
 
 /***/ }),
-/* 389 */
+/* 388 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -56740,7 +56880,7 @@
 	//! author : Javkhlantugs Nyamdorj : https://github.com/javkhaanj7
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -56847,7 +56987,7 @@
 
 
 /***/ }),
-/* 390 */
+/* 389 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -56856,7 +56996,7 @@
 	//! author : Vivek Athalye : https://github.com/vnathalye
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -57065,7 +57205,7 @@
 
 
 /***/ }),
-/* 391 */
+/* 390 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -57073,7 +57213,7 @@
 	//! author : Weldan Jamili : https://github.com/weldan
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -57156,7 +57296,7 @@
 
 
 /***/ }),
-/* 392 */
+/* 391 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -57165,7 +57305,7 @@
 	//! author : Weldan Jamili : https://github.com/weldan
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -57248,7 +57388,7 @@
 
 
 /***/ }),
-/* 393 */
+/* 392 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -57256,7 +57396,7 @@
 	//! author : Alessandro Maruccia : https://github.com/alesma
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -57319,7 +57459,7 @@
 
 
 /***/ }),
-/* 394 */
+/* 393 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -57329,7 +57469,7 @@
 	//! author : Tin Aung Lin : https://github.com/thanyawzinmin
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -57426,7 +57566,7 @@
 
 
 /***/ }),
-/* 395 */
+/* 394 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -57436,7 +57576,7 @@
 	//!           Stephen Ramthun : https://github.com/stephenramthun
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -57503,7 +57643,7 @@
 
 
 /***/ }),
-/* 396 */
+/* 395 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -57511,7 +57651,7 @@
 	//! author : suvash : https://github.com/suvash
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -57639,7 +57779,7 @@
 
 
 /***/ }),
-/* 397 */
+/* 396 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -57648,7 +57788,7 @@
 	//! author : Jacob Middag : https://github.com/middagj
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -57759,7 +57899,7 @@
 
 
 /***/ }),
-/* 398 */
+/* 397 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -57768,7 +57908,7 @@
 	//! author : Jacob Middag : https://github.com/middagj
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -57877,7 +58017,7 @@
 
 
 /***/ }),
-/* 399 */
+/* 398 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -57886,7 +58026,7 @@
 	//!           Stephen Ramthun : https://github.com/stephenramthun
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -57953,7 +58093,7 @@
 
 
 /***/ }),
-/* 400 */
+/* 399 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -57961,7 +58101,7 @@
 	//! author : Quentin PAGÈS : https://github.com/Quenty31
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -58052,7 +58192,7 @@
 
 
 /***/ }),
-/* 401 */
+/* 400 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -58060,7 +58200,7 @@
 	//! author : Harpreet Singh : https://github.com/harpreetkhalsagtbit
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -58189,7 +58329,7 @@
 
 
 /***/ }),
-/* 402 */
+/* 401 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -58197,7 +58337,7 @@
 	//! author : Rafal Hirsz : https://github.com/evoL
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -58344,7 +58484,7 @@
 
 
 /***/ }),
-/* 403 */
+/* 402 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -58352,7 +58492,7 @@
 	//! author : Jefferson : https://github.com/jalex79
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -58422,7 +58562,7 @@
 
 
 /***/ }),
-/* 404 */
+/* 403 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -58430,7 +58570,7 @@
 	//! author : Caio Ribeiro Pereira : https://github.com/caio-ribeiro-pereira
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -58495,7 +58635,7 @@
 
 
 /***/ }),
-/* 405 */
+/* 404 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -58505,7 +58645,7 @@
 	//! author : Emanuel Cepoi : https://github.com/cepem
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -58586,7 +58726,7 @@
 
 
 /***/ }),
-/* 406 */
+/* 405 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -58596,7 +58736,7 @@
 	//! author : Коренберг Марк : https://github.com/socketpair
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -58808,7 +58948,7 @@
 
 
 /***/ }),
-/* 407 */
+/* 406 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -58816,7 +58956,7 @@
 	//! author : Narain Sagar : https://github.com/narainsagar
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -58905,7 +59045,7 @@
 
 
 /***/ }),
-/* 408 */
+/* 407 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -58913,7 +59053,7 @@
 	//! authors : Bård Rolstad Henriksen : https://github.com/karamell
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -58978,7 +59118,7 @@
 
 
 /***/ }),
-/* 409 */
+/* 408 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -58986,7 +59126,7 @@
 	//! author : Sampath Sitinamaluwa : https://github.com/sampathsris
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -59062,7 +59202,7 @@
 
 
 /***/ }),
-/* 410 */
+/* 409 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -59071,7 +59211,7 @@
 	//! based on work of petrbela : https://github.com/petrbela
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -59222,7 +59362,7 @@
 
 
 /***/ }),
-/* 411 */
+/* 410 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -59230,7 +59370,7 @@
 	//! author : Robert Sedovšek : https://github.com/sedovsek
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -59408,7 +59548,7 @@
 
 
 /***/ }),
-/* 412 */
+/* 411 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -59418,7 +59558,7 @@
 	//! author : Oerd Cukalla : https://github.com/oerd
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -59489,7 +59629,7 @@
 
 
 /***/ }),
-/* 413 */
+/* 412 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -59498,7 +59638,7 @@
 	//! author : Stefan Crnjaković <stefan@hotmail.rs> : https://github.com/crnjakovic
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -59623,7 +59763,7 @@
 
 
 /***/ }),
-/* 414 */
+/* 413 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -59632,7 +59772,7 @@
 	//! author : Stefan Crnjaković <stefan@hotmail.rs> : https://github.com/crnjakovic
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -59755,7 +59895,7 @@
 
 
 /***/ }),
-/* 415 */
+/* 414 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -59763,7 +59903,7 @@
 	//! author : Nicolai Davies<mail@nicolai.io> : https://github.com/nicolaidavies
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -59854,7 +59994,7 @@
 
 
 /***/ }),
-/* 416 */
+/* 415 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -59862,7 +60002,7 @@
 	//! author : Jens Alm : https://github.com/ulmus
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -59938,7 +60078,7 @@
 
 
 /***/ }),
-/* 417 */
+/* 416 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -59946,7 +60086,7 @@
 	//! author : Fahad Kassim : https://github.com/fadsel
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -60008,7 +60148,7 @@
 
 
 /***/ }),
-/* 418 */
+/* 417 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -60016,7 +60156,7 @@
 	//! author : Arjunkumar Krishnamoorthy : https://github.com/tk120404
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -60153,7 +60293,7 @@
 
 
 /***/ }),
-/* 419 */
+/* 418 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -60161,7 +60301,7 @@
 	//! author : Krishna Chaitanya Thota : https://github.com/kcthota
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -60255,7 +60395,7 @@
 
 
 /***/ }),
-/* 420 */
+/* 419 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -60265,7 +60405,7 @@
 	//! author : Sonia Simoes : https://github.com/soniasimoes
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -60339,7 +60479,7 @@
 
 
 /***/ }),
-/* 421 */
+/* 420 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -60347,7 +60487,7 @@
 	//! author : Orif N. Jr. : https://github.com/orif-jr
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -60471,7 +60611,7 @@
 
 
 /***/ }),
-/* 422 */
+/* 421 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -60479,7 +60619,7 @@
 	//! author : Kridsada Thanabulpong : https://github.com/sirn
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -60551,7 +60691,7 @@
 
 
 /***/ }),
-/* 423 */
+/* 422 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -60559,7 +60699,7 @@
 	//! author : Atamyrat Abdyrahmanov : https://github.com/atamyratabdy
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -60658,7 +60798,7 @@
 
 
 /***/ }),
-/* 424 */
+/* 423 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -60666,7 +60806,7 @@
 	//! author : Dan Hagman : https://github.com/hagmandan
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -60731,7 +60871,7 @@
 
 
 /***/ }),
-/* 425 */
+/* 424 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -60739,7 +60879,7 @@
 	//! author : Dominika Kruk : https://github.com/amaranthrose
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -60872,7 +61012,7 @@
 
 
 /***/ }),
-/* 426 */
+/* 425 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -60881,7 +61021,7 @@
 	//!           Burak Yiğit Kaya: https://github.com/BYK
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -60994,7 +61134,7 @@
 
 
 /***/ }),
-/* 427 */
+/* 426 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -61003,7 +61143,7 @@
 	//! author : Iustì Canun
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -61099,7 +61239,7 @@
 
 
 /***/ }),
-/* 428 */
+/* 427 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -61107,7 +61247,7 @@
 	//! author : Abdel Said : https://github.com/abdelsaid
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -61168,7 +61308,7 @@
 
 
 /***/ }),
-/* 429 */
+/* 428 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -61176,7 +61316,7 @@
 	//! author : Abdel Said : https://github.com/abdelsaid
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -61237,7 +61377,7 @@
 
 
 /***/ }),
-/* 430 */
+/* 429 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -61245,7 +61385,7 @@
 	//! author: boyaq : https://github.com/boyaq
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -61363,7 +61503,7 @@
 
 
 /***/ }),
-/* 431 */
+/* 430 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -61372,7 +61512,7 @@
 	//! Author : Menelion Elensúle : https://github.com/Oire
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -61542,7 +61682,7 @@
 
 
 /***/ }),
-/* 432 */
+/* 431 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -61551,7 +61691,7 @@
 	//! author : Zack : https://github.com/ZackVision
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -61640,7 +61780,7 @@
 
 
 /***/ }),
-/* 433 */
+/* 432 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -61648,7 +61788,7 @@
 	//! author : Sardor Muminov : https://github.com/muminoff
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -61707,7 +61847,7 @@
 
 
 /***/ }),
-/* 434 */
+/* 433 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -61715,7 +61855,7 @@
 	//! author : Rasulbek Mirzayev : github.com/Rasulbeeek
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -61776,7 +61916,7 @@
 
 
 /***/ }),
-/* 435 */
+/* 434 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -61785,7 +61925,7 @@
 	//! author : Chien Kira : https://github.com/chienkira
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -61871,7 +62011,7 @@
 
 
 /***/ }),
-/* 436 */
+/* 435 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -61879,7 +62019,7 @@
 	//! author : Andrew Hood : https://github.com/andrewhood125
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -61958,7 +62098,7 @@
 
 
 /***/ }),
-/* 437 */
+/* 436 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -61966,7 +62106,7 @@
 	//! author : Atolagbe Abisoye : https://github.com/andela-batolagbe
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -62027,7 +62167,7 @@
 
 
 /***/ }),
-/* 438 */
+/* 437 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -62037,7 +62177,7 @@
 	//! author : uu109 : https://github.com/uu109
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -62163,7 +62303,7 @@
 
 
 /***/ }),
-/* 439 */
+/* 438 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -62174,7 +62314,7 @@
 	//! author : Anthony : https://github.com/anthonylau
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -62280,7 +62420,7 @@
 
 
 /***/ }),
-/* 440 */
+/* 439 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -62290,7 +62430,7 @@
 	//! author : Tan Yuanhong : https://github.com/le0tan
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -62396,7 +62536,7 @@
 
 
 /***/ }),
-/* 441 */
+/* 440 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	//! moment.js locale configuration
@@ -62405,7 +62545,7 @@
 	//! author : Chris Lam : https://github.com/hehachris
 	
 	;(function (global, factory) {
-	    true ? factory(__webpack_require__(305)) :
+	    true ? factory(__webpack_require__(304)) :
 	   typeof define === 'function' && define.amd ? define(['../moment'], factory) :
 	   factory(global.moment)
 	}(this, (function (moment) { 'use strict';
@@ -62511,7 +62651,7 @@
 
 
 /***/ }),
-/* 442 */
+/* 441 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -62532,11 +62672,11 @@
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _DateConstants = __webpack_require__(304);
+	var _DateConstants = __webpack_require__(303);
 	
 	var _DateConstants2 = _interopRequireDefault(_DateConstants);
 	
-	var _util = __webpack_require__(443);
+	var _util = __webpack_require__(442);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -62819,7 +62959,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 443 */
+/* 442 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -62841,7 +62981,7 @@
 	exports.isAllowedDate = isAllowedDate;
 	exports.formatDate = formatDate;
 	
-	var _moment = __webpack_require__(305);
+	var _moment = __webpack_require__(304);
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
@@ -62949,7 +63089,7 @@
 	}
 
 /***/ }),
-/* 444 */
+/* 443 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -62968,19 +63108,19 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _mapSelf = __webpack_require__(445);
+	var _mapSelf = __webpack_require__(444);
 	
 	var _mapSelf2 = _interopRequireDefault(_mapSelf);
 	
-	var _MonthPanel = __webpack_require__(446);
+	var _MonthPanel = __webpack_require__(445);
 	
 	var _MonthPanel2 = _interopRequireDefault(_MonthPanel);
 	
-	var _YearPanel = __webpack_require__(449);
+	var _YearPanel = __webpack_require__(448);
 	
 	var _YearPanel2 = _interopRequireDefault(_YearPanel);
 	
-	var _DecadePanel = __webpack_require__(450);
+	var _DecadePanel = __webpack_require__(449);
 	
 	var _DecadePanel2 = _interopRequireDefault(_DecadePanel);
 	
@@ -62998,13 +63138,13 @@
 	function goMonth(direction) {
 	  var next = this.props.value.clone();
 	  next.add(direction, 'months');
-	  this.props.onValueChange(next);
+	  this.props.onValueChange(next, false);
 	}
 	
 	function goYear(direction) {
 	  var next = this.props.value.clone();
 	  next.add(direction, 'years');
-	  this.props.onValueChange(next);
+	  this.props.onValueChange(next, false);
 	}
 	
 	function showIf(condition, el) {
@@ -63249,7 +63389,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 445 */
+/* 444 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -63273,7 +63413,7 @@
 	}
 
 /***/ }),
-/* 446 */
+/* 445 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -63290,17 +63430,17 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _reactLifecyclesCompat = __webpack_require__(78);
+	var _reactLifecyclesCompat = __webpack_require__(79);
 	
-	var _MonthTable = __webpack_require__(447);
+	var _MonthTable = __webpack_require__(446);
 	
 	var _MonthTable2 = _interopRequireDefault(_MonthTable);
 	
-	var _DateInput = __webpack_require__(448);
+	var _DateInput = __webpack_require__(447);
 	
 	var _DateInput2 = _interopRequireDefault(_DateInput);
 	
-	var _moment = __webpack_require__(305);
+	var _moment = __webpack_require__(304);
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
@@ -63471,7 +63611,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 447 */
+/* 446 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -63492,7 +63632,7 @@
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _index = __webpack_require__(443);
+	var _index = __webpack_require__(442);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -63657,7 +63797,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 448 */
+/* 447 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -63680,13 +63820,13 @@
 	
 	var _tinperBeeCore = __webpack_require__(26);
 	
-	var _reactLifecyclesCompat = __webpack_require__(78);
+	var _reactLifecyclesCompat = __webpack_require__(79);
 	
-	var _moment = __webpack_require__(305);
+	var _moment = __webpack_require__(304);
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
-	var _util = __webpack_require__(443);
+	var _util = __webpack_require__(442);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -63871,7 +64011,6 @@
 	      });
 	      return;
 	    }
-	
 	    // 如果上次值不合法，此次值合法，把此次值更新到datepicker的value中
 	    if (parsed.isValid() && !value.isValid()) {
 	      _this2.setState({
@@ -63985,11 +64124,13 @@
 	        _this2.setState({
 	          invalid: true
 	        });
+	        return;
 	      }
 	      if (!validatorFunc(str)) {
 	        _this2.setState({
 	          invalid: true
 	        });
+	        return;
 	      }
 	      value.year(parsed.year()).month(parsed.month()).date(parsed.date()).hour(parsed.hour()).minute(parsed.minute()).second(parsed.second());
 	
@@ -64026,7 +64167,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 449 */
+/* 448 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -64047,15 +64188,15 @@
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _DecadePanel = __webpack_require__(450);
+	var _DecadePanel = __webpack_require__(449);
 	
 	var _DecadePanel2 = _interopRequireDefault(_DecadePanel);
 	
-	var _DateInput = __webpack_require__(448);
+	var _DateInput = __webpack_require__(447);
 	
 	var _DateInput2 = _interopRequireDefault(_DateInput);
 	
-	var _moment = __webpack_require__(305);
+	var _moment = __webpack_require__(304);
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
@@ -64346,7 +64487,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 450 */
+/* 449 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -64558,7 +64699,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 451 */
+/* 450 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -64581,7 +64722,7 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _mapSelf = __webpack_require__(445);
+	var _mapSelf = __webpack_require__(444);
 	
 	var _mapSelf2 = _interopRequireDefault(_mapSelf);
 	
@@ -64589,15 +64730,15 @@
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _TodayButton = __webpack_require__(452);
+	var _TodayButton = __webpack_require__(451);
 	
 	var _TodayButton2 = _interopRequireDefault(_TodayButton);
 	
-	var _OkButton = __webpack_require__(453);
+	var _OkButton = __webpack_require__(452);
 	
 	var _OkButton2 = _interopRequireDefault(_OkButton);
 	
-	var _TimePickerButton = __webpack_require__(454);
+	var _TimePickerButton = __webpack_require__(453);
 	
 	var _TimePickerButton2 = _interopRequireDefault(_TimePickerButton);
 	
@@ -64698,7 +64839,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 452 */
+/* 451 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -64712,7 +64853,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _util = __webpack_require__(443);
+	var _util = __webpack_require__(442);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -64744,7 +64885,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 453 */
+/* 452 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -64758,7 +64899,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _beeButton = __webpack_require__(273);
+	var _beeButton = __webpack_require__(274);
 	
 	var _beeButton2 = _interopRequireDefault(_beeButton);
 	
@@ -64788,7 +64929,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 454 */
+/* 453 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -64838,7 +64979,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 455 */
+/* 454 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -64861,11 +65002,11 @@
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _moment = __webpack_require__(305);
+	var _moment = __webpack_require__(304);
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
-	var _index = __webpack_require__(443);
+	var _index = __webpack_require__(442);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -64952,6 +65093,8 @@
 	        }
 	        // }
 	      }, _this.setValue = function (value) {
+	        var shouldChange = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+	
 	        var originalValue = _this.state.value;
 	        if (!('value' in _this.props)) {
 	          _this.setState({
@@ -64960,7 +65103,7 @@
 	          });
 	        }
 	        if (originalValue && value && !originalValue.isSame(value) || !originalValue && value || originalValue && !value) {
-	          _this.props.onChange(value);
+	          _this.props.onChange(value, shouldChange);
 	        }
 	      }, _this.isAllowedDate = function (value) {
 	        var disabledDate = _this.props.disabledDate;
@@ -64995,7 +65138,7 @@
 	};
 
 /***/ }),
-/* 456 */
+/* 455 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -65009,7 +65152,7 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _en_US = __webpack_require__(457);
+	var _en_US = __webpack_require__(456);
 	
 	var _en_US2 = _interopRequireDefault(_en_US);
 	
@@ -65104,7 +65247,7 @@
 	};
 
 /***/ }),
-/* 457 */
+/* 456 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -65141,7 +65284,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 458 */
+/* 457 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -65176,7 +65319,7 @@
 	}
 
 /***/ }),
-/* 459 */
+/* 458 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -65197,21 +65340,21 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _reactLifecyclesCompat = __webpack_require__(78);
+	var _reactLifecyclesCompat = __webpack_require__(79);
 	
-	var _createChainedFunction = __webpack_require__(460);
+	var _createChainedFunction = __webpack_require__(459);
 	
 	var _createChainedFunction2 = _interopRequireDefault(_createChainedFunction);
 	
-	var _KeyCode = __webpack_require__(301);
+	var _KeyCode = __webpack_require__(300);
 	
 	var _KeyCode2 = _interopRequireDefault(_KeyCode);
 	
-	var _placements = __webpack_require__(461);
+	var _placements = __webpack_require__(460);
 	
 	var _placements2 = _interopRequireDefault(_placements);
 	
-	var _rcTrigger = __webpack_require__(462);
+	var _rcTrigger = __webpack_require__(461);
 	
 	var _rcTrigger2 = _interopRequireDefault(_rcTrigger);
 	
@@ -65359,7 +65502,7 @@
 	      event.stopPropagation();
 	      event.target._dataTransfer = {
 	        owner: _reactDom2['default'].findDOMNode(_this2.outInput),
-	        _target: e.target
+	        _target: event.target
 	      };
 	      _this2.close(_this2.focus);
 	    }
@@ -65497,7 +65640,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 460 */
+/* 459 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -65532,7 +65675,7 @@
 	}
 
 /***/ }),
-/* 461 */
+/* 460 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -65578,26 +65721,26 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 462 */
+/* 461 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _extends2 = __webpack_require__(463);
+	var _extends2 = __webpack_require__(462);
 	
 	var _extends3 = _interopRequireDefault(_extends2);
 	
-	var _classCallCheck2 = __webpack_require__(465);
+	var _classCallCheck2 = __webpack_require__(464);
 	
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 	
-	var _possibleConstructorReturn2 = __webpack_require__(466);
+	var _possibleConstructorReturn2 = __webpack_require__(465);
 	
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 	
-	var _inherits2 = __webpack_require__(496);
+	var _inherits2 = __webpack_require__(495);
 	
 	var _inherits3 = _interopRequireDefault(_inherits2);
 	
@@ -65611,21 +65754,21 @@
 	
 	var _reactDom = __webpack_require__(2);
 	
-	var _reactLifecyclesCompat = __webpack_require__(78);
+	var _reactLifecyclesCompat = __webpack_require__(79);
 	
-	var _contains = __webpack_require__(499);
+	var _contains = __webpack_require__(498);
 	
 	var _contains2 = _interopRequireDefault(_contains);
 	
-	var _addEventListener = __webpack_require__(500);
+	var _addEventListener = __webpack_require__(499);
 	
 	var _addEventListener2 = _interopRequireDefault(_addEventListener);
 	
-	var _ContainerRender = __webpack_require__(501);
+	var _ContainerRender = __webpack_require__(500);
 	
 	var _ContainerRender2 = _interopRequireDefault(_ContainerRender);
 	
-	var _Portal = __webpack_require__(502);
+	var _Portal = __webpack_require__(501);
 	
 	var _Portal2 = _interopRequireDefault(_Portal);
 	
@@ -65633,9 +65776,9 @@
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _utils = __webpack_require__(503);
+	var _utils = __webpack_require__(502);
 	
-	var _Popup = __webpack_require__(504);
+	var _Popup = __webpack_require__(503);
 	
 	var _Popup2 = _interopRequireDefault(_Popup);
 	
@@ -66357,14 +66500,14 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 463 */
+/* 462 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
 	
 	exports.__esModule = true;
 	
-	var _assign = __webpack_require__(464);
+	var _assign = __webpack_require__(463);
 	
 	var _assign2 = _interopRequireDefault(_assign);
 	
@@ -66385,13 +66528,13 @@
 	};
 
 /***/ }),
-/* 464 */
+/* 463 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	module.exports = { "default": __webpack_require__(145), __esModule: true };
+	module.exports = { "default": __webpack_require__(146), __esModule: true };
 
 /***/ }),
-/* 465 */
+/* 464 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -66405,14 +66548,14 @@
 	};
 
 /***/ }),
-/* 466 */
+/* 465 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
 	
 	exports.__esModule = true;
 	
-	var _typeof2 = __webpack_require__(467);
+	var _typeof2 = __webpack_require__(466);
 	
 	var _typeof3 = _interopRequireDefault(_typeof2);
 	
@@ -66427,18 +66570,18 @@
 	};
 
 /***/ }),
-/* 467 */
+/* 466 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
 	
 	exports.__esModule = true;
 	
-	var _iterator = __webpack_require__(468);
+	var _iterator = __webpack_require__(467);
 	
 	var _iterator2 = _interopRequireDefault(_iterator);
 	
-	var _symbol = __webpack_require__(484);
+	var _symbol = __webpack_require__(483);
 	
 	var _symbol2 = _interopRequireDefault(_symbol);
 	
@@ -66453,29 +66596,29 @@
 	};
 
 /***/ }),
+/* 467 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	module.exports = { "default": __webpack_require__(468), __esModule: true };
+
+/***/ }),
 /* 468 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	module.exports = { "default": __webpack_require__(469), __esModule: true };
+	__webpack_require__(469);
+	__webpack_require__(478);
+	module.exports = __webpack_require__(482).f('iterator');
+
 
 /***/ }),
 /* 469 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	__webpack_require__(470);
-	__webpack_require__(479);
-	module.exports = __webpack_require__(483).f('iterator');
-
-
-/***/ }),
-/* 470 */
-/***/ (function(module, exports, __webpack_require__) {
-
 	'use strict';
-	var $at = __webpack_require__(471)(true);
+	var $at = __webpack_require__(470)(true);
 	
 	// 21.1.3.27 String.prototype[@@iterator]()
-	__webpack_require__(472)(String, 'String', function (iterated) {
+	__webpack_require__(471)(String, 'String', function (iterated) {
 	  this._t = String(iterated); // target
 	  this._i = 0;                // next index
 	// 21.1.5.2.1 %StringIteratorPrototype%.next()
@@ -66491,11 +66634,11 @@
 
 
 /***/ }),
-/* 471 */
+/* 470 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var toInteger = __webpack_require__(172);
-	var defined = __webpack_require__(169);
+	var toInteger = __webpack_require__(173);
+	var defined = __webpack_require__(170);
 	// true  -> String#at
 	// false -> String#codePointAt
 	module.exports = function (TO_STRING) {
@@ -66514,19 +66657,19 @@
 
 
 /***/ }),
-/* 472 */
+/* 471 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
-	var LIBRARY = __webpack_require__(176);
-	var $export = __webpack_require__(147);
-	var redefine = __webpack_require__(473);
-	var hide = __webpack_require__(152);
-	var Iterators = __webpack_require__(474);
-	var $iterCreate = __webpack_require__(475);
-	var setToStringTag = __webpack_require__(476);
-	var getPrototypeOf = __webpack_require__(478);
-	var ITERATOR = __webpack_require__(477)('iterator');
+	var LIBRARY = __webpack_require__(177);
+	var $export = __webpack_require__(148);
+	var redefine = __webpack_require__(472);
+	var hide = __webpack_require__(153);
+	var Iterators = __webpack_require__(473);
+	var $iterCreate = __webpack_require__(474);
+	var setToStringTag = __webpack_require__(475);
+	var getPrototypeOf = __webpack_require__(477);
+	var ITERATOR = __webpack_require__(476)('iterator');
 	var BUGGY = !([].keys && 'next' in [].keys()); // Safari has buggy iterators w/o `next`
 	var FF_ITERATOR = '@@iterator';
 	var KEYS = 'keys';
@@ -66589,31 +66732,31 @@
 
 
 /***/ }),
-/* 473 */
+/* 472 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(152);
+	module.exports = __webpack_require__(153);
 
 
 /***/ }),
-/* 474 */
+/* 473 */
 /***/ (function(module, exports) {
 
 	module.exports = {};
 
 
 /***/ }),
-/* 475 */
+/* 474 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	var create = __webpack_require__(198);
-	var descriptor = __webpack_require__(161);
-	var setToStringTag = __webpack_require__(476);
+	var descriptor = __webpack_require__(162);
+	var setToStringTag = __webpack_require__(475);
 	var IteratorPrototype = {};
 	
 	// 25.1.2.1.1 %IteratorPrototype%[@@iterator]()
-	__webpack_require__(152)(IteratorPrototype, __webpack_require__(477)('iterator'), function () { return this; });
+	__webpack_require__(153)(IteratorPrototype, __webpack_require__(476)('iterator'), function () { return this; });
 	
 	module.exports = function (Constructor, NAME, next) {
 	  Constructor.prototype = create(IteratorPrototype, { next: descriptor(1, next) });
@@ -66622,12 +66765,12 @@
 
 
 /***/ }),
-/* 476 */
+/* 475 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var def = __webpack_require__(153).f;
-	var has = __webpack_require__(162);
-	var TAG = __webpack_require__(477)('toStringTag');
+	var def = __webpack_require__(154).f;
+	var has = __webpack_require__(163);
+	var TAG = __webpack_require__(476)('toStringTag');
 	
 	module.exports = function (it, tag, stat) {
 	  if (it && !has(it = stat ? it : it.prototype, TAG)) def(it, TAG, { configurable: true, value: tag });
@@ -66635,12 +66778,12 @@
 
 
 /***/ }),
-/* 477 */
+/* 476 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var store = __webpack_require__(175)('wks');
-	var uid = __webpack_require__(177);
-	var Symbol = __webpack_require__(148).Symbol;
+	var store = __webpack_require__(176)('wks');
+	var uid = __webpack_require__(178);
+	var Symbol = __webpack_require__(149).Symbol;
 	var USE_SYMBOL = typeof Symbol == 'function';
 	
 	var $exports = module.exports = function (name) {
@@ -66652,13 +66795,13 @@
 
 
 /***/ }),
-/* 478 */
+/* 477 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	// 19.1.2.9 / 15.2.3.2 Object.getPrototypeOf(O)
-	var has = __webpack_require__(162);
-	var toObject = __webpack_require__(181);
-	var IE_PROTO = __webpack_require__(174)('IE_PROTO');
+	var has = __webpack_require__(163);
+	var toObject = __webpack_require__(182);
+	var IE_PROTO = __webpack_require__(175)('IE_PROTO');
 	var ObjectProto = Object.prototype;
 	
 	module.exports = Object.getPrototypeOf || function (O) {
@@ -66671,14 +66814,14 @@
 
 
 /***/ }),
-/* 479 */
+/* 478 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	__webpack_require__(480);
-	var global = __webpack_require__(148);
-	var hide = __webpack_require__(152);
-	var Iterators = __webpack_require__(474);
-	var TO_STRING_TAG = __webpack_require__(477)('toStringTag');
+	__webpack_require__(479);
+	var global = __webpack_require__(149);
+	var hide = __webpack_require__(153);
+	var Iterators = __webpack_require__(473);
+	var TO_STRING_TAG = __webpack_require__(476)('toStringTag');
 	
 	var DOMIterables = ('CSSRuleList,CSSStyleDeclaration,CSSValueList,ClientRectList,DOMRectList,DOMStringList,' +
 	  'DOMTokenList,DataTransferItemList,FileList,HTMLAllCollection,HTMLCollection,HTMLFormElement,HTMLSelectElement,' +
@@ -66696,20 +66839,20 @@
 
 
 /***/ }),
-/* 480 */
+/* 479 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
-	var addToUnscopables = __webpack_require__(481);
-	var step = __webpack_require__(482);
-	var Iterators = __webpack_require__(474);
-	var toIObject = __webpack_require__(166);
+	var addToUnscopables = __webpack_require__(480);
+	var step = __webpack_require__(481);
+	var Iterators = __webpack_require__(473);
+	var toIObject = __webpack_require__(167);
 	
 	// 22.1.3.4 Array.prototype.entries()
 	// 22.1.3.13 Array.prototype.keys()
 	// 22.1.3.29 Array.prototype.values()
 	// 22.1.3.30 Array.prototype[@@iterator]()
-	module.exports = __webpack_require__(472)(Array, 'Array', function (iterated, kind) {
+	module.exports = __webpack_require__(471)(Array, 'Array', function (iterated, kind) {
 	  this._t = toIObject(iterated); // target
 	  this._i = 0;                   // next index
 	  this._k = kind;                // kind
@@ -66736,14 +66879,14 @@
 
 
 /***/ }),
-/* 481 */
+/* 480 */
 /***/ (function(module, exports) {
 
 	module.exports = function () { /* empty */ };
 
 
 /***/ }),
-/* 482 */
+/* 481 */
 /***/ (function(module, exports) {
 
 	module.exports = function (done, value) {
@@ -66752,62 +66895,62 @@
 
 
 /***/ }),
+/* 482 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	exports.f = __webpack_require__(476);
+
+
+/***/ }),
 /* 483 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	exports.f = __webpack_require__(477);
-
+	module.exports = { "default": __webpack_require__(484), __esModule: true };
 
 /***/ }),
 /* 484 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	module.exports = { "default": __webpack_require__(485), __esModule: true };
+	__webpack_require__(485);
+	__webpack_require__(492);
+	__webpack_require__(493);
+	__webpack_require__(494);
+	module.exports = __webpack_require__(150).Symbol;
+
 
 /***/ }),
 /* 485 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	__webpack_require__(486);
-	__webpack_require__(493);
-	__webpack_require__(494);
-	__webpack_require__(495);
-	module.exports = __webpack_require__(149).Symbol;
-
-
-/***/ }),
-/* 486 */
-/***/ (function(module, exports, __webpack_require__) {
-
 	'use strict';
 	// ECMAScript 6 symbols shim
-	var global = __webpack_require__(148);
-	var has = __webpack_require__(162);
-	var DESCRIPTORS = __webpack_require__(157);
-	var $export = __webpack_require__(147);
-	var redefine = __webpack_require__(473);
-	var META = __webpack_require__(487).KEY;
-	var $fails = __webpack_require__(158);
-	var shared = __webpack_require__(175);
-	var setToStringTag = __webpack_require__(476);
-	var uid = __webpack_require__(177);
-	var wks = __webpack_require__(477);
-	var wksExt = __webpack_require__(483);
-	var wksDefine = __webpack_require__(488);
-	var enumKeys = __webpack_require__(489);
-	var isArray = __webpack_require__(490);
-	var anObject = __webpack_require__(154);
-	var isObject = __webpack_require__(155);
-	var toObject = __webpack_require__(181);
-	var toIObject = __webpack_require__(166);
-	var toPrimitive = __webpack_require__(160);
-	var createDesc = __webpack_require__(161);
+	var global = __webpack_require__(149);
+	var has = __webpack_require__(163);
+	var DESCRIPTORS = __webpack_require__(158);
+	var $export = __webpack_require__(148);
+	var redefine = __webpack_require__(472);
+	var META = __webpack_require__(486).KEY;
+	var $fails = __webpack_require__(159);
+	var shared = __webpack_require__(176);
+	var setToStringTag = __webpack_require__(475);
+	var uid = __webpack_require__(178);
+	var wks = __webpack_require__(476);
+	var wksExt = __webpack_require__(482);
+	var wksDefine = __webpack_require__(487);
+	var enumKeys = __webpack_require__(488);
+	var isArray = __webpack_require__(489);
+	var anObject = __webpack_require__(155);
+	var isObject = __webpack_require__(156);
+	var toObject = __webpack_require__(182);
+	var toIObject = __webpack_require__(167);
+	var toPrimitive = __webpack_require__(161);
+	var createDesc = __webpack_require__(162);
 	var _create = __webpack_require__(198);
-	var gOPNExt = __webpack_require__(491);
+	var gOPNExt = __webpack_require__(490);
 	var $GOPD = __webpack_require__(206);
-	var $GOPS = __webpack_require__(179);
-	var $DP = __webpack_require__(153);
-	var $keys = __webpack_require__(164);
+	var $GOPS = __webpack_require__(180);
+	var $DP = __webpack_require__(154);
+	var $keys = __webpack_require__(165);
 	var gOPD = $GOPD.f;
 	var dP = $DP.f;
 	var gOPN = gOPNExt.f;
@@ -66930,11 +67073,11 @@
 	
 	  $GOPD.f = $getOwnPropertyDescriptor;
 	  $DP.f = $defineProperty;
-	  __webpack_require__(492).f = gOPNExt.f = $getOwnPropertyNames;
-	  __webpack_require__(180).f = $propertyIsEnumerable;
+	  __webpack_require__(491).f = gOPNExt.f = $getOwnPropertyNames;
+	  __webpack_require__(181).f = $propertyIsEnumerable;
 	  $GOPS.f = $getOwnPropertySymbols;
 	
-	  if (DESCRIPTORS && !__webpack_require__(176)) {
+	  if (DESCRIPTORS && !__webpack_require__(177)) {
 	    redefine(ObjectProto, 'propertyIsEnumerable', $propertyIsEnumerable, true);
 	  }
 	
@@ -67018,7 +67161,7 @@
 	});
 	
 	// 19.4.3.4 Symbol.prototype[@@toPrimitive](hint)
-	$Symbol[PROTOTYPE][TO_PRIMITIVE] || __webpack_require__(152)($Symbol[PROTOTYPE], TO_PRIMITIVE, $Symbol[PROTOTYPE].valueOf);
+	$Symbol[PROTOTYPE][TO_PRIMITIVE] || __webpack_require__(153)($Symbol[PROTOTYPE], TO_PRIMITIVE, $Symbol[PROTOTYPE].valueOf);
 	// 19.4.3.5 Symbol.prototype[@@toStringTag]
 	setToStringTag($Symbol, 'Symbol');
 	// 20.2.1.9 Math[@@toStringTag]
@@ -67028,18 +67171,18 @@
 
 
 /***/ }),
-/* 487 */
+/* 486 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var META = __webpack_require__(177)('meta');
-	var isObject = __webpack_require__(155);
-	var has = __webpack_require__(162);
-	var setDesc = __webpack_require__(153).f;
+	var META = __webpack_require__(178)('meta');
+	var isObject = __webpack_require__(156);
+	var has = __webpack_require__(163);
+	var setDesc = __webpack_require__(154).f;
 	var id = 0;
 	var isExtensible = Object.isExtensible || function () {
 	  return true;
 	};
-	var FREEZE = !__webpack_require__(158)(function () {
+	var FREEZE = !__webpack_require__(159)(function () {
 	  return isExtensible(Object.preventExtensions({}));
 	});
 	var setMeta = function (it) {
@@ -67087,14 +67230,14 @@
 
 
 /***/ }),
-/* 488 */
+/* 487 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var global = __webpack_require__(148);
-	var core = __webpack_require__(149);
-	var LIBRARY = __webpack_require__(176);
-	var wksExt = __webpack_require__(483);
-	var defineProperty = __webpack_require__(153).f;
+	var global = __webpack_require__(149);
+	var core = __webpack_require__(150);
+	var LIBRARY = __webpack_require__(177);
+	var wksExt = __webpack_require__(482);
+	var defineProperty = __webpack_require__(154).f;
 	module.exports = function (name) {
 	  var $Symbol = core.Symbol || (core.Symbol = LIBRARY ? {} : global.Symbol || {});
 	  if (name.charAt(0) != '_' && !(name in $Symbol)) defineProperty($Symbol, name, { value: wksExt.f(name) });
@@ -67102,13 +67245,13 @@
 
 
 /***/ }),
-/* 489 */
+/* 488 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	// all enumerable object keys, includes symbols
-	var getKeys = __webpack_require__(164);
-	var gOPS = __webpack_require__(179);
-	var pIE = __webpack_require__(180);
+	var getKeys = __webpack_require__(165);
+	var gOPS = __webpack_require__(180);
+	var pIE = __webpack_require__(181);
 	module.exports = function (it) {
 	  var result = getKeys(it);
 	  var getSymbols = gOPS.f;
@@ -67123,23 +67266,23 @@
 
 
 /***/ }),
-/* 490 */
+/* 489 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	// 7.2.2 IsArray(argument)
-	var cof = __webpack_require__(168);
+	var cof = __webpack_require__(169);
 	module.exports = Array.isArray || function isArray(arg) {
 	  return cof(arg) == 'Array';
 	};
 
 
 /***/ }),
-/* 491 */
+/* 490 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	// fallback for IE11 buggy Object.getOwnPropertyNames with iframe and window
-	var toIObject = __webpack_require__(166);
-	var gOPN = __webpack_require__(492).f;
+	var toIObject = __webpack_require__(167);
+	var gOPN = __webpack_require__(491).f;
 	var toString = {}.toString;
 	
 	var windowNames = typeof window == 'object' && window && Object.getOwnPropertyNames
@@ -67159,12 +67302,12 @@
 
 
 /***/ }),
-/* 492 */
+/* 491 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	// 19.1.2.7 / 15.2.3.4 Object.getOwnPropertyNames(O)
-	var $keys = __webpack_require__(165);
-	var hiddenKeys = __webpack_require__(178).concat('length', 'prototype');
+	var $keys = __webpack_require__(166);
+	var hiddenKeys = __webpack_require__(179).concat('length', 'prototype');
 	
 	exports.f = Object.getOwnPropertyNames || function getOwnPropertyNames(O) {
 	  return $keys(O, hiddenKeys);
@@ -67172,42 +67315,42 @@
 
 
 /***/ }),
-/* 493 */
+/* 492 */
 /***/ (function(module, exports) {
 
+
+
+/***/ }),
+/* 493 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	__webpack_require__(487)('asyncIterator');
 
 
 /***/ }),
 /* 494 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	__webpack_require__(488)('asyncIterator');
+	__webpack_require__(487)('observable');
 
 
 /***/ }),
 /* 495 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	__webpack_require__(488)('observable');
-
-
-/***/ }),
-/* 496 */
-/***/ (function(module, exports, __webpack_require__) {
-
 	"use strict";
 	
 	exports.__esModule = true;
 	
-	var _setPrototypeOf = __webpack_require__(497);
+	var _setPrototypeOf = __webpack_require__(496);
 	
 	var _setPrototypeOf2 = _interopRequireDefault(_setPrototypeOf);
 	
-	var _create = __webpack_require__(498);
+	var _create = __webpack_require__(497);
 	
 	var _create2 = _interopRequireDefault(_create);
 	
-	var _typeof2 = __webpack_require__(467);
+	var _typeof2 = __webpack_require__(466);
 	
 	var _typeof3 = _interopRequireDefault(_typeof2);
 	
@@ -67230,19 +67373,19 @@
 	};
 
 /***/ }),
-/* 497 */
+/* 496 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	module.exports = { "default": __webpack_require__(203), __esModule: true };
 
 /***/ }),
-/* 498 */
+/* 497 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	module.exports = { "default": __webpack_require__(196), __esModule: true };
 
 /***/ }),
-/* 499 */
+/* 498 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -67267,7 +67410,7 @@
 	}
 
 /***/ }),
-/* 500 */
+/* 499 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -67277,7 +67420,7 @@
 	});
 	exports.default = addEventListenerWrap;
 	
-	var _addDomEventListener = _interopRequireDefault(__webpack_require__(40));
+	var _addDomEventListener = _interopRequireDefault(__webpack_require__(41));
 	
 	var _reactDom = _interopRequireDefault(__webpack_require__(2));
 	
@@ -67292,7 +67435,7 @@
 	}
 
 /***/ }),
-/* 501 */
+/* 500 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -67434,7 +67577,7 @@
 	};
 
 /***/ }),
-/* 502 */
+/* 501 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -67539,14 +67682,14 @@
 	};
 
 /***/ }),
-/* 503 */
+/* 502 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _extends2 = __webpack_require__(463);
+	var _extends2 = __webpack_require__(462);
 	
 	var _extends3 = _interopRequireDefault(_extends2);
 	
@@ -67585,26 +67728,26 @@
 	}
 
 /***/ }),
-/* 504 */
+/* 503 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _extends2 = __webpack_require__(463);
+	var _extends2 = __webpack_require__(462);
 	
 	var _extends3 = _interopRequireDefault(_extends2);
 	
-	var _classCallCheck2 = __webpack_require__(465);
+	var _classCallCheck2 = __webpack_require__(464);
 	
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 	
-	var _possibleConstructorReturn2 = __webpack_require__(466);
+	var _possibleConstructorReturn2 = __webpack_require__(465);
 	
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 	
-	var _inherits2 = __webpack_require__(496);
+	var _inherits2 = __webpack_require__(495);
 	
 	var _inherits3 = _interopRequireDefault(_inherits2);
 	
@@ -67620,23 +67763,23 @@
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _rcAlign = __webpack_require__(505);
+	var _rcAlign = __webpack_require__(504);
 	
 	var _rcAlign2 = _interopRequireDefault(_rcAlign);
 	
-	var _rcAnimate = __webpack_require__(512);
+	var _rcAnimate = __webpack_require__(511);
 	
 	var _rcAnimate2 = _interopRequireDefault(_rcAnimate);
 	
-	var _PopupInner = __webpack_require__(520);
+	var _PopupInner = __webpack_require__(519);
 	
 	var _PopupInner2 = _interopRequireDefault(_PopupInner);
 	
-	var _LazyRenderBox = __webpack_require__(521);
+	var _LazyRenderBox = __webpack_require__(520);
 	
 	var _LazyRenderBox2 = _interopRequireDefault(_LazyRenderBox);
 	
-	var _utils = __webpack_require__(503);
+	var _utils = __webpack_require__(502);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -67972,7 +68115,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 505 */
+/* 504 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -67981,7 +68124,7 @@
 	  value: true
 	});
 	
-	var _Align = __webpack_require__(506);
+	var _Align = __webpack_require__(505);
 	
 	var _Align2 = _interopRequireDefault(_Align);
 	
@@ -67992,7 +68135,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 506 */
+/* 505 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -68001,19 +68144,19 @@
 	  value: true
 	});
 	
-	var _classCallCheck2 = __webpack_require__(465);
+	var _classCallCheck2 = __webpack_require__(464);
 	
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 	
-	var _createClass2 = __webpack_require__(507);
+	var _createClass2 = __webpack_require__(506);
 	
 	var _createClass3 = _interopRequireDefault(_createClass2);
 	
-	var _possibleConstructorReturn2 = __webpack_require__(466);
+	var _possibleConstructorReturn2 = __webpack_require__(465);
 	
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 	
-	var _inherits2 = __webpack_require__(496);
+	var _inherits2 = __webpack_require__(495);
 	
 	var _inherits3 = _interopRequireDefault(_inherits2);
 	
@@ -68029,13 +68172,13 @@
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _domAlign = __webpack_require__(50);
+	var _domAlign = __webpack_require__(51);
 	
-	var _addEventListener = __webpack_require__(500);
+	var _addEventListener = __webpack_require__(499);
 	
 	var _addEventListener2 = _interopRequireDefault(_addEventListener);
 	
-	var _util = __webpack_require__(511);
+	var _util = __webpack_require__(510);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -68228,14 +68371,14 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 507 */
+/* 506 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
 	
 	exports.__esModule = true;
 	
-	var _defineProperty = __webpack_require__(508);
+	var _defineProperty = __webpack_require__(507);
 	
 	var _defineProperty2 = _interopRequireDefault(_defineProperty);
 	
@@ -68260,33 +68403,33 @@
 	}();
 
 /***/ }),
+/* 507 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	module.exports = { "default": __webpack_require__(508), __esModule: true };
+
+/***/ }),
 /* 508 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	module.exports = { "default": __webpack_require__(509), __esModule: true };
-
-/***/ }),
-/* 509 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	__webpack_require__(510);
-	var $Object = __webpack_require__(149).Object;
+	__webpack_require__(509);
+	var $Object = __webpack_require__(150).Object;
 	module.exports = function defineProperty(it, key, desc) {
 	  return $Object.defineProperty(it, key, desc);
 	};
 
 
 /***/ }),
-/* 510 */
+/* 509 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var $export = __webpack_require__(147);
+	var $export = __webpack_require__(148);
 	// 19.1.2.4 / 15.2.3.6 Object.defineProperty(O, P, Attributes)
-	$export($export.S + $export.F * !__webpack_require__(157), 'Object', { defineProperty: __webpack_require__(153).f });
+	$export($export.S + $export.F * !__webpack_require__(158), 'Object', { defineProperty: __webpack_require__(154).f });
 
 
 /***/ }),
-/* 511 */
+/* 510 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -68300,7 +68443,7 @@
 	exports.isSimilarValue = isSimilarValue;
 	exports.restoreFocus = restoreFocus;
 	
-	var _contains = __webpack_require__(499);
+	var _contains = __webpack_require__(498);
 	
 	var _contains2 = _interopRequireDefault(_contains);
 	
@@ -68359,7 +68502,7 @@
 	}
 
 /***/ }),
-/* 512 */
+/* 511 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -68368,27 +68511,27 @@
 	  value: true
 	});
 	
-	var _extends2 = __webpack_require__(463);
+	var _extends2 = __webpack_require__(462);
 	
 	var _extends3 = _interopRequireDefault(_extends2);
 	
-	var _defineProperty2 = __webpack_require__(513);
+	var _defineProperty2 = __webpack_require__(512);
 	
 	var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 	
-	var _classCallCheck2 = __webpack_require__(465);
+	var _classCallCheck2 = __webpack_require__(464);
 	
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 	
-	var _createClass2 = __webpack_require__(507);
+	var _createClass2 = __webpack_require__(506);
 	
 	var _createClass3 = _interopRequireDefault(_createClass2);
 	
-	var _possibleConstructorReturn2 = __webpack_require__(466);
+	var _possibleConstructorReturn2 = __webpack_require__(465);
 	
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 	
-	var _inherits2 = __webpack_require__(496);
+	var _inherits2 = __webpack_require__(495);
 	
 	var _inherits3 = _interopRequireDefault(_inherits2);
 	
@@ -68400,17 +68543,17 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _unsafeLifecyclesPolyfill = __webpack_require__(514);
+	var _unsafeLifecyclesPolyfill = __webpack_require__(513);
 	
 	var _unsafeLifecyclesPolyfill2 = _interopRequireDefault(_unsafeLifecyclesPolyfill);
 	
-	var _ChildrenUtils = __webpack_require__(515);
+	var _ChildrenUtils = __webpack_require__(514);
 	
-	var _AnimateChild = __webpack_require__(516);
+	var _AnimateChild = __webpack_require__(515);
 	
 	var _AnimateChild2 = _interopRequireDefault(_AnimateChild);
 	
-	var _animate = __webpack_require__(519);
+	var _animate = __webpack_require__(518);
 	
 	var _animate2 = _interopRequireDefault(_animate);
 	
@@ -68759,14 +68902,14 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 513 */
+/* 512 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
 	
 	exports.__esModule = true;
 	
-	var _defineProperty = __webpack_require__(508);
+	var _defineProperty = __webpack_require__(507);
 	
 	var _defineProperty2 = _interopRequireDefault(_defineProperty);
 	
@@ -68788,7 +68931,7 @@
 	};
 
 /***/ }),
-/* 514 */
+/* 513 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -68830,7 +68973,7 @@
 	exports.default = _default;
 
 /***/ }),
-/* 515 */
+/* 514 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -68952,7 +69095,7 @@
 	}
 
 /***/ }),
-/* 516 */
+/* 515 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -68961,19 +69104,19 @@
 	  value: true
 	});
 	
-	var _classCallCheck2 = __webpack_require__(465);
+	var _classCallCheck2 = __webpack_require__(464);
 	
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 	
-	var _createClass2 = __webpack_require__(507);
+	var _createClass2 = __webpack_require__(506);
 	
 	var _createClass3 = _interopRequireDefault(_createClass2);
 	
-	var _possibleConstructorReturn2 = __webpack_require__(466);
+	var _possibleConstructorReturn2 = __webpack_require__(465);
 	
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 	
-	var _inherits2 = __webpack_require__(496);
+	var _inherits2 = __webpack_require__(495);
 	
 	var _inherits3 = _interopRequireDefault(_inherits2);
 	
@@ -68989,11 +69132,11 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _cssAnimation = __webpack_require__(517);
+	var _cssAnimation = __webpack_require__(516);
 	
 	var _cssAnimation2 = _interopRequireDefault(_cssAnimation);
 	
-	var _animate = __webpack_require__(519);
+	var _animate = __webpack_require__(518);
 	
 	var _animate2 = _interopRequireDefault(_animate);
 	
@@ -69103,7 +69246,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 517 */
+/* 516 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -69113,15 +69256,15 @@
 	});
 	exports.isCssAnimationSupported = undefined;
 	
-	var _typeof2 = __webpack_require__(467);
+	var _typeof2 = __webpack_require__(466);
 	
 	var _typeof3 = _interopRequireDefault(_typeof2);
 	
-	var _Event = __webpack_require__(518);
+	var _Event = __webpack_require__(517);
 	
 	var _Event2 = _interopRequireDefault(_Event);
 	
-	var _componentClasses = __webpack_require__(46);
+	var _componentClasses = __webpack_require__(47);
 	
 	var _componentClasses2 = _interopRequireDefault(_componentClasses);
 	
@@ -69299,7 +69442,7 @@
 	exports['default'] = cssAnimation;
 
 /***/ }),
-/* 518 */
+/* 517 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -69439,7 +69582,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 519 */
+/* 518 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -69471,22 +69614,22 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 520 */
+/* 519 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _classCallCheck2 = __webpack_require__(465);
+	var _classCallCheck2 = __webpack_require__(464);
 	
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 	
-	var _possibleConstructorReturn2 = __webpack_require__(466);
+	var _possibleConstructorReturn2 = __webpack_require__(465);
 	
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 	
-	var _inherits2 = __webpack_require__(496);
+	var _inherits2 = __webpack_require__(495);
 	
 	var _inherits3 = _interopRequireDefault(_inherits2);
 	
@@ -69498,7 +69641,7 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _LazyRenderBox = __webpack_require__(521);
+	var _LazyRenderBox = __webpack_require__(520);
 	
 	var _LazyRenderBox2 = _interopRequireDefault(_LazyRenderBox);
 	
@@ -69553,26 +69696,26 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 521 */
+/* 520 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _objectWithoutProperties2 = __webpack_require__(522);
+	var _objectWithoutProperties2 = __webpack_require__(521);
 	
 	var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
 	
-	var _classCallCheck2 = __webpack_require__(465);
+	var _classCallCheck2 = __webpack_require__(464);
 	
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 	
-	var _possibleConstructorReturn2 = __webpack_require__(466);
+	var _possibleConstructorReturn2 = __webpack_require__(465);
 	
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 	
-	var _inherits2 = __webpack_require__(496);
+	var _inherits2 = __webpack_require__(495);
 	
 	var _inherits3 = _interopRequireDefault(_inherits2);
 	
@@ -69628,7 +69771,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 522 */
+/* 521 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -69648,7 +69791,7 @@
 	};
 
 /***/ }),
-/* 523 */
+/* 522 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -69662,15 +69805,15 @@
 	
 	var _propTypes = _interopRequireDefault(__webpack_require__(6));
 	
-	var _moment = _interopRequireDefault(__webpack_require__(305));
+	var _moment = _interopRequireDefault(__webpack_require__(304));
 	
 	var _classnames = _interopRequireDefault(__webpack_require__(5));
 	
-	var _reactLifecyclesCompat = __webpack_require__(78);
+	var _reactLifecyclesCompat = __webpack_require__(79);
 	
-	var _Header = _interopRequireDefault(__webpack_require__(524));
+	var _Header = _interopRequireDefault(__webpack_require__(523));
 	
-	var _Combobox = _interopRequireDefault(__webpack_require__(525));
+	var _Combobox = _interopRequireDefault(__webpack_require__(524));
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
@@ -69954,7 +70097,7 @@
 	exports["default"] = _default;
 
 /***/ }),
-/* 524 */
+/* 523 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -69968,7 +70111,7 @@
 	
 	var _propTypes = _interopRequireDefault(__webpack_require__(6));
 	
-	var _moment = _interopRequireDefault(__webpack_require__(305));
+	var _moment = _interopRequireDefault(__webpack_require__(304));
 	
 	var _classnames = _interopRequireDefault(__webpack_require__(5));
 	
@@ -70214,7 +70357,7 @@
 	exports["default"] = _default;
 
 /***/ }),
-/* 525 */
+/* 524 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -70228,7 +70371,7 @@
 	
 	var _propTypes = _interopRequireDefault(__webpack_require__(6));
 	
-	var _Select = _interopRequireDefault(__webpack_require__(526));
+	var _Select = _interopRequireDefault(__webpack_require__(525));
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
@@ -70537,7 +70680,7 @@
 	exports["default"] = _default;
 
 /***/ }),
-/* 526 */
+/* 525 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -70763,15 +70906,15 @@
 	exports["default"] = _default;
 
 /***/ }),
-/* 527 */
+/* 526 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	module.exports = __webpack_require__(528);
+	module.exports = __webpack_require__(527);
 
 /***/ }),
-/* 528 */
+/* 527 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -70790,11 +70933,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _beeInputGroupAddon = __webpack_require__(529);
+	var _beeInputGroupAddon = __webpack_require__(528);
 	
 	var _beeInputGroupAddon2 = _interopRequireDefault(_beeInputGroupAddon);
 	
-	var _InputGroupButton = __webpack_require__(531);
+	var _InputGroupButton = __webpack_require__(530);
 	
 	var _InputGroupButton2 = _interopRequireDefault(_InputGroupButton);
 	
@@ -70851,7 +70994,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 529 */
+/* 528 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -70860,7 +71003,7 @@
 	  value: true
 	});
 	
-	var _InputGroupAddon = __webpack_require__(530);
+	var _InputGroupAddon = __webpack_require__(529);
 	
 	var _InputGroupAddon2 = _interopRequireDefault(_InputGroupAddon);
 	
@@ -70870,7 +71013,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 530 */
+/* 529 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -70933,7 +71076,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 531 */
+/* 530 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -70996,7 +71139,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 532 */
+/* 531 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -71032,7 +71175,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 533 */
+/* 532 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -71041,7 +71184,7 @@
 	  value: true
 	});
 	
-	var _extends2 = __webpack_require__(463);
+	var _extends2 = __webpack_require__(462);
 	
 	var _extends3 = _interopRequireDefault(_extends2);
 	
@@ -71060,7 +71203,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 534 */
+/* 533 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -71071,7 +71214,7 @@
 	
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
-	var _MonthCalendar = __webpack_require__(535);
+	var _MonthCalendar = __webpack_require__(534);
 	
 	var _MonthCalendar2 = _interopRequireDefault(_MonthCalendar);
 	
@@ -71085,19 +71228,19 @@
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _Picker = __webpack_require__(459);
+	var _Picker = __webpack_require__(458);
 	
 	var _Picker2 = _interopRequireDefault(_Picker);
 	
-	var _beeFormControl = __webpack_require__(276);
+	var _beeFormControl = __webpack_require__(277);
 	
 	var _beeFormControl2 = _interopRequireDefault(_beeFormControl);
 	
-	var _beeIcon = __webpack_require__(93);
+	var _beeIcon = __webpack_require__(94);
 	
 	var _beeIcon2 = _interopRequireDefault(_beeIcon);
 	
-	var _beeInputGroup = __webpack_require__(527);
+	var _beeInputGroup = __webpack_require__(526);
 	
 	var _beeInputGroup2 = _interopRequireDefault(_beeInputGroup);
 	
@@ -71105,19 +71248,19 @@
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _zh_CN = __webpack_require__(532);
+	var _zh_CN = __webpack_require__(531);
 	
 	var _zh_CN2 = _interopRequireDefault(_zh_CN);
 	
-	var _omit = __webpack_require__(533);
+	var _omit = __webpack_require__(532);
 	
 	var _omit2 = _interopRequireDefault(_omit);
 	
-	var _moment = __webpack_require__(305);
+	var _moment = __webpack_require__(304);
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
-	var _util = __webpack_require__(443);
+	var _util = __webpack_require__(442);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
@@ -71402,7 +71545,7 @@
 	module.exports = exports["default"];
 
 /***/ }),
-/* 535 */
+/* 534 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -71421,27 +71564,27 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _KeyCode = __webpack_require__(301);
+	var _KeyCode = __webpack_require__(300);
 	
 	var _KeyCode2 = _interopRequireDefault(_KeyCode);
 	
-	var _CalendarHeader = __webpack_require__(444);
+	var _CalendarHeader = __webpack_require__(443);
 	
 	var _CalendarHeader2 = _interopRequireDefault(_CalendarHeader);
 	
-	var _CalendarFooter = __webpack_require__(451);
+	var _CalendarFooter = __webpack_require__(450);
 	
 	var _CalendarFooter2 = _interopRequireDefault(_CalendarFooter);
 	
-	var _CalendarMixin = __webpack_require__(455);
+	var _CalendarMixin = __webpack_require__(454);
 	
-	var _CommonMixin = __webpack_require__(456);
+	var _CommonMixin = __webpack_require__(455);
 	
-	var _DateInput = __webpack_require__(448);
+	var _DateInput = __webpack_require__(447);
 	
 	var _DateInput2 = _interopRequireDefault(_DateInput);
 	
-	var _moment = __webpack_require__(305);
+	var _moment = __webpack_require__(304);
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
@@ -71637,7 +71780,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 536 */
+/* 535 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -71652,27 +71795,27 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _RangeCalendar = __webpack_require__(537);
+	var _RangeCalendar = __webpack_require__(536);
 	
 	var _RangeCalendar2 = _interopRequireDefault(_RangeCalendar);
 	
-	var _Panel = __webpack_require__(523);
+	var _Panel = __webpack_require__(522);
 	
 	var _Panel2 = _interopRequireDefault(_Panel);
 	
-	var _beeFormControl = __webpack_require__(276);
+	var _beeFormControl = __webpack_require__(277);
 	
 	var _beeFormControl2 = _interopRequireDefault(_beeFormControl);
 	
-	var _Picker = __webpack_require__(459);
+	var _Picker = __webpack_require__(458);
 	
 	var _Picker2 = _interopRequireDefault(_Picker);
 	
-	var _beeInputGroup = __webpack_require__(527);
+	var _beeInputGroup = __webpack_require__(526);
 	
 	var _beeInputGroup2 = _interopRequireDefault(_beeInputGroup);
 	
-	var _beeIcon = __webpack_require__(93);
+	var _beeIcon = __webpack_require__(94);
 	
 	var _beeIcon2 = _interopRequireDefault(_beeIcon);
 	
@@ -71682,21 +71825,21 @@
 	
 	var _tinperBeeCore = __webpack_require__(26);
 	
-	var _util = __webpack_require__(443);
+	var _util = __webpack_require__(442);
 	
-	var _zh_CN = __webpack_require__(532);
+	var _zh_CN = __webpack_require__(531);
 	
 	var _zh_CN2 = _interopRequireDefault(_zh_CN);
 	
-	var _omit = __webpack_require__(533);
+	var _omit = __webpack_require__(532);
 	
 	var _omit2 = _interopRequireDefault(_omit);
 	
-	var _moment = __webpack_require__(305);
+	var _moment = __webpack_require__(304);
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
-	__webpack_require__(438);
+	__webpack_require__(437);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
@@ -71741,6 +71884,22 @@
 	    now.locale("zh-cn").utcOffset(8);
 	} else {
 	    now.locale("en-gb").utcOffset(0);
+	}
+	
+	/**
+	 * @desc 阻止事件冒泡传播兼容ie
+	 */
+	function stopBubble(event) {
+	    //如果提供了事件对象，则这是一个非IE浏览器
+	    if (event && event.stopPropagation) {
+	        //因此它支持W3C的stopPropagation()方法
+	        event.stopPropagation();
+	        event.preventDefault(); // 取消事件的默认行为
+	    } else {
+	        //否则，我们需要使用IE的方式来取消事件冒泡
+	        window.event.cancelBubble = true;
+	        window.event.returnValue = false; //阻止事件的默认行为
+	    }
 	}
 	
 	var RangePicker = function (_Component) {
@@ -71836,12 +71995,13 @@
 	            onClear: this.clear,
 	            onOk: this.onOk,
 	            validatorFunc: props.validatorFunc,
-	            panelValues: this.state.panelValues || null
+	            panelValues: this.state.panelValues || null,
+	            style: props.dropdownStyle
 	        });
 	        return _react2["default"].createElement(
 	            "div",
 	            _extends({
-	                onClick: this.stopPropagation, onMouseOver: this.stopPropagation
+	                onClick: this.isOpenStopPropagation, onMouseOver: this.isOpenStopPropagation
 	            }, (0, _omit2["default"])(others, ['closeIcon', 'renderIcon', 'showClear', 'showToday', 'locale', 'placeholder', 'showOk', 'dateInputPlaceholder', 'onPanelChange', 'onStartInputBlur', 'onEndInputBlur', 'renderFooter', 'showTime', 'disabledDate', 'disabledTime'])),
 	            _react2["default"].createElement(
 	                _Picker2["default"],
@@ -72004,7 +72164,7 @@
 	    };
 	
 	    this.clear = function (e) {
-	        e && e.stopPropagation && e.stopPropagation();
+	        stopBubble(e);
 	        _this3.setState({
 	            value: []
 	        });
@@ -72041,7 +72201,7 @@
 	    };
 	
 	    this.outInputFocus = function (e) {
-	        if (_this3.props.hasOwnProperty('open')) e.stopPropagation();
+	        if (_this3.props.hasOwnProperty('open')) _this3.isOpenStopPropagation(e);
 	        _this3.props.outInputFocus && _this3.props.outInputFocus(e);
 	    };
 	
@@ -72107,8 +72267,8 @@
 	        _this3.props.onEndInputBlur && _this3.props.onEndInputBlur(e, endValue, "[\"" + startValue + "\" , \"" + endValue + "\"]");
 	    };
 	
-	    this.stopPropagation = function (e) {
-	        e.stopPropagation();
+	    this.isOpenStopPropagation = function (e) {
+	        if (_this3.state.open) stopBubble(e); //只有日期面板被打开的时候才阻止冒泡，否则会影响外侧的tooltips触发
 	    };
 	
 	    this.onOk = function (value) {
@@ -72140,7 +72300,7 @@
 	module.exports = exports["default"];
 
 /***/ }),
-/* 537 */
+/* 536 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -72161,7 +72321,7 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _moment = __webpack_require__(305);
+	var _moment = __webpack_require__(304);
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
@@ -72169,33 +72329,33 @@
 	
 	var _classnames3 = _interopRequireDefault(_classnames2);
 	
-	var _reactLifecyclesCompat = __webpack_require__(78);
+	var _reactLifecyclesCompat = __webpack_require__(79);
 	
-	var _KeyCode = __webpack_require__(301);
+	var _KeyCode = __webpack_require__(300);
 	
 	var _KeyCode2 = _interopRequireDefault(_KeyCode);
 	
-	var _CalendarPart = __webpack_require__(538);
+	var _CalendarPart = __webpack_require__(537);
 	
 	var _CalendarPart2 = _interopRequireDefault(_CalendarPart);
 	
-	var _TodayButton = __webpack_require__(452);
+	var _TodayButton = __webpack_require__(451);
 	
 	var _TodayButton2 = _interopRequireDefault(_TodayButton);
 	
-	var _OkButton = __webpack_require__(453);
+	var _OkButton = __webpack_require__(452);
 	
 	var _OkButton2 = _interopRequireDefault(_OkButton);
 	
-	var _TimePickerButton = __webpack_require__(454);
+	var _TimePickerButton = __webpack_require__(453);
 	
 	var _TimePickerButton2 = _interopRequireDefault(_TimePickerButton);
 	
-	var _CommonMixin = __webpack_require__(456);
+	var _CommonMixin = __webpack_require__(455);
 	
-	var _util = __webpack_require__(443);
+	var _util = __webpack_require__(442);
 	
-	var _toTime = __webpack_require__(458);
+	var _toTime = __webpack_require__(457);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -72379,8 +72539,8 @@
 	    var isClosestMonths = nextMonthOfStart.year() === endValue.year() && nextMonthOfStart.month() === endValue.month();
 	
 	    var extraFooter = props.renderFooter();
-	    var leftPanelValue = panelValues && panelValues[0] ? { panelValue: (0, _moment2['default'])(panelValues[0]) } : {};
-	    var rightPanelValue = panelValues && panelValues[1] ? { panelValue: (0, _moment2['default'])(panelValues[1]) } : {};
+	    var leftPanelValue = !selectedValue[0] && panelValues && panelValues[0] ? { panelValue: (0, _moment2['default'])(panelValues[0]) } : {};
+	    var rightPanelValue = !selectedValue[1] && panelValues && panelValues[1] ? { panelValue: (0, _moment2['default'])(panelValues[1]) } : {};
 	    return _react2['default'].createElement(
 	      'div',
 	      {
@@ -72780,7 +72940,7 @@
 	  this.onToday = function () {
 	    var startValue = (0, _util.getTodayTime)(_this2.state.value[0]);
 	    var endValue = startValue.clone().add(1, 'months');
-	    _this2.setState({ value: [startValue, endValue] });
+	    _this2.setState({ value: [startValue, endValue], panelValues: null });
 	  };
 	
 	  this.onOpenTimePicker = function () {
@@ -72993,6 +73153,7 @@
 	      var endValue = selectedValue[1] || startValue.clone().add(1, 'months');
 	      _this2.setState({
 	        selectedValue: selectedValue,
+	        panelValues: null,
 	        value: getValueFromSelectedValue([startValue, endValue])
 	      });
 	    }
@@ -73075,7 +73236,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 538 */
+/* 537 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -73094,19 +73255,19 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _CalendarHeader = __webpack_require__(444);
+	var _CalendarHeader = __webpack_require__(443);
 	
 	var _CalendarHeader2 = _interopRequireDefault(_CalendarHeader);
 	
-	var _DateTable = __webpack_require__(302);
+	var _DateTable = __webpack_require__(301);
 	
 	var _DateTable2 = _interopRequireDefault(_DateTable);
 	
-	var _DateInput = __webpack_require__(448);
+	var _DateInput = __webpack_require__(447);
 	
 	var _DateInput2 = _interopRequireDefault(_DateInput);
 	
-	var _index = __webpack_require__(443);
+	var _index = __webpack_require__(442);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -73283,7 +73444,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 539 */
+/* 538 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -73294,7 +73455,7 @@
 	
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
-	var _rcCalendar = __webpack_require__(299);
+	var _rcCalendar = __webpack_require__(298);
 	
 	var _rcCalendar2 = _interopRequireDefault(_rcCalendar);
 	
@@ -73310,39 +73471,39 @@
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _Picker = __webpack_require__(459);
+	var _Picker = __webpack_require__(458);
 	
 	var _Picker2 = _interopRequireDefault(_Picker);
 	
-	var _beeFormControl = __webpack_require__(276);
+	var _beeFormControl = __webpack_require__(277);
 	
 	var _beeFormControl2 = _interopRequireDefault(_beeFormControl);
 	
-	var _zh_CN = __webpack_require__(532);
+	var _zh_CN = __webpack_require__(531);
 	
 	var _zh_CN2 = _interopRequireDefault(_zh_CN);
 	
-	var _en_US = __webpack_require__(457);
+	var _en_US = __webpack_require__(456);
 	
 	var _en_US2 = _interopRequireDefault(_en_US);
 	
-	var _beeIcon = __webpack_require__(93);
+	var _beeIcon = __webpack_require__(94);
 	
 	var _beeIcon2 = _interopRequireDefault(_beeIcon);
 	
-	var _beeInputGroup = __webpack_require__(527);
+	var _beeInputGroup = __webpack_require__(526);
 	
 	var _beeInputGroup2 = _interopRequireDefault(_beeInputGroup);
 	
-	var _moment = __webpack_require__(305);
+	var _moment = __webpack_require__(304);
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
-	__webpack_require__(438);
+	__webpack_require__(437);
 	
-	__webpack_require__(336);
+	__webpack_require__(335);
 	
-	var _omit = __webpack_require__(533);
+	var _omit = __webpack_require__(532);
 	
 	var _omit2 = _interopRequireDefault(_omit);
 	
@@ -73681,7 +73842,7 @@
 	module.exports = exports["default"];
 
 /***/ }),
-/* 540 */
+/* 539 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -73692,13 +73853,13 @@
 	
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
-	var _YearPanel = __webpack_require__(449);
+	var _YearPanel = __webpack_require__(448);
 	
 	var _YearPanel2 = _interopRequireDefault(_YearPanel);
 	
 	var _tinperBeeCore = __webpack_require__(26);
 	
-	var _zh_CN = __webpack_require__(532);
+	var _zh_CN = __webpack_require__(531);
 	
 	var _zh_CN2 = _interopRequireDefault(_zh_CN);
 	
@@ -73710,19 +73871,19 @@
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _Picker = __webpack_require__(459);
+	var _Picker = __webpack_require__(458);
 	
 	var _Picker2 = _interopRequireDefault(_Picker);
 	
-	var _beeFormControl = __webpack_require__(276);
+	var _beeFormControl = __webpack_require__(277);
 	
 	var _beeFormControl2 = _interopRequireDefault(_beeFormControl);
 	
-	var _beeInputGroup = __webpack_require__(527);
+	var _beeInputGroup = __webpack_require__(526);
 	
 	var _beeInputGroup2 = _interopRequireDefault(_beeInputGroup);
 	
-	var _beeIcon = __webpack_require__(93);
+	var _beeIcon = __webpack_require__(94);
 	
 	var _beeIcon2 = _interopRequireDefault(_beeIcon);
 	
@@ -73730,11 +73891,11 @@
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _moment = __webpack_require__(305);
+	var _moment = __webpack_require__(304);
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
-	var _omit = __webpack_require__(533);
+	var _omit = __webpack_require__(532);
 	
 	var _omit2 = _interopRequireDefault(_omit);
 	
@@ -73817,7 +73978,7 @@
 	        return _react2["default"].createElement(
 	            "div",
 	            _extends({ className: classes
-	            }, (0, _omit2["default"])(others, ['closeIcon', 'renderIcon', 'disabled', 'format', 'locale', 'placeholder', 'showDateInput', 'disabledYear'])),
+	            }, (0, _omit2["default"])(others, ['closeIcon', 'renderIcon', 'disabled', 'format', 'locale', 'placeholder', 'showDateInput', 'disabledYear', 'onChange', 'onSelect'])),
 	            _react2["default"].createElement(
 	                _Picker2["default"],
 	                _extends({
@@ -73999,7 +74160,7 @@
 	module.exports = exports["default"];
 
 /***/ }),
-/* 541 */
+/* 540 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -74014,11 +74175,11 @@
 	
 	var _beeLayout = __webpack_require__(3);
 	
-	var _src = __webpack_require__(297);
+	var _src = __webpack_require__(296);
 	
 	var _src2 = _interopRequireDefault(_src);
 	
-	var _moment = __webpack_require__(305);
+	var _moment = __webpack_require__(304);
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
@@ -74094,7 +74255,7 @@
 	module.exports = exports["default"];
 
 /***/ }),
-/* 542 */
+/* 541 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -74109,11 +74270,11 @@
 	
 	var _beeLayout = __webpack_require__(3);
 	
-	var _src = __webpack_require__(297);
+	var _src = __webpack_require__(296);
 	
 	var _src2 = _interopRequireDefault(_src);
 	
-	var _moment = __webpack_require__(305);
+	var _moment = __webpack_require__(304);
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
@@ -74183,7 +74344,7 @@
 	module.exports = exports["default"];
 
 /***/ }),
-/* 543 */
+/* 542 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -74198,15 +74359,15 @@
 	
 	var _beeLayout = __webpack_require__(3);
 	
-	var _src = __webpack_require__(297);
+	var _src = __webpack_require__(296);
 	
 	var _src2 = _interopRequireDefault(_src);
 	
-	var _moment = __webpack_require__(305);
+	var _moment = __webpack_require__(304);
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
-	var _YearPicker = __webpack_require__(540);
+	var _YearPicker = __webpack_require__(539);
 	
 	var _YearPicker2 = _interopRequireDefault(_YearPicker);
 	
@@ -74246,8 +74407,18 @@
 	  return current && current > (0, _moment2["default"])().endOf('year');
 	}
 	
-	function disabledDateTime() {
-	  return {
+	function disabledDateTime(_) {
+	  return _.get('month') <= 6 ? {
+	    disabledHours: function disabledHours() {
+	      return range(0, 24).splice(4, 2);
+	    },
+	    disabledMinutes: function disabledMinutes() {
+	      return range(0, 30);
+	    },
+	    disabledSeconds: function disabledSeconds() {
+	      return [55, 56];
+	    }
+	  } : {
 	    disabledHours: function disabledHours() {
 	      return range(0, 24).splice(4, 20);
 	    },
@@ -74350,7 +74521,7 @@
 	module.exports = exports["default"];
 
 /***/ }),
-/* 544 */
+/* 543 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -74365,15 +74536,15 @@
 	
 	var _beeLayout = __webpack_require__(3);
 	
-	var _src = __webpack_require__(297);
+	var _src = __webpack_require__(296);
 	
 	var _src2 = _interopRequireDefault(_src);
 	
-	var _moment = __webpack_require__(305);
+	var _moment = __webpack_require__(304);
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
-	var _zh_CN = __webpack_require__(532);
+	var _zh_CN = __webpack_require__(531);
 	
 	var _zh_CN2 = _interopRequireDefault(_zh_CN);
 	
@@ -74508,7 +74679,7 @@
 	module.exports = exports["default"];
 
 /***/ }),
-/* 545 */
+/* 544 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -74521,21 +74692,21 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _src = __webpack_require__(297);
+	var _src = __webpack_require__(296);
 	
 	var _src2 = _interopRequireDefault(_src);
 	
-	var _moment = __webpack_require__(305);
+	var _moment = __webpack_require__(304);
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
-	var _zh_CN = __webpack_require__(532);
+	var _zh_CN = __webpack_require__(531);
 	
 	var _zh_CN2 = _interopRequireDefault(_zh_CN);
 	
 	var _beeLayout = __webpack_require__(3);
 	
-	var _beeButton = __webpack_require__(273);
+	var _beeButton = __webpack_require__(274);
 	
 	var _beeButton2 = _interopRequireDefault(_beeButton);
 	
@@ -74626,7 +74797,7 @@
 	module.exports = exports["default"];
 
 /***/ }),
-/* 546 */
+/* 545 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -74639,11 +74810,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _src = __webpack_require__(297);
+	var _src = __webpack_require__(296);
 	
 	var _src2 = _interopRequireDefault(_src);
 	
-	var _beeTable = __webpack_require__(547);
+	var _beeTable = __webpack_require__(546);
 	
 	var _beeTable2 = _interopRequireDefault(_beeTable);
 	
@@ -74694,14 +74865,14 @@
 	module.exports = exports["default"];
 
 /***/ }),
-/* 547 */
+/* 546 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var Table = __webpack_require__(548);
-	var Column = __webpack_require__(664);
-	var ColumnGroup = __webpack_require__(665);
+	var Table = __webpack_require__(547);
+	var Column = __webpack_require__(663);
+	var ColumnGroup = __webpack_require__(664);
 	
 	Table.Column = Column;
 	Table.ColumnGroup = ColumnGroup;
@@ -74709,7 +74880,7 @@
 	module.exports = Table;
 
 /***/ }),
-/* 548 */
+/* 547 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -74728,49 +74899,55 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _componentClasses = __webpack_require__(46);
-	
-	var _componentClasses2 = _interopRequireDefault(_componentClasses);
-	
-	var _TableRow = __webpack_require__(549);
+	var _TableRow = __webpack_require__(548);
 	
 	var _TableRow2 = _interopRequireDefault(_TableRow);
 	
-	var _TableHeader = __webpack_require__(603);
+	var _TableHeader = __webpack_require__(602);
 	
 	var _TableHeader2 = _interopRequireDefault(_TableHeader);
 	
-	var _utils = __webpack_require__(550);
+	var _utils = __webpack_require__(549);
 	
-	var _shallowequal = __webpack_require__(584);
+	var _shallowequal = __webpack_require__(583);
 	
 	var _shallowequal2 = _interopRequireDefault(_shallowequal);
 	
-	var _addEventListener = __webpack_require__(39);
-	
-	var _addEventListener2 = _interopRequireDefault(_addEventListener);
-	
-	var _ColumnManager = __webpack_require__(663);
+	var _ColumnManager = __webpack_require__(662);
 	
 	var _ColumnManager2 = _interopRequireDefault(_ColumnManager);
 	
-	var _createStore = __webpack_require__(666);
+	var _createStore = __webpack_require__(665);
 	
 	var _createStore2 = _interopRequireDefault(_createStore);
 	
-	var _beeLoading = __webpack_require__(667);
+	var _beeLoading = __webpack_require__(666);
 	
 	var _beeLoading2 = _interopRequireDefault(_beeLoading);
 	
-	var _beeIcon = __webpack_require__(93);
+	var _beeIcon = __webpack_require__(94);
 	
 	var _beeIcon2 = _interopRequireDefault(_beeIcon);
 	
-	var _i18n = __webpack_require__(566);
+	var _util = __webpack_require__(668);
+	
+	var _i18n = __webpack_require__(565);
 	
 	var _i18n2 = _interopRequireDefault(_i18n);
 	
-	var _tool = __webpack_require__(118);
+	var _tool = __webpack_require__(119);
+	
+	var _resizeObserverPolyfill = __webpack_require__(293);
+	
+	var _resizeObserverPolyfill2 = _interopRequireDefault(_resizeObserverPolyfill);
+	
+	var _DragResizerLine = __webpack_require__(669);
+	
+	var _DragResizerLine2 = _interopRequireDefault(_DragResizerLine);
+	
+	var _DragRowLine = __webpack_require__(670);
+	
+	var _DragRowLine2 = _interopRequireDefault(_DragRowLine);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
@@ -74837,7 +75014,55 @@
 	  headerDisplayInRow: _propTypes2["default"].bool, // 表头内容超出列宽度时进行换行 or 以...形式展现
 	  showRowNum: _propTypes2["default"].oneOfType([_propTypes2["default"].bool, _propTypes2["default"].object]), // 表格是否自动生成序号,格式为{base:number || 0,defaultKey:string || '_index',defaultName:string || '序号'}
 	  onPaste: _propTypes2["default"].func,
-	  onBodyMouseLeave: _propTypes2["default"].func
+	  onBodyMouseLeave: _propTypes2["default"].func,
+	  originWidth: _propTypes2["default"].number,
+	  scrollTop: _propTypes2["default"].number,
+	  lazyLoad: _propTypes2["default"].bool,
+	  ignoreScrollYChange: _propTypes2["default"].func,
+	  onResize: _propTypes2["default"].func,
+	  bordered: _propTypes2["default"].bool,
+	  onDragStart: _propTypes2["default"].func,
+	  onDragEnter: _propTypes2["default"].func,
+	  onDragOver: _propTypes2["default"].func,
+	  onDrop: _propTypes2["default"].func,
+	  onDragEnd: _propTypes2["default"].func,
+	  onMouseDown: _propTypes2["default"].func,
+	  onMouseMove: _propTypes2["default"].func,
+	  onMouseUp: _propTypes2["default"].func,
+	  dragborder: _propTypes2["default"].bool,
+	  onDropBorder: _propTypes2["default"].func,
+	  onDraggingBorder: _propTypes2["default"].func,
+	  dragborderKey: _propTypes2["default"].string,
+	  headerHeight: _propTypes2["default"].string,
+	  afterDragColWidth: _propTypes2["default"].number,
+	  headerScroll: _propTypes2["default"].func,
+	  headerEventNoStop: _propTypes2["default"].bool,
+	  onCopy: _propTypes2["default"].func,
+	  resetScroll: _propTypes2["default"].func,
+	  footerScroll: _propTypes2["default"].func,
+	  hideHeaderScroll: _propTypes2["default"].func,
+	  locale: _propTypes2["default"].string,
+	  getCellClassName: _propTypes2["default"].string,
+	  useDragHandle: _propTypes2["default"].func,
+	  expandedRowRender: _propTypes2["default"].any,
+	  expandRowByClick: _propTypes2["default"].func,
+	  haveExpandIcon: _propTypes2["default"].any,
+	  expandedIcon: _propTypes2["default"].any,
+	  collapsedIcon: _propTypes2["default"].any,
+	  height: _propTypes2["default"].number,
+	  showSum: _propTypes2["default"].bool,
+	  heightConsistent: _propTypes2["default"].bool,
+	  syncFixedRowHeight: _propTypes2["default"].bool,
+	  setRowHeight: _propTypes2["default"].func,
+	  setRowParentIndex: _propTypes2["default"].func,
+	  handleScrollY: _propTypes2["default"].func,
+	  handleScrollX: _propTypes2["default"].func,
+	  onKeyTab: _propTypes2["default"].func,
+	  onKeyUp: _propTypes2["default"].func,
+	  onKeyDown: _propTypes2["default"].func,
+	  onTableKeyDown: _propTypes2["default"].func,
+	  focusable: _propTypes2["default"].bool,
+	  loading: _propTypes2["default"].bool
 	};
 	
 	var defaultProps = {
@@ -74891,10 +75116,16 @@
 	  bodyDisplayInRow: true,
 	  headerDisplayInRow: true,
 	  showRowNum: false,
-	  onPaste: function onPaste() {}
+	  onPaste: function onPaste() {},
+	  originWidth: null //做什么用??
 	};
 	
 	var expandIconCellWidth = Number(43);
+	
+	var tableUUID = function tableUUID() {
+	  return "_table_uid_" + new Date().getTime();
+	};
+	var browserInfo = {};
 	
 	var Table = function (_Component) {
 	  _inherits(Table, _Component);
@@ -74904,151 +75135,16 @@
 	
 	    var _this = _possibleConstructorReturn(this, _Component.call(this, props));
 	
-	    _this.resize = function () {
-	      (0, _utils.debounce)(_this.syncFixedTableRowHeight, 150);
-	      _this.computeTableWidth();
-	      var renderFlag = _this.state.renderFlag;
-	      _this.setState({
-	        renderFlag: !renderFlag
-	      });
-	    };
+	    _initialiseProps.call(_this);
 	
-	    _this.getTableUID = function () {
-	      var uid = "_table_uid_" + new Date().getTime();
-	      _this.tableUid = uid;
-	      var div = document.createElement("div");
-	      // div.className = "u-table-drag-hidden-cont";
-	      div.className = "u-table-drag-hidden-cont";
-	      div.id = uid;
-	      _this.contentTable.appendChild(div);
-	    };
-	
-	    _this.onDragRowStart = function (currentKey) {
-	      var data = _this.state.data,
-	          currentIndex = void 0,
-	          record = void 0;
-	      data.forEach(function (da, i) {
-	        // tr 的唯一标识通过 data.key 或 rowKey 两种方式传进来
-	        var trKey = da.key ? da.key : _this.getRowKey(da, i);
-	        if (trKey == currentKey) {
-	          currentIndex = i;
-	          record = da;
-	        }
-	      });
-	      _this.props.onDragRowStart && _this.props.onDragRowStart(record, currentIndex);
-	    };
-	
-	    _this.onDragRow = function (currentKey, targetKey) {
-	      var data = _this.state.data,
-	          currentIndex = void 0,
-	          targetIndex = void 0,
-	          record = void 0;
-	      data.forEach(function (da, i) {
-	        // tr 的唯一标识通过 data.key 或 rowKey 两种方式传进来
-	        var trKey = da.key ? da.key : _this.getRowKey(da, i);
-	        if (trKey == currentKey) {
-	          currentIndex = i;
-	          record = da;
-	        }
-	        if (trKey == targetKey) {
-	          targetIndex = i;
-	        }
-	      });
-	      if (currentIndex > -1) {
-	        if (_this.contentTable.dragType == 'top') {
-	          targetIndex = targetIndex - 1;
-	        }
-	        data = _this.swapArray(data, currentIndex, targetIndex);
-	        _this.props.onDropRow && _this.props.onDropRow(data, record, targetIndex);
-	        _this.setState({
-	          data: data
-	        });
-	      } else {
-	        _this.props.onDropRow && _this.props.onDropRow(data, record, targetIndex);
-	      }
-	    };
-	
-	    _this.swapArray = function (arr, index1, index2) {
-	      var value1 = arr[index1];
-	      arr.splice(index1, 1);
-	      if (index1 < index2) {
-	        arr.splice(index2, 0, value1);
-	      } else {
-	        arr.splice(index2 + 1, 0, value1);
-	      }
-	
-	      return arr;
-	    };
-	
-	    _this.renderDragHideTable = function () {
-	      var _this$props = _this.props,
-	          columns = _this$props.columns,
-	          dragborder = _this$props.dragborder,
-	          dragborderKey = _this$props.dragborderKey;
-	
-	      if (!dragborder) return null;
-	      var sum = 0;
-	      return _react2["default"].createElement(
-	        'div',
-	        { id: 'u-table-drag-hide-table-' + dragborderKey, className: _this.props.clsPrefix + '-hiden-drag' },
-	        columns.map(function (da, i) {
-	          sum += da.width ? da.width : 0;
-	          return _react2["default"].createElement('div', { className: _this.props.clsPrefix + '-hiden-drag-li', key: da + "_hiden_" + i, style: { left: sum + "px" } });
-	        })
-	      );
-	    };
-	
-	    _this.getTdPadding = function (td) {
-	      var tdPaddingTop = _this.getStyle(td, 'paddingTop'),
-	          tdPaddingBottom = _this.getStyle(td, 'paddingBottom'),
-	          tdBorderTop = _this.getStyle(td, 'borderTopWidth'),
-	          tdBorderBottom = _this.getStyle(td, 'borderBottomWidth');
-	      return Number(tdPaddingTop.replace('px', '')) + Number(tdPaddingBottom.replace('px', '')) + Number(tdBorderTop.replace('px', '')) + Number(tdBorderBottom.replace('px', ''));
-	    };
-	
-	    _this.clearBodyMouseLeaveTimer = function () {
-	      if (_this.bodyMouseLeaveTimmer) {
-	        clearTimeout(_this.bodyMouseLeaveTimmer);
-	        _this.bodyMouseLeaveTimmer = null;
-	      }
-	    };
-	
-	    _this.onRowHoverMouseEnter = function () {
-	
-	      _this.store.setState({
-	        currentHoverKey: _this.currentHoverKey
-	      });
-	      _this.hoverDom.style.display = 'block';
-	      _this.clearBodyMouseLeaveTimer();
-	    };
-	
-	    _this.onRowHoverMouseLeave = function () {};
-	
-	    _this.onFocus = function (e) {
-	      _this.props.onKeyTab && _this.props.onKeyTab();
-	    };
-	
-	    _this.onKeyDown = function (e) {
-	      var event = _utils.Event.getEvent(e);
-	      // event.preventDefault?event.preventDefault():event.returnValue = false;
-	      if (event.keyCode === 38) {
-	        //up
-	        event.preventDefault && event.preventDefault();
-	        _this.props.onKeyUp && _this.props.onKeyUp();
-	      } else if (event.keyCode === 40) {
-	        //down
-	        event.preventDefault && event.preventDefault();
-	        _this.props.onKeyDown && _this.props.onKeyDown();
-	      }
-	      _this.props.onTableKeyDown && _this.props.onTableKeyDown();
-	    };
-	
+	    browserInfo = (0, _utils.myBrowser)();
 	    var expandedRowKeys = [];
 	    var rows = [].concat(_toConsumableArray(props.data));
 	    var showDragHandle = !props.hideDragHandle && props.rowDraggAble;
 	    _this.columnManager = new _ColumnManager2["default"](props.columns, props.children, props.originWidth, showDragHandle, props.showRowNum); // 加入props.showRowNum参数
 	    _this.store = (0, _createStore2["default"])({ currentHoverKey: null });
 	    _this.firstDid = true;
+	    _this.scrollYChanged = false;
 	    if (props.defaultExpandAllRows) {
 	      for (var i = 0; i < rows.length; i++) {
 	        var row = rows[i];
@@ -75064,7 +75160,7 @@
 	      data: props.data,
 	      currentHoverKey: null,
 	      scrollPosition: 'left',
-	      fixedColumnsHeadRowsHeight: [],
+	      fixedColumnsHeadRowsHeight: null,
 	      fixedColumnsBodyRowsHeight: [],
 	      fixedColumnsExpandedRowsHeight: {} //扩展行的高度
 	    };
@@ -75086,21 +75182,23 @@
 	    _this.getTitle = _this.getTitle.bind(_this);
 	    _this.getFooter = _this.getFooter.bind(_this);
 	    _this.getEmptyText = _this.getEmptyText.bind(_this);
-	    _this.getHeaderRowStyle = _this.getHeaderRowStyle.bind(_this);
 	    _this.syncFixedTableRowHeight = _this.syncFixedTableRowHeight.bind(_this);
 	    _this.resetScrollX = _this.resetScrollX.bind(_this);
 	    _this.findExpandedRow = _this.findExpandedRow.bind(_this);
 	    _this.isRowExpanded = _this.isRowExpanded.bind(_this);
-	    _this.detectScrollTarget = _this.detectScrollTarget.bind(_this);
+	    // this.detectScrollTarget = this.detectScrollTarget.bind(this);
 	    _this.handleBodyScroll = _this.handleBodyScroll.bind(_this);
 	    _this.handleRowHover = _this.handleRowHover.bind(_this);
 	    _this.computeTableWidth = _this.computeTableWidth.bind(_this);
 	    _this.onBodyMouseLeave = _this.onBodyMouseLeave.bind(_this);
-	    _this.tableUid = null;
+	    _this.tableUid = tableUUID();
 	    _this.contentTable = null;
 	    _this.leftColumnsLength; //左侧固定列的长度
-	    _this.centerColumnsLength; //非固定列的长度
-	    _this.columnsChildrenList = []; //复杂表头、所有叶子节点
+	    _this.centerColumnsLength; //非固定列的长度// this.columnsChildrenList = [];//复杂表头、所有叶子节点
+	    _this.dataChanged = false; // 数据是否改变
+	    //同步行高时使用的缓存
+	    _this.fixedColumnsBodyRowsHeightCache = null;
+	    _this.fixedColumnsExpandedRowsHeightCache = null;
 	    return _this;
 	  }
 	
@@ -75110,29 +75208,52 @@
 	  };
 	
 	  Table.prototype.componentDidMount = function componentDidMount() {
-	    this.getTableUID();
+	    var _this2 = this;
+	
+	    // this.getTableUID();
 	    _utils.EventUtil.addHandler(this.contentTable, 'keydown', this.onKeyDown);
 	    _utils.EventUtil.addHandler(this.contentTable, 'focus', this.onFocus);
 	    setTimeout(this.resetScrollX, 300);
 	    //含有纵向滚动条
 	    // if(this.props.scroll.y){
-	    this.scrollbarWidth = (0, _utils.measureScrollbar)();
+	    //    this.scrollbarWidth = measureScrollbar(`.u-table`);
 	    // }
+	    this.scrollbarWidth = (0, _utils.measureScrollbar)('.' + this.props.clsPrefix); //dom装载后获取浏览器下的滚动条宽度
 	    //后续也放在recevice里面
 	    if (!this.props.originWidth) {
 	      this.computeTableWidth();
 	    }
+	    var _props = this.props,
+	        useFixedHeader = _props.useFixedHeader,
+	        _props$scroll = _props.scroll,
+	        scroll = _props$scroll === undefined ? {} : _props$scroll;
+	
 	    if (this.columnManager.isAnyColumnsFixed()) {
-	      this.syncFixedTableRowHeight();
-	      this.resizeEvent = (0, _addEventListener2["default"])(window, 'resize', this.resize);
+	      this.syncFixedTableRowHeight(); //同步固定列的内容行高度
+	      var targetNode = this.contentTable;
+	      if (targetNode) {
+	        this.resizeObserver = new _resizeObserverPolyfill2["default"](function () {
+	          _this2.resize();
+	        });
+	        this.resizeObserver.observe(targetNode);
+	      }
+	    }
+	    if (scroll.y) {
+	      //固定列头存在则执行head和body的宽度
+	      this.syncFixedTableScrollWidth(); //同步固定列的滚动宽度
 	    }
 	  };
 	
 	  Table.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
-	    var _props = this.props,
-	        hideDragHandle = _props.hideDragHandle,
-	        rowDraggAble = _props.rowDraggAble,
-	        showRowNum = _props.showRowNum;
+	    var _props2 = this.props,
+	        hideDragHandle = _props2.hideDragHandle,
+	        rowDraggAble = _props2.rowDraggAble,
+	        showRowNum = _props2.showRowNum,
+	        clsPrefix = _props2.clsPrefix;
+	    // 清除同步行高时使用的缓存
+	
+	    this.fixedColumnsBodyRowsHeightCache = null;
+	    this.fixedColumnsExpandedRowsHeightCache = null;
 	
 	    if ('data' in nextProps) {
 	      this.setState({
@@ -75145,8 +75266,9 @@
 	      });
 	    }
 	    if (nextProps.columns && nextProps.columns !== this.props.columns) {
+	      this.tableUid = tableUUID(); //列发生变化时需重新生成uuid
 	      this.columnManager.reset(nextProps.columns, null, showRowNum, !hideDragHandle && rowDraggAble); // 加入this.props.showRowNum参数
-	      if (nextProps.columns.length !== this.props.columns.length && this.refs && this.bodyTable) {
+	      if (nextProps.columns.length !== this.props.columns.length && this.bodyTable) {
 	        this.scrollTop = this.bodyTable.scrollTop;
 	      }
 	    } else if (nextProps.children !== this.props.children) {
@@ -75159,9 +75281,9 @@
 	    }
 	    // fix:模态框中使用table，计算的滚动条宽度为0的bug
 	    // fix:表格首次渲染时 display:none，再显示时，未重新计算，导致表行出现错位的bug
-	    if (this.scrollbarWidth <= 0 && this.props.scroll.y) {
-	      this.scrollbarWidth = (0, _utils.measureScrollbar)();
-	    }
+	    // if(this.scrollbarWidth<=0 && this.props.scroll.y){
+	    //   this.scrollbarWidth = measureScrollbar(`.${clsPrefix}`);
+	    // }
 	    if (!nextProps.originWidth) {
 	      this.computeTableWidth();
 	      this.firstDid = true; //避免重复update
@@ -75176,8 +75298,17 @@
 	  Table.prototype.componentDidUpdate = function componentDidUpdate(prevProps, prevState) {
 	    // todo: IE 大数据渲染，行高不固定，且设置了 heightConsistent={true} 时，滚动加载操作会导致 ie11 浏览器崩溃
 	    // https://github.com/tinper-bee/bee-table/commit/bd2092cdbaad236ff89477304e58dea93325bf09
+	    var _props3 = this.props,
+	        useFixedHeader = _props3.useFixedHeader,
+	        _props3$scroll = _props3.scroll,
+	        scroll = _props3$scroll === undefined ? {} : _props3$scroll;
+	
 	    if (this.columnManager.isAnyColumnsFixed()) {
-	      this.syncFixedTableRowHeight();
+	      (0, _utils.debounce)(this.syncFixedTableRowHeight(), 200); //同步固定列内容行的高度
+	    }
+	    if (scroll.y) {
+	      //固定列头存在则执行head和body的宽度
+	      (0, _utils.debounce)(this.syncFixedTableScrollWidth(), 200); //同步固定列的滚动宽度
 	    }
 	
 	    //适应模态框中表格、以及父容器宽度变化的情况
@@ -75186,8 +75317,8 @@
 	      this.firstDid = false; //避免重复update
 	    }
 	    if (this.scrollTop > -1) {
-	      this.refs.fixedColumnsBodyLeft && (this.refs.fixedColumnsBodyLeft.scrollTop = this.scrollTop);
-	      this.refs.fixedColumnsBodyRight && (this.refs.fixedColumnsBodyRight.scrollTop = this.scrollTop);
+	      this.fixedLeftBodyInner && (this.fixedLeftBodyInner.scrollTop = this.scrollTop);
+	      this.fixedRightBodyInner && (this.fixedRightBodyInner.scrollTop = this.scrollTop);
 	      this.bodyTable.scrollTop = this.scrollTop;
 	      this.scrollTop = -1;
 	    }
@@ -75195,14 +75326,70 @@
 	    // if (prevProps.data.length === 0  || this.props.data.length === 0 ) {
 	    //   this.resetScrollX();
 	    // }
-	    // 当手动设置的scroll.y发生变化时，滚动条回到顶部
+	    // 当懒加载手动设置的scroll.y发生变化时，滚动条回到顶部
 	    var prevScrollY = prevProps.scroll.y;
 	    var currentScrollY = this.props.scroll.y;
-	    if (prevScrollY && currentScrollY && prevScrollY !== currentScrollY) {
+	    if (prevScrollY && currentScrollY && prevScrollY !== currentScrollY && this.props.lazyLoad && !this.props.ignoreScrollYChange) {
 	      this.bodyTable.scrollTop = 0;
+	    } else if (this.props.ignoreScrollYChange && currentScrollY && prevScrollY) {
+	      if (prevScrollY !== currentScrollY) {
+	        this.scrollYChanged = true;
+	        var bodyScrollTop = this.bodyTable.scrollTop;
+	        if (bodyScrollTop === 0) {
+	          // 在顶部的时候，滚动条不用动
+	          this.bodyTable.scrollTop = 0;
+	        } else {
+	          var distance = bodyScrollTop + currentScrollY - prevScrollY;
+	          if (distance < 0) {
+	            this.bodyTable.scrollTop = 0;
+	          } else {
+	            var _bodyTable = this.bodyTable,
+	                scrollHeight = _bodyTable.scrollHeight,
+	                scrollTop = _bodyTable.scrollTop;
+	
+	            var bottomDistance = Math.abs(scrollHeight - scrollTop - prevScrollY); // 在最底部的时候也不用滚动滚动条
+	            if (bottomDistance < 5) {
+	              // 有些dom计算不是十分精确，设置一个值来缓冲一下
+	              this.bodyTable.scrollTop = scrollTop + prevScrollY - currentScrollY;
+	            } else {
+	              this.bodyTable.scrollTop = distance;
+	            }
+	          }
+	        }
+	      } else if (this.scrollYChanged) {
+	        this.bodyTable.scrollTop += 1;
+	        this.scrollYChanged = false;
+	      }
 	    }
 	    // 是否传入 scroll中的y属性，如果传入判断是否是整数，如果是则进行比较 。bodyTable 的clientHeight进行判断
-	    this.isShowScrollY();
+	    // this.isShowScrollY();
+	    // gx为了解决底部滚动条显示的问题
+	    // if (this.bodyTable) {
+	    //   const currentOverflowX = window.getComputedStyle(this.bodyTable).overflowX;
+	    //   if (this.props.scroll.x && currentOverflowX !== 'scroll') {
+	    //     // 此处应该对比一下实际的
+	    //     if (this.computeWidth > this.contentDomWidth) {
+	    //       this.bodyTable.style.overflowX = 'scroll';
+	    //     }
+	    //   }
+	    // }
+	    // let scrollContainerWidth = window.getComputedStyle(this.bodyTableOuter.querySelector('.scroll-container')).width; // scroll-container层元素的宽度
+	    // let scrollContainerTableWidth =  this.bodyTableOuter.querySelector('.table-bordered').style.width; // scroll-container内层table元素的宽度
+	    // // 有左右固定列时，scroll-container因为有竖直滚动条，使得scroll-container实际宽度（不包括滚动条的宽度）小于内部table宽度出现水平方向滚动条，导致滚动到底部不对齐
+	    // if ((parseFloat(scrollContainerWidth) >= parseFloat(scrollContainerTableWidth)) && (this.columnManager.leftLeafColumns().length > 0 || this.columnManager.rightLeafColumns().length > 0)) {
+	    //   this.bodyTable.style.overflowX = 'hidden';
+	    // } else {
+	    //   this.bodyTable.style.overflowX = 'auto';
+	    // }
+	    // if (this.bodyTableOuter) { // 隐藏几个不需要真正滚动的父元素的滚动条
+	    //   this.bodyTableOuter.style.overflowY = 'hidden'
+	    // }
+	    // if (this.fixedColumnsBodyLeftOuter) {
+	    //   this.fixedColumnsBodyLeftOuter.style.overflowY = 'hidden'
+	    // }
+	    // if (this.fixedColumnsBodyRightOuter) {
+	    //   this.fixedColumnsBodyRightOuter.style.overflowY = 'hidden'
+	    // }
 	  };
 	
 	  Table.prototype.componentWillUnmount = function componentWillUnmount() {
@@ -75210,11 +75397,22 @@
 	    this.contentTable = null;
 	    _utils.EventUtil.removeHandler(this.contentTable, 'keydown', this.onKeyDown);
 	    _utils.EventUtil.removeHandler(this.contentTable, 'focus', this.onFocus);
-	    if (this.resizeEvent) {
-	      this.resizeEvent.remove();
+	    if (this.resizeObserver) {
+	      this.resizeObserver.disconnect();
 	    }
 	  };
 	
+	  /*
+	  getTableUID =()=>{
+	    let uid = "_table_uid_"+new Date().getTime();
+	    this.tableUid = uid;
+	    let div = document.createElement("div");
+	    div.className = "u-table-drag-hidden-cont";
+	    div.id = uid;
+	    this.contentTable.appendChild(div);
+	  }
+	   */
+	  //计算表格宽度 --- 这块有必要？待确认 待废除 zzj
 	  Table.prototype.computeTableWidth = function computeTableWidth() {
 	    var expandIconAsCell = this.props.expandIconAsCell;
 	    //如果用户传了scroll.x按用户传的为主
@@ -75254,31 +75452,25 @@
 	      this.setState({ contentWidthDiff: 0, lastShowIndex: lastShowIndex }); //重新渲染，为了显示滚动条
 	    }
 	  };
+	  /*
 	  //根据内容动态的判断是否显示纵向滚动条
-	
-	
-	  Table.prototype.isShowScrollY = function isShowScrollY() {
-	    var props = this.props;
-	    var y = props.scroll && props.scroll.y;
-	    if (y) {
-	      var bodyH = this.bodyTable.clientHeight;
-	      var bodyContentH = this.bodyTable.querySelector('table').clientHeight;
-	      var rightBodyTable = this.refs.fixedColumnsBodyRight;
-	      // const leftBodyTable = this.refs.fixedColumnsBodyLeft;
-	      var overflowy = bodyContentH <= bodyH ? 'auto' : 'scroll';
+	  isShowScrollY(){
+	    const props = this.props;
+	    const y = props.scroll && props.scroll.y;
+	    if(y){
+	      const bodyH = this.bodyTable.clientHeight;
+	      const bodyContentH = this.bodyTable.querySelector('table').clientHeight;
+	      const rightBodyTable = this.fixedRightBodyInner;
+	      // const leftBodyTable = this.fixedLeftBodyInner;
+	      const overflowy = bodyContentH <= bodyH ? 'auto':'scroll';
 	      this.bodyTable.style.overflowY = overflowy;
-	
-	      this.headTable.style.overflowY = overflowy;
+	       this.headTable.style.overflowY = overflowy;
 	      rightBodyTable && (rightBodyTable.style.overflowY = overflowy);
-	      // 没有纵向滚动条时，表头横向滚动条根据内容动态显示 待验证
-	      // if(overflowy == 'auto'){
-	      //   this.fixedHeadTable && (this.fixedHeadTable.style.overflowX = 'auto');
-	      //   rightBodyTable && (rightBodyTable.style.overflowX = 'auto');
-	      //   leftBodyTable && (leftBodyTable.style.overflowX = 'auto');
-	      // }
+	     }
+	  }
+	   */
+	  //同步固定列情况下部分区域滚动条出现引起的错位问题
 	
-	    }
-	  };
 	
 	  Table.prototype.onExpandedRowsChange = function onExpandedRowsChange(expandedRowKeys) {
 	    if (!this.props.expandedRowKeys) {
@@ -75342,69 +75534,78 @@
 	  };
 	
 	  Table.prototype.getHeader = function getHeader(columns, fixed, leftFixedWidth, rightFixedWidth) {
-	    var lastShowIndex = this.state.lastShowIndex;
-	    var _props2 = this.props,
-	        filterDelay = _props2.filterDelay,
-	        onFilterChange = _props2.onFilterChange,
-	        onFilterClear = _props2.onFilterClear,
-	        filterable = _props2.filterable,
-	        showHeader = _props2.showHeader,
-	        expandIconAsCell = _props2.expandIconAsCell,
-	        clsPrefix = _props2.clsPrefix,
-	        onDragStart = _props2.onDragStart,
-	        onDragEnter = _props2.onDragEnter,
-	        onDragOver = _props2.onDragOver,
-	        onDrop = _props2.onDrop,
-	        onDragEnd = _props2.onDragEnd,
-	        draggable = _props2.draggable,
-	        onMouseDown = _props2.onMouseDown,
-	        onMouseMove = _props2.onMouseMove,
-	        onMouseUp = _props2.onMouseUp,
-	        dragborder = _props2.dragborder,
-	        onThMouseMove = _props2.onThMouseMove,
-	        dragborderKey = _props2.dragborderKey,
-	        minColumnWidth = _props2.minColumnWidth,
-	        headerHeight = _props2.headerHeight,
-	        afterDragColWidth = _props2.afterDragColWidth,
-	        headerScroll = _props2.headerScroll,
-	        bordered = _props2.bordered,
-	        onDropBorder = _props2.onDropBorder,
-	        onDraggingBorder = _props2.onDraggingBorder,
-	        bodyDisplayInRow = _props2.bodyDisplayInRow,
-	        headerEventNoStop = _props2.headerEventNoStop,
-	        onCopy = _props2.onCopy;
+	    var _props4 = this.props,
+	        filterDelay = _props4.filterDelay,
+	        onFilterChange = _props4.onFilterChange,
+	        onFilterClear = _props4.onFilterClear,
+	        filterable = _props4.filterable,
+	        showHeader = _props4.showHeader,
+	        expandIconAsCell = _props4.expandIconAsCell,
+	        clsPrefix = _props4.clsPrefix,
+	        onDragStart = _props4.onDragStart,
+	        onDragEnter = _props4.onDragEnter,
+	        onDragOver = _props4.onDragOver,
+	        onDrop = _props4.onDrop,
+	        onDragEnd = _props4.onDragEnd,
+	        draggable = _props4.draggable,
+	        onMouseDown = _props4.onMouseDown,
+	        onMouseMove = _props4.onMouseMove,
+	        onMouseUp = _props4.onMouseUp,
+	        dragborder = _props4.dragborder,
+	        dragborderKey = _props4.dragborderKey,
+	        minColumnWidth = _props4.minColumnWidth,
+	        headerHeight = _props4.headerHeight,
+	        afterDragColWidth = _props4.afterDragColWidth,
+	        headerScroll = _props4.headerScroll,
+	        bordered = _props4.bordered,
+	        onDropBorder = _props4.onDropBorder,
+	        onDraggingBorder = _props4.onDraggingBorder,
+	        bodyDisplayInRow = _props4.bodyDisplayInRow,
+	        headerEventNoStop = _props4.headerEventNoStop,
+	        onCopy = _props4.onCopy;
 	
-	    this.columnsChildrenList = []; //复杂表头拖拽，重新render表头前，将其置空
-	    var rows = this.getHeaderRows(columns);
-	    if (expandIconAsCell && fixed !== 'right') {
-	      rows[0].unshift({
-	        key: 'u-table-expandIconAsCell',
-	        className: clsPrefix + '-expand-icon-th',
-	        title: '',
-	        rowSpan: rows.length,
-	        width: expandIconCellWidth
-	      });
-	      this.columnsChildrenList.unshift({
-	        className: "u-table-expand-icon-column",
-	        key: "expand-icon"
-	      });
+	    var columnsChildrenList = []; //复杂表头拖拽，重新render表头前，将其置空
+	    var rows = this.getHeaderRows({ columns: columns, columnsChildrenList: columnsChildrenList });
+	    if (expandIconAsCell) {
+	      var hasLeftFixed = this.columnManager.isAnyColumnsLeftFixed();
+	      if (hasLeftFixed && fixed == 'left' || //存在左侧固定列则展开图标独立到左侧区域
+	      !hasLeftFixed && !fixed //不存在左侧固定列则展开图标独立到中间区域
+	      ) {
+	          rows[0].unshift({
+	            key: 'u-table-expandIconAsCell',
+	            className: 'u-table-expand-icon-th',
+	            title: '',
+	            rowSpan: rows.length,
+	            width: expandIconCellWidth
+	          });
+	          columnsChildrenList.unshift({
+	            className: 'u-table-expand-icon-column',
+	            key: "expand-icon"
+	          });
+	        }
 	    }
-	    var trStyle = headerHeight && !fixed ? { height: headerHeight } : fixed ? this.getHeaderRowStyle(columns, rows) : null;
+	    if (fixed) {
+	      columnsChildrenList = columnsChildrenList.filter(function (col) {
+	        return col.fixed == fixed;
+	      }); //只获取对应的固定列
+	    } else {
+	      columnsChildrenList = columnsChildrenList.filter(function (col) {
+	        return !col.fixed;
+	      }); //只获取非固定的列
+	    }
+	    // const trStyle = headerHeight&&!fixed ? { height: headerHeight } : (fixed ? this.getHeaderRowStyle(columns, rows) : null);
+	    var trStyle = this.getHeaderRowStyle(columns, rows); //确保固定列和非固定列表头行高一致
 	    var drop = draggable ? { onDragStart: onDragStart, onDragOver: onDragOver, onDrop: onDrop, onDragEnd: onDragEnd, onDragEnter: onDragEnter, draggable: draggable } : {};
-	    var dragBorder = dragborder ? { onMouseDown: onMouseDown, onMouseMove: onMouseMove, onMouseUp: onMouseUp, dragborder: dragborder, onThMouseMove: onThMouseMove, dragborderKey: dragborderKey, onDropBorder: onDropBorder, onDraggingBorder: onDraggingBorder } : {};
-	    var contentWidthDiff = 0;
-	    //非固定表格,宽度不够时自动扩充
-	    if (!fixed) {
-	      contentWidthDiff = this.state.contentWidthDiff;
-	    }
+	    var dragBorder = dragborder ? { onMouseDown: this.onDragBorderMouseDown, onMouseMove: onMouseMove, onMouseUp: onMouseUp, dragborder: dragborder, dragborderKey: dragborderKey, onDropBorder: onDropBorder, onDraggingBorder: onDraggingBorder } : {};
+	
 	    return showHeader ? _react2["default"].createElement(_TableHeader2["default"], _extends({}, drop, dragBorder, {
-	      columnsChildrenList: this.columnsChildrenList,
+	      columnManager: this.columnManager,
+	      columnsChildrenList: columnsChildrenList,
 	      locale: this.props.locale,
 	      minColumnWidth: minColumnWidth,
-	      contentWidthDiff: contentWidthDiff,
-	      contentWidth: this.contentWidth,
-	      lastShowIndex: expandIconAsCell ? parseInt(lastShowIndex) + 1 : lastShowIndex,
-	      clsPrefix: clsPrefix,
+	      contentWidthDiff: !fixed ? this.state.contentWidthDiff : 0
+	      // contentWidth={this.contentWidth}
+	      , clsPrefix: clsPrefix,
 	      rows: rows,
 	      contentTable: this.contentTable,
 	      rowStyle: trStyle,
@@ -75418,6 +75619,7 @@
 	      scrollbarWidth: this.scrollbarWidth,
 	      headerScroll: headerScroll,
 	      bordered: bordered,
+	      tableUid: this.tableUid,
 	      leftFixedWidth: leftFixedWidth,
 	      rightFixedWidth: rightFixedWidth,
 	      bodyDisplayInRow: bodyDisplayInRow,
@@ -75426,22 +75628,21 @@
 	    })) : null;
 	  };
 	
-	  Table.prototype.getHeaderRows = function getHeaderRows(columns) {
-	    var _this2 = this;
+	  Table.prototype.getHeaderRows = function getHeaderRows(options) {
+	    var _this3 = this;
 	
-	    var currentRow = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-	    var rows = arguments[2];
+	    var columns = options.columns,
+	        _options$currentRow = options.currentRow,
+	        currentRow = _options$currentRow === undefined ? 0 : _options$currentRow,
+	        rows = options.rows,
+	        columnsChildrenList = options.columnsChildrenList;
 	    var columnKey = this.props.columnKey;
-	    var _state = this.state,
-	        _state$contentWidthDi = _state.contentWidthDiff,
-	        contentWidthDiff = _state$contentWidthDi === undefined ? 0 : _state$contentWidthDi,
-	        _state$lastShowIndex = _state.lastShowIndex,
-	        lastShowIndex = _state$lastShowIndex === undefined ? -1 : _state$lastShowIndex;
+	    // let { contentWidthDiff = 0, lastShowIndex = -1 } = this.state;
 	
 	    var filterCol = [];
 	    rows = rows || [];
 	    rows[currentRow] = rows[currentRow] || [];
-	
+	    // let centerShowColCount = 0;
 	    columns.forEach(function (column, i) {
 	      if (!column.key) {
 	        column.key = column[columnKey];
@@ -75452,14 +75653,17 @@
 	        }
 	      }
 	      var width = column.width;
-	      if (typeof width == 'string' && width.indexOf('%') > -1 && _this2.contentWidth) {
-	        width = parseInt(_this2.contentWidth * parseInt(width) / 100);
+	      if (typeof width == 'string' && width.indexOf('%') > -1 && _this3.contentWidth) {
+	        width = Math.ceil(_this3.contentWidth * parseInt(width) / 100);
 	      } else if (width) {
 	        width = parseInt(width);
 	      }
-	      if (!column.fixed && lastShowIndex == i && width) {
-	        width = width + contentWidthDiff;
-	      }
+	      // if (!column.fixed && column.ifshow) {
+	      //   centerShowColCount++;//非固定列显示的个数
+	      //   if(lastShowIndex+1 == centerShowColCount && width){//对最后一列进行补全宽度
+	      //     width = width + contentWidthDiff;
+	      //   }
+	      // }
 	      var cell = {
 	        key: column.key,
 	        className: column.className || '',
@@ -75467,7 +75671,7 @@
 	        drgHover: column.drgHover,
 	        fixed: column.fixed,
 	        width: width,
-	        dataindex: column.dataIndex,
+	        dataIndex: column.dataIndex,
 	        textAlign: column.textAlign,
 	        titleAlign: column.titleAlign, // 标题水平对齐方式
 	        required: column.required // 标题是否展示必填标志
@@ -75476,9 +75680,9 @@
 	        cell.onClick = column.onHeadCellClick;
 	      }
 	      if (column.children) {
-	        _this2.getHeaderRows(column.children, currentRow + 1, rows);
+	        _this3.getHeaderRows({ columns: column.children, currentRow: currentRow + 1, rows: rows, columnsChildrenList: columnsChildrenList });
 	      } else {
-	        _this2.columnsChildrenList.push(column); //复杂表头拖拽，所有叶子节点
+	        columnsChildrenList && columnsChildrenList.push(column); //复杂表头拖拽，所有叶子节点
 	      }
 	      if ('colSpan' in column) {
 	        cell.colSpan = column.colSpan;
@@ -75490,15 +75694,15 @@
 	        rows[currentRow].push(cell);
 	      }
 	      //判断是否启用过滤
-	      if (_this2.props.filterable) {
+	      if (_this3.props.filterable) {
 	        //组装Filter需要的Col
 	        filterCol.push({
 	          key: column.key,
 	          children: "过滤渲染",
 	          width: column.width,
 	          filtertype: column.filterType, //下拉的类型 包括['text','dropdown','date','daterange','number']
-	          dataindex: column.dataIndex, //field
-	          datasource: _this2.props.data, //需要单独拿到数据处理
+	          dataIndex: column.dataIndex, //field
+	          datasource: _this3.props.data, //需要单独拿到数据处理
 	          format: column.format, //设置日期的格式
 	          filterdropdown: column.filterDropdown, //是否显示 show hide
 	          filterdropdownauto: column.filterDropdownAuto, //是否自定义数据
@@ -75519,11 +75723,11 @@
 	  };
 	
 	  Table.prototype.getExpandedRow = function getExpandedRow(key, content, visible, className, fixed) {
-	    var _props3 = this.props,
-	        clsPrefix = _props3.clsPrefix,
-	        expandIconAsCell = _props3.expandIconAsCell,
-	        onPaste = _props3.onPaste,
-	        getCellClassName = _props3.getCellClassName;
+	    var _props5 = this.props,
+	        clsPrefix = _props5.clsPrefix,
+	        expandIconAsCell = _props5.expandIconAsCell,
+	        onPaste = _props5.onPaste,
+	        getCellClassName = _props5.getCellClassName;
 	
 	    var colCount = void 0;
 	    if (fixed === 'left') {
@@ -75533,7 +75737,7 @@
 	    } else {
 	      colCount = this.columnManager.centerColumns().length; //计算非固定列的个数，fix: 嵌套表格场景，右侧列断开的问题
 	    }
-	
+	    var hasLeftFixed = this.columnManager.isAnyColumnsLeftFixed();
 	    var expandedRowHeight = this.state.fixedColumnsExpandedRowsHeight[key] || 'auto';
 	    function contentContainer() {
 	      if (content && content.props && content.props.style) {
@@ -75554,15 +75758,19 @@
 	        };
 	      }
 	    }];
-	    if (expandIconAsCell && fixed !== 'right') {
-	      columns.unshift({
-	        key: 'expand-icon-placeholder',
-	        render: function render() {
-	          return null;
-	        }
-	      });
+	
+	    if (expandIconAsCell) {
+	      if (hasLeftFixed && fixed == 'left' || !hasLeftFixed && !fixed) {
+	        columns.unshift({
+	          key: 'expand-icon-placeholder',
+	          render: function render() {
+	            return null;
+	          }
+	        });
+	      }
 	    }
 	    return _react2["default"].createElement(_TableRow2["default"], {
+	      tableUid: this.tableUid,
 	      onPaste: onPaste,
 	      columns: columns,
 	      visible: visible,
@@ -75570,17 +75778,24 @@
 	      key: key + '-extra-row',
 	      clsPrefix: clsPrefix + '-expanded-row',
 	      indent: 1,
+	      expandIconAsCell: false,
 	      expandable: false,
 	      store: this.store,
 	      dragborderKey: this.props.dragborderKey,
 	      rowDraggAble: this.props.rowDraggAble,
 	      useDragHandle: this.props.useDragHandle,
-	      onDragRow: this.onDragRow,
-	      onDragRowStart: this.onDragRowStart,
 	      height: expandedRowHeight,
 	      getCellClassName: getCellClassName
 	    });
 	  };
+	  //列宽度拖拽-鼠标按下的事件
+	
+	
+	  //列宽度拖拽-鼠标松开的事件
+	
+	  //列宽度拖拽-取消事件
+	
+	  //列宽度拖拽-鼠标移动的事件
 	
 	  /**
 	   * 行拖拽开始时触发
@@ -75590,16 +75805,7 @@
 	
 	  /**
 	   * 行拖拽结束时触发
-	   * @param currentKey 当前拖拽目标的key
-	   * @param targetKey 拖拽结束时，目标位置的key
 	   */
-	
-	  /**
-	  * 数组元素交换位置
-	  * @param {array} arr 数组
-	  * @param {number} index1 添加项目的位置
-	  * @param {number} index2 删除项目的位置
-	  */
 	
 	
 	  /**
@@ -75622,6 +75828,8 @@
 	    var expandedRowRender = props.expandedRowRender;
 	    var expandRowByClick = props.expandRowByClick;
 	    var onPaste = props.onPaste;
+	    var anyColumnsFixed = this.columnManager.isAnyColumnsFixed();
+	    var hasLeftFixed = this.columnManager.isAnyColumnsLeftFixed();
 	    var fixedColumnsBodyRowsHeight = this.state.fixedColumnsBodyRowsHeight;
 	
 	    var rst = [];
@@ -75635,20 +75843,33 @@
 	    var onRowClick = props.onRowClick;
 	    var onRowDoubleClick = props.onRowDoubleClick;
 	
-	    var expandIconAsCell = fixed !== 'right' ? props.expandIconAsCell : false;
+	    //const expandIconAsCell = fixed !== 'right' ? props.expandIconAsCell : false;
 	    var expandIconColumnIndex = props.expandIconColumnIndex;
 	    if (props.lazyLoad && props.lazyLoad.preHeight && indent == 0) {
-	      rst.push(_react2["default"].createElement(_TableRow2["default"], { onPaste: onPaste, height: props.lazyLoad.preHeight, columns: [], className: '', key: 'table_row_first', store: this.store, visible: true }));
+	      // console.log("AAA--->lazyLoad--first->"+props.lazyLoad.preHeight);
+	      rst.push(_react2["default"].createElement(_TableRow2["default"], { onPaste: onPaste, height: props.lazyLoad.preHeight, columns: [], className: 'table_lazyload_row_first', key: 'table_lazyload_row_first', store: this.store, visible: true }));
+	    }
+	    var leafColumns = void 0;
+	    if (fixed === 'left') {
+	      leafColumns = this.columnManager.leftLeafColumns();
+	    } else if (fixed === 'right') {
+	      leafColumns = this.columnManager.rightLeafColumns();
+	    } else {
+	      leafColumns = this.columnManager.leafColumns();
 	    }
 	    var lazyCurrentIndex = props.lazyLoad && props.lazyLoad.startIndex ? props.lazyLoad.startIndex : 0;
 	    var lazyParentIndex = props.lazyLoad && props.lazyLoad.startParentIndex ? props.lazyLoad.startParentIndex : 0;
 	    var lazyEndIndex = props.lazyLoad && props.lazyLoad.endIndex ? props.lazyLoad.endIndex : -1;
+	    var lazyLoadEnable = props.lazyLoad && props.lazyLoad.startIndex > -1 && props.lazyLoad.endIndex > -1;
 	    for (var i = 0; i < data.length; i++) {
 	      var isHiddenExpandIcon = void 0;
 	      var record = data[i];
 	      var key = this.getRowKey(record, i);
 	      // 兼容 NCC 以前的业务逻辑，支持外部通过 record 中的 isleaf 字段，判断是否为叶子节点
-	      record['_isLeaf'] = typeof record['isleaf'] === 'boolean' ? record['isleaf'] : record['_isLeaf'];
+	      // record['_isLeaf'] = typeof record['isleaf'] === 'boolean' ? record['isleaf'] : record['_isLeaf'];
+	      if (typeof record['isleaf'] === 'boolean') {
+	        record['_isLeaf'] = record['isleaf']; //如果isleaf存在并且为boolean的情况下才生成_isLeaf，否则无需生成
+	      }
 	      // _isLeaf 字段是在 bigData 里添加的，只有层级树大数据场景需要该字段
 	      // _isLeaf 有三种取值情况：true / false / null。（Table内部字段）
 	      var _isLeaf = typeof record['_isLeaf'] === 'boolean' ? record['_isLeaf'] : null;
@@ -75671,24 +75892,31 @@
 	        isHiddenExpandIcon = props.haveExpandIcon(record, i);
 	      }
 	
-	      var onHoverProps = {};
-	
-	      onHoverProps.onHover = this.handleRowHover;
-	
-	      if (props.bodyDisplayInRow && props.height) {
-	        height = props.height;
-	      } else if (fixed || props.heightConsistent) {
-	        height = fixedColumnsBodyRowsHeight[fixedIndex];
-	      }
-	
-	      var leafColumns = void 0;
-	      if (fixed === 'left') {
-	        leafColumns = this.columnManager.leftLeafColumns();
-	      } else if (fixed === 'right') {
-	        leafColumns = this.columnManager.rightLeafColumns();
+	      if (props.bodyDisplayInRow) {
+	        //内容显示不换行，即显示为"..."
+	        if (anyColumnsFixed) {
+	          //存在固定列则强制同步行高度，以确保行不会错位
+	          height = props.height ? props.height : fixedColumnsBodyRowsHeight[fixedIndex];
+	        } else {
+	          //不存在固定列，则按指定高度呈现行
+	          height = props.height || 40;
+	        }
 	      } else {
-	        leafColumns = this.columnManager.leafColumns();
+	        //内容自适应行高
+	        if (anyColumnsFixed) {
+	          //存在固定列则强制同步行高度，以确保行不会错位
+	          height = fixedColumnsBodyRowsHeight[fixedIndex];
+	        } else {
+	          //不存在固定列，则按内容高度自行呈现
+	        }
 	      }
+	
+	      // if (props.bodyDisplayInRow && props.height) {
+	      //   height = props.height
+	      // } else if(fixed || props.heightConsistent) {
+	      //   height = fixedColumnsBodyRowsHeight[fixedIndex];
+	      // }
+	
 	      var className = rowClassName(record, fixedIndex + lazyCurrentIndex, indent);
 	
 	      //合计代码如果是最后一行并且有合计功能时，最后一行为合计列
@@ -75705,58 +75933,63 @@
 	      if (rootIndex == -1) {
 	        index = i + lazyParentIndex;
 	      }
-	      rst.push(_react2["default"].createElement(_TableRow2["default"], _extends({
-	        onPaste: onPaste,
-	        indent: indent,
-	        indentSize: props.indentSize,
-	        needIndentSpaced: needIndentSpaced,
-	        className: '' + className,
-	        record: record,
-	        expandIconAsCell: expandIconAsCell,
-	        onDestroy: this.onRowDestroy,
-	        index: index,
-	        visible: visible,
-	        expandRowByClick: expandRowByClick,
-	        onExpand: this.onExpanded,
-	        expandable: expandedRowRender || (childrenColumn && childrenColumn.length > 0 ? true : _isLeaf === false),
-	        expanded: isRowExpanded,
-	        clsPrefix: props.clsPrefix + '-row',
-	        childrenColumnName: childrenColumnName,
-	        columns: leafColumns,
-	        expandIconColumnIndex: expandIconColumnIndex,
-	        onRowClick: onRowClick,
-	        onRowDoubleClick: onRowDoubleClick,
-	        height: height,
-	        isHiddenExpandIcon: isHiddenExpandIcon
-	      }, onHoverProps, {
-	        key: "table_row_" + key + "_" + index,
-	        hoverKey: key,
-	        ref: rowRef,
-	        store: this.store,
-	        fixed: fixed,
-	        expandedContentHeight: expandedContentHeight,
-	        setRowHeight: props.setRowHeight,
-	        setRowParentIndex: props.setRowParentIndex,
-	        treeType: childrenColumn || this.treeType ? true : false,
-	        fixedIndex: fixedIndex + lazyCurrentIndex,
-	        rootIndex: rootIndex,
-	        syncHover: props.syncHover,
-	        bodyDisplayInRow: props.bodyDisplayInRow,
-	        rowDraggAble: props.rowDraggAble,
-	        useDragHandle: props.useDragHandle,
-	        onDragRow: this.onDragRow,
-	        onDragRowStart: this.onDragRowStart,
-	        contentTable: this.contentTable,
-	        tableUid: this.tableUid,
-	        expandedIcon: props.expandedIcon,
-	        collapsedIcon: props.collapsedIcon,
-	        lazyStartIndex: lazyCurrentIndex,
-	        lazyEndIndex: lazyEndIndex,
-	        centerColumnsLength: this.centerColumnsLength,
-	        leftColumnsLength: this.leftColumnsLength,
-	        expandIconCellWidth: expandIconCellWidth,
-	        getCellClassName: props.getCellClassName
-	      })));
+	      if (lazyLoadEnable && this.treeType && (record.index < lazyCurrentIndex || record.index > lazyEndIndex)) {
+	        // 大数据表格下，如果是树表，父节点如果已经不在区域范围则无需渲染dom，解决快速向上滚动父级树节点闪现的问题
+	        fixedIndex--;
+	        this.treeRowIndex--;
+	      } else {
+	        rst.push(_react2["default"].createElement(_TableRow2["default"], {
+	          onPaste: onPaste,
+	          indent: indent,
+	          indentSize: props.indentSize,
+	          needIndentSpaced: needIndentSpaced,
+	          className: '' + className,
+	          record: record,
+	          hasLeftFixed: hasLeftFixed,
+	          expandIconAsCell: props.expandIconAsCell,
+	          onDestroy: this.onRowDestroy,
+	          index: index,
+	          visible: visible,
+	          expandRowByClick: expandRowByClick,
+	          onExpand: this.onExpanded,
+	          expandable: expandedRowRender || (childrenColumn && childrenColumn.length > 0 ? true : _isLeaf === false),
+	          expanded: isRowExpanded,
+	          clsPrefix: props.clsPrefix + '-row',
+	          childrenColumnName: childrenColumnName,
+	          columns: leafColumns,
+	          expandIconColumnIndex: expandIconColumnIndex,
+	          onRowClick: onRowClick,
+	          onRowDoubleClick: onRowDoubleClick,
+	          height: height,
+	          isHiddenExpandIcon: isHiddenExpandIcon,
+	          onHover: this.handleRowHover,
+	          key: "table_row_" + key,
+	          hoverKey: key,
+	          ref: rowRef,
+	          store: this.store,
+	          fixed: fixed,
+	          expandedContentHeight: expandedContentHeight,
+	          setRowHeight: props.setRowHeight,
+	          setRowParentIndex: props.setRowParentIndex,
+	          treeType: childrenColumn || this.treeType ? true : false,
+	          fixedIndex: fixedIndex + lazyCurrentIndex,
+	          rootIndex: rootIndex,
+	          syncHover: props.syncHover,
+	          bodyDisplayInRow: props.bodyDisplayInRow,
+	          rowDraggAble: props.rowDraggAble,
+	          useDragHandle: props.useDragHandle,
+	          contentTable: this.contentTable,
+	          tableUid: this.tableUid,
+	          expandedIcon: props.expandedIcon,
+	          collapsedIcon: props.collapsedIcon,
+	          lazyStartIndex: lazyCurrentIndex,
+	          lazyEndIndex: lazyEndIndex,
+	          centerColumnsLength: this.centerColumnsLength,
+	          leftColumnsLength: this.leftColumnsLength,
+	          expandIconCellWidth: expandIconCellWidth,
+	          getCellClassName: props.getCellClassName
+	        }));
+	      }
 	      this.treeRowIndex++;
 	      var subVisible = visible && isRowExpanded;
 	
@@ -75771,7 +76004,9 @@
 	    }
 	
 	    if (props.lazyLoad && props.lazyLoad.sufHeight && indent == 0) {
-	      rst.push(_react2["default"].createElement(_TableRow2["default"], { onPaste: onPaste, height: props.lazyLoad.sufHeight, key: 'table_row_end', columns: [], className: '', store: this.store, visible: true }));
+	      //console.log("AAA--->lazyLoad---last-->"+props.lazyLoad.sufHeight);
+	      rst.push(_react2["default"].createElement(_TableRow2["default"], { onPaste: onPaste //containerWidth={this.contentDomWidth} isSuf //滚动loading相关的暂时不用
+	        , height: props.lazyLoad.sufHeight, key: 'table_lazyload_row_end', columns: [], className: 'table_lazyload_row_end', store: this.store, visible: true }));
 	    }
 	    if (!this.isTreeType) {
 	      this.treeType = false;
@@ -75789,19 +76024,20 @@
 	  };
 	
 	  Table.prototype.getColGroup = function getColGroup(columns, fixed) {
-	    var _this3 = this;
-	
 	    var cols = [];
 	    var self = this;
 	
-	    var _state2 = this.state,
-	        _state2$contentWidthD = _state2.contentWidthDiff,
-	        contentWidthDiff = _state2$contentWidthD === undefined ? 0 : _state2$contentWidthD,
-	        _state2$lastShowIndex = _state2.lastShowIndex,
-	        lastShowIndex = _state2$lastShowIndex === undefined ? 0 : _state2$lastShowIndex;
+	    var _state = this.state,
+	        _state$contentWidthDi = _state.contentWidthDiff,
+	        contentWidthDiff = _state$contentWidthDi === undefined ? 0 : _state$contentWidthDi,
+	        _state$lastShowIndex = _state.lastShowIndex,
+	        lastShowIndex = _state$lastShowIndex === undefined ? -1 : _state$lastShowIndex;
+	    var expandIconAsCell = this.props.expandIconAsCell;
 	
-	    if (this.props.expandIconAsCell && fixed !== 'right') {
+	    var hasLeftFixed = this.columnManager.isAnyColumnsLeftFixed();
+	    if (expandIconAsCell && hasLeftFixed && fixed == 'left' || expandIconAsCell && !hasLeftFixed && !fixed) {
 	      cols.push(_react2["default"].createElement('col', {
+	        style: { minWidth: expandIconCellWidth, width: expandIconCellWidth },
 	        className: this.props.clsPrefix + '-expand-icon-col',
 	        key: 'u-table-expand-icon-col'
 	      }));
@@ -75814,30 +76050,45 @@
 	      contentWidthDiff = 0;
 	      leafColumns = this.columnManager.rightLeafColumns();
 	    } else {
-	      leafColumns = this.columnManager.leafColumns();
+	      leafColumns = this.columnManager.centerLeafColumns();
 	    }
 	    cols = cols.concat(leafColumns.map(function (c, i, arr) {
 	      var fixedClass = '';
 	      var width = c.width;
 	      if (typeof width == 'string' && width.indexOf('%') > -1 && self.contentWidth) {
-	        width = parseInt(self.contentWidth * parseInt(width) / 100);
+	        width = Math.floor((self.contentWidth - self.scrollbarWidth) * parseInt(width) / 100); //向下取整，解决宽度2518px时10列每列10%(四舍五入时252px)的情况下，合计2520px导致出现滚动条的问题
 	      } else if (width) {
 	        width = parseInt(width);
 	      }
-	      if (lastShowIndex == i && width) {
-	        width = width + contentWidthDiff;
+	      //中间区域非固定的最后一列自动补充宽度
+	      if (!fixed && lastShowIndex == i && width) {
+	        width = width + (contentWidthDiff < 0 ? 0 : contentWidthDiff);
 	      }
-	      if (!fixed && c.fixed) {
-	        fixedClass = ' ' + _this3.props.clsPrefix + '-row-fixed-columns-in-body';
-	      }
-	      return _react2["default"].createElement('col', { key: c.key, style: { width: width, minWidth: c.width }, className: fixedClass });
+	      // if (!fixed && c.fixed) {//之前中间区域会渲染固定列dom单不让显示，现在直接不渲染dom了，所以需要了
+	      //   fixedClass = ` ${this.props.clsPrefix}-row-fixed-columns-in-body`;
+	      // }
+	      return _react2["default"].createElement('col', { key: c.key || c.dataIndex, style: { width: width, minWidth: c.width }, className: fixedClass || null });
 	    }));
 	    return _react2["default"].createElement(
 	      'colgroup',
-	      { id: 'bee-table-colgroup' },
+	      { className: 'u-table-colgroup' },
 	      cols
 	    );
 	  };
+	
+	  // renderDragHideTable = () => {
+	  //   const { columns,clsPrefix, dragborder, dragborderKey } = this.props;
+	  //   if (!dragborder) return null;
+	  //   let sum = 0;
+	  //   return (<div id={`u-table-drag-hide-table-${dragborderKey}`} className={`${clsPrefix}-hiden-drag`} >
+	  //     {
+	  //       columns.map((da, i) => {
+	  //         sum += da.width ? parseInt(da.width) : 0;
+	  //         return (<div className={`${clsPrefix}-hiden-drag-li`} key={da + "_hiden_" + i} style={{ left: sum + "px" }}></div>);
+	  //       })
+	  //     }
+	  //   </div>);
+	  // }
 	
 	  Table.prototype.getLeftFixedTable = function getLeftFixedTable() {
 	    return this.getTable({
@@ -75859,114 +76110,168 @@
 	    var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 	    var columns = options.columns,
 	        fixed = options.fixed;
-	    var _props4 = this.props,
-	        clsPrefix = _props4.clsPrefix,
-	        _props4$scroll = _props4.scroll,
-	        scroll = _props4$scroll === undefined ? {} : _props4$scroll,
-	        getBodyWrapper = _props4.getBodyWrapper,
-	        footerScroll = _props4.footerScroll,
-	        headerScroll = _props4.headerScroll,
-	        _props4$hideHeaderScr = _props4.hideHeaderScroll,
-	        hideHeaderScroll = _props4$hideHeaderScr === undefined ? false : _props4$hideHeaderScr,
-	        expandIconAsCell = _props4.expandIconAsCell;
-	    var _props5 = this.props,
-	        useFixedHeader = _props5.useFixedHeader,
-	        data = _props5.data;
+	    var _props6 = this.props,
+	        clsPrefix = _props6.clsPrefix,
+	        data = _props6.data,
+	        bordered = _props6.bordered,
+	        _props6$scroll = _props6.scroll,
+	        scroll = _props6$scroll === undefined ? {} : _props6$scroll,
+	        getBodyWrapper = _props6.getBodyWrapper,
+	        footerScroll = _props6.footerScroll,
+	        headerScroll = _props6.headerScroll,
+	        _props6$hideHeaderScr = _props6.hideHeaderScroll,
+	        hideHeaderScroll = _props6$hideHeaderScr === undefined ? false : _props6$hideHeaderScr,
+	        expandIconAsCell = _props6.expandIconAsCell;
 	
-	    var bodyStyle = _extends({}, this.props.bodyStyle); // 这里为什么不写在上面?
+	    var useFixedHeader = this.props.useFixedHeader; // let变量声明
+	    var bodyStyle = _extends({}, this.props.bodyStyle); // 克隆一份
 	    var headStyle = {};
 	    var innerBodyStyle = {};
-	    var leftFixedWidth = this.columnManager.getLeftColumnsWidth(this.contentWidth);
-	    var rightFixedWidth = this.columnManager.getRightColumnsWidth(this.contentWidth);
+	    var leftFixedWidth = this.columnManager.getLeftColumnsWidth(this.contentWidth); // gx + (bordered ? 1 : 0); // 边框table需要把左边的1像素边框加上
+	    var rightFixedWidth = this.columnManager.getRightColumnsWidth(this.contentWidth); // gx + (browserInfo.browserType=='IE' ? 16 : 0); // IE右侧固定列会被横竖滚动条影响一些宽度
 	
-	    var tableClassName = '';
-	    //表格元素的宽度大于容器的宽度也显示滚动条
-	    if (scroll.x || fixed || this.contentDomWidth < this.contentWidth) {
-	      tableClassName = clsPrefix + '-fixed';
-	      //没有数据并且含有顶部菜单时
-	      if (this.props.data.length == 0 && this.props.headerScroll) {
-	        bodyStyle.overflowX = 'hidden';
+	    var tableClassName = fixed ? clsPrefix + '-fixed' : '';
+	
+	    if (scroll.x || fixed //|| this.contentDomWidth < this.contentWidth  //表格元素的宽度大于容器的宽度也显示滚动条
+	    ) {
+	
+	        //没有数据并且含有顶部菜单时
+	        if (data.length == 0 && this.props.headerScroll) {
+	          bodyStyle.overflowX = 'hidden';
+	        }
+	        if (!footerScroll) {
+	          bodyStyle.overflowX = bodyStyle.overflowX || 'auto';
+	        }
 	      }
-	      if (!footerScroll) {
-	        bodyStyle.overflowX = bodyStyle.overflowX || 'auto';
-	      }
-	    }
 	
 	    if (scroll.y) {
 	      // maxHeight will make fixed-Table scrolling not working
 	      // so we only set maxHeight to body-Table here
 	      if (fixed) {
+	        //固定表格
 	        // bodyStyle.height = bodyStyle.height || scroll.y;
+	        innerBodyStyle.minHeight = bodyStyle.minHeight || scroll.y;
 	        innerBodyStyle.maxHeight = bodyStyle.maxHeight || scroll.y;
-	        innerBodyStyle.overflowY = bodyStyle.overflowY || 'scroll';
+	        innerBodyStyle.overflowY = bodyStyle.overflowY || 'auto';
+	        // gx解决底部滚动条的显示问题
+	        // if (this.computeWidth > this.contentDomWidth) {
+	        //   innerBodyStyle.overflowX = 'scroll';
+	        // } else if (this.contentWidth === this.contentDomWidth) {
+	        //   innerBodyStyle.overflowX = 'hidden';
+	        // }
 	      } else {
 	        bodyStyle.maxHeight = bodyStyle.maxHeight || scroll.y;
 	      }
-	      bodyStyle.overflowY = bodyStyle.overflowY || 'scroll';
+	      bodyStyle.overflowY = bodyStyle.overflowY || 'auto';
 	      useFixedHeader = true;
 	
 	      // Add negative margin bottom for scroll bar overflow bug
-	      var scrollbarWidth = this.scrollbarWidth;
-	      if (scrollbarWidth >= 0) {
-	        (fixed ? bodyStyle : headStyle).paddingBottom = '0px';
-	        //显示表头滚动条
-	        if (headerScroll) {
-	          if (fixed) {
-	
-	            if (this.domWidthDiff <= 0) {
-	              headStyle.marginBottom = scrollbarWidth + 'px';
-	              bodyStyle.marginBottom = '-' + scrollbarWidth + 'px';
-	            } else {
-	              innerBodyStyle.overflowX = 'auto';
-	            }
-	          } else {
-	            //内容少，不用显示滚动条
-	            if (this.domWidthDiff > 0) {
-	              headStyle.overflowX = 'hidden';
-	            }
-	            headStyle.marginBottom = '0px';
-	          }
-	        } else {
-	          if (fixed) {
-	            if (this.domWidthDiff > 0) {
-	              headStyle.overflow = 'hidden';
-	              innerBodyStyle.overflowX = 'auto'; //兼容expand场景、子表格含有固定列的场景
-	            } else {
-	              bodyStyle.marginBottom = '-' + scrollbarWidth + 'px';
-	            }
-	          } else {
-	            // 没有数据时，表头滚动条隐藏问题
-	            if (data.length == 0 && this.domWidthDiff < 0) {
-	              headStyle.marginBottom = '0px';
-	            } else {
-	              headStyle.marginBottom = '-' + scrollbarWidth + 'px';
-	            }
-	          }
-	        }
-	      }
+	      // const scrollbarWidth = this.scrollbarWidth;
+	      // if (scrollbarWidth >= 0) {
+	      //   (fixed ? bodyStyle : headStyle).paddingBottom = '0px';
+	      //   //显示表头滚动条
+	      //   if(headerScroll){
+	      //     if(fixed){
+	      //
+	      //      if(this.domWidthDiff <= 0){
+	      //         headStyle.marginBottom = `${scrollbarWidth}px`;
+	      //         bodyStyle.marginBottom = `-${scrollbarWidth}px`;
+	      //       }else{
+	      //         innerBodyStyle.overflowX = 'auto';
+	      //       }
+	      //     }else{
+	      //          //内容少，不用显示滚动条
+	      //          if(this.domWidthDiff > 0){
+	      //           headStyle.overflowX = 'hidden';
+	      //         }
+	      //       headStyle.marginBottom = `0px`;
+	      //     }
+	      //   }else{
+	      //     if(fixed){
+	      //       if(this.domWidthDiff > 0){
+	      //         headStyle.overflow = 'hidden';
+	      //         innerBodyStyle.overflowX = 'auto'; //兼容expand场景、子表格含有固定列的场景
+	      //       }else{
+	      //         // 海龙为了解决固定右侧滚动条Firefox下的现象问题，解决方案不合适，暂时不用，还原
+	      //         // if (this.computeWidth > this.contentDomWidth) {
+	      //         //   bodyStyle.marginBottom = '-' + scrollbarWidth + 'px';
+	      //         //   const userAgent = navigator.userAgent; // 火狐，IE浏览器，固定表格跟随resize事件产生的滚动条隐藏
+	      //         //   const isFF = userAgent.indexOf("Firefox") > -1;
+	      //         //   const isIE = !!window.ActiveXObject || "ActiveXObject" in window
+	      //         //   if (isFF || isIE) {
+	      //         //     // innerBodyStyle.overflowX = 'hidden';
+	      //         //     delete innerBodyStyle.overflowX
+	      //         //   }
+	      //         // }
+	      //         bodyStyle.marginBottom = `-${scrollbarWidth}px`;
+	      //       }
+	      //
+	      //     }else{
+	      //         // // 没有数据时，表头滚动条隐藏问题
+	      //         // if(data.length == 0 && this.domWidthDiff < 0){
+	      //         //   headStyle.marginBottom = '0px';
+	      //         // }else{
+	      //         //   headStyle.marginBottom = `-${scrollbarWidth}px`;
+	      //         // }
+	      //
+	      //     }
+	      //
+	      //   }
+	      // }
 	    }
 	
-	    if (data.length == 0 && hideHeaderScroll) {
-	      //支持 NCC 需求:表格无数据时，去掉表头滚动条 (https://github.com/iuap-design/tinper-bee/issues/207)
-	      headStyle.marginBottom = '-' + this.scrollbarWidth + 'px';
+	    // if(data.length == 0 && hideHeaderScroll){
+	    //   //支持 NCC 需求:表格无数据时，去掉表头滚动条 (https://github.com/iuap-design/tinper-bee/issues/207)
+	    //   headStyle.marginBottom = `-${this.scrollbarWidth}px`;
+	    // }
+	
+	    //----------------水平滚动条的显示处理-------------
+	    //没有数据时
+	    if (data.length == 0) {
+	      if (fixed) {
+	        //固定列头部滚水平动条隐藏
+	        headStyle.overflowX = 'hidden';
+	      } else {
+	        //中间列头部水平滚动条自动显示
+	        headStyle.overflowX = 'auto';
+	      }
+	    } else {
+	      //有数据时，头部水平滚动条隐藏
+	      headStyle.overflowX = 'hidden';
+	    }
+	    //强制固定列和中间列隐藏头部水平滚动条，
+	    if (hideHeaderScroll) {
+	      headStyle.overflowX = 'hidden';
+	    }
+	
+	    //---------------垂直滚动条的显示处理---------------
+	    if (data.length == 0) {
+	      bodyStyle.overflowY = 'hidden';
+	      innerBodyStyle.overflowY = 'hidden';
+	      headStyle.overflowY = 'hidden';
+	    } else {
+	      bodyStyle.overflowY = bodyStyle.overflowY || 'auto';
+	      innerBodyStyle.overflowY = bodyStyle.overflowY;
+	      headStyle.overflowY = innerBodyStyle.overflowY;
 	    }
 	
 	    var renderTable = function renderTable() {
 	      var hasHead = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
 	      var hasBody = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+	      var options = arguments[2];
+	      var columns = options.columns,
+	          fixed = options.fixed;
 	
 	      var tableStyle = {};
 	      if (!fixed && scroll.x) {
+	        //非固定列的中间表格
 	        // not set width, then use content fixed width
 	        if (scroll.x === true) {
 	          tableStyle.tableLayout = 'fixed';
 	        } else {
-	          tableStyle.width = _this4.contentWidth - _this4.columnManager.getLeftColumnsWidth(_this4.contentWidth) - _this4.columnManager.getRightColumnsWidth(_this4.contentWidth);
+	          // tableStyle.width = this.contentWidth - this.columnManager.getLeftColumnsWidth(this.contentWidth) - this.columnManager.getRightColumnsWidth(this.contentWidth);
+	          tableStyle.width = scroll.x;
 	        }
-	      }
-	      // 自动出现滚动条
-	      if (!fixed && _this4.contentDomWidth < _this4.contentWidth) {
-	        tableStyle.width = _this4.contentWidth - _this4.columnManager.getLeftColumnsWidth(_this4.contentWidth) - _this4.columnManager.getRightColumnsWidth(_this4.contentWidth);
 	      }
 	      var tableBody = hasBody ? getBodyWrapper(_react2["default"].createElement(
 	        'tbody',
@@ -75976,7 +76281,7 @@
 	      var _drag_class = _this4.props.dragborder ? "table-drag-bordered" : "";
 	      return _react2["default"].createElement(
 	        'table',
-	        { className: ' ' + tableClassName + '  table-bordered ' + _drag_class + ' ', style: tableStyle },
+	        { className: ' ' + tableClassName + '  table-bordered ' + _drag_class + ' ', 'data-for-table': _this4.tableUid },
 	        _this4.getColGroup(columns, fixed),
 	        hasHead ? _this4.getHeader(columns, fixed, leftFixedWidth, rightFixedWidth) : null,
 	        tableBody
@@ -75991,40 +76296,41 @@
 	        {
 	          className: clsPrefix + '-header',
 	          ref: function ref(el) {
-	            fixed ? _this4.fixedHeadTable = el : _this4.headTable = el;
+	            if (fixed == 'right') {
+	              _this4.rightHeadTable = el;
+	            } else if (fixed) {
+	              _this4.leftHeadTable = el;
+	            } else {
+	              _this4.headTable = el;
+	            }
 	          },
-	          style: headStyle,
-	          onMouseOver: this.detectScrollTarget,
-	          onTouchStart: this.detectScrollTarget,
-	          onScroll: this.handleBodyScroll
+	          style: headStyle
+	          // onMouseOver={this.detectScrollTarget}
+	          // onTouchStart={this.detectScrollTarget}
+	          , onScroll: this.handleBodyScroll
 	        },
-	        renderTable(true, false)
+	        renderTable(true, false, options)
 	      );
 	    }
-	    var BodyTable = _react2["default"].createElement(
+	    var BodyTable = //中间表格的body
+	    _react2["default"].createElement(
 	      'div',
 	      {
 	        className: clsPrefix + '-body',
 	        style: bodyStyle,
 	        ref: function ref(el) {
 	          _this4.bodyTable = el;
-	        },
-	        onMouseOver: this.detectScrollTarget,
-	        onTouchStart: this.detectScrollTarget,
-	        onScroll: this.handleBodyScroll,
+	        }
+	        // onMouseOver={this.detectScrollTarget}
+	        // onTouchStart={this.detectScrollTarget}
+	        , onScroll: this.handleBodyScroll,
 	        onMouseLeave: this.onBodyMouseLeave
 	      },
-	      this.renderDragHideTable(),
-	      renderTable(!useFixedHeader)
+	      renderTable(!useFixedHeader, true, options)
 	    );
 	
 	    if (fixed && columns.length) {
-	      var refName = void 0;
-	      if (columns[0].fixed === 'left' || columns[0].fixed === true) {
-	        refName = 'fixedColumnsBodyLeft';
-	      } else if (columns[0].fixed === 'right') {
-	        refName = 'fixedColumnsBodyRight';
-	      }
+	      //固定表格的body
 	      delete bodyStyle.overflowX;
 	      delete bodyStyle.overflowY;
 	      BodyTable = _react2["default"].createElement(
@@ -76038,21 +76344,43 @@
 	          {
 	            style: _extends({}, innerBodyStyle),
 	            className: clsPrefix + '-body-inner',
-	            ref: refName,
-	            onMouseOver: this.detectScrollTarget,
-	            onTouchStart: this.detectScrollTarget,
-	            onScroll: this.handleBodyScroll
+	            ref: function ref(_ref) {
+	              switch (fixed) {
+	                case "left":
+	                  _this4.fixedLeftBodyInner = _ref;break;
+	                case "right":
+	                  _this4.fixedRightBodyInner = _ref;break;
+	              }
+	            }
+	            // onMouseOver={this.detectScrollTarget}
+	            // onTouchStart={this.detectScrollTarget}
+	            , onScroll: this.handleBodyScroll
 	          },
-	          renderTable(!useFixedHeader)
+	          renderTable(!useFixedHeader, true, options)
 	        )
 	      );
 	    }
 	    // const leftFixedWidth = this.columnManager.getLeftColumnsWidth(this.contentWidth);
 	    // const rightFixedWidth = this.columnManager.getRightColumnsWidth(this.contentWidth);
-	    var expandIconWidth = expandIconAsCell ? 32 : 0;
+	    var expandIconWidth = expandIconAsCell && this.columnManager.isAnyColumnsLeftFixed() ? expandIconCellWidth : 0;
+	    // if(expandIconAsCell && typeof this.props.expandedRowRender == 'function'){
+	    //   let hasLeftFixed = this.columnManager.isAnyColumnsLeftFixed();
+	    //   if((hasLeftFixed&& fixed == 'left')
+	    //     ||!hasLeftFixed&& !fixed
+	    //   ){
+	    //     expandIconWidth = expandIconCellWidth;
+	    //   }
+	    // }
 	    var parStyle = {};
 	    if (!fixed) {
-	      parStyle = { 'marginLeft': leftFixedWidth + expandIconWidth, 'marginRight': rightFixedWidth };
+	      //渲染中间区域
+	      parStyle.marginRight = rightFixedWidth;
+	      var leftBorderedWidth = 0;
+	      if (bordered && leftFixedWidth > 0) {
+	        leftBorderedWidth = 1;
+	        parStyle.paddingLeft = 1;
+	      }
+	      parStyle.marginLeft = leftFixedWidth + expandIconWidth - leftBorderedWidth;
 	    }
 	    return _react2["default"].createElement(
 	      'div',
@@ -76063,9 +76391,9 @@
 	  };
 	
 	  Table.prototype.getTitle = function getTitle() {
-	    var _props6 = this.props,
-	        title = _props6.title,
-	        clsPrefix = _props6.clsPrefix;
+	    var _props7 = this.props,
+	        title = _props7.title,
+	        clsPrefix = _props7.clsPrefix;
 	
 	    return title ? _react2["default"].createElement(
 	      'div',
@@ -76075,9 +76403,9 @@
 	  };
 	
 	  Table.prototype.getFooter = function getFooter() {
-	    var _props7 = this.props,
-	        footer = _props7.footer,
-	        clsPrefix = _props7.clsPrefix;
+	    var _props8 = this.props,
+	        footer = _props8.footer,
+	        clsPrefix = _props8.clsPrefix;
 	
 	    return footer ? _react2["default"].createElement(
 	      'div',
@@ -76087,10 +76415,10 @@
 	  };
 	
 	  Table.prototype.getEmptyText = function getEmptyText() {
-	    var _props8 = this.props,
-	        defaultEmptyText = _props8.emptyText,
-	        clsPrefix = _props8.clsPrefix,
-	        data = _props8.data;
+	    var _props9 = this.props,
+	        defaultEmptyText = _props9.emptyText,
+	        clsPrefix = _props9.clsPrefix,
+	        data = _props9.data;
 	
 	    var locale = (0, _tool.getComponentLocale)(this.props, this.context, 'Table', function () {
 	      return _i18n2["default"];
@@ -76115,77 +76443,134 @@
 	    ) : null;
 	  };
 	
-	  Table.prototype.getHeaderRowStyle = function getHeaderRowStyle(columns, rows) {
-	    var fixedColumnsHeadRowsHeight = this.state.fixedColumnsHeadRowsHeight;
+	  // getStyle(obj,attr){
+	  //   if(obj.currentStyle){
+	  //       return obj.currentStyle[attr];
+	  //   }
+	  //   else{
+	  //       return document.defaultView.getComputedStyle(obj,null)[attr];
+	  //   }
+	  // }
+	  // getTdPadding=(td)=>{
+	  //   let tdPaddingTop = this.getStyle(td,'paddingTop'),tdPaddingBottom = this.getStyle(td,'paddingBottom'),
+	  //   tdBorderTop = this.getStyle(td,'borderTopWidth'),tdBorderBottom = this.getStyle(td,'borderBottomWidth');
+	  //   return Number(tdPaddingTop.replace('px',''))+Number(tdPaddingBottom.replace('px',''))+Number(tdBorderTop.replace('px',''))+Number(tdBorderBottom.replace('px',''))
+	  //
+	  // }
 	
-	    var headerHeight = fixedColumnsHeadRowsHeight[0];
-	
-	    if (headerHeight && columns) {
-	      if (headerHeight === 'auto') {
-	        return { height: 'auto' };
-	      }
-	      return { height: headerHeight / rows.length };
-	    }
-	    return null;
-	  };
-	
-	  Table.prototype.getStyle = function getStyle(obj, attr) {
-	    if (obj.currentStyle) {
-	      return obj.currentStyle[attr];
-	    } else {
-	      return document.defaultView.getComputedStyle(obj, null)[attr];
-	    }
+	  // getFlatRecords = data => {
+	  //   var result = []
+	  //   for (var i = 0; i < data.length; i++) {
+	  //     result.push(data[i])
+	  //     if ((data[i].children || []).length) {
+	  //       result = result.concat(this.getFlatRecords(data[i].children))
+	  //     }
+	  //   }
+	  //   return result
+	  // };
+	  //add by gx 供外部数据变更时调用此方法同步内容行高度
+	  Table.prototype.manualSyncFixedTableRowHeight = function manualSyncFixedTableRowHeight() {
+	    this.dataChanged = true;
+	    this.syncFixedTableRowHeight();
 	  };
 	
 	  Table.prototype.syncFixedTableRowHeight = function syncFixedTableRowHeight() {
-	    //this.props.height、headerHeight分别为用户传入的行高和表头高度，如果有值，所有行的高度都是固定的，主要为了避免在千行数据中有固定列时获取行高度有问题
-	    var _props9 = this.props,
-	        clsPrefix = _props9.clsPrefix,
-	        height = _props9.height,
-	        headerHeight = _props9.headerHeight,
-	        columns = _props9.columns,
-	        heightConsistent = _props9.heightConsistent,
-	        bodyDisplayInRow = _props9.bodyDisplayInRow;
+	    var _this5 = this;
 	
-	    var headRows = this.headTable ? this.headTable.querySelectorAll('thead') : this.bodyTable.querySelectorAll('thead');
-	    var expandedRows = this.bodyTable.querySelectorAll('.' + clsPrefix + '-expanded-row') || [];
-	    var bodyRows = this.bodyTable.querySelectorAll('.' + clsPrefix + '-row') || [];
-	    var leftBodyRows = this.refs.fixedColumnsBodyLeft && this.refs.fixedColumnsBodyLeft.querySelectorAll('.' + clsPrefix + '-row') || [];
-	    var rightBodyRows = this.refs.fixedColumnsBodyRight && this.refs.fixedColumnsBodyRight.querySelectorAll('.' + clsPrefix + '-row') || [];
-	    var fixedColumnsHeadRowsHeight = [].map.call(headRows, function (row) {
-	      var height = headerHeight;
-	      if (headerHeight) {
-	        height = ((0, _utils.getMaxColChildrenLength)(columns) + 1) * headerHeight;
-	      }
-	      return headerHeight ? height : parseInt(row.getBoundingClientRect().height) || 'auto';
-	    });
-	    var fixedColumnsBodyRowsHeight = [].map.call(bodyRows, function (row, index) {
+	    //this.props.height、headerHeight分别为用户传入的行高和表头高度，如果有值，所有行的高度都是固定的，主要为了避免在千行数据中有固定列时获取行高度有问题
+	    var _props10 = this.props,
+	        clsPrefix = _props10.clsPrefix,
+	        height = _props10.height,
+	        headerHeight = _props10.headerHeight,
+	        columns = _props10.columns,
+	        heightConsistent = _props10.heightConsistent,
+	        bodyDisplayInRow = _props10.bodyDisplayInRow,
+	        lazyLoad = _props10.lazyLoad,
+	        syncFixedRowHeight = _props10.syncFixedRowHeight;
+	
+	    var expandedRows = this.bodyTable && this.bodyTable.querySelectorAll('.' + clsPrefix + '-expanded-row[data-for-table=\'' + this.tableUid + '\']') || [];
+	    var bodyRows = this.bodyTable && this.bodyTable.querySelectorAll('.' + clsPrefix + '-row[data-for-table=\'' + this.tableUid + '\']') || [];
+	    var leftBodyRows = !this.dataChanged && this.fixedLeftBodyInner && this.fixedLeftBodyInner.querySelectorAll('.' + clsPrefix + '-row[data-for-table=\'' + this.tableUid + '\']') || [];
+	    var rightBodyRows = !this.dataChanged && this.fixedRightBodyInner && this.fixedRightBodyInner.querySelectorAll('.' + clsPrefix + '-row[data-for-table=\'' + this.tableUid + '\']') || [];
+	    this.dataChanged = false;
+	    /*
+	    const headRows = this.headTable ?this.headTable.querySelector('thead') : this.bodyTable ?this.bodyTable.querySelectorAll('thead') : [];
+	    const fixedColumnsHeadRowsHeight = [].map.call(
+	      headRows, row =>{
+	        let height = headerHeight;
+	        if(headerHeight){
+	          height = (getMaxColChildrenLength(columns)+1)*headerHeight;
+	        }
+	        return headerHeight ? height : (Math.ceil(row.getBoundingClientRect().height) || 'auto')}//向上取整
+	    );
+	     */
+	    var headCenterTableDom = this.headTable && this.headTable.querySelector('table');
+	    var headLeftTableDom = this.leftHeadTable && this.leftHeadTable.querySelector('table');
+	    var headRightTableDom = this.rightHeadTable && this.rightHeadTable.querySelector('table');
+	    this.fixedColumnsHeadRowsHeightCache = this.fixedColumnsHeadRowsHeightCache || null;
+	    //计算出左中右三个表头的最大高度值
+	    var fixedColumnsHeadRowsHeight = Math.ceil(Math.max( //注意：不能使用getBoundingClientRect().height在ie下会出现小数点导致高度自动增长的问题
+	    headLeftTableDom ? headLeftTableDom.clientHeight : 0, headRightTableDom ? headRightTableDom.clientHeight : 0, headCenterTableDom ? headCenterTableDom.clientHeight : 0, headerHeight || 0));
+	    // const flatRecords = this.getFlatRecords(this.props.data || [])
+	    // const fixedColumnsBodyRowsHeight = [].map.call(
+	    //   bodyRows, (row,index) =>{
+	    //     let rsHeight = height;
+	    //     if(bodyDisplayInRow && rsHeight){
+	    //       return rsHeight;
+	    //     }else{
+	    //       const rowKey = row.getAttribute('data-row-key')
+	    //       const record = flatRecords.find(record => record.key === rowKey) || {}
+	    //       const leafKey = 'isleaf' in record ? 'isleaf' : '_isLeaf' in record ? '_isLeaf' : null // ncc传递这俩属性区分是否是子节点
+	    //       const isLeaf = leafKey && record[leafKey] === true
+	    //       if (isLeaf) {
+	    //         return Number((Number(row.getBoundingClientRect().height)).toFixed(2)) || 'auto';
+	    //       }
+	    //       // 为了提高性能，默认获取主表的高度，但是有的场景中固定列的高度比主表的高度高，所以提供此属性，会统计所有列的高度取最大的，设置
+	    //       // 内容折行显示，并又设置了 height 的情况下，也要获取主表高度
+	    //       if(heightConsistent || (!bodyDisplayInRow && rsHeight && syncFixedRowHeight)){
+	    //         let leftHeight,rightHeight,currentHeight,maxHeight;
+	    //         leftHeight = leftBodyRows[index]?Number(leftBodyRows[index].getBoundingClientRect().height).toFixed(2):0; // 有些浏览器中，取到的高度是小数，直接parseInt有问题，保留两位小数处理
+	    //         rightHeight = rightBodyRows[index]?Number(rightBodyRows[index].getBoundingClientRect().height).toFixed(2):0;
+	    //         currentHeight = Number(row.getBoundingClientRect().height).toFixed(2)
+	    //         maxHeight = Math.max(leftHeight,rightHeight,currentHeight);
+	    //         return maxHeight || 'auto'
+	    //       }else{
+	    //         return Number((Number(row.getBoundingClientRect().height)).toFixed(2)) || 'auto';
+	    //       }
+	    //     }
+	    //   }
+	    // );
+	    //add by zzj
+	    // 记录表格各行高缓存
+	    this.fixedColumnsBodyRowsHeightCache = this.fixedColumnsBodyRowsHeightCache || {};
+	    // 计算出表格各行的最大高度（非折叠展开行）
+	    var fixedColumnsBodyRowsHeight = [];
+	    bodyRows.length > 0 && [].forEach.call(bodyRows, function (row, i) {
 	      var rsHeight = height;
 	      if (bodyDisplayInRow && rsHeight) {
-	        return rsHeight;
+	        rsHeight = height; //使用指定的固定行高
 	      } else {
-	        // 为了提高性能，默认获取主表的高度，但是有的场景中固定列的高度比主表的高度高，所以提供此属性，会统计所有列的高度取最大的，设置
-	        // 内容折行显示，并又设置了 height 的情况下，也要获取主表高度
-	        if (heightConsistent || !bodyDisplayInRow && rsHeight) {
-	          var leftHeight = void 0,
-	              rightHeight = void 0,
-	              currentHeight = void 0,
-	              maxHeight = void 0;
-	          leftHeight = leftBodyRows[index] ? parseInt(leftBodyRows[index].getBoundingClientRect().height) : 0;
-	          rightHeight = rightBodyRows[index] ? parseInt(rightBodyRows[index].getBoundingClientRect().height) : 0;
-	          currentHeight = parseInt(row.getBoundingClientRect().height);
-	          maxHeight = Math.max(leftHeight, rightHeight, currentHeight);
-	          return maxHeight || 'auto';
+	        //使用自适应行高
+	        var rsKey = row.getAttribute("data-row-key");
+	        if (browserInfo.browserType == 'IE' && _this5.fixedColumnsBodyRowsHeightCache[rsKey]) {
+	          //暂时仅ie下走缓存，解决ie下的自动增长行高的问题
+	          rsHeight = _this5.fixedColumnsBodyRowsHeightCache[rsKey];
+	          //console.log("AAA-->fixedColumnsBodyRowsHeight->cache-->"+this.props.name+"rsKey:"+rsKey+":"+i+":"+rsHeight)
 	        } else {
-	          return parseInt(row.getBoundingClientRect().height) || 'auto';
+	          rsHeight = Math.max(leftBodyRows.length ? Math.ceil(leftBodyRows[i].getBoundingClientRect().height) : 0, rightBodyRows.length ? Math.ceil(rightBodyRows[i].getBoundingClientRect().height) : 0, Math.ceil(row.getBoundingClientRect().height));
+	          //console.log("AAA-->fixedColumnsBodyRowsHeight->no cache-->"+this.props.name+"rsKey:"+rsKey+":"+i+":"+rsHeight)
+	          _this5.fixedColumnsBodyRowsHeightCache[rsKey] = rsHeight;
 	        }
 	      }
+	      fixedColumnsBodyRowsHeight[i] = rsHeight;
 	    });
+	    //console.log("AAA--->fixedColumnsBodyRowsHeight->" + fixedColumnsBodyRowsHeight)
+	    // 记录表格各折叠行高缓存
+	    this.fixedColumnsExpandedRowsHeightCache = this.fixedColumnsExpandedRowsHeightCache || {};
+	    // 计算出表格各折叠展开行的高度
 	    var fixedColumnsExpandedRowsHeight = {};
-	    // expandedRows为NodeList  Array.prototype.forEach ie 下报错 对象不支持 “forEach” 方法
-	    expandedRows.length > 0 && Array.prototype.forEach.call(expandedRows, function (row) {
+	    expandedRows.length > 0 && [].forEach.call(expandedRows, function (row) {
 	      var parentRowKey = row && row.previousSibling && row.previousSibling.getAttribute("data-row-key");
-	      var exHeight = row && parseInt(row.getBoundingClientRect().height) || 'auto';
 	      // fix: ie 展开表格计算渲染bug
 	      // try {//子表数据减少时，动态计算高度
 	      //   let td = row.querySelector('td');
@@ -76193,19 +76578,54 @@
 	      //   let trueheight = parseInt(row.querySelectorAll('.u-table')[0].getBoundingClientRect().height);
 	      //   exHeight = trueheight+tdPadding;
 	      // } catch (error) {
-	
 	      // }
-	      fixedColumnsExpandedRowsHeight[parentRowKey] = parseInt(exHeight);
+	
+	      if (browserInfo.browserType == 'IE' && _this5.fixedColumnsExpandedRowsHeightCache[parentRowKey]) {
+	        //暂时仅ie下走缓存，解决ie下的自动增长行高的问题
+	        fixedColumnsExpandedRowsHeight[parentRowKey] = _this5.fixedColumnsExpandedRowsHeightCache[parentRowKey];
+	        //console.log("AAA-->fixedColumnsExpandedRowsHeight->cache-->"+"rsKey:"+parentRowKey+":"+":"+this.fixedColumnsExpandedRowsHeightCache[parentRowKey])
+	      } else {
+	        //解决相同行的expandedRowRender内容高度动态变化的问题：先动态设置td为伸缩盒，再获取高度，再还原为table-cell渲染。
+	        row.children[0].style.display = 'flex';
+	        var exHeight = row && Math.ceil(row.children[0].getBoundingClientRect().height) || 'auto';
+	        row.children[0].style.display = 'table-cell'; //解决相同行的expandedRowRender内容高度动态变化的问题：先动态设置td为伸缩盒，再获取高度，再还原为table-cell渲染。
+	        fixedColumnsExpandedRowsHeight[parentRowKey] = exHeight;
+	        _this5.fixedColumnsExpandedRowsHeightCache[parentRowKey] = exHeight;
+	        //console.log("AAA-->fixedColumnsExpandedRowsHeight->no cache-->"+this.props.name+":rsKey:"+parentRowKey+":"+":"+exHeight)
+	      }
 	    });
 	    if ((0, _shallowequal2["default"])(this.state.fixedColumnsHeadRowsHeight, fixedColumnsHeadRowsHeight) && (0, _shallowequal2["default"])(this.state.fixedColumnsBodyRowsHeight, fixedColumnsBodyRowsHeight) && (0, _shallowequal2["default"])(this.state.fixedColumnsExpandedRowsHeight, fixedColumnsExpandedRowsHeight)) {
 	      return;
 	    }
-	
-	    this.setState({
-	      fixedColumnsHeadRowsHeight: fixedColumnsHeadRowsHeight,
-	      fixedColumnsBodyRowsHeight: fixedColumnsBodyRowsHeight,
-	      fixedColumnsExpandedRowsHeight: fixedColumnsExpandedRowsHeight
-	    });
+	    //add by zzj
+	    // clearTimeout(this.timer);
+	    // this.timer = setTimeout(() => {
+	    var updateRowHeightState = function updateRowHeightState() {
+	      _this5.setState({
+	        fixedColumnsHeadRowsHeight: fixedColumnsHeadRowsHeight,
+	        fixedColumnsBodyRowsHeight: fixedColumnsBodyRowsHeight,
+	        fixedColumnsExpandedRowsHeight: fixedColumnsExpandedRowsHeight
+	      }, function () {
+	        var center = _this5.bodyTable;
+	        var left = _this5.fixedLeftBodyInner;
+	        var right = _this5.fixedRightBodyInner;
+	        //滚动条在最底部并且表格行高变化时，inner部分scrollTop数值不一致造成的表格没对齐。
+	        if (_this5.columnManager.isAnyColumnsRightFixed()) {
+	          if (center && right && center.scrollTop !== right.scrollTop) {
+	            center.scrollTop = right.scrollTop;
+	          }
+	          if (center && left && left.scrollTop !== right.scrollTop) {
+	            left.scrollTop = right.scrollTop;
+	          }
+	        } else {
+	          if (center && left && center.scrollTop !== left.scrollTop) {
+	            left.scrollTop = center.scrollTop;
+	          }
+	        }
+	      });
+	      // }, 10);
+	    };
+	    (0, _utils.debounce)(updateRowHeightState(), 100);
 	  };
 	
 	  Table.prototype.resetScrollX = function resetScrollX() {
@@ -76218,10 +76638,10 @@
 	  };
 	
 	  Table.prototype.findExpandedRow = function findExpandedRow(record, index) {
-	    var _this5 = this;
+	    var _this6 = this;
 	
 	    var rows = this.getExpandedRows().filter(function (i) {
-	      return i === _this5.getRowKey(record, index);
+	      return i === _this6.getRowKey(record, index);
 	    });
 	    return rows[0];
 	  };
@@ -76242,12 +76662,15 @@
 	      this.bodyMouseLeaveTimmer = setTimeout(onBodyMouseLeave, 0);
 	    }
 	  };
-	
-	  Table.prototype.detectScrollTarget = function detectScrollTarget(e) {
+	  /*
+	  detectScrollTarget(e) {
 	    if (this.scrollTarget !== e.currentTarget) {
 	      this.scrollTarget = e.currentTarget;
 	    }
-	  };
+	  }
+	  */
+	  //隐藏行上悬浮的自定义dom
+	
 	
 	  Table.prototype.hideHoverDom = function hideHoverDom(e) {
 	    if (this.hoverDom) {
@@ -76255,90 +76678,119 @@
 	    }
 	  };
 	
+	  //处理表格体内滚动
+	
+	
 	  Table.prototype.handleBodyScroll = function handleBodyScroll(e) {
-	    var headTable = this.headTable;
-	    var _props10 = this.props,
-	        _props10$scroll = _props10.scroll,
-	        scroll = _props10$scroll === undefined ? {} : _props10$scroll,
-	        clsPrefix = _props10.clsPrefix,
-	        handleScrollY = _props10.handleScrollY,
-	        handleScrollX = _props10.handleScrollX,
-	        onBodyScroll = _props10.onBodyScroll;
-	    var _refs = this.refs,
-	        fixedColumnsBodyLeft = _refs.fixedColumnsBodyLeft,
-	        fixedColumnsBodyRight = _refs.fixedColumnsBodyRight;
+	    var _this7 = this;
+	
+	    var _props11 = this.props,
+	        _props11$scroll = _props11.scroll,
+	        scroll = _props11$scroll === undefined ? {} : _props11$scroll,
+	        clsPrefix = _props11.clsPrefix,
+	        handleScrollY = _props11.handleScrollY,
+	        handleScrollX = _props11.handleScrollX,
+	        onBodyScroll = _props11.onBodyScroll;
+	    var headTable = this.headTable,
+	        bodyTable = this.bodyTable,
+	        bottomTable = this.bottomTable,
+	        fixedLeftBodyInner = this.fixedLeftBodyInner,
+	        fixedRightBodyInner = this.fixedRightBodyInner;
 	    // Prevent scrollTop setter trigger onScroll event
 	    // http://stackoverflow.com/q/1386696
-	
-	    if (e.currentTarget !== e.target) {
+	    /*
+	    if (this.scrollTarget && e.target !== this.scrollTarget && e.target !== headTable) {//仅body区域滚动生效，头部区域滚动无需处理
 	      return;
 	    }
-	    if (e.target.scrollLeft !== this.lastScrollLeft) {
-	      var position = '';
-	      if (e.target === this.bodyTable && headTable) {
-	        headTable.scrollLeft = e.target.scrollLeft;
-	      } else if (e.target === headTable && this.bodyTable) {
-	        this.bodyTable.scrollLeft = e.target.scrollLeft;
+	    */
+	
+	    if (this.lastScrollLeft == undefined) this.lastScrollLeft = 0;
+	    if (this.lastScrollTop == undefined) this.lastScrollTop = 0;
+	
+	    //水平滚动的逻辑处理
+	    if (e.target.scrollLeft !== this.lastScrollLeft && (e.target == bodyTable || e.target == headTable)) {
+	      if (e.target === bodyTable) {
+	        //中间内容中的水平滚动
+	        if (headTable) headTable.scrollLeft = e.target.scrollLeft;
+	        if (bottomTable) bottomTable.scrollLeft = e.target.scrollLeft;
+	      } else if (e.target === headTable && bodyTable) {
+	        bodyTable.scrollLeft = e.target.scrollLeft;
 	      }
 	      if (e.target.scrollLeft === 0) {
-	        position = 'left';
+	        this.setState({ scrollPosition: 'left' });
 	      } else if (e.target.scrollLeft + 1 >= e.target.querySelector('table').getBoundingClientRect().width - e.target.getBoundingClientRect().width) {
-	        position = 'right';
+	        this.setState({ scrollPosition: 'right' });
 	      } else if (this.state.scrollPosition !== 'middle') {
-	        position = 'middle';
-	      }
-	      if (position) {
-	        (0, _componentClasses2["default"])(this.contentTable).remove(new RegExp('^' + clsPrefix + '-scroll-position-.+$')).add(clsPrefix + '-scroll-position-' + position);
+	        this.setState({ scrollPosition: 'middle' });
 	      }
 	      if (handleScrollX) {
-	        (0, _utils.debounce)(handleScrollX(e.target.scrollLeft, this.treeType), 300);
+	        //触发props.handleScrollX
+	        // debounce(
+	        handleScrollX(e.target.scrollLeft, this.treeType);
+	        // ,300)
 	      }
+	      this.lastScrollLeft = e.target.scrollLeft; //记录最后一次水平滚动位置
 	    }
-	    // console.log('lastScrollTop--'+this.lastScrollTop+'--eventScrollTop--'+ e.target.scrollTop);
-	    if (scroll.y && this.lastScrollTop != e.target.scrollTop && e.target !== headTable) {
-	      if (fixedColumnsBodyLeft && e.target !== fixedColumnsBodyLeft) {
-	        fixedColumnsBodyLeft.scrollTop = e.target.scrollTop;
+	    //垂直滚动的逻辑处理
+	    if (this.lastScrollTop !== e.target.scrollTop && (e.target == bodyTable || e.target == fixedLeftBodyInner || e.target == fixedRightBodyInner) //仅对此三个区域的垂直滚动条进行同步，以防止水平滚动时，scrollTop>0时被重置为0的问题
+	    ) {
+	        // console.log("AAA---handleBodyScroll-->垂直滚动："+e.target.scrollTop+"---lastScrollTop:"+this.lastScrollTop,e.target);
+	        if (fixedLeftBodyInner && e.target !== fixedLeftBodyInner) {
+	          fixedLeftBodyInner.scrollTop = e.target.scrollTop;
+	        }
+	        if (fixedRightBodyInner && e.target !== fixedRightBodyInner) {
+	          fixedRightBodyInner.scrollTop = e.target.scrollTop;
+	        }
+	        if (bodyTable && e.target !== bodyTable) {
+	          // console.log("AAA---handleBodyScroll-->中间内容垂直滚动："+e.target.scrollTop);
+	          bodyTable.scrollTop = e.target.scrollTop;
+	        }
+	        //注意快速滚动时将行的hover效果隐藏，timeout之后还原，以解决固定列情况下表格滚动时hover效果错位的问题。
+	        if (!this.state.currentHoverKey) {
+	          this.store.setState({ currentHoverKey: null });
+	          clearTimeout(this.scrollHoverKeyTimer);
+	          this.scrollHoverKeyTimer = setTimeout(function () {
+	            _this7.store.setState({ currentHoverKey: _this7.hoverKey });
+	          }, 100);
+	        }
+	        this.hideHoverDom(e); //隐藏外部自定义悬浮dom
+	        this.lastScrollTop = e.target.scrollTop; //记录最后一次垂直滚动位置
+	        if (handleScrollY) {
+	          //触发props.handleScrollY
+	          // debounce(
+	          handleScrollY(this.lastScrollTop, this.treeType, onBodyScroll);
+	          // ,300)
+	        } else {
+	          onBodyScroll(this.lastScrollTop); //触发props.onBodyScroll滚动回调
+	        }
 	      }
-	      if (fixedColumnsBodyRight && e.target !== fixedColumnsBodyRight) {
-	        fixedColumnsBodyRight.scrollTop = e.target.scrollTop;
-	      }
-	      if (this.bodyTable && e.target !== this.bodyTable) {
-	        this.bodyTable.scrollTop = e.target.scrollTop;
-	      }
-	      if (this.hoverDom) {
-	        this.hoverDom.style.display = 'none';
-	      }
-	      this.lastScrollTop = e.target.scrollTop;
-	      if (handleScrollY) {
-	        (0, _utils.debounce)(handleScrollY(this.lastScrollTop, this.treeType, onBodyScroll), 300);
-	      } else {
-	        //滚动回调
-	        onBodyScroll(this.lastScrollTop);
-	      }
-	    }
-	
-	    // Remember last scrollLeft for scroll direction detecting.
-	    this.lastScrollLeft = e.target.scrollLeft;
 	  };
 	
 	  Table.prototype.handleRowHover = function handleRowHover(isHover, key, event, currentIndex, propsRecord) {
+	    var _this8 = this;
+	
 	    //增加新的API，设置是否同步Hover状态，提高性能，避免无关的渲染
-	    var _props11 = this.props,
-	        syncHover = _props11.syncHover,
-	        onRowHover = _props11.onRowHover,
-	        data = _props11.data;
+	    var _props12 = this.props,
+	        syncHover = _props12.syncHover,
+	        onRowHover = _props12.onRowHover,
+	        data = _props12.data,
+	        lazyLoad = _props12.lazyLoad;
 	    //fix:树形表，onRowHover返回参数异常
 	
 	    var isTreeType = this.isTreeType;
 	
-	    var record = isTreeType ? propsRecord : data[currentIndex];
+	    var record = isTreeType ? propsRecord : lazyLoad ? data.find(function (item, index) {
+	      var rowKey = item.key ? item.key : _this8.getRowKey(item, index);
+	      return rowKey === key;
+	    }) : data[currentIndex];
+	    this.hoverKey = key;
 	    // 固定列、或者含有hoverdom时情况下同步hover状态
 	    if (this.columnManager.isAnyColumnsFixed() && syncHover) {
-	      this.hoverKey = key;
 	      this.store.setState({
 	        currentHoverKey: isHover ? key : null
 	      });
 	    }
+	
 	    if (this.hoverDom) {
 	      if (isHover) {
 	        this.currentHoverKey = key;
@@ -76356,24 +76808,36 @@
 	        }
 	        this.setState({
 	          currentHoverIndex: currentIndex,
-	          currentHoverRecord: record
+	          currentHoverRecord: record,
+	          copyCurrentHoverIndex: currentIndex,
+	          copyCurrentHoverRecord: record
+	        });
+	      } else {
+	        // 鼠标离开行时，清空currentHoverRecord（解决切换数据时currentHoverRecord获取了上次hover的数据）
+	        this.setState({
+	          copyCurrentHoverRecord: null,
+	          copyCurrentHoverIndex: null
 	        });
 	      }
 	    }
-	
 	    onRowHover && onRowHover(currentIndex, record);
 	  };
+	  //表格mouseLeave时移除hoverContent元素
+	
 	
 	  Table.prototype.render = function render() {
-	    var _this6 = this;
+	    var _this9 = this;
 	
-	    var _state3 = this.state,
-	        currentHoverRecord = _state3.currentHoverRecord,
-	        currentHoverIndex = _state3.currentHoverIndex;
+	    var _state2 = this.state,
+	        currentHoverRecord = _state2.currentHoverRecord,
+	        currentHoverIndex = _state2.currentHoverIndex,
+	        copyCurrentHoverRecord = _state2.copyCurrentHoverRecord,
+	        copyCurrentHoverIndex = _state2.copyCurrentHoverIndex;
 	
 	    var props = this.props;
 	    var clsPrefix = props.clsPrefix;
 	    var hasFixedLeft = this.columnManager.isAnyColumnsLeftFixed();
+	    var hasFixedRight = this.columnManager.isAnyColumnsRightFixed();
 	    var className = props.clsPrefix;
 	    if (props.className) {
 	      className += ' ' + props.className;
@@ -76415,13 +76879,15 @@
 	    if (hasFixedLeft) {
 	      className += ' has-fixed-left';
 	    }
-	
+	    if (hasFixedRight) {
+	      className += ' has-fixed-right';
+	    }
 	    return _react2["default"].createElement(
 	      'div',
 	      { className: className, style: props.style, ref: function ref(el) {
-	          return _this6.contentTable = el;
+	          return _this9.contentTable = el;
 	        },
-	        tabIndex: props.focusable && (props.tabIndex ? props.tabIndex : '0') },
+	        tabIndex: props.focusable && (props.tabIndex ? props.tabIndex : '0'), onMouseLeave: this.onTableHoverMouseLeave },
 	      this.getTitle(),
 	      _react2["default"].createElement(
 	        'div',
@@ -76435,15 +76901,42 @@
 	        ),
 	        hasFixedLeft && _react2["default"].createElement(
 	          'div',
-	          { className: clsPrefix + '-fixed-left' },
+	          { className: clsPrefix + '-fixed-left', key: "left_" + this.tableUid },
 	          this.getLeftFixedTable()
 	        ),
-	        this.columnManager.isAnyColumnsRightFixed() && _react2["default"].createElement(
+	        hasFixedRight && _react2["default"].createElement(
 	          'div',
-	          { className: clsPrefix + '-fixed-right' },
+	          { className: clsPrefix + '-fixed-right', key: "right_" + this.tableUid },
 	          this.getRightFixedTable()
 	        )
 	      ),
+	      props.rowDraggAble ? _react2["default"].createElement(_DragRowLine2["default"], {
+	        container: this,
+	        clsPrefix: clsPrefix,
+	        bigData: props.lazyLoad ? true : false,
+	        ref: function ref(line) {
+	          return _this9.dragrowLine = line;
+	        },
+	        onRowDragStart: this._onRowDragStart,
+	        onRowDragDrop: this._onRowDragDrop
+	      }) : null,
+	      props.dragborder ? _react2["default"].createElement(_DragResizerLine2["default"], {
+	        key: "DragResizerLine_" + this.tableUid,
+	        ref: function ref(line) {
+	          return _this9.resizerLine = line;
+	        },
+	        container: this,
+	        clsPrefix: clsPrefix,
+	        left: this.state.resizerLineLeft,
+	        height: this.state.resizerLineHeight,
+	        defaultWidth: this.state.resizerDefaultWidth,
+	        minWidth: this.state.resizerMinWidth,
+	        visible: this.state.resizerVisible,
+	        onChange: this.onDragBorderMouseMove,
+	        onResizeEnd: this.onDragBorderMouseUp,
+	        onResizeCancel: this.onDragBorderCancel,
+	        dataSource: this.state.dataSource
+	      }) : null,
 	      _react2["default"].createElement(_beeLoading2["default"], _extends({
 	        container: this
 	      }, loading)),
@@ -76451,15 +76944,377 @@
 	        'div',
 	        { className: 'u-row-hover',
 	          onMouseEnter: this.onRowHoverMouseEnter, onMouseLeave: this.onRowHoverMouseLeave, ref: function ref(el) {
-	            return _this6.hoverDom = el;
+	            return _this9.hoverDom = el;
 	          } },
-	        props.hoverContent(currentHoverRecord, currentHoverIndex)
+	        currentHoverRecord ? props.hoverContent(copyCurrentHoverRecord, copyCurrentHoverIndex) : null
 	      )
 	    );
 	  };
 	
 	  return Table;
 	}(_react.Component);
+	
+	var _initialiseProps = function _initialiseProps() {
+	  var _this10 = this;
+	
+	  this.resize = function () {
+	    var debounceFunc = function debounceFunc() {
+	      _this10.syncFixedTableRowHeight();
+	      _this10.computeTableWidth();
+	      typeof _this10.props.onResize == 'function' && _this10.props.onResize();
+	    };
+	    (0, _utils.debounce)(debounceFunc(), 150);
+	    var renderFlag = _this10.state.renderFlag;
+	    _this10.setState({
+	      renderFlag: !renderFlag
+	    });
+	  };
+	
+	  this.syncFixedTableScrollWidth = function () {
+	    var clsPrefix = _this10.props.clsPrefix;
+	
+	    var tableDom = _this10.contentTable;
+	    var tableContentDom = tableDom.querySelector('.' + clsPrefix + '-content');
+	    var tableFixedRight = tableDom.querySelector('.' + clsPrefix + '-fixed-right');
+	    var centerBodyDom = tableDom.querySelector('.' + clsPrefix + '-scroll .' + clsPrefix + '-body');
+	    var centerHeadDom = tableDom.querySelector('.' + clsPrefix + '-scroll .' + clsPrefix + '-header'); //固定列头的情况下
+	    if (!centerHeadDom) centerHeadDom = tableDom.querySelector('.' + clsPrefix + '-scroll .' + clsPrefix + '-thead'); //未固定列头的情况下
+	    //注意精准匹配，以确保行展开表格嵌套表格时正确匹配
+	    var centerHeadTableDom = tableDom.querySelector('.' + clsPrefix + '-scroll .' + clsPrefix + '-header > table[data-for-table=\'' + _this10.tableUid + '\']');
+	    var centerBodyTableDom = tableDom.querySelector('.' + clsPrefix + '-scroll .' + clsPrefix + '-body > table[data-for-table=\'' + _this10.tableUid + '\']');
+	    var bodyInnerDoms = tableDom.querySelectorAll('.' + clsPrefix + '-body-outer .' + clsPrefix + '-body-inner');
+	    // if(!this.scrollbarWidth)this.scrollbarWidth=measureScrollbar();
+	    var scrollbarWidth = _this10.scrollbarWidth;
+	    var hasCenterScrollY = centerBodyTableDom.getBoundingClientRect().height > centerBodyDom.getBoundingClientRect().height ? true : false; //中间区域是否存在垂直滚动条
+	    // let hasCenterScrollX = centerBodyTableDom.getBoundingClientRect().width>centerBodyDom.getBoundingClientRect().width?true:false;//中间区域存在水平滚动条
+	    var hasCenterScrollX = centerBodyDom.scrollWidth > centerBodyDom.clientWidth + 1 ? true : false; //中间区域存在水平滚动条
+	    //console.log("AAA---->syncFixedTableScrollWidth-->hasCenterScrollX"+hasCenterScrollX+"-->hasCenterScrollY"+hasCenterScrollY+"--->scrollbarWidth"+scrollbarWidth)
+	    //解决存在右侧固定列,中间区域垂直滚动条需要隐藏显示的问题
+	    if (hasCenterScrollY && _this10.columnManager.isAnyColumnsRightFixed()) {
+	      //非Chrome内核浏览器中间区域会出现多余垂直滚动条需要隐藏
+	      if (browserInfo.browserType == 'Chrome') {
+	        centerBodyDom.style.marginRight = 0;
+	      } else {
+	        centerBodyDom.style.marginRight = -scrollbarWidth + "px";
+	      }
+	      if (browserInfo.osType == 'Mac' && browserInfo.browserType == 'FF') {
+	        //解决mac的ff下右侧固定列存在，中间区域右侧被遮挡的问题
+	        centerBodyTableDom.style.paddingRight = scrollbarWidth + "px";
+	      }
+	    } else {
+	      centerBodyDom.style.marginRight = 0;
+	    }
+	    if (centerHeadDom) centerHeadDom.style.marginRight = centerBodyDom.style.marginRight;
+	    //解决中间区域存在水平滚动条，左右固定区域无法跟其对齐的问题
+	    if (bodyInnerDoms && bodyInnerDoms.length) {
+	      [].forEach.call(bodyInnerDoms, function (bodyInnerDom) {
+	        if (hasCenterScrollX) {
+	          if (browserInfo.browserType == 'Chrome') {
+	            //mac下验证
+	            if (hasCenterScrollX) {
+	              bodyInnerDom.style.overflowX = 'scroll';
+	            } else {
+	              bodyInnerDom.style.overflowX = 'hidden';
+	            }
+	          } else {
+	            if (browserInfo.osType == 'Win' && browserInfo.browserType == 'FF') {
+	              bodyInnerDom.style.overflowX = 'hidden'; //win的firefox下，中间x滚动出现时，左右固定列x滚动条隐藏通过paddingBottom填充占位
+	            } else {
+	              bodyInnerDom.style.overflowX = 'scroll'; //确保中间x滚动出现时，左右固定列x滚动条正确显示占位
+	            }
+	          }
+	          // bodyInnerDom.style.paddingBottom = browserInfo.browserType=='Chrome'?0:`${scrollbarWidth}px`;//chrome下左右固定列底部不需要填充占位,firefox需要占位，
+	          if (browserInfo.osType == 'Win' && browserInfo.browserType == 'FF') {
+	            bodyInnerDom.style.paddingBottom = scrollbarWidth + 'px'; //win的firefox不需显示x滚动条但需要填充占位
+	          } else {
+	            bodyInnerDom.style.paddingBottom = 0; //firefox升级89.0.2后不需要占位了
+	          }
+	        } else {
+	          bodyInnerDom.style.overflowX = 'hidden'; //确保中间x滚动不出现时，左右固定列x滚动条不显示
+	          bodyInnerDom.style.paddingBottom = 0;
+	        }
+	      });
+	    }
+	    //解决中间存在水平滚动条头部区域无法对齐的问题
+	    if (centerHeadTableDom) {
+	      var paddingWidth = 0;
+	      if (hasCenterScrollY && hasCenterScrollX || hasCenterScrollY && !tableFixedRight) paddingWidth = paddingWidth + scrollbarWidth;
+	      centerHeadTableDom.style.paddingRight = paddingWidth + 'px';
+	    }
+	    //为表格追加是否存在滚动条的样式标识
+	    if (tableContentDom) {
+	      if (hasCenterScrollX) {
+	        if (!tableContentDom.classList.contains('has-scroll-x')) tableContentDom.classList.add('has-scroll-x');
+	      } else {
+	        tableContentDom.classList.remove('has-scroll-x');
+	      }
+	      if (hasCenterScrollY) {
+	        if (!tableContentDom.classList.contains('has-scroll-y')) tableContentDom.classList.add('has-scroll-y');
+	      } else {
+	        tableContentDom.classList.remove('has-scroll-y');
+	      }
+	      //中间区域有垂直滚动条
+	      if (hasCenterScrollY) {
+	        if (_this10.headTable) {
+	          //中间区域有垂直滚动条，则头部也需要显示头部滚动条
+	          _this10.headTable.style.overflowY = 'scroll';
+	          if (_this10.columnManager.isAnyColumnsRightFixed()) {
+	            //右侧固定列存在时需要头部Y滚动条占位
+	          } else {
+	            if (browserInfo.osType == 'Win' && browserInfo.browserType == 'FF') {
+	              // 解决win下FF的头部右上角多于滚动条显示问题
+	              _this10.headTable.style.overflowY = 'hidden';
+	              _this10.headTable.style.paddingRight = scrollbarWidth + 'px';
+	            }
+	          }
+	        }
+	      } else {
+	        if (_this10.headTable) _this10.headTable.style.overflowY = 'hidden'; //中间区域无垂直滚动条，则头部也不需要显示头部滚动条
+	      }
+	    }
+	  };
+	
+	  this.onDragBorderMouseDown = function (event) {
+	    var minColumnWidth = _this10.props.minColumnWidth;
+	
+	    var dragGapDom = _utils.Event.getTarget(event);
+	    var currentDom = dragGapDom.parentElement;
+	    var columnKey = currentDom.getAttribute('data-col-key');
+	    var columnFixed = currentDom.getAttribute('data-th-fixed');
+	    var columnWidth = currentDom.getAttribute('data-th-width');
+	    var columnIndex = currentDom.getAttribute('data-col-index');
+	    var currentInfo = { columnKey: columnKey, columnFixed: columnFixed, columnWidth: columnWidth, columnIndex: columnIndex };
+	
+	    var tableRect = _this10.contentTable.getBoundingClientRect(); //表格
+	    var dragGapRect = dragGapDom.getBoundingClientRect(); //当前的伸缩label
+	    //向上查找th元素
+	    function getParentThElement(element) {
+	      var _tagName = element.tagName.toLowerCase();
+	      if (element.getAttribute('data-filter-type') === 'filterContext') return null;
+	      if (_tagName === 'i') return null;
+	      if (_tagName != 'th') {
+	        return getParentThElement(element.parentElement);
+	      } else {
+	        return element;
+	      }
+	    }
+	    var thDom = getParentThElement(currentDom);
+	    var resizerDefaultWidth = thDom.getBoundingClientRect().width;
+	    var resizerLineHeight = tableRect.height;
+	    var resizerLineLeft = dragGapRect.right - tableRect.left - parseInt(dragGapRect.width / 2) - 1;
+	    var column = _this10.columnManager.leafColumns().find(function (col) {
+	      return col.key ? col.key == columnKey : col.dataIndex == columnKey;
+	    });
+	
+	    _this10.setState({
+	      resizerVisible: true,
+	      resizerLineHeight: resizerLineHeight,
+	      resizerLineLeft: resizerLineLeft,
+	      resizerDefaultWidth: resizerDefaultWidth,
+	      resizerMinWidth: column.minWidth || minColumnWidth,
+	      dataSource: currentInfo
+	    });
+	    _this10.resizerLine.start(event);
+	  };
+	
+	  this.onDragBorderMouseUp = function (event, moveX, info) {
+	    var _props13 = _this10.props,
+	        minColumnWidth = _props13.minColumnWidth,
+	        onDropBorder = _props13.onDropBorder;
+	
+	    var target = _utils.Event.getTarget(event);
+	    var columnKey = info.columnKey,
+	        columnFixed = info.columnFixed,
+	        columnWidth = info.columnWidth,
+	        columnIndex = info.columnIndex;
+	
+	    var column = _this10.columnManager.leafColumns().find(function (col) {
+	      return col.key ? col.key == columnKey : col.dataIndex == columnKey;
+	    });
+	    var oldWidth = _ColumnManager2["default"].DefaultColumnWidth;
+	    //原宽度
+	    if (typeof column.width == 'string' && column.width.indexOf('%') > -1) {
+	      //百分比情况
+	      oldWidth = parseInt(columnWidth);
+	    } else if (column.width) {
+	      //非百分比情况
+	      oldWidth = parseInt(column.width);
+	    }
+	    var newWidth = oldWidth + moveX; //拖动后的宽度
+	    newWidth = newWidth < minColumnWidth ? minColumnWidth : newWidth; //限制最小宽度
+	    _this10.columnManager.clearCache(); //注意：先清除缓存
+	    var changeColumn = _this10.columnManager.findColumn(column.key || column.dataIndex);
+	    if (!changeColumn) {
+	      console.error('拖拽列宽度未找到列定义：' + (column.key || column.dataIndex), column);
+	      return;
+	    }
+	    changeColumn.width = newWidth;
+	    _this10.computeTableWidth(); //注意：重新计算需要补充的列宽度
+	    // let newWidthDiff = newWidth-oldWidth;//计算新旧宽度的实际变化距离, 负数为缩小，正数为放大
+	    // console.log("AAA---onDragBorderMouseUp-->最终距离"+moveX+'---表宽度--'+this.contentWidth+'---实际变化距离---'+newWidthDiff,this.columnManager.columns)
+	    _this10.setState({ resizerVisible: false });
+	    typeof onDropBorder == 'function' && onDropBorder(event, newWidth, column, _this10.columnManager.columns);
+	  };
+	
+	  this.onDragBorderCancel = function (event, moveX, info) {
+	    _this10.setState({ resizerVisible: false });
+	  };
+	
+	  this.onDragBorderMouseMove = function (event, moveX, info) {
+	    var _props14 = _this10.props,
+	        minColumnWidth = _props14.minColumnWidth,
+	        onDraggingBorder = _props14.onDraggingBorder;
+	    var columnKey = info.columnKey,
+	        columnFixed = info.columnFixed,
+	        columnWidth = info.columnWidth,
+	        columnIndex = info.columnIndex;
+	
+	    var column = _this10.columnManager.leafColumns().find(function (col) {
+	      return col.key ? col.key == columnKey : col.dataIndex == columnKey;
+	    });
+	    var oldWidth = _ColumnManager2["default"].DefaultColumnWidth; //原宽度
+	    //原宽度
+	    if (typeof column.width == 'string' && column.width.indexOf('%') > -1) {
+	      //百分比情况
+	      oldWidth = parseInt(columnWidth);
+	    } else if (column.width) {
+	      //非百分比情况
+	      oldWidth = parseInt(column.width);
+	    }
+	    var newWidth = oldWidth + moveX; //拖动后的宽度
+	    newWidth = newWidth < minColumnWidth ? minColumnWidth : newWidth; //限制最小宽度
+	    typeof onDraggingBorder == 'function' && onDraggingBorder(event, newWidth, column, _this10.columnManager.columns);
+	    // console.log("AAA---onDragBorderMouseMove-->移动距离"+moveX)
+	  };
+	
+	  this._onRowDragStart = function (options) {
+	    var dragStartKey = options.dragStartKey;
+	    var _props15 = _this10.props,
+	        lazyLoad = _props15.lazyLoad,
+	        onRowDragStart = _props15.onRowDragStart;
+	
+	    if (lazyLoad) {
+	      onRowDragStart && onRowDragStart(options); //直接传递给bigDataX触发
+	    } else {
+	      var data = _this10.state.data,
+	          currentIndex = void 0,
+	          record = void 0;
+	      data.forEach(function (da, i) {
+	        // tr 的唯一标识通过 data.key 或 rowKey 两种方式传进来
+	        var trKey = da.key ? da.key : _this10.getRowKey(da, i);
+	        if (trKey == dragStartKey) {
+	          currentIndex = i;
+	          record = da;
+	        }
+	      });
+	      _this10.props.onDragRowStart && _this10.props.onDragRowStart(record, currentIndex);
+	    }
+	  };
+	
+	  this._onRowDragDrop = function (options) {
+	    var _props16 = _this10.props,
+	        lazyLoad = _props16.lazyLoad,
+	        onRowDragDrop = _props16.onRowDragDrop;
+	
+	    if (lazyLoad) {
+	      onRowDragDrop && onRowDragDrop(options); //直接传递给bigDataX触发
+	    } else {
+	      var dragTargetKey = options.dragTargetKey,
+	          dragTargetIndex = options.dragTargetIndex,
+	          dropTargetKey = options.dropTargetKey,
+	          dropTargetIndex = options.dropTargetIndex;
+	      var data = _this10.state.data,
+	          record = void 0;
+	      for (var i = 0; i < data.length; i++) {
+	        var da = data[i];
+	        // tr 的唯一标识通过 data.key 或 rowKey 两种方式传进来
+	        var trKey = da.key ? da.key : _this10.getRowKey(da, i);
+	        if (trKey == dragTargetKey) {
+	          record = da;break; //匹配到后则退出减少性能开销
+	        }
+	      }
+	      if (dragTargetIndex > -1) {
+	        data = (0, _util.arrayMoveTo)(data, dragTargetIndex, dropTargetIndex);
+	        _this10.props.onDropRow && _this10.props.onDropRow(data, record, dropTargetIndex);
+	        _this10.setState({ data: data });
+	      } else {
+	        _this10.props.onDropRow && _this10.props.onDropRow(data, record, dropTargetIndex);
+	      }
+	    }
+	    // console.log("AAAA---->行拖拽结束:"+currentKey,targetKey);
+	  };
+	
+	  this.getHeaderRowStyle = function (columns, rows) {
+	    var headerHeight = _this10.props.headerHeight; //表头每行的高度，注意多表头是多行高度总和
+	
+	    var fixedColumnsHeadRowsHeight = _this10.state.fixedColumnsHeadRowsHeight;
+	
+	
+	    if (headerHeight && columns) {
+	      if (headerHeight === 'auto') {
+	        return { height: 'auto' };
+	      }
+	      return { height: headerHeight / rows.length };
+	    } else if (!headerHeight && columns) {
+	      //当headerHeight为null时，确保左中右多表头高度一致
+	      return { height: fixedColumnsHeadRowsHeight / rows.length };
+	    }
+	    return null;
+	  };
+	
+	  this.clearBodyMouseLeaveTimer = function () {
+	    if (_this10.bodyMouseLeaveTimmer) {
+	      clearTimeout(_this10.bodyMouseLeaveTimmer);
+	      _this10.bodyMouseLeaveTimmer = null;
+	    }
+	  };
+	
+	  this.onRowHoverMouseEnter = function () {
+	
+	    var currentHoverRecordData = _this10.state.currentHoverRecord;
+	    var currentHoverIndexData = _this10.state.currentHoverIndex;
+	    _this10.setState({
+	      copyCurrentHoverRecord: currentHoverRecordData,
+	      copyCurrentHoverIndex: currentHoverIndexData
+	    });
+	    _this10.store.setState({
+	      currentHoverKey: _this10.currentHoverKey
+	    });
+	    if (_this10.hoverDom) _this10.hoverDom.style.display = 'block';
+	    _this10.clearBodyMouseLeaveTimer();
+	  };
+	
+	  this.onRowHoverMouseLeave = function () {
+	
+	    _this10.setState({
+	      copyCurrentHoverRecord: null,
+	      copyCurrentHoverIndex: null
+	    });
+	  };
+	
+	  this.onTableHoverMouseLeave = function () {
+	    _this10.hideHoverDom();
+	  };
+	
+	  this.onFocus = function (e) {
+	    _this10.props.onKeyTab && _this10.props.onKeyTab();
+	  };
+	
+	  this.onKeyDown = function (e) {
+	    var event = _utils.Event.getEvent(e);
+	    // event.preventDefault?event.preventDefault():event.returnValue = false;
+	    if (event.keyCode === 38) {
+	      //up
+	      event.preventDefault && event.preventDefault();
+	      _this10.props.onKeyUp && _this10.props.onKeyUp();
+	    } else if (event.keyCode === 40) {
+	      //down
+	      event.preventDefault && event.preventDefault();
+	      _this10.props.onKeyDown && _this10.props.onKeyDown();
+	    }
+	    _this10.props.onTableKeyDown && _this10.props.onTableKeyDown();
+	  };
+	};
 	
 	;
 	
@@ -76473,7 +77328,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 549 */
+/* 548 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -76492,13 +77347,13 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _utils = __webpack_require__(550);
+	var _utils = __webpack_require__(549);
 	
-	var _TableCell = __webpack_require__(564);
+	var _TableCell = __webpack_require__(563);
 	
 	var _TableCell2 = _interopRequireDefault(_TableCell);
 	
-	var _ExpandIcon = __webpack_require__(602);
+	var _ExpandIcon = __webpack_require__(601);
 	
 	var _ExpandIcon2 = _interopRequireDefault(_ExpandIcon);
 	
@@ -76536,8 +77391,9 @@
 	  expandRowByClick: _propTypes2["default"].bool,
 	  store: _propTypes2["default"].object.isRequired,
 	  rowDraggAble: _propTypes2["default"].bool,
-	  onDragRow: _propTypes2["default"].func,
-	  onDragRowStart: _propTypes2["default"].func,
+	  // onRowDragDrop: PropTypes.func,  //拖拽行放置时触发
+	  // onRowDragStart: PropTypes.func,//拖拽行开始时触发 传递参数：startRowKey,startRowIndex
+	  // onRowDragEnter: PropTypes.func,  //拖拽行经过时触发
 	  syncRowHeight: _propTypes2["default"].bool
 	};
 	
@@ -76554,7 +77410,6 @@
 	  className: '',
 	  setRowParentIndex: function setRowParentIndex() {},
 	  rowDraggAble: false,
-	  // onDragRow:()=>{}
 	  syncRowHeight: false
 	};
 	
@@ -76565,237 +77420,6 @@
 	    _classCallCheck(this, TableRow);
 	
 	    var _this = _possibleConstructorReturn(this, _Component.call(this, props));
-	
-	    _this.initEvent = function () {
-	      var events = [{ key: 'touchstart', fun: _this.onTouchStart }, //手指触摸到一个 DOM 元素时触发
-	      { key: 'touchmove', fun: _this.onTouchMove }, //手指在一个 DOM 元素上滑动时触发
-	      { key: 'touchend', fun: _this.onTouchEnd }, //手指从一个 DOM 元素上移开时触发
-	
-	      { key: 'dragstart', fun: _this.onDragStart }, //用户开始拖动元素时触发
-	      { key: 'dragover', fun: _this.onDragOver }, //当某被拖动的对象在另一对象容器范围内拖动时触发此事件
-	      { key: 'drop', fun: _this.onDrop }, //在一个拖动过程中，释放鼠标键时触发此事件
-	      { key: 'dragenter', fun: _this.onDragEnter }, { key: 'dragleave', fun: _this.onDragLeave }];
-	      _this.eventListen(events, '', _this.element);
-	    };
-	
-	    _this.removeDragAbleEvent = function () {
-	      var events = [{ key: 'touchstart', fun: _this.onTouchStart }, //手指触摸到一个 DOM 元素时触发
-	      { key: 'touchmove', fun: _this.onTouchMove }, //手指在一个 DOM 元素上滑动时触发
-	      { key: 'touchend', fun: _this.onTouchEnd }, //手指从一个 DOM 元素上移开时触发
-	
-	      { key: 'dragstart', fun: _this.onDragStart }, //用户开始拖动元素时触发
-	      { key: 'dragover', fun: _this.onDragOver }, //当某被拖动的对象在另一对象容器范围内拖动时触发此事件
-	      { key: 'drop', fun: _this.onDrop }, //在一个拖动过程中，释放鼠标键时触发此事件
-	      { key: 'dragenter', fun: _this.onDragEnter }, { key: 'dragleave', fun: _this.onDragLeave }];
-	      _this.eventListen(events, 'remove', _this.element);
-	    };
-	
-	    _this.onDragStart = function (e) {
-	      var onDragRowStart = _this.props.onDragRowStart;
-	
-	      if (!_this.props.rowDraggAble || _this.notRowDrag) return;
-	      var event = _utils.Event.getEvent(e),
-	          target = _utils.Event.getTarget(event);
-	      if (target.tagName === 'TD') {
-	        target = target.parentNode;
-	      }
-	      _this.currentIndex = target.getAttribute("data-row-key");
-	
-	      // 拖拽其实index
-	      _this.props.contentTable.startI = target.getAttribute("data-row-index");
-	      _this._dragCurrent = target;
-	      event.dataTransfer.effectAllowed = "move";
-	      event.dataTransfer.setData("Text", _this.currentIndex);
-	      onDragRowStart && onDragRowStart(_this.currentIndex);
-	    };
-	
-	    _this.onDragOver = function (e) {
-	      var event = _utils.Event.getEvent(e);
-	      event.preventDefault();
-	    };
-	
-	    _this.onDrop = function (e) {
-	      var _this$props = _this.props,
-	          onDragRow = _this$props.onDragRow,
-	          contentTable = _this$props.contentTable;
-	
-	      var event = _utils.Event.getEvent(e),
-	          _target = _utils.Event.getTarget(event),
-	          target = _target.parentNode;
-	      event.preventDefault();
-	      event.stopPropagation();
-	      var currentKey = event.dataTransfer.getData("text");
-	      var targetKey = target.getAttribute("data-row-key");
-	
-	      if (!targetKey || targetKey === currentKey) return;
-	      if (target.nodeName.toUpperCase() === "TR") {
-	        _this.synchronizeTableTr(currentKey, null);
-	        _this.synchronizeTableTr(targetKey, null);
-	      }
-	      onDragRow && onDragRow(currentKey, targetKey);
-	    };
-	
-	    _this.getTouchDom = function (event) {
-	      var currentLocation = event.changedTouches[0];
-	      var realTarget = document.elementFromPoint(currentLocation.clientX, currentLocation.clientY);
-	      return realTarget;
-	    };
-	
-	    _this.onTouchStart = function (e) {
-	      e.stopPropagation();
-	      var onDragRowStart = _this.props.onDragRowStart;
-	
-	      var event = _utils.Event.getEvent(e),
-	          _target = _utils.Event.getTarget(event),
-	          target = _target.parentNode;
-	
-	      if (target.tagName === 'TR') {
-	
-	        _this.currentIndex = target.getAttribute("data-row-key");
-	
-	        onDragRowStart && onDragRowStart(_this.currentIndex);
-	      } else {
-	
-	        _this.canBeTouch = false;
-	      }
-	    };
-	
-	    _this.onTouchMove = function (e) {
-	
-	      if (!_this.canBeTouch) return;
-	      e.stopPropagation();
-	      var event = _utils.Event.getEvent(e);
-	      event.preventDefault();
-	      var touchTarget = _this.getTouchDom(event),
-	          target = touchTarget.parentNode,
-	          targetKey = target.getAttribute("data-row-key");
-	      if (!targetKey || targetKey === _this.currentIndex) return;
-	      if (target.nodeName.toUpperCase() === "TR") {
-	        if (_this.cacheCurrentIndex !== targetKey) {
-	          //模拟 touchenter toucheleave 事件
-	          _this.cacheCurrentIndex && _this.synchronizeTableTr(_this.cacheCurrentIndex, null); //去掉虚线
-	          _this.synchronizeTableTr(targetKey, true); //添加虚线
-	        }
-	      }
-	    };
-	
-	    _this.onTouchEnd = function (e) {
-	
-	      if (!_this.canBeTouch) {
-	        _this.canBeTouch = true;
-	        return;
-	      }
-	
-	      e.stopPropagation();
-	      var onDragRow = _this.props.onDragRow;
-	
-	      var event = _utils.Event.getEvent(e),
-	          currentKey = _this.currentIndex,
-	          //拖拽行的key
-	      touchTarget = _this.getTouchDom(event),
-	          //当前触摸的DOM节点
-	      target = touchTarget.parentNode,
-	          //目标位置的行
-	      targetKey = target.getAttribute("data-row-key"); //目标位置的行key
-	      if (!targetKey || targetKey === currentKey) return;
-	      if (target.nodeName.toUpperCase() === "TR") {
-	        _this.synchronizeTableTr(currentKey, null);
-	        _this.synchronizeTableTr(targetKey, null);
-	      }
-	
-	      onDragRow && onDragRow(currentKey, targetKey);
-	    };
-	
-	    _this.synchronizeTableTrShadow = function () {
-	      var _this$props2 = _this.props,
-	          contentTable = _this$props2.contentTable,
-	          index = _this$props2.index;
-	
-	
-	      var cont = contentTable.querySelector('.u-table-scroll table tbody').getElementsByTagName("tr")[index],
-	          trs = cont.getBoundingClientRect(),
-	          fixed_left_trs = contentTable.querySelector('.u-table-fixed-left table tbody'),
-	          fixed_right_trs = contentTable.querySelector('.u-table-fixed-right table tbody');
-	      fixed_left_trs = fixed_left_trs && fixed_left_trs.getElementsByTagName("tr")[index].getBoundingClientRect();
-	      fixed_right_trs = fixed_right_trs && fixed_right_trs.getElementsByTagName("tr")[index].getBoundingClientRect();
-	
-	      var div = document.createElement("div");
-	      var style = "wdith:" + (trs.width + (fixed_left_trs ? fixed_left_trs.width : 0) + (fixed_right_trs ? fixed_right_trs.width : 0)) + "px";
-	      style += ";height:" + trs.height + "px";
-	      style += ";classname:" + cont.className;
-	      div.setAttribute("style", style);
-	      return div;
-	    };
-	
-	    _this.synchronizeTableTr = function (currentIndex, type) {
-	      if (type) {
-	        //同步 this.cacheCurrentIndex
-	        _this.cacheCurrentIndex = currentIndex;
-	      }
-	      var contentTable = _this.props.contentTable;
-	
-	      var _table_trs = contentTable.querySelector('.u-table-scroll table tbody'),
-	          _table_fixed_left_trs = contentTable.querySelector('.u-table-fixed-left table tbody'),
-	          _table_fixed_right_trs = contentTable.querySelector('.u-table-fixed-right table tbody');
-	
-	      _table_trs = _table_trs ? _table_trs : contentTable.querySelector('.u-table table tbody');
-	
-	      _this.synchronizeTrStyle(_table_trs, currentIndex, type);
-	      if (_table_fixed_left_trs) {
-	        _this.synchronizeTrStyle(_table_fixed_left_trs, currentIndex, type);
-	      }
-	      if (_table_fixed_right_trs) {
-	        _this.synchronizeTrStyle(_table_fixed_right_trs, currentIndex, type);
-	      }
-	    };
-	
-	    _this.synchronizeTrStyle = function (_elementBody, id, type) {
-	      var contentTable = _this.props.contentTable,
-	          trs = _elementBody.getElementsByTagName("tr"),
-	          currentObj = void 0;
-	
-	      for (var index = 0; index < trs.length; index++) {
-	        var element = trs[index];
-	        if (element.getAttribute("data-row-key") == id) {
-	          currentObj = element;
-	        }
-	      }
-	      if (type == 'down') {
-	        currentObj && currentObj.setAttribute("style", "border-bottom:2px solid #02B1FD");
-	      } else if (type) {
-	        currentObj && currentObj.setAttribute("style", "border-top:2px solid #02B1FD");
-	      } else {
-	        currentObj && currentObj.setAttribute("style", "");
-	      }
-	    };
-	
-	    _this.onDragEnter = function (e) {
-	      var contentTable = _this.props.contentTable;
-	
-	      var event = _utils.Event.getEvent(e),
-	          _target = _utils.Event.getTarget(event),
-	          target = _target.parentNode;
-	      var currentIndex = target.getAttribute("data-row-key");
-	      var dragEnterIndex = target.getAttribute("data-row-index");
-	      if (!currentIndex || currentIndex === _this.currentIndex) return;
-	      var dragType = parseInt(dragEnterIndex) > parseInt(contentTable.startI) ? 'down' : 'top';
-	
-	      contentTable.dragType = dragType;
-	      if (target.nodeName.toUpperCase() === "TR") {
-	        _this.synchronizeTableTr(currentIndex, dragType);
-	      }
-	    };
-	
-	    _this.onDragLeave = function (e) {
-	      var event = _utils.Event.getEvent(e),
-	          _target = _utils.Event.getTarget(event),
-	          target = _target.parentNode;
-	      var currentIndex = target.getAttribute("data-row-key");
-	      if (!currentIndex || currentIndex === _this.currentIndex) return;
-	      if (target.nodeName.toUpperCase() === "TR") {
-	        _this.synchronizeTableTr(currentIndex, null);
-	      }
-	    };
 	
 	    _this.stopRowDrag = function (isStop) {
 	      var rowDraggAble = _this.props.rowDraggAble;
@@ -76864,80 +77488,298 @@
 	  /**
 	   * 事件初始化
 	   */
-	
+	  // initEvent=()=>{
+	  //   let  events = [
+	  //     {key:'touchstart', fun:this.onTouchStart},//手指触摸到一个 DOM 元素时触发
+	  //     {key:'touchmove', fun:this.onTouchMove}, //手指在一个 DOM 元素上滑动时触发
+	  //     {key:'touchend', fun:this.onTouchEnd}, //手指从一个 DOM 元素上移开时触发
+	  //
+	  //     {key:'dragstart',fun:this.onDragStart},//用户开始拖动元素时触发
+	  //     {key:'dragend',fun:this.onDragEnd},//用户结束拖动元素时触发
+	  //     {key:'dragover', fun:this.onDragOver},//当某被拖动的对象在另一对象容器范围内拖动时触发此事件
+	  //     // {key:'drop', fun:this.onDrop},        //在一个拖动过程中，释放鼠标键时触发此事件
+	  //     {key:'dragenter', fun:this.onDragEnter},
+	  //     // {key:'dragleave', fun:this.onDragLeave},
+	  //   ];
+	  //   this.eventListen(events,'',this.element);
+	  // }
 	
 	  /**
 	   * 事件移除，提供性能以及内存泄漏等问题。
 	   */
+	  // removeDragAbleEvent=()=>{
+	  //   let  events = [
+	  //     {key:'touchstart', fun:this.onTouchStart},//手指触摸到一个 DOM 元素时触发
+	  //     {key:'touchmove', fun:this.onTouchMove}, //手指在一个 DOM 元素上滑动时触发
+	  //     {key:'touchend', fun:this.onTouchEnd}, //手指从一个 DOM 元素上移开时触发
+	  //
+	  //     // {key:'dragstart',fun:this.onDragStart},//用户开始拖动元素时触发
+	  //     {key:'dragend',fun:this.onDragEnd},//用户结束拖动元素时触发
+	  //     {key:'dragover', fun:this.onDragOver},//当某被拖动的对象在另一对象容器范围内拖动时触发此事件
+	  //     // {key:'drop', fun:this.onDrop},        //在一个拖动过程中，释放鼠标键时触发此事件
+	  //     {key:'dragenter', fun:this.onDragEnter},
+	  //     // {key:'dragleave', fun:this.onDragLeave},
+	  //   ];
+	  //   this.eventListen(events,'remove',this.element);
+	  // }
 	
 	
 	  /**
 	   * 事件绑定和移除函数
 	   */
-	  TableRow.prototype.eventListen = function eventListen(events, type, eventSource) {
-	    for (var i = 0; i < events.length; i++) {
-	      var _event = events[i];
-	      if (type === "remove") {
-	        _utils.EventUtil.removeHandler(eventSource, _event.key, _event.fun);
-	      } else {
-	        _utils.EventUtil.addHandler(eventSource, _event.key, _event.fun);
+	  // eventListen(events,type,eventSource){
+	  //   for (let i = 0; i < events.length; i++) {
+	  //     const _event = events[i];
+	  //     if(type === "remove"){
+	  //       EventUtil.removeHandler(eventSource,_event.key,_event.fun);
+	  //     }else{
+	  //       EventUtil.addHandler(eventSource,_event.key,_event.fun);
+	  //     }
+	  //   }
+	  // }
+	
+	  /**
+	   * 【交换行】开始拖拽
+	   */
+	  /*  onDragStart = (e) => {
+	      let {onRowDragStart,contentTable} = this.props;
+	      if (!this.props.rowDraggAble || this.notRowDrag) return;
+	      let event = Event.getEvent(e) ,
+	      target = Event.getTarget(event);
+	      if(target.nodeName.toUpperCase() !== "TR")return;//如果是TD，则继续冒泡至TR
+	      let dragStartKey = target.getAttribute("data-row-key");
+	      let dragStartIndex = target.getAttribute("data-row-index");
+	      console.log("AAA---row-1--onDragStart"+dragStartKey)
+	      event.dataTransfer.effectAllowed = "move";
+	      event.dataTransfer.setData("Text", JSON.stringify({dragStartKey, dragStartIndex}));
+	      if(contentTable){
+	          contentTable.dragStartKey = dragStartKey;
+	          contentTable.dragStartIndex = dragStartIndex;
 	      }
+	      onRowDragStart && onRowDragStart({dragStartKey, dragStartIndex});
+	    }*/
+	  /**
+	   * 【交换行】结束拖拽
+	   */
+	  /* onDragEnd = (e) =>{
+	     if (!this.props.rowDraggAble || this.notRowDrag) return;
+	     let {onRowDragDrop,contentTable} = this.props;
+	     let event = Event.getEvent(e) ,
+	         target = Event.getTarget(event);
+	     if(target.nodeName.toUpperCase() !== "TR")return;//如果是TD，则继续冒泡至TR
+	     if(!contentTable)return;
+	     let {dragStartKey,dragStartIndex,dragEnterKey,dragEnterIndex} = contentTable||{};
+	       console.log("AAA---row-3--onDragEnd:"+dragStartKey+"->"+dragEnterKey)
+	     onRowDragDrop && onRowDragDrop({dragTargetKey:dragStartKey,dragTargetIndex:dragStartIndex,dropTargetKey:dragEnterKey,dropTargetIndex:dragEnterIndex});
+	   }*/
+	  /*onDragOver = (e) => {
+	    let event = Event.getEvent(e);
+	    event.preventDefault();
+	  };*/
+	
+	  /**
+	   * 【交换行】拖拽释放
+	   */
+	  /*
+	  onDrop = (e) => {
+	    let {onRowDragDrop} = this.props;
+	    let event = Event.getEvent(e) ,
+	        _target = Event.getTarget(event),
+	        target = _target.parentNode;
+	    // event.preventDefault()
+	    // event.stopPropagation();
+	    let dropTargetKey = target.getAttribute("data-row-key");
+	    let dropTargetIndex = target.getAttribute("data-row-index");
+	     if(!dropTargetKey || dropTargetKey === dragStartKey)return;
+	    if(target.nodeName.toUpperCase() === "TR"){
+	      this.synchronizeTableTr(dragStartKey,null);
+	      this.synchronizeTableTr(targetKey,null);
 	    }
 	  };
-	
-	  /**
-	   * 开始调整交换列的事件
-	   */
-	
-	
-	  /**
-	   * 在一个拖动过程中，释放鼠标键时触发此事件。【目标事件】
-	   * @memberof TableHeader
-	   */
-	
-	
+	  */
 	  /**
 	   * 获取当前触摸的Dom节点
 	   */
-	
+	  /* getTouchDom = (event) => {
+	     let currentLocation = event.changedTouches[0];
+	     let realTarget = document.elementFromPoint(currentLocation.clientX, currentLocation.clientY);
+	     return realTarget;
+	   }*/
 	
 	  /**
 	   * 开始调整交换行的事件
 	   */
+	  /* onTouchStart = (e) => {
+	     e.stopPropagation()
+	     let event = Event.getEvent(e) ,
+	         _target = Event.getTarget(event),
+	         target = _target.parentNode;
+	      if (target.tagName === 'TR') {
+	       this.onDragStart(e);
+	     }else{
+	       this.canBeTouch = false
+	     }
+	   }*/
 	
+	  /*onTouchMove = (e) => {
+	     if (!this.canBeTouch) return;
+	    e.stopPropagation()
+	    let event = Event.getEvent(e);
+	    event.preventDefault();
+	    let touchTarget = this.getTouchDom(event),
+	        target = touchTarget.parentNode,
+	        targetKey = target.getAttribute("data-row-key");
+	    if(!targetKey || targetKey === this.dragStartKey)return;
+	    if(target.nodeName.toUpperCase() === "TR"){
+	      if(this.cacheCurrentIndex !== targetKey){ //模拟 touchenter toucheleave 事件
+	        this.cacheCurrentIndex && this.synchronizeTableTr(this.cacheCurrentIndex,null); //去掉虚线
+	        this.synchronizeTableTr(targetKey,true); //添加虚线
+	      }
+	    }
+	  }*/
 	
 	  /**
 	   * 手指移开时触发
 	   */
-	
+	  /*onTouchEnd = (e) => {
+	     if(!this.canBeTouch){
+	      this.canBeTouch = true
+	      return
+	    }
+	     e.stopPropagation()
+	    let {onRowDragDrop} = this.props;
+	    let event = Event.getEvent(e),
+	        dragStartKey = this.dragStartKey, //拖拽行的key
+	        touchTarget = this.getTouchDom(event), //当前触摸的DOM节点
+	        target = touchTarget.parentNode, //目标位置的行
+	        targetKey = target.getAttribute("data-row-key"); //目标位置的行key
+	    if(!targetKey || targetKey === dragStartKey)return;
+	    if(target.nodeName.toUpperCase() === "TR"){
+	      this.synchronizeTableTr(dragStartKey,null);
+	      this.synchronizeTableTr(targetKey,null);
+	    }
+	     onRowDragDrop && onRowDragDrop(dragStartKey,targetKey);
+	  }*/
 	
 	  /**
 	   *同步当前拖拽到阴影
 	   * @memberof TableRow
 	   */
-	
+	  /* synchronizeTableTrShadow = ()=>{
+	     let {contentTable,index} = this.props;
+	      let cont = contentTable.querySelector('.u-table-scroll table tbody').getElementsByTagName("tr")[index],
+	         trs = cont.getBoundingClientRect(),
+	         fixed_left_trs = contentTable.querySelector('.u-table-fixed-left table tbody'),
+	         fixed_right_trs = contentTable.querySelector('.u-table-fixed-right table tbody');
+	     fixed_left_trs = fixed_left_trs && fixed_left_trs.getElementsByTagName("tr")[index].getBoundingClientRect();
+	     fixed_right_trs = fixed_right_trs && fixed_right_trs.getElementsByTagName("tr")[index].getBoundingClientRect()
+	      let div = document.createElement("div");
+	     let style = "wdith:"+(trs.width + (fixed_left_trs ? fixed_left_trs.width : 0) + (fixed_right_trs ? fixed_right_trs.width : 0))+"px";
+	     style += ";height:"+ trs.height+"px";
+	     style += ";classname:"+ cont.className;
+	     div.setAttribute("style",style);
+	     return div;
+	   }*/
 	
 	  /**
 	   * 同步自己,也需要同步当前行的行显示
 	   */
-	
-	
+	  /*
+	  synchronizeTableTr = (dragStartKey,type)=>{
+	    if(type){ //同步 this.cacheCurrentIndex
+	      this.cacheCurrentIndex = dragStartKey;
+	    }
+	    let {contentTable} = this.props;
+	    let _table_trs = contentTable.querySelector('.u-table-scroll table tbody'),
+	     _table_fixed_left_trs = contentTable.querySelector('.u-table-fixed-left table tbody'),
+	    _table_fixed_right_trs = contentTable.querySelector('.u-table-fixed-right table tbody');
+	     _table_trs = _table_trs?_table_trs:contentTable.querySelector('.u-table table tbody');
+	     this.synchronizeTrStyle(_table_trs,dragStartKey,type);
+	    if(_table_fixed_left_trs){
+	      this.synchronizeTrStyle(_table_fixed_left_trs,dragStartKey,type);
+	    }
+	    if(_table_fixed_right_trs){
+	      this.synchronizeTrStyle(_table_fixed_right_trs,dragStartKey,type);
+	    }
+	  }
+	  */
 	  /**
 	   * 设置同步的style
 	   */
+	  /*
+	  synchronizeTrStyle = (_elementBody,id,type)=>{
+	    let {contentTable} = this.props,
+	    trs = _elementBody.getElementsByTagName("tr"),
+	    currentObj;
+	    for (let index = 0; index < trs.length; index++) {
+	      const element = trs[index];
+	      if(element.getAttribute("data-row-key") == id){
+	        currentObj = element;
+	      }
+	    }
+	    if(type == 'down'){
+	      currentObj && currentObj.setAttribute("style","border-bottom:2px solid #02B1FD");
+	    }else if(type){
+	      currentObj && currentObj.setAttribute("style","border-top:2px solid #02B1FD");
+	    }else{
+	      currentObj && currentObj.setAttribute("style","");
+	    }
+	  }
+	   */
+	  /**
+	   * 【交换行】拖拽经过目标行
+	   */
+	  /*onDragEnter = (e) => {
+	    const {onRowDragEnter,contentTable} = this.props;
+	    let event = Event.getEvent(e) ,
+	    _target = Event.getTarget(event),target = _target.parentNode;
+	    if(target.nodeName.toUpperCase() !== "TR")return;//如果是TD，则继续冒泡至TR
+	    if(!contentTable)return;
+	    let dragEnterKey = target.getAttribute("data-row-key");
+	    let dragEnterIndex = target.getAttribute("data-row-index");
+	    if(!dragEnterKey)return;
+	    if(dragEnterKey !== contentTable.dragStartKey){
+	        contentTable.dragEnterKey = dragEnterKey;
+	        contentTable.dragEnterIndex = dragEnterIndex;
+	        onRowDragEnter && onRowDragEnter(dragEnterKey,parseInt(dragEnterIndex) >= parseInt(contentTable.dragStartIndex)+1  ? 'bottom' : 'top',target);
+	        console.log("AAAA---1.1--enter-->"+contentTable.dragStartIndex+"->"+dragEnterIndex)
+	    }else{
+	        contentTable.dragEnterKey = null;
+	        contentTable.dragEnterIndex = null;
+	        console.log("AAAA---1.1--enter-hidden-->"+contentTable.dragStartIndex+"->"+dragEnterIndex)
+	        onRowDragEnter && onRowDragEnter(dragEnterKey,null,null);
+	    }
+	  }*/
+	  /**
+	   * 【交换行】拖拽离开目标行
+	   */
+	  /*
+	  onDragLeave = (e) => {
+	    let event = Event.getEvent(e) ,
+	    _target = Event.getTarget(event),target = _target.parentNode;
+	    let dragLeaveKey = target.getAttribute("data-row-key");
+	    if(!dragLeaveKey || dragLeaveKey === this.dragStartKey)return;
+	    if(target.nodeName.toUpperCase() === "TR"){
+	      this.synchronizeTableTr(dragLeaveKey,null);
+	    }
+	  }
+	  */
 	
 	
 	  TableRow.prototype.componentDidUpdate = function componentDidUpdate(prevProps) {
 	    var _props2 = this.props,
 	        rowDraggAble = _props2.rowDraggAble,
 	        syncRowHeight = _props2.syncRowHeight;
+	    // if(!this.event){
+	    //   this.event = true;
+	    //   if(rowDraggAble){
+	    //   console.time("AABB");
+	    // this.removeDragAbleEvent();
+	    // this.initEvent();
+	    // console.timeEnd("AABB");
+	    //   }
+	    // }
 	
-	    if (!this.event) {
-	      this.event = true;
-	      if (rowDraggAble) {
-	        this.initEvent();
-	      }
-	    }
 	    if (this.props.treeType) {
 	      this.setRowParentIndex();
 	    }
@@ -76958,9 +77800,9 @@
 	    if (this.unsubscribe) {
 	      this.unsubscribe();
 	    }
-	    if (rowDraggAble) {
-	      this.removeDragAbleEvent();
-	    }
+	    // if(rowDraggAble){
+	    //   this.removeDragAbleEvent();
+	    // }
 	  };
 	
 	  TableRow.prototype.setRowHeight = function setRowHeight() {
@@ -76972,7 +77814,7 @@
 	        fixedIndex = _props4.fixedIndex;
 	
 	    if (!setRowHeight || !this.element || fixed) return;
-	    setRowHeight(this.element.clientHeight + expandedContentHeight, fixedIndex);
+	    setRowHeight(this.element.clientHeight + expandedContentHeight, fixedIndex, this.getRecordKey());
 	  };
 	
 	  TableRow.prototype.setRowParentIndex = function setRowParentIndex() {
@@ -77051,39 +77893,56 @@
 	    }
 	    onHover(false, hoverKey, e, fixedIndex, record);
 	  };
+	  //TODO column.notRowDrag供TableCell禁用行拖拽，待优化
+	
+	
+	  //获取当前行唯一键值
+	  TableRow.prototype.getRecordKey = function getRecordKey() {
+	    var _props10 = this.props,
+	        record = _props10.record,
+	        hoverKey = _props10.hoverKey;
+	
+	    return record && record.key ? record.key : hoverKey;
+	  };
 	
 	  TableRow.prototype.render = function render() {
-	    var _props10 = this.props,
-	        clsPrefix = _props10.clsPrefix,
-	        columns = _props10.columns,
-	        record = _props10.record,
-	        height = _props10.height,
-	        visible = _props10.visible,
-	        index = _props10.index,
-	        onPaste = _props10.onPaste,
-	        expandIconColumnIndex = _props10.expandIconColumnIndex,
-	        expandIconAsCell = _props10.expandIconAsCell,
-	        expanded = _props10.expanded,
-	        useDragHandle = _props10.useDragHandle,
-	        rowDraggAble = _props10.rowDraggAble,
-	        expandable = _props10.expandable,
-	        onExpand = _props10.onExpand,
-	        needIndentSpaced = _props10.needIndentSpaced,
-	        indent = _props10.indent,
-	        indentSize = _props10.indentSize,
-	        isHiddenExpandIcon = _props10.isHiddenExpandIcon,
-	        fixed = _props10.fixed,
-	        bodyDisplayInRow = _props10.bodyDisplayInRow,
-	        expandedIcon = _props10.expandedIcon,
-	        collapsedIcon = _props10.collapsedIcon,
-	        hoverKey = _props10.hoverKey,
-	        lazyStartIndex = _props10.lazyStartIndex,
-	        lazyEndIndex = _props10.lazyEndIndex,
-	        expandIconCellWidth = _props10.expandIconCellWidth,
-	        getCellClassName = _props10.getCellClassName;
+	    var _props11 = this.props,
+	        clsPrefix = _props11.clsPrefix,
+	        columns = _props11.columns,
+	        record = _props11.record,
+	        height = _props11.height,
+	        visible = _props11.visible,
+	        index = _props11.index,
+	        onPaste = _props11.onPaste,
+	        hasLeftFixed = _props11.hasLeftFixed,
+	        expandIconColumnIndex = _props11.expandIconColumnIndex,
+	        expandIconAsCell = _props11.expandIconAsCell,
+	        expanded = _props11.expanded,
+	        useDragHandle = _props11.useDragHandle,
+	        rowDraggAble = _props11.rowDraggAble,
+	        expandable = _props11.expandable,
+	        onExpand = _props11.onExpand,
+	        needIndentSpaced = _props11.needIndentSpaced,
+	        indent = _props11.indent,
+	        indentSize = _props11.indentSize,
+	        isHiddenExpandIcon = _props11.isHiddenExpandIcon,
+	        fixed = _props11.fixed,
+	        bodyDisplayInRow = _props11.bodyDisplayInRow,
+	        expandedIcon = _props11.expandedIcon,
+	        collapsedIcon = _props11.collapsedIcon,
+	        hoverKey = _props11.hoverKey,
+	        lazyStartIndex = _props11.lazyStartIndex,
+	        lazyEndIndex = _props11.lazyEndIndex,
+	        expandIconCellWidth = _props11.expandIconCellWidth,
+	        getCellClassName = _props11.getCellClassName;
 	    var notRowDrag = this.state.notRowDrag;
+	    // const isEmptyTr = isPre || isSuf//暂时不用 滚动loading相关
 	
 	    var showSum = false;
+	    var cls = [];
+	    if (clsPrefix) {
+	      cls.push(clsPrefix);
+	    }
 	    var className = this.props.className;
 	
 	    if (this.state.hovered) {
@@ -77106,7 +77965,6 @@
 	      collapsedIcon: collapsedIcon,
 	      isHiddenExpandIcon: isHiddenExpandIcon
 	    });
-	    var isExpandIconAsCell = expandIconAsCell ? clsPrefix + '-expand-columns-in-body' : '';
 	    var expandIndexInThisTable;
 	    if (this.props.fixed === 'right') {
 	      expandIndexInThisTable = expandIconColumnIndex - this.props.leftColumnsLength - this.props.centerColumnsLength;
@@ -77114,19 +77972,31 @@
 	      expandIndexInThisTable = expandIconColumnIndex;
 	    }
 	    for (var i = 0; i < columns.length; i++) {
-	      if (expandIconAsCell && i === 0) {
-	        showSum ? cells.push(_react2["default"].createElement('td', { width: expandIconCellWidth })) : cells.push(_react2["default"].createElement(
-	          'td',
-	          {
-	            className: clsPrefix + '-expand-icon-cell ' + isExpandIconAsCell,
-	            key: 'rc-table-expand-icon-cell-' + i,
-	            width: expandIconCellWidth
-	          },
-	          expandIcon
-	        ));
+	      var createExpandIconCell = false;
+	      if (i == 0) {
+	        if (hasLeftFixed && fixed == 'left' && expandIconAsCell) {
+	          //存在左侧固定列则在左侧固定区域下渲染展开列
+	          createExpandIconCell = true;
+	        } else if (!hasLeftFixed && !fixed && expandIconAsCell) {
+	          //不存在左侧固定列则在中间区域第一列渲染展开列
+	          createExpandIconCell = true;
+	        }
+	        if (createExpandIconCell) {
+	          showSum ? cells.push(_react2["default"].createElement('td', { width: expandIconCellWidth, dangerouslySetInnerHTML: { __html: '&nbsp;' } })) : cells.push(_react2["default"].createElement(
+	            'td',
+	            {
+	              className: clsPrefix + '-expand-icon-cell',
+	              key: clsPrefix + '-expand-icon-cell-' + i,
+	              width: expandIconCellWidth
+	            },
+	            expandIcon
+	          ));
+	        }
 	      }
 	      // bugfix 设置expandRowByClick，无法显示箭头，去掉 expandRowByClick 判断
 	      var isColumnHaveExpandIcon = expandIconAsCell || showSum ? false : i === expandIndexInThisTable;
+	      //注意：中间表格区域不需要渲染出固定列的单元格，以节省多余的性能消耗
+	      if (!fixed && columns[i].fixed) continue;
 	      cells.push(_react2["default"].createElement(_TableCell2["default"], {
 	        clsPrefix: clsPrefix,
 	        record: record,
@@ -77158,7 +78028,13 @@
 	    if (rowDraggAble && !useDragHandle && !notRowDrag) {
 	      className += ' row-dragg-able';
 	    }
-	
+	    if (className) {
+	      cls.push(className);
+	    }
+	    if (clsPrefix && indent) {
+	      cls.push(clsPrefix + '-level-' + indent);
+	    }
+	    // const tdStyle = !isEmptyTr ? {} : this.getLoadingStyle(isPre, isSuf)//暂时不用 滚动loading相关
 	    return _react2["default"].createElement(
 	      'tr',
 	      {
@@ -77167,10 +78043,11 @@
 	        onDoubleClick: this.onRowDoubleClick,
 	        onMouseEnter: this.onMouseEnter,
 	        onMouseLeave: this.onMouseLeave,
-	        className: clsPrefix + ' ' + className + ' ' + clsPrefix + '-level-' + indent,
+	        className: cls.join(' '),
 	        style: style,
-	        'data-row-key': record && record.key ? record.key : hoverKey,
-	        'data-row-index': this.props.index
+	        'data-for-table': this.props.tableUid,
+	        'data-row-key': this.getRecordKey(),
+	        'data-row-index': this.props.fixedIndex
 	        // key={hoverKey}
 	        , ref: this.bindElement
 	      },
@@ -77181,6 +78058,9 @@
 	  return TableRow;
 	}(_react.Component);
 	
+	TableRow.defaultProps = {
+	  tableUid: null
+	};
 	;
 	
 	TableRow.propTypes = propTypes;
@@ -77190,7 +78070,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 550 */
+/* 549 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -77203,6 +78083,7 @@
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
 	exports.measureScrollbar = measureScrollbar;
+	exports.myBrowser = myBrowser;
 	exports.debounce = debounce;
 	exports.warningOnce = warningOnce;
 	exports.getOffset = getOffset;
@@ -77217,11 +78098,11 @@
 	exports.formatMoney = formatMoney;
 	exports.convertListToTree = convertListToTree;
 	
-	var _warning = __webpack_require__(31);
+	var _warning = __webpack_require__(32);
 	
 	var _warning2 = _interopRequireDefault(_warning);
 	
-	var _parseInt = __webpack_require__(551);
+	var _parseInt = __webpack_require__(550);
 	
 	var _parseInt2 = _interopRequireDefault(_parseInt);
 	
@@ -77239,35 +78120,105 @@
 	  height: '50px',
 	  overflow: 'scroll'
 	};
-	
-	function measureScrollbar() {
-	  var direction = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'vertical';
-	
+	//注意需要处理各系统及各浏览器的兼容性
+	function measureScrollbar(selectors) {
+	  var direction = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'vertical';
 	
 	  if (typeof document === 'undefined' || typeof window === 'undefined') {
 	    return 0;
 	  }
-	  var tableDom = document.querySelector('.u-table');
-	  var currentDom = tableDom ? tableDom : document.body;
-	
 	  if (scrollbarSize) {
+	    //计算一次即可
 	    return scrollbarSize;
 	  }
-	  var scrollDiv = document.createElement('div');
-	  Object.keys(scrollbarMeasure).forEach(function (scrollProp) {
-	    scrollDiv.style[scrollProp] = scrollbarMeasure[scrollProp];
-	  });
-	  currentDom.appendChild(scrollDiv);
-	  var size = 0;
-	  if (direction === 'vertical') {
-	    size = scrollDiv.offsetWidth - scrollDiv.clientWidth;
-	  } else if (direction === 'horizontal') {
-	    size = scrollDiv.offsetHeight - scrollDiv.clientHeight;
+	  var brow = myBrowser();
+	  var containerDom = selectors && document.querySelector(selectors) || document.body;
+	  var doubleDiv = function doubleDiv() {
+	    var scrollDivParent = document.createElement('div');
+	    scrollDivParent.setAttribute("id", 'measureScrollbar_temp');
+	    scrollDivParent.style.position = 'absolute';
+	    scrollDivParent.style.top = '-9999px';
+	    scrollDivParent.style.overflow = 'scroll';
+	    // scrollDivParent.style.background = 'red';
+	    scrollDivParent.style.width = '50px';
+	    scrollDivParent.style.height = '100px';
+	    var scrollDivChild = document.createElement('div');
+	    // scrollDivChild.style.background = 'green';
+	    scrollDivChild.style.height = '200px';
+	    scrollDivChild.style.flex = "1";
+	    scrollDivParent.appendChild(scrollDivChild);
+	    var a = document.getElementById('measureScrollbar_temp');
+	    if (a) {
+	      containerDom.replaceChild(scrollDivParent, a);
+	    } else {
+	      containerDom.appendChild(scrollDivParent);
+	    }
+	    var barSize = scrollDivParent.getBoundingClientRect().width - scrollDivChild.getBoundingClientRect().width;
+	    containerDom.removeChild(scrollDivParent);
+	    scrollDivParent = null;
+	    scrollDivChild = null;
+	    return barSize;
+	  };
+	  var singleDiv = function singleDiv() {
+	    var scrollDiv = document.createElement('div');
+	    Object.keys(scrollbarMeasure).forEach(function (scrollProp) {
+	      scrollDiv.style[scrollProp] = scrollbarMeasure[scrollProp];
+	    });
+	    containerDom.appendChild(scrollDiv);
+	    var barSize = scrollDiv.offsetWidth - scrollDiv.clientWidth;
+	    containerDom.removeChild(scrollDiv);
+	    return barSize;
+	  };
+	  if (brow.osType == 'Win') {
+	    switch (brow.browserType) {
+	      case "IE":
+	      case "FF":
+	        scrollbarSize = doubleDiv(); //window系统下firefox的offsetWidth同clientWidth一致，所以通过父子容器间带滚动条的墨盒尺寸计算出滚动条宽度
+	        break;
+	      default:
+	        scrollbarSize = singleDiv(); //注意：chrome浏览器可以自定义宽度::-webkit-scrollbar{width:8px}
+	    }
+	  } else if (brow.osType == 'Mac') {
+	    switch (brow.browserType) {
+	      case "FF":
+	        scrollbarSize = 8;
+	        break;
+	      default:
+	        scrollbarSize = singleDiv();
+	    }
+	  } else {
+	    scrollbarSize = singleDiv();
 	  }
-	
-	  currentDom.removeChild(scrollDiv);
-	  scrollbarSize = size;
 	  return scrollbarSize;
+	}
+	
+	function myBrowser() {
+	  var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串
+	  var browserType = '',
+	      osType = '';
+	
+	  if (userAgent.indexOf("Opera") > -1) {
+	    //判断是否Opera浏览器
+	    browserType = "Opera";
+	  } else if (userAgent.indexOf("Firefox") > -1) {
+	    //判断是否Firefox浏览器
+	    browserType = "FF";
+	  } else if (userAgent.indexOf("Chrome") > -1) {
+	    browserType = "Chrome";
+	  } else if (userAgent.indexOf("Safari") > -1) {
+	    //判断是否Safari浏览器
+	    browserType = "Safari";
+	  } else if (userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1 || userAgent.indexOf('Trident') > -1 && userAgent.indexOf("rv:11.0") > -1 //ie版本11
+	  ) {
+	      //判断是否IE浏览器
+	      browserType = "IE";
+	    }
+	  if (userAgent.indexOf("Win") > -1) {
+	    osType = 'Win';
+	  } else if (userAgent.indexOf("Mac") > -1) {
+	    osType = 'Mac';
+	  }
+	  return { browserType: browserType, osType: osType };
 	}
 	
 	function debounce(func, wait, immediate) {
@@ -77287,7 +78238,9 @@
 	    };
 	    var callNow = immediate && !timeout;
 	    clearTimeout(timeout);
-	    timeout = setTimeout(later, wait);
+	    timeout = setTimeout(function () {
+	      later();
+	    }, wait); // 兼容火狐浏览器的写法
 	    if (callNow) {
 	      func.apply(context, args);
 	    }
@@ -77356,7 +78309,7 @@
 	
 	/**
 	 * 简单数组数据对象拷贝
-	 * @param {*} obj 要拷贝的对象 
+	 * @param {*} obj 要拷贝的对象
 	 */
 	function ObjectAssign(obj) {
 	  var b = obj instanceof Array;
@@ -77414,6 +78367,7 @@
 	}
 	
 	function addHandler(element, type, handler) {
+	  if (!element) return;
 	  var event = null;
 	  if (element.addEventListener) {
 	    //检测是否为DOM2级方法
@@ -77436,6 +78390,20 @@
 	    element.detachEvent("on" + type, handler);
 	  } else if (element) {
 	    element["on" + type] = null;
+	  }
+	}
+	function addHandlerArray(elemArray, type, handler) {
+	  if (!elemArray || !elemArray.length) return;
+	  for (var i = 0; i < elemArray.length; i++) {
+	    var elem = elemArray[i];
+	    addHandler(elem, type, handler);
+	  }
+	}
+	function removeHandlerArray(elemArray, type, handler) {
+	  if (!elemArray || !elemArray.length) return;
+	  for (var i = 0; i < elemArray.length; i++) {
+	    var elem = elemArray[i];
+	    removeHandler(elem, type, handler);
 	  }
 	}
 	
@@ -77464,29 +78432,18 @@
 	    event.cancelBubble = true;
 	  }
 	}
+	//是否支持触摸事件
+	function isSupportTouch() {
+	  var support = {
+	    touch: !!('ontouchstart' in window || window.DocumentTouch && document instanceof window.DocumentTouch)
+	  };
+	  return support;
+	}
 	
 	//用事件冒泡方式，如果想兼容事件捕获只需要添加个bool参数
 	var EventUtil = exports.EventUtil = {
-	  addHandler: function addHandler(element, type, handler) {
-	    if (element.addEventListener) {
-	      element.addEventListener(type, handler, false);
-	    } else if (element.attachEvent) {
-	      element.attachEvent('on' + type, handler);
-	    } else {
-	      element['on' + type] = handler;
-	    }
-	  },
-	
-	  removeHandler: function removeHandler(element, type, handler) {
-	    //element&& ie11报错兼容
-	    if (element && element.removeEventListener) {
-	      element.removeEventListener(type, handler, false);
-	    } else if (element && element.detachEvent) {
-	      element.detachEvent('on' + type, handler);
-	    } else if (element) {
-	      element['on' + type] = null;
-	    }
-	  }
+	  addHandler: addHandler,
+	  removeHandler: removeHandler
 	
 	  /*
 	   * 处理精度
@@ -77527,6 +78484,9 @@
 	var Event = exports.Event = {
 	  addHandler: addHandler,
 	  removeHandler: removeHandler,
+	  addHandlerArray: addHandlerArray,
+	  removeHandlerArray: removeHandlerArray,
+	  isSupportTouch: isSupportTouch,
 	  getEvent: getEvent,
 	  getTarget: getTarget,
 	  preventDefault: preventDefault,
@@ -77635,13 +78595,13 @@
 	}
 
 /***/ }),
-/* 551 */
+/* 550 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var root = __webpack_require__(552),
-	    toString = __webpack_require__(554);
+	var root = __webpack_require__(551),
+	    toString = __webpack_require__(553);
 	
-	/** Used to match leading and trailing whitespace. */
+	/** Used to match leading whitespace. */
 	var reTrimStart = /^\s+/;
 	
 	/* Built-in method references for those with the same name as other `lodash` methods. */
@@ -77684,10 +78644,10 @@
 
 
 /***/ }),
-/* 552 */
+/* 551 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var freeGlobal = __webpack_require__(553);
+	var freeGlobal = __webpack_require__(552);
 	
 	/** Detect free variable `self`. */
 	var freeSelf = typeof self == 'object' && self && self.Object === Object && self;
@@ -77699,7 +78659,7 @@
 
 
 /***/ }),
-/* 553 */
+/* 552 */
 /***/ (function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/** Detect free variable `global` from Node.js. */
@@ -77710,10 +78670,10 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ }),
-/* 554 */
+/* 553 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var baseToString = __webpack_require__(555);
+	var baseToString = __webpack_require__(554);
 	
 	/**
 	 * Converts `value` to a string. An empty string is returned for `null`
@@ -77744,13 +78704,13 @@
 
 
 /***/ }),
-/* 555 */
+/* 554 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var Symbol = __webpack_require__(556),
-	    arrayMap = __webpack_require__(557),
-	    isArray = __webpack_require__(558),
-	    isSymbol = __webpack_require__(559);
+	var Symbol = __webpack_require__(555),
+	    arrayMap = __webpack_require__(556),
+	    isArray = __webpack_require__(557),
+	    isSymbol = __webpack_require__(558);
 	
 	/** Used as references for various `Number` constants. */
 	var INFINITY = 1 / 0;
@@ -77787,10 +78747,10 @@
 
 
 /***/ }),
-/* 556 */
+/* 555 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var root = __webpack_require__(552);
+	var root = __webpack_require__(551);
 	
 	/** Built-in value references. */
 	var Symbol = root.Symbol;
@@ -77799,7 +78759,7 @@
 
 
 /***/ }),
-/* 557 */
+/* 556 */
 /***/ (function(module, exports) {
 
 	/**
@@ -77826,7 +78786,7 @@
 
 
 /***/ }),
-/* 558 */
+/* 557 */
 /***/ (function(module, exports) {
 
 	/**
@@ -77858,11 +78818,11 @@
 
 
 /***/ }),
-/* 559 */
+/* 558 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var baseGetTag = __webpack_require__(560),
-	    isObjectLike = __webpack_require__(563);
+	var baseGetTag = __webpack_require__(559),
+	    isObjectLike = __webpack_require__(562);
 	
 	/** `Object#toString` result references. */
 	var symbolTag = '[object Symbol]';
@@ -77893,12 +78853,12 @@
 
 
 /***/ }),
-/* 560 */
+/* 559 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var Symbol = __webpack_require__(556),
-	    getRawTag = __webpack_require__(561),
-	    objectToString = __webpack_require__(562);
+	var Symbol = __webpack_require__(555),
+	    getRawTag = __webpack_require__(560),
+	    objectToString = __webpack_require__(561);
 	
 	/** `Object#toString` result references. */
 	var nullTag = '[object Null]',
@@ -77927,10 +78887,10 @@
 
 
 /***/ }),
-/* 561 */
+/* 560 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var Symbol = __webpack_require__(556);
+	var Symbol = __webpack_require__(555);
 	
 	/** Used for built-in method references. */
 	var objectProto = Object.prototype;
@@ -77979,7 +78939,7 @@
 
 
 /***/ }),
-/* 562 */
+/* 561 */
 /***/ (function(module, exports) {
 
 	/** Used for built-in method references. */
@@ -78007,7 +78967,7 @@
 
 
 /***/ }),
-/* 563 */
+/* 562 */
 /***/ (function(module, exports) {
 
 	/**
@@ -78042,7 +79002,7 @@
 
 
 /***/ }),
-/* 564 */
+/* 563 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -78061,23 +79021,23 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _objectPath = __webpack_require__(565);
+	var _objectPath = __webpack_require__(564);
 	
 	var _objectPath2 = _interopRequireDefault(_objectPath);
 	
-	var _i18n = __webpack_require__(566);
+	var _i18n = __webpack_require__(565);
 	
 	var _i18n2 = _interopRequireDefault(_i18n);
 	
-	var _tool = __webpack_require__(118);
+	var _tool = __webpack_require__(119);
 	
-	var _utils = __webpack_require__(550);
+	var _utils = __webpack_require__(549);
 	
-	var _beeDropdown = __webpack_require__(567);
+	var _beeDropdown = __webpack_require__(566);
 	
 	var _beeDropdown2 = _interopRequireDefault(_beeDropdown);
 	
-	var _beeMenus = __webpack_require__(576);
+	var _beeMenus = __webpack_require__(575);
 	
 	var _beeMenus2 = _interopRequireDefault(_beeMenus);
 	
@@ -78490,10 +79450,8 @@
 	      rowSpan = tdProps.mergeEndIndex - index;
 	      text = '';
 	    }
-	    //不是固定表格并且当前列是固定，则隐藏当前列
-	    if (column.fixed && !fixed) {
-	      className = className + (' ' + clsPrefix + '-fixed-columns-in-body');
-	    }
+	    //注意：中间表格区域不需要渲染出固定列的单元格，以节省多余的性能消耗
+	    if (!fixed && column.fixed) return null;
 	    if (column.contentAlign) {
 	      className = className + (' text-' + column.contentAlign);
 	    } else if (column.textAlign) {
@@ -78545,93 +79503,94 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 565 */
+/* 564 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (root, factory){
-	  'use strict';
+	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (root, factory) {
+	  'use strict'
 	
 	  /*istanbul ignore next:cant test*/
 	  if (typeof module === 'object' && typeof module.exports === 'object') {
-	    module.exports = factory();
+	    module.exports = factory()
 	  } else if (true) {
 	    // AMD. Register as an anonymous module.
-	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__))
 	  } else {
 	    // Browser globals
-	    root.objectPath = factory();
+	    root.objectPath = factory()
 	  }
-	})(this, function(){
-	  'use strict';
+	})(this, function () {
+	  'use strict'
 	
-	  var toStr = Object.prototype.toString;
-	  function hasOwnProperty(obj, prop) {
-	    if(obj == null) {
+	  var toStr = Object.prototype.toString
+	
+	  function hasOwnProperty (obj, prop) {
+	    if (obj == null) {
 	      return false
 	    }
 	    //to handle objects with null prototypes (too edge case?)
 	    return Object.prototype.hasOwnProperty.call(obj, prop)
 	  }
 	
-	  function isEmpty(value){
+	  function isEmpty (value) {
 	    if (!value) {
-	      return true;
+	      return true
 	    }
 	    if (isArray(value) && value.length === 0) {
-	        return true;
+	      return true
 	    } else if (typeof value !== 'string') {
-	        for (var i in value) {
-	            if (hasOwnProperty(value, i)) {
-	                return false;
-	            }
+	      for (var i in value) {
+	        if (hasOwnProperty(value, i)) {
+	          return false
 	        }
-	        return true;
+	      }
+	      return true
 	    }
-	    return false;
+	    return false
 	  }
 	
-	  function toString(type){
-	    return toStr.call(type);
+	  function toString (type) {
+	    return toStr.call(type)
 	  }
 	
-	  function isObject(obj){
-	    return typeof obj === 'object' && toString(obj) === "[object Object]";
+	  function isObject (obj) {
+	    return typeof obj === 'object' && toString(obj) === '[object Object]'
 	  }
 	
-	  var isArray = Array.isArray || function(obj){
+	  var isArray = Array.isArray || function (obj) {
 	    /*istanbul ignore next:cant test*/
-	    return toStr.call(obj) === '[object Array]';
+	    return toStr.call(obj) === '[object Array]'
 	  }
 	
-	  function isBoolean(obj){
-	    return typeof obj === 'boolean' || toString(obj) === '[object Boolean]';
+	  function isBoolean (obj) {
+	    return typeof obj === 'boolean' || toString(obj) === '[object Boolean]'
 	  }
 	
-	  function getKey(key){
-	    var intKey = parseInt(key);
+	  function getKey (key) {
+	    var intKey = parseInt(key)
 	    if (intKey.toString() === key) {
-	      return intKey;
+	      return intKey
 	    }
-	    return key;
+	    return key
 	  }
 	
-	  function factory(options) {
+	  function factory (options) {
 	    options = options || {}
 	
-	    var objectPath = function(obj) {
-	      return Object.keys(objectPath).reduce(function(proxy, prop) {
-	        if(prop === 'create') {
-	          return proxy;
+	    var objectPath = function (obj) {
+	      return Object.keys(objectPath).reduce(function (proxy, prop) {
+	        if (prop === 'create') {
+	          return proxy
 	        }
 	
 	        /*istanbul ignore else*/
 	        if (typeof objectPath[prop] === 'function') {
-	          proxy[prop] = objectPath[prop].bind(objectPath, obj);
+	          proxy[prop] = objectPath[prop].bind(objectPath, obj)
 	        }
 	
-	        return proxy;
-	      }, {});
-	    };
+	        return proxy
+	      }, {})
+	    }
 	
 	    var hasShallowProperty
 	    if (options.includeInheritedProps) {
@@ -78644,217 +79603,233 @@
 	      }
 	    }
 	
-	    function getShallowProperty(obj, prop) {
+	    function getShallowProperty (obj, prop) {
 	      if (hasShallowProperty(obj, prop)) {
-	        return obj[prop];
+	        return obj[prop]
 	      }
 	    }
 	
-	    function set(obj, path, value, doNotReplace){
+	    var getShallowPropertySafely
+	    if (options.includeInheritedProps) {
+	      getShallowPropertySafely = function (obj, currentPath) {
+	        if (typeof currentPath !== 'string' && typeof currentPath !== 'number') {
+	          currentPath = String(currentPath)
+	        }
+	        var currentValue = getShallowProperty(obj, currentPath)
+	        if (currentPath === '__proto__' || currentPath === 'prototype' ||
+	          (currentPath === 'constructor' && typeof currentValue === 'function')) {
+	          throw new Error('For security reasons, object\'s magic properties cannot be set')
+	        }
+	        return currentValue
+	      }
+	    } else {
+	      getShallowPropertySafely = function (obj, currentPath) {
+	        return getShallowProperty(obj, currentPath)
+	      }
+	    }
+	
+	    function set (obj, path, value, doNotReplace) {
 	      if (typeof path === 'number') {
-	        path = [path];
+	        path = [path]
 	      }
 	      if (!path || path.length === 0) {
-	        return obj;
+	        return obj
 	      }
 	      if (typeof path === 'string') {
-	        return set(obj, path.split('.').map(getKey), value, doNotReplace);
+	        return set(obj, path.split('.').map(getKey), value, doNotReplace)
 	      }
-	      var currentPath = path[0];
-	      var currentValue = getShallowProperty(obj, currentPath);
-	      if (options.includeInheritedProps && (currentPath === '__proto__' ||
-	        (currentPath === 'constructor' && typeof currentValue === 'function'))) {
-	        throw new Error('For security reasons, object\'s magic properties cannot be set')
-	      }
+	      var currentPath = path[0]
+	      var currentValue = getShallowPropertySafely(obj, currentPath)
 	      if (path.length === 1) {
 	        if (currentValue === void 0 || !doNotReplace) {
-	          obj[currentPath] = value;
+	          obj[currentPath] = value
 	        }
-	        return currentValue;
+	        return currentValue
 	      }
 	
 	      if (currentValue === void 0) {
 	        //check if we assume an array
-	        if(typeof path[1] === 'number') {
-	          obj[currentPath] = [];
+	        if (typeof path[1] === 'number') {
+	          obj[currentPath] = []
 	        } else {
-	          obj[currentPath] = {};
+	          obj[currentPath] = {}
 	        }
 	      }
 	
-	      return set(obj[currentPath], path.slice(1), value, doNotReplace);
+	      return set(obj[currentPath], path.slice(1), value, doNotReplace)
 	    }
 	
 	    objectPath.has = function (obj, path) {
 	      if (typeof path === 'number') {
-	        path = [path];
+	        path = [path]
 	      } else if (typeof path === 'string') {
-	        path = path.split('.');
+	        path = path.split('.')
 	      }
 	
 	      if (!path || path.length === 0) {
-	        return !!obj;
+	        return !!obj
 	      }
 	
 	      for (var i = 0; i < path.length; i++) {
-	        var j = getKey(path[i]);
+	        var j = getKey(path[i])
 	
-	        if((typeof j === 'number' && isArray(obj) && j < obj.length) ||
+	        if ((typeof j === 'number' && isArray(obj) && j < obj.length) ||
 	          (options.includeInheritedProps ? (j in Object(obj)) : hasOwnProperty(obj, j))) {
-	          obj = obj[j];
+	          obj = obj[j]
 	        } else {
-	          return false;
+	          return false
 	        }
 	      }
 	
-	      return true;
-	    };
+	      return true
+	    }
 	
-	    objectPath.ensureExists = function (obj, path, value){
-	      return set(obj, path, value, true);
-	    };
+	    objectPath.ensureExists = function (obj, path, value) {
+	      return set(obj, path, value, true)
+	    }
 	
-	    objectPath.set = function (obj, path, value, doNotReplace){
-	      return set(obj, path, value, doNotReplace);
-	    };
+	    objectPath.set = function (obj, path, value, doNotReplace) {
+	      return set(obj, path, value, doNotReplace)
+	    }
 	
-	    objectPath.insert = function (obj, path, value, at){
-	      var arr = objectPath.get(obj, path);
-	      at = ~~at;
+	    objectPath.insert = function (obj, path, value, at) {
+	      var arr = objectPath.get(obj, path)
+	      at = ~~at
 	      if (!isArray(arr)) {
-	        arr = [];
-	        objectPath.set(obj, path, arr);
+	        arr = []
+	        objectPath.set(obj, path, arr)
 	      }
-	      arr.splice(at, 0, value);
-	    };
+	      arr.splice(at, 0, value)
+	    }
 	
-	    objectPath.empty = function(obj, path) {
+	    objectPath.empty = function (obj, path) {
 	      if (isEmpty(path)) {
-	        return void 0;
+	        return void 0
 	      }
 	      if (obj == null) {
-	        return void 0;
+	        return void 0
 	      }
 	
-	      var value, i;
+	      var value, i
 	      if (!(value = objectPath.get(obj, path))) {
-	        return void 0;
+	        return void 0
 	      }
 	
 	      if (typeof value === 'string') {
-	        return objectPath.set(obj, path, '');
+	        return objectPath.set(obj, path, '')
 	      } else if (isBoolean(value)) {
-	        return objectPath.set(obj, path, false);
+	        return objectPath.set(obj, path, false)
 	      } else if (typeof value === 'number') {
-	        return objectPath.set(obj, path, 0);
+	        return objectPath.set(obj, path, 0)
 	      } else if (isArray(value)) {
-	        value.length = 0;
+	        value.length = 0
 	      } else if (isObject(value)) {
 	        for (i in value) {
 	          if (hasShallowProperty(value, i)) {
-	            delete value[i];
+	            delete value[i]
 	          }
 	        }
 	      } else {
-	        return objectPath.set(obj, path, null);
+	        return objectPath.set(obj, path, null)
 	      }
-	    };
+	    }
 	
-	    objectPath.push = function (obj, path /*, values */){
-	      var arr = objectPath.get(obj, path);
+	    objectPath.push = function (obj, path /*, values */) {
+	      var arr = objectPath.get(obj, path)
 	      if (!isArray(arr)) {
-	        arr = [];
-	        objectPath.set(obj, path, arr);
+	        arr = []
+	        objectPath.set(obj, path, arr)
 	      }
 	
-	      arr.push.apply(arr, Array.prototype.slice.call(arguments, 2));
-	    };
+	      arr.push.apply(arr, Array.prototype.slice.call(arguments, 2))
+	    }
 	
 	    objectPath.coalesce = function (obj, paths, defaultValue) {
-	      var value;
+	      var value
 	
 	      for (var i = 0, len = paths.length; i < len; i++) {
 	        if ((value = objectPath.get(obj, paths[i])) !== void 0) {
-	          return value;
+	          return value
 	        }
 	      }
 	
-	      return defaultValue;
-	    };
+	      return defaultValue
+	    }
 	
-	    objectPath.get = function (obj, path, defaultValue){
+	    objectPath.get = function (obj, path, defaultValue) {
 	      if (typeof path === 'number') {
-	        path = [path];
+	        path = [path]
 	      }
 	      if (!path || path.length === 0) {
-	        return obj;
+	        return obj
 	      }
 	      if (obj == null) {
-	        return defaultValue;
+	        return defaultValue
 	      }
 	      if (typeof path === 'string') {
-	        return objectPath.get(obj, path.split('.'), defaultValue);
+	        return objectPath.get(obj, path.split('.'), defaultValue)
 	      }
 	
-	      var currentPath = getKey(path[0]);
-	      var nextObj = getShallowProperty(obj, currentPath)
+	      var currentPath = getKey(path[0])
+	      var nextObj = getShallowPropertySafely(obj, currentPath)
 	      if (nextObj === void 0) {
-	        return defaultValue;
+	        return defaultValue
 	      }
 	
 	      if (path.length === 1) {
-	        return nextObj;
+	        return nextObj
 	      }
 	
-	      return objectPath.get(obj[currentPath], path.slice(1), defaultValue);
-	    };
+	      return objectPath.get(obj[currentPath], path.slice(1), defaultValue)
+	    }
 	
-	    objectPath.del = function del(obj, path) {
+	    objectPath.del = function del (obj, path) {
 	      if (typeof path === 'number') {
-	        path = [path];
+	        path = [path]
 	      }
 	
 	      if (obj == null) {
-	        return obj;
+	        return obj
 	      }
 	
 	      if (isEmpty(path)) {
-	        return obj;
+	        return obj
 	      }
-	      if(typeof path === 'string') {
-	        return objectPath.del(obj, path.split('.'));
+	      if (typeof path === 'string') {
+	        return objectPath.del(obj, path.split('.'))
 	      }
 	
-	      var currentPath = getKey(path[0]);
+	      var currentPath = getKey(path[0])
+	      getShallowPropertySafely(obj, currentPath)
 	      if (!hasShallowProperty(obj, currentPath)) {
-	        return obj;
+	        return obj
 	      }
 	
-	      if(path.length === 1) {
+	      if (path.length === 1) {
 	        if (isArray(obj)) {
-	          obj.splice(currentPath, 1);
+	          obj.splice(currentPath, 1)
 	        } else {
-	          delete obj[currentPath];
+	          delete obj[currentPath]
 	        }
 	      } else {
-	        return objectPath.del(obj[currentPath], path.slice(1));
+	        return objectPath.del(obj[currentPath], path.slice(1))
 	      }
 	
-	      return obj;
+	      return obj
 	    }
 	
-	    return objectPath;
+	    return objectPath
 	  }
 	
-	  var mod = factory();
-	  mod.create = factory;
+	  var mod = factory()
+	  mod.create = factory
 	  mod.withInheritedProps = factory({includeInheritedProps: true})
-	  return mod;
-	});
+	  return mod
+	})
 
 
 /***/ }),
-/* 566 */
+/* 565 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -78916,7 +79891,7 @@
 	};
 
 /***/ }),
-/* 567 */
+/* 566 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -78925,7 +79900,7 @@
 	  value: true
 	});
 	
-	var _Dropdown = __webpack_require__(568);
+	var _Dropdown = __webpack_require__(567);
 	
 	var _Dropdown2 = _interopRequireDefault(_Dropdown);
 	
@@ -78935,7 +79910,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 568 */
+/* 567 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -78954,11 +79929,11 @@
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _trigger = __webpack_require__(569);
+	var _trigger = __webpack_require__(568);
 	
 	var _trigger2 = _interopRequireDefault(_trigger);
 	
-	var _placement = __webpack_require__(575);
+	var _placement = __webpack_require__(574);
 	
 	var _placement2 = _interopRequireDefault(_placement);
 	
@@ -79161,15 +80136,15 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 569 */
+/* 568 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	module.exports = __webpack_require__(570);
+	module.exports = __webpack_require__(569);
 
 /***/ }),
-/* 570 */
+/* 569 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -79192,17 +80167,17 @@
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _contains = __webpack_require__(98);
+	var _contains = __webpack_require__(99);
 	
 	var _contains2 = _interopRequireDefault(_contains);
 	
 	var _tinperBeeCore = __webpack_require__(26);
 	
-	var _Popup = __webpack_require__(571);
+	var _Popup = __webpack_require__(570);
 	
 	var _Popup2 = _interopRequireDefault(_Popup);
 	
-	var _utils = __webpack_require__(574);
+	var _utils = __webpack_require__(573);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
@@ -79805,7 +80780,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 571 */
+/* 570 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -79828,19 +80803,19 @@
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _Align = __webpack_require__(49);
+	var _Align = __webpack_require__(50);
 	
 	var _Align2 = _interopRequireDefault(_Align);
 	
-	var _beeAnimate = __webpack_require__(56);
+	var _beeAnimate = __webpack_require__(57);
 	
 	var _beeAnimate2 = _interopRequireDefault(_beeAnimate);
 	
-	var _PopupInner = __webpack_require__(572);
+	var _PopupInner = __webpack_require__(571);
 	
 	var _PopupInner2 = _interopRequireDefault(_PopupInner);
 	
-	var _LazyRenderBox = __webpack_require__(573);
+	var _LazyRenderBox = __webpack_require__(572);
 	
 	var _LazyRenderBox2 = _interopRequireDefault(_LazyRenderBox);
 	
@@ -80085,7 +81060,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 572 */
+/* 571 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -80104,7 +81079,7 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _LazyRenderBox = __webpack_require__(573);
+	var _LazyRenderBox = __webpack_require__(572);
 	
 	var _LazyRenderBox2 = _interopRequireDefault(_LazyRenderBox);
 	
@@ -80172,7 +81147,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 573 */
+/* 572 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -80251,7 +81226,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 574 */
+/* 573 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -80286,7 +81261,7 @@
 	}
 
 /***/ }),
-/* 575 */
+/* 574 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -80343,7 +81318,7 @@
 	exports["default"] = placements;
 
 /***/ }),
-/* 576 */
+/* 575 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -80352,7 +81327,7 @@
 	  value: true
 	});
 	
-	var _VerticalMenu = __webpack_require__(577);
+	var _VerticalMenu = __webpack_require__(576);
 	
 	var _VerticalMenu2 = _interopRequireDefault(_VerticalMenu);
 	
@@ -80362,7 +81337,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 577 */
+/* 576 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -80377,15 +81352,15 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _ExportMenu = __webpack_require__(578);
+	var _ExportMenu = __webpack_require__(577);
 	
 	var _ExportMenu2 = _interopRequireDefault(_ExportMenu);
 	
-	var _openAnimation = __webpack_require__(600);
+	var _openAnimation = __webpack_require__(599);
 	
 	var _openAnimation2 = _interopRequireDefault(_openAnimation);
 	
-	var _warning = __webpack_require__(601);
+	var _warning = __webpack_require__(600);
 	
 	var _warning2 = _interopRequireDefault(_warning);
 	
@@ -80518,7 +81493,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 578 */
+/* 577 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -80528,31 +81503,31 @@
 	});
 	exports.MenuToggle = exports.SideContainer = exports.Divider = exports.ItemGroup = exports.MenuItemGroup = exports.MenuItem = exports.Item = exports.SubMenu = undefined;
 	
-	var _Menu = __webpack_require__(579);
+	var _Menu = __webpack_require__(578);
 	
 	var _Menu2 = _interopRequireDefault(_Menu);
 	
-	var _SubMenu = __webpack_require__(589);
+	var _SubMenu = __webpack_require__(588);
 	
 	var _SubMenu2 = _interopRequireDefault(_SubMenu);
 	
-	var _MenuItem = __webpack_require__(592);
+	var _MenuItem = __webpack_require__(591);
 	
 	var _MenuItem2 = _interopRequireDefault(_MenuItem);
 	
-	var _MenuItemGroup = __webpack_require__(596);
+	var _MenuItemGroup = __webpack_require__(595);
 	
 	var _MenuItemGroup2 = _interopRequireDefault(_MenuItemGroup);
 	
-	var _Divider = __webpack_require__(597);
+	var _Divider = __webpack_require__(596);
 	
 	var _Divider2 = _interopRequireDefault(_Divider);
 	
-	var _SideContainer = __webpack_require__(598);
+	var _SideContainer = __webpack_require__(597);
 	
 	var _SideContainer2 = _interopRequireDefault(_SideContainer);
 	
-	var _MenuToggle = __webpack_require__(599);
+	var _MenuToggle = __webpack_require__(598);
 	
 	var _MenuToggle2 = _interopRequireDefault(_MenuToggle);
 	
@@ -80573,7 +81548,7 @@
 	exports["default"] = _Menu2["default"];
 
 /***/ }),
-/* 579 */
+/* 578 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -80596,13 +81571,13 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _miniStore = __webpack_require__(580);
+	var _miniStore = __webpack_require__(579);
 	
-	var _SubPopupMenu = __webpack_require__(586);
+	var _SubPopupMenu = __webpack_require__(585);
 	
 	var _SubPopupMenu2 = _interopRequireDefault(_SubPopupMenu);
 	
-	var _util = __webpack_require__(587);
+	var _util = __webpack_require__(586);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
@@ -80871,7 +81846,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 580 */
+/* 579 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -80881,15 +81856,15 @@
 	});
 	exports.create = exports.connect = exports.Provider = undefined;
 	
-	var _Provider2 = __webpack_require__(581);
+	var _Provider2 = __webpack_require__(580);
 	
 	var _Provider3 = _interopRequireDefault(_Provider2);
 	
-	var _connect2 = __webpack_require__(583);
+	var _connect2 = __webpack_require__(582);
 	
 	var _connect3 = _interopRequireDefault(_connect2);
 	
-	var _create2 = __webpack_require__(585);
+	var _create2 = __webpack_require__(584);
 	
 	var _create3 = _interopRequireDefault(_create2);
 	
@@ -80900,7 +81875,7 @@
 	exports.create = _create3.default;
 
 /***/ }),
-/* 581 */
+/* 580 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -80915,7 +81890,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _PropTypes = __webpack_require__(582);
+	var _PropTypes = __webpack_require__(581);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -80960,7 +81935,7 @@
 	exports.default = Provider;
 
 /***/ }),
-/* 582 */
+/* 581 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -80983,7 +81958,7 @@
 	});
 
 /***/ }),
-/* 583 */
+/* 582 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -81002,7 +81977,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _shallowequal = __webpack_require__(584);
+	var _shallowequal = __webpack_require__(583);
 	
 	var _shallowequal2 = _interopRequireDefault(_shallowequal);
 	
@@ -81010,9 +81985,9 @@
 	
 	var _hoistNonReactStatics2 = _interopRequireDefault(_hoistNonReactStatics);
 	
-	var _reactLifecyclesCompat = __webpack_require__(78);
+	var _reactLifecyclesCompat = __webpack_require__(79);
 	
-	var _PropTypes = __webpack_require__(582);
+	var _PropTypes = __webpack_require__(581);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -81151,7 +82126,7 @@
 	}
 
 /***/ }),
-/* 584 */
+/* 583 */
 /***/ (function(module, exports) {
 
 	//
@@ -81203,7 +82178,7 @@
 
 
 /***/ }),
-/* 585 */
+/* 584 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -81247,7 +82222,7 @@
 	}
 
 /***/ }),
-/* 586 */
+/* 585 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -81274,11 +82249,11 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _miniStore = __webpack_require__(580);
+	var _miniStore = __webpack_require__(579);
 	
 	var _tinperBeeCore = __webpack_require__(26);
 	
-	var _createChainedFunction = __webpack_require__(460);
+	var _createChainedFunction = __webpack_require__(459);
 	
 	var _createChainedFunction2 = _interopRequireDefault(_createChainedFunction);
 	
@@ -81286,9 +82261,9 @@
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _util = __webpack_require__(587);
+	var _util = __webpack_require__(586);
 	
-	var _DOMWrap = __webpack_require__(588);
+	var _DOMWrap = __webpack_require__(587);
 	
 	var _DOMWrap2 = _interopRequireDefault(_DOMWrap);
 	
@@ -81696,7 +82671,7 @@
 	exports["default"] = connected;
 
 /***/ }),
-/* 587 */
+/* 586 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -81823,7 +82798,7 @@
 	}
 
 /***/ }),
-/* 588 */
+/* 587 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -81846,15 +82821,15 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _resizeObserverPolyfill = __webpack_require__(294);
+	var _resizeObserverPolyfill = __webpack_require__(293);
 	
 	var _resizeObserverPolyfill2 = _interopRequireDefault(_resizeObserverPolyfill);
 	
-	var _SubMenu = __webpack_require__(589);
+	var _SubMenu = __webpack_require__(588);
 	
 	var _SubMenu2 = _interopRequireDefault(_SubMenu);
 	
-	var _util = __webpack_require__(587);
+	var _util = __webpack_require__(586);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
@@ -81880,7 +82855,7 @@
 	
 	// Fix ssr
 	if (canUseDOM) {
-	  __webpack_require__(591);
+	  __webpack_require__(590);
 	}
 	
 	var DOMWrap = function (_React$Component) {
@@ -82198,7 +83173,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 589 */
+/* 588 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -82228,7 +83203,7 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _rcTrigger = __webpack_require__(462);
+	var _rcTrigger = __webpack_require__(461);
 	
 	var _rcTrigger2 = _interopRequireDefault(_rcTrigger);
 	
@@ -82238,21 +83213,21 @@
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _miniStore = __webpack_require__(580);
+	var _miniStore = __webpack_require__(579);
 	
-	var _SubPopupMenu = __webpack_require__(586);
+	var _SubPopupMenu = __webpack_require__(585);
 	
 	var _SubPopupMenu2 = _interopRequireDefault(_SubPopupMenu);
 	
-	var _placements = __webpack_require__(590);
+	var _placements = __webpack_require__(589);
 	
 	var _placements2 = _interopRequireDefault(_placements);
 	
-	var _rcAnimate = __webpack_require__(512);
+	var _rcAnimate = __webpack_require__(511);
 	
 	var _rcAnimate2 = _interopRequireDefault(_rcAnimate);
 	
-	var _util = __webpack_require__(587);
+	var _util = __webpack_require__(586);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
@@ -82845,7 +83820,7 @@
 	exports["default"] = connected;
 
 /***/ }),
-/* 590 */
+/* 589 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -82888,7 +83863,7 @@
 	exports["default"] = placements;
 
 /***/ }),
-/* 591 */
+/* 590 */
 /***/ (function(module, exports) {
 
 	// mutationobserver-shim v0.3.3 (github.com/megawac/MutationObserver.js)
@@ -82913,7 +83888,7 @@
 
 
 /***/ }),
-/* 592 */
+/* 591 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -82943,13 +83918,13 @@
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _domScrollIntoView = __webpack_require__(593);
+	var _domScrollIntoView = __webpack_require__(592);
 	
 	var _domScrollIntoView2 = _interopRequireDefault(_domScrollIntoView);
 	
-	var _miniStore = __webpack_require__(580);
+	var _miniStore = __webpack_require__(579);
 	
-	var _util = __webpack_require__(587);
+	var _util = __webpack_require__(586);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
@@ -83195,20 +84170,20 @@
 	exports["default"] = connected;
 
 /***/ }),
+/* 592 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	module.exports = __webpack_require__(593);
+
+/***/ }),
 /* 593 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	module.exports = __webpack_require__(594);
-
-/***/ }),
-/* 594 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var util = __webpack_require__(595);
+	var util = __webpack_require__(594);
 	
 	function scrollIntoView(elem, container, config) {
 	  config = config || {};
@@ -83337,7 +84312,7 @@
 	module.exports = scrollIntoView;
 
 /***/ }),
-/* 595 */
+/* 594 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -83781,7 +84756,7 @@
 	}, domUtils);
 
 /***/ }),
-/* 596 */
+/* 595 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -83800,7 +84775,7 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _util = __webpack_require__(587);
+	var _util = __webpack_require__(586);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
@@ -83898,7 +84873,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 597 */
+/* 596 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -83968,7 +84943,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 598 */
+/* 597 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -84042,7 +85017,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 599 */
+/* 598 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -84065,7 +85040,7 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _createChainedFunction = __webpack_require__(36);
+	var _createChainedFunction = __webpack_require__(37);
 	
 	var _createChainedFunction2 = _interopRequireDefault(_createChainedFunction);
 	
@@ -84200,7 +85175,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 600 */
+/* 599 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -84248,7 +85223,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 601 */
+/* 600 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -84257,7 +85232,7 @@
 	  value: true
 	});
 	
-	var _warning = __webpack_require__(31);
+	var _warning = __webpack_require__(32);
 	
 	var _warning2 = _interopRequireDefault(_warning);
 	
@@ -84275,7 +85250,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 602 */
+/* 601 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -84292,7 +85267,7 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _shallowequal = __webpack_require__(584);
+	var _shallowequal = __webpack_require__(583);
 	
 	var _shallowequal2 = _interopRequireDefault(_shallowequal);
 	
@@ -84385,7 +85360,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 603 */
+/* 602 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -84408,11 +85383,11 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _throttleDebounce = __webpack_require__(604);
+	var _throttleDebounce = __webpack_require__(603);
 	
-	var _utils = __webpack_require__(550);
+	var _utils = __webpack_require__(549);
 	
-	var _FilterType = __webpack_require__(605);
+	var _FilterType = __webpack_require__(604);
 	
 	var _FilterType2 = _interopRequireDefault(_FilterType);
 	
@@ -84432,13 +85407,6 @@
 	  rows: _propTypes2["default"].array
 	};
 	
-	function getDiv(id) {
-	  var div = document.createElement("div");
-	  div.className = "u-table-drag-hidden-cont";
-	  div.id = id;
-	  return div;
-	}
-	
 	var TableHeader = function (_Component) {
 	  _inherits(TableHeader, _Component);
 	
@@ -84447,12 +85415,584 @@
 	
 	    var _this = _possibleConstructorReturn(this, _Component.call(this, props));
 	
-	    _initialiseProps.call(_this);
+	    _this.createTableNone = function () {
+	      _this._table_none_cont_id = _this.props.tableUid || "_table_uid_" + new Date().getTime();
+	      if (document.getElementById(_this._table_none_cont_id)) return;
+	      var div = document.createElement("div");
+	      div.className = "u-table-drag-hidden-cont";
+	      div.id = _this._table_none_cont_id;
+	      document.body.appendChild(div);
+	      return div;
+	    };
+	
+	    _this.destroyTableNone = function () {
+	      var elem = document.getElementById(_this._table_none_cont_id);
+	      if (!elem) return;
+	      if (elem.remove) {
+	        elem.remove();
+	      } else {
+	        //ie 不支持remove方法，只能用removeChild方法
+	        elem.parentNode.removeChild(elem);
+	      }
+	    };
+	
+	    _this.getOnLineObject = function (_element) {
+	      var type = _element.getAttribute('data-type'),
+	          elementObj = null;
+	      if (!type) {
+	        var element = _element.parentElement || parentNode; //兼容写法。
+	        if (element.getAttribute('data-type')) {
+	          elementObj = element;
+	        }
+	      } else {
+	        elementObj = _element;
+	      }
+	      return elementObj;
+	    };
+	
+	    _this.onDragMouseDown = function (e) {
+	      var _this$props = _this.props,
+	          dragborder = _this$props.dragborder,
+	          eventNoStop = _this$props.eventNoStop,
+	          onMouseDown = _this$props.onMouseDown;
+	
+	      !eventNoStop && _utils.Event.stopPropagation(e);
+	      dragborder && typeof onMouseDown == 'function' && onMouseDown(e);
+	    };
+	
+	    _this.getTableWidth = function () {
+	      var tableWidth = 0,
+	          offWidth = 0; //this.table.cols.length;
+	      for (var index = 0; index < _this.table.cols.length; index++) {
+	        var da = _this.table.cols[index];
+	        tableWidth += parseInt(da.style.width);
+	      }
+	      return tableWidth - offWidth;
+	    };
+	
+	    _this.getTargetToType = function (targetEvent) {
+	      var tag = targetEvent;
+	      if (targetEvent && !targetEvent.getAttribute("data-type")) {
+	        tag = _this.getTargetToType(targetEvent.parentElement);
+	      }
+	      return tag;
+	    };
+	
+	    _this.getTargetToTh = function (targetEvent) {
+	      var th = targetEvent;
+	      if (targetEvent.nodeName.toUpperCase() != "TH") {
+	        th = _this.getThDome(targetEvent);
+	      }
+	      // console.log(" getTargetToTh: ", th);
+	      return th;
+	    };
+	
+	    _this.onTrMouseMove = function (e) {
+	      // console.log("AAA---TableHeader---mousemove->",e);
+	      if (!_this.props.dragborder && !_this.props.draggable) return;
+	      var _this$props2 = _this.props,
+	          clsPrefix = _this$props2.clsPrefix,
+	          dragborder = _this$props2.dragborder,
+	          contentDomWidth = _this$props2.contentDomWidth,
+	          scrollbarWidth = _this$props2.scrollbarWidth,
+	          contentTable = _this$props2.contentTable,
+	          headerScroll = _this$props2.headerScroll,
+	          lastShowIndex = _this$props2.lastShowIndex,
+	          onMouseMove = _this$props2.onMouseMove,
+	          onDraggingBorder = _this$props2.onDraggingBorder,
+	          leftFixedWidth = _this$props2.leftFixedWidth,
+	          rightFixedWidth = _this$props2.rightFixedWidth,
+	          bodyDisplayInRow = _this$props2.bodyDisplayInRow,
+	          eventNoStop = _this$props2.eventNoStop;
+	
+	      !eventNoStop && _utils.Event.stopPropagation(e);
+	      var event = _utils.Event.getEvent(e);
+	      if (_this.props.dragborder && _this.drag.option == "border") {
+	        //移动改变宽度
+	
+	        var isMoveToRight = _this.drag.currentLeft < event.clientX;
+	        if (_this.drag.fixedType === 'left' && isMoveToRight && _this.drag.fixedRightBodyTableLeft) {
+	          if (_this.drag.fixedRightBodyTableLeft - event.clientX < 100) {
+	            return; // 拖动左侧固定列，离右侧固定列距离小于100时，禁止拖动
+	          }
+	        }
+	        var currentCols = _this.table.cols[_this.drag.currIndex];
+	        var diff = event.clientX - _this.drag.oldLeft;
+	        var newWidth = _this.drag.oldWidth + diff;
+	        _this.drag.newWidth = newWidth > 0 ? newWidth : _this.minWidth;
+	        _this.drag.currentLeft = event.clientX;
+	
+	        // displayinrow 判断、 固定行高判断
+	        if (!bodyDisplayInRow) {
+	          _this.table.bodyRows.forEach(function (row, index) {
+	            var leftRow = _this.table.fixedLeftBodyRows[index];
+	            var rightRow = _this.table.fixedRightBodyRows[index];
+	            if (leftRow || rightRow) {
+	              var height = row.getBoundingClientRect().height;
+	              leftRow && (leftRow.style.height = height + "px");
+	              rightRow && (rightRow.style.height = height + "px");
+	            }
+	          });
+	        }
+	
+	        if (newWidth > _this.minWidth) {
+	          //移动后的宽度大于列最小宽度，则更新列和内容宽度
+	          /*拖拽列宽度使用尺标代替不再实时更新重绘宽度
+	          currentCols.style.width = newWidth +'px'; //中间表头-拖拽过程中实时更新重绘宽度
+	          //hao 支持固定表头拖拽 修改表体的width
+	          if(this.fixedTable.cols){
+	              this.fixedTable.cols[this.drag.currIndex].style.width = newWidth + "px";//固定列表头-拖拽过程中实时更新重绘宽度
+	          }
+	           const  contentTableSWidth = this.drag.contentTableSWidth - this.drag.contentTableCWidth;
+	            // console.log('contentTableSWidth+diff',contentTableSWidth+diff,'diff',diff);
+	            if(diff<0 && contentTableSWidth+diff < 0) {//拖拽后宽度小于可视宽度，则最后一列自动缩减宽度
+	              const headerCols = this.table.tableHeaderCols || this.table.cols;
+	              const lastWidth =this.lastColumWidth - (contentTableSWidth+diff);
+	              headerCols[headerCols.length-1].style.width = lastWidth +"px";//同步表头
+	              this.table.tableBodyCols[headerCols.length-1].style.width = lastWidth + "px";//同步表体
+	            }
+	           */
+	          // 内容区非固定列场景拖拽
+	          if (!_this.drag.fixedType) {
+	
+	            // let newDiff = (parseInt(currentCols.style.minWidth) - parseInt(currentCols.style.width));
+	            // if(newDiff > 0){//缩小
+	            //   let lastWidth = this.lastColumWidth + newDiff;
+	            //   this.table.cols[lastShowIndex].style.width = lastWidth +"px";//同步表头
+	            //   this.table.tableBodyCols[lastShowIndex].style.width = lastWidth + "px";//同步表体
+	
+	            // }
+	
+	
+	            // let dargTableWidth = parseFloat(window.getComputedStyle(this.table.table).width)
+	            // let showScroll =  contentDomWidth - (leftFixedWidth + rightFixedWidth) - (dargTableWidth + diff) - scrollbarWidth;
+	            // //let showScroll =  contentDomWidth - (leftFixedWidth + rightFixedWidth) - (this.drag.tableWidth + diff) - scrollbarWidth ;
+	            //
+	            //  //表头滚动条处理
+	            //  if(headerScroll){
+	            //    if(showScroll < 0){ //小于 0 出现滚动条
+	            //        //找到固定列表格，设置表头的marginBottom值为scrollbarWidth;
+	            //        this.table.contentTableHeader.style.overflowX = 'scroll';
+	            //        this.optTableMargin( this.table.fixedLeftHeaderTable,scrollbarWidth);
+	            //        this.optTableMargin( this.table.fixedRightHeaderTable,scrollbarWidth);
+	            //      }else{ //大于 0 不显示滚动条
+	            //        this.table.contentTableHeader.style.overflowX = 'hidden';
+	            //        this.optTableMargin( this.table.fixedLeftHeaderTable,0);
+	            //        this.optTableMargin( this.table.fixedRightHeaderTable,0);
+	            //    }
+	            //  }else{
+	            //  // const scrollContainers = this.table.tableBody.querySelectorAll('.scroll-container') || []
+	            //  if(showScroll < 0){
+	            //    // scrollContainers[0] ? scrollContainers[0].style.overflowX = 'auto' : null//暂时注释，还原原来逻辑
+	            //        this.table.tableBody.style.overflowX = 'auto';
+	            //        this.optTableMargin( this.table.fixedLeftBodyTable,'-'+scrollbarWidth);
+	            //        this.optTableMargin( this.table.fixedRightBodyTable,'-'+scrollbarWidth);
+	            //        this.optTableScroll( this.table.fixedLeftBodyTable,{x:'scroll'});
+	            //        this.optTableScroll( this.table.fixedRightBodyTable,{x:'scroll'});
+	            //  }else{
+	            //    // scrollContainers[0] ? scrollContainers[0].style.overflowX = 'hidden' : null
+	            //    this.table.tableBody.style.overflowX = 'hidden';//暂时注释，还原原来逻辑
+	            //    this.optTableMargin( this.table.fixedLeftBodyTable,0);
+	            //    this.optTableMargin( this.table.fixedRightBodyTable,0);
+	            //    this.optTableScroll( this.table.fixedLeftBodyTable,{x:'auto'});
+	            //    this.optTableScroll( this.table.fixedRightBodyTable,{x:'auto'});
+	            //  }
+	            //  }
+	          } else if (_this.drag.fixedType) {
+	            if (_this.table.ths[_this.drag.currIndex]) {
+	              _this.table.ths[_this.drag.currIndex].width = newWidth;
+	            }
+	            // console.log('this.drag.contentTableML',this.drag.contentTableML,'diff',diff);
+	            // debugger
+	            // this.syncFixedBodyTableWidth() // 同步body中table的宽度 以移到Table.syncFixedBodyTableWidth
+	            var contentTablePar = _this.table.contentTableHeader.parentNode;
+	            // left、right缩小的内容，在没有滚动条时，需要将宽度同步到到最后一列
+	            // diff<0 往里拖，
+	            // const  contentTableSWidth = this.drag.contentTableSWidth - this.drag.contentTableCWidth;
+	            // console.log('contentTableSWidth+diff',contentTableSWidth+diff,'diff',diff);
+	            // if(diff<0 && contentTableSWidth+diff < 0) {
+	            //   const headerCols = this.table.tableHeaderCols || this.table.cols;
+	            //   const lastWidth =this.lastColumWidth - (contentTableSWidth+diff);
+	            //   console.log('lastWidth',lastWidth,'lastShowIndex',lastShowIndex);
+	            //   headerCols[lastShowIndex].style.width = lastWidth +"px";//同步表头
+	            //   this.table.tableBodyCols[lastShowIndex].style.width = lastWidth + "px";//同步表体
+	            // }
+	            if (_this.drag.fixedType == 'left') {
+	              contentTablePar.style.marginLeft = _this.drag.contentTableML + diff + 'px';
+	            } else {
+	              contentTablePar.style.marginRight = _this.drag.contentTableMR + diff + 'px';
+	            }
+	            //暂时注释，还原
+	            // const containerWidth = contentTablePar.getBoundingClientRect().width
+	            // const tableWidth = this.table.innerTableBody.getBoundingClientRect().width
+	            // const scrollContainers = this.table.tableBody.querySelectorAll('.scroll-container') || []
+	            // if (tableWidth > containerWidth) {
+	            //   scrollContainers[0] ? scrollContainers[0].style.overflowX = 'auto' : null
+	            //   this.optTableMargin( this.table.fixedLeftBodyTable,'-'+scrollbarWidth);
+	            //   this.optTableMargin( this.table.fixedRightBodyTable,'-'+scrollbarWidth);
+	            //   this.optTableScroll( this.table.fixedLeftBodyTable,{x:'scroll'});
+	            //   this.optTableScroll( this.table.fixedRightBodyTable,{x:'scroll'});
+	            // } else {
+	            //   scrollContainers[0] ? scrollContainers[0].style.overflowX = 'hidden' : null
+	            //   this.optTableMargin( this.table.fixedLeftBodyTable,0);
+	            //   this.optTableMargin( this.table.fixedRightBodyTable,0);
+	            //   this.optTableScroll( this.table.fixedLeftBodyTable,{x:'auto'});
+	            //   this.optTableScroll( this.table.fixedRightBodyTable,{x:'auto'});
+	            // }
+	          }
+	        } else {
+	          _this.drag.newWidth = _this.minWidth;
+	        }
+	      }
+	      // console.log("AAAA----TableHeader---newWidth-->"+this.drag.newWidth)
+	      // onMouseMove && onMouseMove(e);
+	      // 增加拖拽列宽动作的回调函数
+	      _this.drag.newWidth && onDraggingBorder && onDraggingBorder(event, _this.drag.newWidth);
+	    };
+	
+	    _this.syncFixedBodyTableWidth = function () {
+	      var _this$table = _this.table,
+	          fixedLeftHeaderTableBody = _this$table.fixedLeftHeaderTableBody,
+	          fixedLeftInnerTableBody = _this$table.fixedLeftInnerTableBody,
+	          fixedRightHeaderTableBody = _this$table.fixedRightHeaderTableBody,
+	          fixedRightInnerTableBody = _this$table.fixedRightInnerTableBody;
+	
+	      if (fixedLeftHeaderTableBody && fixedLeftInnerTableBody) {
+	        fixedLeftInnerTableBody.style.width = fixedLeftHeaderTableBody.getBoundingClientRect().width + 'px';
+	      }
+	      if (fixedRightHeaderTableBody && fixedRightInnerTableBody) {
+	        fixedRightInnerTableBody.style.width = fixedRightHeaderTableBody.getBoundingClientRect().width + 'px';
+	      }
+	    };
+	
+	    _this.onTrMouseUp = function (e) {
+	      var event = _utils.Event.getEvent(e);
+	      var width = _this.drag.newWidth;
+	      var opt = _this.drag.option;
+	      _this.mouseClear();
+	      if (opt !== "border") return; // fix:点击表头会触发onDropBorder事件的问题
+	      _this.props.onDropBorder && _this.props.onDropBorder(event, width);
+	    };
+	
+	    _this.clearThsDr = function () {
+	      var ths = _this.table.ths;
+	      for (var index = 0; index < ths.length; index++) {
+	        ths[index].setAttribute('draggable', false); //去掉交换列效果
+	      }
+	    };
+	
+	    _this.bodyonLineMouseUp = function (events, type) {
+	      if (!_this.drag || !_this.drag.option) return;
+	      _this.mouseClear();
+	    };
+	
+	    _this.dragAbleMouseDown = function (e) {
+	      var eventNoStop = _this.props.eventNoStop;
+	
+	      !eventNoStop && _utils.Event.stopPropagation(e);
+	      var event = _utils.Event.getEvent(e),
+	          targetEvent = _utils.Event.getTarget(event);
+	      if (!_this.props.draggable) return;
+	      var currentElement = _this.getTargetToType(targetEvent);
+	      if (!currentElement) return;
+	      var type = currentElement.getAttribute('data-type');
+	      if (type == 'draggable' && _this.props.draggable) {
+	        var th = currentElement;
+	        th.setAttribute('draggable', true); //添加交换列效果
+	        _this.drag.option = 'dragAble';
+	        _this.currentDome = th;
+	        _this.drag.dragTarget = th; //抓起的th目标
+	      }
+	    };
+	
+	    _this.onDragStart = function (e) {
+	      if (!_this.props.draggable) return;
+	      if (_this.drag && _this.drag.option != 'dragAble') {
+	        return;
+	      }
+	      var event = _utils.Event.getEvent(e);
+	      var target = _this.drag.dragTarget; //抓起的th目标
+	      var currColKey = target.getAttribute("data-col-key");
+	      var currColIndex = target.getAttribute('data-col-index');
+	      if (event.dataTransfer.setDragImage) {
+	        var crt = target.cloneNode(true);
+	        crt.style.backgroundColor = "#ebecf0";
+	        crt.style.width = _this.table.cols[currColIndex].style.width; //拖动后再交换列的时候，阴影效果可同步
+	        crt.style.height = "40px";
+	        document.getElementById(_this._table_none_cont_id).appendChild(crt);
+	        event.dataTransfer.setDragImage(crt, 0, 0);
+	      }
+	
+	      event.dataTransfer.effectAllowed = "move";
+	      event.dataTransfer.setData("Text", currColKey);
+	    };
+	
+	    _this.onDragOver = function (e) {
+	      var event = _utils.Event.getEvent(e);
+	      event.preventDefault();
+	    };
+	
+	    _this.onDrop = function (e) {
+	      if (!_this.props.draggable) return;
+	      if (_this.drag && _this.drag.option != 'dragAble') {
+	        _this.props.onDrop && _this.props.onDrop(e);
+	        return;
+	      }
+	      var event = _utils.Event.getEvent(e);
+	      _utils.Event.preventDefault(e); //防止拖拽后打开a链接
+	      _utils.Event.stopPropagation(e);
+	      _this.currentDome.setAttribute('draggable', false); //添加交换列效果
+	      if (!_this.props.onDrop) return;
+	      var _this$drag = _this.drag,
+	          dragTarget = _this$drag.dragTarget,
+	          enterTarget = _this$drag.enterTarget;
+	
+	      var dragColKey = dragTarget && dragTarget.getAttribute("data-col-key"); //抓起的th目标
+	      var dropColKey = enterTarget && enterTarget.getAttribute("data-col-key");
+	      var dragSourceColumn = _this.props.rows[0].find(function (da) {
+	        return da.key == dragColKey;
+	      }); //抓取来源列定义
+	      var dragTargetColumn = _this.props.rows[0].find(function (da) {
+	        return da.key == dropColKey;
+	      }); //放置目标列定义
+	      if (dragSourceColumn.fixed !== dragTargetColumn.fixed) return; //固定列和非固定列之间不能拖拽换顺序
+	      _this.props.onDrop(event, { dragSource: dragSourceColumn, dragTarget: dragTargetColumn });
+	    };
+	
+	    _this.onDragEnter = function (e) {
+	      var event = _utils.Event.getEvent(e),
+	          target = _utils.Event.getTarget(event);
+	      _this.drag.enterTarget = target; //拖拽进入的目标th
+	      var dragColKey = _this.drag.dragTarget && _this.drag.dragTarget.getAttribute('data-col-key');
+	      var dragColFixed = _this.drag.dragTarget && _this.drag.dragTarget.getAttribute('data-th-fixed');
+	      var currColKey = target.getAttribute("data-col-key");
+	      var currColFixed = target.getAttribute("data-th-fixed");
+	      if (dragColFixed !== currColFixed) return; //固定列和非固定列之间不能拖拽换顺序
+	      if (!currColKey || currColKey === dragColKey) return; //拖放在同一个th目标上时则结束
+	      if (target.nodeName.toUpperCase() === "TH") {
+	        // 显示交换的插入点
+	        target.setAttribute("style", "border-right:2px dashed rgb(30, 136, 229)");
+	      }
+	    };
+	
+	    _this.onDragEnd = function (e) {
+	      var event = _utils.Event.getEvent(e),
+	          target = _utils.Event.getTarget(event);
+	      var _this$drag2 = _this.drag,
+	          enterTarget = _this$drag2.enterTarget,
+	          dragTarget = _this$drag2.dragTarget;
+	
+	      enterTarget && enterTarget.setAttribute("style", ""); //清除进入目标th的插入点
+	      event.preventDefault();
+	      event.stopPropagation();
+	      //清除抓取目标的副本
+	      document.getElementById(_this._table_none_cont_id).innerHTML = "";
+	      if (!_this.props.onDragEnd) return;
+	      var dragColKey = dragTarget && dragTarget.getAttribute('data-col-key');
+	      var dropColKey = enterTarget && enterTarget.getAttribute("data-col-key");
+	      var dragSourceColumn = _this.props.rows[0].find(function (da) {
+	        return da.key == dragColKey;
+	      }); //抓取来源列定义
+	      var dragTargetColumn = _this.props.rows[0].find(function (da) {
+	        return da.key == dropColKey;
+	      }); //放置目标列定义
+	      if (!dragTargetColumn) return;
+	      if (dragSourceColumn.fixed !== dragTargetColumn.fixed) return; //固定列和非固定列之间不能拖拽换顺序
+	      if (!dropColKey || dropColKey == dragColKey) return;
+	      _this.props.onDragEnd(event, { dragSource: dragSourceColumn, dragTarget: dragTargetColumn });
+	    };
+	
+	    _this.onDragLeave = function (e) {
+	      var event = _utils.Event.getEvent(e),
+	          target = _utils.Event.getTarget(event);
+	      var dragColKey = _this.drag.dragTarget && _this.drag.dragTarget.getAttribute('data-col-key');
+	      var currColKey = target.getAttribute("data-col-key");
+	      if (!currColKey || currColKey === dragColKey) return;
+	      if (target.nodeName.toUpperCase() === "TH") {
+	        // 清除交换的插入点
+	        target.setAttribute("style", "");
+	      }
+	    };
+	
+	    _this.handlerFilterChange = function (key, value, condition) {
+	      var onFilterChange = _this.props.onFilterChange;
+	
+	      if (onFilterChange) {
+	        onFilterChange(key, value, condition);
+	      }
+	    };
+	
+	    _this.handlerFilterClear = function (field) {
+	      var onFilterClear = _this.props.onFilterClear;
+	
+	      if (onFilterClear) {
+	        onFilterClear(field);
+	      }
+	    };
+	
+	    _this.filterRenderType = function (type, dataIndex, index) {
+	      var _this$props3 = _this.props,
+	          clsPrefix = _this$props3.clsPrefix,
+	          rows = _this$props3.rows,
+	          filterDelay = _this$props3.filterDelay,
+	          locale = _this$props3.locale;
+	
+	      switch (type) {
+	        //文本输入
+	        case "text":
+	          return _react2["default"].createElement(_FilterType2["default"], {
+	            locale: locale //多语
+	            , rendertype: type //渲染类型
+	            , clsPrefix: clsPrefix //css前缀
+	            , className: clsPrefix + " filter-text",
+	            dataIndex: dataIndex //字段
+	            , onFilterChange: (0, _throttleDebounce.debounce)(filterDelay || 300, _this.handlerFilterChange) //输入框回调
+	            , onFilterClear: _this.handlerFilterClear //清除回调
+	            , filterDropdown: rows[1][index]["filterdropdown"] //是否显示下拉条件
+	            , filterDropdownType: rows[1][index]["filterdropdowntype"] //下拉的条件类型为string,number
+	            , filterDropdownIncludeKeys: rows[1][index]["filterdropdownincludekeys"] //下拉条件按照指定的keys去显示
+	          });
+	        //数值输入
+	        case "number":
+	          return _react2["default"].createElement(_FilterType2["default"], {
+	            locale: locale,
+	            rendertype: type,
+	            clsPrefix: clsPrefix,
+	            className: clsPrefix + " filter-text",
+	            dataIndex: dataIndex //字段
+	            , onFilterChange: (0, _throttleDebounce.debounce)(filterDelay || 300, _this.handlerFilterChange) //输入框回调并且函数防抖动
+	            , onFilterClear: _this.handlerFilterClear //清除回调
+	            , filterDropdown: rows[1][index]["filterdropdown"],
+	            filterDropdownType: rows[1][index]["filterdropdowntype"] //下拉的条件类型为string,number
+	            , filterDropdownIncludeKeys: rows[1][index]["filterdropdownincludekeys"] //下拉条件按照指定的keys去显示
+	            , filterInputNumberOptions: rows[1][index]["filterinputnumberoptions"] //设置数值框内的详细属性
+	          });
+	        //下拉框选择
+	        case "dropdown":
+	          var selectDataSource = [];
+	          //处理没有输入数据源的时候，系统自动查找自带的数据筛选后注入
+	          if (rows.length > 0 && (rows[1][index]["filterdropdownauto"] || "auto") == "auto") {
+	            var hash = {};
+	            //处理下拉重复对象组装dropdown
+	            selectDataSource = Array.from(rows[1][0].datasource, function (x) {
+	              return {
+	                key: x[dataIndex],
+	                value: x[dataIndex]
+	              };
+	            });
+	            selectDataSource = selectDataSource.reduceRight(function (item, next) {
+	              hash[next.key] ? "" : hash[next.key] = true && item.push(next);
+	              return item;
+	            }, []);
+	          } else {
+	            //从外部数据源加载系统数据
+	            selectDataSource = rows[1][index]["filterdropdowndata"];
+	          }
+	          return _react2["default"].createElement(_FilterType2["default"], {
+	            locale: locale,
+	            rendertype: type,
+	            className: clsPrefix + " filter-dropdown",
+	            data: selectDataSource,
+	            notFoundContent: "Loading" //没有数据显示的默认字
+	            , dataIndex: dataIndex //字段
+	            , onFilterChange: _this.handlerFilterChange //输入框回调
+	            , onFilterClear: _this.handlerFilterClear //清除回调
+	            , filterDropdown: rows[1][index]["filterdropdown"],
+	            onFocus: rows[1][index]["filterdropdownfocus"],
+	            filterDropdownType: rows[1][index]["filterdropdowntype"] //下拉的条件类型为string,number
+	            , filterDropdownIncludeKeys: rows[1][index]["filterdropdownincludekeys"] //下拉条件按照指定的keys去显示
+	          });
+	        //日期
+	        case "date":
+	          return _react2["default"].createElement(_FilterType2["default"], {
+	            locale: locale,
+	            rendertype: type,
+	            className: "filter-date",
+	            onClick: function onClick() {},
+	            format: rows[1][index]["format"] || "YYYY-MM-DD",
+	            dataIndex: dataIndex //字段
+	            , onFilterChange: _this.handlerFilterChange //输入框回调
+	            , onFilterClear: _this.handlerFilterClear //清除回调
+	            , filterDropdown: rows[1][index]["filterdropdown"],
+	            filterDropdownType: rows[1][index]["filterdropdowntype"] //下拉的条件类型为string,number
+	            , filterDropdownIncludeKeys: rows[1][index]["filterdropdownincludekeys"] //下拉条件按照指定的keys去显示
+	          });
+	        //日期 年
+	        case "dateyear":
+	          return _react2["default"].createElement(_FilterType2["default"], {
+	            locale: locale,
+	            rendertype: type,
+	            className: "filter-date",
+	            onClick: function onClick() {},
+	            format: rows[1][index]["format"] || "YYYY",
+	            dataIndex: dataIndex //字段
+	            , onFilterChange: _this.handlerFilterChange //输入框回调
+	            , onFilterClear: _this.handlerFilterClear //清除回调
+	            , filterDropdown: rows[1][index]["filterdropdown"],
+	            filterDropdownType: rows[1][index]["filterdropdowntype"] //下拉的条件类型为string,number
+	            , filterDropdownIncludeKeys: rows[1][index]["filterdropdownincludekeys"] //下拉条件按照指定的keys去显示
+	          });
+	        //日期 月
+	        case "datemonth":
+	          return _react2["default"].createElement(_FilterType2["default"], {
+	            locale: locale,
+	            rendertype: type,
+	            className: "filter-date",
+	            onClick: function onClick() {},
+	            format: rows[1][index]["format"] || "YYYY-MM",
+	            dataIndex: dataIndex //字段
+	            , onFilterChange: _this.handlerFilterChange //输入框回调
+	            , onFilterClear: _this.handlerFilterClear //清除回调
+	            , filterDropdown: rows[1][index]["filterdropdown"],
+	            filterDropdownType: rows[1][index]["filterdropdowntype"] //下拉的条件类型为string,number
+	            , filterDropdownIncludeKeys: rows[1][index]["filterdropdownincludekeys"] //下拉条件按照指定的keys去显示
+	          });
+	        //日期 周
+	        case "dateweek":
+	          return _react2["default"].createElement(_FilterType2["default"], {
+	            locale: locale,
+	            rendertype: type,
+	            className: "filter-date",
+	            onClick: function onClick() {},
+	            format: rows[1][index]["format"] || "YYYY-Wo",
+	            dataIndex: dataIndex //字段
+	            , onFilterChange: _this.handlerFilterChange //输入框回调
+	            , onFilterClear: _this.handlerFilterClear //清除回调
+	            , filterDropdown: rows[1][index]["filterdropdown"],
+	            filterDropdownType: rows[1][index]["filterdropdowntype"] //下拉的条件类型为string,number
+	            , filterDropdownIncludeKeys: rows[1][index]["filterdropdownincludekeys"] //下拉条件按照指定的keys去显示
+	          });
+	        //日期范围
+	        case "daterange":
+	          return _react2["default"].createElement(_FilterType2["default"], {
+	            locale: locale,
+	            rendertype: type,
+	            className: "filter-date",
+	            onClick: function onClick() {},
+	            format: rows[1][index]["format"] || "YYYY-MM-DD",
+	            dataIndex: dataIndex //字段
+	            , onFilterChange: _this.handlerFilterChange //输入框回调
+	            , onFilterClear: _this.handlerFilterClear //清除回调
+	            , filterDropdown: rows[1][index]["filterdropdown"],
+	            filterDropdownType: rows[1][index]["filterdropdowntype"] //下拉的条件类型为string,number
+	            , filterDropdownIncludeKeys: rows[1][index]["filterdropdownincludekeys"] //下拉条件按照指定的keys去显示
+	          });
+	        default:
+	          //不匹配类型默认文本输入
+	          return _react2["default"].createElement("div", null);
+	      }
+	    };
+	
+	    _this.onCopy = function (data, index, event) {
+	      if (_this.props.onCopy) {
+	        _this.props.onCopy(_extends(data, { col: index }), event);
+	      }
+	    };
 	
 	    _this.currentObj = null;
 	    _this.theadKey = new Date().getTime();
 	    _this.drag = {
-	      option: ''
+	      option: '' //拖拽的操作类型
 	    };
 	    _this.minWidth = parseInt(props.minColumnWidth);
 	    _this.table = null;
@@ -84460,6 +86000,7 @@
 	    _this.event = false; //避免多次绑定问题
 	    _this.lastColumWidth = null; //非固定列最后一列的初始化宽度
 	    _this.fixedTable = {};
+	    _this.isIE = !!window.ActiveXObject || "ActiveXObject" in window;
 	    return _this;
 	  }
 	
@@ -84488,17 +86029,16 @@
 	    this.initTable();
 	    this.initEvent();
 	  };
+	  //----交换列头顺序时抓起的副本---begin
 	
+	
+	  //----交换列头顺序时抓起的副本---end
 	  TableHeader.prototype.componentDidMount = function componentDidMount() {
-	    var uid = "_table_uid_" + new Date().getTime();
-	    this._table_none_cont_id = uid;
-	    var div = getDiv(uid);
-	    document.querySelector("body").appendChild(div);
+	    this.createTableNone(); // 交换列头时用到的副本-创建
 	  };
 	
 	  TableHeader.prototype.componentWillUnmount = function componentWillUnmount() {
-	    var _this3 = this;
-	
+	    this.destroyTableNone(); // 交换列头时用到的副本-销毁
 	    this.fixedTable = null;
 	    if (!this.table) return;
 	    if (this.props.draggable) {
@@ -84507,9 +86047,11 @@
 	    if (this.props.dragborder) {
 	      this.removeDragBorderEvent();
 	    }
-	    this.doEventList(this.table.tr, function (tr) {
-	      _this3.eventListen([{ key: 'mousedown', fun: _this3.onTrMouseDown }], 'remove', tr);
-	    });
+	    /*removeDragBorderEvent方法里面已经处理过了，重复逻辑去掉 by zhuzj
+	    this.doEventList(this.table.tr,(tr)=>{
+	      this.eventListen([{key:'mousedown',fun:this.onTrMouseDown}],'remove',tr);
+	    })
+	    */
 	    // this.eventListen([{key:'mousedown',fun:this.onTrMouseDown}],'remove',this.table.tr[0]);
 	    this.eventListen([{ key: 'mouseup', fun: this.bodyonLineMouseUp }], 'remove', document.body);
 	  };
@@ -84522,7 +86064,9 @@
 	
 	
 	  TableHeader.prototype.initTable = function initTable() {
-	    var contentTable = this.props.contentTable;
+	    var _props = this.props,
+	        clsPrefix = _props.clsPrefix,
+	        contentTable = _props.contentTable;
 	
 	    if (!this.props.dragborder && !this.props.draggable) return;
 	    var tableDome = this._thead.parentNode;
@@ -84532,13 +86076,14 @@
 	      table.cols = tableDome.getElementsByTagName("col");
 	      table.ths = tableDome.getElementsByTagName("th");
 	      table.tr = tableDome.getElementsByTagName("tr");
+	      table.thDragGaps = tableDome.getElementsByClassName(clsPrefix + "-thead-th-drag-gap") || []; //拖拽列宽的全部抓手
 	      table.tableHeaderCols = contentTable.querySelector('.u-table-scroll .u-table-header') && contentTable.querySelector('.u-table-scroll .u-table-header').getElementsByTagName("col");
 	      table.tableBody = contentTable.querySelector('.u-table-scroll .u-table-body') && contentTable.querySelector('.u-table-scroll .u-table-body');
 	      table.tableBodyCols = contentTable.querySelector('.u-table-scroll .u-table-body') && contentTable.querySelector('.u-table-scroll .u-table-body').getElementsByTagName("col");
 	      table.bodyRows = table.tableBody && table.tableBody.querySelectorAll('tr') || [];
 	
 	      table.fixedLeftHeaderTable = contentTable.querySelector('.u-table-fixed-left .u-table-header');
-	      table.fixedRighHeadertTable = contentTable.querySelector('.u-table-fixed-right .u-table-header');
+	      table.fixedRightHeaderTable = contentTable.querySelector('.u-table-fixed-right .u-table-header');
 	      table.contentTableHeader = contentTable.querySelector('.u-table-scroll .u-table-header');
 	      table.fixedLeftBodyTable = contentTable.querySelectorAll('.u-table-fixed-left .u-table-body-outer');
 	      if (table.fixedLeftBodyTable) {
@@ -84553,24 +86098,31 @@
 	      }
 	
 	      table.innerTableBody = contentTable.querySelector('.u-table-scroll .u-table-body table');
+	      table.fixedLeftHeaderTableBody = table.fixedLeftHeaderTable && table.fixedLeftHeaderTable.querySelector('table') || null;
+	      table.fixedRightHeaderTableBody = table.fixedRightHeaderTable && table.fixedRightHeaderTable.querySelector('table') || null;
+	      table.fixedLeftInnerTableBody = table.fixedLeftBodyTable && table.fixedLeftBodyTable.querySelector('table') || null;
+	      table.fixedRightInnerTableBody = table.fixedRightBodyTable && table.fixedRightBodyTable.querySelector('table') || null;
 	      table.fixedLeftBodyRows = table.fixedLeftBodyTable && table.fixedLeftBodyTable.querySelectorAll('tr') || [];
 	      table.fixedRightBodyRows = table.fixedRightBodyTable && table.fixedRightBodyTable.querySelectorAll('tr') || [];
 	    }
 	
+	    //维护表格全部的dom元素
 	    this.table = table;
 	
-	    if (!this.props.dragborder) return;
-	    if (document.getElementById("u-table-drag-thead-" + this.theadKey)) {
+	    /*
+	    if(!this.props.dragborder)return;
+	    if(document.getElementById("u-table-drag-thead-" + this.theadKey)){
 	      this.fixedTable = {};
-	      var _fixedParentContext = document.getElementById("u-table-drag-thead-" + this.theadKey).parentNode;
-	      var siblingDom = _fixedParentContext.parentNode.nextElementSibling;
+	      let _fixedParentContext =  document.getElementById("u-table-drag-thead-" + this.theadKey).parentNode;
+	      let siblingDom = _fixedParentContext.parentNode.nextElementSibling;
 	      if (siblingDom) {
-	        var fixedTable = siblingDom.querySelector("table");
-	        this.fixedTable.table = fixedTable;
-	        this.fixedTable.cols = fixedTable.getElementsByTagName("col");
+	        let fixedTable = siblingDom.querySelector("table");
+	        // this.fixedTable.table = fixedTable //没有用到
+	        this.fixedTable.cols = fixedTable&&fixedTable.getElementsByTagName("col");
 	        // this.fixedTable.ths = fixedTable.tableDome.getElementsByTagName("th");
 	      }
 	    }
+	    */
 	  };
 	
 	  /**
@@ -84579,12 +86131,10 @@
 	
 	
 	  TableHeader.prototype.initEvent = function initEvent() {
-	    var _this4 = this;
-	
-	    var _props = this.props,
-	        dragborder = _props.dragborder,
-	        draggable = _props.draggable,
-	        rows = _props.rows;
+	    var _props2 = this.props,
+	        dragborder = _props2.dragborder,
+	        draggable = _props2.draggable,
+	        rows = _props2.rows;
 	    // 当传入的 columns 为空时，不绑定拖拽事件
 	
 	    if (Object.prototype.toString.call(rows) === '[object Array]' && rows.length === 0) {
@@ -84599,19 +86149,24 @@
 	      if (draggable) {
 	        this.dragAbleEventInit(); //交换列
 	      }
-	      if (this.table && this.table.tr) {
+	      /* dragBorderEventInit、dragAbleEventInit方法里面已经处理过了，重复逻辑去除 by zhuzj
+	      if(this.table && this.table.tr){
 	        // this.eventListen([{key:'mousedown',fun:this.onTrMouseDown}],'',this.table.tr[0]);//body mouseup
-	        this.doEventList(this.table.tr, function (tr) {
-	          _this4.eventListen([{ key: 'mousedown', fun: _this4.onTrMouseDown }], '', tr); //body mouseup
-	        });
+	        this.doEventList(this.table.tr,(tr)=>{
+	          this.eventListen([{key:'mousedown',fun:this.onTrMouseDown}],'',tr);//body mouseup
+	        })
 	      }
+	      */
 	      this.eventListen([{ key: 'mouseup', fun: this.bodyonLineMouseUp }], '', document.body); //body mouseup
 	    }
 	  };
 	
 	  TableHeader.prototype.doEventList = function doEventList(trs, action) {
-	    for (var index = 0; index < trs.length; index++) {
-	      action(trs[index]);
+	    if (trs && HTMLCollection.prototype.isPrototypeOf(trs) && action) {
+	      if (this.isIE && !trs[0]) return;
+	      for (var index = 0; index < trs.length; index++) {
+	        action(trs[index]);
+	      }
 	    }
 	  };
 	
@@ -84621,19 +86176,20 @@
 	
 	
 	  TableHeader.prototype.dragBorderEventInit = function dragBorderEventInit() {
-	    if (!this.props.dragborder) return;
-	    this.eventListen([{ key: 'mouseup', fun: this.onTrMouseUp }], '', document.body);
-	    this.eventListen([{ key: 'mousemove', fun: this.onTrMouseMove }], '', document.body);
+	    var _this3 = this;
 	
-	    // let  events = [
-	    //   {key:'mouseup', fun:this.onTrMouseUp},
-	    //   {key:'mousemove', fun:this.onTrMouseMove},
-	    //   // {key:'mousemove', fun:debounce(50,this.onTrMouseMove)},//函数节流后体验很差
-	    // ];
-	    // this.doEventList(this.table.tr,(tr)=>{
-	    //   this.eventListen(events,'',tr);//表示把事件添加到th元素上
-	    // })
-	    // this.eventListen(events,'',this.table.tr[0]);//表示把事件添加到th元素上
+	    if (!this.props.dragborder) return;
+	    /* 事件监听不应该渲染到body上性能损耗很大 by zhuzj
+	    this.eventListen([{key:'mouseup', fun:this.onTrMouseUp}],'',document.body);
+	    this.eventListen([{key:'mousemove', fun:this.onTrMouseMove}],'',document.body);
+	    */
+	    var events = [
+	    // {key:'mousedown', fun:this.onTrMouseDown},
+	    { key: 'mousedown', fun: this.onDragMouseDown }, //拖拽列宽度-尺标方式
+	    { key: 'mouseup', fun: this.onTrMouseUp }];
+	    this.doEventList(this.table.thDragGaps, function (elem) {
+	      _this3.eventListen(events, '', elem); //表示把事件添加到元素上
+	    });
 	  };
 	
 	  /**
@@ -84642,14 +86198,18 @@
 	
 	
 	  TableHeader.prototype.removeDragBorderEvent = function removeDragBorderEvent() {
-	    var _this5 = this;
+	    var _this4 = this;
 	
-	    var events = [{ key: 'mouseup', fun: this.onTrMouseUp }, { key: 'mousemove', fun: this.onTrMouseMove }];
-	    // this.eventListen(events,'remove',this.table.tr[0]);
-	    this.doEventList(this.table.tr, function (tr) {
-	      _this5.eventListen(events, 'remove', _this5.table.tr);
+	    var events = [
+	    // {key:'mousedown', fun:this.onTrMouseDown},
+	    { key: 'mousedown', fun: this.onDragMouseDown }, //拖拽列宽度-尺标方式
+	    { key: 'mouseup', fun: this.onTrMouseUp }];
+	    this.doEventList(this.table.thDragGaps, function (elem) {
+	      _this4.eventListen(events, 'remove', elem); //表示把事件添加到元素上
 	    });
 	  };
+	  // 将多个事件绑定到dom元素上
+	
 	
 	  TableHeader.prototype.eventListen = function eventListen(events, type, eventSource) {
 	    if (!this.table) return;
@@ -84657,8 +86217,6 @@
 	      console.log("Please set the attributes of column !");
 	      return;
 	    }
-	    var tr = this.table.tr;
-	
 	    for (var i = 0; i < events.length; i++) {
 	      var _event = events[i];
 	      if (type === "remove") {
@@ -84681,6 +86239,85 @@
 	  * @memberof TableHeader
 	  */
 	
+	  /*
+	  onTrMouseDown = (e) => {
+	    const { eventNoStop } = this.props;
+	    !eventNoStop && Event.stopPropagation(e);
+	    let event = Event.getEvent(e) ,
+	    targetEvent = Event.getTarget(event);
+	    const { clsPrefix, contentTable,lastShowIndex,columnsChildrenList } = this.props;
+	    // let currentElement = this.getOnLineObject(targetEvent);
+	    let currentElement = this.getTargetToType(targetEvent);
+	    if(!currentElement)return;
+	    let type = currentElement.getAttribute('data-type');
+	    const fixedType = currentElement.getAttribute('data-th-fixed');
+	    if(!this.props.dragborder && !this.props.draggable)return;
+	    if(type == 'online' && this.props.dragborder){
+	      // if(!this.props.dragborder)return;
+	      targetEvent.setAttribute('draggable',false);//添加交换列效果
+	      let currentIndex = -1;
+	      let defaultWidth = currentElement.getAttribute("data-th-width");
+	      this.drag.option = "border";//拖拽操作
+	      if(columnsChildrenList){
+	        let columnKey = currentElement.getAttribute("data-line-key");
+	        if(columnKey){
+	          currentIndex = columnsChildrenList.findIndex(da=> (da.key && da.key.toLowerCase()) === columnKey.toLowerCase());
+	        }
+	      }
+	      if(currentIndex < 0){
+	        console.log('Key must be set for column!')
+	        return;
+	      }
+	      let currentObj = this.table.cols[currentIndex];
+	      this.drag.currIndex = currentIndex;
+	      this.drag.oldLeft = event.clientX;
+	      this.drag.currentLeft = event.clientX;
+	      this.drag.oldWidth = parseInt((currentObj).style.width);
+	      this.drag.minWidth = currentObj.style.minWidth != ""?parseInt(currentObj.style.minWidth):defaultWidth;
+	      this.drag.tableWidth = parseInt(this.table.table.style.width ?this.table.table.style.width:this.table.table.scrollWidth);
+	      if(!this.tableOldWidth){
+	        this.tableOldWidth = this.drag.tableWidth;//this.getTableWidth();
+	      }
+	       // if(!this.lastColumWidth){
+	        const contentT = this.table.tableHeaderCols || this.table.cols ;
+	        this.lastColumWidth = parseInt(contentT[contentT.length-1].style.width);
+	        // console.log('begin--lastColumnWidth',this.lastColumWidth);
+	      // }
+	      this.drag.contentTableCWidth = this.table.contentTableHeader.clientWidth;
+	      this.drag.contentTableSWidth = this.table.contentTableHeader.scrollWidth;
+	      if(fixedType) {
+	          const contentTablePar = this.table.contentTableHeader.parentNode;
+	           if(contentTablePar) {
+	            const originL = parseInt(contentTablePar.style.marginLeft);
+	            const originR = parseInt(contentTablePar.style.marginRight);
+	            // 内容区表格marginLef
+	            this.drag.contentTableML = originL;
+	            this.drag.contentTableMR = originR;
+	          }
+	      }
+	      this.drag.fixedType = fixedType;
+	      // add by gx
+	      // if (fixedType === 'left' && this.table.fixedRightBodyTable) {
+	      //   this.drag.fixedRightBodyTableLeft = this.table.fixedRightBodyTable.getBoundingClientRect().left
+	      // } else {
+	      //   this.drag.fixedRightBodyTableLeft = null
+	      // }
+	    }else if(type != 'online' &&  this.props.draggable){
+	        // if (!this.props.draggable || targetEvent.nodeName.toUpperCase() != "TH") return;
+	        if (!this.props.draggable) return;
+	        let th = this.getTargetToType(targetEvent);
+	        th.setAttribute('draggable',true);//添加交换列效果
+	        this.drag.option = 'dragAble';
+	        this.currentDome = th;
+	        let currentIndex = parseInt(th.getAttribute("data-line-index"));
+	        this.drag.currIndex = currentIndex;
+	    }else{
+	      // console.log("onTrMouseDown dragborder or draggable is all false !");
+	      return ;
+	    }
+	  };
+	  */
+	
 	
 	  /**
 	   * 根据当前节点查找到有data-type类型的容器返回。
@@ -84696,6 +86333,7 @@
 	  /**
 	   * 调整列宽的move事件
 	   * @memberof TableHeader
+	   * @deprecated
 	   */
 	
 	
@@ -84730,18 +86368,40 @@
 	   *
 	   * @memberof TableHeader
 	   */
-	
-	
+	  /*
+	  optTableMargin =(table,scrollbarWidth)=>{
+	    if(table){
+	      table.style.marginBottom = scrollbarWidth + "px"
+	    }
+	  }
+	   optTableScroll = (table,overflow ={})=>{
+	    if(table){
+	      const innerTable = table.querySelector('.u-table-body-inner');
+	      if(innerTable){
+	        //fixbug: 拖拽列宽后，滚动条滚到表格底部，会导致固定列和非固定列错行，//暂时注释，还原
+	        // if (overflow.x) {
+	        //   const fixedScrollContainers = innerTable.querySelectorAll('.fixed-scroll-container')
+	        //   if (fixedScrollContainers && fixedScrollContainers.length) {
+	        //     fixedScrollContainers[0] && (fixedScrollContainers[0].style.overflowX = overflow.x);
+	        //     fixedScrollContainers[1] && (fixedScrollContainers[1].style.overflowX = overflow.x);
+	        //   }
+	        // }
+	        overflow.y && (innerTable.style.overflowY = overflow.y);
+	        // overflow.x && (innerTable.style.overflowX = overflow.x);
+	      }
+	     }
+	  }
+	  */
 	  //---拖拽交换列代码----start-----
 	  /**
 	   * 添加换列的事件监听
 	   */
 	  TableHeader.prototype.dragAbleEventInit = function dragAbleEventInit() {
 	    if (!this.props.draggable) return;
-	    var events = [{ key: 'dragstart', fun: this.onDragStart }, //用户开始拖动元素时触发
+	    var events = [{ key: 'mousedown', fun: this.dragAbleMouseDown }, //用户开始按住列头元素时触发
+	    { key: 'dragstart', fun: this.onDragStart }, //用户开始拖动元素时触发
 	    { key: 'dragover', fun: this.onDragOver }, //当某被拖动的对象在另一对象容器范围内拖动时触发此事件
 	    { key: 'drop', fun: this.onDrop }, //在一个拖动过程中，释放鼠标键时触发此事件
-	
 	    { key: 'dragenter', fun: this.onDragEnter }, { key: 'dragend', fun: this.onDragEnd }, { key: 'dragleave', fun: this.onDragLeave }];
 	    this.eventListen(events, '', this.table.tr[0]); //表示把事件添加到th元素上
 	  };
@@ -84752,9 +86412,14 @@
 	
 	
 	  TableHeader.prototype.removeDragAbleEvent = function removeDragAbleEvent() {
-	    var events = [{ key: 'dragstart', fun: this.onDragStart }, { key: 'dragover', fun: this.onDragOver }, { key: 'drop', fun: this.onDrop }, { key: 'dragenter', fun: this.onDragEnter }, { key: 'dragend', fun: this.onDragEnd }, { key: 'dragleave', fun: this.onDragLeave }];
+	    var events = [{ key: 'mousedown', fun: this.dragAbleMouseDown }, { key: 'dragstart', fun: this.onDragStart }, { key: 'dragover', fun: this.onDragOver }, { key: 'drop', fun: this.onDrop }, { key: 'dragenter', fun: this.onDragEnter }, { key: 'dragend', fun: this.onDragEnd }, { key: 'dragleave', fun: this.onDragLeave }];
 	    this.eventListen(events, 'remove', this.table.tr[0]);
 	  };
+	
+	  /**
+	   * 按下调整交换列的事件
+	   */
+	
 	
 	  /**
 	   * 开始调整交换列的事件
@@ -84766,6 +86431,8 @@
 	  * @memberof TableHeader
 	  */
 	
+	  //注意：列不多的情况下，如果最后一列：实际宽度-100，被填充宽度-300，则与其前面列交换后宽度只是实际宽度交换，填充宽度不会交换
+	
 	
 	  /**
 	   * 获取当前th上的对象数据
@@ -84773,31 +86440,28 @@
 	   * @returns
 	   * @memberof TableHeader
 	   */
-	  TableHeader.prototype.getCurrentEventData = function getCurrentEventData(th) {
-	    if (!th) {
+	  /*
+	  getCurrentEventData(th){
+	    if(!th){
 	      console.log(" event target is not th ! ");
 	      return null;
 	    }
-	    var key = th.getAttribute('data-line-key');
-	    var data = this.props.rows[0].find(function (da) {
-	      return da.key == key;
-	    });
-	    if (data) {
+	    let key = th.getAttribute('data-line-key');
+	    let data = this.props.rows[0].find(da=>da.key == key);
+	    if(data){
 	      return data;
-	    } else {
+	    }else{
 	      console.log(" getCurrentEventData data is null ");
 	      return null;
 	    }
-	  };
-	
+	  }
+	  */
 	  /**
 	  * 根据当前鼠标点击的节点，进行递归遍历，最终找到th
 	  * @param {*} element
 	  * @returns  <th />对象
 	  * @memberof TableHeader
 	  */
-	
-	
 	  TableHeader.prototype.getThDome = function getThDome(element) {
 	    var _tagName = element.tagName.toLowerCase();
 	    if (element.getAttribute('data-filter-type') === 'filterContext') return null;
@@ -84827,28 +86491,30 @@
 	
 	
 	  TableHeader.prototype.render = function render() {
-	    var _this6 = this;
+	    var _this5 = this;
 	
-	    var _props2 = this.props,
-	        clsPrefix = _props2.clsPrefix,
-	        rowStyle = _props2.rowStyle,
-	        draggable = _props2.draggable,
-	        dragborder = _props2.dragborder,
-	        rows = _props2.rows,
-	        filterable = _props2.filterable,
-	        fixed = _props2.fixed,
-	        lastShowIndex = _props2.lastShowIndex,
-	        columnsChildrenList = _props2.columnsChildrenList;
+	    var _props3 = this.props,
+	        clsPrefix = _props3.clsPrefix,
+	        rowStyle = _props3.rowStyle,
+	        draggable = _props3.draggable,
+	        dragborder = _props3.dragborder,
+	        rows = _props3.rows,
+	        filterable = _props3.filterable,
+	        fixed = _props3.fixed,
+	        columnsChildrenList = _props3.columnsChildrenList,
+	        columnManager = _props3.columnManager;
 	
 	    var attr = dragborder ? { id: "u-table-drag-thead-" + this.theadKey } : {};
-	    var lastObj = columnsChildrenList[columnsChildrenList.length - 1];
+	    var showColumns = columnManager.showLeafColumns(fixed);
 	    return _react2["default"].createElement(
 	      "thead",
 	      _extends({ className: clsPrefix + "-thead" }, attr, { "data-theader-fixed": "scroll", ref: function ref(_thead) {
-	          return _this6._thead = _thead;
+	          return _this5._thead = _thead;
 	        } }),
 	      rows.map(function (row, index) {
-	        var _rowLeng = row.length - 1;
+	        var leftFixedColIndex = 0,
+	            rightFixedColIndex = 0,
+	            centerColIndex = 0;
 	        return _react2["default"].createElement(
 	          "tr",
 	          { key: index, style: rowStyle, className: filterable && index == rows.length - 1 ? 'filterable' : '' },
@@ -84865,16 +86531,13 @@
 	            ) : da.children;
 	            var thHover = da.drgHover ? " " + clsPrefix + "-thead th-drag-hover" : "";
 	            delete da.drgHover;
-	            var fixedStyle = "";
-	            var canDotDrag = "";
+	            /*
+	            let fixedStyle = "";
 	            //主表格下、固定列或者是过滤行中含有固定列时添加该属性
-	            if (!fixed && (da.fixed || filterable && index == rows.length - 1 && rows[0][columIndex].fixed)) {
-	              fixedStyle = " " + clsPrefix + "-row-fixed-columns-in-body";
+	            if (!fixed && (da.fixed || (filterable && index == rows.length - 1 && rows[0][columIndex].fixed)) ) {
+	              fixedStyle = ` ${clsPrefix}-row-fixed-columns-in-body`;
 	            }
-	
-	            if (lastShowIndex == columIndex) {
-	              canDotDrag = "th-can-not-drag";
-	            }
+	            */
 	            var thClassName = "" + da.className ? "" + da.className : '';
 	            if (da.titleAlign) {
 	              thClassName += " text-" + da.titleAlign + " ";
@@ -84884,72 +86547,107 @@
 	
 	            delete da.textAlign;
 	            delete da.titleAlign;
-	            var keyTemp = {};
-	            //避免key为undefined
-	            // if(da.dataindex && da.key ===undefined ){
-	            keyTemp.key = da.key || da.dataindex || index + '-' + columIndex;
+	            var colKey = da.key || da.dataIndex || index + '-' + columIndex; //避免key为undefined
 	
-	            // }
 	            if (filterable && index == rows.length - 1) {
-	              da.children = _this6.filterRenderType(da["filtertype"], da.dataindex, columIndex);
+	              da.children = _this5.filterRenderType(da["filtertype"], da.dataIndex, columIndex);
 	              if (da.key === undefined) {
-	                keyTemp.key = keyTemp.key + '-filterable';
+	                colKey = colKey + '-filterable';
 	              }
 	              delete da.filterdropdownfocus;
 	            }
-	
-	            var thDefaultObj = {};
 	
 	            if (draggable) {
 	              thClassName += " " + clsPrefix + "-thead th-drag " + thHover + " ";
 	            }
 	            if (dragborder) {
-	              thClassName += " " + clsPrefix + "-thead-th " + canDotDrag;
+	              thClassName += " " + clsPrefix + "-thead-th ";
 	            }
-	            thClassName += " " + fixedStyle;
-	            if (!da.fixed) {
+	            // if (columnsChildrenList.length-1 == columIndex) {
+	            //   thClassName += " th-can-not-drag";
+	            // }
+	            //thClassName += ` ${fixedStyle}`;
+	
+	            //存放到dom上的数据
+	            var domData = {
+	              'data-th-fixed': da.fixed,
+	              'data-th-width': da.width,
+	              'data-line-key': da.key,
+	              // 'data-line-index':columIndex,//不分区域的列索引
+	              'data-col-key': colKey,
+	              'data-col-index': fixed && da.fixed ? da.fixed == 'right' ? rightFixedColIndex : leftFixedColIndex : !fixed && !da.fixed && centerColIndex //左中右各区域的列索引
+	            };
+	
+	            //渲染拖拽列宽度的抓手
+	            var dragGapView = null;
+	            if (dragborder && !da.colSpan) {
+	              //如果存在colSpan则表明其是组合列（不允许拖拽），不是最终显示列。
+	              var isLastCol = false; //是否为本区域最后一列
+	              if (fixed && da.fixed) {
+	                if (fixed == 'right' && da.fixed == 'right') {
+	                  isLastCol = showColumns.length - 1 == rightFixedColIndex ? 'last' : '';
+	                }
+	              } else if (!fixed && !da.fixed) {
+	                isLastCol = showColumns.length - 1 == centerColIndex;
+	              }
+	              dragGapView = _react2["default"].createElement(
+	                "div",
+	                _extends({ ref: function ref(el) {
+	                    return _this5.gap = el;
+	                  }, "data-type": "online" }, domData, {
+	                  className: clsPrefix + "-thead-th-drag-gap " + da.fixed + " " + (isLastCol ? 'last' : '') }),
+	                _react2["default"].createElement("div", { className: "online" })
+	              );
+	            }
+	            var thProps = _extends({}, da);
+	            if (da.maxWidth || da.width) {
+	              //由于th中文本过长时会撑开内容需要显示声明maxWidth以确保省略文本css样式生效
+	              thProps.style = thProps.style || {};
+	              thProps.style.maxWidth = da.maxWidth || da.width;
+	            }
+	            delete thProps.width;
+	            delete thProps.dataIndex; //多余属性不渲染到dom元素上
+	            //计数+1
+	            fixed && da.fixed ? da.fixed == 'right' ? rightFixedColIndex++ : leftFixedColIndex++ : !fixed && !da.fixed && centerColIndex++;
+	            if (!da.fixed && !fixed) {
+	              //非固定表头 , data-type="draggable"标识允许进行列拖拽排序
 	              return _react2["default"].createElement(
 	                "th",
-	                _extends({}, da, keyTemp, { className: thClassName, "data-th-fixed": da.fixed, "data-line-key": da.key,
-	                  "data-line-index": columIndex, "data-th-width": da.width, "data-type": "draggable", onCopy: function onCopy(event) {
-	                    _this6.onCopy(da, columIndex, event);
+	                _extends({}, thProps, { key: colKey, className: thClassName, "data-type": "draggable" }, domData, { onCopy: function onCopy(event) {
+	                    _this5.onCopy(da, columIndex, event);
 	                  } }),
 	                da.children,
-	
-	                // && columIndex != _rowLeng
-	                dragborder && lastObj && da.key != lastObj.key ? _react2["default"].createElement(
-	                  "div",
-	                  { ref: function ref(el) {
-	                      return _this6.gap = el;
-	                    }, "data-line-key": da.key,
-	                    "data-line-index": columIndex, "data-th-width": da.width,
-	                    "data-type": "online", "data-th-fixed": da.fixed, className: clsPrefix + "-thead-th-drag-gap" },
-	                  _react2["default"].createElement("div", { className: "online" })
-	                ) : ""
+	                dragGapView
 	              );
+	            } else if (da.fixed && fixed) {
+	              //固定表头
+	              if (da.dataIndex == 'checkbox' && da.fixed == 'left') {
+	                //多选框列
+	                return _react2["default"].createElement(
+	                  "th",
+	                  thProps,
+	                  da.children
+	                );
+	              } else if (filterable && index == rows.length - 1) {
+	                //固定列下的筛选单元格需要一个空占位
+	                return _react2["default"].createElement("th", { dangerouslySetInnerHTML: { __html: '&nbsp;' } });
+	              } else {
+	                return _react2["default"].createElement(
+	                  "th",
+	                  _extends({}, thProps, { onClick: da.onClick ? da.onClick.bind(_this5, da) : null, key: colKey }, domData, { onCopy: _this5.onCopy }),
+	                  da.children,
+	                  dragGapView
+	                );
+	              }
 	            } else {
-	              thDefaultObj = _extends({}, da, {
-	                className: thClassName + " " + fixedStyle
-	              });
-	              da.onClick ? thDefaultObj.onClick = function (e) {
-	                da.onClick(da, e);
-	              } : "";
-	              return _react2["default"].createElement(
-	                "th",
-	                _extends({}, thDefaultObj, keyTemp, { "data-th-fixed": da.fixed, style: { maxWidth: da.width }, onCopy: _this6.onCopy }),
-	                da.children,
-	
-	                // && columIndex != _rowLeng
-	                dragborder ? _react2["default"].createElement(
-	                  "div",
-	                  { ref: function ref(el) {
-	                      return _this6.gap = el;
-	                    }, "data-line-key": da.key,
-	                    "data-line-index": columIndex, "data-th-width": da.width,
-	                    "data-type": "online", "data-th-fixed": da.fixed, className: clsPrefix + "-thead-th-drag-gap" },
-	                  _react2["default"].createElement("div", { className: "online" })
-	                ) : ""
-	              );
+	              if (da.key == 'u-table-expandIconAsCell') {
+	                //展开列
+	                return _react2["default"].createElement(
+	                  "th",
+	                  thProps,
+	                  da.children
+	                );
+	              }
 	            }
 	          })
 	        );
@@ -84961,580 +86659,22 @@
 	}(_react.Component);
 	
 	TableHeader.defaultProps = {
-	  contentWidthDiff: 0
+	  tableUid: null,
+	  columnManager: null,
+	  draggable: false,
+	  onDragEnd: null,
+	  onDrop: null,
+	  afterDragColWidth: null,
+	  contentWidthDiff: 0 //中间区域最后一列需要补充的宽度
 	};
 	
-	var _initialiseProps = function _initialiseProps() {
-	  var _this7 = this;
-	
-	  this.getOnLineObject = function (_element) {
-	    var type = _element.getAttribute('data-type'),
-	        elementObj = null;
-	    if (!type) {
-	      var element = _element.parentElement || parentNode; //兼容写法。
-	      if (element.getAttribute('data-type')) {
-	        elementObj = element;
-	      }
-	    } else {
-	      elementObj = _element;
-	    }
-	    return elementObj;
-	  };
-	
-	  this.onTrMouseDown = function (e) {
-	    var eventNoStop = _this7.props.eventNoStop;
-	
-	    !eventNoStop && _utils.Event.stopPropagation(e);
-	    var event = _utils.Event.getEvent(e),
-	        targetEvent = _utils.Event.getTarget(event);
-	    var _props3 = _this7.props,
-	        clsPrefix = _props3.clsPrefix,
-	        contentTable = _props3.contentTable,
-	        lastShowIndex = _props3.lastShowIndex,
-	        columnsChildrenList = _props3.columnsChildrenList;
-	    // let currentElement = this.getOnLineObject(targetEvent);
-	
-	    var currentElement = _this7.getTargetToType(targetEvent);
-	    if (!currentElement) return;
-	    var type = currentElement.getAttribute('data-type');
-	    var fixedType = currentElement.getAttribute('data-th-fixed');
-	    if (!_this7.props.dragborder && !_this7.props.draggable) return;
-	    if (type == 'online' && _this7.props.dragborder) {
-	      // if(!this.props.dragborder)return;
-	      targetEvent.setAttribute('draggable', false); //添加交换列效果
-	      var currentIndex = -1;
-	      var defaultWidth = currentElement.getAttribute("data-th-width");
-	      _this7.drag.option = "border"; //拖拽操作
-	      if (columnsChildrenList) {
-	        var columnKey = currentElement.getAttribute("data-line-key");
-	        if (columnKey) {
-	          currentIndex = columnsChildrenList.findIndex(function (da) {
-	            return (da.key && da.key.toLowerCase()) === columnKey.toLowerCase();
-	          });
-	        }
-	      }
-	      if (currentIndex < 0) {
-	        console.log('Key must be set for column!');
-	        return;
-	      }
-	      var currentObj = _this7.table.cols[currentIndex];
-	      _this7.drag.currIndex = currentIndex;
-	      _this7.drag.oldLeft = event.clientX;
-	      _this7.drag.oldWidth = parseInt(currentObj.style.width);
-	      _this7.drag.minWidth = currentObj.style.minWidth != "" ? parseInt(currentObj.style.minWidth) : defaultWidth;
-	      _this7.drag.tableWidth = parseInt(_this7.table.table.style.width ? _this7.table.table.style.width : _this7.table.table.scrollWidth);
-	      if (!_this7.tableOldWidth) {
-	        _this7.tableOldWidth = _this7.drag.tableWidth; //this.getTableWidth();
-	      }
-	
-	      // if(!this.lastColumWidth){
-	      var contentT = _this7.table.tableHeaderCols || _this7.table.cols;
-	      _this7.lastColumWidth = parseInt(contentT[lastShowIndex].style.width);
-	      // console.log('begin--lastColumnWidth',this.lastColumWidth);
-	      // }
-	      _this7.drag.contentTableCWidth = _this7.table.contentTableHeader.clientWidth;
-	      _this7.drag.contentTableSWidth = _this7.table.contentTableHeader.scrollWidth;
-	      if (fixedType) {
-	        var contentTablePar = _this7.table.contentTableHeader.parentNode;
-	
-	        if (contentTablePar) {
-	          var originL = parseInt(contentTablePar.style.marginLeft);
-	          var originR = parseInt(contentTablePar.style.marginRight);
-	          // 内容区表格marginLef
-	          _this7.drag.contentTableML = originL;
-	          _this7.drag.contentTableMR = originR;
-	        }
-	      }
-	      _this7.drag.fixedType = fixedType;
-	    } else if (type != 'online' && _this7.props.draggable) {
-	      // if (!this.props.draggable || targetEvent.nodeName.toUpperCase() != "TH") return;
-	      if (!_this7.props.draggable) return;
-	      var th = _this7.getTargetToType(targetEvent);
-	      th.setAttribute('draggable', true); //添加交换列效果
-	      _this7.drag.option = 'dragAble';
-	      _this7.currentDome = th;
-	      var _currentIndex = parseInt(th.getAttribute("data-line-index"));
-	      _this7.drag.currIndex = _currentIndex;
-	    } else {
-	      // console.log("onTrMouseDown dragborder or draggable is all false !");
-	      return;
-	    }
-	  };
-	
-	  this.getTableWidth = function () {
-	    var tableWidth = 0,
-	        offWidth = 0; //this.table.cols.length;
-	    for (var index = 0; index < _this7.table.cols.length; index++) {
-	      var da = _this7.table.cols[index];
-	      tableWidth += parseInt(da.style.width);
-	    }
-	    return tableWidth - offWidth;
-	  };
-	
-	  this.getTargetToType = function (targetEvent) {
-	    var tag = targetEvent;
-	    if (targetEvent && !targetEvent.getAttribute("data-type")) {
-	      tag = _this7.getTargetToType(targetEvent.parentElement);
-	    }
-	    return tag;
-	  };
-	
-	  this.getTargetToTh = function (targetEvent) {
-	    var th = targetEvent;
-	    if (targetEvent.nodeName.toUpperCase() != "TH") {
-	      th = _this7.getThDome(targetEvent);
-	    }
-	    // console.log(" getTargetToTh: ", th);
-	    return th;
-	  };
-	
-	  this.onTrMouseMove = function (e) {
-	    if (!_this7.props.dragborder && !_this7.props.draggable) return;
-	    var _props4 = _this7.props,
-	        clsPrefix = _props4.clsPrefix,
-	        dragborder = _props4.dragborder,
-	        contentDomWidth = _props4.contentDomWidth,
-	        scrollbarWidth = _props4.scrollbarWidth,
-	        contentTable = _props4.contentTable,
-	        headerScroll = _props4.headerScroll,
-	        lastShowIndex = _props4.lastShowIndex,
-	        onDraggingBorder = _props4.onDraggingBorder,
-	        leftFixedWidth = _props4.leftFixedWidth,
-	        rightFixedWidth = _props4.rightFixedWidth,
-	        bodyDisplayInRow = _props4.bodyDisplayInRow,
-	        eventNoStop = _props4.eventNoStop;
-	
-	    !eventNoStop && _utils.Event.stopPropagation(e);
-	    var event = _utils.Event.getEvent(e);
-	    if (_this7.props.dragborder && _this7.drag.option == "border") {
-	      //移动改变宽度
-	      var currentCols = _this7.table.cols[_this7.drag.currIndex];
-	      var diff = event.clientX - _this7.drag.oldLeft;
-	      var newWidth = _this7.drag.oldWidth + diff;
-	      _this7.drag.newWidth = newWidth > 0 ? newWidth : _this7.minWidth;
-	      if (newWidth > _this7.minWidth) {
-	        currentCols.style.width = newWidth + 'px';
-	
-	        // displayinrow 判断、 固定行高判断 
-	        if (!bodyDisplayInRow) {
-	          _this7.table.bodyRows.forEach(function (row, index) {
-	            var leftRow = _this7.table.fixedLeftBodyRows[index];
-	            var rightRow = _this7.table.fixedRightBodyRows[index];
-	            if (leftRow || rightRow) {
-	              var height = row.getBoundingClientRect().height;
-	              leftRow && (leftRow.style.height = height + "px");
-	              rightRow && (rightRow.style.height = height + "px");
-	            }
-	          });
-	        }
-	
-	        //hao 支持固定表头拖拽 修改表体的width
-	        if (_this7.fixedTable.cols) {
-	          _this7.fixedTable.cols[_this7.drag.currIndex].style.width = newWidth + "px";
-	        }
-	
-	        var contentTableSWidth = _this7.drag.contentTableSWidth - _this7.drag.contentTableCWidth;
-	        // console.log('contentTableSWidth+diff',contentTableSWidth+diff,'diff',diff);
-	        if (diff < 0 && contentTableSWidth + diff < 0) {
-	          var headerCols = _this7.table.tableHeaderCols || _this7.table.cols;
-	          var lastWidth = _this7.lastColumWidth - (contentTableSWidth + diff);
-	          // console.log('lastWidth',lastWidth,'lastShowIndex',lastShowIndex);
-	          headerCols[lastShowIndex].style.width = lastWidth + "px"; //同步表头
-	          _this7.table.tableBodyCols[lastShowIndex].style.width = lastWidth + "px"; //同步表体
-	        }
-	        // 内容区非固定列场景拖拽
-	        if (!_this7.drag.fixedType) {
-	
-	          // let newDiff = (parseInt(currentCols.style.minWidth) - parseInt(currentCols.style.width));
-	          // if(newDiff > 0){//缩小
-	          //   let lastWidth = this.lastColumWidth + newDiff;
-	          //   this.table.cols[lastShowIndex].style.width = lastWidth +"px";//同步表头
-	          //   this.table.tableBodyCols[lastShowIndex].style.width = lastWidth + "px";//同步表体
-	
-	          // }
-	
-	          var showScroll = contentDomWidth - (leftFixedWidth + rightFixedWidth) - (_this7.drag.tableWidth + diff) - scrollbarWidth;
-	
-	          //表头滚动条处理
-	          if (headerScroll) {
-	            if (showScroll < 0) {
-	              //小于 0 出现滚动条
-	              //找到固定列表格，设置表头的marginBottom值为scrollbarWidth;
-	              _this7.table.contentTableHeader.style.overflowX = 'scroll';
-	              _this7.optTableMargin(_this7.table.fixedLeftHeaderTable, scrollbarWidth);
-	              _this7.optTableMargin(_this7.table.fixedRighHeadertTable, scrollbarWidth);
-	            } else {
-	              //大于 0 不显示滚动条
-	              _this7.table.contentTableHeader.style.overflowX = 'hidden';
-	              _this7.optTableMargin(_this7.table.fixedLeftHeaderTable, 0);
-	              _this7.optTableMargin(_this7.table.fixedRighHeadertTable, 0);
-	            }
-	          } else {
-	            if (showScroll < 0) {
-	              _this7.table.tableBody.style.overflowX = 'auto';
-	              _this7.optTableMargin(_this7.table.fixedLeftBodyTable, '-' + scrollbarWidth);
-	              _this7.optTableMargin(_this7.table.fixedRightBodyTable, '-' + scrollbarWidth);
-	              _this7.optTableScroll(_this7.table.fixedLeftBodyTable, { x: 'scroll' });
-	              _this7.optTableScroll(_this7.table.fixedRightBodyTable, { x: 'scroll' });
-	            } else {
-	              _this7.table.tableBody.style.overflowX = 'hidden';
-	              _this7.optTableMargin(_this7.table.fixedLeftBodyTable, 0);
-	              _this7.optTableMargin(_this7.table.fixedRightBodyTable, 0);
-	              _this7.optTableScroll(_this7.table.fixedLeftBodyTable, { x: 'auto' });
-	              _this7.optTableScroll(_this7.table.fixedRightBodyTable, { x: 'auto' });
-	            }
-	          }
-	        } else if (_this7.drag.fixedType) {
-	          if (_this7.table.ths[_this7.drag.currIndex]) {
-	            _this7.table.ths[_this7.drag.currIndex].width = newWidth;
-	          }
-	          // console.log('this.drag.contentTableML',this.drag.contentTableML,'diff',diff);
-	          // debugger
-	
-	          var contentTablePar = _this7.table.contentTableHeader.parentNode;
-	          // left、right缩小的内容，在没有滚动条时，需要将宽度同步到到最后一列
-	          // diff<0 往里拖，
-	          // const  contentTableSWidth = this.drag.contentTableSWidth - this.drag.contentTableCWidth;
-	          // console.log('contentTableSWidth+diff',contentTableSWidth+diff,'diff',diff);
-	          // if(diff<0 && contentTableSWidth+diff < 0) {
-	          //   const headerCols = this.table.tableHeaderCols || this.table.cols;
-	          //   const lastWidth =this.lastColumWidth - (contentTableSWidth+diff);
-	          //   console.log('lastWidth',lastWidth,'lastShowIndex',lastShowIndex);
-	          //   headerCols[lastShowIndex].style.width = lastWidth +"px";//同步表头
-	          //   this.table.tableBodyCols[lastShowIndex].style.width = lastWidth + "px";//同步表体
-	          // }
-	          if (_this7.drag.fixedType == 'left') {
-	            contentTablePar.style.marginLeft = _this7.drag.contentTableML + diff + 'px';
-	          } else {
-	            contentTablePar.style.marginRight = _this7.drag.contentTableMR + diff + 'px';
-	          }
-	        }
-	      } else {
-	        _this7.drag.newWidth = _this7.minWidth;
-	      }
-	    }
-	    // 增加拖拽列宽动作的回调函数
-	    _this7.drag.newWidth && onDraggingBorder && onDraggingBorder(event, _this7.drag.newWidth);
-	  };
-	
-	  this.onTrMouseUp = function (e) {
-	    var event = _utils.Event.getEvent(e);
-	    var width = _this7.drag.newWidth;
-	    var opt = _this7.drag.option;
-	    _this7.mouseClear();
-	    if (opt !== "border") return; // fix:点击表头会触发onDropBorder事件的问题
-	    _this7.props.onDropBorder && _this7.props.onDropBorder(event, width);
-	  };
-	
-	  this.clearThsDr = function () {
-	    var ths = _this7.table.ths;
-	    for (var index = 0; index < ths.length; index++) {
-	      ths[index].setAttribute('draggable', false); //去掉交换列效果
-	    }
-	  };
-	
-	  this.bodyonLineMouseUp = function (events, type) {
-	    if (!_this7.drag || !_this7.drag.option) return;
-	    _this7.mouseClear();
-	  };
-	
-	  this.optTableMargin = function (table, scrollbarWidth) {
-	    if (table) {
-	      table.style.marginBottom = scrollbarWidth + "px";
-	    }
-	  };
-	
-	  this.optTableScroll = function (table) {
-	    var overflow = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-	
-	    if (table) {
-	      var innerTable = table.querySelector('.u-table-body-inner');
-	      if (innerTable) {
-	        //fixbug: 拖拽列宽后，滚动条滚到表格底部，会导致固定列和非固定列错行
-	        overflow.x && (innerTable.style.overflowX = overflow.x);
-	        overflow.y && (innerTable.style.overflowY = overflow.y);
-	      }
-	    }
-	  };
-	
-	  this.onDragStart = function (e) {
-	    if (!_this7.props.draggable) return;
-	    if (_this7.drag && _this7.drag.option != 'dragAble') {
-	      return;
-	    }
-	    var event = _utils.Event.getEvent(e),
-	
-	    // target = Event.getTarget(event);
-	    target = _this7.getTargetToTh(_utils.Event.getTarget(event));
-	    var currentIndex = parseInt(target.getAttribute("data-line-index"));
-	    var currentKey = target.getAttribute('data-line-key');
-	
-	    if (event.dataTransfer.setDragImage) {
-	      var crt = target.cloneNode(true);
-	      crt.style.backgroundColor = "#ebecf0";
-	      crt.style.width = _this7.table.cols[currentIndex].style.width; //拖动后再交换列的时候，阴影效果可同步
-	      crt.style.height = "40px";
-	      // crt.style['line-height'] = "40px";
-	      // document.body.appendChild(crt);
-	      document.getElementById(_this7._table_none_cont_id).appendChild(crt);
-	      event.dataTransfer.setDragImage(crt, 0, 0);
-	    }
-	
-	    event.dataTransfer.effectAllowed = "move";
-	    event.dataTransfer.setData("Text", currentKey);
-	    _this7.currentObj = _this7.props.rows[0][currentIndex];
-	  };
-	
-	  this.onDragOver = function (e) {
-	    var event = _utils.Event.getEvent(e);
-	    event.preventDefault();
-	  };
-	
-	  this.onDrop = function (e) {
-	    if (!_this7.props.draggable) return;
-	    var props = _this7.getCurrentEventData(_this7._dragCurrent);
-	    e.column = { props: props };
-	    if (_this7.drag && _this7.drag.option != 'dragAble') {
-	      _this7.props.onDrop(e);
-	      return;
-	    }
-	    var event = _utils.Event.getEvent(e),
-	        target = _utils.Event.getTarget(event);
-	    event.preventDefault();
-	    event.stopPropagation();
-	    _this7.currentDome.setAttribute('draggable', false); //添加交换列效果
-	    // let data = this.getCurrentEventData(this._dragCurrent);
-	    // if(!data){
-	    //   this.props.onDrop(e);
-	    //   return;
-	    // }
-	    if (!_this7.props.onDrop) return;
-	    // this.props.onDrop(event,target);
-	    _this7.props.onDrop(event, { dragSource: _this7.currentObj, dragTarg: e.column });
-	  };
-	
-	  this.onDragEnter = function (e) {
-	    var event = _utils.Event.getEvent(e),
-	        target = _utils.Event.getTarget(event);
-	    _this7._dragCurrent = target;
-	    var currentIndex = target.getAttribute("data-line-index");
-	    if (!currentIndex || parseInt(currentIndex) === _this7.drag.currIndex) return;
-	    if (target.nodeName.toUpperCase() === "TH") {
-	      // target.style.border = "2px dashed rgba(5,0,0,0.25)";
-	      target.setAttribute("style", "border-right:2px dashed rgb(30, 136, 229)");
-	      // target.style.backgroundColor = 'rgb(235, 236, 240)';
-	    }
-	  };
-	
-	  this.onDragEnd = function (e) {
-	    var event = _utils.Event.getEvent(e),
-	        target = _utils.Event.getTarget(event);
-	    _this7._dragCurrent.setAttribute("style", "");
-	    event.preventDefault();
-	    event.stopPropagation();
-	    // this._dragCurrent.style = "";
-	    document.getElementById(_this7._table_none_cont_id).innerHTML = "";
-	
-	    var data = _this7.getCurrentEventData(_this7._dragCurrent);
-	    if (!data) return;
-	    if (!_this7.currentObj || _this7.currentObj.key == data.key) return;
-	    if (!_this7.props.onDragEnd) return;
-	    _this7.props.onDragEnd(event, { dragSource: _this7.currentObj, dragTarg: data });
-	  };
-	
-	  this.onDragLeave = function (e) {
-	    var event = _utils.Event.getEvent(e),
-	        target = _utils.Event.getTarget(event);
-	    var currentIndex = target.getAttribute("data-line-index");
-	    if (!currentIndex || parseInt(currentIndex) === _this7.drag.currIndex) return;
-	    if (target.nodeName.toUpperCase() === "TH") {
-	      target.setAttribute("style", "");
-	      // this._dragCurrent.style = "";
-	    }
-	  };
-	
-	  this.handlerFilterChange = function (key, value, condition) {
-	    var onFilterChange = _this7.props.onFilterChange;
-	
-	    if (onFilterChange) {
-	      onFilterChange(key, value, condition);
-	    }
-	  };
-	
-	  this.handlerFilterClear = function (field) {
-	    var onFilterClear = _this7.props.onFilterClear;
-	
-	    if (onFilterClear) {
-	      onFilterClear(field);
-	    }
-	  };
-	
-	  this.filterRenderType = function (type, dataIndex, index) {
-	    var _props5 = _this7.props,
-	        clsPrefix = _props5.clsPrefix,
-	        rows = _props5.rows,
-	        filterDelay = _props5.filterDelay,
-	        locale = _props5.locale;
-	
-	    switch (type) {
-	      //文本输入
-	      case "text":
-	        return _react2["default"].createElement(_FilterType2["default"], {
-	          locale: locale //多语
-	          , rendertype: type //渲染类型
-	          , clsPrefix: clsPrefix //css前缀
-	          , className: clsPrefix + " filter-text",
-	          dataIndex: dataIndex //字段
-	          , onFilterChange: (0, _throttleDebounce.debounce)(filterDelay || 300, _this7.handlerFilterChange) //输入框回调
-	          , onFilterClear: _this7.handlerFilterClear //清除回调
-	          , filterDropdown: rows[1][index]["filterdropdown"] //是否显示下拉条件
-	          , filterDropdownType: rows[1][index]["filterdropdowntype"] //下拉的条件类型为string,number
-	          , filterDropdownIncludeKeys: rows[1][index]["filterdropdownincludekeys"] //下拉条件按照指定的keys去显示
-	        });
-	      //数值输入
-	      case "number":
-	        return _react2["default"].createElement(_FilterType2["default"], {
-	          locale: locale,
-	          rendertype: type,
-	          clsPrefix: clsPrefix,
-	          className: clsPrefix + " filter-text",
-	          dataIndex: dataIndex //字段
-	          , onFilterChange: (0, _throttleDebounce.debounce)(filterDelay || 300, _this7.handlerFilterChange) //输入框回调并且函数防抖动
-	          , onFilterClear: _this7.handlerFilterClear //清除回调
-	          , filterDropdown: rows[1][index]["filterdropdown"],
-	          filterDropdownType: rows[1][index]["filterdropdowntype"] //下拉的条件类型为string,number
-	          , filterDropdownIncludeKeys: rows[1][index]["filterdropdownincludekeys"] //下拉条件按照指定的keys去显示
-	          , filterInputNumberOptions: rows[1][index]["filterinputnumberoptions"] //设置数值框内的详细属性
-	        });
-	      //下拉框选择
-	      case "dropdown":
-	        var selectDataSource = [];
-	        //处理没有输入数据源的时候，系统自动查找自带的数据筛选后注入
-	        if (rows.length > 0 && (rows[1][index]["filterdropdownauto"] || "auto") == "auto") {
-	          var hash = {};
-	          //处理下拉重复对象组装dropdown
-	          selectDataSource = Array.from(rows[1][0].datasource, function (x) {
-	            return {
-	              key: x[dataIndex],
-	              value: x[dataIndex]
-	            };
-	          });
-	          selectDataSource = selectDataSource.reduceRight(function (item, next) {
-	            hash[next.key] ? "" : hash[next.key] = true && item.push(next);
-	            return item;
-	          }, []);
-	        } else {
-	          //从外部数据源加载系统数据
-	          selectDataSource = rows[1][index]["filterdropdowndata"];
-	        }
-	        return _react2["default"].createElement(_FilterType2["default"], {
-	          locale: locale,
-	          rendertype: type,
-	          className: clsPrefix + " filter-dropdown",
-	          data: selectDataSource,
-	          notFoundContent: "Loading" //没有数据显示的默认字
-	          , dataIndex: dataIndex //字段
-	          , onFilterChange: _this7.handlerFilterChange //输入框回调
-	          , onFilterClear: _this7.handlerFilterClear //清除回调
-	          , filterDropdown: rows[1][index]["filterdropdown"],
-	          onFocus: rows[1][index]["filterdropdownfocus"],
-	          filterDropdownType: rows[1][index]["filterdropdowntype"] //下拉的条件类型为string,number
-	          , filterDropdownIncludeKeys: rows[1][index]["filterdropdownincludekeys"] //下拉条件按照指定的keys去显示
-	        });
-	      //日期
-	      case "date":
-	        return _react2["default"].createElement(_FilterType2["default"], {
-	          locale: locale,
-	          rendertype: type,
-	          className: "filter-date",
-	          onClick: function onClick() {},
-	          format: rows[1][index]["format"] || "YYYY-MM-DD",
-	          dataIndex: dataIndex //字段
-	          , onFilterChange: _this7.handlerFilterChange //输入框回调
-	          , onFilterClear: _this7.handlerFilterClear //清除回调
-	          , filterDropdown: rows[1][index]["filterdropdown"],
-	          filterDropdownType: rows[1][index]["filterdropdowntype"] //下拉的条件类型为string,number
-	          , filterDropdownIncludeKeys: rows[1][index]["filterdropdownincludekeys"] //下拉条件按照指定的keys去显示
-	        });
-	      //日期 年
-	      case "dateyear":
-	        return _react2["default"].createElement(_FilterType2["default"], {
-	          locale: locale,
-	          rendertype: type,
-	          className: "filter-date",
-	          onClick: function onClick() {},
-	          format: rows[1][index]["format"] || "YYYY",
-	          dataIndex: dataIndex //字段
-	          , onFilterChange: _this7.handlerFilterChange //输入框回调
-	          , onFilterClear: _this7.handlerFilterClear //清除回调
-	          , filterDropdown: rows[1][index]["filterdropdown"],
-	          filterDropdownType: rows[1][index]["filterdropdowntype"] //下拉的条件类型为string,number
-	          , filterDropdownIncludeKeys: rows[1][index]["filterdropdownincludekeys"] //下拉条件按照指定的keys去显示
-	        });
-	      //日期 月
-	      case "datemonth":
-	        return _react2["default"].createElement(_FilterType2["default"], {
-	          locale: locale,
-	          rendertype: type,
-	          className: "filter-date",
-	          onClick: function onClick() {},
-	          format: rows[1][index]["format"] || "YYYY-MM",
-	          dataIndex: dataIndex //字段
-	          , onFilterChange: _this7.handlerFilterChange //输入框回调
-	          , onFilterClear: _this7.handlerFilterClear //清除回调
-	          , filterDropdown: rows[1][index]["filterdropdown"],
-	          filterDropdownType: rows[1][index]["filterdropdowntype"] //下拉的条件类型为string,number
-	          , filterDropdownIncludeKeys: rows[1][index]["filterdropdownincludekeys"] //下拉条件按照指定的keys去显示
-	        });
-	      //日期 周
-	      case "dateweek":
-	        return _react2["default"].createElement(_FilterType2["default"], {
-	          locale: locale,
-	          rendertype: type,
-	          className: "filter-date",
-	          onClick: function onClick() {},
-	          format: rows[1][index]["format"] || "YYYY-Wo",
-	          dataIndex: dataIndex //字段
-	          , onFilterChange: _this7.handlerFilterChange //输入框回调
-	          , onFilterClear: _this7.handlerFilterClear //清除回调
-	          , filterDropdown: rows[1][index]["filterdropdown"],
-	          filterDropdownType: rows[1][index]["filterdropdowntype"] //下拉的条件类型为string,number
-	          , filterDropdownIncludeKeys: rows[1][index]["filterdropdownincludekeys"] //下拉条件按照指定的keys去显示
-	        });
-	      //日期范围
-	      case "daterange":
-	        return _react2["default"].createElement(_FilterType2["default"], {
-	          locale: locale,
-	          rendertype: type,
-	          className: "filter-date",
-	          onClick: function onClick() {},
-	          format: rows[1][index]["format"] || "YYYY-MM-DD",
-	          dataIndex: dataIndex //字段
-	          , onFilterChange: _this7.handlerFilterChange //输入框回调
-	          , onFilterClear: _this7.handlerFilterClear //清除回调
-	          , filterDropdown: rows[1][index]["filterdropdown"],
-	          filterDropdownType: rows[1][index]["filterdropdowntype"] //下拉的条件类型为string,number
-	          , filterDropdownIncludeKeys: rows[1][index]["filterdropdownincludekeys"] //下拉条件按照指定的keys去显示
-	        });
-	      default:
-	        //不匹配类型默认文本输入
-	        return _react2["default"].createElement("div", null);
-	    }
-	  };
-	
-	  this.onCopy = function (data, index, event) {
-	    if (_this7.props.onCopy) {
-	      _this7.props.onCopy(_extends(data, { col: index }), event);
-	    }
-	  };
-	};
 	
 	TableHeader.propTypes = propTypes;
 	exports["default"] = TableHeader;
 	module.exports = exports["default"];
 
 /***/ }),
-/* 604 */
+/* 603 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	(function (global, factory) {
@@ -85691,7 +86831,7 @@
 
 
 /***/ }),
-/* 605 */
+/* 604 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -85710,27 +86850,27 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _beeDatepicker = __webpack_require__(606);
+	var _beeDatepicker = __webpack_require__(605);
 	
 	var _beeDatepicker2 = _interopRequireDefault(_beeDatepicker);
 	
-	var _zh_CN = __webpack_require__(631);
+	var _zh_CN = __webpack_require__(630);
 	
 	var _zh_CN2 = _interopRequireDefault(_zh_CN);
 	
-	var _beeFormControl = __webpack_require__(276);
+	var _beeFormControl = __webpack_require__(277);
 	
 	var _beeFormControl2 = _interopRequireDefault(_beeFormControl);
 	
-	var _beeSelect = __webpack_require__(639);
+	var _beeSelect = __webpack_require__(638);
 	
 	var _beeSelect2 = _interopRequireDefault(_beeSelect);
 	
-	var _beeInputNumber = __webpack_require__(658);
+	var _beeInputNumber = __webpack_require__(657);
 	
 	var _beeInputNumber2 = _interopRequireDefault(_beeInputNumber);
 	
-	var _FilterDropDown = __webpack_require__(662);
+	var _FilterDropDown = __webpack_require__(661);
 	
 	var _FilterDropDown2 = _interopRequireDefault(_FilterDropDown);
 	
@@ -86195,7 +87335,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 606 */
+/* 605 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -86208,23 +87348,23 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _DatePicker = __webpack_require__(607);
+	var _DatePicker = __webpack_require__(606);
 	
 	var _DatePicker2 = _interopRequireDefault(_DatePicker);
 	
-	var _MonthPicker = __webpack_require__(632);
+	var _MonthPicker = __webpack_require__(631);
 	
 	var _MonthPicker2 = _interopRequireDefault(_MonthPicker);
 	
-	var _RangePicker = __webpack_require__(634);
+	var _RangePicker = __webpack_require__(633);
 	
 	var _RangePicker2 = _interopRequireDefault(_RangePicker);
 	
-	var _WeekPicker = __webpack_require__(637);
+	var _WeekPicker = __webpack_require__(636);
 	
 	var _WeekPicker2 = _interopRequireDefault(_WeekPicker);
 	
-	var _YearPicker = __webpack_require__(638);
+	var _YearPicker = __webpack_require__(637);
 	
 	var _YearPicker2 = _interopRequireDefault(_YearPicker);
 	
@@ -86239,7 +87379,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 607 */
+/* 606 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -86250,7 +87390,7 @@
 	
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
-	var _rcCalendar = __webpack_require__(608);
+	var _rcCalendar = __webpack_require__(607);
 	
 	var _rcCalendar2 = _interopRequireDefault(_rcCalendar);
 	
@@ -86264,23 +87404,23 @@
 	
 	var _tinperBeeCore = __webpack_require__(26);
 	
-	var _Picker = __webpack_require__(629);
+	var _Picker = __webpack_require__(628);
 	
 	var _Picker2 = _interopRequireDefault(_Picker);
 	
-	var _beeFormControl = __webpack_require__(276);
+	var _beeFormControl = __webpack_require__(277);
 	
 	var _beeFormControl2 = _interopRequireDefault(_beeFormControl);
 	
-	var _Panel = __webpack_require__(523);
+	var _Panel = __webpack_require__(522);
 	
 	var _Panel2 = _interopRequireDefault(_Panel);
 	
-	var _moment = __webpack_require__(305);
+	var _moment = __webpack_require__(304);
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
-	var _beeIcon = __webpack_require__(93);
+	var _beeIcon = __webpack_require__(94);
 	
 	var _beeIcon2 = _interopRequireDefault(_beeIcon);
 	
@@ -86288,15 +87428,15 @@
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _beeInputGroup = __webpack_require__(527);
+	var _beeInputGroup = __webpack_require__(526);
 	
 	var _beeInputGroup2 = _interopRequireDefault(_beeInputGroup);
 	
-	var _zh_CN = __webpack_require__(631);
+	var _zh_CN = __webpack_require__(630);
 	
 	var _zh_CN2 = _interopRequireDefault(_zh_CN);
 	
-	var _omit = __webpack_require__(533);
+	var _omit = __webpack_require__(532);
 	
 	var _omit2 = _interopRequireDefault(_omit);
 	
@@ -86330,6 +87470,7 @@
 	    _this.state = {
 	      type: "month",
 	      value: _this.initValue(props),
+	      panelValue: props.panelValue ? props.value || props.defaultValue ? null : (0, _moment2["default"])(props.panelValue) : '', // value和defaultValue的优先级高于panelValue
 	      open: props.open || false,
 	      inputValue: _this.initValue(props),
 	      showClose: false
@@ -86340,10 +87481,16 @@
 	  }
 	
 	  DatePicker.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
+	    var value = null;
 	    if ("value" in nextProps) {
-	      this.setState({
-	        value: this.initValue(nextProps),
+	      value = this.initValue(nextProps), this.setState({
+	        value: value,
 	        inputValue: nextProps.value && this.getValue(nextProps.value) || ''
+	      });
+	    }
+	    if ("panelValue" in nextProps) {
+	      this.setState({
+	        panelValue: value ? null : (0, _moment2["default"])(nextProps.panelValue)
 	      });
 	    }
 	    if ("open" in nextProps) {
@@ -86394,7 +87541,6 @@
 	        onChange: this.handleChange
 	      };
 	    }
-	
 	    var splitNumber = '3';
 	    if (!showHour) splitNumber -= 1;
 	    if (!showMinute) splitNumber -= 1;
@@ -86407,7 +87553,6 @@
 	    } else {
 	      calendarProps.onChange = noop;
 	    }
-	
 	    var calendar = _react2["default"].createElement(_rcCalendar2["default"], _extends({
 	      timePicker: props.showTime ? _react2["default"].createElement(_Panel2["default"], {
 	        className: 'time-split-' + splitNumber,
@@ -86415,7 +87560,8 @@
 	        defaultValue: (0, _moment2["default"])((0, _moment2["default"])().format("HH:mm:ss"), "HH:mm:ss") }) : null
 	    }, (0, _omit2["default"])(props, ['value']), calendarProps, {
 	      onSelect: this.handleSelect,
-	      onInputBlur: this.onDateInputBlur
+	      onInputBlur: this.onDateInputBlur,
+	      panelValue: state.panelValue
 	    }));
 	
 	    var keyboardInputProps = {};
@@ -86730,7 +87876,8 @@
 	    e.stopPropagation();
 	    _this3.setState({
 	      inputValue: '',
-	      value: ''
+	      value: '',
+	      panelValue: null
 	    });
 	    _this3.fireChange('', '');
 	  };
@@ -86806,7 +87953,7 @@
 	module.exports = exports["default"];
 
 /***/ }),
-/* 608 */
+/* 607 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -86815,7 +87962,7 @@
 	  value: true
 	});
 	
-	var _Calendar = __webpack_require__(609);
+	var _Calendar = __webpack_require__(608);
 	
 	var _Calendar2 = _interopRequireDefault(_Calendar);
 	
@@ -86825,7 +87972,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 609 */
+/* 608 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -86848,37 +87995,37 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _KeyCode = __webpack_require__(301);
+	var _KeyCode = __webpack_require__(300);
 	
 	var _KeyCode2 = _interopRequireDefault(_KeyCode);
 	
-	var _reactLifecyclesCompat = __webpack_require__(78);
+	var _reactLifecyclesCompat = __webpack_require__(79);
 	
-	var _DateTable = __webpack_require__(610);
+	var _DateTable = __webpack_require__(609);
 	
 	var _DateTable2 = _interopRequireDefault(_DateTable);
 	
-	var _CalendarHeader = __webpack_require__(615);
+	var _CalendarHeader = __webpack_require__(614);
 	
 	var _CalendarHeader2 = _interopRequireDefault(_CalendarHeader);
 	
-	var _CalendarFooter = __webpack_require__(621);
+	var _CalendarFooter = __webpack_require__(620);
 	
 	var _CalendarFooter2 = _interopRequireDefault(_CalendarFooter);
 	
-	var _CalendarMixin = __webpack_require__(625);
+	var _CalendarMixin = __webpack_require__(624);
 	
-	var _CommonMixin = __webpack_require__(626);
+	var _CommonMixin = __webpack_require__(625);
 	
-	var _DateInput = __webpack_require__(618);
+	var _DateInput = __webpack_require__(617);
 	
 	var _DateInput2 = _interopRequireDefault(_DateInput);
 	
-	var _util = __webpack_require__(614);
+	var _util = __webpack_require__(613);
 	
-	var _toTime = __webpack_require__(628);
+	var _toTime = __webpack_require__(627);
 	
-	var _moment = __webpack_require__(305);
+	var _moment = __webpack_require__(304);
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
@@ -86907,7 +88054,8 @@
 	    _this.state = {
 	      mode: _this.props.mode || 'date',
 	      value: props.value || props.defaultValue || (0, _moment2["default"])(),
-	      selectedValue: props.selectedValue || props.defaultSelectedValue
+	      selectedValue: props.selectedValue || props.defaultSelectedValue,
+	      panelValue: props.panelValue || ''
 	    };
 	    return _this;
 	  }
@@ -86920,7 +88068,8 @@
 	
 	  Calendar.getDerivedStateFromProps = function getDerivedStateFromProps(nextProps, state) {
 	    var value = nextProps.value,
-	        selectedValue = nextProps.selectedValue;
+	        selectedValue = nextProps.selectedValue,
+	        panelValue = nextProps.panelValue;
 	
 	    var newState = {};
 	
@@ -86933,7 +88082,9 @@
 	    if ('selectedValue' in nextProps) {
 	      newState.selectedValue = selectedValue;
 	    }
-	
+	    if ('panelValue' in nextProps) {
+	      newState.panelValue = panelValue;
+	    }
 	    return newState;
 	  };
 	
@@ -87023,7 +88174,7 @@
 	        _react2["default"].createElement(_CalendarHeader2["default"], {
 	          locale: locale,
 	          mode: mode,
-	          value: value,
+	          value: this.state.panelValue || value,
 	          onValueChange: this.setValue,
 	          onPanelChange: this.onPanelChange,
 	          renderFooter: renderFooter,
@@ -87045,7 +88196,7 @@
 	          { className: prefixCls + '-body' },
 	          _react2["default"].createElement(_DateTable2["default"], {
 	            locale: locale,
-	            value: value,
+	            value: this.state.panelValue || value,
 	            selectedValue: selectedValue,
 	            prefixCls: prefixCls,
 	            dateRender: props.dateRender,
@@ -87232,6 +88383,9 @@
 	    var timePicker = _this3.props.timePicker;
 	    var selectedValue = _this3.state.selectedValue;
 	
+	    _this3.setState({
+	      panelValue: ''
+	    });
 	    if (!selectedValue && timePicker) {
 	      var timePickerDefaultValue = timePicker.props.defaultValue;
 	      if (timePickerDefaultValue) {
@@ -87277,7 +88431,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 610 */
+/* 609 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -87290,11 +88444,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _DateTHead = __webpack_require__(611);
+	var _DateTHead = __webpack_require__(610);
 	
 	var _DateTHead2 = _interopRequireDefault(_DateTHead);
 	
-	var _DateTBody = __webpack_require__(613);
+	var _DateTBody = __webpack_require__(612);
 	
 	var _DateTBody2 = _interopRequireDefault(_DateTBody);
 	
@@ -87335,7 +88489,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 611 */
+/* 610 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -87348,11 +88502,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _DateConstants = __webpack_require__(612);
+	var _DateConstants = __webpack_require__(611);
 	
 	var _DateConstants2 = _interopRequireDefault(_DateConstants);
 	
-	var _moment = __webpack_require__(305);
+	var _moment = __webpack_require__(304);
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
@@ -87441,7 +88595,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 612 */
+/* 611 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -87456,7 +88610,7 @@
 	module.exports = exports["default"];
 
 /***/ }),
-/* 613 */
+/* 612 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -87477,11 +88631,11 @@
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _DateConstants = __webpack_require__(612);
+	var _DateConstants = __webpack_require__(611);
 	
 	var _DateConstants2 = _interopRequireDefault(_DateConstants);
 	
-	var _util = __webpack_require__(614);
+	var _util = __webpack_require__(613);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
@@ -87611,8 +88765,15 @@
 	        var cls = cellClass;
 	        var disabled = false;
 	        var selected = false;
-	
 	        if (isSameDay(current, today)) {
+	          cls += ' ' + todayClass;
+	          isCurrentWeek = true;
+	        }
+	        var _props = this.props,
+	            panelValue = _props.panelValue,
+	            noCurrentDate = _props.noCurrentDate;
+	
+	        if (panelValue && !noCurrentDate && isSameDay(current, panelValue)) {
 	          cls += ' ' + todayClass;
 	          isCurrentWeek = true;
 	        }
@@ -87757,7 +88918,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 614 */
+/* 613 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -87779,7 +88940,7 @@
 	exports.isAllowedDate = isAllowedDate;
 	exports.formatDate = formatDate;
 	
-	var _moment = __webpack_require__(305);
+	var _moment = __webpack_require__(304);
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
@@ -87887,7 +89048,7 @@
 	}
 
 /***/ }),
-/* 615 */
+/* 614 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -87906,19 +89067,19 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _mapSelf = __webpack_require__(445);
+	var _mapSelf = __webpack_require__(444);
 	
 	var _mapSelf2 = _interopRequireDefault(_mapSelf);
 	
-	var _MonthPanel = __webpack_require__(616);
+	var _MonthPanel = __webpack_require__(615);
 	
 	var _MonthPanel2 = _interopRequireDefault(_MonthPanel);
 	
-	var _YearPanel = __webpack_require__(619);
+	var _YearPanel = __webpack_require__(618);
 	
 	var _YearPanel2 = _interopRequireDefault(_YearPanel);
 	
-	var _DecadePanel = __webpack_require__(620);
+	var _DecadePanel = __webpack_require__(619);
 	
 	var _DecadePanel2 = _interopRequireDefault(_DecadePanel);
 	
@@ -88187,7 +89348,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 616 */
+/* 615 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -88204,17 +89365,17 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _reactLifecyclesCompat = __webpack_require__(78);
+	var _reactLifecyclesCompat = __webpack_require__(79);
 	
-	var _MonthTable = __webpack_require__(617);
+	var _MonthTable = __webpack_require__(616);
 	
 	var _MonthTable2 = _interopRequireDefault(_MonthTable);
 	
-	var _DateInput = __webpack_require__(618);
+	var _DateInput = __webpack_require__(617);
 	
 	var _DateInput2 = _interopRequireDefault(_DateInput);
 	
-	var _moment = __webpack_require__(305);
+	var _moment = __webpack_require__(304);
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
@@ -88385,7 +89546,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 617 */
+/* 616 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -88406,7 +89567,7 @@
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _index = __webpack_require__(614);
+	var _index = __webpack_require__(613);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
@@ -88571,7 +89732,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 618 */
+/* 617 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -88594,13 +89755,13 @@
 	
 	var _tinperBeeCore = __webpack_require__(26);
 	
-	var _reactLifecyclesCompat = __webpack_require__(78);
+	var _reactLifecyclesCompat = __webpack_require__(79);
 	
-	var _moment = __webpack_require__(305);
+	var _moment = __webpack_require__(304);
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
-	var _util = __webpack_require__(614);
+	var _util = __webpack_require__(613);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
@@ -88785,7 +89946,6 @@
 	      });
 	      return;
 	    }
-	
 	    // 如果上次值不合法，此次值合法，把此次值更新到datepicker的value中
 	    if (parsed.isValid() && !value.isValid()) {
 	      _this2.setState({
@@ -88899,11 +90059,13 @@
 	        _this2.setState({
 	          invalid: true
 	        });
+	        return;
 	      }
 	      if (!validatorFunc(str)) {
 	        _this2.setState({
 	          invalid: true
 	        });
+	        return;
 	      }
 	      value.year(parsed.year()).month(parsed.month()).date(parsed.date()).hour(parsed.hour()).minute(parsed.minute()).second(parsed.second());
 	
@@ -88940,7 +90102,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 619 */
+/* 618 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -88961,15 +90123,15 @@
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _DecadePanel = __webpack_require__(620);
+	var _DecadePanel = __webpack_require__(619);
 	
 	var _DecadePanel2 = _interopRequireDefault(_DecadePanel);
 	
-	var _DateInput = __webpack_require__(618);
+	var _DateInput = __webpack_require__(617);
 	
 	var _DateInput2 = _interopRequireDefault(_DateInput);
 	
-	var _moment = __webpack_require__(305);
+	var _moment = __webpack_require__(304);
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
@@ -89260,7 +90422,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 620 */
+/* 619 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -89472,7 +90634,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 621 */
+/* 620 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -89495,7 +90657,7 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _mapSelf = __webpack_require__(445);
+	var _mapSelf = __webpack_require__(444);
 	
 	var _mapSelf2 = _interopRequireDefault(_mapSelf);
 	
@@ -89503,15 +90665,15 @@
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _TodayButton = __webpack_require__(622);
+	var _TodayButton = __webpack_require__(621);
 	
 	var _TodayButton2 = _interopRequireDefault(_TodayButton);
 	
-	var _OkButton = __webpack_require__(623);
+	var _OkButton = __webpack_require__(622);
 	
 	var _OkButton2 = _interopRequireDefault(_OkButton);
 	
-	var _TimePickerButton = __webpack_require__(624);
+	var _TimePickerButton = __webpack_require__(623);
 	
 	var _TimePickerButton2 = _interopRequireDefault(_TimePickerButton);
 	
@@ -89612,7 +90774,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 622 */
+/* 621 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -89626,7 +90788,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _util = __webpack_require__(614);
+	var _util = __webpack_require__(613);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
@@ -89658,7 +90820,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 623 */
+/* 622 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -89672,7 +90834,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _beeButton = __webpack_require__(273);
+	var _beeButton = __webpack_require__(274);
 	
 	var _beeButton2 = _interopRequireDefault(_beeButton);
 	
@@ -89702,7 +90864,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 624 */
+/* 623 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -89752,7 +90914,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 625 */
+/* 624 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -89775,11 +90937,11 @@
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _moment = __webpack_require__(305);
+	var _moment = __webpack_require__(304);
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
-	var _index = __webpack_require__(614);
+	var _index = __webpack_require__(613);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
@@ -89869,7 +91031,8 @@
 	        var originalValue = _this.state.value;
 	        if (!('value' in _this.props)) {
 	          _this.setState({
-	            value: value
+	            value: value,
+	            panelValue: ''
 	          });
 	        }
 	        if (originalValue && value && !originalValue.isSame(value) || !originalValue && value || originalValue && !value) {
@@ -89908,7 +91071,7 @@
 	};
 
 /***/ }),
-/* 626 */
+/* 625 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -89922,7 +91085,7 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _en_US = __webpack_require__(627);
+	var _en_US = __webpack_require__(626);
 	
 	var _en_US2 = _interopRequireDefault(_en_US);
 	
@@ -90017,7 +91180,7 @@
 	};
 
 /***/ }),
-/* 627 */
+/* 626 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -90054,7 +91217,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 628 */
+/* 627 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -90089,7 +91252,7 @@
 	}
 
 /***/ }),
-/* 629 */
+/* 628 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -90110,21 +91273,21 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _reactLifecyclesCompat = __webpack_require__(78);
+	var _reactLifecyclesCompat = __webpack_require__(79);
 	
-	var _createChainedFunction = __webpack_require__(460);
+	var _createChainedFunction = __webpack_require__(459);
 	
 	var _createChainedFunction2 = _interopRequireDefault(_createChainedFunction);
 	
-	var _KeyCode = __webpack_require__(301);
+	var _KeyCode = __webpack_require__(300);
 	
 	var _KeyCode2 = _interopRequireDefault(_KeyCode);
 	
-	var _placements = __webpack_require__(630);
+	var _placements = __webpack_require__(629);
 	
 	var _placements2 = _interopRequireDefault(_placements);
 	
-	var _rcTrigger = __webpack_require__(462);
+	var _rcTrigger = __webpack_require__(461);
 	
 	var _rcTrigger2 = _interopRequireDefault(_rcTrigger);
 	
@@ -90272,7 +91435,7 @@
 	      event.stopPropagation();
 	      event.target._dataTransfer = {
 	        owner: _reactDom2["default"].findDOMNode(_this2.outInput),
-	        _target: e.target
+	        _target: event.target
 	      };
 	      _this2.close(_this2.focus);
 	    }
@@ -90410,7 +91573,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 630 */
+/* 629 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -90456,7 +91619,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 631 */
+/* 630 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -90492,7 +91655,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 632 */
+/* 631 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -90503,7 +91666,7 @@
 	
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
-	var _MonthCalendar = __webpack_require__(633);
+	var _MonthCalendar = __webpack_require__(632);
 	
 	var _MonthCalendar2 = _interopRequireDefault(_MonthCalendar);
 	
@@ -90517,19 +91680,19 @@
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _Picker = __webpack_require__(629);
+	var _Picker = __webpack_require__(628);
 	
 	var _Picker2 = _interopRequireDefault(_Picker);
 	
-	var _beeFormControl = __webpack_require__(276);
+	var _beeFormControl = __webpack_require__(277);
 	
 	var _beeFormControl2 = _interopRequireDefault(_beeFormControl);
 	
-	var _beeIcon = __webpack_require__(93);
+	var _beeIcon = __webpack_require__(94);
 	
 	var _beeIcon2 = _interopRequireDefault(_beeIcon);
 	
-	var _beeInputGroup = __webpack_require__(527);
+	var _beeInputGroup = __webpack_require__(526);
 	
 	var _beeInputGroup2 = _interopRequireDefault(_beeInputGroup);
 	
@@ -90537,19 +91700,19 @@
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _zh_CN = __webpack_require__(631);
+	var _zh_CN = __webpack_require__(630);
 	
 	var _zh_CN2 = _interopRequireDefault(_zh_CN);
 	
-	var _omit = __webpack_require__(533);
+	var _omit = __webpack_require__(532);
 	
 	var _omit2 = _interopRequireDefault(_omit);
 	
-	var _moment = __webpack_require__(305);
+	var _moment = __webpack_require__(304);
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
-	var _util = __webpack_require__(614);
+	var _util = __webpack_require__(613);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
@@ -90834,7 +91997,7 @@
 	module.exports = exports["default"];
 
 /***/ }),
-/* 633 */
+/* 632 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -90853,27 +92016,27 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _KeyCode = __webpack_require__(301);
+	var _KeyCode = __webpack_require__(300);
 	
 	var _KeyCode2 = _interopRequireDefault(_KeyCode);
 	
-	var _CalendarHeader = __webpack_require__(615);
+	var _CalendarHeader = __webpack_require__(614);
 	
 	var _CalendarHeader2 = _interopRequireDefault(_CalendarHeader);
 	
-	var _CalendarFooter = __webpack_require__(621);
+	var _CalendarFooter = __webpack_require__(620);
 	
 	var _CalendarFooter2 = _interopRequireDefault(_CalendarFooter);
 	
-	var _CalendarMixin = __webpack_require__(625);
+	var _CalendarMixin = __webpack_require__(624);
 	
-	var _CommonMixin = __webpack_require__(626);
+	var _CommonMixin = __webpack_require__(625);
 	
-	var _DateInput = __webpack_require__(618);
+	var _DateInput = __webpack_require__(617);
 	
 	var _DateInput2 = _interopRequireDefault(_DateInput);
 	
-	var _moment = __webpack_require__(305);
+	var _moment = __webpack_require__(304);
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
@@ -91069,7 +92232,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 634 */
+/* 633 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -91084,27 +92247,27 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _RangeCalendar = __webpack_require__(635);
+	var _RangeCalendar = __webpack_require__(634);
 	
 	var _RangeCalendar2 = _interopRequireDefault(_RangeCalendar);
 	
-	var _Panel = __webpack_require__(523);
+	var _Panel = __webpack_require__(522);
 	
 	var _Panel2 = _interopRequireDefault(_Panel);
 	
-	var _beeFormControl = __webpack_require__(276);
+	var _beeFormControl = __webpack_require__(277);
 	
 	var _beeFormControl2 = _interopRequireDefault(_beeFormControl);
 	
-	var _Picker = __webpack_require__(629);
+	var _Picker = __webpack_require__(628);
 	
 	var _Picker2 = _interopRequireDefault(_Picker);
 	
-	var _beeInputGroup = __webpack_require__(527);
+	var _beeInputGroup = __webpack_require__(526);
 	
 	var _beeInputGroup2 = _interopRequireDefault(_beeInputGroup);
 	
-	var _beeIcon = __webpack_require__(93);
+	var _beeIcon = __webpack_require__(94);
 	
 	var _beeIcon2 = _interopRequireDefault(_beeIcon);
 	
@@ -91114,21 +92277,21 @@
 	
 	var _tinperBeeCore = __webpack_require__(26);
 	
-	var _util = __webpack_require__(614);
+	var _util = __webpack_require__(613);
 	
-	var _zh_CN = __webpack_require__(631);
+	var _zh_CN = __webpack_require__(630);
 	
 	var _zh_CN2 = _interopRequireDefault(_zh_CN);
 	
-	var _omit = __webpack_require__(533);
+	var _omit = __webpack_require__(532);
 	
 	var _omit2 = _interopRequireDefault(_omit);
 	
-	var _moment = __webpack_require__(305);
+	var _moment = __webpack_require__(304);
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
-	__webpack_require__(438);
+	__webpack_require__(437);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
@@ -91175,6 +92338,22 @@
 	    now.locale("en-gb").utcOffset(0);
 	}
 	
+	/**
+	 * @desc 阻止事件冒泡传播兼容ie
+	 */
+	function stopBubble(event) {
+	    //如果提供了事件对象，则这是一个非IE浏览器
+	    if (event && event.stopPropagation) {
+	        //因此它支持W3C的stopPropagation()方法
+	        event.stopPropagation();
+	        event.preventDefault(); // 取消事件的默认行为
+	    } else {
+	        //否则，我们需要使用IE的方式来取消事件冒泡
+	        window.event.cancelBubble = true;
+	        window.event.returnValue = false; //阻止事件的默认行为
+	    }
+	}
+	
 	var RangePicker = function (_Component) {
 	    _inherits(RangePicker, _Component);
 	
@@ -91185,18 +92364,30 @@
 	
 	        _initialiseProps.call(_this);
 	
+	        var initialValue = props.value || props.defaultValue;
 	        _this.state = {
 	            hoverValue: [],
 	            value: _this.initValue(props),
-	            open: props.open || false
+	            open: props.open || false,
+	            panelValues: initialValue && initialValue.length ? null : _this.modifyPanelValues(props.panelValues)
 	        };
 	        return _this;
 	    }
 	
 	    RangePicker.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
+	        var value = null;
 	        if ("value" in nextProps) {
+	            value = this.initValue(nextProps);
 	            this.setState({
-	                value: this.initValue(nextProps)
+	                value: value
+	            });
+	        }
+	        if ("panelValues" in nextProps) {
+	            var isValueEmpty = !(value || []).some(function (item) {
+	                return item;
+	            });
+	            this.setState({
+	                panelValues: !isValueEmpty ? null : this.modifyPanelValues(nextProps.panelValues)
 	            });
 	        }
 	        if ("open" in nextProps) {
@@ -91255,12 +92446,13 @@
 	            onEndInputBlur: this.onEndInputBlur,
 	            onClear: this.clear,
 	            onOk: this.onOk,
-	            validatorFunc: props.validatorFunc
+	            validatorFunc: props.validatorFunc,
+	            panelValues: this.state.panelValues || null
 	        });
 	        return _react2["default"].createElement(
 	            "div",
 	            _extends({
-	                onClick: this.stopPropagation, onMouseOver: this.stopPropagation
+	                onClick: this.isOpenStopPropagation, onMouseOver: this.isOpenStopPropagation
 	            }, (0, _omit2["default"])(others, ['closeIcon', 'renderIcon', 'showClear', 'showToday', 'locale', 'placeholder', 'showOk', 'dateInputPlaceholder', 'onPanelChange', 'onStartInputBlur', 'onEndInputBlur', 'renderFooter', 'showTime', 'disabledDate', 'disabledTime'])),
 	            _react2["default"].createElement(
 	                _Picker2["default"],
@@ -91312,6 +92504,23 @@
 	
 	var _initialiseProps = function _initialiseProps() {
 	    var _this3 = this;
+	
+	    this.modifyPanelValues = function (values) {
+	        if (!values) return null;
+	        if (typeof values === 'string' && (0, _moment2["default"])(values).isValid()) {
+	            var nextMonthDate = (0, _moment2["default"])(values).clone().add(1, 'months').format('YYYY-MM-DD');
+	            return [values, nextMonthDate];
+	        } else if (values && values.length && values.length === 2) {
+	            return values.map(function (value) {
+	                if ((0, _moment2["default"])(value).isValid()) {
+	                    return value;
+	                } else {
+	                    return '';
+	                }
+	            });
+	        }
+	        return null;
+	    };
 	
 	    this.initValue = function (props) {
 	        var valueProp = props.value || props.defaultValue || [];
@@ -91406,7 +92615,7 @@
 	    };
 	
 	    this.clear = function (e) {
-	        e && e.stopPropagation && e.stopPropagation();
+	        stopBubble(e);
 	        _this3.setState({
 	            value: []
 	        });
@@ -91443,7 +92652,7 @@
 	    };
 	
 	    this.outInputFocus = function (e) {
-	        if (_this3.props.hasOwnProperty('open')) e.stopPropagation();
+	        if (_this3.props.hasOwnProperty('open')) _this3.isOpenStopPropagation(e);
 	        _this3.props.outInputFocus && _this3.props.outInputFocus(e);
 	    };
 	
@@ -91509,8 +92718,8 @@
 	        _this3.props.onEndInputBlur && _this3.props.onEndInputBlur(e, endValue, "[\"" + startValue + "\" , \"" + endValue + "\"]");
 	    };
 	
-	    this.stopPropagation = function (e) {
-	        e.stopPropagation();
+	    this.isOpenStopPropagation = function (e) {
+	        if (_this3.state.open) stopBubble(e); //只有日期面板被打开的时候才阻止冒泡，否则会影响外侧的tooltips触发
 	    };
 	
 	    this.onOk = function (value) {
@@ -91542,7 +92751,7 @@
 	module.exports = exports["default"];
 
 /***/ }),
-/* 635 */
+/* 634 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -91563,7 +92772,7 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _moment = __webpack_require__(305);
+	var _moment = __webpack_require__(304);
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
@@ -91571,33 +92780,33 @@
 	
 	var _classnames3 = _interopRequireDefault(_classnames2);
 	
-	var _reactLifecyclesCompat = __webpack_require__(78);
+	var _reactLifecyclesCompat = __webpack_require__(79);
 	
-	var _KeyCode = __webpack_require__(301);
+	var _KeyCode = __webpack_require__(300);
 	
 	var _KeyCode2 = _interopRequireDefault(_KeyCode);
 	
-	var _CalendarPart = __webpack_require__(636);
+	var _CalendarPart = __webpack_require__(635);
 	
 	var _CalendarPart2 = _interopRequireDefault(_CalendarPart);
 	
-	var _TodayButton = __webpack_require__(622);
+	var _TodayButton = __webpack_require__(621);
 	
 	var _TodayButton2 = _interopRequireDefault(_TodayButton);
 	
-	var _OkButton = __webpack_require__(623);
+	var _OkButton = __webpack_require__(622);
 	
 	var _OkButton2 = _interopRequireDefault(_OkButton);
 	
-	var _TimePickerButton = __webpack_require__(624);
+	var _TimePickerButton = __webpack_require__(623);
 	
 	var _TimePickerButton2 = _interopRequireDefault(_TimePickerButton);
 	
-	var _CommonMixin = __webpack_require__(626);
+	var _CommonMixin = __webpack_require__(625);
 	
-	var _util = __webpack_require__(614);
+	var _util = __webpack_require__(613);
 	
-	var _toTime = __webpack_require__(628);
+	var _toTime = __webpack_require__(627);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
@@ -91697,7 +92906,8 @@
 	      hoverValue: props.hoverValue || [],
 	      value: value,
 	      showTimePicker: false,
-	      mode: props.mode || ['date', 'date']
+	      mode: props.mode || ['date', 'date'],
+	      panelValues: props.panelValues || null
 	    };
 	    return _this;
 	  }
@@ -91743,7 +92953,8 @@
 	    var hoverValue = state.hoverValue,
 	        selectedValue = state.selectedValue,
 	        mode = state.mode,
-	        showTimePicker = state.showTimePicker;
+	        showTimePicker = state.showTimePicker,
+	        panelValues = state.panelValues;
 	
 	    var className = (_className = {}, _defineProperty(_className, props.className, !!props.className), _defineProperty(_className, prefixCls, 1), _defineProperty(_className, prefixCls + '-hidden', !props.visible), _defineProperty(_className, prefixCls + '-range', 1), _defineProperty(_className, prefixCls + '-show-time-picker', showTimePicker), _defineProperty(_className, prefixCls + '-week-number', props.showWeekNumber), _className);
 	    var classes = (0, _classnames3["default"])(className);
@@ -91779,6 +92990,8 @@
 	    var isClosestMonths = nextMonthOfStart.year() === endValue.year() && nextMonthOfStart.month() === endValue.month();
 	
 	    var extraFooter = props.renderFooter();
+	    var leftPanelValue = !selectedValue[0] && panelValues && panelValues[0] ? { panelValue: (0, _moment2["default"])(panelValues[0]) } : {};
+	    var rightPanelValue = !selectedValue[1] && panelValues && panelValues[1] ? { panelValue: (0, _moment2["default"])(panelValues[1]) } : {};
 	    return _react2["default"].createElement(
 	      'div',
 	      {
@@ -91828,7 +93041,7 @@
 	            clearIcon: clearIcon,
 	            tabIndex: '0',
 	            onInputBlur: onStartInputBlur
-	          })),
+	          }, leftPanelValue)),
 	          _react2["default"].createElement(
 	            'span',
 	            { className: prefixCls + '-range-middle' },
@@ -91857,6 +93070,8 @@
 	            tabIndex: '0',
 	            inputTabIndex: '-1',
 	            onInputBlur: onEndInputBlur
+	          }, rightPanelValue, {
+	            noCurrentDate: true
 	          }))
 	        ),
 	        _react2["default"].createElement(
@@ -92176,7 +93391,7 @@
 	  this.onToday = function () {
 	    var startValue = (0, _util.getTodayTime)(_this2.state.value[0]);
 	    var endValue = startValue.clone().add(1, 'months');
-	    _this2.setState({ value: [startValue, endValue] });
+	    _this2.setState({ value: [startValue, endValue], panelValues: null });
 	  };
 	
 	  this.onOpenTimePicker = function () {
@@ -92230,13 +93445,13 @@
 	  this.onStartValueChange = function (leftValue) {
 	    var value = [].concat(_toConsumableArray(_this2.state.value));
 	    value[0] = leftValue;
-	    return _this2.fireValueChange(value);
+	    return _this2.fireValueChange(value, 'left');
 	  };
 	
 	  this.onEndValueChange = function (rightValue) {
 	    var value = [].concat(_toConsumableArray(_this2.state.value));
 	    value[1] = rightValue;
-	    return _this2.fireValueChange(value);
+	    return _this2.fireValueChange(value, 'right');
 	  };
 	
 	  this.onStartPanelChange = function (value, mode) {
@@ -92389,6 +93604,7 @@
 	      var endValue = selectedValue[1] || startValue.clone().add(1, 'months');
 	      _this2.setState({
 	        selectedValue: selectedValue,
+	        panelValues: null,
 	        value: getValueFromSelectedValue([startValue, endValue])
 	      });
 	    }
@@ -92414,11 +93630,14 @@
 	    }
 	  };
 	
-	  this.fireValueChange = function (value) {
+	  this.fireValueChange = function (value, direction) {
+	    var panelValues = _this2.state.panelValues;
+	
 	    var props = _this2.props;
 	    if (!('value' in props)) {
 	      _this2.setState({
-	        value: value
+	        value: value,
+	        panelValues: direction === 'left' && panelValues ? [null, panelValues[1]] : direction === 'right' && panelValues ? [panelValues[0], null] : null
 	      });
 	    }
 	    props.onValueChange(value);
@@ -92468,7 +93687,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 636 */
+/* 635 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -92487,19 +93706,19 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _CalendarHeader = __webpack_require__(615);
+	var _CalendarHeader = __webpack_require__(614);
 	
 	var _CalendarHeader2 = _interopRequireDefault(_CalendarHeader);
 	
-	var _DateTable = __webpack_require__(610);
+	var _DateTable = __webpack_require__(609);
 	
 	var _DateTable2 = _interopRequireDefault(_DateTable);
 	
-	var _DateInput = __webpack_require__(618);
+	var _DateInput = __webpack_require__(617);
 	
 	var _DateInput2 = _interopRequireDefault(_DateInput);
 	
-	var _index = __webpack_require__(614);
+	var _index = __webpack_require__(613);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
@@ -92514,11 +93733,24 @@
 	var CalendarPart = function (_React$Component) {
 	  _inherits(CalendarPart, _React$Component);
 	
-	  function CalendarPart() {
+	  function CalendarPart(props) {
 	    _classCallCheck(this, CalendarPart);
 	
-	    return _possibleConstructorReturn(this, _React$Component.apply(this, arguments));
+	    var _this = _possibleConstructorReturn(this, _React$Component.call(this, props));
+	
+	    _this.state = {
+	      panelValue: props.panelValue || ''
+	    };
+	    return _this;
 	  }
+	
+	  CalendarPart.getDerivedStateFromProps = function getDerivedStateFromProps(nextProps, state) {
+	    var panelValue = nextProps.panelValue;
+	
+	    var newState = {};
+	    newState.panelValue = panelValue;
+	    return newState;
+	  };
 	
 	  CalendarPart.prototype.render = function render() {
 	    var props = this.props;
@@ -92544,7 +93776,8 @@
 	        renderError = props.renderError,
 	        inputTabIndex = props.inputTabIndex,
 	        onInputBlur = props.onInputBlur,
-	        validatorFunc = props.validatorFunc;
+	        validatorFunc = props.validatorFunc,
+	        noCurrentDate = props.noCurrentDate;
 	
 	    var shouldShowTimePicker = showTimePicker && timePicker;
 	    var disabledTimeConfig = shouldShowTimePicker && disabledTime ? (0, _index.getTimeConfig)(selectedValue, disabledTime) : null;
@@ -92602,7 +93835,8 @@
 	          enablePrev: enablePrev,
 	          onValueChange: props.onValueChange,
 	          onPanelChange: props.onPanelChange,
-	          disabledMonth: props.disabledMonth
+	          disabledMonth: props.disabledMonth,
+	          value: this.state.panelValue || value
 	        })),
 	        showTimePicker ? _react2["default"].createElement(
 	          'div',
@@ -92623,7 +93857,10 @@
 	            onSelect: props.onSelect,
 	            onDayHover: props.onDayHover,
 	            disabledDate: disabledDate,
-	            showWeekNumber: props.showWeekNumber
+	            showWeekNumber: props.showWeekNumber,
+	            value: this.state.panelValue || value,
+	            panelValue: this.state.panelValue,
+	            noCurrentDate: noCurrentDate
 	          }))
 	        )
 	      )
@@ -92658,7 +93895,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 637 */
+/* 636 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -92669,7 +93906,7 @@
 	
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
-	var _rcCalendar = __webpack_require__(608);
+	var _rcCalendar = __webpack_require__(607);
 	
 	var _rcCalendar2 = _interopRequireDefault(_rcCalendar);
 	
@@ -92685,39 +93922,39 @@
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _Picker = __webpack_require__(629);
+	var _Picker = __webpack_require__(628);
 	
 	var _Picker2 = _interopRequireDefault(_Picker);
 	
-	var _beeFormControl = __webpack_require__(276);
+	var _beeFormControl = __webpack_require__(277);
 	
 	var _beeFormControl2 = _interopRequireDefault(_beeFormControl);
 	
-	var _zh_CN = __webpack_require__(631);
+	var _zh_CN = __webpack_require__(630);
 	
 	var _zh_CN2 = _interopRequireDefault(_zh_CN);
 	
-	var _en_US = __webpack_require__(627);
+	var _en_US = __webpack_require__(626);
 	
 	var _en_US2 = _interopRequireDefault(_en_US);
 	
-	var _beeIcon = __webpack_require__(93);
+	var _beeIcon = __webpack_require__(94);
 	
 	var _beeIcon2 = _interopRequireDefault(_beeIcon);
 	
-	var _beeInputGroup = __webpack_require__(527);
+	var _beeInputGroup = __webpack_require__(526);
 	
 	var _beeInputGroup2 = _interopRequireDefault(_beeInputGroup);
 	
-	var _moment = __webpack_require__(305);
+	var _moment = __webpack_require__(304);
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
-	__webpack_require__(438);
+	__webpack_require__(437);
 	
-	__webpack_require__(336);
+	__webpack_require__(335);
 	
-	var _omit = __webpack_require__(533);
+	var _omit = __webpack_require__(532);
 	
 	var _omit2 = _interopRequireDefault(_omit);
 	
@@ -93056,7 +94293,7 @@
 	module.exports = exports["default"];
 
 /***/ }),
-/* 638 */
+/* 637 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -93067,13 +94304,13 @@
 	
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
-	var _YearPanel = __webpack_require__(619);
+	var _YearPanel = __webpack_require__(618);
 	
 	var _YearPanel2 = _interopRequireDefault(_YearPanel);
 	
 	var _tinperBeeCore = __webpack_require__(26);
 	
-	var _zh_CN = __webpack_require__(631);
+	var _zh_CN = __webpack_require__(630);
 	
 	var _zh_CN2 = _interopRequireDefault(_zh_CN);
 	
@@ -93085,19 +94322,19 @@
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _Picker = __webpack_require__(629);
+	var _Picker = __webpack_require__(628);
 	
 	var _Picker2 = _interopRequireDefault(_Picker);
 	
-	var _beeFormControl = __webpack_require__(276);
+	var _beeFormControl = __webpack_require__(277);
 	
 	var _beeFormControl2 = _interopRequireDefault(_beeFormControl);
 	
-	var _beeInputGroup = __webpack_require__(527);
+	var _beeInputGroup = __webpack_require__(526);
 	
 	var _beeInputGroup2 = _interopRequireDefault(_beeInputGroup);
 	
-	var _beeIcon = __webpack_require__(93);
+	var _beeIcon = __webpack_require__(94);
 	
 	var _beeIcon2 = _interopRequireDefault(_beeIcon);
 	
@@ -93105,11 +94342,11 @@
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _moment = __webpack_require__(305);
+	var _moment = __webpack_require__(304);
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
-	var _omit = __webpack_require__(533);
+	var _omit = __webpack_require__(532);
 	
 	var _omit2 = _interopRequireDefault(_omit);
 	
@@ -93374,7 +94611,7 @@
 	module.exports = exports["default"];
 
 /***/ }),
-/* 639 */
+/* 638 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -93383,17 +94620,17 @@
 	  value: true
 	});
 	
-	var _Select = __webpack_require__(640);
+	var _Select = __webpack_require__(639);
 	
 	var _Select2 = _interopRequireDefault(_Select);
 	
-	var _Option = __webpack_require__(652);
+	var _Option = __webpack_require__(651);
 	
 	var _Option2 = _interopRequireDefault(_Option);
 	
-	var _PropTypes = __webpack_require__(656);
+	var _PropTypes = __webpack_require__(655);
 	
-	var _OptGroup = __webpack_require__(657);
+	var _OptGroup = __webpack_require__(656);
 	
 	var _OptGroup2 = _interopRequireDefault(_OptGroup);
 	
@@ -93405,7 +94642,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 640 */
+/* 639 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -93428,15 +94665,15 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _RcSelect = __webpack_require__(641);
+	var _RcSelect = __webpack_require__(640);
 	
 	var _RcSelect2 = _interopRequireDefault(_RcSelect);
 	
-	var _Option = __webpack_require__(652);
+	var _Option = __webpack_require__(651);
 	
 	var _Option2 = _interopRequireDefault(_Option);
 	
-	var _OptGroup = __webpack_require__(657);
+	var _OptGroup = __webpack_require__(656);
 	
 	var _OptGroup2 = _interopRequireDefault(_OptGroup);
 	
@@ -93677,7 +94914,7 @@
 	module.exports = exports["default"];
 
 /***/ }),
-/* 641 */
+/* 640 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -93696,7 +94933,7 @@
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _reactLifecyclesCompat = __webpack_require__(78);
+	var _reactLifecyclesCompat = __webpack_require__(79);
 	
 	var _tinperBeeCore = __webpack_require__(26);
 	
@@ -93704,39 +94941,39 @@
 	
 	var _classnames3 = _interopRequireDefault(_classnames2);
 	
-	var _beeAnimate = __webpack_require__(56);
+	var _beeAnimate = __webpack_require__(57);
 	
 	var _beeAnimate2 = _interopRequireDefault(_beeAnimate);
 	
-	var _componentClasses = __webpack_require__(46);
+	var _componentClasses = __webpack_require__(47);
 	
 	var _componentClasses2 = _interopRequireDefault(_componentClasses);
 	
-	var _rcMenu = __webpack_require__(642);
+	var _rcMenu = __webpack_require__(641);
 	
-	var _MenuItem = __webpack_require__(649);
+	var _MenuItem = __webpack_require__(648);
 	
 	var _MenuItem2 = _interopRequireDefault(_MenuItem);
 	
-	var _warning = __webpack_require__(31);
+	var _warning = __webpack_require__(32);
 	
 	var _warning2 = _interopRequireDefault(_warning);
 	
-	var _Option = __webpack_require__(652);
+	var _Option = __webpack_require__(651);
 	
 	var _Option2 = _interopRequireDefault(_Option);
 	
-	var _omit = __webpack_require__(533);
+	var _omit = __webpack_require__(532);
 	
 	var _omit2 = _interopRequireDefault(_omit);
 	
-	var _util = __webpack_require__(653);
+	var _util = __webpack_require__(652);
 	
-	var _SelectTrigger = __webpack_require__(654);
+	var _SelectTrigger = __webpack_require__(653);
 	
 	var _SelectTrigger2 = _interopRequireDefault(_SelectTrigger);
 	
-	var _PropTypes = __webpack_require__(656);
+	var _PropTypes = __webpack_require__(655);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
@@ -94412,11 +95649,11 @@
 	      if ((0, _util.isSingleMode)(props) && props.showSearch && inputValue && props.defaultActiveFirstOption) {
 	        var options = _this2._options || [];
 	        if (options.length) {
-	          var firstOption = (0, _util.findFirstMenuItem)(options);
-	          if (firstOption) {
-	            value = [(0, _util.getValuePropValue)(firstOption)];
-	            _this2.fireChange(value);
-	          }
+	          // const firstOption = findFirstMenuItem(options); // 自定义输入时失去焦点触发两次onChange解决
+	          // if (firstOption) {
+	          //   value = [getValuePropValue(firstOption)];
+	          //   this.fireChange(value);
+	          // }
 	          if (props.showSearch && props.supportWrite) {
 	            //查询时是否支持自定义输入
 	            value = [inputValue];
@@ -95264,7 +96501,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 642 */
+/* 641 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -95272,23 +96509,23 @@
 	exports.__esModule = true;
 	exports.Divider = exports.ItemGroup = exports.MenuItemGroup = exports.MenuItem = exports.Item = exports.SubMenu = undefined;
 	
-	var _Menu = __webpack_require__(643);
+	var _Menu = __webpack_require__(642);
 	
 	var _Menu2 = _interopRequireDefault(_Menu);
 	
-	var _SubMenu = __webpack_require__(647);
+	var _SubMenu = __webpack_require__(646);
 	
 	var _SubMenu2 = _interopRequireDefault(_SubMenu);
 	
-	var _MenuItem = __webpack_require__(649);
+	var _MenuItem = __webpack_require__(648);
 	
 	var _MenuItem2 = _interopRequireDefault(_MenuItem);
 	
-	var _MenuItemGroup = __webpack_require__(650);
+	var _MenuItemGroup = __webpack_require__(649);
 	
 	var _MenuItemGroup2 = _interopRequireDefault(_MenuItemGroup);
 	
-	var _Divider = __webpack_require__(651);
+	var _Divider = __webpack_require__(650);
 	
 	var _Divider2 = _interopRequireDefault(_Divider);
 	
@@ -95303,30 +96540,30 @@
 	exports['default'] = _Menu2['default'];
 
 /***/ }),
-/* 643 */
+/* 642 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _extends2 = __webpack_require__(463);
+	var _extends2 = __webpack_require__(462);
 	
 	var _extends3 = _interopRequireDefault(_extends2);
 	
-	var _objectWithoutProperties2 = __webpack_require__(522);
+	var _objectWithoutProperties2 = __webpack_require__(521);
 	
 	var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
 	
-	var _classCallCheck2 = __webpack_require__(465);
+	var _classCallCheck2 = __webpack_require__(464);
 	
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 	
-	var _possibleConstructorReturn2 = __webpack_require__(466);
+	var _possibleConstructorReturn2 = __webpack_require__(465);
 	
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 	
-	var _inherits2 = __webpack_require__(496);
+	var _inherits2 = __webpack_require__(495);
 	
 	var _inherits3 = _interopRequireDefault(_inherits2);
 	
@@ -95338,13 +96575,13 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _miniStore = __webpack_require__(580);
+	var _miniStore = __webpack_require__(579);
 	
-	var _SubPopupMenu = __webpack_require__(644);
+	var _SubPopupMenu = __webpack_require__(643);
 	
 	var _SubPopupMenu2 = _interopRequireDefault(_SubPopupMenu);
 	
-	var _util = __webpack_require__(645);
+	var _util = __webpack_require__(644);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -95589,7 +96826,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 644 */
+/* 643 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -95597,23 +96834,23 @@
 	exports.__esModule = true;
 	exports.SubPopupMenu = undefined;
 	
-	var _objectWithoutProperties2 = __webpack_require__(522);
+	var _objectWithoutProperties2 = __webpack_require__(521);
 	
 	var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
 	
-	var _classCallCheck2 = __webpack_require__(465);
+	var _classCallCheck2 = __webpack_require__(464);
 	
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 	
-	var _possibleConstructorReturn2 = __webpack_require__(466);
+	var _possibleConstructorReturn2 = __webpack_require__(465);
 	
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 	
-	var _inherits2 = __webpack_require__(496);
+	var _inherits2 = __webpack_require__(495);
 	
 	var _inherits3 = _interopRequireDefault(_inherits2);
 	
-	var _extends4 = __webpack_require__(463);
+	var _extends4 = __webpack_require__(462);
 	
 	var _extends5 = _interopRequireDefault(_extends4);
 	
@@ -95628,13 +96865,13 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _miniStore = __webpack_require__(580);
+	var _miniStore = __webpack_require__(579);
 	
-	var _KeyCode = __webpack_require__(301);
+	var _KeyCode = __webpack_require__(300);
 	
 	var _KeyCode2 = _interopRequireDefault(_KeyCode);
 	
-	var _createChainedFunction = __webpack_require__(460);
+	var _createChainedFunction = __webpack_require__(459);
 	
 	var _createChainedFunction2 = _interopRequireDefault(_createChainedFunction);
 	
@@ -95642,9 +96879,9 @@
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _util = __webpack_require__(645);
+	var _util = __webpack_require__(644);
 	
-	var _DOMWrap = __webpack_require__(646);
+	var _DOMWrap = __webpack_require__(645);
 	
 	var _DOMWrap2 = _interopRequireDefault(_DOMWrap);
 	
@@ -96031,7 +97268,7 @@
 	exports['default'] = connected;
 
 /***/ }),
-/* 645 */
+/* 644 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -96112,30 +97349,30 @@
 	};
 
 /***/ }),
-/* 646 */
+/* 645 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _extends2 = __webpack_require__(463);
+	var _extends2 = __webpack_require__(462);
 	
 	var _extends3 = _interopRequireDefault(_extends2);
 	
-	var _objectWithoutProperties2 = __webpack_require__(522);
+	var _objectWithoutProperties2 = __webpack_require__(521);
 	
 	var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
 	
-	var _classCallCheck2 = __webpack_require__(465);
+	var _classCallCheck2 = __webpack_require__(464);
 	
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 	
-	var _possibleConstructorReturn2 = __webpack_require__(466);
+	var _possibleConstructorReturn2 = __webpack_require__(465);
 	
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 	
-	var _inherits2 = __webpack_require__(496);
+	var _inherits2 = __webpack_require__(495);
 	
 	var _inherits3 = _interopRequireDefault(_inherits2);
 	
@@ -96151,15 +97388,15 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _resizeObserverPolyfill = __webpack_require__(294);
+	var _resizeObserverPolyfill = __webpack_require__(293);
 	
 	var _resizeObserverPolyfill2 = _interopRequireDefault(_resizeObserverPolyfill);
 	
-	var _SubMenu = __webpack_require__(647);
+	var _SubMenu = __webpack_require__(646);
 	
 	var _SubMenu2 = _interopRequireDefault(_SubMenu);
 	
-	var _util = __webpack_require__(645);
+	var _util = __webpack_require__(644);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -96169,7 +97406,7 @@
 	
 	// Fix ssr
 	if (canUseDOM) {
-	  __webpack_require__(591);
+	  __webpack_require__(590);
 	}
 	
 	var DOMWrap = function (_React$Component) {
@@ -96487,7 +97724,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 647 */
+/* 646 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -96495,19 +97732,19 @@
 	exports.__esModule = true;
 	exports.SubMenu = undefined;
 	
-	var _classCallCheck2 = __webpack_require__(465);
+	var _classCallCheck2 = __webpack_require__(464);
 	
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 	
-	var _possibleConstructorReturn2 = __webpack_require__(466);
+	var _possibleConstructorReturn2 = __webpack_require__(465);
 	
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 	
-	var _inherits2 = __webpack_require__(496);
+	var _inherits2 = __webpack_require__(495);
 	
 	var _inherits3 = _interopRequireDefault(_inherits2);
 	
-	var _extends3 = __webpack_require__(463);
+	var _extends3 = __webpack_require__(462);
 	
 	var _extends4 = _interopRequireDefault(_extends3);
 	
@@ -96523,11 +97760,11 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _rcTrigger = __webpack_require__(462);
+	var _rcTrigger = __webpack_require__(461);
 	
 	var _rcTrigger2 = _interopRequireDefault(_rcTrigger);
 	
-	var _KeyCode = __webpack_require__(301);
+	var _KeyCode = __webpack_require__(300);
 	
 	var _KeyCode2 = _interopRequireDefault(_KeyCode);
 	
@@ -96535,21 +97772,21 @@
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _miniStore = __webpack_require__(580);
+	var _miniStore = __webpack_require__(579);
 	
-	var _SubPopupMenu = __webpack_require__(644);
+	var _SubPopupMenu = __webpack_require__(643);
 	
 	var _SubPopupMenu2 = _interopRequireDefault(_SubPopupMenu);
 	
-	var _placements = __webpack_require__(648);
+	var _placements = __webpack_require__(647);
 	
 	var _placements2 = _interopRequireDefault(_placements);
 	
-	var _rcAnimate = __webpack_require__(512);
+	var _rcAnimate = __webpack_require__(511);
 	
 	var _rcAnimate2 = _interopRequireDefault(_rcAnimate);
 	
-	var _util = __webpack_require__(645);
+	var _util = __webpack_require__(644);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -97135,7 +98372,7 @@
 	exports['default'] = connected;
 
 /***/ }),
-/* 648 */
+/* 647 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -97172,7 +98409,7 @@
 	exports['default'] = placements;
 
 /***/ }),
-/* 649 */
+/* 648 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -97180,19 +98417,19 @@
 	exports.__esModule = true;
 	exports.MenuItem = undefined;
 	
-	var _extends2 = __webpack_require__(463);
+	var _extends2 = __webpack_require__(462);
 	
 	var _extends3 = _interopRequireDefault(_extends2);
 	
-	var _classCallCheck2 = __webpack_require__(465);
+	var _classCallCheck2 = __webpack_require__(464);
 	
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 	
-	var _possibleConstructorReturn2 = __webpack_require__(466);
+	var _possibleConstructorReturn2 = __webpack_require__(465);
 	
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 	
-	var _inherits2 = __webpack_require__(496);
+	var _inherits2 = __webpack_require__(495);
 	
 	var _inherits3 = _interopRequireDefault(_inherits2);
 	
@@ -97208,7 +98445,7 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _KeyCode = __webpack_require__(301);
+	var _KeyCode = __webpack_require__(300);
 	
 	var _KeyCode2 = _interopRequireDefault(_KeyCode);
 	
@@ -97216,13 +98453,13 @@
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _domScrollIntoView = __webpack_require__(593);
+	var _domScrollIntoView = __webpack_require__(592);
 	
 	var _domScrollIntoView2 = _interopRequireDefault(_domScrollIntoView);
 	
-	var _miniStore = __webpack_require__(580);
+	var _miniStore = __webpack_require__(579);
 	
-	var _util = __webpack_require__(645);
+	var _util = __webpack_require__(644);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -97452,30 +98689,30 @@
 	exports['default'] = connected;
 
 /***/ }),
-/* 650 */
+/* 649 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _extends2 = __webpack_require__(463);
+	var _extends2 = __webpack_require__(462);
 	
 	var _extends3 = _interopRequireDefault(_extends2);
 	
-	var _objectWithoutProperties2 = __webpack_require__(522);
+	var _objectWithoutProperties2 = __webpack_require__(521);
 	
 	var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
 	
-	var _classCallCheck2 = __webpack_require__(465);
+	var _classCallCheck2 = __webpack_require__(464);
 	
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 	
-	var _possibleConstructorReturn2 = __webpack_require__(466);
+	var _possibleConstructorReturn2 = __webpack_require__(465);
 	
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 	
-	var _inherits2 = __webpack_require__(496);
+	var _inherits2 = __webpack_require__(495);
 	
 	var _inherits3 = _interopRequireDefault(_inherits2);
 	
@@ -97487,7 +98724,7 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _util = __webpack_require__(645);
+	var _util = __webpack_require__(644);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -97570,22 +98807,22 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 651 */
+/* 650 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _classCallCheck2 = __webpack_require__(465);
+	var _classCallCheck2 = __webpack_require__(464);
 	
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 	
-	var _possibleConstructorReturn2 = __webpack_require__(466);
+	var _possibleConstructorReturn2 = __webpack_require__(465);
 	
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 	
-	var _inherits2 = __webpack_require__(496);
+	var _inherits2 = __webpack_require__(495);
 	
 	var _inherits3 = _interopRequireDefault(_inherits2);
 	
@@ -97637,7 +98874,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 652 */
+/* 651 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -97688,7 +98925,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 653 */
+/* 652 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -97907,7 +99144,7 @@
 	}
 
 /***/ }),
-/* 654 */
+/* 653 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -97918,7 +99155,7 @@
 	
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
-	var _trigger = __webpack_require__(569);
+	var _trigger = __webpack_require__(568);
 	
 	var _trigger2 = _interopRequireDefault(_trigger);
 	
@@ -97938,9 +99175,9 @@
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _util = __webpack_require__(653);
+	var _util = __webpack_require__(652);
 	
-	var _DropdownMenu = __webpack_require__(655);
+	var _DropdownMenu = __webpack_require__(654);
 	
 	var _DropdownMenu2 = _interopRequireDefault(_DropdownMenu);
 	
@@ -98161,7 +99398,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 655 */
+/* 654 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -98184,11 +99421,11 @@
 	
 	var _tinperBeeCore = __webpack_require__(26);
 	
-	var _rcMenu = __webpack_require__(642);
+	var _rcMenu = __webpack_require__(641);
 	
 	var _rcMenu2 = _interopRequireDefault(_rcMenu);
 	
-	var _domScrollIntoView = __webpack_require__(593);
+	var _domScrollIntoView = __webpack_require__(592);
 	
 	var _domScrollIntoView2 = _interopRequireDefault(_domScrollIntoView);
 	
@@ -98196,7 +99433,7 @@
 	
 	var _raf2 = _interopRequireDefault(_raf);
 	
-	var _util = __webpack_require__(653);
+	var _util = __webpack_require__(652);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
@@ -98407,7 +99644,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 656 */
+/* 655 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -98494,7 +99731,7 @@
 	};
 
 /***/ }),
-/* 657 */
+/* 656 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -98534,7 +99771,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 658 */
+/* 657 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -98543,11 +99780,11 @@
 	  value: true
 	});
 	
-	var _InputNumber = __webpack_require__(659);
+	var _InputNumber = __webpack_require__(658);
 	
 	var _InputNumber2 = _interopRequireDefault(_InputNumber);
 	
-	var _InputNumberGroup = __webpack_require__(661);
+	var _InputNumberGroup = __webpack_require__(660);
 	
 	var _InputNumberGroup2 = _interopRequireDefault(_InputNumberGroup);
 	
@@ -98559,7 +99796,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 659 */
+/* 658 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -98578,15 +99815,15 @@
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _beeInputGroup = __webpack_require__(527);
+	var _beeInputGroup = __webpack_require__(526);
 	
 	var _beeInputGroup2 = _interopRequireDefault(_beeInputGroup);
 	
-	var _beeFormControl = __webpack_require__(276);
+	var _beeFormControl = __webpack_require__(277);
 	
 	var _beeFormControl2 = _interopRequireDefault(_beeFormControl);
 	
-	var _beeMessage = __webpack_require__(52);
+	var _beeMessage = __webpack_require__(53);
 	
 	var _beeMessage2 = _interopRequireDefault(_beeMessage);
 	
@@ -98594,11 +99831,11 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _i18n = __webpack_require__(660);
+	var _i18n = __webpack_require__(659);
 	
 	var _i18n2 = _interopRequireDefault(_i18n);
 	
-	var _tool = __webpack_require__(118);
+	var _tool = __webpack_require__(119);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
@@ -99088,7 +100325,7 @@
 	            var prec = String(value.split(".")[1]).replace("-", "");
 	            if (_this3.props.precision === 0 && (prec === "" || prec != "")) return;
 	            if (_this3.props.precision && prec.length > _this3.props.precision) return;
-	            if (prec.length > 8) return;
+	            // if(prec.length > 8)return;
 	        }
 	        _this3.setState({
 	            value: value,
@@ -99488,7 +100725,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 660 */
+/* 659 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -99508,7 +100745,7 @@
 	};
 
 /***/ }),
-/* 661 */
+/* 660 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -99527,7 +100764,7 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _InputNumber = __webpack_require__(659);
+	var _InputNumber = __webpack_require__(658);
 	
 	var _InputNumber2 = _interopRequireDefault(_InputNumber);
 	
@@ -99699,7 +100936,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 662 */
+/* 661 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -99716,27 +100953,27 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _beeDropdown = __webpack_require__(567);
+	var _beeDropdown = __webpack_require__(566);
 	
 	var _beeDropdown2 = _interopRequireDefault(_beeDropdown);
 	
-	var _beeMenus = __webpack_require__(576);
+	var _beeMenus = __webpack_require__(575);
 	
 	var _beeMenus2 = _interopRequireDefault(_beeMenus);
 	
-	var _beeButton = __webpack_require__(273);
+	var _beeButton = __webpack_require__(274);
 	
 	var _beeButton2 = _interopRequireDefault(_beeButton);
 	
-	var _beeIcon = __webpack_require__(93);
+	var _beeIcon = __webpack_require__(94);
 	
 	var _beeIcon2 = _interopRequireDefault(_beeIcon);
 	
-	var _i18n = __webpack_require__(566);
+	var _i18n = __webpack_require__(565);
 	
 	var _i18n2 = _interopRequireDefault(_i18n);
 	
-	var _tool = __webpack_require__(118);
+	var _tool = __webpack_require__(119);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
@@ -100024,7 +101261,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 663 */
+/* 662 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -100039,15 +101276,15 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Column = __webpack_require__(664);
+	var _Column = __webpack_require__(663);
 	
 	var _Column2 = _interopRequireDefault(_Column);
 	
-	var _ColumnGroup = __webpack_require__(665);
+	var _ColumnGroup = __webpack_require__(664);
 	
 	var _ColumnGroup2 = _interopRequireDefault(_ColumnGroup);
 	
-	var _beeIcon = __webpack_require__(93);
+	var _beeIcon = __webpack_require__(94);
 	
 	var _beeIcon2 = _interopRequireDefault(_beeIcon);
 	
@@ -100059,6 +101296,7 @@
 	
 	//行控制管理
 	var ColumnManager = function () {
+	  //缺省的列宽度
 	  function ColumnManager(columns, elements, originWidth, rowDraggAble, showRowNum) {
 	    _classCallCheck(this, ColumnManager);
 	
@@ -100140,6 +101378,8 @@
 	      });
 	    });
 	  };
+	  //全部末级列（多表头下）节点
+	
 	
 	  ColumnManager.prototype.leafColumns = function leafColumns() {
 	    var _this7 = this;
@@ -100173,6 +101413,26 @@
 	    });
 	  };
 	
+	  //获取显示的列
+	
+	
+	  ColumnManager.prototype.showLeafColumns = function showLeafColumns(fixed) {
+	    var columns = [];
+	    if (fixed) {
+	      if (fixed == 'right') {
+	        columns = this.rightLeafColumns();
+	      } else {
+	        columns = this.leftLeafColumns();
+	      }
+	    } else {
+	      columns = this.centerLeafColumns();
+	    }
+	    var showColumns = columns.filter(function (col) {
+	      return col.ifshow == true;
+	    });
+	    return showColumns;
+	  };
+	
 	  // add appropriate rowspan and colspan to column
 	
 	
@@ -100200,7 +101460,7 @@
 	            ifshow: true
 	          };
 	          if (!_this11.originWidth) {
-	            defaultOpt.width = 200;
+	            defaultOpt.width = ColumnManager.DefaultColumnWidth;
 	          }
 	          //获取非固定列
 	          if (type == 'nofixed' && column.fixed) {
@@ -100261,9 +101521,14 @@
 	    this._cached = {};
 	  };
 	
+	  ColumnManager.prototype.clearCache = function clearCache() {
+	    this._cached = {};
+	  };
+	
 	  ColumnManager.prototype.getColumnWidth = function getColumnWidth(contentWidth) {
 	    var columns = this.leafColumns();
 	    var res = { computeWidth: 0, lastShowIndex: -1 };
+	    var centerShowColCount = 0; //中间区域的可见列个数
 	    columns.forEach(function (col, index) {
 	      //如果列显示
 	      if (col.ifshow) {
@@ -100273,10 +101538,11 @@
 	        }
 	        res.computeWidth += parseInt(width);
 	        if (!col.fixed) {
-	          res.lastShowIndex = index;
+	          centerShowColCount++;
 	        }
 	      }
 	    });
+	    res.lastShowIndex = centerShowColCount - 1;
 	    return res;
 	  };
 	
@@ -100320,6 +101586,30 @@
 	    });
 	  };
 	
+	  //通过key或dataIndex查找匹配的列定义（支持多表头的列定义情况）
+	
+	
+	  ColumnManager.prototype.findColumn = function findColumn(columnKey) {
+	    return this._findColumn(columnKey, this.columns || []);
+	  };
+	
+	  ColumnManager.prototype._findColumn = function _findColumn(columnKey, columns) {
+	    for (var i = 0; i < columns.length; i++) {
+	      var findOne = null;
+	      var column = columns[i];
+	      if (!column) continue;
+	      if (column.key == columnKey || column.dataIndex == columnKey) {
+	        //兼容只有key的情况
+	        findOne = column;
+	      } else {
+	        if (column.children) {
+	          findOne = this._findColumn(columnKey, column.children);
+	        }
+	      }
+	      if (findOne) return findOne;
+	    }
+	  };
+	
 	  ColumnManager.prototype._cache = function _cache(name, fn) {
 	    if (name in this._cached) {
 	      return this._cached[name];
@@ -100343,7 +101633,7 @@
 	          ifshow: true
 	        };
 	        if (!_this15.originWidth) {
-	          defaultOpt.width = 200;
+	          defaultOpt.width = ColumnManager.DefaultColumnWidth;
 	        }
 	        var newColumn = _extends({}, defaultOpt, column);
 	        leafColumns.push(newColumn);
@@ -100356,6 +101646,8 @@
 	
 	  return ColumnManager;
 	}();
+	
+	ColumnManager.DefaultColumnWidth = 200;
 	
 	var _initialiseProps = function _initialiseProps() {
 	  this._cached = {};
@@ -100435,7 +101727,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 664 */
+/* 663 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -100496,7 +101788,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 665 */
+/* 664 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -100540,7 +101832,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 666 */
+/* 665 */
 /***/ (function(module, exports) {
 
 	"use strict";
@@ -100585,7 +101877,7 @@
 	module.exports = exports["default"];
 
 /***/ }),
-/* 667 */
+/* 666 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -100594,7 +101886,7 @@
 	  value: true
 	});
 	
-	var _Loading = __webpack_require__(668);
+	var _Loading = __webpack_require__(667);
 	
 	var _Loading2 = _interopRequireDefault(_Loading);
 	
@@ -100604,7 +101896,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 668 */
+/* 667 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -100625,7 +101917,7 @@
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
-	var _Portal = __webpack_require__(99);
+	var _Portal = __webpack_require__(100);
 	
 	var _Portal2 = _interopRequireDefault(_Portal);
 	
@@ -100825,7 +102117,644 @@
 	module.exports = exports["default"];
 
 /***/ }),
+/* 668 */
+/***/ (function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	exports.sortBy = sortBy;
+	exports.compare = compare;
+	exports.ObjectAssign = ObjectAssign;
+	exports.arrayMoveTo = arrayMoveTo;
+	/*
+	* 快速排序，按某个属性，或按“获取排序依据的函数”，来排序.
+	* @method soryBy
+	* @static
+	* @param {array} arr 待处理数组
+	* @param {string|function} prop 排序依据属性，获取
+	* @param {boolean} desc 降序
+	* @return {array} 返回排序后的新数组
+	*/
+	
+	function sortBy(arr, prop, desc) {
+	    var props = [],
+	        ret = [],
+	        i = 0,
+	        len = arr.length;
+	    if (typeof prop == 'string') {
+	        for (; i < len; i++) {
+	            var oI = arr[i];
+	            (props[i] = new String(oI && oI[prop] || ''))._obj = oI;
+	        }
+	    } else if (typeof prop == 'function') {
+	        for (; i < len; i++) {
+	            var _oI = arr[i];
+	            (props[i] = new String(_oI && prop(_oI) || ''))._obj = _oI;
+	        }
+	    } else {
+	        throw '参数类型错误';
+	    }
+	    props.sort();
+	    for (i = 0; i < len; i++) {
+	        ret[i] = props[i]._obj;
+	    }
+	    if (desc) ret.reverse();
+	    return ret;
+	};
+	
+	/**
+	 * 数组对象排序
+	 * console.log(arr.sort(compare('age')))
+	 * @param {} property
+	 */
+	function compare(property) {
+	    return function (a, b) {
+	        var value1 = a[property];
+	        var value2 = b[property];
+	        return value1 - value2;
+	    };
+	}
+	
+	/**
+	 * 简单数组数据对象拷贝
+	 * @param {*} obj 要拷贝的对象
+	 */
+	function ObjectAssign(obj) {
+	    var b = obj instanceof Array;
+	    var tagObj = b ? [] : {};
+	    if (b) {
+	        //数组
+	        obj.forEach(function (da) {
+	            var _da = {};
+	            _extends(_da, da);
+	            tagObj.push(_da);
+	        });
+	    } else {
+	        _extends(tagObj, obj);
+	    }
+	    return tagObj;
+	}
+	
+	/**
+	 * 移动数组元素位置
+	 * @param {array} arr 数组
+	 * @param moveIndex 移动的位置
+	 * @param toIndex 目标的位置
+	 */
+	function arrayMoveTo(arr, moveIndex, toIndex) {
+	    var value = arr[moveIndex];
+	    if (moveIndex < toIndex) {
+	        arr.splice(moveIndex, 1);
+	        arr.splice(toIndex, 0, value);
+	    } else if (moveIndex > toIndex) {
+	        arr.splice(moveIndex, 1);
+	        arr.splice(toIndex, 0, value);
+	    }
+	    return arr;
+	}
+
+/***/ }),
 /* 669 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactDom = __webpack_require__(2);
+	
+	var _utils = __webpack_require__(549);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	
+	function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
+	
+	//拖拽的尺表线
+	var DragResizerLine = function (_Component) {
+	    _inherits(DragResizerLine, _Component);
+	
+	    function DragResizerLine(props) {
+	        _classCallCheck(this, DragResizerLine);
+	
+	        var _this = _possibleConstructorReturn(this, _Component.call(this, props));
+	
+	        _this.handleResizerMove = function (event) {
+	            var _this$props = _this.props,
+	                visible = _this$props.visible,
+	                left = _this$props.left,
+	                dataSource = _this$props.dataSource,
+	                onChange = _this$props.onChange,
+	                defaultWidth = _this$props.defaultWidth,
+	                minWidth = _this$props.minWidth;
+	            var _this$state = _this.state,
+	                x = _this$state.x,
+	                moveX = _this$state.moveX;
+	            // console.log(`AAA---resizer--line--move`,event)
+	
+	            if (visible) {
+	                var newmoveX = moveX + (event.clientX - x); //计算出移动的距离，向左移动则值小于0，右右移动则值大于0
+	                // console.log(`AAA---resizer--line--移动距离：${newmoveX}`)
+	                if (defaultWidth + newmoveX < minWidth) {
+	                    newmoveX = minWidth - defaultWidth;
+	                }
+	                _this.setState({
+	                    left: left + newmoveX,
+	                    x: event.clientX,
+	                    moveX: newmoveX
+	                });
+	                onChange && onChange(event, moveX, dataSource);
+	                _utils.Event.stopPropagation(event);
+	            }
+	        };
+	
+	        _this.handleResizerDown = function (event) {
+	            // console.log(`AAA---resizer--line--down`,event)
+	            var visible = _this.props.visible;
+	
+	            if (visible) {
+	                // console.log(`AAA---resizer--line--down-finish`,event)
+	                _this.setState({ moveX: 0, x: event.clientX });
+	                _utils.Event.stopPropagation(event);
+	            }
+	        };
+	
+	        _this.handleResizerUp = function (event) {
+	            var _this$props2 = _this.props,
+	                visible = _this$props2.visible,
+	                dataSource = _this$props2.dataSource,
+	                onResizeEnd = _this$props2.onResizeEnd;
+	            var moveX = _this.state.moveX;
+	
+	            if (visible) {
+	                // console.log(`AAA---resizer--line--up`,event)
+	                onResizeEnd && onResizeEnd(event, moveX, dataSource);
+	            }
+	        };
+	
+	        _this.handleResizerCancel = function (event) {
+	            var _this$props3 = _this.props,
+	                visible = _this$props3.visible,
+	                dataSource = _this$props3.dataSource,
+	                onResizeCancel = _this$props3.onResizeCancel;
+	
+	            if (visible) {
+	                onResizeCancel && onResizeCancel(event, 0, dataSource);
+	            }
+	        };
+	
+	        _this.state = {
+	            left: props.left
+	            // width: props.width||0
+	        };
+	        return _this;
+	    }
+	
+	    DragResizerLine.prototype.componentDidMount = function componentDidMount() {
+	        this.initEvent(this.props.container);
+	    };
+	
+	    DragResizerLine.prototype.componentWillUnmount = function componentWillUnmount() {
+	        this.removeEvent(this.props.container);
+	    };
+	
+	    //初始化事件
+	
+	
+	    DragResizerLine.prototype.initEvent = function initEvent(container) {
+	        // console.log("AAA---Line--->initEvent",container);
+	        if (container) {
+	            var domElem = (0, _reactDom.findDOMNode)(container);
+	            _utils.Event.addHandler(domElem, 'mousedown', this.handleResizerDown);
+	            _utils.Event.addHandler(domElem, 'mousemove', this.handleResizerMove);
+	            _utils.Event.addHandler(domElem, 'mouseup', this.handleResizerUp);
+	            if (domElem !== document.body) {
+	                _utils.Event.addHandler(document.body, 'mouseup', this.handleResizerCancel);
+	            }
+	        }
+	    };
+	    //移除事件
+	
+	
+	    DragResizerLine.prototype.removeEvent = function removeEvent(container) {
+	        // console.log("AAA---Line--->removeEvent",container);
+	        if (container) {
+	            var domElem = (0, _reactDom.findDOMNode)(container);
+	            _utils.Event.removeHandler(domElem, 'mousedown', this.handleResizerDown);
+	            _utils.Event.removeHandler(domElem, 'mousemove', this.handleResizerMove);
+	            _utils.Event.removeHandler(domElem, 'mouseup', this.handleResizerUp);
+	            if (domElem !== document.body) {
+	                _utils.Event.removeHandler(document.body, 'mouseup', this.handleResizerCancel);
+	            }
+	        }
+	    };
+	
+	    DragResizerLine.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
+	        if ('left' in nextProps) {
+	            this.setState({ left: nextProps.left });
+	        }
+	    };
+	
+	    DragResizerLine.prototype.start = function start(event) {
+	        this.setState({ moveX: 0, x: event.clientX });
+	        _utils.Event.stopPropagation(event);
+	    };
+	
+	    DragResizerLine.prototype.render = function render() {
+	        var _props = this.props,
+	            clsPrefix = _props.clsPrefix,
+	            height = _props.height,
+	            visible = _props.visible;
+	        var left = this.state.left;
+	
+	        var style = { left: left, height: height, display: visible ? 'block' : 'none' };
+	        // console.log(`AAA---resizer--line:left${style.left}`)
+	        return _react2["default"].createElement(
+	            "div",
+	            { style: style, className: clsPrefix + "-drag-resizer" },
+	            _react2["default"].createElement("div", { className: clsPrefix + "-drag-resizer-line" })
+	        );
+	    };
+	
+	    return DragResizerLine;
+	}(_react.Component);
+	
+	DragResizerLine.defaultProps = {
+	    clsPrefix: '', //样式名前缀
+	    container: null, //所属容器
+	    onResizeEnd: null, //当释放resizer时出发，接收参数当前的宽度
+	    onResizeCancel: null, //当释放resizer时在容器以外区域则触发取消回调
+	    onChange: null, //当移动resizer时出发，接收参数相对位移
+	    visible: false, //是否可见
+	    left: null, //左侧距离
+	    height: null, //高度
+	    defaultWidth: null, //当前矩阵宽度
+	    minWidth: null, //最小宽度
+	    // maxWidth:null,//最大宽度
+	    dataSource: null //当前对象信息
+	};
+	exports["default"] = DragResizerLine;
+	module.exports = exports["default"];
+
+/***/ }),
+/* 670 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _utils = __webpack_require__(549);
+	
+	var _reactDom = __webpack_require__(2);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+	
+	function _defaults(obj, defaults) { var keys = Object.getOwnPropertyNames(defaults); for (var i = 0; i < keys.length; i++) { var key = keys[i]; var value = Object.getOwnPropertyDescriptor(defaults, key); if (value && value.configurable && obj[key] === undefined) { Object.defineProperty(obj, key, value); } } return obj; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : _defaults(subClass, superClass); }
+	
+	var CAN_TOUCH = _utils.Event.isSupportTouch(); //是否支持触摸
+	/***
+	 * @author Dio.Zhu
+	 * 提供表格拖拽行排序的能力，显示拖拽行的尺标线
+	 */
+	
+	var DragRowLine = function (_Component) {
+	    _inherits(DragRowLine, _Component);
+	
+	    function DragRowLine(props) {
+	        _classCallCheck(this, DragRowLine);
+	
+	        var _this = _possibleConstructorReturn(this, _Component.call(this, props));
+	
+	        _this.getTableRowDoms = function () {
+	            var _this$props = _this.props,
+	                container = _this$props.container,
+	                clsPrefix = _this$props.clsPrefix;
+	
+	            if (!container || !clsPrefix) return;
+	            var domElem = (0, _reactDom.findDOMNode)(container);
+	            var centerBody = domElem.querySelector("." + clsPrefix + "-scroll table tbody");
+	            if (!centerBody) {
+	                //非固定表头的情况下
+	                centerBody = domElem.querySelector("." + clsPrefix + "-body table tbody");
+	            }
+	            var leftBody = domElem.querySelector("." + clsPrefix + "-fixed-left table tbody");
+	            var rightBody = domElem.querySelector("." + clsPrefix + "-scroll table tbody");
+	            var centerTrs = centerBody && centerBody.getElementsByTagName("tr");
+	            var leftTrs = leftBody && leftBody.getElementsByTagName("tr");
+	            var rightTrs = rightBody && rightBody.getElementsByTagName("tr");
+	            return { centerTrs: centerTrs, leftTrs: leftTrs, rightTrs: rightTrs };
+	        };
+	
+	        _this.initEvent = function () {
+	            var _this$getTableRowDoms = _this.getTableRowDoms(),
+	                centerTrs = _this$getTableRowDoms.centerTrs,
+	                leftTrs = _this$getTableRowDoms.leftTrs,
+	                rightTrs = _this$getTableRowDoms.rightTrs;
+	
+	            var allTrs = [].concat(centerTrs, leftTrs, rightTrs);
+	            // Event.addHandler(document.body,'drop',this.onBodyDrop);
+	            allTrs.forEach(function (trs) {
+	                _utils.Event.addHandlerArray(trs, 'dragstart', _this.onDragStart);
+	                _utils.Event.addHandlerArray(trs, 'dragenter', _this.onDragEnter);
+	                _utils.Event.addHandlerArray(trs, 'dragover', _this.onDragOver);
+	                _utils.Event.addHandlerArray(trs, 'dragend', _this.onDragEnd);
+	                //触屏下支持
+	                if (CAN_TOUCH) {
+	                    _utils.Event.addHandlerArray(trs, 'touchstart', _this.onTouchStart); //手指触摸到一个 DOM 元素时触发
+	                    _utils.Event.addHandlerArray(trs, 'touchmove', _this.onTouchMove); //手指在一个 DOM 元素上滑动时触发
+	                    _utils.Event.addHandlerArray(trs, 'touchend', _this.onTouchEnd); //手指从一个 DOM 元素上移开时触发
+	                }
+	            });
+	        };
+	
+	        _this.removeEvent = function (container) {
+	            var _this$getTableRowDoms2 = _this.getTableRowDoms(),
+	                centerTrs = _this$getTableRowDoms2.centerTrs,
+	                leftTrs = _this$getTableRowDoms2.leftTrs,
+	                rightTrs = _this$getTableRowDoms2.rightTrs;
+	
+	            var allTrs = [].concat(centerTrs, leftTrs, rightTrs);
+	            allTrs.forEach(function (trs) {
+	                _utils.Event.removeHandlerArray(trs, 'dragstart', _this.onDragStart);
+	                _utils.Event.removeHandlerArray(trs, 'dragenter', _this.onDragEnter);
+	                _utils.Event.removeHandlerArray(trs, 'dragover', _this.onDragOver);
+	                _utils.Event.removeHandlerArray(trs, 'dragend', _this.onDragEnd);
+	                //触屏下支持
+	                if (CAN_TOUCH) {
+	                    _utils.Event.removeHandlerArray(trs, 'touchstart', _this.onTouchStart); //手指触摸到一个 DOM 元素时触发
+	                    _utils.Event.removeHandlerArray(trs, 'touchmove', _this.onTouchMove); //手指在一个 DOM 元素上滑动时触发
+	                    _utils.Event.removeHandlerArray(trs, 'touchend', _this.onTouchEnd); //手指从一个 DOM 元素上移开时触发
+	                }
+	            });
+	            // Event.removeHandler(document.body,'drop',this.onBodyDrop);
+	        };
+	
+	        _this.onDragStart = function (e, touchTarget) {
+	            var _this$props2 = _this.props,
+	                onRowDragStart = _this$props2.onRowDragStart,
+	                container = _this$props2.container;
+	            var contentTable = container.contentTable;
+	
+	            var event = _utils.Event.getEvent(e);
+	            var target = touchTarget ? touchTarget : _utils.Event.getTarget(event); //支持触屏目标对象
+	            if (target.nodeName.toUpperCase() !== "TR") return; //如果是TD，则继续冒泡至TR
+	            var dragStartKey = target.getAttribute("data-row-key");
+	            var dragStartIndex = target.getAttribute("data-row-index");
+	            // console.log("AAA---row-1--onDragStart"+dragStartKey)
+	            if (!touchTarget) {
+	                //非触摸屏
+	                event.dataTransfer.effectAllowed = "move";
+	                event.dataTransfer.setData("Text", JSON.stringify({ dragStartKey: dragStartKey, dragStartIndex: dragStartIndex }));
+	            } else {
+	                //目前触屏下没有提供抓取的阴影副本对象
+	            }
+	            if (contentTable) {
+	                contentTable.dragStartKey = dragStartKey;
+	                contentTable.dragStartIndex = dragStartIndex;
+	            }
+	            onRowDragStart && onRowDragStart({ dragStartKey: dragStartKey, dragStartIndex: dragStartIndex });
+	        };
+	
+	        _this.onDragEnter = function (e, touchTarget) {
+	            var container = _this.props.container;
+	            var contentTable = container.contentTable;
+	
+	            var event = _utils.Event.getEvent(e),
+	                _target = _utils.Event.getTarget(event);
+	            var target = touchTarget ? touchTarget : _target.parentNode; //支持触屏目标对象
+	            if (target.nodeName.toUpperCase() !== "TR") return; //如果是TD，则继续冒泡至TR
+	            if (!contentTable) return;
+	            var dragEnterKey = target.getAttribute("data-row-key");
+	            var dragEnterIndex = target.getAttribute("data-row-index");
+	            if (!dragEnterKey) return;
+	            var dropAlign = parseInt(dragEnterIndex) >= parseInt(contentTable.dragStartIndex) + 1 ? 'bottom' : 'top';
+	            if (dragEnterKey !== contentTable.dragStartKey) {
+	                contentTable.dragEnterKey = dragEnterKey;
+	                contentTable.dragEnterIndex = dragEnterIndex;
+	                // onRowDragEnter && onRowDragEnter(dragEnterKey,dropAlign,target);
+	                // console.log("AAAA---1.1--enter-->"+contentTable.dragStartIndex+"->"+dragEnterIndex)
+	                _this.setLinePosition(contentTable, target, dropAlign); //显示行拖拽的尺表线
+	            } else {
+	                contentTable.dragEnterKey = null;
+	                contentTable.dragEnterIndex = null;
+	                // console.log("AAAA---1.1--enter-hidden-->"+contentTable.dragStartIndex+"->"+dragEnterIndex)
+	                // onRowDragEnter && onRowDragEnter(dragEnterKey,null,null);
+	                _this.setLinePosition(contentTable, null, null); //隐藏行拖拽的尺表线
+	            }
+	        };
+	
+	        _this.onDragEnd = function (e, touchTarget) {
+	            var _this$props3 = _this.props,
+	                onRowDragDrop = _this$props3.onRowDragDrop,
+	                container = _this$props3.container;
+	            var contentTable = container.contentTable;
+	
+	            if (!contentTable) return;
+	
+	            var _ref = contentTable || {},
+	                dragStartKey = _ref.dragStartKey,
+	                dragStartIndex = _ref.dragStartIndex,
+	                dragEnterKey = _ref.dragEnterKey,
+	                dragEnterIndex = _ref.dragEnterIndex;
+	            // console.log("AAA---row-3--onDragEnd:"+dragStartKey+"->"+dragEnterKey)
+	
+	
+	            onRowDragDrop && onRowDragDrop({ dragTargetKey: dragStartKey, dragTargetIndex: dragStartIndex, dropTargetKey: dragEnterKey, dropTargetIndex: dragEnterIndex });
+	            _this.setLinePosition(null, null, null); //隐藏行拖拽的尺表线
+	        };
+	
+	        _this.onDragOver = function (e) {
+	            var event = _utils.Event.getEvent(e);
+	            event.preventDefault();
+	        };
+	
+	        _this.onTouchStart = function (e) {
+	            e.stopPropagation();
+	            var event = _utils.Event.getEvent(e),
+	                _target = _utils.Event.getTarget(event),
+	                target = _target.parentNode;
+	            if (target.tagName === 'TR') {
+	                _this.isTouchDragRow = true;
+	                _this.onDragStart(e, target);
+	            } else {
+	                _this.isTouchDragRow = false;
+	            }
+	        };
+	
+	        _this.onTouchMove = function (e) {
+	            if (!_this.isTouchDragRow) return;
+	            e.stopPropagation();
+	            var event = _utils.Event.getEvent(e);
+	            event.preventDefault();
+	            var touchTarget = _this.getTouchDom(event),
+	                target = touchTarget.parentNode;
+	            _this.onDragEnter(e, target);
+	        };
+	
+	        _this.onTouchEnd = function (e) {
+	            if (!_this.isTouchDragRow) return;
+	            e.stopPropagation();
+	            var event = _utils.Event.getEvent(e),
+	                touchTarget = _this.getTouchDom(event),
+	                //当前触摸的DOM节点
+	            target = touchTarget.parentNode; //目标位置的行
+	            _this.onDragEnd(e, target);
+	            _this.isTouchDragRow = false;
+	        };
+	
+	        _this.getTouchDom = function (event) {
+	            var currentLocation = event.changedTouches[0];
+	            var realTarget = document.elementFromPoint(currentLocation.clientX, currentLocation.clientY);
+	            return realTarget;
+	        };
+	
+	        _this.setLinePosition = function (targetContainer, targetDom, targetAlign) {
+	            var clsPrefix = _this.props.clsPrefix;
+	
+	            if (!targetContainer || !targetDom) {
+	                _this.setState({ left: 0, top: 0, width: 0, visible: false });
+	            } else {
+	                var contRect = targetContainer.getBoundingClientRect();
+	                var centerBodyDom = targetContainer.querySelector("." + clsPrefix + "-content ." + clsPrefix + "-body");
+	                var centerBodyRect = centerBodyDom.getBoundingClientRect();
+	                var headerHeight = centerBodyRect.top - contRect.top;
+	                var targetRect = targetDom.getBoundingClientRect();
+	                var top = headerHeight + targetRect.top - centerBodyRect.top - 1;
+	                if (['bottom', 'down'].includes(targetAlign)) {
+	                    top = top + targetRect.height;
+	                }
+	                _this.setState({ left: 0, width: contRect.width, top: top, visible: true });
+	            }
+	        };
+	
+	        _this.state = {
+	            visible: false,
+	            top: 0,
+	            left: 0,
+	            width: 0
+	        };
+	        return _this;
+	    }
+	
+	    DragRowLine.prototype.componentDidMount = function componentDidMount() {
+	        if (!this.props.bigData) {
+	            //非大数据场景则直接初始化事件一次节省性能开销
+	            this.initEvent(this.props.container);
+	        }
+	    };
+	
+	    DragRowLine.prototype.componentWillUnmount = function componentWillUnmount() {
+	        this.removeEvent();
+	    };
+	
+	    DragRowLine.prototype.componentDidUpdate = function componentDidUpdate(prevProps, prevState, snapshot) {
+	        if (this.props.bigData) {
+	            //大数据场景则每次更新都需要重新初始化绑定事件
+	            this.removeEvent();
+	            this.initEvent();
+	        }
+	    };
+	
+	    //获取左、中、右三个区域的全部行dom元素
+	
+	
+	    //初始化绑定相关事件
+	
+	    //移除相关事件
+	
+	    /* 会导致单元格内自定义onDrop冒泡失效，所以body上不阻止冒泡。
+	    //拖放到body区域时触发，解决Firefox下拖放会新打开浏览器窗口的问题
+	    onBodyDrop(e){
+	        // console.log("AAA--->2",e.dataTransfer.getData('Text'))
+	        Event.stopPropagation(e);
+	    }*/
+	    /**
+	     * 【交换行】开始拖拽
+	     */
+	
+	    /**
+	     * 【交换行】拖拽经过目标行
+	     */
+	
+	    /**
+	     * 【交换行】结束拖拽
+	     */
+	
+	    //触屏-手指点击时触发
+	
+	    //触屏-手指滑动时触发
+	
+	    //触屏-手指移开时触发
+	
+	
+	    //获取当前触摸的Dom节点
+	
+	    /**
+	     * 设置尺标线显示的位置
+	     * @param targetContainer
+	     * @param targetDom
+	     * @param targetAlign
+	     */
+	
+	
+	    DragRowLine.prototype.render = function render() {
+	        var clsPrefix = this.props.clsPrefix;
+	        var _state = this.state,
+	            left = _state.left,
+	            width = _state.width,
+	            top = _state.top,
+	            visible = _state.visible;
+	
+	        var style = { position: 'absolute', left: left + 'px', top: top + 'px', height: '2px', width: width + 'px', background: '#02B1FD', zIndex: 'auto', display: visible ? 'block' : 'none' };
+	        return _react2["default"].createElement("div", { style: style, className: clsPrefix + "-drag-row-line", dangerouslySetInnerHTML: { __html: '&nbsp;' } });
+	    };
+	
+	    return DragRowLine;
+	}(_react.Component);
+	
+	DragRowLine.defaultProps = {
+	    clsPrefix: '', //样式名前缀
+	    container: null, //所属容器组件
+	    onRowDragStart: null, //拖拽开始的回调
+	    onRowDragDrop: null, //拖拽放置完成的回调
+	    rowDraggAble: true, //是否启用行拖拽
+	    bigData: false //是否大数据场景
+	};
+	exports["default"] = DragRowLine;
+	module.exports = exports["default"];
+
+/***/ }),
+/* 671 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -100840,27 +102769,27 @@
 	
 	var _beeLayout = __webpack_require__(3);
 	
-	var _src = __webpack_require__(297);
+	var _src = __webpack_require__(296);
 	
 	var _src2 = _interopRequireDefault(_src);
 	
-	var _zh_CN = __webpack_require__(532);
+	var _zh_CN = __webpack_require__(531);
 	
 	var _zh_CN2 = _interopRequireDefault(_zh_CN);
 	
-	var _en_US = __webpack_require__(457);
+	var _en_US = __webpack_require__(456);
 	
 	var _en_US2 = _interopRequireDefault(_en_US);
 	
-	var _moment = __webpack_require__(305);
+	var _moment = __webpack_require__(304);
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
-	var _beeIcon = __webpack_require__(93);
+	var _beeIcon = __webpack_require__(94);
 	
 	var _beeIcon2 = _interopRequireDefault(_beeIcon);
 	
-	__webpack_require__(438);
+	__webpack_require__(437);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 	
@@ -100968,7 +102897,7 @@
 	module.exports = exports["default"];
 
 /***/ }),
-/* 670 */
+/* 672 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -100983,25 +102912,25 @@
 	
 	var _beeLayout = __webpack_require__(3);
 	
-	var _src = __webpack_require__(297);
+	var _src = __webpack_require__(296);
 	
 	var _src2 = _interopRequireDefault(_src);
 	
-	var _zh_CN = __webpack_require__(532);
+	var _zh_CN = __webpack_require__(531);
 	
 	var _zh_CN2 = _interopRequireDefault(_zh_CN);
 	
-	var _en_US = __webpack_require__(457);
+	var _en_US = __webpack_require__(456);
 	
 	var _en_US2 = _interopRequireDefault(_en_US);
 	
-	var _moment = __webpack_require__(305);
+	var _moment = __webpack_require__(304);
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
-	__webpack_require__(438);
+	__webpack_require__(437);
 	
-	var _beeForm = __webpack_require__(671);
+	var _beeForm = __webpack_require__(673);
 	
 	var _beeForm2 = _interopRequireDefault(_beeForm);
 	
@@ -101132,7 +103061,7 @@
 	module.exports = exports["default"];
 
 /***/ }),
-/* 671 */
+/* 673 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -101141,11 +103070,11 @@
 	  value: true
 	});
 	
-	var _Form = __webpack_require__(672);
+	var _Form = __webpack_require__(674);
 	
 	var _Form2 = _interopRequireDefault(_Form);
 	
-	var _FormItem = __webpack_require__(764);
+	var _FormItem = __webpack_require__(766);
 	
 	var _FormItem2 = _interopRequireDefault(_FormItem);
 	
@@ -101156,7 +103085,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 672 */
+/* 674 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -101175,7 +103104,7 @@
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _rcForm = __webpack_require__(673);
+	var _rcForm = __webpack_require__(675);
 	
 	var _classnames = __webpack_require__(5);
 	
@@ -101242,7 +103171,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 673 */
+/* 675 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -101252,15 +103181,15 @@
 	});
 	exports.createForm = exports.formShape = exports.createFormField = undefined;
 	
-	var _createForm = __webpack_require__(674);
+	var _createForm = __webpack_require__(676);
 	
 	var _createForm2 = _interopRequireDefault(_createForm);
 	
-	var _createFormField = __webpack_require__(760);
+	var _createFormField = __webpack_require__(762);
 	
 	var _createFormField2 = _interopRequireDefault(_createFormField);
 	
-	var _propTypes = __webpack_require__(763);
+	var _propTypes = __webpack_require__(765);
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
@@ -101271,7 +103200,7 @@
 	exports.createForm = _createForm2['default']; // export this package's api
 
 /***/ }),
-/* 674 */
+/* 676 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -101281,7 +103210,7 @@
 	});
 	exports.mixin = undefined;
 	
-	var _createBaseForm = __webpack_require__(675);
+	var _createBaseForm = __webpack_require__(677);
 	
 	var _createBaseForm2 = _interopRequireDefault(_createBaseForm);
 	
@@ -101319,7 +103248,7 @@
 	exports['default'] = createForm;
 
 /***/ }),
-/* 675 */
+/* 677 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -101328,19 +103257,19 @@
 	  value: true
 	});
 	
-	var _objectWithoutProperties2 = __webpack_require__(522);
+	var _objectWithoutProperties2 = __webpack_require__(521);
 	
 	var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
 	
-	var _defineProperty2 = __webpack_require__(513);
+	var _defineProperty2 = __webpack_require__(512);
 	
 	var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 	
-	var _extends5 = __webpack_require__(463);
+	var _extends5 = __webpack_require__(462);
 	
 	var _extends6 = _interopRequireDefault(_extends5);
 	
-	var _toConsumableArray2 = __webpack_require__(676);
+	var _toConsumableArray2 = __webpack_require__(678);
 	
 	var _toConsumableArray3 = _interopRequireDefault(_toConsumableArray2);
 	
@@ -101348,41 +103277,41 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _createReactClass = __webpack_require__(686);
+	var _createReactClass = __webpack_require__(688);
 	
 	var _createReactClass2 = _interopRequireDefault(_createReactClass);
 	
-	var _unsafeLifecyclesPolyfill = __webpack_require__(514);
+	var _unsafeLifecyclesPolyfill = __webpack_require__(513);
 	
 	var _unsafeLifecyclesPolyfill2 = _interopRequireDefault(_unsafeLifecyclesPolyfill);
 	
-	var _asyncValidator = __webpack_require__(688);
+	var _asyncValidator = __webpack_require__(690);
 	
 	var _asyncValidator2 = _interopRequireDefault(_asyncValidator);
 	
-	var _warning = __webpack_require__(31);
+	var _warning = __webpack_require__(32);
 	
 	var _warning2 = _interopRequireDefault(_warning);
 	
-	var _get = __webpack_require__(713);
+	var _get = __webpack_require__(715);
 	
 	var _get2 = _interopRequireDefault(_get);
 	
-	var _set = __webpack_require__(753);
+	var _set = __webpack_require__(755);
 	
 	var _set2 = _interopRequireDefault(_set);
 	
-	var _eq = __webpack_require__(741);
+	var _eq = __webpack_require__(743);
 	
 	var _eq2 = _interopRequireDefault(_eq);
 	
-	var _createFieldsStore = __webpack_require__(759);
+	var _createFieldsStore = __webpack_require__(761);
 	
 	var _createFieldsStore2 = _interopRequireDefault(_createFieldsStore);
 	
-	var _utils = __webpack_require__(761);
+	var _utils = __webpack_require__(763);
 	
-	var _FieldElemWrapper = __webpack_require__(762);
+	var _FieldElemWrapper = __webpack_require__(764);
 	
 	var _FieldElemWrapper2 = _interopRequireDefault(_FieldElemWrapper);
 	
@@ -101977,17 +103906,17 @@
 	
 	exports['default'] = createBaseForm;
 	module.exports = exports['default'];
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(32)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33)))
 
 /***/ }),
-/* 676 */
+/* 678 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
 	
 	exports.__esModule = true;
 	
-	var _from = __webpack_require__(677);
+	var _from = __webpack_require__(679);
 	
 	var _from2 = _interopRequireDefault(_from);
 	
@@ -102006,35 +103935,35 @@
 	};
 
 /***/ }),
-/* 677 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	module.exports = { "default": __webpack_require__(678), __esModule: true };
-
-/***/ }),
-/* 678 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	__webpack_require__(470);
-	__webpack_require__(679);
-	module.exports = __webpack_require__(149).Array.from;
-
-
-/***/ }),
 /* 679 */
 /***/ (function(module, exports, __webpack_require__) {
 
+	module.exports = { "default": __webpack_require__(680), __esModule: true };
+
+/***/ }),
+/* 680 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	__webpack_require__(469);
+	__webpack_require__(681);
+	module.exports = __webpack_require__(150).Array.from;
+
+
+/***/ }),
+/* 681 */
+/***/ (function(module, exports, __webpack_require__) {
+
 	'use strict';
-	var ctx = __webpack_require__(150);
-	var $export = __webpack_require__(147);
-	var toObject = __webpack_require__(181);
-	var call = __webpack_require__(680);
-	var isArrayIter = __webpack_require__(681);
-	var toLength = __webpack_require__(171);
-	var createProperty = __webpack_require__(682);
-	var getIterFn = __webpack_require__(683);
+	var ctx = __webpack_require__(151);
+	var $export = __webpack_require__(148);
+	var toObject = __webpack_require__(182);
+	var call = __webpack_require__(682);
+	var isArrayIter = __webpack_require__(683);
+	var toLength = __webpack_require__(172);
+	var createProperty = __webpack_require__(684);
+	var getIterFn = __webpack_require__(685);
 	
-	$export($export.S + $export.F * !__webpack_require__(685)(function (iter) { Array.from(iter); }), 'Array', {
+	$export($export.S + $export.F * !__webpack_require__(687)(function (iter) { Array.from(iter); }), 'Array', {
 	  // 22.1.2.1 Array.from(arrayLike, mapfn = undefined, thisArg = undefined)
 	  from: function from(arrayLike /* , mapfn = undefined, thisArg = undefined */) {
 	    var O = toObject(arrayLike);
@@ -102064,11 +103993,11 @@
 
 
 /***/ }),
-/* 680 */
+/* 682 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	// call something on iterator step with safe closing on error
-	var anObject = __webpack_require__(154);
+	var anObject = __webpack_require__(155);
 	module.exports = function (iterator, fn, value, entries) {
 	  try {
 	    return entries ? fn(anObject(value)[0], value[1]) : fn(value);
@@ -102082,12 +104011,12 @@
 
 
 /***/ }),
-/* 681 */
+/* 683 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	// check on default Array iterator
-	var Iterators = __webpack_require__(474);
-	var ITERATOR = __webpack_require__(477)('iterator');
+	var Iterators = __webpack_require__(473);
+	var ITERATOR = __webpack_require__(476)('iterator');
 	var ArrayProto = Array.prototype;
 	
 	module.exports = function (it) {
@@ -102096,12 +104025,12 @@
 
 
 /***/ }),
-/* 682 */
+/* 684 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
-	var $defineProperty = __webpack_require__(153);
-	var createDesc = __webpack_require__(161);
+	var $defineProperty = __webpack_require__(154);
+	var createDesc = __webpack_require__(162);
 	
 	module.exports = function (object, index, value) {
 	  if (index in object) $defineProperty.f(object, index, createDesc(0, value));
@@ -102110,13 +104039,13 @@
 
 
 /***/ }),
-/* 683 */
+/* 685 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var classof = __webpack_require__(684);
-	var ITERATOR = __webpack_require__(477)('iterator');
-	var Iterators = __webpack_require__(474);
-	module.exports = __webpack_require__(149).getIteratorMethod = function (it) {
+	var classof = __webpack_require__(686);
+	var ITERATOR = __webpack_require__(476)('iterator');
+	var Iterators = __webpack_require__(473);
+	module.exports = __webpack_require__(150).getIteratorMethod = function (it) {
 	  if (it != undefined) return it[ITERATOR]
 	    || it['@@iterator']
 	    || Iterators[classof(it)];
@@ -102124,12 +104053,12 @@
 
 
 /***/ }),
-/* 684 */
+/* 686 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	// getting tag from 19.1.3.6 Object.prototype.toString()
-	var cof = __webpack_require__(168);
-	var TAG = __webpack_require__(477)('toStringTag');
+	var cof = __webpack_require__(169);
+	var TAG = __webpack_require__(476)('toStringTag');
 	// ES3 wrong here
 	var ARG = cof(function () { return arguments; }()) == 'Arguments';
 	
@@ -102153,10 +104082,10 @@
 
 
 /***/ }),
-/* 685 */
+/* 687 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var ITERATOR = __webpack_require__(477)('iterator');
+	var ITERATOR = __webpack_require__(476)('iterator');
 	var SAFE_CLOSING = false;
 	
 	try {
@@ -102181,7 +104110,7 @@
 
 
 /***/ }),
-/* 686 */
+/* 688 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/**
@@ -102195,7 +104124,7 @@
 	'use strict';
 	
 	var React = __webpack_require__(1);
-	var factory = __webpack_require__(687);
+	var factory = __webpack_require__(689);
 	
 	if (typeof React === 'undefined') {
 	  throw Error(
@@ -102215,7 +104144,7 @@
 
 
 /***/ }),
-/* 687 */
+/* 689 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -102228,7 +104157,7 @@
 	
 	'use strict';
 	
-	var _assign = __webpack_require__(43);
+	var _assign = __webpack_require__(44);
 	
 	// -- Inlined from fbjs --
 	
@@ -103221,10 +105150,10 @@
 	
 	module.exports = factory;
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(32)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33)))
 
 /***/ }),
-/* 688 */
+/* 690 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -103235,13 +105164,13 @@
 	
 	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 	
-	var _util = __webpack_require__(689);
+	var _util = __webpack_require__(691);
 	
-	var _validator = __webpack_require__(690);
+	var _validator = __webpack_require__(692);
 	
 	var _validator2 = _interopRequireDefault(_validator);
 	
-	var _messages2 = __webpack_require__(712);
+	var _messages2 = __webpack_require__(714);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -103526,7 +105455,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 689 */
+/* 691 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -103750,69 +105679,69 @@
 	  }
 	  return target;
 	}
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(32)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33)))
 
 /***/ }),
-/* 690 */
+/* 692 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _string = __webpack_require__(691);
+	var _string = __webpack_require__(693);
 	
 	var _string2 = _interopRequireDefault(_string);
 	
-	var _method = __webpack_require__(699);
+	var _method = __webpack_require__(701);
 	
 	var _method2 = _interopRequireDefault(_method);
 	
-	var _number = __webpack_require__(700);
+	var _number = __webpack_require__(702);
 	
 	var _number2 = _interopRequireDefault(_number);
 	
-	var _boolean = __webpack_require__(701);
+	var _boolean = __webpack_require__(703);
 	
 	var _boolean2 = _interopRequireDefault(_boolean);
 	
-	var _regexp = __webpack_require__(702);
+	var _regexp = __webpack_require__(704);
 	
 	var _regexp2 = _interopRequireDefault(_regexp);
 	
-	var _integer = __webpack_require__(703);
+	var _integer = __webpack_require__(705);
 	
 	var _integer2 = _interopRequireDefault(_integer);
 	
-	var _float = __webpack_require__(704);
+	var _float = __webpack_require__(706);
 	
 	var _float2 = _interopRequireDefault(_float);
 	
-	var _array = __webpack_require__(705);
+	var _array = __webpack_require__(707);
 	
 	var _array2 = _interopRequireDefault(_array);
 	
-	var _object = __webpack_require__(706);
+	var _object = __webpack_require__(708);
 	
 	var _object2 = _interopRequireDefault(_object);
 	
-	var _enum = __webpack_require__(707);
+	var _enum = __webpack_require__(709);
 	
 	var _enum2 = _interopRequireDefault(_enum);
 	
-	var _pattern = __webpack_require__(708);
+	var _pattern = __webpack_require__(710);
 	
 	var _pattern2 = _interopRequireDefault(_pattern);
 	
-	var _date = __webpack_require__(709);
+	var _date = __webpack_require__(711);
 	
 	var _date2 = _interopRequireDefault(_date);
 	
-	var _required = __webpack_require__(710);
+	var _required = __webpack_require__(712);
 	
 	var _required2 = _interopRequireDefault(_required);
 	
-	var _type = __webpack_require__(711);
+	var _type = __webpack_require__(713);
 	
 	var _type2 = _interopRequireDefault(_type);
 	
@@ -103839,18 +105768,18 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 691 */
+/* 693 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _rule = __webpack_require__(692);
+	var _rule = __webpack_require__(694);
 	
 	var _rule2 = _interopRequireDefault(_rule);
 	
-	var _util = __webpack_require__(689);
+	var _util = __webpack_require__(691);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -103888,34 +105817,34 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 692 */
+/* 694 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _required = __webpack_require__(693);
+	var _required = __webpack_require__(695);
 	
 	var _required2 = _interopRequireDefault(_required);
 	
-	var _whitespace = __webpack_require__(694);
+	var _whitespace = __webpack_require__(696);
 	
 	var _whitespace2 = _interopRequireDefault(_whitespace);
 	
-	var _type = __webpack_require__(695);
+	var _type = __webpack_require__(697);
 	
 	var _type2 = _interopRequireDefault(_type);
 	
-	var _range = __webpack_require__(696);
+	var _range = __webpack_require__(698);
 	
 	var _range2 = _interopRequireDefault(_range);
 	
-	var _enum = __webpack_require__(697);
+	var _enum = __webpack_require__(699);
 	
 	var _enum2 = _interopRequireDefault(_enum);
 	
-	var _pattern = __webpack_require__(698);
+	var _pattern = __webpack_require__(700);
 	
 	var _pattern2 = _interopRequireDefault(_pattern);
 	
@@ -103932,14 +105861,14 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 693 */
+/* 695 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _util = __webpack_require__(689);
+	var _util = __webpack_require__(691);
 	
 	var util = _interopRequireWildcard(_util);
 	
@@ -103966,14 +105895,14 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 694 */
+/* 696 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _util = __webpack_require__(689);
+	var _util = __webpack_require__(691);
 	
 	var util = _interopRequireWildcard(_util);
 	
@@ -104000,7 +105929,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 695 */
+/* 697 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -104009,11 +105938,11 @@
 	
 	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 	
-	var _util = __webpack_require__(689);
+	var _util = __webpack_require__(691);
 	
 	var util = _interopRequireWildcard(_util);
 	
-	var _required = __webpack_require__(693);
+	var _required = __webpack_require__(695);
 	
 	var _required2 = _interopRequireDefault(_required);
 	
@@ -104108,14 +106037,14 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 696 */
+/* 698 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _util = __webpack_require__(689);
+	var _util = __webpack_require__(691);
 	
 	var util = _interopRequireWildcard(_util);
 	
@@ -104180,14 +106109,14 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 697 */
+/* 699 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _util = __webpack_require__(689);
+	var _util = __webpack_require__(691);
 	
 	var util = _interopRequireWildcard(_util);
 	
@@ -104217,14 +106146,14 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 698 */
+/* 700 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _util = __webpack_require__(689);
+	var _util = __webpack_require__(691);
 	
 	var util = _interopRequireWildcard(_util);
 	
@@ -104264,18 +106193,18 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 699 */
+/* 701 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _rule = __webpack_require__(692);
+	var _rule = __webpack_require__(694);
 	
 	var _rule2 = _interopRequireDefault(_rule);
 	
-	var _util = __webpack_require__(689);
+	var _util = __webpack_require__(691);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -104308,18 +106237,18 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 700 */
+/* 702 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _rule = __webpack_require__(692);
+	var _rule = __webpack_require__(694);
 	
 	var _rule2 = _interopRequireDefault(_rule);
 	
-	var _util = __webpack_require__(689);
+	var _util = __webpack_require__(691);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -104356,16 +106285,16 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 701 */
+/* 703 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _util = __webpack_require__(689);
+	var _util = __webpack_require__(691);
 	
-	var _rule = __webpack_require__(692);
+	var _rule = __webpack_require__(694);
 	
 	var _rule2 = _interopRequireDefault(_rule);
 	
@@ -104400,18 +106329,18 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 702 */
+/* 704 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _rule = __webpack_require__(692);
+	var _rule = __webpack_require__(694);
 	
 	var _rule2 = _interopRequireDefault(_rule);
 	
-	var _util = __webpack_require__(689);
+	var _util = __webpack_require__(691);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -104444,18 +106373,18 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 703 */
+/* 705 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _rule = __webpack_require__(692);
+	var _rule = __webpack_require__(694);
 	
 	var _rule2 = _interopRequireDefault(_rule);
 	
-	var _util = __webpack_require__(689);
+	var _util = __webpack_require__(691);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -104489,18 +106418,18 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 704 */
+/* 706 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _rule = __webpack_require__(692);
+	var _rule = __webpack_require__(694);
 	
 	var _rule2 = _interopRequireDefault(_rule);
 	
-	var _util = __webpack_require__(689);
+	var _util = __webpack_require__(691);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -104534,18 +106463,18 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 705 */
+/* 707 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _rule = __webpack_require__(692);
+	var _rule = __webpack_require__(694);
 	
 	var _rule2 = _interopRequireDefault(_rule);
 	
-	var _util = __webpack_require__(689);
+	var _util = __webpack_require__(691);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -104579,18 +106508,18 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 706 */
+/* 708 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _rule = __webpack_require__(692);
+	var _rule = __webpack_require__(694);
 	
 	var _rule2 = _interopRequireDefault(_rule);
 	
-	var _util = __webpack_require__(689);
+	var _util = __webpack_require__(691);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -104623,18 +106552,18 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 707 */
+/* 709 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _rule = __webpack_require__(692);
+	var _rule = __webpack_require__(694);
 	
 	var _rule2 = _interopRequireDefault(_rule);
 	
-	var _util = __webpack_require__(689);
+	var _util = __webpack_require__(691);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -104669,18 +106598,18 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 708 */
+/* 710 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _rule = __webpack_require__(692);
+	var _rule = __webpack_require__(694);
 	
 	var _rule2 = _interopRequireDefault(_rule);
 	
-	var _util = __webpack_require__(689);
+	var _util = __webpack_require__(691);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -104716,18 +106645,18 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 709 */
+/* 711 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _rule = __webpack_require__(692);
+	var _rule = __webpack_require__(694);
 	
 	var _rule2 = _interopRequireDefault(_rule);
 	
-	var _util = __webpack_require__(689);
+	var _util = __webpack_require__(691);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -104763,7 +106692,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 710 */
+/* 712 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -104772,7 +106701,7 @@
 	
 	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 	
-	var _rule = __webpack_require__(692);
+	var _rule = __webpack_require__(694);
 	
 	var _rule2 = _interopRequireDefault(_rule);
 	
@@ -104789,18 +106718,18 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 711 */
+/* 713 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
-	var _rule = __webpack_require__(692);
+	var _rule = __webpack_require__(694);
 	
 	var _rule2 = _interopRequireDefault(_rule);
 	
-	var _util = __webpack_require__(689);
+	var _util = __webpack_require__(691);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -104824,7 +106753,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 712 */
+/* 714 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -104889,10 +106818,10 @@
 	var messages = exports.messages = newMessages();
 
 /***/ }),
-/* 713 */
+/* 715 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var baseGet = __webpack_require__(714);
+	var baseGet = __webpack_require__(716);
 	
 	/**
 	 * Gets the value at `path` of `object`. If the resolved value is
@@ -104928,11 +106857,11 @@
 
 
 /***/ }),
-/* 714 */
+/* 716 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var castPath = __webpack_require__(715),
-	    toKey = __webpack_require__(752);
+	var castPath = __webpack_require__(717),
+	    toKey = __webpack_require__(754);
 	
 	/**
 	 * The base implementation of `_.get` without support for default values.
@@ -104958,13 +106887,13 @@
 
 
 /***/ }),
-/* 715 */
+/* 717 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var isArray = __webpack_require__(558),
-	    isKey = __webpack_require__(716),
-	    stringToPath = __webpack_require__(717),
-	    toString = __webpack_require__(554);
+	var isArray = __webpack_require__(557),
+	    isKey = __webpack_require__(718),
+	    stringToPath = __webpack_require__(719),
+	    toString = __webpack_require__(553);
 	
 	/**
 	 * Casts `value` to a path array if it's not one.
@@ -104985,11 +106914,11 @@
 
 
 /***/ }),
-/* 716 */
+/* 718 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var isArray = __webpack_require__(558),
-	    isSymbol = __webpack_require__(559);
+	var isArray = __webpack_require__(557),
+	    isSymbol = __webpack_require__(558);
 	
 	/** Used to match property names within property paths. */
 	var reIsDeepProp = /\.|\[(?:[^[\]]*|(["'])(?:(?!\1)[^\\]|\\.)*?\1)\]/,
@@ -105020,10 +106949,10 @@
 
 
 /***/ }),
-/* 717 */
+/* 719 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var memoizeCapped = __webpack_require__(718);
+	var memoizeCapped = __webpack_require__(720);
 	
 	/** Used to match property names within property paths. */
 	var rePropName = /[^.[\]]+|\[(?:(-?\d+(?:\.\d+)?)|(["'])((?:(?!\2)[^\\]|\\.)*?)\2)\]|(?=(?:\.|\[\])(?:\.|\[\]|$))/g;
@@ -105053,10 +106982,10 @@
 
 
 /***/ }),
-/* 718 */
+/* 720 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var memoize = __webpack_require__(719);
+	var memoize = __webpack_require__(721);
 	
 	/** Used as the maximum memoize cache size. */
 	var MAX_MEMOIZE_SIZE = 500;
@@ -105085,10 +107014,10 @@
 
 
 /***/ }),
-/* 719 */
+/* 721 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var MapCache = __webpack_require__(720);
+	var MapCache = __webpack_require__(722);
 	
 	/** Error message constants. */
 	var FUNC_ERROR_TEXT = 'Expected a function';
@@ -105164,14 +107093,14 @@
 
 
 /***/ }),
-/* 720 */
+/* 722 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var mapCacheClear = __webpack_require__(721),
-	    mapCacheDelete = __webpack_require__(746),
-	    mapCacheGet = __webpack_require__(749),
-	    mapCacheHas = __webpack_require__(750),
-	    mapCacheSet = __webpack_require__(751);
+	var mapCacheClear = __webpack_require__(723),
+	    mapCacheDelete = __webpack_require__(748),
+	    mapCacheGet = __webpack_require__(751),
+	    mapCacheHas = __webpack_require__(752),
+	    mapCacheSet = __webpack_require__(753);
 	
 	/**
 	 * Creates a map cache object to store key-value pairs.
@@ -105202,12 +107131,12 @@
 
 
 /***/ }),
-/* 721 */
+/* 723 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var Hash = __webpack_require__(722),
-	    ListCache = __webpack_require__(737),
-	    Map = __webpack_require__(745);
+	var Hash = __webpack_require__(724),
+	    ListCache = __webpack_require__(739),
+	    Map = __webpack_require__(747);
 	
 	/**
 	 * Removes all key-value entries from the map.
@@ -105229,14 +107158,14 @@
 
 
 /***/ }),
-/* 722 */
+/* 724 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var hashClear = __webpack_require__(723),
-	    hashDelete = __webpack_require__(733),
-	    hashGet = __webpack_require__(734),
-	    hashHas = __webpack_require__(735),
-	    hashSet = __webpack_require__(736);
+	var hashClear = __webpack_require__(725),
+	    hashDelete = __webpack_require__(735),
+	    hashGet = __webpack_require__(736),
+	    hashHas = __webpack_require__(737),
+	    hashSet = __webpack_require__(738);
 	
 	/**
 	 * Creates a hash object.
@@ -105267,10 +107196,10 @@
 
 
 /***/ }),
-/* 723 */
+/* 725 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var nativeCreate = __webpack_require__(724);
+	var nativeCreate = __webpack_require__(726);
 	
 	/**
 	 * Removes all key-value entries from the hash.
@@ -105288,10 +107217,10 @@
 
 
 /***/ }),
-/* 724 */
+/* 726 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var getNative = __webpack_require__(725);
+	var getNative = __webpack_require__(727);
 	
 	/* Built-in method references that are verified to be native. */
 	var nativeCreate = getNative(Object, 'create');
@@ -105300,11 +107229,11 @@
 
 
 /***/ }),
-/* 725 */
+/* 727 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var baseIsNative = __webpack_require__(726),
-	    getValue = __webpack_require__(732);
+	var baseIsNative = __webpack_require__(728),
+	    getValue = __webpack_require__(734);
 	
 	/**
 	 * Gets the native function at `key` of `object`.
@@ -105323,13 +107252,13 @@
 
 
 /***/ }),
-/* 726 */
+/* 728 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var isFunction = __webpack_require__(727),
-	    isMasked = __webpack_require__(729),
-	    isObject = __webpack_require__(728),
-	    toSource = __webpack_require__(731);
+	var isFunction = __webpack_require__(729),
+	    isMasked = __webpack_require__(731),
+	    isObject = __webpack_require__(730),
+	    toSource = __webpack_require__(733);
 	
 	/**
 	 * Used to match `RegExp`
@@ -105376,11 +107305,11 @@
 
 
 /***/ }),
-/* 727 */
+/* 729 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var baseGetTag = __webpack_require__(560),
-	    isObject = __webpack_require__(728);
+	var baseGetTag = __webpack_require__(559),
+	    isObject = __webpack_require__(730);
 	
 	/** `Object#toString` result references. */
 	var asyncTag = '[object AsyncFunction]',
@@ -105419,7 +107348,7 @@
 
 
 /***/ }),
-/* 728 */
+/* 730 */
 /***/ (function(module, exports) {
 
 	/**
@@ -105456,10 +107385,10 @@
 
 
 /***/ }),
-/* 729 */
+/* 731 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var coreJsData = __webpack_require__(730);
+	var coreJsData = __webpack_require__(732);
 	
 	/** Used to detect methods masquerading as native. */
 	var maskSrcKey = (function() {
@@ -105482,10 +107411,10 @@
 
 
 /***/ }),
-/* 730 */
+/* 732 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var root = __webpack_require__(552);
+	var root = __webpack_require__(551);
 	
 	/** Used to detect overreaching core-js shims. */
 	var coreJsData = root['__core-js_shared__'];
@@ -105494,7 +107423,7 @@
 
 
 /***/ }),
-/* 731 */
+/* 733 */
 /***/ (function(module, exports) {
 
 	/** Used for built-in method references. */
@@ -105526,7 +107455,7 @@
 
 
 /***/ }),
-/* 732 */
+/* 734 */
 /***/ (function(module, exports) {
 
 	/**
@@ -105545,7 +107474,7 @@
 
 
 /***/ }),
-/* 733 */
+/* 735 */
 /***/ (function(module, exports) {
 
 	/**
@@ -105568,10 +107497,10 @@
 
 
 /***/ }),
-/* 734 */
+/* 736 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var nativeCreate = __webpack_require__(724);
+	var nativeCreate = __webpack_require__(726);
 	
 	/** Used to stand-in for `undefined` hash values. */
 	var HASH_UNDEFINED = '__lodash_hash_undefined__';
@@ -105604,10 +107533,10 @@
 
 
 /***/ }),
-/* 735 */
+/* 737 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var nativeCreate = __webpack_require__(724);
+	var nativeCreate = __webpack_require__(726);
 	
 	/** Used for built-in method references. */
 	var objectProto = Object.prototype;
@@ -105633,10 +107562,10 @@
 
 
 /***/ }),
-/* 736 */
+/* 738 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var nativeCreate = __webpack_require__(724);
+	var nativeCreate = __webpack_require__(726);
 	
 	/** Used to stand-in for `undefined` hash values. */
 	var HASH_UNDEFINED = '__lodash_hash_undefined__';
@@ -105662,14 +107591,14 @@
 
 
 /***/ }),
-/* 737 */
+/* 739 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var listCacheClear = __webpack_require__(738),
-	    listCacheDelete = __webpack_require__(739),
-	    listCacheGet = __webpack_require__(742),
-	    listCacheHas = __webpack_require__(743),
-	    listCacheSet = __webpack_require__(744);
+	var listCacheClear = __webpack_require__(740),
+	    listCacheDelete = __webpack_require__(741),
+	    listCacheGet = __webpack_require__(744),
+	    listCacheHas = __webpack_require__(745),
+	    listCacheSet = __webpack_require__(746);
 	
 	/**
 	 * Creates an list cache object.
@@ -105700,7 +107629,7 @@
 
 
 /***/ }),
-/* 738 */
+/* 740 */
 /***/ (function(module, exports) {
 
 	/**
@@ -105719,10 +107648,10 @@
 
 
 /***/ }),
-/* 739 */
+/* 741 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var assocIndexOf = __webpack_require__(740);
+	var assocIndexOf = __webpack_require__(742);
 	
 	/** Used for built-in method references. */
 	var arrayProto = Array.prototype;
@@ -105760,10 +107689,10 @@
 
 
 /***/ }),
-/* 740 */
+/* 742 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var eq = __webpack_require__(741);
+	var eq = __webpack_require__(743);
 	
 	/**
 	 * Gets the index at which the `key` is found in `array` of key-value pairs.
@@ -105787,7 +107716,7 @@
 
 
 /***/ }),
-/* 741 */
+/* 743 */
 /***/ (function(module, exports) {
 
 	/**
@@ -105830,10 +107759,10 @@
 
 
 /***/ }),
-/* 742 */
+/* 744 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var assocIndexOf = __webpack_require__(740);
+	var assocIndexOf = __webpack_require__(742);
 	
 	/**
 	 * Gets the list cache value for `key`.
@@ -105855,10 +107784,10 @@
 
 
 /***/ }),
-/* 743 */
+/* 745 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var assocIndexOf = __webpack_require__(740);
+	var assocIndexOf = __webpack_require__(742);
 	
 	/**
 	 * Checks if a list cache value for `key` exists.
@@ -105877,10 +107806,10 @@
 
 
 /***/ }),
-/* 744 */
+/* 746 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var assocIndexOf = __webpack_require__(740);
+	var assocIndexOf = __webpack_require__(742);
 	
 	/**
 	 * Sets the list cache `key` to `value`.
@@ -105909,11 +107838,11 @@
 
 
 /***/ }),
-/* 745 */
+/* 747 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var getNative = __webpack_require__(725),
-	    root = __webpack_require__(552);
+	var getNative = __webpack_require__(727),
+	    root = __webpack_require__(551);
 	
 	/* Built-in method references that are verified to be native. */
 	var Map = getNative(root, 'Map');
@@ -105922,10 +107851,10 @@
 
 
 /***/ }),
-/* 746 */
+/* 748 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var getMapData = __webpack_require__(747);
+	var getMapData = __webpack_require__(749);
 	
 	/**
 	 * Removes `key` and its value from the map.
@@ -105946,10 +107875,10 @@
 
 
 /***/ }),
-/* 747 */
+/* 749 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var isKeyable = __webpack_require__(748);
+	var isKeyable = __webpack_require__(750);
 	
 	/**
 	 * Gets the data for `map`.
@@ -105970,7 +107899,7 @@
 
 
 /***/ }),
-/* 748 */
+/* 750 */
 /***/ (function(module, exports) {
 
 	/**
@@ -105991,10 +107920,10 @@
 
 
 /***/ }),
-/* 749 */
+/* 751 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var getMapData = __webpack_require__(747);
+	var getMapData = __webpack_require__(749);
 	
 	/**
 	 * Gets the map value for `key`.
@@ -106013,10 +107942,10 @@
 
 
 /***/ }),
-/* 750 */
+/* 752 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var getMapData = __webpack_require__(747);
+	var getMapData = __webpack_require__(749);
 	
 	/**
 	 * Checks if a map value for `key` exists.
@@ -106035,10 +107964,10 @@
 
 
 /***/ }),
-/* 751 */
+/* 753 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var getMapData = __webpack_require__(747);
+	var getMapData = __webpack_require__(749);
 	
 	/**
 	 * Sets the map `key` to `value`.
@@ -106063,10 +107992,10 @@
 
 
 /***/ }),
-/* 752 */
+/* 754 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var isSymbol = __webpack_require__(559);
+	var isSymbol = __webpack_require__(558);
 	
 	/** Used as references for various `Number` constants. */
 	var INFINITY = 1 / 0;
@@ -106090,10 +108019,10 @@
 
 
 /***/ }),
-/* 753 */
+/* 755 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var baseSet = __webpack_require__(754);
+	var baseSet = __webpack_require__(756);
 	
 	/**
 	 * Sets the value at `path` of `object`. If a portion of `path` doesn't exist,
@@ -106131,14 +108060,14 @@
 
 
 /***/ }),
-/* 754 */
+/* 756 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var assignValue = __webpack_require__(755),
-	    castPath = __webpack_require__(715),
-	    isIndex = __webpack_require__(758),
-	    isObject = __webpack_require__(728),
-	    toKey = __webpack_require__(752);
+	var assignValue = __webpack_require__(757),
+	    castPath = __webpack_require__(717),
+	    isIndex = __webpack_require__(760),
+	    isObject = __webpack_require__(730),
+	    toKey = __webpack_require__(754);
 	
 	/**
 	 * The base implementation of `_.set`.
@@ -106188,11 +108117,11 @@
 
 
 /***/ }),
-/* 755 */
+/* 757 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var baseAssignValue = __webpack_require__(756),
-	    eq = __webpack_require__(741);
+	var baseAssignValue = __webpack_require__(758),
+	    eq = __webpack_require__(743);
 	
 	/** Used for built-in method references. */
 	var objectProto = Object.prototype;
@@ -106222,10 +108151,10 @@
 
 
 /***/ }),
-/* 756 */
+/* 758 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var defineProperty = __webpack_require__(757);
+	var defineProperty = __webpack_require__(759);
 	
 	/**
 	 * The base implementation of `assignValue` and `assignMergeValue` without
@@ -106253,10 +108182,10 @@
 
 
 /***/ }),
-/* 757 */
+/* 759 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var getNative = __webpack_require__(725);
+	var getNative = __webpack_require__(727);
 	
 	var defineProperty = (function() {
 	  try {
@@ -106270,7 +108199,7 @@
 
 
 /***/ }),
-/* 758 */
+/* 760 */
 /***/ (function(module, exports) {
 
 	/** Used as references for various `Number` constants. */
@@ -106301,7 +108230,7 @@
 
 
 /***/ }),
-/* 759 */
+/* 761 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -106310,33 +108239,33 @@
 	  value: true
 	});
 	
-	var _defineProperty2 = __webpack_require__(513);
+	var _defineProperty2 = __webpack_require__(512);
 	
 	var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 	
-	var _extends2 = __webpack_require__(463);
+	var _extends2 = __webpack_require__(462);
 	
 	var _extends3 = _interopRequireDefault(_extends2);
 	
-	var _classCallCheck2 = __webpack_require__(465);
+	var _classCallCheck2 = __webpack_require__(464);
 	
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 	
-	var _createClass2 = __webpack_require__(507);
+	var _createClass2 = __webpack_require__(506);
 	
 	var _createClass3 = _interopRequireDefault(_createClass2);
 	
 	exports['default'] = createFieldsStore;
 	
-	var _set = __webpack_require__(753);
+	var _set = __webpack_require__(755);
 	
 	var _set2 = _interopRequireDefault(_set);
 	
-	var _createFormField = __webpack_require__(760);
+	var _createFormField = __webpack_require__(762);
 	
 	var _createFormField2 = _interopRequireDefault(_createFormField);
 	
-	var _utils = __webpack_require__(761);
+	var _utils = __webpack_require__(763);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
@@ -106649,7 +108578,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 760 */
+/* 762 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -106658,11 +108587,11 @@
 	  value: true
 	});
 	
-	var _extends2 = __webpack_require__(463);
+	var _extends2 = __webpack_require__(462);
 	
 	var _extends3 = _interopRequireDefault(_extends2);
 	
-	var _classCallCheck2 = __webpack_require__(465);
+	var _classCallCheck2 = __webpack_require__(464);
 	
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 	
@@ -106689,7 +108618,7 @@
 	}
 
 /***/ }),
-/* 761 */
+/* 763 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -106698,7 +108627,7 @@
 	  value: true
 	});
 	
-	var _extends2 = __webpack_require__(463);
+	var _extends2 = __webpack_require__(462);
 	
 	var _extends3 = _interopRequireDefault(_extends2);
 	
@@ -106721,7 +108650,7 @@
 	
 	var _hoistNonReactStatics2 = _interopRequireDefault(_hoistNonReactStatics);
 	
-	var _warning = __webpack_require__(31);
+	var _warning = __webpack_require__(32);
 	
 	var _warning2 = _interopRequireDefault(_warning);
 	
@@ -106898,7 +108827,7 @@
 	}
 
 /***/ }),
-/* 762 */
+/* 764 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -106907,19 +108836,19 @@
 	  value: true
 	});
 	
-	var _classCallCheck2 = __webpack_require__(465);
+	var _classCallCheck2 = __webpack_require__(464);
 	
 	var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 	
-	var _createClass2 = __webpack_require__(507);
+	var _createClass2 = __webpack_require__(506);
 	
 	var _createClass3 = _interopRequireDefault(_createClass2);
 	
-	var _possibleConstructorReturn2 = __webpack_require__(466);
+	var _possibleConstructorReturn2 = __webpack_require__(465);
 	
 	var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 	
-	var _inherits2 = __webpack_require__(496);
+	var _inherits2 = __webpack_require__(495);
 	
 	var _inherits3 = _interopRequireDefault(_inherits2);
 	
@@ -107001,7 +108930,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 763 */
+/* 765 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -107041,7 +108970,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 764 */
+/* 766 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -107118,7 +109047,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 765 */
+/* 767 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -107133,7 +109062,7 @@
 	
 	var _beeLayout = __webpack_require__(3);
 	
-	var _src = __webpack_require__(297);
+	var _src = __webpack_require__(296);
 	
 	var _src2 = _interopRequireDefault(_src);
 	
@@ -107216,7 +109145,7 @@
 	module.exports = exports["default"];
 
 /***/ }),
-/* 766 */
+/* 768 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -107233,11 +109162,11 @@
 	
 	var _beeLayout = __webpack_require__(3);
 	
-	var _src = __webpack_require__(297);
+	var _src = __webpack_require__(296);
 	
 	var _src2 = _interopRequireDefault(_src);
 	
-	var _beeForm = __webpack_require__(671);
+	var _beeForm = __webpack_require__(673);
 	
 	var _beeForm2 = _interopRequireDefault(_beeForm);
 	
@@ -107327,7 +109256,7 @@
 	module.exports = exports["default"];
 
 /***/ }),
-/* 767 */
+/* 769 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -107344,15 +109273,15 @@
 	
 	var _beeLayout = __webpack_require__(3);
 	
-	var _src = __webpack_require__(297);
+	var _src = __webpack_require__(296);
 	
 	var _src2 = _interopRequireDefault(_src);
 	
-	var _beeForm = __webpack_require__(671);
+	var _beeForm = __webpack_require__(673);
 	
 	var _beeForm2 = _interopRequireDefault(_beeForm);
 	
-	var _beeButton = __webpack_require__(273);
+	var _beeButton = __webpack_require__(274);
 	
 	var _beeButton2 = _interopRequireDefault(_beeButton);
 	
@@ -107374,6 +109303,39 @@
 	    MonthPicker = _src2["default"].MonthPicker,
 	    WeekPicker = _src2["default"].WeekPicker,
 	    RangePicker = _src2["default"].RangePicker;
+	
+	
+	function range(start, end) {
+	    var result = [];
+	    for (var i = start; i < end; i++) {
+	        result.push(i);
+	    }
+	    return result;
+	}
+	
+	function disabledDateTime(_) {
+	    return _.get('month') <= 6 ? {
+	        disabledHours: function disabledHours() {
+	            return range(0, 24).splice(4, 2);
+	        },
+	        disabledMinutes: function disabledMinutes() {
+	            return range(0, 30);
+	        },
+	        disabledSeconds: function disabledSeconds() {
+	            return [55, 56];
+	        }
+	    } : {
+	        disabledHours: function disabledHours() {
+	            return range(0, 24).splice(4, 20);
+	        },
+	        disabledMinutes: function disabledMinutes() {
+	            return range(30, 60);
+	        },
+	        disabledSeconds: function disabledSeconds() {
+	            return [55, 56];
+	        }
+	    };
+	}
 	
 	var Demo11 = function (_Component) {
 	    _inherits(Demo11, _Component);
@@ -107461,7 +109423,8 @@
 	                { className: "demo11-item" },
 	                _react2["default"].createElement(_src2["default"], _extends({
 	                    format: "YYYY-MM-DD hh:mm:ss",
-	                    showTime: true
+	                    showTime: true,
+	                    disabledTime: disabledDateTime
 	                }, getFieldProps('dateTime', {
 	                    initialValue: this.state.initialValues.dateTime,
 	                    normalize: function normalize(value) {
@@ -107573,7 +109536,7 @@
 	module.exports = exports["default"];
 
 /***/ }),
-/* 768 */
+/* 770 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -107588,19 +109551,19 @@
 	
 	var _beeLayout = __webpack_require__(3);
 	
-	var _src = __webpack_require__(297);
+	var _src = __webpack_require__(296);
 	
 	var _src2 = _interopRequireDefault(_src);
 	
-	var _zh_CN = __webpack_require__(532);
+	var _zh_CN = __webpack_require__(531);
 	
 	var _zh_CN2 = _interopRequireDefault(_zh_CN);
 	
-	var _en_US = __webpack_require__(457);
+	var _en_US = __webpack_require__(456);
 	
 	var _en_US2 = _interopRequireDefault(_en_US);
 	
-	var _moment = __webpack_require__(305);
+	var _moment = __webpack_require__(304);
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	
@@ -107672,7 +109635,7 @@
 	module.exports = exports["default"];
 
 /***/ }),
-/* 769 */
+/* 771 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -107687,11 +109650,11 @@
 	
 	var _beeLayout = __webpack_require__(3);
 	
-	var _src = __webpack_require__(297);
+	var _src = __webpack_require__(296);
 	
 	var _src2 = _interopRequireDefault(_src);
 	
-	var _moment = __webpack_require__(305);
+	var _moment = __webpack_require__(304);
 	
 	var _moment2 = _interopRequireDefault(_moment);
 	

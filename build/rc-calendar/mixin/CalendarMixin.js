@@ -109,6 +109,8 @@ var calendarMixinWrapper = exports.calendarMixinWrapper = function calendarMixin
         }
         // }
       }, _this.setValue = function (value) {
+        var shouldChange = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+
         var originalValue = _this.state.value;
         if (!('value' in _this.props)) {
           _this.setState({
@@ -117,7 +119,7 @@ var calendarMixinWrapper = exports.calendarMixinWrapper = function calendarMixin
           });
         }
         if (originalValue && value && !originalValue.isSame(value) || !originalValue && value || originalValue && !value) {
-          _this.props.onChange(value);
+          _this.props.onChange(value, shouldChange);
         }
       }, _this.isAllowedDate = function (value) {
         var disabledDate = _this.props.disabledDate;
