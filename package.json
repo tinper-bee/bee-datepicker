@@ -40,9 +40,9 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "bee-button": "latest",
-    "bee-form-control": "latest",
-    "bee-input-group": "latest",
+    "bee-button": "^0.2.8",
+    "bee-form-control": "^0.1.23",
+    "bee-input-group": "^0.1.13",
     "classnames": "^2.2.5",
     "moment": "^2.17.1",
     "omit.js": "^1.0.2",
@@ -54,17 +54,17 @@
     "tinper-bee-core": "latest"
   },
   "peerDependencies": {
-    "react": "^15.3.0 || ^16.0",
-    "react-dom": "^15.3.0 || ^16.0",
-    "prop-types": "15.6.0"
+    "prop-types": "15.6.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
   },
   "devDependencies": {
-    "bee-clipboard": "^2.0.0",
+    "bee-clipboard": "^0.1.7",
     "bee-drawer": "0.0.2",
-    "bee-form": "latest",
-    "bee-layout": "latest",
-    "bee-panel": "latest",
-    "bee-table": "latest",
+    "bee-form": "^2.0.4",
+    "bee-layout": "^0.2.4",
+    "bee-panel": "^0.2.8",
+    "bee-table": "^1.4.6",
     "chai": "^3.5.0",
     "console-polyfill": "~0.2.1",
     "conventional-changelog": "^3.1.23",
@@ -73,8 +73,8 @@
     "es5-shim": "~4.1.10",
     "husky": "^4.2.5",
     "object-assign": "^4.1.0",
-    "react": "~15.3.0",
+    "react": "^18.3.1",
     "react-addons-test-utils": "15.3.2",
-    "react-dom": "~15.3.0"
+    "react-dom": "^18.3.1"
   }
 }
